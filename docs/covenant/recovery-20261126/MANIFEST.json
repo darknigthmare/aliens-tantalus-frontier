@@ -1,0 +1,1205 @@
+{
+  "schemaVersion": 1,
+  "dlc": "Alien: Covenant",
+  "date": "2026-11-26",
+  "baselineCommit": "7399f15c97db68f977ee59093a175a6c19afd121",
+  "pullRequest": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/79",
+  "archiveRoot": "docs/covenant/recovery-20261126",
+  "scope": "Exact preservation of readable local material; no runtime promotion.",
+  "verified1to1": false,
+  "summary": {
+    "readableLocalFiles": 69,
+    "alreadyPublishedIdentical": 23,
+    "newArchivedFiles": 46,
+    "newArchivedBytes": 32263702,
+    "generatedImageCandidates": 16,
+    "supersededIterations": 6,
+    "unassignedWalkingCandidates": 10,
+    "retainedRuntimeSprites": 81,
+    "retainedProductionCatalogueSprites": 154
+  },
+  "files": [
+    {
+      "path": "docs/covenant/recovery-20261126/qa/oram-v015/oram-final-recovered-qa.json",
+      "sourceFile": "oram-final-recovered-qa.json",
+      "sizeBytes": 3722,
+      "sha256": "37da4b7163c597502c91155f73deda31b1e573e69a50962ed5dab217727f0a19",
+      "gitBlobSha": "297d3a5eae33189a274c1496e96a7e15572ee2b4",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/oram-v015/oram-walk-final-review.jpg",
+      "sourceFile": "oram-walk-final-review.jpg",
+      "sizeBytes": 232287,
+      "sha256": "d64272b3515eb1a108b503e3e2c46ab0b8440c7a5e9e664ee0b11abfb9efa4bd",
+      "gitBlobSha": "028edb4086f80b7e055f1304eb496f714e1299df",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1440,
+        "height": 1185,
+        "mode": "RGB"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/unassigned-walking-01.png",
+      "sourceFile": "exec-a241dc76-7a0e-4496-8bb6-b7d704cdbd72.png",
+      "sizeBytes": 1562155,
+      "sha256": "4de6c16f17c570ba7efe91e947f3056135e5f5641666a82262a5f04fa6ebd6e6",
+      "gitBlobSha": "6e1618721ca23fd4ecc1beb12178b81eb0f6cb85",
+      "kind": "generated-image",
+      "status": "unassigned-generation-candidate",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          123,
+          17,
+          937,
+          1493
+        ],
+        "alphaZeroPixels": 1174351
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/unassigned-walking-02.png",
+      "sourceFile": "exec-1908fc80-876e-4b6f-9255-517ce0eb46ea.png",
+      "sizeBytes": 1484702,
+      "sha256": "c1b53ea472c7643754718e97d0a2696853f8d2de6368aacb070c247b1155daa7",
+      "gitBlobSha": "6f58568218ee8fc9947fec092a3c4051d2252d69",
+      "kind": "generated-image",
+      "status": "unassigned-generation-candidate",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          84,
+          22,
+          884,
+          1496
+        ],
+        "alphaZeroPixels": 1193921
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/unassigned-walking-03.png",
+      "sourceFile": "exec-b739f233-4d0c-4633-854f-e1c8c3861a1c.png",
+      "sizeBytes": 1362370,
+      "sha256": "1d24b9605f631654a9af128d1a27eedeaa1e4efb2ce2c90abcddcd58574c9679",
+      "gitBlobSha": "82812d40e88d3a3901337cb692b2a27c104c1b3d",
+      "kind": "generated-image",
+      "status": "unassigned-generation-candidate",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          357,
+          18,
+          750,
+          1498
+        ],
+        "alphaZeroPixels": 1225250
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/oram-walk-07-attempt-01.png",
+      "sourceFile": "exec-af1f17f6-50fc-43cb-a8ce-591a89c8470c.png",
+      "sizeBytes": 1557248,
+      "sha256": "6f7f23142b22cdc8395df5553f5ed7ba9e73c74e7b2722350fbae70c00d0d82a",
+      "gitBlobSha": "36e23ee7865111bbf8a6b44874cc0f499abf60b0",
+      "kind": "generated-image",
+      "status": "superseded-iteration",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "historicalDecisions": [
+        {
+          "manifest": "assets/openai/sprites/alien-covenant-v015/manifest.json.recoveryHistory[0].checkpoint.supersededAttempts[1]",
+          "reason": "Legs/support accepted; arms insufficiently neutral at mid-passing. Replaced by attempt 02 via imagegen, no pixel editing.",
+          "accepted": false
+        }
+      ],
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          248,
+          25,
+          808,
+          1503
+        ],
+        "alphaZeroPixels": 1185625
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/unassigned-walking-04.png",
+      "sourceFile": "exec-865e6c54-936a-49dd-a74c-7afe4333ee38.png",
+      "sizeBytes": 1368008,
+      "sha256": "1c90dc83f4a2892612c19502ffbe0bba8611adb00aee6c98f831932474d3ff1c",
+      "gitBlobSha": "932b4ea8f634af96da264f05ad52185d80603a60",
+      "kind": "generated-image",
+      "status": "unassigned-generation-candidate",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          344,
+          25,
+          739,
+          1498
+        ],
+        "alphaZeroPixels": 1228099
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/unassigned-walking-05.png",
+      "sourceFile": "exec-8c41524e-5a09-43c8-85e4-20939268567e.png",
+      "sizeBytes": 1470105,
+      "sha256": "ac7dc7e8401abd114680f14c93b12b93973da52c2e464bb66afb59c17d4b99a6",
+      "gitBlobSha": "862cfb24ca38069509e216b862e2f68778458e8e",
+      "kind": "generated-image",
+      "status": "unassigned-generation-candidate",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          117,
+          17,
+          820,
+          1486
+        ],
+        "alphaZeroPixels": 1194742
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/unassigned-walking-06.png",
+      "sourceFile": "exec-f70f71fc-b79a-4605-a706-489cee8bb6fe.png",
+      "sizeBytes": 1522432,
+      "sha256": "18c12a48101f24819f051c229c67e8aae7700ad9c86d5f00c31de12c09f4f2c4",
+      "gitBlobSha": "8b92bdd7f0fdf8fd2d21149dc76924197f9875cb",
+      "kind": "generated-image",
+      "status": "unassigned-generation-candidate",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          119,
+          16,
+          821,
+          1486
+        ],
+        "alphaZeroPixels": 1171749
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/unassigned-walking-07.png",
+      "sourceFile": "exec-d89479be-0f20-45ec-a622-6192f68f74ec.png",
+      "sizeBytes": 1496651,
+      "sha256": "d8c3c31cdcd6e9d7651d8225b27d24920bb0cc4fe173fd09bf86f9764964f599",
+      "gitBlobSha": "4ef58e56da179382b9baf7837ea67d0c5e75f7fd",
+      "kind": "generated-image",
+      "status": "unassigned-generation-candidate",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          147,
+          29,
+          794,
+          1483
+        ],
+        "alphaZeroPixels": 1185311
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/ricks-walk-05-attempt-1.png",
+      "sourceFile": "exec-abc94e71-fe43-41b7-97bf-d51db58ec0d1.png",
+      "sizeBytes": 1660386,
+      "sha256": "b39007d9b249480d102bba44812e7acf5f71982a2f1a52c65592393a6e588865",
+      "gitBlobSha": "6b6f9fddd1de0a723307c3e4a192e0cefe9fdd00",
+      "kind": "generated-image",
+      "status": "superseded-iteration",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "historicalDecisions": [
+        {
+          "manifest": "assets/openai/sprites/alien-covenant-v015/manifest.json.generationIterations[0]",
+          "reason": "Near cargo-pocket leg led forward instead of trailing; opposite contact corrected.",
+          "accepted": false
+        }
+      ],
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          80,
+          29,
+          903,
+          1494
+        ],
+        "alphaZeroPixels": 1127551
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/ricks-walk-03-attempt-1.png",
+      "sourceFile": "exec-aed62f9d-1f8f-40d9-9ea5-e65c7888ea04.png",
+      "sizeBytes": 1589697,
+      "sha256": "8b9434d35bd090bf5e810c2948f94af5d448182158d35e27665d8e745612a054",
+      "gitBlobSha": "121b1c3ad8322950384234db2d9c1202920abbdc",
+      "kind": "generated-image",
+      "status": "superseded-iteration",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "historicalDecisions": [
+        {
+          "manifest": "assets/openai/sprites/alien-covenant-v015/manifest.json.generationIterations[2]",
+          "reason": "Arms remained too far from neutral during passing; legs preserved and arms corrected.",
+          "accepted": false
+        }
+      ],
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          201,
+          26,
+          822,
+          1508
+        ],
+        "alphaZeroPixels": 1148338
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/oram-walk-03-attempt-01.png",
+      "sourceFile": "exec-167ad723-612d-4fe1-a2dc-b9e505cce84d.png",
+      "sizeBytes": 1566689,
+      "sha256": "9721a9ff1b1d55522d02d5fa0ea5e0f39da6ddb0e1e17b5fb772da1ea1696e7b",
+      "gitBlobSha": "5b9286ea22c5e70919bda75087883cbbc89f0351",
+      "kind": "generated-image",
+      "status": "superseded-iteration",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "historicalDecisions": [
+        {
+          "manifest": "assets/openai/sprites/alien-covenant-v015/manifest.json.recoveryHistory[0].checkpoint.supersededAttempts[0]",
+          "reason": "Legs/support accepted; arm offsets too broad for the passing pose. Replaced by attempt 02 via imagegen, no pixel editing.",
+          "accepted": false
+        }
+      ],
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          233,
+          26,
+          825,
+          1504
+        ],
+        "alphaZeroPixels": 1160154
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/ricks-walk-06-attempt-1.png",
+      "sourceFile": "exec-1b7f92d7-6e99-4189-b28b-e315f6772d36.png",
+      "sizeBytes": 1579311,
+      "sha256": "5e29f4ca8ef89d9b1632b3ae22486d03506dbf54b0abe7a7d2b727ff05e9230e",
+      "gitBlobSha": "08ab63e416c46abee4fb29cdf08078c3c02b9d74",
+      "kind": "generated-image",
+      "status": "superseded-iteration",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "historicalDecisions": [
+        {
+          "manifest": "assets/openai/sprites/alien-covenant-v015/manifest.json.generationIterations[1]",
+          "reason": "Near cargo-pocket leg led forward instead of trailing; support arrangement corrected.",
+          "accepted": false
+        }
+      ],
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          88,
+          38,
+          777,
+          1496
+        ],
+        "alphaZeroPixels": 1169599
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/unassigned-walking-08.png",
+      "sourceFile": "exec-1778438e-0198-4c85-a0ec-9320014249b9.png",
+      "sizeBytes": 1594843,
+      "sha256": "2aeeb428341b2ab564e083b40f1b23e2a00a1d8c02307d8a6e7e3d64a98d2f63",
+      "gitBlobSha": "b221d6e53095e89d043ab13d05110bae0fac1133",
+      "kind": "generated-image",
+      "status": "unassigned-generation-candidate",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          86,
+          13,
+          960,
+          1518
+        ],
+        "alphaZeroPixels": 1162181
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/unassigned-walking-09.png",
+      "sourceFile": "exec-750d5a08-a6f0-44e4-941a-68e3bf52a3d7.png",
+      "sizeBytes": 1556947,
+      "sha256": "1ea835ab7db5bc3f2e0e5e2e7165ca7f5a4a90c9f0922c98ed706fd780456d07",
+      "gitBlobSha": "594318e09fc2803f58a61fe7e44f601a19b3fbca",
+      "kind": "generated-image",
+      "status": "unassigned-generation-candidate",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          54,
+          17,
+          902,
+          1503
+        ],
+        "alphaZeroPixels": 1174211
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/ricks-walk-07-attempt-1.png",
+      "sourceFile": "exec-ec2a7948-e433-4e89-a315-4bce640f5df0.png",
+      "sizeBytes": 1576003,
+      "sha256": "5beb4adf4da7e6f0d2a45872749c98fc79d735a5e126b349aa87aa7e23fda52c",
+      "gitBlobSha": "a7d7489e39ebbaf0e1e06a74e2e7d1cdfd440316",
+      "kind": "generated-image",
+      "status": "superseded-iteration",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "historicalDecisions": [
+        {
+          "manifest": "assets/openai/sprites/alien-covenant-v015/manifest.json.generationIterations[3]",
+          "reason": "Arms remained too far from neutral during passing; legs preserved and arms corrected.",
+          "accepted": false
+        }
+      ],
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          191,
+          30,
+          795,
+          1499
+        ],
+        "alphaZeroPixels": 1171627
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/originals/unassigned-walking-10.png",
+      "sourceFile": "exec-e43d93f1-5ce4-473a-9bf4-9f84e1f77a82.png",
+      "sizeBytes": 1449799,
+      "sha256": "cb8e1fb09fe96c618cc0bb33627472bef0fdb5f1891ec46409dc088d8cefc6da",
+      "gitBlobSha": "bd5aba144e3d809fe49fb624ef00f77f83d7eaf9",
+      "kind": "generated-image",
+      "status": "unassigned-generation-candidate",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "bboxAlphaGe32": [
+          163,
+          21,
+          820,
+          1491
+        ],
+        "alphaZeroPixels": 1188932
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v015/oram-walk-final-qa.jpg",
+      "sourceFile": "oram-walk-final-qa.jpg",
+      "sizeBytes": 235799,
+      "sha256": "4b0c58f6305905aa540430785026d4b316e987d271ac995647adadcd81d6be0e",
+      "gitBlobSha": "6e79ed3923bc4581d35e19e1979a5d998139cc7a",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1440,
+        "height": 1220,
+        "mode": "RGB"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v015/recovered-png-qa.json",
+      "sourceFile": "recovered-png-qa.json",
+      "sizeBytes": 11726,
+      "sha256": "9c625d54782981f95bfbc862870c85451fc053841ef2b830815b5119345075b2",
+      "gitBlobSha": "04560917e4515be6a940ba4945f6fddecaee80fd",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v015/ricks-walk-final-qa.jpg",
+      "sourceFile": "ricks-walk-final-qa.jpg",
+      "sizeBytes": 243682,
+      "sha256": "500758f3e8a9f3301fef59b914f4d1215503c55fe7089582b79885bccfad0b8b",
+      "gitBlobSha": "0e3090252aca286a537bb24ce6da991c57544284",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1440,
+        "height": 1220,
+        "mode": "RGB"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v015/props-final-qa.jpg",
+      "sourceFile": "props-final-qa.jpg",
+      "sizeBytes": 241247,
+      "sha256": "6b3ee2782bb809314687eafa46b221efabde07972d14ba7b2907839ff96e0bbb",
+      "gitBlobSha": "3c182458cf2b785cdd68c026f4415adc03acde3e",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1500,
+        "height": 960,
+        "mode": "RGB"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/BIBLE_COVENANT_V014.xlsx.inspect.ndjson",
+      "sourceFile": "BIBLE_COVENANT_V014.xlsx.inspect.ndjson",
+      "sizeBytes": 6214500,
+      "sha256": "b2d44f198b2a75b80e59dbbd9455b95ec592b0cf6290459c068d524d415254dd",
+      "gitBlobSha": "94835174e0183e54425d150ccf56205f5b4c151d",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-final-qa.json",
+      "sourceFile": "xlsx-final-qa.json",
+      "sizeBytes": 2721,
+      "sha256": "058e6b009d17e10d6b85681d0490be6f340b0aa61ff0f1c7fe110747ad3449f1",
+      "gitBlobSha": "2aa7db279b27333510a906feb67038a5498891c4",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-inspection.json",
+      "sourceFile": "xlsx-inspection.json",
+      "sizeBytes": 2008,
+      "sha256": "0be186037164e648a7ce9f9838bf00f8d5d22e5b5b8bab44a22bdc27ab5b2ee7",
+      "gitBlobSha": "f21ed0146b85e5cadac6e2f968fb2b5b55bea816",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-receipt.json",
+      "sourceFile": "xlsx-receipt.json",
+      "sizeBytes": 8312,
+      "sha256": "63ab0468cb0e3841f3c4ea63e0b95fb914e38b76f1d0038574df329a9a41fcf6",
+      "gitBlobSha": "ba1b4169002bfea1bdf5d4da974d7ebcc4d6886d",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/references.png",
+      "sourceFile": "references.png",
+      "sizeBytes": 27682,
+      "sha256": "5d91e7b4429ed7b394e19264590917001e9513558879afa29314002120f41415",
+      "gitBlobSha": "12efbc515a05f8f9fcedac078d1c8d11141f1b3c",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1690,
+        "height": 279,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/composants.png",
+      "sourceFile": "composants.png",
+      "sizeBytes": 30211,
+      "sha256": "3ddf65c387cbdb3ef14980b4aa9fc3b9c7f918b58fd86c3672149c3be80e7a65",
+      "gitBlobSha": "0564003d628c4cbc745f9dc1e993e872917f7ea6",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1690,
+        "height": 375,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/seuils.png",
+      "sourceFile": "seuils.png",
+      "sizeBytes": 21439,
+      "sha256": "1c177e23e476e8d34bea5a8fc427965693f8946e8165030d1a91ca9735f81c22",
+      "gitBlobSha": "96e53e1c50f9f7d5124b93ffa810f6e9c8967cd3",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1420,
+        "height": 231,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/production.png",
+      "sourceFile": "production.png",
+      "sizeBytes": 27550,
+      "sha256": "e903900fe02dff45c521001fbfe58e5d086cb721bbe4b7db64758f1a1d340ed9",
+      "gitBlobSha": "8482b9231dca67336b9200c7d648db257635f253",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1640,
+        "height": 231,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/terrains.png",
+      "sourceFile": "terrains.png",
+      "sizeBytes": 29695,
+      "sha256": "623c8e254ebe429d5282dfcbcf0db03002877f6baa38dc1392416bb89cbb63c0",
+      "gitBlobSha": "b499fead5f964dbae642d13799644bf86db5d519",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1690,
+        "height": 295,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/profils.png",
+      "sourceFile": "profils.png",
+      "sizeBytes": 35782,
+      "sha256": "4d07300b0ae2a596684b4fb232e5b28fa943537de87fcd00cded25f0d8f7f84a",
+      "gitBlobSha": "5fd8143aa0b191c65a2f2287896f82a4bc618367",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1690,
+        "height": 663,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/synthese.png",
+      "sourceFile": "synthese.png",
+      "sizeBytes": 133808,
+      "sha256": "89ef72f82e7d8260f1af7eca06491d6f4846d9fed200a6f4df833a1ac9a92141",
+      "gitBlobSha": "e9c77198a03a26ce31a895b7c21470e2c3a9045a",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1720,
+        "height": 1115,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/planetes.png",
+      "sourceFile": "planetes.png",
+      "sizeBytes": 30361,
+      "sha256": "0e39b6e1fe1c60d109adb9d0ca941ccca0655971be63f6bde83c1ad218172377",
+      "gitBlobSha": "e8919540e64fbf82e1b8ba27d64ec705e11b81e0",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1690,
+        "height": 327,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/props.png",
+      "sourceFile": "props.png",
+      "sizeBytes": 26043,
+      "sha256": "f0a877ddf318c5e69dfc17bbb81c7f531cb21f925c55d5b6c9cdc888d6da23be",
+      "gitBlobSha": "04c14a39673f76b6c8effe119064d128de569a18",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1690,
+        "height": 279,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/references-details.png",
+      "sourceFile": "references-details.png",
+      "sizeBytes": 33915,
+      "sha256": "03fa90def456a12b31a0a378550c4cb17fbcf77e5e442b73a82c719f1ecedc28",
+      "gitBlobSha": "896f2cf03908661321a058890acd1e2524ada8dd",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1920,
+        "height": 199,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/biologie.png",
+      "sourceFile": "biologie.png",
+      "sizeBytes": 31157,
+      "sha256": "eef750e8ba9b2d0e5f6446c905170ea704db76311b7281f82fc1044ad6e6bfee",
+      "gitBlobSha": "519b76e26f192921fa93eb736592423ce45a4803",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1690,
+        "height": 407,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/armes.png",
+      "sourceFile": "armes.png",
+      "sizeBytes": 27583,
+      "sha256": "5e469fd1370515d296d20c941f03b651a3216d47602be613df5ffd34fd325ddf",
+      "gitBlobSha": "31315122ded778a1533b3bf1fc1966737b9d70b8",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1690,
+        "height": 359,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/lieux.png",
+      "sourceFile": "lieux.png",
+      "sizeBytes": 36775,
+      "sha256": "5092c3fe24396846d1fd69612ce075a17336f6ef8622c624b32f6d1de3879891",
+      "gitBlobSha": "fc299ff7532235feff20ab62e4b4dac61a44305e",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1690,
+        "height": 455,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/biologie-details.png",
+      "sourceFile": "biologie-details.png",
+      "sizeBytes": 48522,
+      "sha256": "83d5481c48a0243de19688cff470c8af7068494b18403d18de50940e655e8cc8",
+      "gitBlobSha": "0739962dff3338093cc40b66c38cae2f52d16074",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1920,
+        "height": 327,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/personnages.png",
+      "sourceFile": "personnages.png",
+      "sizeBytes": 27564,
+      "sha256": "35796bd0fe2a5d6ad6294f103f901daeb50936235dfd4f7f33b99743b304d546",
+      "gitBlobSha": "803a9877cc65b263a08811beeb1f02c652c498e5",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1690,
+        "height": 279,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/vaisseaux.png",
+      "sourceFile": "vaisseaux.png",
+      "sizeBytes": 33882,
+      "sha256": "fab050ae5d76a2adadaf582a2452d06b5fcc16c17ffea16a1421d0e0cd6f7291",
+      "gitBlobSha": "9f053cb987607909c51f8233ac9a71979a2a7e46",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1690,
+        "height": 503,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/vehicules.png",
+      "sourceFile": "vehicules.png",
+      "sizeBytes": 29602,
+      "sha256": "8e03f7dc5ac2be874dcf0a3f73baf036e49c168478fb1e4b5b989d016b65e8fc",
+      "gitBlobSha": "7b67488bd6b084f568f3bd894f710c8cc983ae13",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1690,
+        "height": 487,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/qa/v014/xlsx-previews/occurrences.png",
+      "sourceFile": "occurrences.png",
+      "sizeBytes": 18644,
+      "sha256": "35bf209c0b61eebb84ae6a4587390184c8044aea8b334fe7e887c07e6fdec1f3",
+      "gitBlobSha": "98618b5c457c4db9ed4a4356321a1cd690c91ecb",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true,
+      "image": {
+        "width": 1120,
+        "height": 231,
+        "mode": "RGBA"
+      }
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/research/research-covenant-v014.md",
+      "sourceFile": "research_covenant.md",
+      "sizeBytes": 10644,
+      "sha256": "836bb22ebaba04bd6076e449e08c1bad592de0706807ae87450ce1934d5987b5",
+      "gitBlobSha": "d52e97badebdd2e375848c7b2d18159af673ae5e",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/research/covenant-paths.txt",
+      "sourceFile": "covenant-paths.txt",
+      "sizeBytes": 9493,
+      "sha256": "c6484e54648875ecd1e5adeff131e40ebf5744245aafbc967c10fdc90ffcd4eb",
+      "gitBlobSha": "8538e58f014a9212cf05c32d21009265d8bf04cf",
+      "kind": "historical-evidence",
+      "status": "archived-source-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "originalBytesPreserved": true
+    }
+  ],
+  "alreadyPublished": [
+    {
+      "sourceFile": "exec-532da673-71c9-455f-a6be-0a37f4f9ba3f.png",
+      "sizeBytes": 1638207,
+      "sha256": "923762e387b87366e068e8ecc727458597ae6ae4b1c5f44cb5cb17f93118cd4f",
+      "gitBlobSha": "64b65f215a73ce1c7660de2f11f50c4371b3ae02",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/ricks-walk-06.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-acd8b070-355a-4870-b57d-1d99df2f2a08.png",
+      "sizeBytes": 2460007,
+      "sha256": "e5dee7cebc33fe1418f7bc045d48b98b3e1dd4ae65f0d1cc50912ccf6d81dd71",
+      "gitBlobSha": "c78a8775c006bd8ed6882e6daf292d22e1aeacbe",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/prop-holotable-covenant-bridge.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-325235c6-c2db-4792-9437-887e4fac5fe0.png",
+      "sizeBytes": 1626600,
+      "sha256": "124ba708d2cf4cb87edf9cfbe2b0f09982e33adcf67ba937385f9ac9bf1f4bd3",
+      "gitBlobSha": "0691c6b82108116b6c5df37bc80fd84bc2a11cd2",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/oram-walk-02.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-86106732-8027-4cde-a6c2-7a13034f4fe3.png",
+      "sizeBytes": 2162292,
+      "sha256": "94c3b6f92e11d5554ff800270c74debcb1e32947be2324e62a6f5c5299b49b6f",
+      "gitBlobSha": "5aba216f2f20e5b331da773a7729168c84a60a54",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/prop-seat-covenant-bridge.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-7533a31d-c4ad-4bf8-b133-786adb2d756d.png",
+      "sizeBytes": 1513296,
+      "sha256": "02eb335c09572fdb52f18de180ca14e89283f932c08d71cddd3018150a49be6c",
+      "gitBlobSha": "b35b098fc2f728645baf71eb72503c7bb61be5f2",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/oram-walk-03.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-30af3ca7-7039-439d-8f76-5bcda6fa2528.png",
+      "sizeBytes": 1724473,
+      "sha256": "d31760ba62547fc3073bb79b6d26c1b07a8476844ec6834f5fdc8439018e4bf2",
+      "gitBlobSha": "28ad7ae6a7768ecf9d8a654b0648aa2f9f563e27",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/ricks-walk-02.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-9caa94ff-3cb2-4579-8385-9654d74c28fe.png",
+      "sizeBytes": 2228274,
+      "sha256": "febd03250f501a6e8875f5b585c8408ffc9a4c6f4ab883b9f0592530582e955d",
+      "gitBlobSha": "c2aa1d6f88849d6e42974ed3547134ff5b9261c1",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/prop-console-lander-main.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-c0868e9d-e546-421c-b5b7-c2106d43f449.png",
+      "sizeBytes": 1607306,
+      "sha256": "76a633bc3da12c605e1c8ab9294568074442ebe2b1d3ee8ae02863e8a838cd3b",
+      "gitBlobSha": "6ec28ce8227579fa013788b6fb6279030c3bf978",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/oram-walk-05.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-aae1a388-89d8-47cd-b741-ebde8c3a4b6e.png",
+      "sizeBytes": 1607014,
+      "sha256": "fd8644466668e17a0b9417ca657fef551271faee5adb13011e41185775558b32",
+      "gitBlobSha": "3edb0575f8d353907d2ef6a46b091b5c7f699ce3",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/oram-walk-01.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-f6f9bd04-ceb0-413b-96dc-f9d58a0fb5d3.png",
+      "sizeBytes": 1737258,
+      "sha256": "5c5bdaad9722f9ad313724939df1c7ee855d9cee8925c84bb84361fb12ad6e27",
+      "gitBlobSha": "080d67c74b02a686df74f58aeb53d70668f3e18d",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/oram-walk-08.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-a3047554-10a1-4b59-a0db-bd13f2baf9c7.png",
+      "sizeBytes": 1504261,
+      "sha256": "d8d28795fb8eba4745ae82c6043f95e76722a8f9a0d0ae975395ea631891c388",
+      "gitBlobSha": "1f0f3c65d129eb48b249d07b696b3caf1e818041",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/ricks-walk-07.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-07d58da6-4601-4625-83d4-d1375263b8d4.png",
+      "sizeBytes": 2261677,
+      "sha256": "5db3e5b8a9cd19f12a2ceb1578119332231112c59f7c29a60b7b6e3c7924ca46",
+      "gitBlobSha": "ff7aadaec82f1557e79f6d6c436e3139d835865d",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/prop-seat-lander.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-80d24fde-6971-4a53-8137-e32826fb7437.png",
+      "sizeBytes": 1754619,
+      "sha256": "141b291fcd3054aa70663a664c1157e455dcc6ba915745a34f758972163a1c37",
+      "gitBlobSha": "9e44f46d125d2c7bbe197600a33cd4a4a908936f",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/ricks-walk-01.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-2621d31e-7bbe-45a3-994e-6246c24beb87.png",
+      "sizeBytes": 1705898,
+      "sha256": "fa4eb2a4534356eab31efe2c6f745fcee2978e390210624c284fa8b44915aa3f",
+      "gitBlobSha": "fb6b505ed4f01f9bd75ccbe38e8587fc1601adce",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/ricks-walk-08.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-c1c64dc6-52c9-4fa7-9377-c9fc9b03cc78.png",
+      "sizeBytes": 1516962,
+      "sha256": "584ea77a38a12817718ed7ca9e9ecf4f35d9326b5950b9e8affad32e00d143b7",
+      "gitBlobSha": "1c4372bcd5b073072e728011c1d800ea130fdbbe",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/oram-walk-07.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-cc73a4f5-ba28-412d-8cce-c601775f752c.png",
+      "sizeBytes": 983118,
+      "sha256": "7bbad5c024f2a9b8d84c32f8d82ff78749611b886de58cda7c00dcf5d4a78dc4",
+      "gitBlobSha": "bd31680de06ab223284719fd6fa2980a0d1664ee",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/ricks-walk-05.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-20554c1d-d123-452f-9e50-14c4172247d9.png",
+      "sizeBytes": 2331264,
+      "sha256": "2658b50c49273fc947eb6886feb6876d76f935bf262952daa10a807d1c15e84d",
+      "gitBlobSha": "76ed5246854b43ee40684fdc6385eab09f1b1580",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/prop-console-covenant-bridge.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-22e68a63-b379-479d-83fd-1c5d7a7336e9.png",
+      "sizeBytes": 1499657,
+      "sha256": "6fe5cd674690b1c91289fbf8c53f09c2f3b111ae6bada8840b8737bc3de29478",
+      "gitBlobSha": "e9d90fdb4a05bb9aab7482112e4d92944ae44cda",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/ricks-walk-03.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-40a9a91d-3440-4361-8687-b605186e7428.png",
+      "sizeBytes": 1751492,
+      "sha256": "4faf90e444093d0893b6bc068028b1711e1d513cdb4d5e5034afc28633d4bdb7",
+      "gitBlobSha": "07d1f123a1ac2c5cc7eab737893ff861ebaae31b",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/ricks-walk-04.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-9e280c74-7101-4c50-b14a-834da934c2bb.png",
+      "sizeBytes": 1619178,
+      "sha256": "af4940ea7ee371ffcbf22d0d48e9ae2600ad18254b9015e1429d78053b47cfd0",
+      "gitBlobSha": "a6ccd9ed068bc8fa37fa2e8cc59ffc9741349d40",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/prop-medbay-table.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-dcf5a321-83ba-4df9-b470-d5ca35ec34c8.png",
+      "sizeBytes": 1665384,
+      "sha256": "3ae97698ecc31104995a9b8f6eafe623cbd7eedf0f41af8048c9235c228dddfb",
+      "gitBlobSha": "3751c477f85bb468c4c495b1c1815643287119c8",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/oram-walk-06.png"
+      ]
+    },
+    {
+      "sourceFile": "exec-774ada82-ec07-4301-8f88-e237db97742d.png",
+      "sizeBytes": 1658400,
+      "sha256": "09874043f558563ff9e94bb7e0223cec9012764b3bd114592ca0700565e8b17e",
+      "gitBlobSha": "5279a14b6d05b18762b9c3adcb86f696e8b32540",
+      "existingPaths": [
+        "assets/openai/sprites/alien-covenant-v015/oram-walk-04.png"
+      ]
+    },
+    {
+      "sourceFile": "BIBLE_COVENANT_V014.xlsx",
+      "sizeBytes": 274865,
+      "sha256": "65d046fc10004fa680b36b0c477548efba44aab150d55bbec9ca8058e977abc3",
+      "gitBlobSha": "7a4779cdf1bff7097f8dca095c09d1d7ba955362",
+      "existingPaths": [
+        "docs/covenant/BIBLE_COVENANT_V014.xlsx"
+      ]
+    }
+  ],
+  "unavailableSourceDirectories": [
+    "covenant-work (broken link)",
+    "covenant-v016 (970dc7a28d27; broken link)",
+    "covenant-v016/people (broken link)",
+    "covenant-continuation (broken link)"
+  ],
+  "limitations": [
+    "Ten walking images have no exact production record in V011–V017; no inferred phase or acceptance status is promoted.",
+    "Six Ricks/Oram images match earlier rejected or superseded iterations; their status remains unchanged.",
+    "Earlier source-directory links target absent files; this inventory covers readable local bytes, not a claim that all historical work has been recovered.",
+    "QA records are preserved historically and are not new test results.",
+    "No generated image is certified as exact film fidelity."
+  ]
+}

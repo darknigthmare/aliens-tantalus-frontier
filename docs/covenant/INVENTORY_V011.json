@@ -1,0 +1,3542 @@
+{
+  "schemaVersion": 1,
+  "release": "0.11.0",
+  "sourceModuleVersion": "0.10.0",
+  "verified1to1": false,
+  "source": "ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip",
+  "counts": {
+    "profiles": 23,
+    "consumedProfiles": 20,
+    "actors": 18,
+    "propFamilies": 126,
+    "propInstances": 630,
+    "film_object_candidate": 50,
+    "structure_or_live_mechanism": 38,
+    "environment_or_effect": 11,
+    "gameplay_original": 8,
+    "generic_unverified": 19
+  },
+  "consumerFiles": {
+    "profiles": "modules/covenant/dlc/covenant/fidelity.js",
+    "humanAndWeaponRenderer": "modules/covenant/dlc/covenant/fidelity-art.js",
+    "state": "modules/covenant/dlc/covenant/core.js",
+    "spriteRenderer": "modules/covenant/dlc/covenant/sprite-art-v011.js"
+  },
+  "profiles": [
+    {
+      "id": "daniels",
+      "appearance": {
+        "coat": "#71848a",
+        "hair": "#292c2a",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "crop",
+        "necklace": true
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [],
+      "playerRooms": [
+        "landing",
+        "wheat",
+        "ravine",
+        "forest",
+        "juggernaut",
+        "pilot",
+        "medlander",
+        "burning",
+        "reeds",
+        "necropolis",
+        "court",
+        "workshop",
+        "gallery",
+        "garden",
+        "crypt",
+        "shaw",
+        "catacomb",
+        "nave",
+        "plaza",
+        "infirmary",
+        "corridor",
+        "returncryo",
+        "embryos",
+        "coolantwalk",
+        "evaclocker",
+        "cistern",
+        "undercroft",
+        "stores",
+        "relay",
+        "coolantduct",
+        "filterduct",
+        "freightduct",
+        "aqueduct",
+        "sluiceworks",
+        "effigybasin",
+        "reliquary",
+        "windfall",
+        "sporehollow",
+        "surveyblind",
+        "landerhold",
+        "landercockpit",
+        "landermed",
+        "davidquarters",
+        "musicroom",
+        "washroom",
+        "colonistvault"
+      ]
+    },
+    {
+      "id": "daniels-work",
+      "appearance": {
+        "coat": "#a6a69d",
+        "hair": "#292c2a",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "crop",
+        "necklace": true
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [],
+      "playerRooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "bridge",
+        "comms",
+        "funeralairlock",
+        "evaprep"
+      ]
+    },
+    {
+      "id": "daniels-eva",
+      "appearance": {
+        "coat": "#4d5e61",
+        "hair": "#292c2a",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "eva",
+        "necklace": false
+      },
+      "logicalHeight": 139,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [],
+      "playerRooms": [
+        "lifter",
+        "cargo",
+        "sailaccess"
+      ]
+    },
+    {
+      "id": "walter",
+      "appearance": {
+        "coat": "#7f8e88",
+        "hair": "#635e51",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "slick"
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "walter-cryo",
+          "role": "walter",
+          "room": "cryo",
+          "untilVisited": null
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "walter-field",
+      "appearance": {
+        "coat": "#728385",
+        "hair": "#635e51",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "cap",
+        "badge": true
+      },
+      "logicalHeight": 126,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [],
+      "playerRooms": []
+    },
+    {
+      "id": "walter-injured",
+      "appearance": {
+        "coat": "#728385",
+        "hair": "#635e51",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "cap",
+        "badge": true,
+        "missingLeft": true
+      },
+      "logicalHeight": 126,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "walter-nave",
+          "role": "walter",
+          "room": "nave",
+          "untilVisited": null
+        },
+        {
+          "id": "synthetic-return",
+          "role": "walter",
+          "room": "returncryo",
+          "untilVisited": null
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "david",
+      "appearance": {
+        "coat": "#747964",
+        "hair": "#afa685",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "long",
+        "cloak": true
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "david-necropolis",
+          "role": "david",
+          "room": "necropolis",
+          "untilVisited": "court"
+        },
+        {
+          "id": "david-court",
+          "role": "david",
+          "room": "court",
+          "untilVisited": null
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "david-young",
+      "appearance": {
+        "coat": "#d7d5c9",
+        "hair": "#8c8065",
+        "skin": "#c7ac92",
+        "pants": "#dddacb",
+        "head": "slick"
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [],
+      "playerRooms": [
+        "whiteroom"
+      ]
+    },
+    {
+      "id": "oram",
+      "appearance": {
+        "coat": "#626f79",
+        "hair": "#514943",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "short"
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "oram-bridge",
+          "role": "oram",
+          "room": "bridge",
+          "untilVisited": "landing"
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "lope",
+      "appearance": {
+        "coat": "#596962",
+        "hair": "#403e38",
+        "skin": "#b0947c",
+        "pants": "#60654d",
+        "head": "cap",
+        "beard": true,
+        "gun": "ar15",
+        "vest": true
+      },
+      "logicalHeight": 126,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "lope-landing",
+          "role": "lope",
+          "room": "landing",
+          "untilVisited": "burning"
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "tennessee",
+      "appearance": {
+        "coat": "#7b7e68",
+        "hair": "#624c36",
+        "skin": "#c49e82",
+        "pants": "#60654d",
+        "head": "hat",
+        "beard": true,
+        "build": 1.12,
+        "gun": "shotgun"
+      },
+      "logicalHeight": 134,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [],
+      "playerRooms": []
+    },
+    {
+      "id": "tennessee-eva",
+      "appearance": {
+        "coat": "#536469",
+        "hair": "#624c36",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "eva",
+        "beard": true,
+        "build": 1.12
+      },
+      "logicalHeight": 139,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "tennessee-eva",
+          "role": "tennessee-eva",
+          "room": "sailaccess",
+          "untilVisited": "landing"
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "faris",
+      "appearance": {
+        "coat": "#73817e",
+        "hair": "#5c493b",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "bob"
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "faris-cockpit",
+          "role": "faris",
+          "room": "landercockpit",
+          "untilVisited": "burning"
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "karine",
+      "appearance": {
+        "coat": "#7a8788",
+        "hair": "#282823",
+        "skin": "#99765f",
+        "pants": "#60654d",
+        "head": "tied"
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "karine-hold",
+          "role": "karine",
+          "room": "landerhold",
+          "untilVisited": "medlander"
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "ricks",
+      "appearance": {
+        "coat": "#708385",
+        "hair": "#202722",
+        "skin": "#906e57",
+        "pants": "#60654d",
+        "head": "short",
+        "beard": true
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "ricks-bridge",
+          "role": "ricks",
+          "room": "bridge",
+          "untilVisited": "infirmary"
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "upworth",
+      "appearance": {
+        "coat": "#798580",
+        "hair": "#362a25",
+        "skin": "#c1977c",
+        "pants": "#60654d",
+        "head": "tied"
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "upworth-comms",
+          "role": "upworth",
+          "room": "comms",
+          "untilVisited": "infirmary"
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "rosenthal",
+      "appearance": {
+        "coat": "#798781",
+        "hair": "#62523e",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "tied",
+        "gun": "inox",
+        "vest": true
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "rosenthal-expedition",
+          "role": "rosenthal",
+          "room": "landing",
+          "untilVisited": "medlander"
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "hallett",
+      "appearance": {
+        "coat": "#66716a",
+        "hair": "#6b6252",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "cap",
+        "gun": "ar15",
+        "vest": true
+      },
+      "logicalHeight": 126,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "hallett-expedition",
+          "role": "hallett",
+          "room": "wheat",
+          "untilVisited": "medlander"
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "ledward",
+      "appearance": {
+        "coat": "#788277",
+        "hair": "#715b42",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "cap",
+        "gun": "f90",
+        "vest": true
+      },
+      "logicalHeight": 126,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "ledward-expedition",
+          "role": "ledward",
+          "room": "forest",
+          "untilVisited": "medlander"
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "ankor",
+      "appearance": {
+        "coat": "#607068",
+        "hair": "#544736",
+        "skin": "#c7ac92",
+        "pants": "#60654d",
+        "head": "cap",
+        "gun": "ar15",
+        "vest": true
+      },
+      "logicalHeight": 126,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "ankor-expedition",
+          "role": "ankor",
+          "room": "landing",
+          "untilVisited": "medlander"
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "cole",
+      "appearance": {
+        "coat": "#61746f",
+        "hair": "#272721",
+        "skin": "#9b765b",
+        "pants": "#60654d",
+        "head": "short",
+        "gun": "sl40",
+        "vest": true,
+        "build": 1.1
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "cole-expedition",
+          "role": "cole",
+          "room": "wheat",
+          "untilVisited": "medlander"
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "weyland",
+      "appearance": {
+        "coat": "#c9c7bd",
+        "hair": "#77736c",
+        "skin": "#c7ac92",
+        "pants": "#9f9f96",
+        "head": "short"
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [
+        {
+          "id": "weyland-opening",
+          "role": "weyland",
+          "room": "whiteroom",
+          "untilVisited": null
+        }
+      ],
+      "playerRooms": []
+    },
+    {
+      "id": "branson-record",
+      "appearance": {
+        "coat": "#a5b4ad",
+        "hair": "#3c352e",
+        "skin": "#c3a88e",
+        "pants": "#697260",
+        "head": "short",
+        "beard": true
+      },
+      "logicalHeight": 122,
+      "sourceFacing": 1,
+      "initialAvailableArtwork": "procedural",
+      "actors": [],
+      "playerRooms": []
+    }
+  ],
+  "weapons": [
+    {
+      "id": "f90",
+      "assetId": "weapon-f90",
+      "playable": true,
+      "consumers": [
+        "ledward"
+      ],
+      "initialAvailableArtwork": "procedural"
+    },
+    {
+      "id": "beretta",
+      "assetId": "weapon-beretta",
+      "playable": true,
+      "consumers": [],
+      "initialAvailableArtwork": "procedural"
+    },
+    {
+      "id": "ar15",
+      "assetId": "weapon-ar15",
+      "playable": true,
+      "consumers": [
+        "lope",
+        "hallett",
+        "ankor"
+      ],
+      "initialAvailableArtwork": "procedural"
+    },
+    {
+      "id": "shotgun",
+      "assetId": "weapon-shotgun",
+      "playable": true,
+      "consumers": [
+        "tennessee"
+      ],
+      "initialAvailableArtwork": "procedural"
+    },
+    {
+      "id": "inox",
+      "assetId": "weapon-inox",
+      "playable": false,
+      "consumers": [
+        "rosenthal"
+      ],
+      "initialAvailableArtwork": "procedural"
+    },
+    {
+      "id": "sl40",
+      "assetId": "weapon-sl40",
+      "playable": false,
+      "consumers": [
+        "cole"
+      ],
+      "initialAvailableArtwork": "procedural"
+    },
+    {
+      "id": "eaa",
+      "assetId": "weapon-eaa",
+      "playable": false,
+      "consumers": [],
+      "initialAvailableArtwork": "procedural"
+    }
+  ],
+  "creatures": [
+    {
+      "id": "neomorph",
+      "logicalHeight": 176,
+      "initialAvailableArtwork": "procedural",
+      "encounters": [
+        {
+          "id": "neo-site",
+          "room": "burning"
+        },
+        {
+          "id": "neo-reeds",
+          "room": "reeds"
+        },
+        {
+          "id": "neo-basin",
+          "room": "effigybasin"
+        }
+      ],
+      "allowedStaticReplacements": {
+        "idle": [
+          "idle",
+          "search",
+          "recover"
+        ],
+        "attack": [
+          "lunge"
+        ]
+      },
+      "uncoveredStatesKeepProcedural": [
+        "windup",
+        "chase",
+        "investigate",
+        "dead",
+        "stunned",
+        "captured",
+        "scripted-sequence"
+      ]
+    },
+    {
+      "id": "xenomorph",
+      "logicalHeight": 195,
+      "initialAvailableArtwork": "procedural",
+      "encounters": [
+        {
+          "id": "xeno-lifter",
+          "room": "lifter"
+        },
+        {
+          "id": "xeno-cargo",
+          "room": "cargo"
+        }
+      ],
+      "allowedStaticReplacements": {
+        "idle": [
+          "idle",
+          "search",
+          "recover"
+        ],
+        "attack": [
+          "lunge"
+        ]
+      },
+      "uncoveredStatesKeepProcedural": [
+        "windup",
+        "chase",
+        "investigate",
+        "dead",
+        "stunned",
+        "captured",
+        "scripted-sequence"
+      ]
+    },
+    {
+      "id": "facehugger",
+      "logicalHeight": 42,
+      "initialAvailableArtwork": "procedural",
+      "encounters": [
+        {
+          "id": "hugger-crypt",
+          "room": "crypt"
+        },
+        {
+          "id": "hugger-stairs",
+          "room": "catacomb"
+        }
+      ],
+      "allowedStaticReplacements": {
+        "idle": [
+          "idle",
+          "search",
+          "recover"
+        ],
+        "attack": [
+          "lunge"
+        ]
+      },
+      "uncoveredStatesKeepProcedural": [
+        "windup",
+        "chase",
+        "investigate",
+        "dead",
+        "stunned",
+        "captured",
+        "scripted-sequence"
+      ]
+    }
+  ],
+  "propFamilies": [
+    {
+      "id": "air-case",
+      "category": "gameplay_original",
+      "count": 2,
+      "rooms": [
+        "windfall",
+        "surveyblind"
+      ],
+      "referenceIds": [],
+      "width": [
+        92,
+        140
+      ],
+      "height": [
+        65,
+        67
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "antenna",
+      "category": "generic_unverified",
+      "count": 8,
+      "rooms": [
+        "bridge",
+        "landing",
+        "wheat",
+        "forest",
+        "reeds",
+        "court",
+        "nave",
+        "plaza"
+      ],
+      "referenceIds": [],
+      "width": [
+        60,
+        110
+      ],
+      "height": [
+        100,
+        160
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "aqueduct-pier",
+      "category": "structure_or_live_mechanism",
+      "count": 4,
+      "rooms": [
+        "aqueduct"
+      ],
+      "referenceIds": [],
+      "width": [
+        150,
+        150
+      ],
+      "height": [
+        350,
+        350
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "bandages",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "infirmary"
+      ],
+      "referenceIds": [
+        "ACOV-146"
+      ],
+      "width": [
+        100,
+        100
+      ],
+      "height": [
+        70,
+        70
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "basin",
+      "category": "structure_or_live_mechanism",
+      "count": 3,
+      "rooms": [
+        "court",
+        "garden",
+        "undercroft"
+      ],
+      "referenceIds": [],
+      "width": [
+        120,
+        430
+      ],
+      "height": [
+        60,
+        125
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "bed",
+      "category": "generic_unverified",
+      "count": 1,
+      "rooms": [
+        "cabin"
+      ],
+      "referenceIds": [],
+      "width": [
+        380,
+        380
+      ],
+      "height": [
+        150,
+        150
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "bedroll",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "davidquarters"
+      ],
+      "referenceIds": [
+        "ACOV-204"
+      ],
+      "width": [
+        235,
+        235
+      ],
+      "height": [
+        52,
+        52
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "bench",
+      "category": "generic_unverified",
+      "count": 9,
+      "rooms": [
+        "cabin",
+        "bridge",
+        "court",
+        "workshop",
+        "shaw",
+        "returncryo",
+        "evaclocker",
+        "cistern"
+      ],
+      "referenceIds": [],
+      "width": [
+        120,
+        240
+      ],
+      "height": [
+        55,
+        100
+      ],
+      "solidCount": 2,
+      "suppressedCount": 1
+    },
+    {
+      "id": "cabindrawing",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "cabin"
+      ],
+      "referenceIds": [
+        "ACOV-162"
+      ],
+      "width": [
+        125,
+        125
+      ],
+      "height": [
+        105,
+        105
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "cable",
+      "category": "generic_unverified",
+      "count": 4,
+      "rooms": [
+        "service",
+        "comms",
+        "juggernaut",
+        "lifter"
+      ],
+      "referenceIds": [],
+      "width": [
+        170,
+        230
+      ],
+      "height": [
+        40,
+        50
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "cable-tray",
+      "category": "structure_or_live_mechanism",
+      "count": 9,
+      "rooms": [
+        "freightduct"
+      ],
+      "referenceIds": [],
+      "width": [
+        188,
+        188
+      ],
+      "height": [
+        60,
+        60
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "canopy",
+      "category": "structure_or_live_mechanism",
+      "count": 1,
+      "rooms": [
+        "medlander"
+      ],
+      "referenceIds": [],
+      "width": [
+        650,
+        650
+      ],
+      "height": [
+        310,
+        310
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "cargoCrate",
+      "category": "generic_unverified",
+      "count": 6,
+      "rooms": [
+        "landing",
+        "burning",
+        "plaza",
+        "lifter",
+        "cargo"
+      ],
+      "referenceIds": [],
+      "width": [
+        120,
+        290
+      ],
+      "height": [
+        72,
+        185
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "cargoLifter",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "plaza"
+      ],
+      "referenceIds": [],
+      "width": [
+        520,
+        520
+      ],
+      "height": [
+        220,
+        220
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "cctvCamera",
+      "category": "gameplay_original",
+      "count": 6,
+      "rooms": [
+        "service",
+        "corridor",
+        "cargo",
+        "stores",
+        "relay"
+      ],
+      "referenceIds": [],
+      "width": [
+        64,
+        64
+      ],
+      "height": [
+        225,
+        225
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "cctvTerminal",
+      "category": "gameplay_original",
+      "count": 3,
+      "rooms": [
+        "comms",
+        "infirmary",
+        "relay"
+      ],
+      "referenceIds": [],
+      "width": [
+        94,
+        94
+      ],
+      "height": [
+        142,
+        142
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "ceilingSpeaker",
+      "category": "gameplay_original",
+      "count": 3,
+      "rooms": [
+        "corridor",
+        "cargo",
+        "stores"
+      ],
+      "referenceIds": [],
+      "width": [
+        64,
+        64
+      ],
+      "height": [
+        225,
+        225
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "chain",
+      "category": "generic_unverified",
+      "count": 7,
+      "rooms": [
+        "juggernaut",
+        "gallery",
+        "crypt",
+        "shaw",
+        "catacomb",
+        "nave",
+        "cargo"
+      ],
+      "referenceIds": [],
+      "width": [
+        45,
+        65
+      ],
+      "height": [
+        240,
+        370
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "chair",
+      "category": "generic_unverified",
+      "count": 1,
+      "rooms": [
+        "landercockpit"
+      ],
+      "referenceIds": [],
+      "width": [
+        90,
+        90
+      ],
+      "height": [
+        130,
+        130
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "channelrim",
+      "category": "structure_or_live_mechanism",
+      "count": 1,
+      "rooms": [
+        "cistern"
+      ],
+      "referenceIds": [],
+      "width": [
+        750,
+        750
+      ],
+      "height": [
+        45,
+        45
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "classicalstatue",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "whiteroom"
+      ],
+      "referenceIds": [
+        "ACOV-183"
+      ],
+      "width": [
+        140,
+        140
+      ],
+      "height": [
+        330,
+        330
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "cloakstand",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "davidquarters"
+      ],
+      "referenceIds": [
+        "ACOV-135"
+      ],
+      "width": [
+        105,
+        105
+      ],
+      "height": [
+        175,
+        175
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "column",
+      "category": "structure_or_live_mechanism",
+      "count": 18,
+      "rooms": [
+        "juggernaut",
+        "pilot",
+        "necropolis",
+        "court",
+        "gallery",
+        "crypt",
+        "catacomb",
+        "nave",
+        "plaza",
+        "cistern",
+        "undercroft",
+        "effigybasin"
+      ],
+      "referenceIds": [],
+      "width": [
+        110,
+        180
+      ],
+      "height": [
+        210,
+        360
+      ],
+      "solidCount": 4,
+      "suppressedCount": 0
+    },
+    {
+      "id": "console",
+      "category": "film_object_candidate",
+      "count": 33,
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "bridge",
+        "comms",
+        "juggernaut",
+        "pilot",
+        "medlander",
+        "burning",
+        "garden",
+        "catacomb",
+        "nave",
+        "lifter",
+        "infirmary",
+        "corridor",
+        "cargo",
+        "embryos",
+        "coolantwalk",
+        "stores",
+        "relay",
+        "funeralairlock",
+        "landercockpit",
+        "colonistvault"
+      ],
+      "referenceIds": [
+        "ACOV-221"
+      ],
+      "width": [
+        60,
+        230
+      ],
+      "height": [
+        70,
+        170
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "coolant",
+      "category": "structure_or_live_mechanism",
+      "count": 8,
+      "rooms": [
+        "cryo",
+        "service",
+        "corridor",
+        "returncryo",
+        "coolantwalk",
+        "evaclocker",
+        "stores"
+      ],
+      "referenceIds": [],
+      "width": [
+        200,
+        420
+      ],
+      "height": [
+        72,
+        220
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "corpse",
+      "category": "film_object_candidate",
+      "count": 9,
+      "rooms": [
+        "necropolis",
+        "plaza"
+      ],
+      "referenceIds": [],
+      "width": [
+        130,
+        170
+      ],
+      "height": [
+        35,
+        40
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "counterweight",
+      "category": "structure_or_live_mechanism",
+      "count": 4,
+      "rooms": [
+        "sluiceworks",
+        "reliquary"
+      ],
+      "referenceIds": [],
+      "width": [
+        70,
+        105
+      ],
+      "height": [
+        265,
+        330
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "coveredremains",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "shaw"
+      ],
+      "referenceIds": [
+        "ACOV-027",
+        "ACOV-174"
+      ],
+      "width": [
+        210,
+        210
+      ],
+      "height": [
+        75,
+        75
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "crane",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "lifter"
+      ],
+      "referenceIds": [],
+      "width": [
+        290,
+        290
+      ],
+      "height": [
+        350,
+        350
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "crate",
+      "category": "generic_unverified",
+      "count": 7,
+      "rooms": [
+        "service",
+        "landing",
+        "burning",
+        "corridor",
+        "cargo",
+        "stores"
+      ],
+      "referenceIds": [],
+      "width": [
+        100,
+        150
+      ],
+      "height": [
+        60,
+        100
+      ],
+      "solidCount": 5,
+      "suppressedCount": 0
+    },
+    {
+      "id": "cryopod",
+      "category": "film_object_candidate",
+      "count": 14,
+      "rooms": [
+        "cryo",
+        "returncryo",
+        "colonistvault"
+      ],
+      "referenceIds": [
+        "ACOV-025",
+        "ACOV-143"
+      ],
+      "width": [
+        195,
+        200
+      ],
+      "height": [
+        78,
+        84
+      ],
+      "solidCount": 0,
+      "suppressedCount": 2
+    },
+    {
+      "id": "dais",
+      "category": "structure_or_live_mechanism",
+      "count": 4,
+      "rooms": [
+        "pilot",
+        "gallery",
+        "nave"
+      ],
+      "referenceIds": [],
+      "width": [
+        210,
+        490
+      ],
+      "height": [
+        190,
+        310
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "damagedpod",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "cryo"
+      ],
+      "referenceIds": [
+        "ACOV-141"
+      ],
+      "width": [
+        190,
+        190
+      ],
+      "height": [
+        90,
+        90
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "drainwheel",
+      "category": "structure_or_live_mechanism",
+      "count": 1,
+      "rooms": [
+        "cistern"
+      ],
+      "referenceIds": [],
+      "width": [
+        130,
+        130
+      ],
+      "height": [
+        150,
+        150
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "drawing",
+      "category": "film_object_candidate",
+      "count": 7,
+      "rooms": [
+        "cabin",
+        "juggernaut",
+        "workshop",
+        "gallery",
+        "shaw",
+        "undercroft"
+      ],
+      "referenceIds": [],
+      "width": [
+        130,
+        230
+      ],
+      "height": [
+        100,
+        240
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "duct-mouth",
+      "category": "structure_or_live_mechanism",
+      "count": 6,
+      "rooms": [
+        "comms",
+        "corridor",
+        "cargo",
+        "coolantwalk",
+        "stores"
+      ],
+      "referenceIds": [],
+      "width": [
+        108,
+        108
+      ],
+      "height": [
+        80,
+        80
+      ],
+      "solidCount": 0,
+      "suppressedCount": 6
+    },
+    {
+      "id": "duct-rib",
+      "category": "structure_or_live_mechanism",
+      "count": 22,
+      "rooms": [
+        "coolantduct",
+        "filterduct",
+        "freightduct"
+      ],
+      "referenceIds": [],
+      "width": [
+        36,
+        36
+      ],
+      "height": [
+        115,
+        115
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "eaarack",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "landerhold"
+      ],
+      "referenceIds": [
+        "ACOV-090"
+      ],
+      "width": [
+        90,
+        90
+      ],
+      "height": [
+        100,
+        100
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "egg",
+      "category": "film_object_candidate",
+      "count": 3,
+      "rooms": [
+        "crypt"
+      ],
+      "referenceIds": [],
+      "width": [
+        90,
+        110
+      ],
+      "height": [
+        150,
+        160
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "eggsupport",
+      "category": "generic_unverified",
+      "count": 1,
+      "rooms": [
+        "crypt"
+      ],
+      "referenceIds": [],
+      "width": [
+        150,
+        150
+      ],
+      "height": [
+        75,
+        75
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "embryotray",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "embryos"
+      ],
+      "referenceIds": [
+        "ACOV-144",
+        "ACOV-145"
+      ],
+      "width": [
+        170,
+        170
+      ],
+      "height": [
+        135,
+        135
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "evahelmet",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "evaprep"
+      ],
+      "referenceIds": [
+        "ACOV-126"
+      ],
+      "width": [
+        100,
+        100
+      ],
+      "height": [
+        92,
+        92
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "evasuit",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "evaprep"
+      ],
+      "referenceIds": [
+        "ACOV-127"
+      ],
+      "width": [
+        150,
+        150
+      ],
+      "height": [
+        220,
+        220
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "fern",
+      "category": "environment_or_effect",
+      "count": 17,
+      "rooms": [
+        "landing",
+        "ravine",
+        "forest",
+        "garden",
+        "aqueduct",
+        "windfall",
+        "sporehollow",
+        "surveyblind"
+      ],
+      "referenceIds": [],
+      "width": [
+        115,
+        280
+      ],
+      "height": [
+        75,
+        130
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "field-awning",
+      "category": "gameplay_original",
+      "count": 1,
+      "rooms": [
+        "surveyblind"
+      ],
+      "referenceIds": [],
+      "width": [
+        570,
+        570
+      ],
+      "height": [
+        230,
+        230
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "fieldradio",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "landing"
+      ],
+      "referenceIds": [
+        "ACOV-155"
+      ],
+      "width": [
+        80,
+        80
+      ],
+      "height": [
+        85,
+        85
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "filter-bank",
+      "category": "structure_or_live_mechanism",
+      "count": 7,
+      "rooms": [
+        "filterduct"
+      ],
+      "referenceIds": [],
+      "width": [
+        176,
+        176
+      ],
+      "height": [
+        75,
+        75
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "fire",
+      "category": "environment_or_effect",
+      "count": 2,
+      "rooms": [
+        "burning"
+      ],
+      "referenceIds": [],
+      "width": [
+        160,
+        160
+      ],
+      "height": [
+        90,
+        110
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "flare",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "reeds"
+      ],
+      "referenceIds": [
+        "ACOV-100",
+        "ACOV-101"
+      ],
+      "width": [
+        85,
+        85
+      ],
+      "height": [
+        72,
+        72
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "flute",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "musicroom"
+      ],
+      "referenceIds": [
+        "ACOV-105",
+        "ACOV-167"
+      ],
+      "width": [
+        170,
+        170
+      ],
+      "height": [
+        70,
+        70
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "freight-cart",
+      "category": "gameplay_original",
+      "count": 3,
+      "rooms": [
+        "cargo",
+        "stores"
+      ],
+      "referenceIds": [],
+      "width": [
+        150,
+        160
+      ],
+      "height": [
+        152,
+        166
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "freight-dock",
+      "category": "structure_or_live_mechanism",
+      "count": 3,
+      "rooms": [
+        "cargo",
+        "stores"
+      ],
+      "referenceIds": [],
+      "width": [
+        180,
+        190
+      ],
+      "height": [
+        7,
+        7
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "freight-rail",
+      "category": "structure_or_live_mechanism",
+      "count": 3,
+      "rooms": [
+        "cargo",
+        "stores"
+      ],
+      "referenceIds": [],
+      "width": [
+        554,
+        784
+      ],
+      "height": [
+        8,
+        8
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "fuelcase",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "burning"
+      ],
+      "referenceIds": [
+        "ACOV-112"
+      ],
+      "width": [
+        140,
+        140
+      ],
+      "height": [
+        130,
+        130
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "generator",
+      "category": "generic_unverified",
+      "count": 3,
+      "rooms": [
+        "service",
+        "comms",
+        "lifter"
+      ],
+      "referenceIds": [],
+      "width": [
+        100,
+        150
+      ],
+      "height": [
+        130,
+        210
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "glasspartition",
+      "category": "structure_or_live_mechanism",
+      "count": 1,
+      "rooms": [
+        "landermed"
+      ],
+      "referenceIds": [
+        "ACOV-150"
+      ],
+      "width": [
+        320,
+        320
+      ],
+      "height": [
+        270,
+        270
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "grate",
+      "category": "structure_or_live_mechanism",
+      "count": 2,
+      "rooms": [
+        "coolantwalk",
+        "relay"
+      ],
+      "referenceIds": [],
+      "width": [
+        160,
+        180
+      ],
+      "height": [
+        75,
+        80
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "gunrack",
+      "category": "film_object_candidate",
+      "count": 2,
+      "rooms": [
+        "infirmary",
+        "landerhold"
+      ],
+      "referenceIds": [
+        "ACOV-097",
+        "ACOV-098",
+        "ACOV-178",
+        "ACOV-088",
+        "ACOV-091"
+      ],
+      "width": [
+        220,
+        270
+      ],
+      "height": [
+        205,
+        205
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "harnessrack",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "landerhold"
+      ],
+      "referenceIds": [
+        "ACOV-131",
+        "ACOV-129"
+      ],
+      "width": [
+        200,
+        200
+      ],
+      "height": [
+        150,
+        150
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "hydraulic-lever",
+      "category": "structure_or_live_mechanism",
+      "count": 1,
+      "rooms": [
+        "sluiceworks"
+      ],
+      "referenceIds": [],
+      "width": [
+        100,
+        100
+      ],
+      "height": [
+        135,
+        135
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "identification",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "shaw"
+      ],
+      "referenceIds": [
+        "ACOV-180"
+      ],
+      "width": [
+        70,
+        70
+      ],
+      "height": [
+        80,
+        80
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "imprint-slab",
+      "category": "structure_or_live_mechanism",
+      "count": 3,
+      "rooms": [
+        "reliquary"
+      ],
+      "referenceIds": [],
+      "width": [
+        195,
+        195
+      ],
+      "height": [
+        220,
+        220
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "isolation-box",
+      "category": "structure_or_live_mechanism",
+      "count": 8,
+      "rooms": [
+        "coolantduct",
+        "filterduct",
+        "freightduct"
+      ],
+      "referenceIds": [],
+      "width": [
+        38,
+        38
+      ],
+      "height": [
+        65,
+        65
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "lamp",
+      "category": "generic_unverified",
+      "count": 48,
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "bridge",
+        "comms",
+        "medlander",
+        "burning",
+        "reeds",
+        "necropolis",
+        "workshop",
+        "crypt",
+        "lifter",
+        "infirmary",
+        "corridor",
+        "cargo",
+        "returncryo",
+        "embryos",
+        "coolantwalk",
+        "evaclocker",
+        "stores",
+        "relay"
+      ],
+      "referenceIds": [],
+      "width": [
+        30,
+        50
+      ],
+      "height": [
+        125,
+        170
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "lander",
+      "category": "film_object_candidate",
+      "count": 2,
+      "rooms": [
+        "landing",
+        "burning"
+      ],
+      "referenceIds": [],
+      "width": [
+        600,
+        600
+      ],
+      "height": [
+        210,
+        255
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "lantern",
+      "category": "generic_unverified",
+      "count": 2,
+      "rooms": [
+        "court"
+      ],
+      "referenceIds": [],
+      "width": [
+        30,
+        30
+      ],
+      "height": [
+        85,
+        85
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "locker",
+      "category": "generic_unverified",
+      "count": 9,
+      "rooms": [
+        "cryo",
+        "cabin",
+        "medlander",
+        "infirmary",
+        "corridor",
+        "returncryo",
+        "evaclocker",
+        "relay"
+      ],
+      "referenceIds": [],
+      "width": [
+        125,
+        190
+      ],
+      "height": [
+        175,
+        225
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "log",
+      "category": "environment_or_effect",
+      "count": 8,
+      "rooms": [
+        "landing",
+        "wheat",
+        "forest",
+        "burning",
+        "reeds",
+        "windfall",
+        "sporehollow",
+        "surveyblind"
+      ],
+      "referenceIds": [],
+      "width": [
+        110,
+        300
+      ],
+      "height": [
+        40,
+        65
+      ],
+      "solidCount": 1,
+      "suppressedCount": 0
+    },
+    {
+      "id": "maintenance-fan",
+      "category": "structure_or_live_mechanism",
+      "count": 4,
+      "rooms": [
+        "coolantduct",
+        "filterduct",
+        "freightduct"
+      ],
+      "referenceIds": [],
+      "width": [
+        132,
+        132
+      ],
+      "height": [
+        114,
+        114
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "maintenance-tag",
+      "category": "structure_or_live_mechanism",
+      "count": 3,
+      "rooms": [
+        "coolantduct",
+        "filterduct",
+        "freightduct"
+      ],
+      "referenceIds": [],
+      "width": [
+        34,
+        34
+      ],
+      "height": [
+        60,
+        60
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "medical",
+      "category": "film_object_candidate",
+      "count": 6,
+      "rooms": [
+        "cryo",
+        "medlander",
+        "infirmary",
+        "evaclocker",
+        "landermed"
+      ],
+      "referenceIds": [
+        "ACOV-147",
+        "ACOV-148"
+      ],
+      "width": [
+        170,
+        260
+      ],
+      "height": [
+        65,
+        90
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "medtray",
+      "category": "film_object_candidate",
+      "count": 2,
+      "rooms": [
+        "landermed",
+        "washroom"
+      ],
+      "referenceIds": [
+        "ACOV-149"
+      ],
+      "width": [
+        110,
+        115
+      ],
+      "height": [
+        60,
+        75
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "memorial",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "garden"
+      ],
+      "referenceIds": [
+        "ACOV-208"
+      ],
+      "width": [
+        120,
+        120
+      ],
+      "height": [
+        70,
+        70
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "microscope",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "workshop"
+      ],
+      "referenceIds": [
+        "ACOV-171"
+      ],
+      "width": [
+        90,
+        90
+      ],
+      "height": [
+        120,
+        120
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "navigationdisplay",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "bridge"
+      ],
+      "referenceIds": [
+        "ACOV-153",
+        "ACOV-157"
+      ],
+      "width": [
+        230,
+        230
+      ],
+      "height": [
+        140,
+        140
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "necklace",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "cabin"
+      ],
+      "referenceIds": [
+        "ACOV-104",
+        "ACOV-163"
+      ],
+      "width": [
+        90,
+        90
+      ],
+      "height": [
+        95,
+        95
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "notebook",
+      "category": "film_object_candidate",
+      "count": 2,
+      "rooms": [
+        "davidquarters",
+        "musicroom"
+      ],
+      "referenceIds": [
+        "ACOV-170"
+      ],
+      "width": [
+        110,
+        135
+      ],
+      "height": [
+        60,
+        70
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "optics",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "landerhold"
+      ],
+      "referenceIds": [
+        "ACOV-132",
+        "ACOV-133"
+      ],
+      "width": [
+        90,
+        90
+      ],
+      "height": [
+        76,
+        76
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "pallet",
+      "category": "generic_unverified",
+      "count": 3,
+      "rooms": [
+        "landing",
+        "plaza",
+        "lifter"
+      ],
+      "referenceIds": [],
+      "width": [
+        140,
+        190
+      ],
+      "height": [
+        22,
+        30
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "personal",
+      "category": "generic_unverified",
+      "count": 3,
+      "rooms": [
+        "cabin",
+        "workshop",
+        "shaw"
+      ],
+      "referenceIds": [],
+      "width": [
+        130,
+        145
+      ],
+      "height": [
+        65,
+        90
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "piano",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "whiteroom"
+      ],
+      "referenceIds": [
+        "ACOV-181"
+      ],
+      "width": [
+        340,
+        340
+      ],
+      "height": [
+        170,
+        170
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "pipebundle",
+      "category": "structure_or_live_mechanism",
+      "count": 10,
+      "rooms": [
+        "coolantwalk",
+        "evaclocker",
+        "stores",
+        "relay",
+        "coolantduct"
+      ],
+      "referenceIds": [],
+      "width": [
+        215,
+        600
+      ],
+      "height": [
+        60,
+        190
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "rack",
+      "category": "generic_unverified",
+      "count": 16,
+      "rooms": [
+        "service",
+        "bridge",
+        "comms",
+        "workshop",
+        "shaw",
+        "infirmary",
+        "corridor",
+        "cargo",
+        "embryos",
+        "evaclocker",
+        "stores"
+      ],
+      "referenceIds": [],
+      "width": [
+        100,
+        260
+      ],
+      "height": [
+        170,
+        300
+      ],
+      "solidCount": 3,
+      "suppressedCount": 0
+    },
+    {
+      "id": "railing",
+      "category": "structure_or_live_mechanism",
+      "count": 5,
+      "rooms": [
+        "coolantwalk",
+        "stores",
+        "relay"
+      ],
+      "referenceIds": [],
+      "width": [
+        340,
+        540
+      ],
+      "height": [
+        52,
+        62
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "recorder",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "pilot"
+      ],
+      "referenceIds": [
+        "ACOV-154",
+        "ACOV-179"
+      ],
+      "width": [
+        80,
+        80
+      ],
+      "height": [
+        80,
+        80
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "recordingscreen",
+      "category": "film_object_candidate",
+      "count": 2,
+      "rooms": [
+        "cabin",
+        "comms"
+      ],
+      "referenceIds": [
+        "ACOV-005",
+        "ACOV-164",
+        "ACOV-156"
+      ],
+      "width": [
+        130,
+        145
+      ],
+      "height": [
+        110,
+        115
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "reeds",
+      "category": "environment_or_effect",
+      "count": 5,
+      "rooms": [
+        "landing",
+        "reeds"
+      ],
+      "referenceIds": [],
+      "width": [
+        260,
+        320
+      ],
+      "height": [
+        95,
+        200
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "relief-tablet",
+      "category": "structure_or_live_mechanism",
+      "count": 3,
+      "rooms": [
+        "aqueduct"
+      ],
+      "referenceIds": [],
+      "width": [
+        170,
+        170
+      ],
+      "height": [
+        170,
+        170
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "repairtool",
+      "category": "film_object_candidate",
+      "count": 2,
+      "rooms": [
+        "evaprep",
+        "sailaccess"
+      ],
+      "referenceIds": [
+        "ACOV-139"
+      ],
+      "width": [
+        95,
+        100
+      ],
+      "height": [
+        72,
+        92
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "rock",
+      "category": "environment_or_effect",
+      "count": 28,
+      "rooms": [
+        "landing",
+        "wheat",
+        "ravine",
+        "forest",
+        "reeds",
+        "catacomb",
+        "nave",
+        "windfall",
+        "sporehollow"
+      ],
+      "referenceIds": [
+        "ACOV-106"
+      ],
+      "width": [
+        95,
+        170
+      ],
+      "height": [
+        55,
+        115
+      ],
+      "solidCount": 12,
+      "suppressedCount": 0
+    },
+    {
+      "id": "root",
+      "category": "environment_or_effect",
+      "count": 31,
+      "rooms": [
+        "ravine",
+        "forest",
+        "juggernaut",
+        "pilot",
+        "necropolis",
+        "garden",
+        "crypt",
+        "catacomb",
+        "cistern",
+        "undercroft",
+        "windfall",
+        "sporehollow",
+        "surveyblind"
+      ],
+      "referenceIds": [],
+      "width": [
+        130,
+        330
+      ],
+      "height": [
+        100,
+        340
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "rubble",
+      "category": "environment_or_effect",
+      "count": 27,
+      "rooms": [
+        "ravine",
+        "juggernaut",
+        "burning",
+        "necropolis",
+        "court",
+        "gallery",
+        "crypt",
+        "catacomb",
+        "nave",
+        "plaza",
+        "cistern",
+        "undercroft",
+        "aqueduct",
+        "sluiceworks",
+        "effigybasin",
+        "reliquary",
+        "windfall",
+        "sporehollow",
+        "surveyblind"
+      ],
+      "referenceIds": [],
+      "width": [
+        85,
+        340
+      ],
+      "height": [
+        40,
+        90
+      ],
+      "solidCount": 2,
+      "suppressedCount": 0
+    },
+    {
+      "id": "seat",
+      "category": "generic_unverified",
+      "count": 3,
+      "rooms": [
+        "bridge"
+      ],
+      "referenceIds": [],
+      "width": [
+        78,
+        78
+      ],
+      "height": [
+        105,
+        105
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "shower",
+      "category": "structure_or_live_mechanism",
+      "count": 2,
+      "rooms": [
+        "washroom"
+      ],
+      "referenceIds": [
+        "ACOV-215"
+      ],
+      "width": [
+        190,
+        190
+      ],
+      "height": [
+        270,
+        270
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "shroud",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "funeralairlock"
+      ],
+      "referenceIds": [
+        "ACOV-166"
+      ],
+      "width": [
+        240,
+        240
+      ],
+      "height": [
+        78,
+        78
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "slab",
+      "category": "structure_or_live_mechanism",
+      "count": 2,
+      "rooms": [
+        "cistern",
+        "undercroft"
+      ],
+      "referenceIds": [],
+      "width": [
+        120,
+        160
+      ],
+      "height": [
+        110,
+        150
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "sluice-gauge",
+      "category": "structure_or_live_mechanism",
+      "count": 1,
+      "rooms": [
+        "sluiceworks"
+      ],
+      "referenceIds": [],
+      "width": [
+        95,
+        95
+      ],
+      "height": [
+        210,
+        210
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "specimen",
+      "category": "film_object_candidate",
+      "count": 7,
+      "rooms": [
+        "ravine",
+        "workshop",
+        "garden",
+        "shaw",
+        "embryos"
+      ],
+      "referenceIds": [],
+      "width": [
+        65,
+        120
+      ],
+      "height": [
+        65,
+        190
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "specimencage",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "workshop"
+      ],
+      "referenceIds": [
+        "ACOV-169"
+      ],
+      "width": [
+        150,
+        150
+      ],
+      "height": [
+        125,
+        125
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "spillway",
+      "category": "structure_or_live_mechanism",
+      "count": 10,
+      "rooms": [
+        "aqueduct",
+        "sluiceworks",
+        "effigybasin"
+      ],
+      "referenceIds": [],
+      "width": [
+        170,
+        210
+      ],
+      "height": [
+        70,
+        110
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "spore",
+      "category": "environment_or_effect",
+      "count": 4,
+      "rooms": [
+        "forest",
+        "garden"
+      ],
+      "referenceIds": [],
+      "width": [
+        150,
+        180
+      ],
+      "height": [
+        40,
+        45
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "spore-colony",
+      "category": "environment_or_effect",
+      "count": 5,
+      "rooms": [
+        "windfall",
+        "sporehollow"
+      ],
+      "referenceIds": [],
+      "width": [
+        125,
+        125
+      ],
+      "height": [
+        53,
+        53
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "stair",
+      "category": "structure_or_live_mechanism",
+      "count": 3,
+      "rooms": [
+        "undercroft",
+        "relay",
+        "reliquary"
+      ],
+      "referenceIds": [],
+      "width": [
+        200,
+        240
+      ],
+      "height": [
+        100,
+        145
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "steamvent",
+      "category": "structure_or_live_mechanism",
+      "count": 1,
+      "rooms": [
+        "coolantwalk"
+      ],
+      "referenceIds": [],
+      "width": [
+        190,
+        190
+      ],
+      "height": [
+        38,
+        38
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "stone-crown",
+      "category": "structure_or_live_mechanism",
+      "count": 3,
+      "rooms": [
+        "sluiceworks"
+      ],
+      "referenceIds": [],
+      "width": [
+        165,
+        165
+      ],
+      "height": [
+        180,
+        180
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "surgicaltray",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "workshop"
+      ],
+      "referenceIds": [
+        "ACOV-173"
+      ],
+      "width": [
+        145,
+        145
+      ],
+      "height": [
+        60,
+        60
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "switchboard",
+      "category": "structure_or_live_mechanism",
+      "count": 1,
+      "rooms": [
+        "relay"
+      ],
+      "referenceIds": [],
+      "width": [
+        400,
+        400
+      ],
+      "height": [
+        240,
+        240
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "tablet",
+      "category": "gameplay_original",
+      "count": 3,
+      "rooms": [
+        "windfall",
+        "sporehollow",
+        "surveyblind"
+      ],
+      "referenceIds": [],
+      "width": [
+        65,
+        75
+      ],
+      "height": [
+        68,
+        70
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "tarp",
+      "category": "generic_unverified",
+      "count": 1,
+      "rooms": [
+        "shaw"
+      ],
+      "referenceIds": [],
+      "width": [
+        265,
+        265
+      ],
+      "height": [
+        105,
+        105
+      ],
+      "solidCount": 0,
+      "suppressedCount": 1
+    },
+    {
+      "id": "teaset",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "whiteroom"
+      ],
+      "referenceIds": [
+        "ACOV-182"
+      ],
+      "width": [
+        140,
+        140
+      ],
+      "height": [
+        100,
+        100
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "terraformer",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "cargo"
+      ],
+      "referenceIds": [],
+      "width": [
+        550,
+        550
+      ],
+      "height": [
+        290,
+        290
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "tether",
+      "category": "film_object_candidate",
+      "count": 2,
+      "rooms": [
+        "evaprep",
+        "sailaccess"
+      ],
+      "referenceIds": [
+        "ACOV-138"
+      ],
+      "width": [
+        100,
+        150
+      ],
+      "height": [
+        92,
+        105
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "toolcart",
+      "category": "generic_unverified",
+      "count": 12,
+      "rooms": [
+        "cryo",
+        "service",
+        "comms",
+        "medlander",
+        "workshop",
+        "infirmary",
+        "coolantwalk",
+        "evaclocker",
+        "stores",
+        "relay",
+        "surveyblind"
+      ],
+      "referenceIds": [],
+      "width": [
+        88,
+        105
+      ],
+      "height": [
+        68,
+        90
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "trail-marker",
+      "category": "structure_or_live_mechanism",
+      "count": 3,
+      "rooms": [
+        "wheat",
+        "ravine",
+        "forest"
+      ],
+      "referenceIds": [],
+      "width": [
+        45,
+        45
+      ],
+      "height": [
+        100,
+        100
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "tree",
+      "category": "environment_or_effect",
+      "count": 5,
+      "rooms": [
+        "landing",
+        "ravine",
+        "forest",
+        "garden"
+      ],
+      "referenceIds": [],
+      "width": [
+        150,
+        180
+      ],
+      "height": [
+        260,
+        360
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "urn",
+      "category": "film_object_candidate",
+      "count": 8,
+      "rooms": [
+        "necropolis",
+        "court",
+        "workshop",
+        "garden",
+        "nave",
+        "cistern",
+        "undercroft",
+        "reliquary"
+      ],
+      "referenceIds": [],
+      "width": [
+        80,
+        100
+      ],
+      "height": [
+        90,
+        150
+      ],
+      "solidCount": 1,
+      "suppressedCount": 0
+    },
+    {
+      "id": "urnplatform",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "juggernaut"
+      ],
+      "referenceIds": [
+        "ACOV-107",
+        "ACOV-108"
+      ],
+      "width": [
+        270,
+        270
+      ],
+      "height": [
+        170,
+        170
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "urnrack",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "juggernaut"
+      ],
+      "referenceIds": [
+        "ACOV-172"
+      ],
+      "width": [
+        160,
+        160
+      ],
+      "height": [
+        145,
+        145
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "utilityknife",
+      "category": "film_object_candidate",
+      "count": 2,
+      "rooms": [
+        "nave",
+        "landerhold"
+      ],
+      "referenceIds": [
+        "ACOV-102",
+        "ACOV-103"
+      ],
+      "width": [
+        90,
+        95
+      ],
+      "height": [
+        75,
+        75
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "vent",
+      "category": "structure_or_live_mechanism",
+      "count": 5,
+      "rooms": [
+        "cryo",
+        "comms",
+        "infirmary",
+        "corridor",
+        "coolantwalk"
+      ],
+      "referenceIds": [],
+      "width": [
+        90,
+        160
+      ],
+      "height": [
+        80,
+        100
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "wallpanel",
+      "category": "structure_or_live_mechanism",
+      "count": 12,
+      "rooms": [
+        "cryo",
+        "cabin",
+        "comms",
+        "medlander",
+        "infirmary",
+        "corridor",
+        "returncryo",
+        "embryos",
+        "coolantwalk",
+        "evaclocker",
+        "stores",
+        "funeralairlock"
+      ],
+      "referenceIds": [],
+      "width": [
+        170,
+        280
+      ],
+      "height": [
+        90,
+        235
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "wastecase",
+      "category": "film_object_candidate",
+      "count": 1,
+      "rooms": [
+        "cryo"
+      ],
+      "referenceIds": [
+        "ACOV-140"
+      ],
+      "width": [
+        140,
+        140
+      ],
+      "height": [
+        105,
+        105
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "weathered-face",
+      "category": "structure_or_live_mechanism",
+      "count": 6,
+      "rooms": [
+        "effigybasin",
+        "reliquary"
+      ],
+      "referenceIds": [],
+      "width": [
+        155,
+        210
+      ],
+      "height": [
+        285,
+        305
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "wheat",
+      "category": "environment_or_effect",
+      "count": 9,
+      "rooms": [
+        "wheat",
+        "reeds"
+      ],
+      "referenceIds": [],
+      "width": [
+        280,
+        430
+      ],
+      "height": [
+        100,
+        160
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "wind-mast",
+      "category": "gameplay_original",
+      "count": 3,
+      "rooms": [
+        "windfall",
+        "sporehollow",
+        "surveyblind"
+      ],
+      "referenceIds": [],
+      "width": [
+        65,
+        75
+      ],
+      "height": [
+        135,
+        160
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    },
+    {
+      "id": "window",
+      "category": "structure_or_live_mechanism",
+      "count": 1,
+      "rooms": [
+        "medlander"
+      ],
+      "referenceIds": [],
+      "width": [
+        160,
+        160
+      ],
+      "height": [
+        170,
+        170
+      ],
+      "solidCount": 0,
+      "suppressedCount": 0
+    }
+  ],
+  "notes": [
+    "Candidates identify objects that need reference review; they do not certify a distinct film asset for every family.",
+    "Walls, markers, live mechanisms and original gameplay props are not missing film accessories.",
+    "A generated free-hands idle pose does not replace armed, moving, crawling or interaction poses.",
+    "Film, bonus and gameplay reconstruction remain distinct; no 1:1 certification is inferred."
+  ]
+}

@@ -1,3 +1,6 @@
+import { publicCovenantPathAdmissionV011 } from './public-covenant-admissions-v011.mjs';
+import { verifyCovenantBundleV011, verifyCovenantAssetsV011, covenantSourceMetadataPathV011,
+  reviewedCovenantSourceMetadataV011 } from './build-covenant-v011.mjs';
 import { avpPathAdmission, verifyAvpAdmission } from './dlc-admission-avp-2004.mjs';
 import { DEV_TOOLS_FILES_V188, isDevToolsPublicPathV188 } from './build-dev-tools-v188.mjs';
 import { publicAliens1986DlcPathAdmission, aliens1986RecoveryFile, verifyAliens1986DlcAdmissions } from './public-aliens1986-dlc-admissions.mjs';
@@ -1236,6 +1239,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126.has(path)) return !built && directory;
   if (typeof path === 'string' && [...AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126].some(root => path.startsWith(root + '/')))
     return !built && !directory && AVP_PRODUCTION_SOURCE_FILES_20261126.has(path);
+  const covenantAdmission = publicCovenantPathAdmissionV011(path, { directory, built });
+  if (covenantAdmission !== null) return covenantAdmission;
   const fiorinaSpriteAdmission = publicFiorinaSpritePathAdmissionV115(path, { directory, built });
   if (fiorinaSpriteAdmission !== null) return fiorinaSpriteAdmission;
   const aliens1986Admission = publicAliens1986DlcPathAdmission(path, { directory, built });
@@ -1379,6 +1384,14 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
           'Changed Aliens 1986 recovery bytes: ' + path);
         continue;
       }
+      if (!built && covenantSourceMetadataPathV011(path)) {
+        // Exact reviewed source metadata, including sprite prompts and public URLs.
+        // The path gate above rejects this file from every built distribution.
+        const bytes = await readFile(join(directory, entry.name));
+        assert.equal(reviewedCovenantSourceMetadataV011(path, bytes, { built }), true,
+          'Unreviewed Covenant source metadata bytes: ' + path);
+        continue;
+      }
       if (!built && AI_TOOLS_FILE_SHA256_V188.has(path)) {
         // Third-party tooling keeps its exact upstream bytes (examples may name
         // generic home paths); it is source-only and rejected from any build.
@@ -1398,6 +1411,8 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyProjectRecoveryArchive20261116(root, { built });
   await verifyAliens1986DlcAdmissions(root, { built });
   await verifyFiorinaSpriteAdmissionsV115(root);
+  if (built) await verifyCovenantAssetsV011(root);
+  else await verifyCovenantBundleV011(root);
   await verifyAvpAdmission(root, { built });
   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);
   const registeredJpgs = USER_REFERENCE_LIBRARY_V100.map(entry => entry.path.replace(/^\//, '')).filter(path => path.endsWith('.jpg'));

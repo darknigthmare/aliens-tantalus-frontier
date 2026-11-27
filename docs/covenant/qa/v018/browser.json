@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "scope": "source-catalogue-only",
+  "browserEngine": "Chromium",
+  "browserVersion": "143.0.7499.4",
+  "images": [
+    {
+      "id": "prop-covenant-terraforming-side-airlock",
+      "complete": true,
+      "width": 1200,
+      "height": 1310,
+      "shown": true
+    },
+    {
+      "id": "prop-covenant-terraforming-main-doors-closed",
+      "complete": true,
+      "width": 2098,
+      "height": 749,
+      "shown": true
+    }
+  ],
+  "backgroundsChecked": [
+    "light",
+    "dark",
+    "checker"
+  ],
+  "desktopViewport": [
+    1365,
+    1000
+  ],
+  "mobileViewport": [
+    390,
+    844
+  ],
+  "mobileHorizontalOverflow": false,
+  "pageErrors": [],
+  "gameplayWalkthroughRun": false,
+  "screenshot": {
+    "path": "docs/covenant/qa/v018/catalogue-desktop.png",
+    "sha256": "a4d2ac13b27061b7ef593dd341322d421fe2e95e9eca0680bfaab71969651317"
+  },
+  "nativeImageHashes": {
+    "prop-covenant-terraforming-side-airlock": "cc292e5458b1f0f91a0559c232773f736e1a88c49041450fb16641441e787f59",
+    "prop-covenant-terraforming-main-doors-closed": "d5b0b101e6a22bd95c6ab4a4722cf250ce6bed3a6e715fc969446e6388e6a9db"
+  }
+}

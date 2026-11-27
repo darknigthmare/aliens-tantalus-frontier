@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "dlc": "Alien: Covenant",
+  "version": "0.18.0",
+  "baselineCommit": "dc9d0a5bb36266ab0baad616644198b856141c61",
+  "baselineTree": "a9724d5d571eef325561adc078c2a0ae65c57a32",
+  "date": "2026-11-26",
+  "pullRequest": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/79",
+  "verified1to1": false,
+  "sourceManifest": {
+    "path": "assets/openai/sprites/alien-covenant-v018/manifest.json",
+    "bytes": 20876,
+    "sha256": "071eed8d03b782e5cb5a379cf17229fd9869b2334b865c43a18c9925889962d4"
+  },
+  "coverage": {
+    "historicalProductionPngs": 154,
+    "newProductionPngs": 1,
+    "cumulativeProductionPngs": 155,
+    "runtimePngs": 81,
+    "catalogueOnlyProductionPngs": 74,
+    "documentaryCandidatesOutsideProduction": 1,
+    "historicalRecoveredFiles": 46,
+    "historicalRecoveredImageCandidates": 16,
+    "runtimePromotions": 0,
+    "completedWorldFamilies": 0,
+    "certified1to1Images": 0
+  },
+  "historicalSourceManifests": [
+    {
+      "path": "assets/openai/sprites/alien-covenant-v011/manifest.json",
+      "bytes": 212497,
+      "sha256": "3bc1b0dc4c370ee39c6fd91ab500b236d2eab4b7e686279c131dd4b4451e4923"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v012/manifest.json",
+      "bytes": 78199,
+      "sha256": "d29fb0343de8a7f7f5b97be995a3583d35c93e33df0272e92d42b38af97ef4e3"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v013/manifest.json",
+      "bytes": 265179,
+      "sha256": "5154d1c63b0f70c49bf45aa3ac4d26f00e3962214f58e999fa290fe580843788"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v014/manifest.json",
+      "bytes": 142223,
+      "sha256": "1fd31f3a6473e95fddb9e3e4dfc41a4938e7bde0454f072472b1f0a7f699e482"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v015/manifest.json",
+      "bytes": 361866,
+      "sha256": "0b6679217b73a5c07c43e7384ada3a31f080bbb33d618f61c74331a46c9ddb62"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v016/manifest.json",
+      "bytes": 79206,
+      "sha256": "6e166985008494e08f2b528368d0ffa53ae299f59634f91a7b0e9941df607c6a"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v017/manifest.json",
+      "bytes": 136343,
+      "sha256": "a0a552042ae8c0cafaa77c2a9161ef46023a066e0d82391044ad4323276315a4"
+    }
+  ],
+  "frozenDocuments": [
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V017.md",
+      "bytes": 1656669,
+      "sha256": "a01be6dfbccd4e282cf98b2422d4fd0be8f6f06759dfd972b4f6fa6567d8586a"
+    },
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V017.html",
+      "bytes": 5459093,
+      "sha256": "a3d1ae6f4d094d5bdd2e0353279dac5cd42bef5345db7368b9d2f77eca61a067"
+    },
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V017.json",
+      "bytes": 6455774,
+      "sha256": "433065ffd2f6fb3619396d70d9852e52784d57aab9f9cf88e634b0638274836b"
+    },
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V017.xlsx",
+      "bytes": 319125,
+      "sha256": "f0377aee4a15dab52f18841b4755d7eef22838e3427f0b69d2d3cd000b166fc8"
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/MANIFEST.json",
+      "bytes": 41597,
+      "sha256": "ac1c505f0067a77efc3c917ad3207a11ebe243ce26cbaefcd5f10d52de72e41e"
+    },
+    {
+      "path": "docs/covenant/recovery-20261126/README.md",
+      "bytes": 6116,
+      "sha256": "0ddecfb6cb91714756eda5558dd41ac386097ef41e3619181489ae95551b2ea6"
+    }
+  ],
+  "unchangedRuntimeFiles": [
+    {
+      "path": "modules/covenant/dlc/covenant/app.js",
+      "bytes": 48917,
+      "sha256": "90d4cb631d8bbfce2ea9cc9aae1966c02cdbf02fb3647ba8c0f6d4ddb0d2ca38"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/archaeology-art.js",
+      "bytes": 11192,
+      "sha256": "c45e148d44ea78f8d0adda2c07d2f13c587f39993d0e4f5c9ce9ac2ee8389124"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/archaeology.js",
+      "bytes": 6157,
+      "sha256": "b5864c0a1dd4feb3516ca5f367ac3878bc84f4da864afc5a9a6739d3e374792f"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/art-direction.js",
+      "bytes": 32404,
+      "sha256": "a5919c76ac41bfa86a185e92fee59377cdd8d115e97c738d4c12e7807830598c"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/atmosphere-art.js",
+      "bytes": 8237,
+      "sha256": "fa212cb10003258e204bb57c1a96256e43da0b2de0f08e89b70b0b29822077e1"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/atmosphere.js",
+      "bytes": 5857,
+      "sha256": "ea87774c4567bcd018e0f2beeab25a6ff89d889f22efdfef1c5adb26540a2286"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/bridge.js",
+      "bytes": 2218,
+      "sha256": "b12321b850b4ef8f9996b55b474f3dd8e1c010b2f626cc7a5f81a919cb436ca1"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/content.js",
+      "bytes": 678677,
+      "sha256": "bb75178f8beaa504e393251c44a2aceec851318175642082cf4b5b6d90c4e680"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/core.js",
+      "bytes": 52020,
+      "sha256": "6052d2b6ce8c31308f55512126f72613133e206dc937afcfd196e2699d92fadf"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/fidelity-art.js",
+      "bytes": 24345,
+      "sha256": "6a4d80a09ffb94601b859ae1bf7f9f5d0d4381731d0bf81f82c62f62c49eb026"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/fidelity.js",
+      "bytes": 3596,
+      "sha256": "6daaa693b3be6d86c1fc9c167b6f631d209961990beca82c8eba4e5afde16fce"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/field-art.js",
+      "bytes": 3729,
+      "sha256": "0a82dac247152042d17dcced468a1515eafc5a36acf60e441228780bdbf87088"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/freight-art.js",
+      "bytes": 5382,
+      "sha256": "3f39d18796c0e8cc25d9867805d96782e9e78ea8ff0154379b6fdc71a190b3f2"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/freight.js",
+      "bytes": 7328,
+      "sha256": "c24cd89346763341510ab7ba372b692b8ce2af2b00b203372585473091860130"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/index.html",
+      "bytes": 7238,
+      "sha256": "0501b2d4795002e9c3a570db1c773cfc324a11437b08fe146078247eff8a3404"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/maintenance-art.js",
+      "bytes": 7299,
+      "sha256": "8655fc5673e10b75244866c0ecca30b025236c2b2ca5c2593d56ea0188fde206"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/maintenance.js",
+      "bytes": 3921,
+      "sha256": "2a3446e49d9d345852400bfb9de95ae71612a7940b83a4f6fdf493a6bb966a81"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/network-art.js",
+      "bytes": 5683,
+      "sha256": "356600eb8b5556c2b66911522150759ac8f733620b5246665205b5c36c66f1d3"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/renderer.js",
+      "bytes": 28287,
+      "sha256": "bc116d6dd6141e664fca52bd9493d9e526148f7b62030739f3af9cd0d59113d8"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/ship-systems.js",
+      "bytes": 13783,
+      "sha256": "fe1382b861d5347e7279471b21156b2b22b50b056487572b3a379ddc296233c2"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/sprite-art-v011.js",
+      "bytes": 10639,
+      "sha256": "80fccc4b6c4988800123234c5c3514cc5fa341074239d37c5c90de58374373e0"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/sprite-registry-v011.js",
+      "bytes": 16312,
+      "sha256": "09ddc45736eb20653eab50152773b06dde31e3b0da68e3baa615285ba793827c"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/style.css",
+      "bytes": 25458,
+      "sha256": "c0a75bb779a95222acebbb1d6316cbd776d74b7beb9d1a467c76668bb670017a"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/threshold-art.js",
+      "bytes": 11267,
+      "sha256": "48ca892eabefdffc37aa52051fd9dcfd438155cabc8a527d1739f57c16f128de"
+    },
+    {
+      "path": "dlc/covenant/index.html",
+      "bytes": 1066732,
+      "sha256": "e83c6f8b51068aca7f1d70de2cec95e1f36ec7566fb2e6dcab5beb46a46b4bfc"
+    },
+    {
+      "path": "dlc/covenant/sprites-v011.json",
+      "bytes": 72588,
+      "sha256": "f43305542a68190d5f44b53305612e58664ddc556ee89e264735e5af9ec1046d"
+    }
+  ],
+  "preservationPolicy": "Les manifestes historiques épinglés décrivent 154 PNG dont chaque empreinte est revérifiée. Les 46 fichiers de récupération et leurs 16 candidats gardent leur registre et leurs octets. Aucun rejet historique promu.",
+  "validationScope": "Contrôle des originaux, transparence, contrats du catalogue, garde source/distribution et préservation du moteur. Pas de nouveau parcours en jeu revendiqué.",
+  "browserPlaythroughRun": false,
+  "pixelEditingPerformed": false
+}

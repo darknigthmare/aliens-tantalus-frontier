@@ -27,7 +27,19 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_PRODUCTION_BIBLE_BASELINE_20261126 as productionBibleBaseline,
   AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126 as productionBibleSuccessors,
   reviewedAvpProductionBibleHostDigest20261126 as advanceProductionBible,
+  COVENANT_DLC_BIBLE_MERGE_BASELINES_20261126 as covenantBibleMergeBaselines,
+  COVENANT_DLC_BIBLE_MERGE_SOURCES_20261126 as covenantBibleMergeSources,
+  reviewedCovenantDlcBibleMergeDigest20261126 as advanceCovenantBibleMerge,
+  COVENANT_V017_BIBLE_BASELINE_20261126 as covenantV017BibleBaseline,
+  COVENANT_V017_BIBLE_SUCCESSORS_20261126 as covenantV017BibleSuccessors,
+  reviewedCovenantV017BibleDigest20261126 as advanceCovenantV017Bible,
   reviewedFiorinaV116HostDigest20261125 as advanceV116,
+  AVP_COVENANT_BASELINE_20261126 as covenantBaseline,
+  AVP_COVENANT_SUCCESSORS_20261126 as covenantSuccessors,
+  reviewedCovenantHostDigest20261126 as advanceCovenant,
+  AVP_COVENANT_V012_BASELINE_20261126 as covenantV012Baseline,
+  AVP_COVENANT_V012_SUCCESSORS_20261126 as covenantV012Successors,
+  reviewedCovenantV012HostDigest20261126 as advanceCovenantV012,
   reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
   reviewedAvpHostDigest20261125 as advance, avpHostRuntimeSources20261125 as runtimeView,
@@ -130,11 +142,44 @@ const expectedSpritePaths = [
 ];
 const expectedSpriteV116Paths = ['.github/workflows/fiorina-native-v114.yml',
   'scripts/qa-fiorina-native-v114.mjs', 'scripts/verify-audit-v143.mjs', 'sw.js'];
-const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...Object.keys(bibleBridgeSuccessors)])];
+const expectedCovenantPaths = [
+  "index.html",
+  "package.json",
+  "scripts/build-asset-filter.mjs",
+  "scripts/build.mjs",
+  "scripts/verify-public-release-v86.mjs",
+  "src/title-screen-v61.js"
+];
+const expectedCovenantV012Paths = ['scripts/qa-title-compositions-v163.py', 'scripts/verify-public-release-v86.mjs'];
+const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...expectedCovenantPaths, ...expectedCovenantV012Paths, ...Object.keys(bibleBridgeSuccessors)])];
 const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path] || bibleBridgeSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
-const finalEndpoint = path => productionBibleSuccessors[path]?.currentSha256 || bibleBridgeSuccessors[path]?.currentSha256 || bibleDocumentsSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-DLC-bible-documents|DLC-bible-document-bridge|DLC-bible-to-AVP-production) source chain/;
+const preCovenantEndpoint = path => spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const preCovenantV012Endpoint = path => covenantSuccessors[path]?.currentSha256 || preCovenantEndpoint(path);
+const finalEndpoint = path => covenantV017BibleSuccessors[path]?.currentSha256
+  || covenantBibleMergeSources[path]?.currentSha256
+  || covenantV012Successors[path]?.currentSha256 || covenantSuccessors[path]?.currentSha256
+  || productionBibleSuccessors[path]?.currentSha256 || bibleBridgeSuccessors[path]?.currentSha256
+  || bibleDocumentsSuccessors[path]?.currentSha256 || preCovenantEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|published-host-to-Covenant|Covenant-V011-to-V012 host|V116-to-DLC-bible-documents|DLC-bible-document-bridge|DLC-bible-to-AVP-production|Covenant-and-DLC-bibles merge|merged-bible-to-Covenant-V017) source chain/;
+
+const covenantV017CampaignPath = 'docs/narrative/CAMPAGNE_PRINCIPALE.md';
+const covenantV017AppendixBytes = 4803;
+const covenantV017AppendixSha256 = 'd27153bbe216970df12d287d2505e0bf8fe6da85605a0aa185025f6b1f838c03';
+
+// Recover bytes, not a heading-based approximation: the historical bridge and
+// both parent inversions must still verify against the exact published merge.
+function campaignBeforeCovenantV017(bytes) {
+  const receipt = covenantV017BibleSuccessors[covenantV017CampaignPath];
+  assert.equal(bytes.length, 591772, 'Unreviewed Covenant V017 campaign length');
+  const historical = bytes.subarray(0, -covenantV017AppendixBytes);
+  const appendix = bytes.subarray(-covenantV017AppendixBytes);
+  assert.equal(sha(appendix), covenantV017AppendixSha256, 'Unreviewed Covenant V016/V017 appendix bytes');
+  assert.equal(historical.length, 586969, 'Changed historical merged campaign length');
+  assert.equal(sha(historical), receipt.previousSha256, 'Changed historical merged campaign bytes');
+  assert.equal(sha(bytes), receipt.currentSha256, 'Unreviewed Covenant V017 campaign bytes');
+  return historical;
+}
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -151,7 +196,7 @@ test('AVP published receipts remain immutable while the exact Fiorina join verif
     joinedSuccessors: expectedJoinPaths.length, qualitySuccessors: expectedQualityPaths.length,
     aliensMergedSuccessors: Object.keys(aliensMerge).length, aliensIncomingSuccessors: Object.keys(aliasesFromAliens).length,
     spriteSuccessors: expectedSpritePaths.length, spriteV116Successors: expectedSpriteV116Paths.length,
-    historicalEvidenceTransferred: false });
+    covenantV012Successors: expectedCovenantV012Paths.length, historicalEvidenceTransferred: false });
 });
 
 test('the Aliens merge joins both exact published parents and refuses any unrecorded incoming endpoint', () => {
@@ -291,6 +336,9 @@ test('the actual terminal imports no audit and cannot admit its own bytes', () =
   assert.equal(Object.hasOwn(aliensIncoming, audit), false);
   assert.equal(Object.hasOwn(spriteSuccessors, audit), false);
   assert.equal(Object.hasOwn(spriteV116Successors, audit), false);
+  assert.equal(Object.hasOwn(covenantSuccessors, audit), false);
+  assert.equal(Object.hasOwn(covenantV012Successors, audit), false);
+  assert.equal(Object.hasOwn(covenantV017BibleSuccessors, audit), false);
   assert.doesNotMatch(source, /from\s+['"].*audit-/);
 });
 
@@ -346,6 +394,244 @@ test('V116 advances exactly four reviewed hosts after the merged V115 receipts',
   assert.equal(Object.hasOwn(spriteV116Successors, audit), false);
 });
 
+test('Covenant advances only six exact reviewed host endpoints after the published V116 parent', () => {
+  assert.equal(covenantBaseline, 'b0df1877a058f0818f96437fdfdea3f21ba7f415');
+  assert.deepEqual(Object.keys(covenantSuccessors).sort(), [...expectedCovenantPaths].sort());
+  assert.equal(sha(JSON.stringify(covenantSuccessors)), 'baa661ba0b58d60fa0278d83c0b6b353cbe70c3b03ddc2ffb39e5a965ef65524');
+  assert.ok(Object.isFrozen(covenantSuccessors));
+  for (const [path, receipt] of Object.entries(covenantSuccessors)) {
+    assert.ok(Object.isFrozen(receipt));
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.equal(receipt.previousSha256, preCovenantEndpoint(path), path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceCovenant(path, receipt.previousSha256), finalEndpoint(path), path);
+    assert.equal(advance(path, firstEndpoint(path)), finalEndpoint(path), path);
+    if (Object.hasOwn(aliensIncoming, path))
+      assert.equal(advanceAliens(path, aliensIncoming[path]), finalEndpoint(path), path);
+    for (const invalid of [receipt.currentSha256, firstEndpoint(path), '0'.repeat(64), undefined])
+      assert.throws(() => advanceCovenant(path, invalid), /Broken published-host-to-Covenant source chain/, path);
+    assert.deepEqual(runtimeView({ [path]: receipt.previousSha256 }), { [path]: finalEndpoint(path) });
+    assert.deepEqual(runtimeView({ [path]: receipt.currentSha256 }), { [path]: finalEndpoint(path) });
+  }
+  for (const path of ['src/unreviewed.js', 'index.html/extra', '__proto__', 'constructor', audit])
+    assert.equal(advanceCovenant(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(covenantSuccessors, audit), false);
+});
+
+test('all pre-Covenant receipt declarations retain their published bytes', () => {
+  const source = withoutTargetReceiptDeclarations(read(audit).toString());
+  const end = source.indexOf('// BEGIN COVENANT V011 HOST RECEIPTS');
+  assert.ok(end > 0);
+  assert.equal(sha(source.slice(0, end)), 'ed20ec02354311aaa7639697bdc05e01b652671ea3291c14ae69f478115b26c0');
+});
+
+// Only these reviewed Covenant edits reconstruct the exact immutable parent.
+// This is a proof over source bytes, not a runtime admission exception.
+const covenantSourceEdits = {
+  "index.html": [
+    [
+      "        <button id=\"title-covenant\" type=\"button\">ALIEN: COVENANT</button>\n",
+      ""
+    ]
+  ],
+  "package.json": [
+    [
+      "    \"qa:fiorina:native-sprites\": \"node scripts/qa-fiorina-native-sprites-v115.mjs\",\n    \"test:covenant\": \"node --test scripts/verify-covenant-sprites-v011.mjs scripts/verify-covenant-integration-v011.mjs\",\n    \"build:covenant\": \"node scripts/build-covenant-v011.mjs\",\n    \"check:covenant\": \"node scripts/build-covenant-v011.mjs --check\",\n    \"qa:covenant\": \"python scripts/qa-covenant-v011.py\",\n    \"qa:covenant:playthrough\": \"node modules/covenant/qa/release-playthrough-v10.cjs\"\n",
+      "    \"qa:fiorina:native-sprites\": \"node scripts/qa-fiorina-native-sprites-v115.mjs\"\n"
+    ]
+  ],
+  "scripts/build-asset-filter.mjs": [
+    [
+      "import { publicCovenantPathAdmissionV011 } from './public-covenant-admissions-v011.mjs';\n",
+      ""
+    ],
+    [
+      "    const covenantAdmission = publicCovenantPathAdmissionV011(sourcePath, { directory: sourcePath === 'assets/openai/sprites/alien-covenant-v011', built: true });\n    if (covenantAdmission !== null) return covenantAdmission;\n",
+      ""
+    ]
+  ],
+  "scripts/build.mjs": [
+    [
+      "import { buildCovenantDlcV011 } from './build-covenant-v011.mjs';\n",
+      ""
+    ],
+    [
+      "await buildCovenantDlcV011(root, output);\n",
+      ""
+    ]
+  ],
+  "scripts/verify-public-release-v86.mjs": [
+    [
+      "import { publicCovenantPathAdmissionV011 } from './public-covenant-admissions-v011.mjs';\nimport { verifyCovenantBundleV011, verifyCovenantAssetsV011, COVENANT_PROVENANCE_V011,\n  reviewedCovenantSourceMetadataV011 } from './build-covenant-v011.mjs';\n",
+      ""
+    ],
+    [
+      "  const covenantAdmission = publicCovenantPathAdmissionV011(path, { directory, built });\n  if (covenantAdmission !== null) return covenantAdmission;\n",
+      ""
+    ],
+    [
+      "      if (!built && path === COVENANT_PROVENANCE_V011) {\n        // Exact reviewed source metadata, including sprite prompts and public URLs.\n        // The path gate above rejects this file from every built distribution.\n        const bytes = await readFile(join(directory, entry.name));\n        assert.equal(reviewedCovenantSourceMetadataV011(path, bytes, { built }), true,\n          'Unreviewed Covenant source metadata bytes: ' + path);\n        continue;\n      }\n",
+      ""
+    ],
+    [
+      "  if (built) await verifyCovenantAssetsV011(root);\n  else await verifyCovenantBundleV011(root);\n",
+      ""
+    ]
+  ],
+  "src/title-screen-v61.js": [
+    [
+      "  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions, onDlc, onAliens1986, onCovenant }) {\n",
+      "  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions, onDlc, onAliens1986 }) {\n"
+    ],
+    [
+      "    this.onCovenant = onCovenant;\n",
+      ""
+    ],
+    [
+      "    this.covenantButton = root.querySelector('#title-covenant');\n",
+      ""
+    ],
+    [
+      "    if (this.covenantButton) listen(this.covenantButton, 'click', (event) => {\n      if (event.detail <= 1) this.openCovenant();\n    });\n",
+      ""
+    ],
+    [
+      "    return [this.continueButton, this.newButton, this.dlcButton, this.forgeButton, this.aliens1986Button, this.covenantButton, this.optionsButton]\n",
+      "    return [this.continueButton, this.newButton, this.dlcButton, this.forgeButton, this.aliens1986Button, this.optionsButton]\n"
+    ],
+    [
+      "  openCovenant() {\n    if (this.root.hidden || this.state !== 'menu') return;\n    this.cancelNewTimelineConfirmation();\n    this.suspendInput();\n    if (this.onCovenant) return this.onCovenant();\n    globalThis.location.assign('/dlc/covenant/?from=tantalus');\n  }\n\n",
+      ""
+    ]
+  ]
+};
+test('removing only the reviewed Covenant host edits recovers all six exact parent sources', () => {
+  assert.deepEqual(Object.keys(covenantSourceEdits).sort(), [...expectedCovenantPaths].sort());
+  for (const [path, edits] of Object.entries(covenantSourceEdits)) {
+    let source = withoutCovenantV012HostEdits(path, withoutTargetHostEdits(path, read(path).toString()));
+    for (const [current, previous] of edits) {
+      assert.notEqual(current, '', path);
+      assert.equal(source.split(current).length, 2, 'Missing or repeated Covenant source edit: ' + path);
+      source = source.replace(current, () => previous);
+    }
+    assert.equal(sha(source), covenantSuccessors[path].previousSha256, 'Unrelated host change: ' + path);
+  }
+});
+
+// These two inverse edits prove the exact aa6e3cc parent, without accepting other source changes.
+const covenantV012SourceEdits = {
+  "scripts/qa-title-compositions-v163.py": [
+    [
+      "                    expected_focus = ['title-continue', 'title-new', 'title-dlc', 'title-forge',\n                                      'title-aliens1986', 'title-covenant', 'title-options']\n                    focus_order = []\n                    for _ in range(len(expected_focus)):\n                        focus_order.append(observed(page)['focus'])\n                        page.keyboard.press('ArrowDown')\n                    check(label + ': native keyboard reaches each existing menu action once', focus_order == expected_focus)",
+      "                    focus_order = []\n                    for _ in range(5):\n                        focus_order.append(observed(page)['focus'])\n                        page.keyboard.press('ArrowDown')\n                    check(label + ': native keyboard reaches each existing menu action once', focus_order == ['title-continue', 'title-new', 'title-dlc', 'title-forge', 'title-options'])"
+    ]
+  ],
+  "scripts/verify-public-release-v86.mjs": [
+    [
+      "verifyCovenantAssetsV011, covenantSourceMetadataPathV011,",
+      "verifyCovenantAssetsV011, COVENANT_PROVENANCE_V011,"
+    ],
+    [
+      "if (!built && covenantSourceMetadataPathV011(path)) {",
+      "if (!built && path === COVENANT_PROVENANCE_V011) {"
+    ]
+  ]
+};
+function withoutCovenantV012HostEdits(path, text) {
+  for (const [current, previous] of covenantV012SourceEdits[path] || []) {
+    assert.equal(text.split(current).length, 2, 'Missing or repeated Covenant V012 source edit: ' + path);
+    text = text.replace(current, () => previous);
+  }
+  return text;
+}
+
+test('Covenant V012 advances only two exact sources from the published V011 head', () => {
+  assert.equal(covenantV012Baseline, 'aa6e3ccdecd54a5d20905e9d5cb6f9273cc27fa9');
+  assert.deepEqual(Object.keys(covenantV012Successors).sort(), [...expectedCovenantV012Paths].sort());
+  assert.equal(sha(JSON.stringify(covenantV012Successors)), 'ae421a28f1097236bdd7acc6e4db4fcb98ed09a7a595b99b762fb2954822f946');
+  assert.ok(Object.isFrozen(covenantV012Successors));
+  for (const [path, receipt] of Object.entries(covenantV012Successors)) {
+    assert.ok(Object.isFrozen(receipt));
+    assert.equal(receipt.previousSha256, preCovenantV012Endpoint(path), path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceCovenantV012(path, receipt.previousSha256), finalEndpoint(path), path);
+    assert.equal(advance(path, firstEndpoint(path)), finalEndpoint(path), path);
+    if (Object.hasOwn(aliensIncoming, path))
+      assert.equal(advanceAliens(path, aliensIncoming[path]), finalEndpoint(path), path);
+    for (const invalid of [receipt.currentSha256, firstEndpoint(path), '0'.repeat(64), undefined])
+      assert.throws(() => advanceCovenantV012(path, invalid), /Broken Covenant-V011-to-V012 host source chain/, path);
+    assert.deepEqual(runtimeView({ [path]: receipt.previousSha256 }), { [path]: finalEndpoint(path) });
+    assert.deepEqual(runtimeView({ [path]: receipt.currentSha256 }), { [path]: finalEndpoint(path) });
+  }
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceCovenantV012(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(covenantV012Successors, audit), false);
+});
+
+test('all published receipt declarations including Covenant V011 remain byte-identical', () => {
+  const source = withoutTargetReceiptDeclarations(read(audit).toString()), end = source.indexOf('// BEGIN COVENANT V012 HOST RECEIPTS');
+  assert.ok(end > 0);
+  assert.equal(sha(source.slice(0, end)), '58ebb68d615843dda9113ba88d69534b1cb1394a9262cf638e7ad173ef1ca731');
+  assert.equal(sha(JSON.stringify(covenantSuccessors)), 'baa661ba0b58d60fa0278d83c0b6b353cbe70c3b03ddc2ffb39e5a965ef65524');
+});
+
+test('removing only the reviewed V012 source edits recovers both exact V011 parent sources', () => {
+  assert.deepEqual(Object.keys(covenantV012SourceEdits).sort(), [...expectedCovenantV012Paths].sort());
+  for (const [path, receipt] of Object.entries(covenantV012Successors)) {
+    const previous = withoutCovenantV012HostEdits(path, withoutTargetHostEdits(path, read(path).toString()));
+    assert.equal(sha(previous), receipt.previousSha256, 'Unrelated V012 host change: ' + path);
+  }
+});
+
+
+// These projections prove the immutable parent bytes. They never relax runtime
+// admissions: the real reader still hashes the three merged source files.
+const targetReceiptDeclarations = "// BEGIN DLC BIBLE DOCUMENT HOST RECEIPTS 20261126\n// Source-only paths follow the exact V116 baseline. Historical receipts and\n// earlier QA remain unchanged; this stage grants no artistic or runtime approval.\nexport const AVP_DLC_BIBLE_DOCUMENTS_BASELINE_20261126 = 'b0df1877a058f0818f96437fdfdea3f21ba7f415';\nexport const AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(\n  Object.entries({\n  \"scripts/verify-public-release-v86.mjs\": {\n    \"previousSha256\": \"6c42dac3d674ebbfb07a3bb5953faa76d5d246f10b889b793d9d916031efcf3f\",\n    \"currentSha256\": \"699e7e0234f0528ffe1e7be1b78b6d0130a5f7cb364ac1be1e670c1b625f7558\"\n  }\n}).map(([path, receipt]) => [path, Object.freeze(receipt)])\n));\n// END DLC BIBLE DOCUMENT HOST RECEIPTS 20261126\n\n// BEGIN DLC BIBLE BRIDGE HOST RECEIPTS 20261126\n// PR 68 added the campaign-to-DLC index link without its source successor.\n// Record that exact document change after the published document-admission stage.\n// This source-only receipt changes no campaign content, game state or art status.\nexport const AVP_DLC_BIBLE_BRIDGE_BASELINE_20261126 = '16686e8681cc0370db3fa3df2967704ef1862155';\nexport const AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(\n  Object.entries({\n  \"docs/narrative/CAMPAGNE_PRINCIPALE.md\": {\n    \"previousSha256\": \"aa4681a3a1eec25fb8bb2ef4502fd0a0dbcffd10bb57a8092b3fbc559bfc51b2\",\n    \"currentSha256\": \"0828b50f85fb83f3e10a831ceb0f8d5aa489e20a289007057758d03b836bfcf2\"\n  }\n}).map(([path, receipt]) => [path, Object.freeze(receipt)])\n));\n// END DLC BIBLE BRIDGE HOST RECEIPTS 20261126\n\n// BEGIN AVP PRODUCTION BIBLE HOST RECEIPTS 20261126\n// A closed source-only production inventory follows the exact corrected bible head.\n// Earlier receipts remain immutable; this stage grants no gameplay or art approval.\nexport const AVP_PRODUCTION_BIBLE_BASELINE_20261126 = '268b1a517c60338899578a165e9784c5b7313dba';\nexport const AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(\n  Object.entries({\n  \"scripts/verify-public-release-v86.mjs\": {\n    \"previousSha256\": \"699e7e0234f0528ffe1e7be1b78b6d0130a5f7cb364ac1be1e670c1b625f7558\",\n    \"currentSha256\": \"ee4324f23d1a4d3282f55490ea19222dcc9bcea096f4a38d3dce4c937b74916b\"\n  },\n  \"scripts/build-asset-filter.mjs\": {\n    \"previousSha256\": \"c49bbc4bf3598a633f78c98febff0309e54b367e5643e4a98daf0371d9b91a56\",\n    \"currentSha256\": \"5735cc0a8110342349313df1c70cba220308238ee756674a357f45aa98a4f8bd\"\n  }\n}).map(([path, receipt]) => [path, Object.freeze(receipt)])\n));\n// END AVP PRODUCTION BIBLE HOST RECEIPTS 20261126\n\n";
+const targetSourceEdits = {
+  "scripts/build-asset-filter.mjs": [
+    [
+      "  'assets/openai/sprites/avp2004-production-v001',\n  'docs/narrative/dlc/avp-2004-production-20261126',\n",
+      ""
+    ]
+  ],
+  "scripts/verify-public-release-v86.mjs": [
+    [
+      "  // DLC bible consolidation: exact source-only documents, never shipped.\n  'docs/narrative/dlc',\n  'docs/narrative/dlc/RECUPERATION_20261126.json',\n  'docs/narrative/dlc/RECUPERATION_20261126.md',\n  'docs/narrative/DLC_DISCUSSIONS_20261126.json',\n  'docs/narrative/DLC_INDEX_20261126.md',\n  'docs/narrative/dlc/40th-anniversary.md',\n  'docs/narrative/dlc/alien-1979-nostromo.md',\n  'docs/narrative/dlc/alien-blackout.md',\n  'docs/narrative/dlc/alien-covenant.md',\n  'docs/narrative/dlc/alien-earth.md',\n  'docs/narrative/dlc/alien-isolation.md',\n  'docs/narrative/dlc/alien-resurrection.md',\n  'docs/narrative/dlc/alien-romulus.md',\n  'docs/narrative/dlc/alien3-fiorina.md',\n  'docs/narrative/dlc/alien5-projet-lazare.md',\n  'docs/narrative/dlc/aliens-1986.md',\n  'docs/narrative/dlc/avp-2004.md',\n  'docs/narrative/dlc/avp-requiem.md',\n  'docs/narrative/dlc/colonial-marines.md',\n  'docs/narrative/dlc/out-of-the-shadows.md',\n  'docs/narrative/dlc/prometheus.md',\n  'docs/narrative/dlc/river-of-pain.md',\n  'docs/narrative/dlc/sea-of-sorrows.md',\n",
+      ""
+    ],
+    [
+      "// Exact AVP production sources remain outside the playable distribution.\n// A generated candidate is not a runtime asset or a fidelity certification.\nconst AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126 = new Set([\n  \"docs/narrative/dlc/avp-2004-production-20261126\",\n  \"assets/openai/sprites/avp2004-production-v001\"\n]);\nconst AVP_PRODUCTION_SOURCE_FILES_20261126 = new Set([\n  \"docs/narrative/dlc/avp-2004-production-20261126/README.md\",\n  \"docs/narrative/dlc/avp-2004-production-20261126/SOURCES.md\",\n  \"docs/narrative/dlc/avp-2004-production-20261126/INVENTORY.md\",\n  \"docs/narrative/dlc/avp-2004-production-20261126/runtime-inventory.json\",\n  \"docs/narrative/dlc/avp-2004-production-20261126/PRODUCTION_SPECIFICATIONS.md\",\n  \"docs/narrative/dlc/avp-2004-production-20261126/production-specs.json\",\n  \"docs/narrative/dlc/avp-2004-production-20261126/GALLERY.md\",\n  \"docs/narrative/dlc/avp-2004-production-20261126/manifest.json\",\n  \"docs/narrative/dlc/avp-2004-production-20261126/canon-research.json\",\n  \"assets/openai/sprites/avp2004-production-v001/chestburster-human-avp2004-v001.png\",\n  \"assets/openai/sprites/avp2004-production-v001/piper-maru-avp2004-v001.png\",\n  \"assets/openai/sprites/avp2004-production-v001/earth-avp2004-v001.png\",\n  \"assets/openai/sprites/avp2004-production-v001/glacier-face-avp2004-v001.png\",\n  \"assets/openai/sprites/avp2004-production-v001/snowcat-avp2004-v001.png\",\n  \"assets/openai/sprites/avp2004-production-v001/whalebone-arch-avp2004-v001.png\",\n  \"assets/openai/sprites/avp2004-production-v001/whaling-station-facade-avp2004-v001.png\",\n  \"assets/openai/sprites/avp2004-production-v001/weyland-satellite-avp2004-v001.png\"\n]);\n\n",
+      ""
+    ],
+    [
+      "  if (AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126.has(path)) return !built && directory;\n  if (typeof path === 'string' && [...AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126].some(root => path.startsWith(root + '/')))\n    return !built && !directory && AVP_PRODUCTION_SOURCE_FILES_20261126.has(path);\n",
+      ""
+    ]
+  ]
+};
+const covenantCampaignAppendices = "\n---\n\n## Annexe de production — DLC Alien: Covenant V0.14\n\nLe suivi détaillé du DLC est regroupé dans la [bible Covenant V0.14](../covenant/BIBLE_COVENANT_V014.md) et son [inventaire structuré](../covenant/BIBLE_COVENANT_V014.json) : personnages et variantes, lieux, armes, accessoires, véhicules, vaisseaux, terrains et planète. Chaque entrée distingue la source retrouvée, la présence dans le moteur, l’image disponible, son admission et les manques encore ouverts. Ces adaptations du film gardent leur provenance propre, distincte des campagnes originales décrites ci-dessus.\n\nLa consolidation parallèle de PR68 reste consultable dans son [index des DLC épinglé](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/DLC_INDEX_20261126.md) et sa [fiche Covenant historique](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/dlc/alien-covenant.md). Ses comptes datés conservent leur version ; l’annexe V0.14 les rapproche des sources effectivement récupérées et du suivi courant, sans modifier cette branche. La production d’une image et les résultats techniques ne certifient pas la fidélité 1:1.\n\n\n## Covenant — continuation V0.15 : sprites récupérés et bible détaillée\n\nMise à jour du 26 novembre 2026. Cette annexe poursuit l’inventaire Covenant V0.14 et conserve ses données historiques.\n\nLa continuation ajoute **22 PNG originaux** : huit phases de marche de Ricks, huit d’Oram et six équipements (consoles du Covenant et du Lander, leurs deux sièges, table centrale du pont et table médicale avec colonne). Les originaux ont été récupérés et leurs empreintes vérifiées après l’incident de l’environnement. Le total atteint **125 PNG dans les sources**, dont **72 utilisés par le runtime V0.14** et **53 hors runtime**.\n\nLe jeu conserve **cinq cycles et 40 phases intégrées**. Les deux nouvelles séries, soit seize phases, sont au catalogue documentaire ; elles n’ajoutent pas de cycle au rendu. Leurs planches finales ont été revues, mais les pivots, la cadence et l’animation continue restent à valider. Les nouveaux équipements conservent leurs limites de rapprochement avec les objets natifs.\n\nLa bible V015 reprend les **315 références** et détaille les personnages, lieux, armes, props, véhicules, vaisseaux, terrains et planètes. Les 23 profils, 126 familles de props / 630 occurrences, 57 fiches spatiales, 67 liaisons, 134 seuils, sept familles d’armes, 16 familles de terrains et trois fiches planétaires sont conservés. Les mises à jour datées distinguent l’apparence sourcée, les PNG présents, les manques, les états attendus et les prochaines actions.\n\nDocuments de référence :\n\n- [Bible Covenant V015 — fiches détaillées](../covenant/BIBLE_COVENANT_V015.md).\n- [Bible Covenant V015 — vue HTML](../covenant/BIBLE_COVENANT_V015.html).\n- [Bible Covenant V015 — données JSON](../covenant/BIBLE_COVENANT_V015.json).\n- [État des sprites et manques V015](../covenant/SPRITES_V015_STATUS.md).\n- [Provenance et portée de vérification V015](../covenant/PROVENANCE_V015.json).\n- [Manifeste des 22 nouveaux PNG](../../assets/openai/sprites/alien-covenant-v015/manifest.json).\n\nLes 15 profils mobiles de PNJ sans marche intégrée restent ouverts ; 13 ne disposent pas encore de série PNG de marche publiée. Les quatre courses joueurs, les sept familles d’armes et les autres besoins demeurent suivis. Aucun PNG de ce lot n’attend encore sa récupération. Le checkpoint Oram non téléversé au moment de l’interruption est conservé comme historique résolu, sans modifier le statut courant des huit originaux publiés.\n\nLes formats V015 livrés sont Markdown, HTML et JSON. Le dernier classeur XLSX finalisé reste V014 ; aucun XLSX ni pack ZIP V015 n’est inclus. Les bibles V014 et les PNG antérieurs restent inchangés. Les références de film, les concepts de production, les adaptations pour le jeu et l’admission dans le rendu gardent des statuts distincts. **La fidélité filmique 1:1 n’est pas certifiée.**\n\n";
+function withoutTargetReceiptDeclarations(source) {
+  assert.equal(sha(targetReceiptDeclarations), 'ed53c2e5ec231fcff4e951252e7fcbee5be99c73884420cc61bcdb61397c327c');
+  assert.equal(source.split(targetReceiptDeclarations).length, 2,
+    'Missing or repeated target receipt declaration block');
+  return source.replace(targetReceiptDeclarations, '');
+}
+function undoExactSourceEdits(path, source, edits) {
+  for (const [current, previous] of edits || []) {
+    assert.notEqual(current, '', path);
+    assert.equal(source.split(current).length, 2, 'Missing or repeated merge source edit: ' + path);
+    source = source.replace(current, () => previous);
+  }
+  return source;
+}
+function withoutTargetHostEdits(path, source) {
+  if (!Object.hasOwn(targetSourceEdits, path)) return source;
+  const receipt = covenantBibleMergeSources[path];
+  assert.equal(sha(source), receipt.currentSha256, 'Unreviewed merged source: ' + path);
+  const covenant = undoExactSourceEdits(path, source, targetSourceEdits[path]);
+  assert.equal(sha(covenant), receipt.covenantSha256, 'Target removal must recover the exact Covenant parent: ' + path);
+  return covenant;
+}
 
 test('DLC bible documents advance only the exact public path verifier from the V116 baseline', () => {
   const path = 'scripts/verify-public-release-v86.mjs';
@@ -418,14 +704,24 @@ test('the campaign-to-DLC bible link advances its exact historical document and 
   assert.ok(Object.isFrozen(bibleBridgeSuccessors) && Object.isFrozen(bibleBridgeSuccessors[path]));
   const receipt = bibleBridgeSuccessors[path];
   assert.equal(receipt.previousSha256, xenoJoin.successors[path].currentSha256);
-  const document = read(path).toString();
+  const currentDocument = read(path);
+  const document = campaignBeforeCovenantV017(currentDocument).toString();
   const addition = "## DLC issus des œuvres — reprise du 26 novembre 2026\n\nLa [bible et l'index des DLC](DLC_INDEX_20261126.md) regroupent les 18 familles retrouvées, les décisions des discussions disponibles, leurs versions, PR et manques documentés. La provenance originale annoncée ci-dessus concerne les campagnes Cocyte et leurs annexes ; les adaptations des œuvres et la branche originale Projet Lazare gardent leurs sources et leurs limites dans cet index. La fidélité 1:1 reste une cible suivie élément par élément.\n\n";
   assert.equal(document.split(addition).length, 2, 'Exactly one index bridge is added');
-  assert.equal(sha(document.replace(addition, '')), receipt.previousSha256,
-    'The original campaign bible remains byte-identical after removing its explicit DLC index link');
-  assert.equal(sha(document), receipt.currentSha256);
-  assert.equal(advanceBibleBridge(path, receipt.previousSha256), receipt.currentSha256);
-  assert.equal(reviewedXenoTrialsTantalusJoinV206(path, xenoJoin.successors[path].previousSha256), receipt.currentSha256);
+  const withoutBridge = document.replace(addition, '');
+  assert.equal(sha(withoutBridge), covenantBibleMergeSources[path].covenantSha256,
+    'Removing the exact target bridge recovers the published Covenant parent');
+  assert.equal(document.split(covenantCampaignAppendices).length, 2,
+    'Exactly one unchanged Covenant appendix suffix is present');
+  assert.ok(document.endsWith(covenantCampaignAppendices));
+  assert.equal(sha(document.slice(0, -covenantCampaignAppendices.length)), receipt.currentSha256,
+    'Removing the exact Covenant appendices recovers the published target document');
+  assert.equal(sha(withoutBridge.slice(0, -covenantCampaignAppendices.length)), receipt.previousSha256,
+    'Removing both reviewed contributions recovers the exact common campaign bible');
+  assert.equal(sha(document), covenantBibleMergeSources[path].currentSha256);
+  assert.equal(sha(currentDocument), finalEndpoint(path));
+  assert.equal(advanceBibleBridge(path, receipt.previousSha256), finalEndpoint(path));
+  assert.equal(reviewedXenoTrialsTantalusJoinV206(path, xenoJoin.successors[path].previousSha256), finalEndpoint(path));
   for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
     assert.throws(() => advanceBibleBridge(path, value), /Broken DLC-bible-document-bridge source chain/);
   for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
@@ -478,13 +774,13 @@ test('AVP production advances only its two exact source admission hosts after th
     assert.ok(Object.isFrozen(receipt));
     const prior = bibleDocumentsSuccessors[path] || spriteSuccessors[path];
     assert.equal(receipt.previousSha256, prior.currentSha256, path);
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
-    assert.equal(advanceProductionBible(path, receipt.previousSha256), receipt.currentSha256, path);
-    assert.equal(advance(path, firstEndpoint(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceProductionBible(path, receipt.previousSha256), finalEndpoint(path), path);
+    assert.equal(advance(path, firstEndpoint(path)), finalEndpoint(path), path);
     for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
       assert.throws(() => advanceProductionBible(path, value), /Broken DLC-bible-to-AVP-production source chain/);
     for (const value of [receipt.previousSha256, receipt.currentSha256])
-      assert.deepEqual(runtimeView({ [path]: value }), { [path]: receipt.currentSha256 });
+      assert.deepEqual(runtimeView({ [path]: value }), { [path]: finalEndpoint(path) });
   }
   const terminal = read(audit).toString();
   assert.equal(sha(terminal.slice(0, terminal.indexOf('// BEGIN AVP PRODUCTION BIBLE HOST RECEIPTS 20261126'))),
@@ -558,5 +854,158 @@ test('the AVP production manifest pins each original PNG and keeps generated, in
     assert.ok(Array.isArray(entry.sourceRefs) && entry.sourceRefs.length > 0);
     for (const reference of entry.sourceRefs) assert.ok(references.has(reference), entry.path + ': ' + reference);
     assert.ok(entry.review && (typeof entry.review === 'string' ? entry.review.length > 0 : Object.keys(entry.review).length > 0));
+  }
+});
+
+test('the Covenant and DLC bible merge joins only three exact sources from both published parents', () => {
+  assert.deepEqual(covenantBibleMergeBaselines, {
+    commonCommit: 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
+    covenantCommit: '9ee21033a71fc0f965ef270fa560d13eaa89d813',
+    targetCommit: '2e8309081d206b86d9f234ebfc33c13ea74970f4'
+  });
+  assert.deepEqual(Object.keys(covenantBibleMergeSources).sort(), [
+    'docs/narrative/CAMPAGNE_PRINCIPALE.md',
+    'scripts/build-asset-filter.mjs', 'scripts/verify-public-release-v86.mjs'
+  ]);
+  assert.equal(sha(JSON.stringify(covenantBibleMergeSources)), '74761c461a5855d46dc8b0189cb29f13acbdeb3be722051c76966e6a365f252a');
+  assert.ok(Object.isFrozen(covenantBibleMergeBaselines) && Object.isFrozen(covenantBibleMergeSources));
+  for (const [path, receipt] of Object.entries(covenantBibleMergeSources)) {
+    assert.ok(Object.isFrozen(receipt));
+    assert.deepEqual(Object.keys(receipt).sort(),
+      ['commonSha256', 'covenantSha256', 'currentSha256', 'targetSha256']);
+    const mergedSource = path === covenantV017CampaignPath
+      ? campaignBeforeCovenantV017(read(path)) : read(path);
+    assert.equal(sha(mergedSource), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    for (const endpoint of [receipt.covenantSha256, receipt.targetSha256])
+      assert.equal(advanceCovenantBibleMerge(path, endpoint), receipt.currentSha256, path);
+    for (const endpoint of [receipt.commonSha256, receipt.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceCovenantBibleMerge(path, endpoint),
+        /Broken Covenant-and-DLC-bibles merge source chain/, path);
+  }
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceCovenantBibleMerge(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(covenantBibleMergeSources, audit), false);
+});
+
+test('inverse merge edits recover both exact admission parents and the common guard bytes', () => {
+  assert.deepEqual(Object.keys(targetSourceEdits).sort(),
+    ['scripts/build-asset-filter.mjs', 'scripts/verify-public-release-v86.mjs']);
+  for (const path of Object.keys(targetSourceEdits)) {
+    const source = read(path).toString(), receipt = covenantBibleMergeSources[path];
+    const covenant = withoutTargetHostEdits(path, source);
+    const target = undoExactSourceEdits(path,
+      withoutCovenantV012HostEdits(path, source), covenantSourceEdits[path]);
+    const common = undoExactSourceEdits(path,
+      withoutCovenantV012HostEdits(path, covenant), covenantSourceEdits[path]);
+    assert.equal(sha(covenant), receipt.covenantSha256, path);
+    assert.equal(sha(target), receipt.targetSha256, path);
+    assert.equal(sha(common), receipt.commonSha256, path);
+    if (path === 'scripts/verify-public-release-v86.mjs') {
+      const privateRules = text => text.match(/const PRIVATE_TEXT = \[[\s\S]*?\n\];/)[0];
+      assert.equal(privateRules(source), privateRules(covenant));
+      assert.equal(privateRules(source), privateRules(target));
+      assert.equal(privateRules(source), privateRules(common));
+    }
+  }
+});
+
+test('runtime source views converge from either published merge parent and accept no unknown digest', () => {
+  const expected = {}, covenant = {}, target = {}, historicalMerged = {};
+  for (const [path, receipt] of Object.entries(covenantBibleMergeSources)) {
+    expected[path] = finalEndpoint(path);
+    historicalMerged[path] = receipt.currentSha256;
+    covenant[path] = receipt.covenantSha256;
+    target[path] = receipt.targetSha256;
+    assert.throws(() => runtimeView({ [path]: 'f'.repeat(64) }),
+      /Incorrect AVP host runtime view predecessor/, path);
+  }
+  assert.deepEqual(runtimeView(covenant), expected);
+  assert.deepEqual(runtimeView(target), expected);
+  assert.deepEqual(runtimeView(historicalMerged), expected);
+  assert.deepEqual(runtimeView(expected), expected);
+  assert.ok(Object.isFrozen(runtimeView(covenant)));
+});
+
+test('Covenant V017 advances only the exact merged campaign and preserves every historical declaration', () => {
+  const path = covenantV017CampaignPath;
+  const receipt = covenantV017BibleSuccessors[path];
+  assert.equal(covenantV017BibleBaseline, '6c2d610b7faf9ed88fc6c6977a98411ad1880940');
+  assert.deepEqual(covenantV017BibleSuccessors, {
+    [path]: {
+      previousSha256: '7f318ee44a83d3cf0fd7a84b48aa94ae7d7a51d25253ae0c289a7e862a37a525',
+      currentSha256: 'e74a6c39b2e4e85f658680578b4e0d03963bc8a42d642638dae4551c302b837c'
+    }
+  });
+  assert.ok(Object.isFrozen(covenantV017BibleSuccessors) && Object.isFrozen(receipt));
+  assert.equal(receipt.previousSha256, covenantBibleMergeSources[path].currentSha256);
+  assert.equal(advanceCovenantV017Bible(path, receipt.previousSha256), receipt.currentSha256);
+  assert.equal(advance(path, firstEndpoint(path)), receipt.currentSha256);
+  assert.equal(sha(read(path)), receipt.currentSha256);
+  for (const endpoint of [receipt.currentSha256, covenantBibleMergeSources[path].commonSha256,
+    covenantBibleMergeSources[path].covenantSha256, covenantBibleMergeSources[path].targetSha256,
+    '0'.repeat(64), undefined])
+    assert.throws(() => advanceCovenantV017Bible(path, endpoint),
+      /Broken merged-bible-to-Covenant-V017 source chain/);
+  for (const candidate of ['src/unreviewed.js', path + '/extra', '__proto__', 'constructor', audit]) {
+    assert.equal(Object.hasOwn(covenantV017BibleSuccessors, candidate), false, candidate);
+    assert.equal(advanceCovenantV017Bible(candidate, 'unreviewed'), 'unreviewed', candidate);
+  }
+  const terminal = read(audit).toString();
+  const marker = '// BEGIN COVENANT V017 BIBLE HOST RECEIPTS 20261126';
+  assert.equal(terminal.split(marker).length, 2);
+  assert.equal(sha(terminal.slice(0, terminal.indexOf(marker))),
+    '265cfc6a482a93251fb7270b21d2f828a066cbca326e8e5c33dcd910ed06163c',
+    'All receipt declarations through the published Covenant/DLC merge remain exact');
+  assert.equal(Buffer.byteLength(covenantCampaignAppendices), 4177);
+  assert.equal(sha(covenantCampaignAppendices),
+    'a75388aa46650c46468ba77131b4c5aff479fc7c5d11b6b958a1e81d57e22e23',
+    'The historical V014/V015 suffix fixture remains byte-identical');
+});
+
+test('exact campaign recovery rejects absent, altered or duplicated appendices and changed historical bytes', () => {
+  const path = covenantV017CampaignPath, current = read(path);
+  const historical = campaignBeforeCovenantV017(current);
+  const appendix = current.subarray(-covenantV017AppendixBytes);
+  const alteredAppendix = Buffer.from(current);
+  alteredAppendix[alteredAppendix.length - 1] ^= 1;
+  const alteredHistorical = Buffer.from(current);
+  alteredHistorical[0] ^= 1;
+  const invalidDocuments = [
+    ['absent appendix', historical],
+    ['truncated appendix', current.subarray(0, -1)],
+    ['altered appendix', alteredAppendix],
+    ['duplicated appendix', Buffer.concat([current, appendix])],
+    ['changed historical prefix', alteredHistorical]
+  ];
+  for (const [label, bytes] of invalidDocuments) {
+    assert.throws(() => campaignBeforeCovenantV017(bytes),
+      /Unreviewed Covenant|Changed historical merged campaign/, label);
+    assert.throws(() => verify(candidate => candidate === path ? bytes : read(candidate)),
+      /Unreviewed AVP host source bytes: docs\/narrative\/CAMPAGNE_PRINCIPALE\.md/, label);
+  }
+  assert.equal(sha(historical), covenantBibleMergeSources[path].currentSha256);
+  assert.equal(sha(appendix), covenantV017AppendixSha256);
+});
+
+test('the V017 campaign successor remains source-only and changes no general admission guard', () => {
+  const path = covenantV017CampaignPath;
+  const projectRoot = fileURLToPath(new URL('../', import.meta.url));
+  assert.equal(isPublicDistributionPathV86(path), true);
+  assert.ok(lstatSync(join(projectRoot, path)).isFile());
+  assert.equal(lstatSync(join(projectRoot, path)).isSymbolicLink(), false);
+  assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
+  // The builder copies only its runtime roots; the asset filter is not a
+  // general document filter. Built admission rejects the document and parents.
+  for (const directory of ['docs', 'docs/narrative'])
+    assert.equal(isPublicDistributionPathV86(directory, { directory: true, built: true }), false, directory);
+  for (const candidate of [path + '.unreviewed', 'docs/narrative/CAMPAGNE_PRINCIPALE_V017.md',
+    'docs/narrative/unreviewed/extra.md']) {
+    assert.equal(isPublicDistributionPathV86(candidate), false, candidate);
+    assert.equal(isPublicDistributionPathV86(candidate, { built: true }), false, candidate);
+  }
+  for (const guard of ['scripts/verify-public-release-v86.mjs', 'scripts/build-asset-filter.mjs']) {
+    assert.equal(sha(read(guard)), covenantBibleMergeSources[guard].currentSha256, guard);
+    assert.equal(Object.hasOwn(covenantV017BibleSuccessors, guard), false, guard);
   }
 });

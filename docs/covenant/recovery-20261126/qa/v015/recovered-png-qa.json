@@ -1,0 +1,534 @@
+[
+  {
+    "id": "ricks-walk-01",
+    "sha256": "141b291fcd3054aa70663a664c1157e455dcc6ba915745a34f758972163a1c37",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1754619,
+    "anchor": [
+      505,
+      1500
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-80d24fde-6971-4a53-8137-e32826fb7437.png",
+    "bboxAlphaGe32": [
+      74,
+      27,
+      903,
+      1500
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1109385,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 0
+  },
+  {
+    "id": "ricks-walk-02",
+    "sha256": "d31760ba62547fc3073bb79b6d26c1b07a8476844ec6834f5fdc8439018e4bf2",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1724473,
+    "anchor": [
+      510,
+      1502
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-30af3ca7-7039-439d-8f76-5bcda6fa2528.png",
+    "bboxAlphaGe32": [
+      111,
+      28,
+      863,
+      1502
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1111748,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "ricks-walk-03",
+    "sha256": "6fe5cd674690b1c91289fbf8c53f09c2f3b111ae6bada8840b8737bc3de29478",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1499657,
+    "anchor": [
+      505,
+      1508
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-22e68a63-b379-479d-83fd-1c5d7a7336e9.png",
+    "bboxAlphaGe32": [
+      280,
+      27,
+      724,
+      1508
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1168288,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 0
+  },
+  {
+    "id": "ricks-walk-04",
+    "sha256": "4faf90e444093d0893b6bc068028b1711e1d513cdb4d5e5034afc28633d4bdb7",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1751492,
+    "anchor": [
+      510,
+      1497
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-40a9a91d-3440-4361-8687-b605186e7428.png",
+    "bboxAlphaGe32": [
+      141,
+      26,
+      931,
+      1497
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1125649,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "ricks-walk-05",
+    "sha256": "7bbad5c024f2a9b8d84c32f8d82ff78749611b886de58cda7c00dcf5d4a78dc4",
+    "width": 1024,
+    "height": 1535,
+    "bytes": 983118,
+    "anchor": [
+      510,
+      1514
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-cc73a4f5-ba28-412d-8cce-c601775f752c.png",
+    "bboxAlphaGe32": [
+      38,
+      23,
+      977,
+      1514
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "alphaZeroPixels": 1116828,
+    "alpha255Pixels": 221,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "ricks-walk-06",
+    "sha256": "923762e387b87366e068e8ecc727458597ae6ae4b1c5f44cb5cb17f93118cd4f",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1638207,
+    "anchor": [
+      515,
+      1495
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-532da673-71c9-455f-a6be-0a37f4f9ba3f.png",
+    "bboxAlphaGe32": [
+      85,
+      19,
+      852,
+      1495
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1119659,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "ricks-walk-07",
+    "sha256": "d8d28795fb8eba4745ae82c6043f95e76722a8f9a0d0ae975395ea631891c388",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1504261,
+    "anchor": [
+      500,
+      1499
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-a3047554-10a1-4b59-a0db-bd13f2baf9c7.png",
+    "bboxAlphaGe32": [
+      282,
+      31,
+      684,
+      1499
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1189019,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 0
+  },
+  {
+    "id": "ricks-walk-08",
+    "sha256": "fa4eb2a4534356eab31efe2c6f745fcee2978e390210624c284fa8b44915aa3f",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1705898,
+    "anchor": [
+      505,
+      1475
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-2621d31e-7bbe-45a3-994e-6246c24beb87.png",
+    "bboxAlphaGe32": [
+      121,
+      32,
+      908,
+      1475
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1134741,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "prop-console-covenant-bridge",
+    "sha256": "2658b50c49273fc947eb6886feb6876d76f935bf262952daa10a807d1c15e84d",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 2331264,
+    "anchor": null,
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-20554c1d-d123-452f-9e50-14c4172247d9.png",
+    "bboxAlphaGe32": [
+      12,
+      92,
+      1524,
+      963
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 841638,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "prop-console-lander-main",
+    "sha256": "febd03250f501a6e8875f5b585c8408ffc9a4c6f4ab883b9f0592530582e955d",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 2228274,
+    "anchor": null,
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-9caa94ff-3cb2-4579-8385-9654d74c28fe.png",
+    "bboxAlphaGe32": [
+      16,
+      118,
+      1529,
+      927
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 750166,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 2
+  },
+  {
+    "id": "prop-holotable-covenant-bridge",
+    "sha256": "e5dee7cebc33fe1418f7bc045d48b98b3e1dd4ae65f0d1cc50912ccf6d81dd71",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 2460007,
+    "anchor": null,
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-acd8b070-355a-4870-b57d-1d99df2f2a08.png",
+    "bboxAlphaGe32": [
+      33,
+      86,
+      1485,
+      965
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 471105,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "prop-medbay-table",
+    "sha256": "af4940ea7ee371ffcbf22d0d48e9ae2600ad18254b9015e1429d78053b47cfd0",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 1619178,
+    "anchor": null,
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-9e280c74-7101-4c50-b14a-834da934c2bb.png",
+    "bboxAlphaGe32": [
+      71,
+      42,
+      1455,
+      993
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 908499,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "prop-seat-covenant-bridge",
+    "sha256": "94c3b6f92e11d5554ff800270c74debcb1e32947be2324e62a6f5c5299b49b6f",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 2162292,
+    "anchor": null,
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-86106732-8027-4cde-a6c2-7a13034f4fe3.png",
+    "bboxAlphaGe32": [
+      30,
+      38,
+      973,
+      1498
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 913752,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 0
+  },
+  {
+    "id": "prop-seat-lander",
+    "sha256": "5db3e5b8a9cd19f12a2ceb1578119332231112c59f7c29a60b7b6e3c7924ca46",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 2261677,
+    "anchor": null,
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-07d58da6-4601-4625-83d4-d1375263b8d4.png",
+    "bboxAlphaGe32": [
+      38,
+      46,
+      984,
+      1492
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 901643,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "oram-walk-01",
+    "sha256": "fd8644466668e17a0b9417ca657fef551271faee5adb13011e41185775558b32",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1607014,
+    "anchor": [
+      475,
+      1506
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-aae1a388-89d8-47cd-b741-ebde8c3a4b6e.png",
+    "bboxAlphaGe32": [
+      83,
+      26,
+      888,
+      1506
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1123976,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 0
+  },
+  {
+    "id": "oram-walk-02",
+    "sha256": "124ba708d2cf4cb87edf9cfbe2b0f09982e33adcf67ba937385f9ac9bf1f4bd3",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1626600,
+    "anchor": [
+      465,
+      1504
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-325235c6-c2db-4792-9437-887e4fac5fe0.png",
+    "bboxAlphaGe32": [
+      98,
+      40,
+      875,
+      1504
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1121732,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "oram-walk-03",
+    "sha256": "02eb335c09572fdb52f18de180ca14e89283f932c08d71cddd3018150a49be6c",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1513296,
+    "anchor": [
+      480,
+      1504
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-7533a31d-c4ad-4bf8-b133-786adb2d756d.png",
+    "bboxAlphaGe32": [
+      322,
+      26,
+      750,
+      1504
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1179868,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 0
+  },
+  {
+    "id": "oram-walk-04",
+    "sha256": "09874043f558563ff9e94bb7e0223cec9012764b3bd114592ca0700565e8b17e",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1658400,
+    "anchor": [
+      490,
+      1514
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-774ada82-ec07-4301-8f88-e237db97742d.png",
+    "bboxAlphaGe32": [
+      119,
+      23,
+      956,
+      1514
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1162454,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "oram-walk-05",
+    "sha256": "76a633bc3da12c605e1c8ab9294568074442ebe2b1d3ee8ae02863e8a838cd3b",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1607306,
+    "anchor": [
+      475,
+      1493
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-c0868e9d-e546-421c-b5b7-c2106d43f449.png",
+    "bboxAlphaGe32": [
+      68,
+      26,
+      946,
+      1493
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1137629,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "oram-walk-06",
+    "sha256": "3ae97698ecc31104995a9b8f6eafe623cbd7eedf0f41af8048c9235c228dddfb",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1665384,
+    "anchor": [
+      485,
+      1487
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-dcf5a321-83ba-4df9-b470-d5ca35ec34c8.png",
+    "bboxAlphaGe32": [
+      85,
+      40,
+      868,
+      1487
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1114470,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  },
+  {
+    "id": "oram-walk-07",
+    "sha256": "584ea77a38a12817718ed7ca9e9ecf4f35d9326b5950b9e8affad32e00d143b7",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1516962,
+    "anchor": [
+      490,
+      1503
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-c1c64dc6-52c9-4fa7-9377-c9fc9b03cc78.png",
+    "bboxAlphaGe32": [
+      274,
+      26,
+      743,
+      1503
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1185251,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 0
+  },
+  {
+    "id": "oram-walk-08",
+    "sha256": "5c5bdaad9722f9ad313724939df1c7ee855d9cee8925c84bb84361fb12ad6e27",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 1737258,
+    "anchor": [
+      490,
+      1512
+    ],
+    "original": "/workspace/scratch/d7884664f936/generated_images/exec-f6f9bd04-ceb0-413b-96dc-f9d58a0fb5d3.png",
+    "bboxAlphaGe32": [
+      112,
+      20,
+      968,
+      1512
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1121518,
+    "alpha255Pixels": 0,
+    "edgeMaxAlpha": 1
+  }
+]

@@ -1,3 +1,4 @@
+import { publicCovenantPathAdmissionV011 } from './public-covenant-admissions-v011.mjs';
 import { publicXenoProductionPathAdmissionV206 } from './public-xeno-production-admissions-v206.mjs';
 import { publicFiorinaSpritePathAdmissionV115, FIORINA_SPRITE_DIRECTORY_V115 } from './public-fiorina-sprite-admissions-v115.mjs';
 import { publicXenoVisualPathAdmissionV205, PUBLIC_XENO_VISUAL_DIRECTORIES_V205 } from './public-xeno-visual-admissions-v205.mjs';
@@ -258,6 +259,8 @@ export function createBuildAssetFilter(projectRoot, {
     // fs.cp also visits the source root (relative path ''). This is a container,
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    const covenantAdmission = publicCovenantPathAdmissionV011(sourcePath, { directory: sourcePath === 'assets/openai/sprites/alien-covenant-v011', built: true });
+    if (covenantAdmission !== null) return covenantAdmission;
     const fiorinaSpriteAdmission = publicFiorinaSpritePathAdmissionV115(sourcePath, { directory: sourcePath === FIORINA_SPRITE_DIRECTORY_V115, built: true });
     if (fiorinaSpriteAdmission !== null) return fiorinaSpriteAdmission;
     const productionAdmissionV206 = publicXenoProductionPathAdmissionV206(sourcePath, { built: true });

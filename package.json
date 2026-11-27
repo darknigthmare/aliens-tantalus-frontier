@@ -122,7 +122,12 @@
     "qa:fiorina": "node scripts/qa-fiorina-native-v114.mjs",
     "test:fiorina:sprites": "node --test scripts/verify-fiorina-sprite-renderer-v115.mjs scripts/verify-fiorina-sprite-admissions-v115.mjs",
     "qa:fiorina:sprites": "node scripts/qa-fiorina-sprites-v115.mjs",
-    "qa:fiorina:native-sprites": "node scripts/qa-fiorina-native-sprites-v115.mjs"
+    "qa:fiorina:native-sprites": "node scripts/qa-fiorina-native-sprites-v115.mjs",
+    "test:covenant": "node --test scripts/verify-covenant-sprites-v011.mjs scripts/verify-covenant-integration-v011.mjs",
+    "build:covenant": "node scripts/build-covenant-v011.mjs",
+    "check:covenant": "node scripts/build-covenant-v011.mjs --check",
+    "qa:covenant": "python scripts/qa-covenant-v011.py",
+    "qa:covenant:playthrough": "node modules/covenant/qa/release-playthrough-v10.cjs"
   },
   "engines": {
     "node": ">=22"

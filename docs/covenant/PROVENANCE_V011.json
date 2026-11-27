@@ -1,0 +1,3015 @@
+{
+  "schemaVersion": 1,
+  "scope": "Alien: Covenant V0.11",
+  "date": "2026-11-26",
+  "productionManifest": "assets/openai/sprites/alien-covenant-v011/manifest.json",
+  "inventory": "docs/covenant/INVENTORY_V011.json",
+  "sourceConservation": "docs/covenant/RUNTIME_SOURCE_V011.json",
+  "coverage": {
+    "schemaVersion": 1,
+    "scope": "Alien: Covenant only",
+    "summary": {
+      "totalPNGs": 49,
+      "newlyGeneratedPNGs": 48,
+      "reusedPNGs": 1,
+      "humanPNGs": 25,
+      "expectedHumanProfiles": 23,
+      "expectedHumanProfilesWithPNG": 23,
+      "creaturePNGs": 4,
+      "expectedCreatureStaticPoses": 6,
+      "weaponPNGs": 0,
+      "expectedWeaponFamilies": 7,
+      "otherPNGs": 20,
+      "runtimePNGs": 29,
+      "catalogueOnlyPNGs": 20,
+      "filmObjectCandidateFamilies": 50,
+      "filmCandidateFamiliesWithSomePNG": 13,
+      "filmCandidateFamiliesWithRuntimeVariant": 11,
+      "filmCandidateFamiliesWithoutPNG": 37,
+      "allPropFamilies": 126,
+      "allPropInstances": 630,
+      "blockedOrRelatedStaticAssets": 10,
+      "certified1to1PNGs": 0
+    },
+    "definition": "A produced PNG does not imply complete animation, all-angle fidelity, automatic runtime use, or coverage of every prop instance.",
+    "humanProfiles": [
+      {
+        "id": "daniels",
+        "assetId": "daniels",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [],
+        "playerRooms": [
+          "landing",
+          "wheat",
+          "ravine",
+          "forest",
+          "juggernaut",
+          "pilot",
+          "medlander",
+          "burning",
+          "reeds",
+          "necropolis",
+          "court",
+          "workshop",
+          "gallery",
+          "garden",
+          "crypt",
+          "shaw",
+          "catacomb",
+          "nave",
+          "plaza",
+          "infirmary",
+          "corridor",
+          "returncryo",
+          "embryos",
+          "coolantwalk",
+          "evaclocker",
+          "cistern",
+          "undercroft",
+          "stores",
+          "relay",
+          "coolantduct",
+          "filterduct",
+          "freightduct",
+          "aqueduct",
+          "sluiceworks",
+          "effigybasin",
+          "reliquary",
+          "windfall",
+          "sporehollow",
+          "surveyblind",
+          "landerhold",
+          "landercockpit",
+          "landermed",
+          "davidquarters",
+          "musicroom",
+          "washroom",
+          "colonistvault"
+        ],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "daniels-work",
+        "assetId": "daniels-work",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [],
+        "playerRooms": [
+          "cryo",
+          "service",
+          "cabin",
+          "bridge",
+          "comms",
+          "funeralairlock",
+          "evaprep"
+        ],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "daniels-eva",
+        "assetId": "daniels-eva",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [],
+        "playerRooms": [
+          "lifter",
+          "cargo",
+          "sailaccess"
+        ],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "walter",
+        "assetId": "walter",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [
+          {
+            "id": "walter-cryo",
+            "role": "walter",
+            "room": "cryo",
+            "untilVisited": null
+          }
+        ],
+        "playerRooms": [],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "walter-field",
+        "assetId": "walter-field",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "catalogue-only",
+        "actors": [],
+        "playerRooms": [],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Aucun consommateur plein pied dans le module actuel."
+      },
+      {
+        "id": "walter-injured",
+        "assetId": "walter-injured",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [
+          {
+            "id": "walter-nave",
+            "role": "walter",
+            "room": "nave",
+            "untilVisited": null
+          },
+          {
+            "id": "synthetic-return",
+            "role": "walter",
+            "room": "returncryo",
+            "untilVisited": null
+          }
+        ],
+        "playerRooms": [],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "david",
+        "assetId": "david",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [
+          {
+            "id": "david-necropolis",
+            "role": "david",
+            "room": "necropolis",
+            "untilVisited": "court"
+          },
+          {
+            "id": "david-court",
+            "role": "david",
+            "room": "court",
+            "untilVisited": null
+          }
+        ],
+        "playerRooms": [],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "david-young",
+        "assetId": "david-young",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [],
+        "playerRooms": [
+          "whiteroom"
+        ],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "oram",
+        "assetId": "oram",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [
+          {
+            "id": "oram-bridge",
+            "role": "oram",
+            "room": "bridge",
+            "untilVisited": "landing"
+          }
+        ],
+        "playerRooms": [],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "lope",
+        "assetId": "lope",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "catalogue-only",
+        "actors": [
+          {
+            "id": "lope-landing",
+            "role": "lope",
+            "room": "landing",
+            "untilVisited": "burning"
+          }
+        ],
+        "playerRooms": [],
+        "weapon": "ar15",
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "La pose livrée a les mains libres ; le profil PNJ armé conserve son rendu existant."
+      },
+      {
+        "id": "tennessee",
+        "assetId": "tennessee",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "catalogue-only",
+        "actors": [],
+        "playerRooms": [],
+        "weapon": "shotgun",
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "La pose livrée a les mains libres ; le profil PNJ armé conserve son rendu existant."
+      },
+      {
+        "id": "tennessee-eva",
+        "assetId": "tennessee-eva",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [
+          {
+            "id": "tennessee-eva",
+            "role": "tennessee-eva",
+            "room": "sailaccess",
+            "untilVisited": "landing"
+          }
+        ],
+        "playerRooms": [],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "faris",
+        "assetId": "faris",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [
+          {
+            "id": "faris-cockpit",
+            "role": "faris",
+            "room": "landercockpit",
+            "untilVisited": "burning"
+          }
+        ],
+        "playerRooms": [],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "karine",
+        "assetId": "karine",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [
+          {
+            "id": "karine-hold",
+            "role": "karine",
+            "room": "landerhold",
+            "untilVisited": "medlander"
+          }
+        ],
+        "playerRooms": [],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "ricks",
+        "assetId": "ricks",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [
+          {
+            "id": "ricks-bridge",
+            "role": "ricks",
+            "room": "bridge",
+            "untilVisited": "infirmary"
+          }
+        ],
+        "playerRooms": [],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "upworth",
+        "assetId": "upworth",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [
+          {
+            "id": "upworth-comms",
+            "role": "upworth",
+            "room": "comms",
+            "untilVisited": "infirmary"
+          }
+        ],
+        "playerRooms": [],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "rosenthal",
+        "assetId": "rosenthal",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "catalogue-only",
+        "actors": [
+          {
+            "id": "rosenthal-expedition",
+            "role": "rosenthal",
+            "room": "landing",
+            "untilVisited": "medlander"
+          }
+        ],
+        "playerRooms": [],
+        "weapon": "inox",
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "La pose livrée a les mains libres ; le profil PNJ armé conserve son rendu existant."
+      },
+      {
+        "id": "hallett",
+        "assetId": "hallett",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "catalogue-only",
+        "actors": [
+          {
+            "id": "hallett-expedition",
+            "role": "hallett",
+            "room": "wheat",
+            "untilVisited": "medlander"
+          }
+        ],
+        "playerRooms": [],
+        "weapon": "ar15",
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "La pose livrée a les mains libres ; le profil PNJ armé conserve son rendu existant."
+      },
+      {
+        "id": "ledward",
+        "assetId": "ledward",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "catalogue-only",
+        "actors": [
+          {
+            "id": "ledward-expedition",
+            "role": "ledward",
+            "room": "forest",
+            "untilVisited": "medlander"
+          }
+        ],
+        "playerRooms": [],
+        "weapon": "f90",
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "La pose livrée a les mains libres ; le profil PNJ armé conserve son rendu existant."
+      },
+      {
+        "id": "ankor",
+        "assetId": "ankor",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "catalogue-only",
+        "actors": [
+          {
+            "id": "ankor-expedition",
+            "role": "ankor",
+            "room": "landing",
+            "untilVisited": "medlander"
+          }
+        ],
+        "playerRooms": [],
+        "weapon": "ar15",
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "La pose livrée a les mains libres ; le profil PNJ armé conserve son rendu existant."
+      },
+      {
+        "id": "cole",
+        "assetId": "cole",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "catalogue-only",
+        "actors": [
+          {
+            "id": "cole-expedition",
+            "role": "cole",
+            "room": "wheat",
+            "untilVisited": "medlander"
+          }
+        ],
+        "playerRooms": [],
+        "weapon": "sl40",
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "La pose livrée a les mains libres ; le profil PNJ armé conserve son rendu existant."
+      },
+      {
+        "id": "weyland",
+        "assetId": "weyland",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "idle-only",
+        "actors": [
+          {
+            "id": "weyland-opening",
+            "role": "weyland",
+            "room": "whiteroom",
+            "untilVisited": null
+          }
+        ],
+        "playerRooms": [],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Seule la pose neutre déclarée est disponible ; les autres états gardent le rendu existant."
+      },
+      {
+        "id": "branson-record",
+        "assetId": "branson-record",
+        "availableStates": [
+          "idle"
+        ],
+        "runtimeAdmission": "catalogue-only",
+        "actors": [],
+        "playerRooms": [],
+        "weapon": null,
+        "missingStates": [
+          "walk",
+          "run",
+          "armed",
+          "reload",
+          "hit",
+          "death"
+        ],
+        "reason": "Aucun consommateur plein pied dans le module actuel."
+      }
+    ],
+    "creaturePoses": [
+      {
+        "id": "neomorph",
+        "creature": "neomorph",
+        "state": "idle",
+        "pngAvailable": true,
+        "status": "static-pose-generated",
+        "runtimeAdmission": true,
+        "uncoveredStatesKeepProcedural": [
+          "windup",
+          "chase",
+          "investigate",
+          "dead",
+          "stunned",
+          "captured",
+          "scripted-sequence"
+        ]
+      },
+      {
+        "id": "neomorph-attack",
+        "creature": "neomorph",
+        "state": "attack",
+        "pngAvailable": true,
+        "status": "static-pose-generated",
+        "runtimeAdmission": true,
+        "uncoveredStatesKeepProcedural": [
+          "windup",
+          "chase",
+          "investigate",
+          "dead",
+          "stunned",
+          "captured",
+          "scripted-sequence"
+        ]
+      },
+      {
+        "id": "xenomorph",
+        "creature": "xenomorph",
+        "state": "idle",
+        "pngAvailable": false,
+        "status": "blocked-generation",
+        "runtimeAdmission": false,
+        "uncoveredStatesKeepProcedural": [
+          "windup",
+          "chase",
+          "investigate",
+          "dead",
+          "stunned",
+          "captured",
+          "scripted-sequence"
+        ]
+      },
+      {
+        "id": "xenomorph-attack",
+        "creature": "xenomorph",
+        "state": "attack",
+        "pngAvailable": false,
+        "status": "not_attempted_after_related_subject_rejection",
+        "runtimeAdmission": false,
+        "uncoveredStatesKeepProcedural": [
+          "windup",
+          "chase",
+          "investigate",
+          "dead",
+          "stunned",
+          "captured",
+          "scripted-sequence"
+        ]
+      },
+      {
+        "id": "facehugger",
+        "creature": "facehugger",
+        "state": "idle",
+        "pngAvailable": true,
+        "status": "static-pose-generated",
+        "runtimeAdmission": true,
+        "uncoveredStatesKeepProcedural": [
+          "windup",
+          "chase",
+          "investigate",
+          "dead",
+          "stunned",
+          "captured",
+          "scripted-sequence"
+        ]
+      },
+      {
+        "id": "facehugger-attack",
+        "creature": "facehugger",
+        "state": "attack",
+        "pngAvailable": true,
+        "status": "static-pose-generated",
+        "runtimeAdmission": true,
+        "uncoveredStatesKeepProcedural": [
+          "windup",
+          "chase",
+          "investigate",
+          "dead",
+          "stunned",
+          "captured",
+          "scripted-sequence"
+        ]
+      }
+    ],
+    "weapons": [
+      {
+        "id": "f90",
+        "assetId": "weapon-f90",
+        "playable": true,
+        "consumers": [
+          "ledward"
+        ],
+        "initialAvailableArtwork": "procedural",
+        "status": "blocked-generation",
+        "pngAvailable": false
+      },
+      {
+        "id": "beretta",
+        "assetId": "weapon-beretta",
+        "playable": true,
+        "consumers": [],
+        "initialAvailableArtwork": "procedural",
+        "status": "blocked-generation",
+        "pngAvailable": false
+      },
+      {
+        "id": "ar15",
+        "assetId": "weapon-ar15",
+        "playable": true,
+        "consumers": [
+          "lope",
+          "hallett",
+          "ankor"
+        ],
+        "initialAvailableArtwork": "procedural",
+        "status": "blocked-generation",
+        "pngAvailable": false
+      },
+      {
+        "id": "shotgun",
+        "assetId": "weapon-shotgun",
+        "playable": true,
+        "consumers": [
+          "tennessee"
+        ],
+        "initialAvailableArtwork": "procedural",
+        "status": "blocked-generation",
+        "pngAvailable": false
+      },
+      {
+        "id": "inox",
+        "assetId": "weapon-inox",
+        "playable": false,
+        "consumers": [
+          "rosenthal"
+        ],
+        "initialAvailableArtwork": "procedural",
+        "status": "not_attempted_after_related_subject_rejection",
+        "pngAvailable": false
+      },
+      {
+        "id": "sl40",
+        "assetId": "weapon-sl40",
+        "playable": false,
+        "consumers": [
+          "cole"
+        ],
+        "initialAvailableArtwork": "procedural",
+        "status": "not_attempted_after_related_subject_rejection",
+        "pngAvailable": false
+      },
+      {
+        "id": "eaa",
+        "assetId": "weapon-eaa",
+        "playable": false,
+        "consumers": [],
+        "initialAvailableArtwork": "procedural",
+        "status": "blocked-generation",
+        "pngAvailable": false
+      }
+    ],
+    "propFamilies": [
+      {
+        "id": "air-case",
+        "category": "gameplay_original",
+        "instances": 2,
+        "rooms": [
+          "windfall",
+          "surveyblind"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "antenna",
+        "category": "generic_unverified",
+        "instances": 8,
+        "rooms": [
+          "bridge",
+          "landing",
+          "wheat",
+          "forest",
+          "reeds",
+          "court",
+          "nave",
+          "plaza"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "aqueduct-pier",
+        "category": "structure_or_live_mechanism",
+        "instances": 4,
+        "rooms": [
+          "aqueduct"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "bandages",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "infirmary"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "basin",
+        "category": "structure_or_live_mechanism",
+        "instances": 3,
+        "rooms": [
+          "court",
+          "garden",
+          "undercroft"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "bed",
+        "category": "generic_unverified",
+        "instances": 1,
+        "rooms": [
+          "cabin"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "bedroll",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "davidquarters"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "bench",
+        "category": "generic_unverified",
+        "instances": 9,
+        "rooms": [
+          "cabin",
+          "bridge",
+          "court",
+          "workshop",
+          "shaw",
+          "returncryo",
+          "evaclocker",
+          "cistern"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "cabindrawing",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "cabin"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "cable",
+        "category": "generic_unverified",
+        "instances": 4,
+        "rooms": [
+          "service",
+          "comms",
+          "juggernaut",
+          "lifter"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "cable-tray",
+        "category": "structure_or_live_mechanism",
+        "instances": 9,
+        "rooms": [
+          "freightduct"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "canopy",
+        "category": "structure_or_live_mechanism",
+        "instances": 1,
+        "rooms": [
+          "medlander"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "cargoCrate",
+        "category": "generic_unverified",
+        "instances": 6,
+        "rooms": [
+          "landing",
+          "burning",
+          "plaza",
+          "lifter",
+          "cargo"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "cargoLifter",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "plaza"
+        ],
+        "assetIds": [
+          "prop-cargoLifter"
+        ],
+        "runtimeAssetIds": [
+          "prop-cargoLifter"
+        ],
+        "status": "partial-static-coverage",
+        "reason": "Au moins une variante statique admise dans ses salles déclarées ; toutes les occurrences et tous les états ne sont pas certifiés."
+      },
+      {
+        "id": "cctvCamera",
+        "category": "gameplay_original",
+        "instances": 6,
+        "rooms": [
+          "service",
+          "corridor",
+          "cargo",
+          "stores",
+          "relay"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "cctvTerminal",
+        "category": "gameplay_original",
+        "instances": 3,
+        "rooms": [
+          "comms",
+          "infirmary",
+          "relay"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "ceilingSpeaker",
+        "category": "gameplay_original",
+        "instances": 3,
+        "rooms": [
+          "corridor",
+          "cargo",
+          "stores"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "chain",
+        "category": "generic_unverified",
+        "instances": 7,
+        "rooms": [
+          "juggernaut",
+          "gallery",
+          "crypt",
+          "shaw",
+          "catacomb",
+          "nave",
+          "cargo"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "chair",
+        "category": "generic_unverified",
+        "instances": 1,
+        "rooms": [
+          "landercockpit"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "channelrim",
+        "category": "structure_or_live_mechanism",
+        "instances": 1,
+        "rooms": [
+          "cistern"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "classicalstatue",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "whiteroom"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "blocked-generation",
+        "reason": "La génération de la statue a été refusée par l’outil ; aucun PNG livré."
+      },
+      {
+        "id": "cloakstand",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "davidquarters"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "column",
+        "category": "structure_or_live_mechanism",
+        "instances": 18,
+        "rooms": [
+          "juggernaut",
+          "pilot",
+          "necropolis",
+          "court",
+          "gallery",
+          "crypt",
+          "catacomb",
+          "nave",
+          "plaza",
+          "cistern",
+          "undercroft",
+          "effigybasin"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "console",
+        "category": "film_object_candidate",
+        "instances": 33,
+        "rooms": [
+          "cryo",
+          "service",
+          "cabin",
+          "bridge",
+          "comms",
+          "juggernaut",
+          "pilot",
+          "medlander",
+          "burning",
+          "garden",
+          "catacomb",
+          "nave",
+          "lifter",
+          "infirmary",
+          "corridor",
+          "cargo",
+          "embryos",
+          "coolantwalk",
+          "stores",
+          "relay",
+          "funeralairlock",
+          "landercockpit",
+          "colonistvault"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "coolant",
+        "category": "structure_or_live_mechanism",
+        "instances": 8,
+        "rooms": [
+          "cryo",
+          "service",
+          "corridor",
+          "returncryo",
+          "coolantwalk",
+          "evaclocker",
+          "stores"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "corpse",
+        "category": "film_object_candidate",
+        "instances": 9,
+        "rooms": [
+          "necropolis",
+          "plaza"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "counterweight",
+        "category": "structure_or_live_mechanism",
+        "instances": 4,
+        "rooms": [
+          "sluiceworks",
+          "reliquary"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "coveredremains",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "shaw"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "crane",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "lifter"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "crate",
+        "category": "generic_unverified",
+        "instances": 7,
+        "rooms": [
+          "service",
+          "landing",
+          "burning",
+          "corridor",
+          "cargo",
+          "stores"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "cryopod",
+        "category": "film_object_candidate",
+        "instances": 14,
+        "rooms": [
+          "cryo",
+          "returncryo",
+          "colonistvault"
+        ],
+        "assetIds": [
+          "prop-cryopod",
+          "prop-cryopod-closed-crew"
+        ],
+        "runtimeAssetIds": [
+          "prop-cryopod"
+        ],
+        "status": "partial-static-coverage",
+        "reason": "Au moins une variante statique admise dans ses salles déclarées ; toutes les occurrences et tous les états ne sont pas certifiés."
+      },
+      {
+        "id": "dais",
+        "category": "structure_or_live_mechanism",
+        "instances": 4,
+        "rooms": [
+          "pilot",
+          "gallery",
+          "nave"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "damagedpod",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "cryo"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "drainwheel",
+        "category": "structure_or_live_mechanism",
+        "instances": 1,
+        "rooms": [
+          "cistern"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "drawing",
+        "category": "film_object_candidate",
+        "instances": 7,
+        "rooms": [
+          "cabin",
+          "juggernaut",
+          "workshop",
+          "gallery",
+          "shaw",
+          "undercroft"
+        ],
+        "assetIds": [
+          "prop-drawing-ammonite",
+          "prop-drawing-arthropod"
+        ],
+        "runtimeAssetIds": [],
+        "status": "catalogue-only",
+        "reason": "PNG disponible au catalogue ; aucune substitution de cette famille validée dans le rendu."
+      },
+      {
+        "id": "duct-mouth",
+        "category": "structure_or_live_mechanism",
+        "instances": 6,
+        "rooms": [
+          "comms",
+          "corridor",
+          "cargo",
+          "coolantwalk",
+          "stores"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "duct-rib",
+        "category": "structure_or_live_mechanism",
+        "instances": 22,
+        "rooms": [
+          "coolantduct",
+          "filterduct",
+          "freightduct"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "eaarack",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "landerhold"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "egg",
+        "category": "film_object_candidate",
+        "instances": 3,
+        "rooms": [
+          "crypt"
+        ],
+        "assetIds": [
+          "prop-egg"
+        ],
+        "runtimeAssetIds": [
+          "prop-egg"
+        ],
+        "status": "partial-static-coverage",
+        "reason": "Au moins une variante statique admise dans ses salles déclarées ; toutes les occurrences et tous les états ne sont pas certifiés."
+      },
+      {
+        "id": "eggsupport",
+        "category": "generic_unverified",
+        "instances": 1,
+        "rooms": [
+          "crypt"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "embryotray",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "embryos"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "La capsule d’embryon existe au catalogue, mais ne couvre ni le plateau complet ni ses autres éléments."
+      },
+      {
+        "id": "evahelmet",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "evaprep"
+        ],
+        "assetIds": [
+          "prop-evahelmet",
+          "prop-evahelmet-heavy"
+        ],
+        "runtimeAssetIds": [
+          "prop-evahelmet"
+        ],
+        "status": "partial-static-coverage",
+        "reason": "Au moins une variante statique admise dans ses salles déclarées ; toutes les occurrences et tous les états ne sont pas certifiés."
+      },
+      {
+        "id": "evasuit",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "evaprep"
+        ],
+        "assetIds": [
+          "prop-evasuit",
+          "prop-evasuit-heavy"
+        ],
+        "runtimeAssetIds": [
+          "prop-evasuit"
+        ],
+        "status": "partial-static-coverage",
+        "reason": "Au moins une variante statique admise dans ses salles déclarées ; toutes les occurrences et tous les états ne sont pas certifiés."
+      },
+      {
+        "id": "fern",
+        "category": "environment_or_effect",
+        "instances": 17,
+        "rooms": [
+          "landing",
+          "ravine",
+          "forest",
+          "garden",
+          "aqueduct",
+          "windfall",
+          "sporehollow",
+          "surveyblind"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "field-awning",
+        "category": "gameplay_original",
+        "instances": 1,
+        "rooms": [
+          "surveyblind"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "fieldradio",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "landing"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "filter-bank",
+        "category": "structure_or_live_mechanism",
+        "instances": 7,
+        "rooms": [
+          "filterduct"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "fire",
+        "category": "environment_or_effect",
+        "instances": 2,
+        "rooms": [
+          "burning"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "flare",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "reeds"
+        ],
+        "assetIds": [
+          "prop-flare"
+        ],
+        "runtimeAssetIds": [
+          "prop-flare"
+        ],
+        "status": "partial-static-coverage",
+        "reason": "Au moins une variante statique admise dans ses salles déclarées ; toutes les occurrences et tous les états ne sont pas certifiés."
+      },
+      {
+        "id": "flute",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "musicroom"
+        ],
+        "assetIds": [
+          "prop-flute"
+        ],
+        "runtimeAssetIds": [
+          "prop-flute"
+        ],
+        "status": "partial-static-coverage",
+        "reason": "Au moins une variante statique admise dans ses salles déclarées ; toutes les occurrences et tous les états ne sont pas certifiés."
+      },
+      {
+        "id": "freight-cart",
+        "category": "gameplay_original",
+        "instances": 3,
+        "rooms": [
+          "cargo",
+          "stores"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "freight-dock",
+        "category": "structure_or_live_mechanism",
+        "instances": 3,
+        "rooms": [
+          "cargo",
+          "stores"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "freight-rail",
+        "category": "structure_or_live_mechanism",
+        "instances": 3,
+        "rooms": [
+          "cargo",
+          "stores"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "fuelcase",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "burning"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "generator",
+        "category": "generic_unverified",
+        "instances": 3,
+        "rooms": [
+          "service",
+          "comms",
+          "lifter"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "glasspartition",
+        "category": "structure_or_live_mechanism",
+        "instances": 1,
+        "rooms": [
+          "landermed"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "grate",
+        "category": "structure_or_live_mechanism",
+        "instances": 2,
+        "rooms": [
+          "coolantwalk",
+          "relay"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "gunrack",
+        "category": "film_object_candidate",
+        "instances": 2,
+        "rooms": [
+          "infirmary",
+          "landerhold"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "harnessrack",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "landerhold"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "hydraulic-lever",
+        "category": "structure_or_live_mechanism",
+        "instances": 1,
+        "rooms": [
+          "sluiceworks"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "identification",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "shaw"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "imprint-slab",
+        "category": "structure_or_live_mechanism",
+        "instances": 3,
+        "rooms": [
+          "reliquary"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "isolation-box",
+        "category": "structure_or_live_mechanism",
+        "instances": 8,
+        "rooms": [
+          "coolantduct",
+          "filterduct",
+          "freightduct"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "lamp",
+        "category": "generic_unverified",
+        "instances": 48,
+        "rooms": [
+          "cryo",
+          "service",
+          "cabin",
+          "bridge",
+          "comms",
+          "medlander",
+          "burning",
+          "reeds",
+          "necropolis",
+          "workshop",
+          "crypt",
+          "lifter",
+          "infirmary",
+          "corridor",
+          "cargo",
+          "returncryo",
+          "embryos",
+          "coolantwalk",
+          "evaclocker",
+          "stores",
+          "relay"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "lander",
+        "category": "film_object_candidate",
+        "instances": 2,
+        "rooms": [
+          "landing",
+          "burning"
+        ],
+        "assetIds": [
+          "prop-lander"
+        ],
+        "runtimeAssetIds": [
+          "prop-lander"
+        ],
+        "status": "partial-static-coverage",
+        "reason": "Au moins une variante statique admise dans ses salles déclarées ; toutes les occurrences et tous les états ne sont pas certifiés."
+      },
+      {
+        "id": "lantern",
+        "category": "generic_unverified",
+        "instances": 2,
+        "rooms": [
+          "court"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "locker",
+        "category": "generic_unverified",
+        "instances": 9,
+        "rooms": [
+          "cryo",
+          "cabin",
+          "medlander",
+          "infirmary",
+          "corridor",
+          "returncryo",
+          "evaclocker",
+          "relay"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "log",
+        "category": "environment_or_effect",
+        "instances": 8,
+        "rooms": [
+          "landing",
+          "wheat",
+          "forest",
+          "burning",
+          "reeds",
+          "windfall",
+          "sporehollow",
+          "surveyblind"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "maintenance-fan",
+        "category": "structure_or_live_mechanism",
+        "instances": 4,
+        "rooms": [
+          "coolantduct",
+          "filterduct",
+          "freightduct"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "maintenance-tag",
+        "category": "structure_or_live_mechanism",
+        "instances": 3,
+        "rooms": [
+          "coolantduct",
+          "filterduct",
+          "freightduct"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "medical",
+        "category": "film_object_candidate",
+        "instances": 6,
+        "rooms": [
+          "cryo",
+          "medlander",
+          "infirmary",
+          "evaclocker",
+          "landermed"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "medtray",
+        "category": "film_object_candidate",
+        "instances": 2,
+        "rooms": [
+          "landermed",
+          "washroom"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "memorial",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "garden"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "microscope",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "workshop"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "navigationdisplay",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "bridge"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "necklace",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "cabin"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "notebook",
+        "category": "film_object_candidate",
+        "instances": 2,
+        "rooms": [
+          "davidquarters",
+          "musicroom"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "optics",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "landerhold"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "pallet",
+        "category": "generic_unverified",
+        "instances": 3,
+        "rooms": [
+          "landing",
+          "plaza",
+          "lifter"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "personal",
+        "category": "generic_unverified",
+        "instances": 3,
+        "rooms": [
+          "cabin",
+          "workshop",
+          "shaw"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "piano",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "whiteroom"
+        ],
+        "assetIds": [
+          "prop-piano"
+        ],
+        "runtimeAssetIds": [
+          "prop-piano"
+        ],
+        "status": "partial-static-coverage",
+        "reason": "Au moins une variante statique admise dans ses salles déclarées ; toutes les occurrences et tous les états ne sont pas certifiés."
+      },
+      {
+        "id": "pipebundle",
+        "category": "structure_or_live_mechanism",
+        "instances": 10,
+        "rooms": [
+          "coolantwalk",
+          "evaclocker",
+          "stores",
+          "relay",
+          "coolantduct"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "rack",
+        "category": "generic_unverified",
+        "instances": 16,
+        "rooms": [
+          "service",
+          "bridge",
+          "comms",
+          "workshop",
+          "shaw",
+          "infirmary",
+          "corridor",
+          "cargo",
+          "embryos",
+          "evaclocker",
+          "stores"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "railing",
+        "category": "structure_or_live_mechanism",
+        "instances": 5,
+        "rooms": [
+          "coolantwalk",
+          "stores",
+          "relay"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "recorder",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "pilot"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "recordingscreen",
+        "category": "film_object_candidate",
+        "instances": 2,
+        "rooms": [
+          "cabin",
+          "comms"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "reeds",
+        "category": "environment_or_effect",
+        "instances": 5,
+        "rooms": [
+          "landing",
+          "reeds"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "relief-tablet",
+        "category": "structure_or_live_mechanism",
+        "instances": 3,
+        "rooms": [
+          "aqueduct"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "repairtool",
+        "category": "film_object_candidate",
+        "instances": 2,
+        "rooms": [
+          "evaprep",
+          "sailaccess"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "rock",
+        "category": "environment_or_effect",
+        "instances": 28,
+        "rooms": [
+          "landing",
+          "wheat",
+          "ravine",
+          "forest",
+          "reeds",
+          "catacomb",
+          "nave",
+          "windfall",
+          "sporehollow"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "root",
+        "category": "environment_or_effect",
+        "instances": 31,
+        "rooms": [
+          "ravine",
+          "forest",
+          "juggernaut",
+          "pilot",
+          "necropolis",
+          "garden",
+          "crypt",
+          "catacomb",
+          "cistern",
+          "undercroft",
+          "windfall",
+          "sporehollow",
+          "surveyblind"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "rubble",
+        "category": "environment_or_effect",
+        "instances": 27,
+        "rooms": [
+          "ravine",
+          "juggernaut",
+          "burning",
+          "necropolis",
+          "court",
+          "gallery",
+          "crypt",
+          "catacomb",
+          "nave",
+          "plaza",
+          "cistern",
+          "undercroft",
+          "aqueduct",
+          "sluiceworks",
+          "effigybasin",
+          "reliquary",
+          "windfall",
+          "sporehollow",
+          "surveyblind"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "seat",
+        "category": "generic_unverified",
+        "instances": 3,
+        "rooms": [
+          "bridge"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "shower",
+        "category": "structure_or_live_mechanism",
+        "instances": 2,
+        "rooms": [
+          "washroom"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "shroud",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "funeralairlock"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "slab",
+        "category": "structure_or_live_mechanism",
+        "instances": 2,
+        "rooms": [
+          "cistern",
+          "undercroft"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "sluice-gauge",
+        "category": "structure_or_live_mechanism",
+        "instances": 1,
+        "rooms": [
+          "sluiceworks"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "specimen",
+        "category": "film_object_candidate",
+        "instances": 7,
+        "rooms": [
+          "ravine",
+          "workshop",
+          "garden",
+          "shaw",
+          "embryos"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "specimencage",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "workshop"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "spillway",
+        "category": "structure_or_live_mechanism",
+        "instances": 10,
+        "rooms": [
+          "aqueduct",
+          "sluiceworks",
+          "effigybasin"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "spore",
+        "category": "environment_or_effect",
+        "instances": 4,
+        "rooms": [
+          "forest",
+          "garden"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "spore-colony",
+        "category": "environment_or_effect",
+        "instances": 5,
+        "rooms": [
+          "windfall",
+          "sporehollow"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "stair",
+        "category": "structure_or_live_mechanism",
+        "instances": 3,
+        "rooms": [
+          "undercroft",
+          "relay",
+          "reliquary"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "steamvent",
+        "category": "structure_or_live_mechanism",
+        "instances": 1,
+        "rooms": [
+          "coolantwalk"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "stone-crown",
+        "category": "structure_or_live_mechanism",
+        "instances": 3,
+        "rooms": [
+          "sluiceworks"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "surgicaltray",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "workshop"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "switchboard",
+        "category": "structure_or_live_mechanism",
+        "instances": 1,
+        "rooms": [
+          "relay"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "tablet",
+        "category": "gameplay_original",
+        "instances": 3,
+        "rooms": [
+          "windfall",
+          "sporehollow",
+          "surveyblind"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "tarp",
+        "category": "generic_unverified",
+        "instances": 1,
+        "rooms": [
+          "shaw"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "teaset",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "whiteroom"
+        ],
+        "assetIds": [
+          "prop-teaset"
+        ],
+        "runtimeAssetIds": [
+          "prop-teaset"
+        ],
+        "status": "partial-static-coverage",
+        "reason": "Au moins une variante statique admise dans ses salles déclarées ; toutes les occurrences et tous les états ne sont pas certifiés."
+      },
+      {
+        "id": "terraformer",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "cargo"
+        ],
+        "assetIds": [
+          "prop-terraformer"
+        ],
+        "runtimeAssetIds": [],
+        "status": "catalogue-only",
+        "reason": "PNG disponible au catalogue ; aucune substitution de cette famille validée dans le rendu."
+      },
+      {
+        "id": "tether",
+        "category": "film_object_candidate",
+        "instances": 2,
+        "rooms": [
+          "evaprep",
+          "sailaccess"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "toolcart",
+        "category": "generic_unverified",
+        "instances": 12,
+        "rooms": [
+          "cryo",
+          "service",
+          "comms",
+          "medlander",
+          "workshop",
+          "infirmary",
+          "coolantwalk",
+          "evaclocker",
+          "stores",
+          "relay",
+          "surveyblind"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "trail-marker",
+        "category": "structure_or_live_mechanism",
+        "instances": 3,
+        "rooms": [
+          "wheat",
+          "ravine",
+          "forest"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "tree",
+        "category": "environment_or_effect",
+        "instances": 5,
+        "rooms": [
+          "landing",
+          "ravine",
+          "forest",
+          "garden"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "urn",
+        "category": "film_object_candidate",
+        "instances": 8,
+        "rooms": [
+          "necropolis",
+          "court",
+          "workshop",
+          "garden",
+          "nave",
+          "cistern",
+          "undercroft",
+          "reliquary"
+        ],
+        "assetIds": [
+          "prop-urn"
+        ],
+        "runtimeAssetIds": [
+          "prop-urn"
+        ],
+        "status": "partial-static-coverage",
+        "reason": "Au moins une variante statique admise dans ses salles déclarées ; toutes les occurrences et tous les états ne sont pas certifiés."
+      },
+      {
+        "id": "urnplatform",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "juggernaut"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "urnrack",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "juggernaut"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "utilityknife",
+        "category": "film_object_candidate",
+        "instances": 2,
+        "rooms": [
+          "nave",
+          "landerhold"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "vent",
+        "category": "structure_or_live_mechanism",
+        "instances": 5,
+        "rooms": [
+          "cryo",
+          "comms",
+          "infirmary",
+          "corridor",
+          "coolantwalk"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "wallpanel",
+        "category": "structure_or_live_mechanism",
+        "instances": 12,
+        "rooms": [
+          "cryo",
+          "cabin",
+          "comms",
+          "medlander",
+          "infirmary",
+          "corridor",
+          "returncryo",
+          "embryos",
+          "coolantwalk",
+          "evaclocker",
+          "stores",
+          "funeralairlock"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "wastecase",
+        "category": "film_object_candidate",
+        "instances": 1,
+        "rooms": [
+          "cryo"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "missing-reference-or-specific-state",
+        "reason": "Aucune référence visuelle suffisamment précise et correspondance de scène validée pour produire ce remplacement en 1:1."
+      },
+      {
+        "id": "weathered-face",
+        "category": "structure_or_live_mechanism",
+        "instances": 6,
+        "rooms": [
+          "effigybasin",
+          "reliquary"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "wheat",
+        "category": "environment_or_effect",
+        "instances": 9,
+        "rooms": [
+          "wheat",
+          "reeds"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "wind-mast",
+        "category": "gameplay_original",
+        "instances": 3,
+        "rooms": [
+          "windfall",
+          "sporehollow",
+          "surveyblind"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      },
+      {
+        "id": "window",
+        "category": "structure_or_live_mechanism",
+        "instances": 1,
+        "rooms": [
+          "medlander"
+        ],
+        "assetIds": [],
+        "runtimeAssetIds": [],
+        "status": "procedural-preserved",
+        "reason": "Le rendu existant conserve les états, mécanismes, affichages ou effets. Aucun PNG statique de remplacement validé."
+      }
+    ],
+    "extraCatalogueAssets": [
+      {
+        "id": "walter-field",
+        "limitations": [
+          "Boots and rear of uniform not fully visible in individual foreground reference.",
+          "Facing and idle pose adapted for runtime."
+        ]
+      },
+      {
+        "id": "tennessee",
+        "limitations": [
+          "Hat repositioned from hand to head for runtime pilot profile.",
+          "Legs and boot details unavailable in cropped references, reconstructed conservatively; pose adapted."
+        ]
+      },
+      {
+        "id": "prop-evasuit-heavy",
+        "limitations": [
+          "Full suit lower-body shapes have only a small film reference; fine rear mechanisms reconstructed.",
+          "Empty suit displayed standing is an asset adaptation, not a production photograph."
+        ]
+      },
+      {
+        "id": "prop-evahelmet-heavy",
+        "limitations": [
+          "Rear shell and interior not completely documented in supplied front and side references; reconstructed conservatively."
+        ]
+      },
+      {
+        "id": "bio-facehugger-embryo",
+        "limitations": [
+          "Only the visible face of the capsule is documented; unseen anatomy is not certified.",
+          "Catalogue biology asset; no v0.10 consumer established."
+        ]
+      },
+      {
+        "id": "prop-drawing-ammonite",
+        "limitations": [
+          "Catalogue variant only until a specific drawing placement is matched.",
+          "Fine charcoal strokes are reconstructed rather than pixel-identical to the original prop."
+        ]
+      },
+      {
+        "id": "prop-drawing-arthropod",
+        "limitations": [
+          "Catalogue variant only until a specific drawing placement is matched.",
+          "Fine graphite strokes are reconstructed rather than pixel-identical to the original prop."
+        ]
+      },
+      {
+        "id": "prop-terraformer",
+        "limitations": [
+          "Adaptation of Tony Drew's orange six-wheel production-design concept, reused byte-for-byte from v122.",
+          "Final filmed geometry is unattested; existing v122 asset was explicitly catalog-inspection-only. Kept catalogue-only in v0.11 as well."
+        ]
+      },
+      {
+        "id": "lope",
+        "limitations": [
+          "Lower trousers, boots and rear gear are partly reconstructed from cropped field reference.",
+          "Pose changed from holding wheat to empty-handed idle."
+        ]
+      },
+      {
+        "id": "branson-record",
+        "limitations": [
+          "Face anchored to Branson's Last Supper appearance, not a full-body cabin-video frame.",
+          "Pale-grey shirt and neutral work trousers reconstruct the archive runtime profile; full-body result remains unused by current campaign renderer."
+        ]
+      },
+      {
+        "id": "hallett",
+        "limitations": [
+          "Full-body standing pose and occluded lower legs reconstructed; group field reference identifies Hallett by his ginger beard, matched to captioned full-crew photo.",
+          "Weapon removed for runtime separate weapon layer."
+        ]
+      },
+      {
+        "id": "cole",
+        "limitations": [
+          "Lower trousers/boots and hidden rear gear reconstructed from cohort costume; supplied field photo partly occludes Cole behind another crew member.",
+          "Identity matched to Uli Latukefu in captioned full-crew photo; gun omitted."
+        ]
+      },
+      {
+        "id": "prop-cryopod-closed-crew",
+        "limitations": [
+          "Production-design reconstruction based on Tony Drew's crew sleep-pod drawings; final filmed detail and closed-view appearance not certified 1:1.",
+          "Not a substitute for the distinct closed colonist capsules or the wake-up room's open pod.",
+          "The external rescue tool is intentionally not included."
+        ]
+      },
+      {
+        "id": "prop-table-e1027",
+        "limitations": [
+          "model-reference reproduction; exact film-instance identity/height not certified",
+          "Official licensed-manufacturer photos of the same named design, not a photo of the actual screen-used instance. Preserve clear-glass translucency. Do not apply this model to unrelated DLC tables.",
+          "No separate E1027 table instance exists in the restored module's white room; the procedural tea-set support is retained.",
+          "The glass is translucent but its generated light grey appearance is stronger than the source; exact optical fidelity is not certified."
+        ]
+      },
+      {
+        "id": "prop-chair-bugatti",
+        "limitations": [
+          "comparable documented design; exact screen-used variant not certified",
+          "Gallery example circa1900 vs film-identification description circa1905. Shared asymmetric throne design, but inlay, tassels, patina, dimensions and details of film instance cannot be certified from this source. Do not substitute for unrelated DLC chairs."
+        ]
+      },
+      {
+        "id": "rosenthal",
+        "limitations": [
+          "Face from official Rosenthal crew-message clip; expedition upper clothing from Rosenthal at far right of wheat-field film still.",
+          "Most lower garment and rear equipment hidden or cropped, continued conservatively from shared security clothing visible in ramp still; not certified 1:1.",
+          "Field cap follows film reference even though procedural code describes tied hair; weapons omitted."
+        ]
+      },
+      {
+        "id": "ankor",
+        "limitations": [
+          "Face taken from primary Framestore suit close-up; yellow suit explicitly excluded for normal expedition runtime profile.",
+          "Ramp front-right identity cross-checked against IMFDB caption for Ankor's distinctive AR-15, and cast photo.",
+          "Neutral pose and hidden rear gear reconstructed; weapon removed."
+        ]
+      },
+      {
+        "id": "ledward",
+        "limitations": [
+          "Actual forest reference shows no cap; bareheaded styling supersedes the procedural cap parameter.",
+          "Legs, boots and rear equipment are partly outside the supplied frame, reconstructed conservatively in matching security costume.",
+          "Pose adapted from seated cigarette break to empty-handed healthy idle; cigarette, rifle and illness removed."
+        ]
+      },
+      {
+        "id": "oram-field",
+        "limitations": [
+          "Reference face is three-quarter and small; fine badge lettering and rear costume unavailable.",
+          "Facing and idle pose adapted for runtime."
+        ]
+      },
+      {
+        "id": "karine-medical",
+        "limitations": [
+          "Film medical-bay shirt variant, retained only in the catalogue; the landerhold runtime scene now uses a separate documented beige expedition anorak variant. Actual chin-length bob reference supersedes the former procedural tied-hair parameter.",
+          "Lower legs and boots not shown; conservatively reconstructed."
+        ]
+      }
+    ],
+    "blocked": [
+      {
+        "id": "weapon-f90",
+        "status": "blocked-generation",
+        "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+        "category": "illicit"
+      },
+      {
+        "id": "weapon-beretta",
+        "status": "blocked-generation",
+        "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+        "category": "illicit"
+      },
+      {
+        "id": "weapon-ar15",
+        "status": "blocked-generation",
+        "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+        "category": "illicit"
+      },
+      {
+        "id": "weapon-eaa",
+        "status": "blocked-generation",
+        "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+        "category": "illicit"
+      },
+      {
+        "id": "weapon-shotgun",
+        "status": "blocked-generation",
+        "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+        "category": "illicit"
+      },
+      {
+        "id": "xenomorph",
+        "status": "blocked-generation",
+        "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+        "category": "other"
+      },
+      {
+        "id": "weapon-sl40",
+        "status": "not_attempted_after_related_subject_rejection",
+        "relatedId": "weapon-f90",
+        "reason": "Film prop is the same F90 fitted with the SL40; no alternate attempt after F90 rejection."
+      },
+      {
+        "id": "weapon-inox",
+        "status": "not_attempted_after_related_subject_rejection",
+        "relatedId": "weapon-beretta",
+        "reason": "Same Beretta92FSBrigadier family with different finish/accessory; no alternate attempt after black Beretta rejection."
+      },
+      {
+        "id": "xenomorph-attack",
+        "status": "not_attempted_after_related_subject_rejection",
+        "relatedId": "xenomorph",
+        "reason": "Alternate pose of the same Xenomorph subject; no attempt after neutral subject rejection."
+      },
+      {
+        "id": "prop-classicalstatue",
+        "status": "blocked-generation",
+        "reason": "Image tool refused output for the classical marble sculpture; no PNG created."
+      }
+    ],
+    "animationCoverage": {
+      "completeCyclesProduced": false,
+      "available": "Static human idle poses and neomorph/facehugger idle/lunge poses only",
+      "proceduralFallbackPreserved": true
+    }
+  },
+  "validation": {
+    "status": "standalone-validated-host-CI-tracked-in-pull-request",
+    "assetSnapshotCommit": "c1feea778feab641f2c4c0401d27b3afdf143b9f",
+    "originalSource": {
+      "files": 22,
+      "bytes": 992906,
+      "archiveSha256": "b765f46776df1308d3872f4793478facc18f2b0603ade64fddbe4d996a4183d1",
+      "conservationVerified": true
+    },
+    "productionPNGs": {
+      "count": 49,
+      "bytes": 78177298,
+      "gitBlobHashesVerified": 49,
+      "alphaAndFrameChecksPassed": 49,
+      "originalBytesPreserved": true
+    },
+    "contracts": {
+      "passed": 28,
+      "failed": 0,
+      "rendererAndRegistryTests": 19,
+      "integrationTests": 9,
+      "imageAndCanvasDoublesDeclared": true
+    },
+    "historicalPilots": {
+      "passed": 15,
+      "failed": 0,
+      "exitCode": 0,
+      "method": "Original engine with coordinate/simulation commands, not browser visual proof."
+    },
+    "chromium": {
+      "passed": 34,
+      "failed": 0,
+      "exitCode": 0,
+      "sourcePNGCount": 49,
+      "decodedRuntimePNGs": 29,
+      "reachedRooms": [
+        "cryo",
+        "service",
+        "bridge",
+        "comms"
+      ],
+      "requiredActionsCompleted": 6,
+      "realKeyboardJourney": true,
+      "obstacleJump": true,
+      "saveReloadPassed": true,
+      "publicProloguePassed": true,
+      "creaturePoseFixtures": 4,
+      "creatureFixtureStatesNotGameplayReached": true,
+      "missingImageFallbackPassed": true,
+      "unexpectedPageErrors": 0,
+      "unexpectedHttpErrors": 0,
+      "hostMenuValidated": false,
+      "fullHostBuildValidated": false
+    },
+    "runtimeBundle": {
+      "htmlBytes": 1018124,
+      "htmlSha256": "71107083f4c9549069179b1ce0db93d7c22d24db3a255dd1a884ba1d63570799",
+      "htmlGitBlobSha": "c5d0b47668a73c8253a2d29e79bf92b55c5ab37a",
+      "independentInMemoryReconstructionMatched": true,
+      "manifestGitBlobSha": "472bd30f90170fed1a9c4634970f1052979a60c0",
+      "manifestSha256": "883270a99e8da81eced7bbd848d46133dd6647ac9fb3f46bb14ace4f2b3b8bc0",
+      "runtimePNGBytes": 43204088
+    },
+    "gallery": {
+      "pythonSyntaxPassed": true,
+      "sourceReviewPassed": true,
+      "browserReviewPending": false,
+      "passed": 8,
+      "failed": 0,
+      "offline": true,
+      "sourcePNGsDecoded": 49,
+      "checks": [
+        "49 cards rendered offline",
+        "49 original PNGs decoded offline",
+        "Daniels search returns three variants",
+        "Creature filter returns four poses",
+        "Runtime and catalogue filters return 29 and 20",
+        "Preview dialog opens and closes with references",
+        "Dark, light and checkerboard backgrounds switch",
+        "No JavaScript page errors"
+      ]
+    },
+    "scopeNotes": [
+      "A prior PNG QA attempt stopped because of an arbitrary 95% opaque-pixel threshold on facehugger (94.9895%). The artistic threshold was removed; the numeric opacity measure remains recorded. No pixels were changed.",
+      "The full Tantalus build and real host-menu browser journey are gates in the dedicated GitHub Actions workflow. Their result is attached to the PR and, when available, the downloadable pack."
+    ],
+    "releaseTestCollection": {
+      "declaredEntries": 398,
+      "uniqueFiles": 392,
+      "duplicatesInOutput": 0,
+      "covenantTestFilesEachCollectedExactlyOnce": true,
+      "sharedCollectorUnchanged": true,
+      "fullSuiteExecutionClaimed": false
+    }
+  }
+}

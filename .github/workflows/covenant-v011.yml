@@ -1,0 +1,111 @@
+name: Covenant sprites and recovered DLC
+on:
+  pull_request:
+    paths:
+      - 'modules/covenant/**'
+      - 'dlc/covenant/**'
+      - 'assets/openai/sprites/alien-covenant-v011/**'
+      - 'assets/openai/sprites/alien-covenant-v012/**'
+      - 'assets/openai/sprites/alien-covenant-v013/**'
+      - 'assets/openai/sprites/alien-covenant-v014/**'
+      - 'assets/openai/sprites/alien-covenant-v015/**'
+      - 'assets/openai/sprites/alien-covenant-v016/**'
+      - 'assets/openai/sprites/alien-covenant-v017/**'
+      - 'docs/covenant/**'
+      - 'docs/narrative/CAMPAGNE_PRINCIPALE.md'
+      - 'src/title-screen-v61.js'
+      - 'index.html'
+      - 'scripts/*covenant*'
+      - 'scripts/build*.mjs'
+      - 'scripts/verify-public-release-v86.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/covenant-v011.yml'
+  push:
+    branches: [main, 'claude/nifty-shannon-qpy1hl']
+    paths:
+      - 'modules/covenant/**'
+      - 'dlc/covenant/**'
+      - 'assets/openai/sprites/alien-covenant-v011/**'
+      - 'assets/openai/sprites/alien-covenant-v012/**'
+      - 'assets/openai/sprites/alien-covenant-v013/**'
+      - 'assets/openai/sprites/alien-covenant-v014/**'
+      - 'assets/openai/sprites/alien-covenant-v015/**'
+      - 'assets/openai/sprites/alien-covenant-v016/**'
+      - 'assets/openai/sprites/alien-covenant-v017/**'
+      - 'docs/covenant/**'
+      - 'docs/narrative/CAMPAGNE_PRINCIPALE.md'
+      - 'src/title-screen-v61.js'
+      - 'index.html'
+      - 'scripts/*covenant*'
+      - 'scripts/build*.mjs'
+      - 'scripts/verify-public-release-v86.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/covenant-v011.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: covenant-v011-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+defaults:
+  run:
+    shell: bash
+jobs:
+  covenant:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Locked host dependencies and evidence directory
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          mkdir -p "$RUNNER_TEMP/covenant-v011-evidence"
+      - name: Runtime conservation, renderer fallback and title integration
+        run: |
+          npm run test:covenant 2>&1 | tee "$RUNNER_TEMP/covenant-v011-evidence/contracts.log"
+          npm run check:covenant 2>&1 | tee "$RUNNER_TEMP/covenant-v011-evidence/bundle.log"
+      - name: Original coordinate-based campaign pilots
+        working-directory: modules/covenant
+        env:
+          COVENANT_QA_OUTPUT: ${{ runner.temp }}/covenant-v011-evidence/historical-pilots
+        run: node qa/release-playthrough-v10.cjs 2>&1 | tee "$RUNNER_TEMP/covenant-v011-evidence/historical-pilots.log"
+      - name: Browser and PNG tools outside source and distribution
+        run: |
+          python3 -m venv "$RUNNER_TEMP/covenant-v011-tools"
+          "$RUNNER_TEMP/covenant-v011-tools/bin/pip" install Pillow==12.0.0 playwright==1.65.2
+          "$RUNNER_TEMP/covenant-v011-tools/bin/python" -m playwright install --with-deps chromium
+      - name: Reproduce sprite bounds and runtime admission from original PNGs
+        run: |
+          "$RUNNER_TEMP/covenant-v011-tools/bin/python" scripts/sync-covenant-sprites-v011.py 2>&1 | tee "$RUNNER_TEMP/covenant-v011-evidence/asset-sync.log"
+          git diff --exit-code -- dlc/covenant/index.html dlc/covenant/sprites-v011.json
+      - name: Source admission and complete host distribution
+        run: |
+          npm run check 2>&1 | tee "$RUNNER_TEMP/covenant-v011-evidence/source-admission.log"
+          npm run build 2>&1 | tee "$RUNNER_TEMP/covenant-v011-evidence/host-build.log"
+          npm run check:built 2>&1 | tee "$RUNNER_TEMP/covenant-v011-evidence/built-admission.log"
+      - name: Real controls, reached rooms, PNG decoding and save isolation
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          "$RUNNER_TEMP/covenant-v011-tools/bin/python" -B scripts/qa-covenant-v011.py --root dist --source-root . --output "$RUNNER_TEMP/covenant-v011-evidence/browser"
+      - name: Cumulative original PNG pack and offline animation catalogue
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          "$RUNNER_TEMP/covenant-v011-tools/bin/python" -B scripts/package-covenant-sprites-v017.py --output "$RUNNER_TEMP/covenant-v017-pack" 2>&1 | tee "$RUNNER_TEMP/covenant-v011-evidence/package-v017.log"
+          "$RUNNER_TEMP/covenant-v011-tools/bin/python" -B scripts/qa-covenant-catalogue-v017.py --catalogue "$RUNNER_TEMP/covenant-v017-pack/ALIEN_COVENANT_SPRITES_V0.17/index.html" --output "$RUNNER_TEMP/covenant-v011-evidence/catalogue"
+      - name: Preserve logs, reached-scene screenshots and declared fixture captures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: covenant-v011-evidence
+          path: ${{ runner.temp }}/covenant-v011-evidence
+          if-no-files-found: warn
+          retention-days: 7

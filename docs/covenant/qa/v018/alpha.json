@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "method": "Read-only Pillow inspection of native RGBA PNGs; no pixel writes",
+  "rows": [
+    {
+      "id": "prop-covenant-terraforming-side-airlock",
+      "path": "assets/openai/sprites/alien-covenant-v018/prop-covenant-terraforming-side-airlock.png",
+      "sha256": "cc292e5458b1f0f91a0559c232773f736e1a88c49041450fb16641441e787f59",
+      "width": 1200,
+      "height": 1310,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaZeroPixels": 547526,
+      "bboxAlphaGe32": [
+        70,
+        32,
+        1139,
+        1277
+      ],
+      "alphaThreshold": 32,
+      "edgeAlphaMaximum": 1,
+      "edgeAlphaAbove16": 0,
+      "visibleAspectRatio": 0.8586345381526105,
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "id": "prop-covenant-terraforming-main-doors-closed",
+      "path": "docs/covenant/v018-candidates/prop-covenant-terraforming-main-doors-closed.png",
+      "sha256": "d5b0b101e6a22bd95c6ab4a4722cf250ce6bed3a6e715fc969446e6388e6a9db",
+      "width": 2098,
+      "height": 749,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaZeroPixels": 623894,
+      "bboxAlphaGe32": [
+        283,
+        39,
+        1809,
+        697
+      ],
+      "alphaThreshold": 32,
+      "edgeAlphaMaximum": 1,
+      "edgeAlphaAbove16": 0,
+      "visibleAspectRatio": 2.3191489361702127,
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    }
+  ]
+}
