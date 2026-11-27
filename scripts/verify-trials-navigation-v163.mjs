@@ -12,7 +12,7 @@ function target(props = {}) {
     emit(type, event = {}) { for (const fn of [...handlers.get(type) || []]) fn({ preventDefault() {}, stopPropagation() {}, ...event }); } }, props);
 }
 
-async function nativeExitHost({ exit = true } = {}) {
+async function nativeExitHost({ exit = true, fullscreen = false } = {}) {
   const document = target({ hidden: false, hasFocus: () => true }), window = target();
   const gradient = { addColorStop() {} };
   const ctx = new Proxy({ measureText: t => ({ width: String(t).length * 7 }), createLinearGradient: () => gradient },
@@ -47,6 +47,17 @@ async function nativeExitHost({ exit = true } = {}) {
   const root = target({ ownerDocument: document, removeAttribute: k => attributes.delete(k),
     getAttribute: k => attributes.get(k), setAttribute: (k, value) => attributes.set(k, value),
     querySelector: selector => element(selector.match(/data-xt="([^"]+)"/)?.[1] || 'super-control') });
+  if (fullscreen) {
+    document.fullscreenEnabled = true;
+    root.requestFullscreen = async () => {
+      document.fullscreenElement = root;
+      root.emit('fullscreenchange');
+    };
+    document.exitFullscreen = async () => {
+      document.fullscreenElement = null;
+      root.emit('fullscreenchange');
+    };
+  }
   document.documentElement = { classList: { remove() {} } };
   class MinimalUi extends XenoTrialsUiV96 { updateOpponents() {} restorePendingSelection() {} render() {} }
   ui = new MinimalUi({ root, getProgress: () => progress, canCommit: () => true,
@@ -63,7 +74,7 @@ async function nativeExitHost({ exit = true } = {}) {
   }
   if (exit) assert.equal(runtime.getState().exitV157?.phase, 'playing');
   else assert.equal(runtime.getState().phase, 'active');
-  return { runtime, document, window, canvas, element, results, ui, frames, returned: () => returned,
+  return { runtime, root, document, window, canvas, element, results, ui, frames, returned: () => returned,
     progress: () => structuredClone(progress) };
 }
 
@@ -116,6 +127,23 @@ test('focusing return releases held combat movement and requires a real key rele
   h.window.emit('keyup', { target: h.canvas, code: 'ArrowRight' });
   h.window.emit('keydown', { target: h.canvas, code: 'ArrowRight', repeat: false }); h.frames();
   assert.equal(h.runtime.getState().fighters[0].previousInput.right, true); h.ui.close();
+});
+
+test('the combat tablet enters and exits its own fullscreen without pausing the fight on button focus', async () => {
+  const h = await nativeExitHost({ exit: false, fullscreen: true });
+  h.ui.selectionStep = 'combat';
+  const button = h.element('tablet-fullscreen');
+  const attributes = new Map();
+  button.setAttribute = (key, value) => attributes.set(key, value);
+  assert.equal(button.hidden, false);
+  button.focus();
+  assert.equal(h.runtime.getState().paused, false);
+  await button.onclick();
+  assert.equal(h.document.fullscreenElement, h.root);
+  assert.equal(attributes.get('aria-pressed'), 'true');
+  h.ui.close();
+  assert.equal(h.document.fullscreenElement, null);
+  assert.equal(attributes.get('aria-pressed'), 'false');
 });
 
 test('a paused unfinished ticket keeps its real abandonment action and both modal focus boundaries', async () => {

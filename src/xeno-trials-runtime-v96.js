@@ -913,17 +913,17 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     listen(doc, 'focusin', event => {
       const target = event.target, control = target?.closest?.('[data-xeno-action]');
       const returning = target?.closest?.('[data-xt="return"]');
+      const fullscreen = target?.closest?.('[data-xt="tablet-fullscreen"]');
       const finishing = finisherV207?.phase === 'offered'
         && target?.closest?.('[data-xt="finisher"], [data-xt="finisher-alternative"]');
-      if (returning) {
-        // Return must remain activatable by both pointer and Tab/Enter. Drop
-        // held combat inputs without inserting a modal over its own action.
+      if (returning || fullscreen) {
+        // Tablet controls stay activatable while held combat inputs are released.
         for (const key of heldKeys) blockedKeys.add(key);
         clearInputs();
       }
       // Accessible combat buttons and native round transitions own their
       // explicit activation. Their focus must not insert a competing pause.
-      if (target === canvas || returning || finishing || control && options.controlsRoot?.contains(control)
+      if (target === canvas || returning || fullscreen || finishing || control && options.controlsRoot?.contains(control)
         || target?.closest?.('[data-xt="pause"], [data-xt="resume-overlay"], [data-xt="skip-sequence"], [data-xt="taunt"], [data-xt="next"], [data-xt="practice-record"], [data-xt="practice-telemetry-toggle"]')) return;
       pause();
     });

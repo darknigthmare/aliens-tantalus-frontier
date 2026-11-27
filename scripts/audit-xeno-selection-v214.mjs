@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedXenoCombatTabletDigestV215, xenoCombatTabletRuntimeSourcesV215, verifyXenoCombatTabletV215 } from './audit-xeno-combat-tablet-v215.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -169,20 +170,22 @@ export const XENO_SELECTION_SUCCESSORS_V214 = freeze({
 });
 
 export function reviewedXenoSelectionDigestV214(path, endpoint) {
-  if (!Object.hasOwn(XENO_SELECTION_SUCCESSORS_V214, path)) return endpoint;
+  if (!Object.hasOwn(XENO_SELECTION_SUCCESSORS_V214, path)) return reviewedXenoCombatTabletDigestV215(path, endpoint);
   const receipt = XENO_SELECTION_SUCCESSORS_V214[path];
   assert.equal(endpoint, receipt.previousSha256, 'Incorrect V213 endpoint for V214: ' + path);
-  return receipt.sha256;
+  return reviewedXenoCombatTabletDigestV215(path, receipt.sha256);
 }
 
 export function xenoSelectionRuntimeSourcesV214(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(XENO_SELECTION_SUCCESSORS_V214)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined && result[path] !== receipt.sha256) reviewedXenoSelectionDigestV214(path, result[path]);
-    result[path] = receipt.sha256;
+    const current = reviewedXenoCombatTabletDigestV215(path, receipt.sha256);
+    if (result[path] !== undefined && result[path] !== receipt.sha256 && result[path] !== current)
+      reviewedXenoSelectionDigestV214(path, result[path]);
+    result[path] = current;
   }
-  return Object.freeze(result);
+  return xenoCombatTabletRuntimeSourcesV215(result);
 }
 
 export function verifyXenoSelectionV214(readSource = readRepository) {
@@ -194,7 +197,7 @@ export function verifyXenoSelectionV214(readSource = readRepository) {
     assert.notEqual(path, 'scripts/audit-xeno-selection-v214.mjs', 'V214 cannot admit its own bytes');
     assert.ok(['runtime', 'tooling'].includes(receipt.kind) && isHash(receipt.sha256), 'Invalid V214 receipt: ' + path);
     assert.ok(isHash(receipt.previousSha256) && receipt.previousSha256 !== receipt.sha256, 'Invalid V214 predecessor: ' + path);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V214 source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedXenoCombatTabletDigestV215(path, receipt.sha256), 'Unreviewed V214 source bytes: ' + path);
   }
   for (const [path, receipt] of Object.entries(XENO_SELECTION_DECLARATIONS_V214)) {
     const source = readSource(path).toString();
@@ -203,6 +206,7 @@ export function verifyXenoSelectionV214(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing V213 declaration boundaries: ' + path);
     assert.equal(sha(source.slice(start, end)), receipt.sha256, 'Historical V213 declarations changed: ' + path);
   }
+  verifyXenoCombatTabletV215(readSource);
   return Object.freeze({ baseline: XENO_SELECTION_BASELINE_V214, successors: successors.length,
     historicalResultsTransferred: false });
 }

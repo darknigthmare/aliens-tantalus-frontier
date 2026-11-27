@@ -224,6 +224,15 @@ export class XenoTrialsUiV96 {
       </form>
       <p data-xt="status" class="xt-status" role="status" aria-live="polite">Choisissez votre spécimen puis une cellule adverse.</p>
       <section data-xt="combat-panel" hidden>
+      <header class="xt-tablet-rail">
+        <div class="xt-tablet-identity">
+          <span class="xt-terminal-mark" aria-hidden="true">W<span>Y</span></span>
+          <div><strong>WEYLAND-YUTANI</strong><span>MIRE / XENO TRIALS</span></div>
+        </div>
+        <button type="button" class="button xt-tablet-fullscreen" data-xt="tablet-fullscreen" aria-pressed="false" hidden>
+          <span aria-hidden="true"></span>PLEIN ÉCRAN
+        </button>
+      </header>
       <div class="xt-match-hud" data-xt="combat-hud" role="group" aria-label="État du duel">
         ${['player', 'opponent'].map((side, i) => `<div class="xt-vitals xt-vitals-${side}" data-xt="${side}-vitals"><span class="xt-side">${i ? 'ADVERSAIRE' : 'VOUS'}</span><strong data-xt="${side}-name"></strong>
         <span class="xt-vital-value" data-xt="${side}-hp-value"></span><progress class="xt-hp-meter" data-xt="${side}-hp" max="1" value="1" aria-label="Santé ${i ? 'adversaire' : 'joueur'}"></progress>
@@ -334,6 +343,25 @@ export class XenoTrialsUiV96 {
       cards[index + offset]?.focus();
     });
     this.el('return').onclick = () => { this.close(); this.onReturn(); };
+    const fullscreen = this.el('tablet-fullscreen');
+    const doc = root.ownerDocument;
+    fullscreen.hidden = !doc?.fullscreenEnabled || typeof root.requestFullscreen !== 'function';
+    root.addEventListener('fullscreenchange', () => {
+      fullscreen.setAttribute('aria-pressed', String(doc.fullscreenElement === root));
+      if (doc.activeElement === fullscreen && this.active && this.selectionStep === 'combat') {
+        this.el('canvas').focus({ preventScroll: true });
+      }
+    });
+    fullscreen.onclick = async () => {
+      if (!this.active || this.selectionStep !== 'combat') return;
+      if (doc.fullscreenElement === root) { this.exitTabletFullscreen(); return; }
+      try {
+        await root.requestFullscreen();
+        if (!this.active || this.selectionStep !== 'combat') this.exitTabletFullscreen();
+      } catch {
+        // The tablet already covers the viewport when native fullscreen is blocked.
+      }
+    };
     this.el('confirm-fighters').onclick = () => this.confirmFighters();
     this.el('back-fighters').onclick = () => this.showFighters();
     this.el('new-duel').onclick = () => this.continueEvaluationV119();
@@ -700,9 +728,14 @@ export class XenoTrialsUiV96 {
     this.resultRetryTimer = null;
   }
   closeRuntime() { this.labRuntimeV209?.stop(); this.labRuntimeV209 = null; this.el('practice-hud').hidden = this.el('practice-restart').hidden = true; this.practiceAnnouncementV207 = this.practiceContactV209 = this.practiceRecordingStatusV209 = null; this.cancelResultRetry(); this.runtime?.stop(); this.root.removeAttribute('data-xt-outro'); this.el('skip-sequence').hidden = true; this.el('finisher').hidden = this.el('finisher-alternative').hidden = true; this.el('finisher').disabled = this.el('finisher-alternative').disabled = true; this.el('finisher-status').textContent = ''; this.lastFinisherMessage = ''; this.el('taunt').hidden=true; this.el('taunt').disabled=true; this.generation++; this.runtime = null; this.loading = false; this.lastStatus = null; this.lastResumedTickV186 = null; this.lastGamepadHintV186 = null; }
+  exitTabletFullscreen() {
+    const doc = this.root.ownerDocument;
+    if (doc?.fullscreenElement === this.root) void doc.exitFullscreen().catch(() => {});
+  }
   close() {
     if (this.unsavedResult) this.finish(this.unsavedResult);
     this.closeRuntime(); this.active = false; this.unsavedResult = null; this.lastStatus = null;
+    this.exitTabletFullscreen();
     this.root.ownerDocument?.documentElement?.classList?.remove('xt-fullscreen-v119');
     this.el('retry-save').hidden = true; this.el('next').hidden = true;
     this.el('result').textContent = '';
@@ -1147,6 +1180,7 @@ export class XenoTrialsUiV96 {
   }
   render() {
     const state = this.state(), running = this.isRunning();
+    if (this.selectionStep !== 'combat') this.exitTabletFullscreen();
     if (!state.pending) { this.el('retry-checkpoint').hidden = this.el('retry-checkpoint-overlay').hidden = true; this.el('checkpoint-status').textContent = ''; }
     this.renderActivitiesV119(state);
     this.el('series-resume').hidden = !state.modesV119.challengeRun;

@@ -51,7 +51,7 @@ test('Fleuve rejects fabricated predecessors and unreviewed changes to every adm
 });
 
 test('the terminal audit retains its no-import and no-self-receipt invariants', () => {
-  const terminalPath = 'scripts/audit-xeno-selection-v214.mjs';
+  const terminalPath = 'scripts/audit-xeno-combat-tablet-v215.mjs';
   assert.doesNotMatch(read(terminalPath).toString(), /from\s+['\"][^'\"]*audit-/);
   assert.ok(!Object.hasOwn(RIVER_OF_PAIN_SUCCESSORS_20261125, terminalPath));
 });

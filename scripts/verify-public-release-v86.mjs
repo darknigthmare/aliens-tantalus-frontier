@@ -949,6 +949,7 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (path === 'scripts/audit-xeno-combat-tablet-v215.mjs') return !built && !directory;
   if (path === 'scripts/audit-xeno-selection-v214.mjs') return !built && !directory;
   if (XENO_GAMEPLAY_SOURCE_ONLY_V213.has(path)) return !built && !directory;
   if (XENO_GAMEPLAY_SOURCE_ONLY_V212.has(path)) return !built && !directory;

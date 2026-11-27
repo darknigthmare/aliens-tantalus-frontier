@@ -22,6 +22,7 @@ const arenaLabels = new Map([
   [label.toUpperCase(), labelEn.toUpperCase()]
 ]));
 const trialLabels = new Map([
+  ['PLEIN ÉCRAN', 'FULL SCREEN'],
   ['Filtres du registre', 'Roster filters'],
   ['SPÉCIMEN AFFECTÉ', 'ASSIGNED SPECIMEN'],
   ['CIBLE D’ESSAI', 'TRIAL TARGET'],
