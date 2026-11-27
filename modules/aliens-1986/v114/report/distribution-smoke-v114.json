@@ -1,0 +1,114 @@
+{
+  "checks": [
+    {
+      "name": "46 modules distribués",
+      "ok": true
+    },
+    {
+      "name": "Sources embarquées byte-for-byte",
+      "ok": true
+    },
+    {
+      "name": "Imports internes résolus",
+      "ok": true
+    },
+    {
+      "name": "Chargeur sans cycle",
+      "ok": true
+    },
+    {
+      "name": "CSS exact intégré",
+      "ok": true
+    },
+    {
+      "name": "377 contrôles gameplay passent sur le même HTML",
+      "ok": true
+    },
+    {
+      "name": "12 PNG exacts embarqués",
+      "ok": true
+    },
+    {
+      "name": "76 captures uniques réellement présentes",
+      "ok": true
+    },
+    {
+      "name": "Menu :25 lieux",
+      "ok": true
+    },
+    {
+      "name": "Export114 neuf à Hadley",
+      "ok": true
+    },
+    {
+      "name": "Onze lieux d’opération,25 mondes exportés",
+      "ok": true
+    },
+    {
+      "name": "Munitions secondaires non offertes à Ripley",
+      "ok": true
+    },
+    {
+      "name": "Hicks a six cartouches propres",
+      "ok": true
+    },
+    {
+      "name": "Newt sans arme",
+      "ok": true
+    },
+    {
+      "name": "Codex :25 fiches",
+      "ok": true
+    },
+    {
+      "name": "Codex :80 règles",
+      "ok": true
+    },
+    {
+      "name": "Codex :44 références lieu+personnage",
+      "ok": true
+    },
+    {
+      "name": "25 schémas étiquetés",
+      "ok": true
+    },
+    {
+      "name": "Recherche filtrante réelle",
+      "ok": true
+    },
+    {
+      "name": "Codex portrait sans débordement",
+      "ok": true
+    },
+    {
+      "name": "Douze images du rapport décodées",
+      "ok": true
+    },
+    {
+      "name": "Rapport :provenance et limites affichées",
+      "ok": true
+    },
+    {
+      "name": "Rapport portrait sans débordement",
+      "ok": true
+    },
+    {
+      "name": "Aucune requête externe nécessaire",
+      "ok": true
+    },
+    {
+      "name": "Aucune erreur JavaScript/console",
+      "ok": true
+    }
+  ],
+  "htmlSha256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+  "codexSha256": "aab3be266824a590be5fc2f3dd2ae856338cbe8929c971c216423dbaa42ec7fb",
+  "reportSha256": "55daf1a55797717f5c5bc2704a2b7cc09f70e3026f0261ff1d954c29b4a35c46",
+  "externalRequests": [],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "directFileTransport": {
+    "validated": false,
+    "reason": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1/JOUER_ALIENS_V114.html\nCall log:\n  - navigating to \"file:///mnt/data/ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1/JOUER_ALIENS_V114.html\", waiting until \"domcontentloaded\"\n"
+  }
+}

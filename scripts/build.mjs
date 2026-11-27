@@ -15,6 +15,8 @@ import { verifyArbiterImageAdmissionsV190 } from './public-xeno-arbiter-admissio
 import { verifyXenoSpriteAdmissionsV191 } from './public-xeno-sprite-admissions-v191.mjs';
 import { verifyXenoSpriteAdmissionsV189 } from './public-xeno-sprite-admissions-v189.mjs';
 import { verifyXenoSpriteAdmissionsV188 } from './public-xeno-sprite-admissions-v188.mjs';
+import { copyRiverOfPainRuntime } from './river-of-pain-distribution.mjs';
+import { buildAliens1986Dlc } from './build-aliens1986-dlc.mjs';
 import { verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
 import { access, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -96,6 +98,8 @@ const assertBuildExclusion = async (...segments) => {
 for (const excludedPath of EXCLUDED_BUILD_ASSET_PATHS) {
   await assertBuildExclusion(...excludedPath.split('/'));
 }
+await copyRiverOfPainRuntime(root, output);
+await buildAliens1986Dlc(root, output);
 const index = await readFile(join(output, 'index.html'), 'utf8');
 if (!index.includes('/src/app.js') || !index.includes('game-canvas') || !index.includes('hub-canvas') || !index.includes('bioforge-canvas-v80')) throw new Error('Built shell is incomplete.');
 await writeFile(join(output, 'build-info.json'), JSON.stringify({

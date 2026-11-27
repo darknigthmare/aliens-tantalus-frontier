@@ -1,0 +1,1689 @@
+{
+  "schema": 1,
+  "version": "0.9.0-candidate.1",
+  "chapter": 15,
+  "objective": 2,
+  "character": "newt",
+  "room": "refuge",
+  "systems": {
+    "revision": 2,
+    "loadouts": {
+      "brackett": {
+        "ammo": 19,
+        "reserve": 90,
+        "medkits": 8,
+        "flares": 5,
+        "hp": 88,
+        "battery": 100
+      },
+      "anne": {
+        "ammo": 0,
+        "reserve": 0,
+        "medkits": 2,
+        "flares": 2,
+        "hp": 100,
+        "battery": 100
+      },
+      "newt": {
+        "ammo": 0,
+        "reserve": 0,
+        "medkits": 0,
+        "flares": 0,
+        "hp": 90,
+        "battery": 100
+      },
+      "paris": {
+        "ammo": 30,
+        "reserve": 75,
+        "medkits": 3,
+        "flares": 3,
+        "hp": 100,
+        "battery": 100
+      }
+    },
+    "circuits": {
+      "habitat": 3,
+      "medical": -1,
+      "research": -1,
+      "industry": 2,
+      "perimeter": -1
+    },
+    "boards": {
+      "grid": {
+        "switches": [
+          true,
+          true,
+          false
+        ],
+        "attempts": 1,
+        "solved": true
+      },
+      "pressure": {
+        "switches": [
+          false,
+          true,
+          true
+        ],
+        "attempts": 1,
+        "solved": true
+      },
+      "reroute": {
+        "switches": [
+          false,
+          true,
+          true
+        ],
+        "attempts": 1,
+        "solved": true
+      },
+      "shelter": {
+        "switches": [
+          true,
+          true,
+          false
+        ],
+        "attempts": 1,
+        "solved": true
+      },
+      "emergency": {
+        "switches": [
+          true,
+          true,
+          false
+        ],
+        "attempts": 1,
+        "solved": true
+      },
+      "last_power": {
+        "switches": [
+          true,
+          true,
+          false
+        ],
+        "attempts": 1,
+        "solved": true
+      }
+    },
+    "doorIntegrity": {
+      "isolation|med": 100,
+      "garage|survey": 100,
+      "coolant|power": 100,
+      "survey|vent_survey": 100
+    },
+    "hiding": null,
+    "exposedFor": 0,
+    "flashlight": false,
+    "battery": 100,
+    "tracker": false,
+    "trackerTimer": 0,
+    "markers": [],
+    "failReason": ""
+  },
+  "exploration": {
+    "revision": 3,
+    "jobs": {
+      "pantry": 3,
+      "biomed": 3,
+      "aerial": 3,
+      "workshop": 3,
+      "drain": 3,
+      "nest": 3
+    },
+    "encounters": {
+      "aerial-wind": {
+        "stage": "done",
+        "remaining": 0
+      },
+      "nest-shadow": {
+        "stage": "done",
+        "remaining": 0
+      }
+    },
+    "trackedJob": null,
+    "aim": {
+      "x": 1,
+      "z": 0
+    },
+    "aiming": false
+  },
+  "passages": {
+    "revision": 4,
+    "transit": null,
+    "listening": null,
+    "reports": [],
+    "counts": {
+      "stairs": 67,
+      "ladder": 9,
+      "lift": 2,
+      "airlock": 12,
+      "listens": 0,
+      "cancelled": 1
+    }
+  },
+  "life": {
+    "revision": 5,
+    "residents": {
+      "kent": {
+        "room": "concourse",
+        "phase": 1,
+        "x": 837.5,
+        "z": 0.84,
+        "node": 1,
+        "wait": 1.1499999999999997,
+        "walk": 22.5,
+        "facing": -1,
+        "alarm": 3.0500000000000007
+      },
+      "vale": {
+        "room": "hab",
+        "phase": 0,
+        "x": 417.5,
+        "z": 0.7,
+        "node": 0,
+        "wait": 1.4500000000000013,
+        "walk": 228.90000000000293,
+        "facing": -1,
+        "alarm": 2.8000000000000016
+      },
+      "bell": {
+        "room": "recreation",
+        "phase": 0,
+        "x": 619.2000000000039,
+        "z": 0.84,
+        "node": 2,
+        "wait": 0.6000000000000005,
+        "walk": 229.80000000000098,
+        "facing": -1,
+        "alarm": 0.5500000000000032
+      },
+      "rhee": {
+        "room": "mess",
+        "phase": 0,
+        "x": 1341.7499999999882,
+        "z": 0.84,
+        "node": 1,
+        "wait": 0,
+        "walk": 172.20000000000078,
+        "facing": 1,
+        "alarm": 0
+      },
+      "arden": {
+        "room": "med",
+        "phase": 1,
+        "x": 1998.8500000000022,
+        "z": 0.84,
+        "node": 2,
+        "wait": 1.3500000000000074,
+        "walk": 63.44999999999985,
+        "facing": -1,
+        "alarm": 0
+      },
+      "doran": {
+        "room": "biomed",
+        "phase": 0,
+        "x": 876.1000000000018,
+        "z": 0.84,
+        "node": 2,
+        "wait": 0,
+        "walk": 243.0000000000036,
+        "facing": -1,
+        "alarm": 0
+      },
+      "corban": {
+        "room": "relay",
+        "phase": 0,
+        "x": 1193.8999999999978,
+        "z": 0.7,
+        "node": 1,
+        "wait": 0,
+        "walk": 29.700000000000017,
+        "facing": 1,
+        "alarm": 0
+      },
+      "becker": {
+        "room": "records",
+        "phase": 1,
+        "x": 417.5,
+        "z": 0.7,
+        "node": 1,
+        "wait": 1.6,
+        "walk": 22.5,
+        "facing": -1,
+        "alarm": 2.2500000000000036
+      },
+      "hale": {
+        "room": "garage",
+        "phase": 0,
+        "x": 880.3999999999943,
+        "z": 0.84,
+        "node": 1,
+        "wait": 0,
+        "walk": 947.0999999999577,
+        "facing": -1,
+        "alarm": 1.7500000000000042
+      },
+      "ferris": {
+        "room": "stores",
+        "phase": 0,
+        "x": 1157.600000000004,
+        "z": 0.84,
+        "node": 0,
+        "wait": 1.3500000000000012,
+        "walk": 288.00000000000483,
+        "facing": -1,
+        "alarm": 0
+      },
+      "voss": {
+        "room": "survey",
+        "phase": 0,
+        "x": 999.7999999999979,
+        "z": 0.84,
+        "node": 1,
+        "wait": 0,
+        "walk": 242.55000000000237,
+        "facing": -1,
+        "alarm": 2.650000000000002
+      },
+      "sato": {
+        "room": "wash",
+        "phase": 0,
+        "x": 1446.2999999999947,
+        "z": 0.84,
+        "node": 2,
+        "wait": 0,
+        "walk": 41.99999999999996,
+        "facing": -1,
+        "alarm": 0
+      }
+    },
+    "contacts": {
+      "vale": {
+        "room": "hab",
+        "phase": 0,
+        "seen": 282.70000000003,
+        "topics": [
+          "work",
+          "route"
+        ]
+      },
+      "rhee": {
+        "room": "mess",
+        "phase": 0,
+        "seen": 300.45000000003404,
+        "topics": [
+          "work",
+          "route"
+        ]
+      },
+      "arden": {
+        "room": "med",
+        "phase": 0,
+        "seen": 330.90000000004096,
+        "topics": [
+          "work",
+          "route"
+        ]
+      },
+      "becker": {
+        "room": "records",
+        "phase": 0,
+        "seen": 350.8000000000455,
+        "topics": [
+          "work",
+          "route"
+        ]
+      },
+      "ferris": {
+        "room": "stores",
+        "phase": 0,
+        "seen": 406.7000000000582,
+        "topics": [
+          "work",
+          "route"
+        ]
+      },
+      "corban": {
+        "room": "relay",
+        "phase": 0,
+        "seen": 445.70000000006706,
+        "topics": [
+          "work",
+          "route"
+        ]
+      },
+      "hale": {
+        "room": "garage",
+        "phase": 0,
+        "seen": 465.6000000000716,
+        "topics": [
+          "work",
+          "route"
+        ]
+      },
+      "doran": {
+        "room": "biomed",
+        "phase": 0,
+        "seen": 485.4500000000761,
+        "topics": [
+          "work",
+          "route"
+        ]
+      },
+      "sato": {
+        "room": "wash",
+        "phase": 0,
+        "seen": 513.1000000000811,
+        "topics": [
+          "work",
+          "route"
+        ]
+      },
+      "bell": {
+        "room": "recreation",
+        "phase": 0,
+        "seen": 537.6500000000588,
+        "topics": [
+          "work",
+          "route"
+        ]
+      },
+      "kent": {
+        "room": "concourse",
+        "phase": 0,
+        "seen": 551.4000000000462,
+        "topics": [
+          "work",
+          "route"
+        ]
+      },
+      "voss": {
+        "room": "survey",
+        "phase": 0,
+        "seen": 576.2500000000236,
+        "topics": [
+          "work",
+          "route"
+        ]
+      }
+    },
+    "containers": {
+      "supply-arrivals": {
+        "open": true,
+        "remaining": {
+          "cell": 0,
+          "wire": 0
+        }
+      },
+      "supply-garrison": {
+        "open": true,
+        "remaining": {
+          "casing": 0,
+          "wire": 0,
+          "ammo": 0
+        }
+      },
+      "supply-kitchen": {
+        "open": true,
+        "remaining": {
+          "ration": 2,
+          "cell": 0
+        }
+      },
+      "supply-habitat": {
+        "open": true,
+        "remaining": {
+          "ration": 1,
+          "medkit": 0
+        }
+      },
+      "supply-medical": {
+        "open": true,
+        "remaining": {
+          "medkit": 0,
+          "cell": 0
+        }
+      },
+      "supply-biomedical": {
+        "open": true,
+        "remaining": {
+          "cell": 0,
+          "wire": 0,
+          "casing": 0
+        }
+      },
+      "supply-archive": {
+        "open": true,
+        "remaining": {
+          "wire": 0,
+          "casing": 0
+        }
+      },
+      "supply-garage": {
+        "open": true,
+        "remaining": {
+          "cell": 1,
+          "wire": 0,
+          "casing": 1
+        }
+      },
+      "supply-cargo": {
+        "open": true,
+        "remaining": {
+          "flare": 0,
+          "ammo": 0
+        }
+      },
+      "supply-laundry": {
+        "open": true,
+        "remaining": {
+          "ration": 1,
+          "medkit": 0
+        }
+      },
+      "supply-workshop": {
+        "open": true,
+        "remaining": {
+          "wire": 2,
+          "cell": 1,
+          "casing": 1
+        }
+      },
+      "supply-vent": {
+        "open": true,
+        "remaining": {
+          "ration": 2
+        }
+      }
+    },
+    "pockets": {
+      "brackett": {
+        "cell": 3,
+        "wire": 3,
+        "casing": 1,
+        "decoy": 0
+      },
+      "paris": {
+        "cell": 0,
+        "wire": 0,
+        "casing": 0,
+        "decoy": 0
+      },
+      "anne": {
+        "cell": 0,
+        "wire": 0,
+        "casing": 0,
+        "decoy": 0
+      },
+      "newt": {
+        "cell": 0,
+        "wire": 0,
+        "casing": 0,
+        "decoy": 0
+      }
+    },
+    "devices": [],
+    "debris": [
+      {
+        "id": "sound-1",
+        "owner": "brackett",
+        "room": "briefing",
+        "x": 1970,
+        "z": 0.7,
+        "reason": "spent"
+      },
+      {
+        "id": "sound-2",
+        "owner": "brackett",
+        "room": "biomed",
+        "x": 1807.3966612340835,
+        "z": 0.8399500957425063,
+        "reason": "spent"
+      },
+      {
+        "id": "sound-3",
+        "owner": "brackett",
+        "room": "workshop",
+        "x": 2307.4216490778877,
+        "z": 0.8399625421173542,
+        "reason": "spent"
+      }
+    ],
+    "sequence": 3,
+    "stats": {
+      "conversations": 12,
+      "opened": 12,
+      "taken": 64,
+      "crafted": 3,
+      "deployed": 3,
+      "destroyed": 0
+    }
+  },
+  "defense": {
+    "revision": 6,
+    "shutters": {
+      "shutter-concourse": {
+        "state": "open",
+        "hp": 100
+      },
+      "shutter-hab": {
+        "state": "open",
+        "hp": 100
+      },
+      "shutter-med": {
+        "state": "open",
+        "hp": 100
+      },
+      "shutter-garage": {
+        "state": "open",
+        "hp": 100
+      },
+      "shutter-stores": {
+        "state": "open",
+        "hp": 100
+      },
+      "shutter-service": {
+        "state": "open",
+        "hp": 100
+      },
+      "shutter-power": {
+        "state": "open",
+        "hp": 100
+      },
+      "shutter-hangar": {
+        "state": "open",
+        "hp": 100
+      }
+    },
+    "alarms": {
+      "alarm-concourse": {
+        "uses": 1,
+        "delay": 0,
+        "remaining": 0,
+        "cooldown": 0,
+        "pulse": 0,
+        "buzz": 0,
+        "broken": false
+      },
+      "alarm-med": {
+        "uses": 1,
+        "delay": 0,
+        "remaining": 0,
+        "cooldown": 0,
+        "pulse": 0,
+        "buzz": 0,
+        "broken": false
+      },
+      "alarm-garage": {
+        "uses": 1,
+        "delay": 0,
+        "remaining": 0,
+        "cooldown": 0,
+        "pulse": 0,
+        "buzz": 0,
+        "broken": false
+      },
+      "alarm-service": {
+        "uses": 1,
+        "delay": 0,
+        "remaining": 0,
+        "cooldown": 0,
+        "pulse": 0,
+        "buzz": 0,
+        "broken": false
+      }
+    },
+    "stats": {
+      "closed": 14,
+      "opened": 14,
+      "broken": 0,
+      "strikes": 0,
+      "alarms": 4,
+      "alarmBroken": 0,
+      "cancelled": 0
+    }
+  },
+  "ducts": {
+    "revision": 7,
+    "mouths": {
+      "duct-concourse": {
+        "state": "open",
+        "hp": 100
+      },
+      "duct-garage": {
+        "state": "open",
+        "hp": 100
+      },
+      "duct-stores": {
+        "state": "open",
+        "hp": 100
+      },
+      "duct-power": {
+        "state": "open",
+        "hp": 100
+      },
+      "duct-service": {
+        "state": "open",
+        "hp": 100
+      },
+      "duct-pump": {
+        "state": "open",
+        "hp": 100
+      },
+      "duct-med": {
+        "state": "open",
+        "hp": 100
+      },
+      "duct-science": {
+        "state": "open",
+        "hp": 100
+      },
+      "duct-hive": {
+        "state": "open",
+        "hp": 100
+      },
+      "duct-coolant": {
+        "state": "open",
+        "hp": 100
+      }
+    },
+    "cooldowns": {
+      "reprise": 0,
+      "fret": 0,
+      "collecteur": 0,
+      "sterile": 0,
+      "echangeur": 0
+    },
+    "transits": [],
+    "reports": [
+      {
+        "id": "duct-concourse",
+        "when": 1368.649999999303,
+        "level": "quiet"
+      },
+      {
+        "id": "duct-garage",
+        "when": 1385.099999999288,
+        "level": "quiet"
+      },
+      {
+        "id": "duct-stores",
+        "when": 1412.1999999992634,
+        "level": "quiet"
+      },
+      {
+        "id": "duct-power",
+        "when": 1428.999999999248,
+        "level": "quiet"
+      },
+      {
+        "id": "duct-service",
+        "when": 1454.9999999992244,
+        "level": "quiet"
+      },
+      {
+        "id": "duct-pump",
+        "when": 1472.1499999992088,
+        "level": "quiet"
+      },
+      {
+        "id": "duct-med",
+        "when": 1499.349999999184,
+        "level": "quiet"
+      },
+      {
+        "id": "duct-science",
+        "when": 1516.4999999991685,
+        "level": "quiet"
+      },
+      {
+        "id": "duct-hive",
+        "when": 1566.499999999123,
+        "level": "quiet"
+      },
+      {
+        "id": "duct-coolant",
+        "when": 1582.4499999991085,
+        "level": "quiet"
+      }
+    ],
+    "stats": {
+      "entries": 1,
+      "arrivals": 1,
+      "closed": 10,
+      "opened": 10,
+      "listened": 10,
+      "broken": 0,
+      "cancelled": 0
+    }
+  },
+  "mobility": {
+    "revision": 8,
+    "rover": {
+      "room": "plateau",
+      "x": 932.7500000000002,
+      "z": 0.78,
+      "hp": 100,
+      "battery": 97.88610576923088,
+      "speed": 0,
+      "heading": 1,
+      "driver": null,
+      "lights": false,
+      "wheels": 385.0546874999984,
+      "hurt": 0,
+      "horn": 0,
+      "hornCooldown": 0
+    },
+    "stations": {
+      "service-road": {
+        "repairs": 1,
+        "charges": 0
+      },
+      "service-plateau": {
+        "repairs": 1,
+        "charges": 1
+      }
+    },
+    "stats": {
+      "boarded": 2,
+      "exits": 2,
+      "crossings": 3,
+      "collisions": 0,
+      "repairs": 0,
+      "charges": 1,
+      "horns": 0,
+      "distance": 12321.749999999949
+    }
+  },
+  "armory": {
+    "revision": 9,
+    "kits": {
+      "brackett": {
+        "issued": false,
+        "selected": "pulse",
+        "fuel": 0,
+        "grenades": 0
+      },
+      "paris": {
+        "issued": false,
+        "selected": "pulse",
+        "fuel": 0,
+        "grenades": 0
+      }
+    },
+    "projectiles": [],
+    "sequence": 0,
+    "stats": {
+      "issued": 0,
+      "flamePulses": 0,
+      "grenades": 0
+    }
+  },
+  "phase": 3,
+  "mode": "hybrid",
+  "difficulty": "story",
+  "status": "complete",
+  "elapsed": 2206.09999999926,
+  "player": {
+    "x": 657.499999999999,
+    "z": 0.7,
+    "hp": 90,
+    "stamina": 100,
+    "facing": 1,
+    "crouch": false,
+    "noise": 0,
+    "hurt": 0,
+    "walk": 107.28888888888955,
+    "ammo": 0,
+    "reserve": 0,
+    "medkits": 0,
+    "flares": 0,
+    "reload": 0
+  },
+  "world": {
+    "pad": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "airlock": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "concourse": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 2
+    },
+    "hab": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "recreation": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "mess": {
+      "enemies": [
+        {
+          "id": "mess-2-0",
+          "x": 1858.5293746707803,
+          "z": 0.7592696776248775,
+          "hp": 72,
+          "kind": "adult",
+          "state": "search",
+          "facing": 1,
+          "notice": 0.16199999999999976,
+          "cooldown": 0,
+          "windup": 0,
+          "repath": 0,
+          "path": [],
+          "timer": 1.5500000000000007,
+          "origin": {
+            "x": 2545,
+            "z": 0.72
+          },
+          "memory": {
+            "x": 1791.0293746707803,
+            "z": 0.7592696776248775,
+            "ttl": 0
+          },
+          "ductCooldown": 0
+        },
+        {
+          "id": "wash-3-0",
+          "x": 2322,
+          "z": 0.69,
+          "hp": 24,
+          "kind": "facehugger",
+          "state": "patrol",
+          "facing": 1,
+          "notice": 0,
+          "cooldown": 0,
+          "windup": 0,
+          "repath": 0,
+          "path": [],
+          "timer": 3.349999999999996,
+          "origin": {
+            "x": 1795,
+            "z": 0.72
+          },
+          "memory": {
+            "x": 2430,
+            "z": 0.69,
+            "ttl": 0
+          },
+          "ductCooldown": 0,
+          "bash": null
+        }
+      ],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 3
+    },
+    "pantry": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "med": {
+      "enemies": [
+        {
+          "id": "med-2-0",
+          "x": 2742.75,
+          "z": 0.72,
+          "hp": 24,
+          "kind": "facehugger",
+          "state": "patrol",
+          "facing": 1,
+          "notice": 0,
+          "cooldown": 0,
+          "windup": 0,
+          "repath": 0,
+          "path": [],
+          "timer": 0,
+          "origin": {
+            "x": 2745,
+            "z": 0.72
+          },
+          "memory": {
+            "x": 2745,
+            "z": 0.72,
+            "ttl": 0
+          },
+          "ductCooldown": 0
+        }
+      ],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 2
+    },
+    "biomed": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "clinic_store": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "ops": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "relay": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "aerial": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "records": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "garage": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "workshop": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "processor6": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "service": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 3
+    },
+    "pump": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 2
+    },
+    "drain": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "power": {
+      "enemies": [
+        {
+          "id": "power-2-0",
+          "x": 2542.75,
+          "z": 0.72,
+          "hp": 72,
+          "kind": "adult",
+          "state": "patrol",
+          "facing": 1,
+          "notice": 0,
+          "cooldown": 0,
+          "windup": 0,
+          "repath": 0,
+          "path": [],
+          "timer": 0,
+          "origin": {
+            "x": 2545,
+            "z": 0.72
+          },
+          "memory": {
+            "x": 2545,
+            "z": 0.72,
+            "ttl": 0
+          },
+          "ductCooldown": 0
+        },
+        {
+          "id": "power-3-0",
+          "x": 2542.75,
+          "z": 0.72,
+          "hp": 72,
+          "kind": "adult",
+          "state": "patrol",
+          "facing": 1,
+          "notice": 0,
+          "cooldown": 0,
+          "windup": 0,
+          "repath": 0,
+          "path": [],
+          "timer": 0,
+          "origin": {
+            "x": 2545,
+            "z": 0.72
+          },
+          "memory": {
+            "x": 2545,
+            "z": 0.72,
+            "ttl": 0
+          },
+          "ductCooldown": 0
+        }
+      ],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 3
+    },
+    "coolant": {
+      "enemies": [
+        {
+          "id": "coolant-3-0",
+          "x": 2547.9901887055785,
+          "z": 0.7194995430463816,
+          "hp": 0,
+          "kind": "adult",
+          "state": "dead",
+          "facing": -1,
+          "notice": 1,
+          "cooldown": 0,
+          "windup": 0,
+          "repath": 0.44999999999999996,
+          "path": [
+            {
+              "x": 2210.9919875357436,
+              "z": 0.7095249799613754
+            }
+          ],
+          "timer": 0.9500000000000003,
+          "origin": {
+            "x": 2645,
+            "z": 0.72
+          },
+          "memory": {
+            "x": 2284.6923084553964,
+            "z": 0.7050141299736673,
+            "ttl": 8
+          },
+          "ductCooldown": 0,
+          "bash": null,
+          "ductEntry": null
+        },
+        {
+          "id": "hive-3-0",
+          "x": 2301.584535054628,
+          "z": 0.7018649977065904,
+          "hp": 0,
+          "kind": "adult",
+          "state": "dead",
+          "facing": -1,
+          "notice": 1,
+          "cooldown": 0,
+          "windup": 0,
+          "repath": 0.05000000000000002,
+          "path": [],
+          "timer": 2.799999999999998,
+          "origin": {
+            "x": 2375,
+            "z": 0.7
+          },
+          "memory": {
+            "x": 2014.8741844105657,
+            "z": 0.7215284282337511,
+            "ttl": 8
+          },
+          "ductCooldown": 21.599999999999966,
+          "ductEntry": null,
+          "bash": null,
+          "sawHide": false
+        }
+      ],
+      "acid": [
+        {
+          "x": 2301.584535054628,
+          "z": 0.7018649977065904,
+          "ttl": 22.499999999999964
+        },
+        {
+          "x": 2547.9901887055785,
+          "z": 0.7194995430463816,
+          "ttl": 23.399999999999977
+        }
+      ],
+      "flares": [
+        {
+          "x": 2035.5863333057503,
+          "z": 0.7294415294833746,
+          "ttl": 15.049999999999958
+        }
+      ],
+      "spawnPhase": 3
+    },
+    "science": {
+      "enemies": [
+        {
+          "id": "science-3-0",
+          "x": 1834.523726413885,
+          "z": 0.7012669257399592,
+          "hp": 72,
+          "kind": "adult",
+          "state": "patrol",
+          "facing": -1,
+          "notice": 0,
+          "cooldown": 0,
+          "windup": 0,
+          "repath": 0.25,
+          "path": [
+            {
+              "x": 1800,
+              "z": 0.7
+            }
+          ],
+          "timer": 6.8999999999999835,
+          "origin": {
+            "x": 2345,
+            "z": 0.72
+          },
+          "memory": {
+            "x": 2345,
+            "z": 0.72,
+            "ttl": 0
+          },
+          "ductCooldown": 0,
+          "ductEntry": {
+            "id": "duct-science",
+            "stage": "approach",
+            "remaining": 1.1
+          }
+        }
+      ],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 3
+    },
+    "stores": {
+      "enemies": [
+        {
+          "id": "stores-2-0",
+          "x": 3058,
+          "z": 0.7183050009544888,
+          "hp": 72,
+          "kind": "adult",
+          "state": "retreat",
+          "facing": -1,
+          "notice": 0,
+          "cooldown": 0,
+          "windup": 0,
+          "repath": 0,
+          "path": [],
+          "timer": 1.7000000000000008,
+          "origin": {
+            "x": 3045,
+            "z": 0.72
+          },
+          "memory": {
+            "x": 2935,
+            "z": 0.69,
+            "ttl": 8
+          },
+          "ductCooldown": 0,
+          "bash": null
+        }
+      ],
+      "acid": [],
+      "flares": [
+        {
+          "x": 2802.5,
+          "z": 0.69,
+          "ttl": 16.54999999999998
+        }
+      ],
+      "spawnPhase": 2
+    },
+    "survey": {
+      "enemies": [
+        {
+          "id": "survey-2-0",
+          "x": 2458,
+          "z": 0.7181070931829052,
+          "hp": 72,
+          "kind": "adult",
+          "state": "patrol",
+          "facing": -1,
+          "notice": 0,
+          "cooldown": 0,
+          "windup": 0,
+          "repath": 0,
+          "path": [],
+          "timer": 0,
+          "origin": {
+            "x": 2445,
+            "z": 0.72
+          },
+          "memory": {
+            "x": 2325.7385151271433,
+            "z": 0.6903705814584341,
+            "ttl": 0
+          },
+          "ductCooldown": 0,
+          "bash": null
+        },
+        {
+          "id": "survey-3-0",
+          "x": 2458,
+          "z": 0.72,
+          "hp": 72,
+          "kind": "adult",
+          "state": "patrol",
+          "facing": -1,
+          "notice": 0,
+          "cooldown": 0,
+          "windup": 0,
+          "repath": 0,
+          "path": [],
+          "timer": 0,
+          "origin": {
+            "x": 2445,
+            "z": 0.72
+          },
+          "memory": {
+            "x": 2445,
+            "z": 0.72,
+            "ttl": 0
+          },
+          "bash": null,
+          "ductCooldown": 0
+        }
+      ],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 3
+    },
+    "wash": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 3
+    },
+    "briefing": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "jorden": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "hive": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 3
+    },
+    "road": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "plateau": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "derelict": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "isolation": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "vent_hab": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "vent_med": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "nest": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "refuge": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "approach": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "lift": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "hangar": {
+      "enemies": [
+        {
+          "id": "hangar-3-0",
+          "x": 3258,
+          "z": 0.7194991860973481,
+          "hp": 0,
+          "kind": "adult",
+          "state": "dead",
+          "facing": -1,
+          "notice": 1,
+          "cooldown": 0,
+          "windup": 0,
+          "repath": 1.3877787807814457e-17,
+          "path": [],
+          "timer": 0.7000000000000001,
+          "origin": {
+            "x": 3245,
+            "z": 0.72
+          },
+          "memory": {
+            "x": 2987.630764871434,
+            "z": 0.6990793847353668,
+            "ttl": 8
+          },
+          "ductCooldown": 0,
+          "bash": null,
+          "ductEntry": null
+        }
+      ],
+      "acid": [
+        {
+          "x": 3258,
+          "z": 0.7194991860973481,
+          "ttl": 24.549999999999994
+        }
+      ],
+      "flares": [
+        {
+          "x": 3008.350372644881,
+          "z": 0.7073240481186043,
+          "ttl": 17.099999999999987
+        }
+      ],
+      "spawnPhase": 3
+    },
+    "shuttle": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    },
+    "vent_survey": {
+      "enemies": [],
+      "acid": [],
+      "flares": [],
+      "spawnPhase": 0
+    }
+  },
+  "pursuers": [],
+  "flags": {
+    "service-pantry": true,
+    "service-biomed": true,
+    "service-aerial": true,
+    "service-workshop": true,
+    "service-drain": true,
+    "grid": true,
+    "pressure": true,
+    "reinforced-isolation": true,
+    "service-nest": true,
+    "reroute": true,
+    "shelter": true,
+    "welder": true,
+    "reinforced-survey": true,
+    "emergency": true,
+    "reinforced-power": true,
+    "last_power": true,
+    "newtInVents": true,
+    "scienceClearance": true,
+    "fourDeparted": true
+  },
+  "archives": [
+    "a25",
+    "a26",
+    "a27",
+    "a28",
+    "a29",
+    "a30"
+  ],
+  "collected": [
+    "welcome",
+    "brief",
+    "locker",
+    "family",
+    "provisions",
+    "grid",
+    "rescue_kit",
+    "pressure",
+    "incident",
+    "coordinates",
+    "tractor",
+    "beacon",
+    "threshold",
+    "stretcher",
+    "quarantine",
+    "triage",
+    "patient_log",
+    "orders",
+    "copy",
+    "marks",
+    "listen",
+    "cache",
+    "missing",
+    "trail",
+    "reroute",
+    "medstock",
+    "civilian",
+    "shelter",
+    "welding",
+    "barricade",
+    "emergency",
+    "descent",
+    "pdt",
+    "fallback",
+    "withdraw",
+    "last_power",
+    "vent_open",
+    "newt_escape",
+    "hidalgo",
+    "luisa",
+    "clearance",
+    "boarding",
+    "autopilot",
+    "departure",
+    "water",
+    "ration",
+    "silence",
+    "route",
+    "hide"
+  ],
+  "visited": [
+    "pad",
+    "airlock",
+    "concourse",
+    "hab",
+    "recreation",
+    "mess",
+    "pantry",
+    "med",
+    "biomed",
+    "clinic_store",
+    "ops",
+    "relay",
+    "aerial",
+    "records",
+    "garage",
+    "workshop",
+    "processor6",
+    "service",
+    "pump",
+    "drain",
+    "power",
+    "coolant",
+    "science",
+    "stores",
+    "survey",
+    "wash",
+    "briefing",
+    "jorden",
+    "hive",
+    "road",
+    "plateau",
+    "derelict",
+    "isolation",
+    "vent_hab",
+    "vent_med",
+    "nest",
+    "refuge",
+    "approach",
+    "lift",
+    "hangar",
+    "shuttle",
+    "vent_survey"
+  ],
+  "doors": {
+    "isolation|med": "open",
+    "garage|survey": "open",
+    "coolant|power": "sealed",
+    "survey|vent_survey": "open"
+  },
+  "escort": null,
+  "work": null,
+  "stats": {
+    "shots": 11,
+    "shotsHit": 9,
+    "kills": 3,
+    "hits": 3,
+    "deaths": 0,
+    "temporaryShelters": 1,
+    "escorts": 2,
+    "chapters": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "log": [
+    "Objectif accompli · Regagner la cache",
+    "Objectif accompli · Vérifier le chemin de retour",
+    "Objectif accompli · Passer sans attirer la créature",
+    "Objectif accompli · Trouver de quoi manger",
+    "La porte ne les a pas arrêtés.",
+    "Du mouvement derrière la porte. Ne restez pas au seuil.",
+    "Objectif accompli · Récupérer de l’eau",
+    "Objectif accompli · Décoller",
+    "Objectif accompli · Désengager la trajectoire automatique",
+    "Objectif accompli · Vérifier l’embarquement",
+    "Objectif accompli · Déverrouiller la navette scientifique",
+    "Objectif accompli · Dégager Luisa et la conduire au hangar",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Votre compagnon doit vous rejoindre et vous suivre.",
+    "Luisa vous suit. Destination : Hangar scientifique.",
+    "Porte libérée.",
+    "Objectif accompli · Recevoir la transmission de Brackett",
+    "Objectif accompli · Mettre Newt à l’abri",
+    "Objectif accompli · Dégager l’accès au conduit",
+    "Objectif accompli · Alimenter le verrou une dernière fois",
+    "Objectif accompli · Fermer derrière le groupe",
+    "Objectif accompli · Baliser la route de repli",
+    "La grille G05B vibre. Éloignez-vous de son ouverture.",
+    "Un frottement rejoint la gaine G05A.",
+    "Objectif accompli · Retrouver la source des signaux",
+    "Objectif accompli · Commander le monte-charge",
+    "Objectif accompli · Rétablir le circuit de secours"
+  ],
+  "power": 4,
+  "finished": true
+}

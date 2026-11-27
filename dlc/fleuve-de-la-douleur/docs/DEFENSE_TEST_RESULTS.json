@@ -1,0 +1,491 @@
+{
+  "version": "0.9.0-candidate.1",
+  "passed": true,
+  "cases": [
+    {
+      "name": "Contenu : huit volets et quatre avertisseurs sans modifier les objectifs",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-concourse / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-concourse / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-concourse : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-concourse : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-hab / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-hab / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-hab : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-hab : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-med / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-med / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-med : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-med : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-garage / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-garage / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-garage : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-garage : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-stores / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-stores / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-stores : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-stores : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-service / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-service / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-service : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-service : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-power / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-power / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-power : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-power : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-hangar / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-hangar / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-hangar : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "hybrid / shutter-hangar : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-concourse / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-concourse / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-concourse : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-concourse : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-hab / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-hab / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-hab : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-hab : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-med / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-med / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-med : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-med : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-garage / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-garage / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-garage : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-garage : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-stores / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-stores / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-stores : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-stores : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-service / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-service / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-service : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-service : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-power / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-power / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-power : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-power : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-hangar / côté 0 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-hangar / côté 1 : ferme, bloque, rouvre sans réparer",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-hangar : import fermé conserve intégrité et n’ajoute aucun objectif",
+      "passed": true
+    },
+    {
+      "name": "classic / shutter-hangar : Newt libère le côté opposé mais ne ferme pas",
+      "passed": true
+    },
+    {
+      "name": "Fermeture refuse l’emprise occupée par le joueur",
+      "passed": true
+    },
+    {
+      "name": "Fermeture refuse l’emprise occupée par un compagnon",
+      "passed": true
+    },
+    {
+      "name": "Une créature arrivée en fin de manipulation empêche le volet de se fermer sur elle",
+      "passed": true
+    },
+    {
+      "name": "Blessure annule la fermeture sans consommer ni changer l’intégrité",
+      "passed": true
+    },
+    {
+      "name": "Import en cours de fermeture annule la manœuvre, volet inchangé",
+      "passed": true
+    },
+    {
+      "name": "Les petits parasites passent sous le volet ; un adulte est bloqué",
+      "passed": true
+    },
+    {
+      "name": "L’adulte annonce ses frappes puis détruit le volet, sans dégâts à travers",
+      "passed": true
+    },
+    {
+      "name": "L’adulte préfère une allée libre plutôt que de frapper un volet contournable",
+      "passed": true
+    },
+    {
+      "name": "Une ouverture pendant la préparation d’une frappe l’annule",
+      "passed": true
+    },
+    {
+      "name": "Une balle touche le volet avant la créature derrière lui",
+      "passed": true
+    },
+    {
+      "name": "Intersection exacte : une lame de deux unités ne laisse pas passer un segment court",
+      "passed": true
+    },
+    {
+      "name": "Volet détruit reste traversable et non réparable après export/import",
+      "passed": true
+    },
+    {
+      "name": "Le checkpoint restaure aussi l’état antérieur des dispositifs",
+      "passed": true
+    },
+    {
+      "name": "alarm-concourse : travail exposé puis délai, pas de bip prématuré",
+      "passed": true
+    },
+    {
+      "name": "alarm-concourse : import conserve un cycle et le délai sans double consommation",
+      "passed": true
+    },
+    {
+      "name": "alarm-concourse : deux déclenchements finis et réarmement non contournable",
+      "passed": true
+    },
+    {
+      "name": "alarm-concourse : Newt ne peut activer l’avertisseur",
+      "passed": true
+    },
+    {
+      "name": "alarm-med : travail exposé puis délai, pas de bip prématuré",
+      "passed": true
+    },
+    {
+      "name": "alarm-med : import conserve un cycle et le délai sans double consommation",
+      "passed": true
+    },
+    {
+      "name": "alarm-med : deux déclenchements finis et réarmement non contournable",
+      "passed": true
+    },
+    {
+      "name": "alarm-med : Newt ne peut activer l’avertisseur",
+      "passed": true
+    },
+    {
+      "name": "alarm-garage : travail exposé puis délai, pas de bip prématuré",
+      "passed": true
+    },
+    {
+      "name": "alarm-garage : import conserve un cycle et le délai sans double consommation",
+      "passed": true
+    },
+    {
+      "name": "alarm-garage : deux déclenchements finis et réarmement non contournable",
+      "passed": true
+    },
+    {
+      "name": "alarm-garage : Newt ne peut activer l’avertisseur",
+      "passed": true
+    },
+    {
+      "name": "alarm-service : travail exposé puis délai, pas de bip prématuré",
+      "passed": true
+    },
+    {
+      "name": "alarm-service : import conserve un cycle et le délai sans double consommation",
+      "passed": true
+    },
+    {
+      "name": "alarm-service : deux déclenchements finis et réarmement non contournable",
+      "passed": true
+    },
+    {
+      "name": "alarm-service : Newt ne peut activer l’avertisseur",
+      "passed": true
+    },
+    {
+      "name": "Une coupure éteint la sirène sans rendre son cycle dépensé",
+      "passed": true
+    },
+    {
+      "name": "Une sirène non alimentée refuse le déclenchement",
+      "passed": true
+    },
+    {
+      "name": "L’avertisseur attire puis se fait détruire par une créature sans cible visible",
+      "passed": true
+    },
+    {
+      "name": "La sirène ne fait pas oublier une personne directement visible",
+      "passed": true
+    },
+    {
+      "name": "Les cycles expirent hors champ mais n’initialisent aucune créature distante",
+      "passed": true
+    },
+    {
+      "name": "Changer de vue ne peut pas enfermer le joueur dans un volet fermé",
+      "passed": true
+    },
+    {
+      "name": "La projection classique recale un ennemi sur un appui libre, pas dans le volet",
+      "passed": true
+    },
+    {
+      "name": "Import refuse révision inconnue",
+      "passed": true
+    },
+    {
+      "name": "Import refuse volet inconnu",
+      "passed": true
+    },
+    {
+      "name": "Import refuse volet manquant",
+      "passed": true
+    },
+    {
+      "name": "Import refuse intégrité négative",
+      "passed": true
+    },
+    {
+      "name": "Import refuse intégrité non finie",
+      "passed": true
+    },
+    {
+      "name": "Import refuse volet détruit en parfait état",
+      "passed": true
+    },
+    {
+      "name": "Import refuse état de volet interdit",
+      "passed": true
+    },
+    {
+      "name": "Import refuse alarme inconnue",
+      "passed": true
+    },
+    {
+      "name": "Import refuse cycles excédentaires",
+      "passed": true
+    },
+    {
+      "name": "Import refuse cycles fractionnaires",
+      "passed": true
+    },
+    {
+      "name": "Import refuse alarme gratuite active",
+      "passed": true
+    },
+    {
+      "name": "Import refuse délai impossible",
+      "passed": true
+    },
+    {
+      "name": "Import refuse bip avant le délai",
+      "passed": true
+    },
+    {
+      "name": "Import refuse statistique inconnue",
+      "passed": true
+    },
+    {
+      "name": "Import refuse statistique négative",
+      "passed": true
+    },
+    {
+      "name": "Véritable export 01 : nouveaux dispositifs initiaux, progression préservée",
+      "passed": true
+    },
+    {
+      "name": "Véritable export 02 : nouveaux dispositifs initiaux, progression préservée",
+      "passed": true
+    },
+    {
+      "name": "Véritable export 03 : nouveaux dispositifs initiaux, progression préservée",
+      "passed": true
+    },
+    {
+      "name": "Véritable export 04 : nouveaux dispositifs initiaux, progression préservée",
+      "passed": true
+    },
+    {
+      "name": "Véritable export 05 : nouveaux dispositifs initiaux, progression préservée",
+      "passed": true
+    }
+  ],
+  "method": "Fixtures localisées explicites. Manipulations et temps utilisent Simulation.update. Ce ne sont pas des parcours humains."
+}

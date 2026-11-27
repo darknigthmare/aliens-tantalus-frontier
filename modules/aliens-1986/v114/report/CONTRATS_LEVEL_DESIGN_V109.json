@@ -1,0 +1,2506 @@
+{
+  "version": "109.0.0-rc.1",
+  "schema": 109,
+  "contract": "bace7a01",
+  "scope": "Branche autonome V108 poursuivie. Deux salles nouvelles ; ce n’est pas la fusion des 64 salles natives Tantalus.",
+  "counts": {
+    "inspectableRooms": 8,
+    "connectedOperationRooms": 7,
+    "newRooms": 2,
+    "inheritedRooms": 6,
+    "finiteStockCaches": 3,
+    "diagnosticAlarms": 1,
+    "sharedLinkHatches": 8,
+    "derivedThresholdVolumes": 16,
+    "reciprocalLinks": 8,
+    "directedEndpoints": 16,
+    "localObjectives": 5,
+    "solids": 47,
+    "doorVolumes": 9,
+    "decorativeProps": 42,
+    "observationNodes": 30,
+    "circuits": 9,
+    "controls": 9,
+    "enemies": 11,
+    "sentries": 1
+  },
+  "operationRooms": [
+    "v106-hadley",
+    "v107-operations",
+    "v107-service",
+    "v106-medlab",
+    "v106-sentry",
+    "v109-logistics",
+    "v109-reserve"
+  ],
+  "resources": [
+    {
+      "id": "log-ammo",
+      "roomId": "v109-logistics",
+      "x": 1190,
+      "z": 221,
+      "reach": 70,
+      "name": "Caisse de munitions",
+      "bodyId": "body-log-ammo",
+      "grant": {
+        "ammo": 3,
+        "medical": 0,
+        "sentry": 0
+      }
+    },
+    {
+      "id": "reserve-sentry",
+      "roomId": "v109-reserve",
+      "x": 347,
+      "z": 216,
+      "reach": 70,
+      "name": "Cartouche pour sentinelle",
+      "bodyId": "body-reserve-sentry",
+      "grant": {
+        "ammo": 0,
+        "medical": 0,
+        "sentry": 1
+      }
+    },
+    {
+      "id": "reserve-medical",
+      "roomId": "v109-reserve",
+      "x": 918,
+      "z": 218,
+      "reach": 70,
+      "name": "Trousse de secours",
+      "bodyId": "body-reserve-medical",
+      "grant": {
+        "ammo": 0,
+        "medical": 2,
+        "sentry": 0
+      }
+    }
+  ],
+  "alarms": [
+    {
+      "id": "reserve-alarm",
+      "roomId": "v109-reserve",
+      "x": 1214,
+      "z": 238,
+      "reach": 70,
+      "name": "Sirène de diagnostic",
+      "bodyId": "body-reserve-alarm",
+      "emitter": {
+        "x": 1170,
+        "z": 238
+      }
+    }
+  ],
+  "logisticsRules": {
+    "stockTime": 1.05,
+    "medicalTime": 1.6,
+    "ammoTime": 0.85,
+    "sentryTime": 1.35,
+    "alarmTime": 0.65,
+    "medicalAmount": 30,
+    "ammoAmount": 18,
+    "sentryAmount": 40,
+    "ammoCap": 96,
+    "sentryCap": 120,
+    "fieldReach": 86,
+    "alarmDuration": 8,
+    "alarmCooldown": 20,
+    "alarmPeriod": 1.5,
+    "alarmRange": 1750
+  },
+  "objectives": [
+    {
+      "id": "rally",
+      "title": "Rejoindre Operations",
+      "detail": "Passer la porte résidentielle et garder le groupe à proximité du seuil."
+    },
+    {
+      "id": "relay",
+      "title": "Rétablir le relais",
+      "detail": "Le poste de maintenance est accessible au nord d’Operations. Actionnez son relais."
+    },
+    {
+      "id": "newt",
+      "title": "Ramener Newt",
+      "detail": "Sécurisez l’infirmerie, puis approchez Newt et appelez-la avec E."
+    },
+    {
+      "id": "defense",
+      "title": "Tenir la ligne de défense",
+      "detail": "Garder Newt avec vous, ouvrir la cloison et tenir dix secondes. Aucun contact ne doit rester."
+    },
+    {
+      "id": "return",
+      "title": "Replier toute l’équipe",
+      "detail": "Retournez au point d’entrée de Hadley. Approchez l’équipe et confirmez le repli avec E."
+    }
+  ],
+  "extraction": {
+    "room": "v106-hadley",
+    "x": 220,
+    "z": 198,
+    "label": "Point de repli"
+  },
+  "team": [
+    {
+      "id": "ripley",
+      "name": "Ripley",
+      "kind": "player",
+      "role": "marine",
+      "radius": 15,
+      "hp": 100,
+      "ammo": 48,
+      "speed": 139
+    },
+    {
+      "id": "hicks",
+      "name": "Hicks",
+      "kind": "ally",
+      "role": "marine",
+      "radius": 15,
+      "hp": 100,
+      "ammo": 24,
+      "speed": 139
+    },
+    {
+      "id": "hudson",
+      "name": "Hudson",
+      "kind": "ally",
+      "role": "marine",
+      "radius": 15,
+      "hp": 100,
+      "ammo": 24,
+      "speed": 139
+    },
+    {
+      "id": "newt",
+      "name": "Newt",
+      "kind": "escort",
+      "role": "child",
+      "radius": 11,
+      "hp": 100,
+      "ammo": 0,
+      "speed": 138
+    }
+  ],
+  "links": [
+    {
+      "id": "residential-ops",
+      "a": {
+        "room": "v106-hadley",
+        "id": "hadley-to-ops",
+        "x": 1360,
+        "z": 195,
+        "label": "Operations",
+        "arrival": {
+          "x": 1290,
+          "z": 195
+        }
+      },
+      "b": {
+        "room": "v107-operations",
+        "id": "ops-to-hadley",
+        "x": 64,
+        "z": 195,
+        "label": "Bloc résidentiel",
+        "arrival": {
+          "x": 135,
+          "z": 195
+        }
+      }
+    },
+    {
+      "id": "ops-service",
+      "a": {
+        "room": "v107-operations",
+        "id": "ops-to-service",
+        "x": 746,
+        "z": 43,
+        "label": "Maintenance",
+        "arrival": {
+          "x": 746,
+          "z": 115
+        }
+      },
+      "b": {
+        "room": "v107-service",
+        "id": "service-to-ops",
+        "x": 68,
+        "z": 195,
+        "label": "Operations",
+        "arrival": {
+          "x": 140,
+          "z": 195
+        }
+      }
+    },
+    {
+      "id": "ops-medlab",
+      "a": {
+        "room": "v107-operations",
+        "id": "ops-to-medlab",
+        "x": 1120,
+        "z": 329,
+        "label": "Infirmerie",
+        "arrival": {
+          "x": 1120,
+          "z": 235
+        }
+      },
+      "b": {
+        "room": "v106-medlab",
+        "id": "medlab-to-ops",
+        "x": 68,
+        "z": 199,
+        "label": "Operations",
+        "arrival": {
+          "x": 143,
+          "z": 199
+        }
+      }
+    },
+    {
+      "id": "ops-sentry",
+      "a": {
+        "room": "v107-operations",
+        "id": "ops-to-sentry",
+        "x": 1360,
+        "z": 195,
+        "label": "Ligne de défense",
+        "arrival": {
+          "x": 1285,
+          "z": 195
+        }
+      },
+      "b": {
+        "room": "v106-sentry",
+        "id": "sentry-to-ops",
+        "x": 68,
+        "z": 194,
+        "label": "Operations",
+        "arrival": {
+          "x": 144,
+          "z": 194
+        }
+      }
+    },
+    {
+      "id": "medical-service",
+      "a": {
+        "room": "v107-service",
+        "id": "service-to-medlab",
+        "x": 1346,
+        "z": 325,
+        "label": "Accès médical de service",
+        "arrival": {
+          "x": 1236,
+          "z": 325
+        }
+      },
+      "b": {
+        "room": "v106-medlab",
+        "id": "medlab-to-service",
+        "x": 1320,
+        "z": 77,
+        "label": "Relais de maintenance",
+        "arrival": {
+          "x": 1314,
+          "z": 171
+        }
+      }
+    },
+    {
+      "id": "ops-logistics",
+      "a": {
+        "room": "v107-operations",
+        "id": "ops-to-logistics",
+        "x": 164,
+        "z": 326,
+        "label": "Galerie logistique",
+        "arrival": {
+          "x": 164,
+          "z": 240
+        }
+      },
+      "b": {
+        "room": "v109-logistics",
+        "id": "logistics-to-ops",
+        "x": 64,
+        "z": 195,
+        "label": "Operations",
+        "arrival": {
+          "x": 144,
+          "z": 195
+        }
+      }
+    },
+    {
+      "id": "logistics-reserve",
+      "a": {
+        "room": "v109-logistics",
+        "id": "logistics-to-reserve",
+        "x": 1366,
+        "z": 195,
+        "label": "Réserve technique",
+        "arrival": {
+          "x": 1275,
+          "z": 195
+        }
+      },
+      "b": {
+        "room": "v109-reserve",
+        "id": "reserve-to-logistics",
+        "x": 64,
+        "z": 195,
+        "label": "Galerie logistique",
+        "arrival": {
+          "x": 144,
+          "z": 195
+        }
+      }
+    },
+    {
+      "id": "reserve-service",
+      "a": {
+        "room": "v109-reserve",
+        "id": "reserve-to-service",
+        "x": 1328,
+        "z": 43,
+        "label": "Maintenance",
+        "arrival": {
+          "x": 1300,
+          "z": 137
+        }
+      },
+      "b": {
+        "room": "v107-service",
+        "id": "service-to-reserve",
+        "x": 1300,
+        "z": 43,
+        "label": "Réserve technique",
+        "arrival": {
+          "x": 1300,
+          "z": 137
+        }
+      }
+    }
+  ],
+  "contracts": {
+    "openingSeconds": 0.88,
+    "playerFireInterval": 0.16,
+    "portalReach": 60,
+    "groupGatherRadius": 165,
+    "sourceThresholdThreatRadius": 155,
+    "localRoomAIOnly": false,
+    "inactiveCombatFrozen": false,
+    "contacts": {
+      "vision": 490,
+      "shotRange": 1780,
+      "footstepRange": 250,
+      "doorRange": 560,
+      "trackerRange": 600,
+      "memory": 24,
+      "search": 5,
+      "crossing": 0.85,
+      "pulseCooldown": 2.4,
+      "maxHops": 2,
+      "portalThickness": 24,
+      "portalHalfSpan": 37
+    },
+    "enemyTransfers": "at most once per simulation substep, only after reaching an open threshold",
+    "playerKnowledge": "line of sight; tracker quantized motion only; no enemy list on map",
+    "transition": "coupure de scène après regroupement physique, arrivée libre vérifiée",
+    "nativeProgression": false,
+    "nativeAdapterActivated": false,
+    "saveImportPaused": true,
+    "v106ImportMode": "inspection only",
+    "newtArmed": false
+  },
+  "rooms": [
+    {
+      "width": 1440,
+      "depth": 380,
+      "mode": "DEPTH",
+      "circuits": [
+        {
+          "id": "service",
+          "initialOn": true
+        }
+      ],
+      "controls": [
+        {
+          "id": "service-switch",
+          "x": 494,
+          "z": 294,
+          "circuit": "service",
+          "reach": 68
+        }
+      ],
+      "id": "v106-hadley",
+      "stageId": "c04-p2",
+      "title": "Hadley’s Hope",
+      "subtitle": "Bloc résidentiel · porte de service",
+      "family": "colony",
+      "goal": "Ouvrir le passage et traverser avec l’escouade.",
+      "solids": [
+        {
+          "id": "north-wall",
+          "x": 610,
+          "z": 0,
+          "w": 44,
+          "d": 138,
+          "h": 166
+        },
+        {
+          "id": "south-wall",
+          "x": 610,
+          "z": 250,
+          "w": 44,
+          "d": 130,
+          "h": 154
+        },
+        {
+          "id": "generator",
+          "x": 348,
+          "z": 78,
+          "w": 100,
+          "d": 62,
+          "h": 84
+        },
+        {
+          "id": "crate-east",
+          "x": 950,
+          "z": 253,
+          "w": 112,
+          "d": 80,
+          "h": 63
+        },
+        {
+          "id": "service-rack",
+          "x": 1100,
+          "z": 40,
+          "w": 94,
+          "d": 62,
+          "h": 130
+        }
+      ],
+      "doors": [
+        {
+          "id": "service-gate",
+          "name": "Porte de service",
+          "x": 610,
+          "z": 138,
+          "w": 44,
+          "d": 112,
+          "h": 174,
+          "reach": 100,
+          "initialOpen": false,
+          "powered": true,
+          "manual": true
+        }
+      ],
+      "props": [
+        {
+          "id": "console",
+          "x": 493,
+          "z": 294,
+          "support": "sol de la coursive",
+          "type": "console"
+        },
+        {
+          "id": "lamp-west",
+          "x": 385,
+          "z": 32,
+          "support": "mur nord",
+          "type": "lamp",
+          "circuit": "service"
+        },
+        {
+          "id": "lamp-east",
+          "x": 1050,
+          "z": 30,
+          "support": "mur nord",
+          "type": "lamp",
+          "circuit": "service"
+        },
+        {
+          "id": "pipe",
+          "x": 298,
+          "z": 18,
+          "support": "mur nord",
+          "type": "pipe"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "entry",
+          "name": "Entrée du bloc",
+          "x": 225,
+          "z": 198
+        },
+        {
+          "id": "threshold",
+          "name": "Porte de service",
+          "x": 608,
+          "z": 196
+        },
+        {
+          "id": "east",
+          "name": "Coursive est",
+          "x": 1020,
+          "z": 182
+        }
+      ],
+      "actors": [
+        {
+          "id": "warrior-a",
+          "name": "Xénomorphe",
+          "kind": "enemy",
+          "role": "warrior",
+          "x": 890,
+          "z": 190,
+          "radius": 19,
+          "hp": 100,
+          "ammo": 0,
+          "speed": 67
+        },
+        {
+          "id": "warrior-b",
+          "name": "Xénomorphe",
+          "kind": "enemy",
+          "role": "warrior",
+          "x": 1200,
+          "z": 270,
+          "radius": 19,
+          "hp": 100,
+          "ammo": 0,
+          "speed": 67
+        }
+      ],
+      "connected": true,
+      "exits": [
+        {
+          "room": "v106-hadley",
+          "id": "hadley-to-ops",
+          "x": 1360,
+          "z": 195,
+          "label": "Operations",
+          "arrival": {
+            "x": 1290,
+            "z": 195
+          },
+          "linkId": "residential-ops",
+          "to": {
+            "room": "v107-operations",
+            "id": "ops-to-hadley",
+            "x": 64,
+            "z": 195,
+            "label": "Bloc résidentiel",
+            "arrival": {
+              "x": 135,
+              "z": 195
+            }
+          }
+        }
+      ],
+      "hatches": [
+        {
+          "id": "hatch:hadley-to-ops",
+          "x": 1348,
+          "z": 158,
+          "w": 24,
+          "d": 74,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "residential-ops",
+          "portalId": "hadley-to-ops"
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "depth": 380,
+      "mode": "DEPTH",
+      "circuits": [
+        {
+          "id": "service",
+          "initialOn": true
+        }
+      ],
+      "controls": [
+        {
+          "id": "service-switch",
+          "x": 462,
+          "z": 305,
+          "circuit": "service",
+          "reach": 68
+        }
+      ],
+      "id": "v106-medlab",
+      "stageId": "c10-p2",
+      "title": "Infirmerie",
+      "subtitle": "Quarantaine · baie vitrée",
+      "family": "medical",
+      "goal": "Sécuriser le passage et garder Newt auprès du groupe.",
+      "solids": [
+        {
+          "id": "glass-north",
+          "x": 690,
+          "z": 0,
+          "w": 30,
+          "d": 133,
+          "h": 144,
+          "material": "glass",
+          "blocksSight": false
+        },
+        {
+          "id": "glass-south",
+          "x": 690,
+          "z": 263,
+          "w": 30,
+          "d": 117,
+          "h": 144,
+          "material": "glass",
+          "blocksSight": false
+        },
+        {
+          "id": "bed-west",
+          "x": 340,
+          "z": 67,
+          "w": 160,
+          "d": 74,
+          "h": 42,
+          "material": "medical"
+        },
+        {
+          "id": "med-cabinet",
+          "x": 905,
+          "z": 32,
+          "w": 94,
+          "d": 83,
+          "h": 124,
+          "material": "medical"
+        },
+        {
+          "id": "bed-east",
+          "x": 1065,
+          "z": 257,
+          "w": 145,
+          "d": 82,
+          "h": 42,
+          "material": "medical"
+        }
+      ],
+      "doors": [
+        {
+          "id": "quarantine-gate",
+          "name": "Quarantaine",
+          "x": 690,
+          "z": 133,
+          "w": 30,
+          "d": 130,
+          "h": 161,
+          "reach": 108,
+          "initialOpen": false,
+          "powered": true,
+          "manual": true
+        }
+      ],
+      "props": [
+        {
+          "id": "med-console",
+          "x": 462,
+          "z": 305,
+          "support": "sol de la baie",
+          "type": "console"
+        },
+        {
+          "id": "med-lamp",
+          "x": 454,
+          "z": 35,
+          "support": "rail mural",
+          "type": "lamp",
+          "circuit": "service"
+        },
+        {
+          "id": "tank-a",
+          "x": 1132,
+          "z": 54,
+          "support": "socle laboratoire",
+          "type": "tank"
+        },
+        {
+          "id": "tank-b",
+          "x": 1245,
+          "z": 54,
+          "support": "socle laboratoire",
+          "type": "tank"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "entry",
+          "name": "Baie de soin",
+          "x": 244,
+          "z": 200
+        },
+        {
+          "id": "threshold",
+          "name": "Vitrage de quarantaine",
+          "x": 689,
+          "z": 200
+        },
+        {
+          "id": "east",
+          "name": "Laboratoire",
+          "x": 1000,
+          "z": 196
+        }
+      ],
+      "actors": [
+        {
+          "id": "parasite-a",
+          "name": "Parasite",
+          "kind": "enemy",
+          "role": "facehugger",
+          "x": 885,
+          "z": 193,
+          "radius": 11,
+          "hp": 100,
+          "ammo": 0,
+          "speed": 91
+        },
+        {
+          "id": "parasite-b",
+          "name": "Parasite",
+          "kind": "enemy",
+          "role": "facehugger",
+          "x": 1260,
+          "z": 238,
+          "radius": 11,
+          "hp": 100,
+          "ammo": 0,
+          "speed": 91
+        }
+      ],
+      "connected": true,
+      "exits": [
+        {
+          "room": "v106-medlab",
+          "id": "medlab-to-ops",
+          "x": 68,
+          "z": 199,
+          "label": "Operations",
+          "arrival": {
+            "x": 143,
+            "z": 199
+          },
+          "linkId": "ops-medlab",
+          "to": {
+            "room": "v107-operations",
+            "id": "ops-to-medlab",
+            "x": 1120,
+            "z": 329,
+            "label": "Infirmerie",
+            "arrival": {
+              "x": 1120,
+              "z": 235
+            }
+          }
+        },
+        {
+          "room": "v106-medlab",
+          "id": "medlab-to-service",
+          "x": 1320,
+          "z": 77,
+          "label": "Relais de maintenance",
+          "arrival": {
+            "x": 1314,
+            "z": 171
+          },
+          "linkId": "medical-service",
+          "to": {
+            "room": "v107-service",
+            "id": "service-to-medlab",
+            "x": 1346,
+            "z": 325,
+            "label": "Accès médical de service",
+            "arrival": {
+              "x": 1236,
+              "z": 325
+            }
+          }
+        }
+      ],
+      "hatches": [
+        {
+          "id": "hatch:medlab-to-ops",
+          "x": 56,
+          "z": 162,
+          "w": 24,
+          "d": 74,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "ops-medlab",
+          "portalId": "medlab-to-ops"
+        },
+        {
+          "id": "hatch:medlab-to-service",
+          "x": 1283,
+          "z": 65,
+          "w": 74,
+          "d": 24,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "medical-service",
+          "portalId": "medlab-to-service"
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "depth": 380,
+      "mode": "DEPTH",
+      "circuits": [
+        {
+          "id": "service",
+          "initialOn": true
+        }
+      ],
+      "controls": [
+        {
+          "id": "service-switch",
+          "x": 446,
+          "z": 313,
+          "circuit": "service",
+          "reach": 68
+        }
+      ],
+      "id": "v106-sentry",
+      "stageId": "c09-p2",
+      "title": "Couloir des sentinelles",
+      "subtitle": "Ligne de défense · repli protégé",
+      "family": "sentry",
+      "goal": "Ouvrir la ligne de tir. Refermer seulement si le passage est libre.",
+      "solids": [
+        {
+          "id": "bulkhead-north",
+          "x": 686,
+          "z": 0,
+          "w": 46,
+          "d": 134,
+          "h": 184
+        },
+        {
+          "id": "bulkhead-south",
+          "x": 686,
+          "z": 254,
+          "w": 46,
+          "d": 126,
+          "h": 184
+        },
+        {
+          "id": "ammo-rack",
+          "x": 325,
+          "z": 43,
+          "w": 88,
+          "d": 62,
+          "h": 80
+        },
+        {
+          "id": "cover-a",
+          "x": 465,
+          "z": 86,
+          "w": 106,
+          "d": 45,
+          "h": 52
+        },
+        {
+          "id": "cover-b",
+          "x": 475,
+          "z": 281,
+          "w": 115,
+          "d": 45,
+          "h": 52
+        },
+        {
+          "id": "east-rack",
+          "x": 1074,
+          "z": 272,
+          "w": 85,
+          "d": 70,
+          "h": 112
+        }
+      ],
+      "doors": [
+        {
+          "id": "defense-gate",
+          "name": "Cloison de défense",
+          "x": 686,
+          "z": 134,
+          "w": 46,
+          "d": 120,
+          "h": 180,
+          "reach": 110,
+          "initialOpen": false,
+          "powered": true,
+          "manual": true
+        }
+      ],
+      "props": [
+        {
+          "id": "sentry-console",
+          "x": 446,
+          "z": 313,
+          "support": "socle arrière",
+          "type": "console"
+        },
+        {
+          "id": "ammo-box",
+          "x": 405,
+          "z": 303,
+          "support": "sol de défense",
+          "type": "crate"
+        },
+        {
+          "id": "lamp-west",
+          "x": 545,
+          "z": 27,
+          "support": "mur nord",
+          "type": "lamp",
+          "circuit": "service"
+        },
+        {
+          "id": "lamp-east",
+          "x": 1095,
+          "z": 35,
+          "support": "mur nord",
+          "type": "lamp",
+          "circuit": "service"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "entry",
+          "name": "Zone de repli",
+          "x": 260,
+          "z": 201
+        },
+        {
+          "id": "threshold",
+          "name": "Cloison de défense",
+          "x": 707,
+          "z": 194
+        },
+        {
+          "id": "east",
+          "name": "Couloir extérieur",
+          "x": 1040,
+          "z": 200
+        }
+      ],
+      "actors": [
+        {
+          "id": "sentry-a",
+          "name": "Sentinelle A",
+          "kind": "ally",
+          "role": "sentry",
+          "x": 514,
+          "z": 198,
+          "radius": 16,
+          "hp": 100,
+          "ammo": 120,
+          "waiting": true
+        },
+        {
+          "id": "rush-a",
+          "name": "Xénomorphe",
+          "kind": "enemy",
+          "role": "warrior",
+          "x": 918,
+          "z": 201,
+          "radius": 19,
+          "hp": 100,
+          "ammo": 0,
+          "speed": 67
+        },
+        {
+          "id": "rush-b",
+          "name": "Xénomorphe",
+          "kind": "enemy",
+          "role": "warrior",
+          "x": 1110,
+          "z": 215,
+          "radius": 19,
+          "hp": 100,
+          "ammo": 0,
+          "speed": 67
+        },
+        {
+          "id": "rush-c",
+          "name": "Xénomorphe",
+          "kind": "enemy",
+          "role": "warrior",
+          "x": 1250,
+          "z": 154,
+          "radius": 19,
+          "hp": 100,
+          "ammo": 0,
+          "speed": 67
+        }
+      ],
+      "connected": true,
+      "exits": [
+        {
+          "room": "v106-sentry",
+          "id": "sentry-to-ops",
+          "x": 68,
+          "z": 194,
+          "label": "Operations",
+          "arrival": {
+            "x": 144,
+            "z": 194
+          },
+          "linkId": "ops-sentry",
+          "to": {
+            "room": "v107-operations",
+            "id": "ops-to-sentry",
+            "x": 1360,
+            "z": 195,
+            "label": "Ligne de défense",
+            "arrival": {
+              "x": 1285,
+              "z": 195
+            }
+          }
+        }
+      ],
+      "hatches": [
+        {
+          "id": "hatch:sentry-to-ops",
+          "x": 56,
+          "z": 157,
+          "w": 24,
+          "d": 74,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "ops-sentry",
+          "portalId": "sentry-to-ops"
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "depth": 380,
+      "mode": "DEPTH",
+      "circuits": [
+        {
+          "id": "service",
+          "initialOn": true
+        }
+      ],
+      "controls": [
+        {
+          "id": "service-switch",
+          "x": 505,
+          "z": 292,
+          "circuit": "service",
+          "reach": 72
+        }
+      ],
+      "id": "v106-sulaco",
+      "stageId": "c16-p1",
+      "title": "Hangar du Sulaco",
+      "subtitle": "Fret · accès au sas",
+      "family": "hangar",
+      "goal": "Contrôler la coursive sans toucher à la logique du sas final.",
+      "solids": [
+        {
+          "id": "cargo-north",
+          "x": 615,
+          "z": 0,
+          "w": 75,
+          "d": 131,
+          "h": 178
+        },
+        {
+          "id": "cargo-south",
+          "x": 615,
+          "z": 260,
+          "w": 75,
+          "d": 120,
+          "h": 163
+        },
+        {
+          "id": "cargo-west",
+          "x": 330,
+          "z": 57,
+          "w": 135,
+          "d": 75,
+          "h": 100
+        },
+        {
+          "id": "cargo-east",
+          "x": 936,
+          "z": 278,
+          "w": 130,
+          "d": 75,
+          "h": 91
+        },
+        {
+          "id": "loader-stand",
+          "x": 1030,
+          "z": 44,
+          "w": 135,
+          "d": 85,
+          "h": 150
+        }
+      ],
+      "doors": [
+        {
+          "id": "cargo-gate",
+          "name": "Accès au fret",
+          "x": 615,
+          "z": 131,
+          "w": 75,
+          "d": 129,
+          "h": 181,
+          "reach": 120,
+          "initialOpen": false,
+          "powered": true,
+          "manual": true
+        },
+        {
+          "id": "airlock-critical",
+          "name": "Sas extérieur",
+          "x": 1370,
+          "z": 0,
+          "w": 45,
+          "d": 380,
+          "h": 200,
+          "reach": 90,
+          "initialOpen": false,
+          "powered": true,
+          "manual": false,
+          "critical": true
+        }
+      ],
+      "props": [
+        {
+          "id": "cargo-console",
+          "x": 505,
+          "z": 292,
+          "support": "sol de la coursive",
+          "type": "console"
+        },
+        {
+          "id": "loader",
+          "x": 1096,
+          "z": 86,
+          "support": "plateforme technique",
+          "type": "loader"
+        },
+        {
+          "id": "hangar-lamp",
+          "x": 412,
+          "z": 25,
+          "support": "poutre nord",
+          "type": "lamp",
+          "circuit": "service"
+        },
+        {
+          "id": "airlock-lamp",
+          "x": 1220,
+          "z": 24,
+          "support": "rail du sas",
+          "type": "lamp",
+          "circuit": "service"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "entry",
+          "name": "Zone de fret",
+          "x": 250,
+          "z": 198
+        },
+        {
+          "id": "threshold",
+          "name": "Accès au fret",
+          "x": 652,
+          "z": 195
+        },
+        {
+          "id": "east",
+          "name": "Approche du sas",
+          "x": 1225,
+          "z": 206
+        }
+      ],
+      "actors": [
+        {
+          "id": "hangar-contact",
+          "name": "Xénomorphe",
+          "kind": "enemy",
+          "role": "warrior",
+          "x": 982,
+          "z": 180,
+          "radius": 19,
+          "hp": 100,
+          "ammo": 0,
+          "speed": 67
+        }
+      ],
+      "connected": false,
+      "exits": [],
+      "hatches": []
+    },
+    {
+      "id": "v107-operations",
+      "stageId": "c05-p1",
+      "width": 1440,
+      "depth": 380,
+      "mode": "HYBRID",
+      "title": "Operations",
+      "subtitle": "Centre du bloc · regroupement et repli",
+      "family": "operations",
+      "goal": "Trouver le relais, récupérer Newt et sécuriser le retour.",
+      "solids": [
+        {
+          "id": "ops-table",
+          "x": 430,
+          "z": 100,
+          "w": 238,
+          "d": 93,
+          "h": 49
+        },
+        {
+          "id": "ops-rack",
+          "x": 303,
+          "z": 274,
+          "w": 133,
+          "d": 75,
+          "h": 126
+        },
+        {
+          "id": "north-partition",
+          "x": 874,
+          "z": 0,
+          "w": 40,
+          "d": 114,
+          "h": 166
+        },
+        {
+          "id": "south-partition",
+          "x": 874,
+          "z": 255,
+          "w": 40,
+          "d": 125,
+          "h": 156
+        },
+        {
+          "id": "ops-display",
+          "x": 1054,
+          "z": 68,
+          "w": 174,
+          "d": 71,
+          "h": 103
+        }
+      ],
+      "doors": [
+        {
+          "id": "ops-bulkhead",
+          "name": "Cloison Operations",
+          "x": 874,
+          "z": 114,
+          "w": 40,
+          "d": 141,
+          "h": 174,
+          "reach": 108,
+          "initialOpen": true,
+          "powered": true,
+          "manual": true
+        }
+      ],
+      "circuits": [
+        {
+          "id": "service",
+          "initialOn": true
+        }
+      ],
+      "controls": [
+        {
+          "id": "service-switch",
+          "name": "Éclairage du poste",
+          "x": 733,
+          "z": 307,
+          "circuit": "service",
+          "reach": 68
+        }
+      ],
+      "props": [
+        {
+          "id": "ops-screen",
+          "x": 570,
+          "z": 142,
+          "support": "table centrale",
+          "supportId": "ops-table",
+          "elevation": 49,
+          "type": "console"
+        },
+        {
+          "id": "ops-console",
+          "x": 733,
+          "z": 307,
+          "support": "sol de la coursive",
+          "type": "console"
+        },
+        {
+          "id": "ops-lamp-west",
+          "x": 380,
+          "z": 25,
+          "support": "rail nord",
+          "type": "lamp",
+          "circuit": "service"
+        },
+        {
+          "id": "ops-lamp-east",
+          "x": 1186,
+          "z": 27,
+          "support": "rail nord",
+          "type": "lamp",
+          "circuit": "service"
+        },
+        {
+          "id": "ops-pipe",
+          "x": 785,
+          "z": 18,
+          "support": "mur nord",
+          "type": "pipe"
+        },
+        {
+          "id": "ammo-bin",
+          "x": 346,
+          "z": 312,
+          "support": "étagère arrière",
+          "type": "crate"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "ops-west",
+          "name": "Coursive résidentielle",
+          "x": 123,
+          "z": 197
+        },
+        {
+          "id": "ops-center",
+          "name": "Table de situation",
+          "x": 740,
+          "z": 200
+        },
+        {
+          "id": "ops-east",
+          "name": "Accès défense",
+          "x": 1290,
+          "z": 195
+        },
+        {
+          "id": "ops-north",
+          "name": "Accès maintenance",
+          "x": 736,
+          "z": 59
+        },
+        {
+          "id": "ops-medical",
+          "name": "Baie médicale",
+          "x": 1120,
+          "z": 324
+        }
+      ],
+      "actors": [],
+      "connected": true,
+      "exits": [
+        {
+          "room": "v107-operations",
+          "id": "ops-to-hadley",
+          "x": 64,
+          "z": 195,
+          "label": "Bloc résidentiel",
+          "arrival": {
+            "x": 135,
+            "z": 195
+          },
+          "linkId": "residential-ops",
+          "to": {
+            "room": "v106-hadley",
+            "id": "hadley-to-ops",
+            "x": 1360,
+            "z": 195,
+            "label": "Operations",
+            "arrival": {
+              "x": 1290,
+              "z": 195
+            }
+          }
+        },
+        {
+          "room": "v107-operations",
+          "id": "ops-to-service",
+          "x": 746,
+          "z": 43,
+          "label": "Maintenance",
+          "arrival": {
+            "x": 746,
+            "z": 115
+          },
+          "linkId": "ops-service",
+          "to": {
+            "room": "v107-service",
+            "id": "service-to-ops",
+            "x": 68,
+            "z": 195,
+            "label": "Operations",
+            "arrival": {
+              "x": 140,
+              "z": 195
+            }
+          }
+        },
+        {
+          "room": "v107-operations",
+          "id": "ops-to-medlab",
+          "x": 1120,
+          "z": 329,
+          "label": "Infirmerie",
+          "arrival": {
+            "x": 1120,
+            "z": 235
+          },
+          "linkId": "ops-medlab",
+          "to": {
+            "room": "v106-medlab",
+            "id": "medlab-to-ops",
+            "x": 68,
+            "z": 199,
+            "label": "Operations",
+            "arrival": {
+              "x": 143,
+              "z": 199
+            }
+          }
+        },
+        {
+          "room": "v107-operations",
+          "id": "ops-to-sentry",
+          "x": 1360,
+          "z": 195,
+          "label": "Ligne de défense",
+          "arrival": {
+            "x": 1285,
+            "z": 195
+          },
+          "linkId": "ops-sentry",
+          "to": {
+            "room": "v106-sentry",
+            "id": "sentry-to-ops",
+            "x": 68,
+            "z": 194,
+            "label": "Operations",
+            "arrival": {
+              "x": 144,
+              "z": 194
+            }
+          }
+        },
+        {
+          "room": "v107-operations",
+          "id": "ops-to-logistics",
+          "x": 164,
+          "z": 326,
+          "label": "Galerie logistique",
+          "arrival": {
+            "x": 164,
+            "z": 240
+          },
+          "linkId": "ops-logistics",
+          "to": {
+            "room": "v109-logistics",
+            "id": "logistics-to-ops",
+            "x": 64,
+            "z": 195,
+            "label": "Operations",
+            "arrival": {
+              "x": 144,
+              "z": 195
+            }
+          }
+        }
+      ],
+      "hatches": [
+        {
+          "id": "hatch:ops-to-hadley",
+          "x": 52,
+          "z": 158,
+          "w": 24,
+          "d": 74,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "residential-ops",
+          "portalId": "ops-to-hadley"
+        },
+        {
+          "id": "hatch:ops-to-service",
+          "x": 709,
+          "z": 31,
+          "w": 74,
+          "d": 24,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "ops-service",
+          "portalId": "ops-to-service"
+        },
+        {
+          "id": "hatch:ops-to-medlab",
+          "x": 1083,
+          "z": 317,
+          "w": 74,
+          "d": 24,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "ops-medlab",
+          "portalId": "ops-to-medlab"
+        },
+        {
+          "id": "hatch:ops-to-sentry",
+          "x": 1348,
+          "z": 158,
+          "w": 24,
+          "d": 74,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "ops-sentry",
+          "portalId": "ops-to-sentry"
+        },
+        {
+          "id": "hatch:ops-to-logistics",
+          "x": 127,
+          "z": 314,
+          "w": 74,
+          "d": 24,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "ops-logistics",
+          "portalId": "ops-to-logistics"
+        }
+      ]
+    },
+    {
+      "id": "v107-service",
+      "stageId": null,
+      "width": 1440,
+      "depth": 380,
+      "mode": "HYBRID",
+      "title": "Relais de maintenance",
+      "subtitle": "Alimentation du bloc · liaison médicale",
+      "family": "service",
+      "goal": "Rétablir la liaison électrique, puis rejoindre le laboratoire.",
+      "solids": [
+        {
+          "id": "service-north",
+          "x": 610,
+          "z": 0,
+          "w": 40,
+          "d": 132,
+          "h": 190
+        },
+        {
+          "id": "service-south",
+          "x": 610,
+          "z": 257,
+          "w": 40,
+          "d": 123,
+          "h": 164
+        },
+        {
+          "id": "pump-foundation",
+          "x": 275,
+          "z": 53,
+          "w": 151,
+          "d": 98,
+          "h": 94
+        },
+        {
+          "id": "transformer-plinth",
+          "x": 1000,
+          "z": 55,
+          "w": 138,
+          "d": 90,
+          "h": 141
+        },
+        {
+          "id": "cable-rack",
+          "x": 828,
+          "z": 275,
+          "w": 115,
+          "d": 72,
+          "h": 69
+        }
+      ],
+      "doors": [
+        {
+          "id": "maintenance-gate",
+          "name": "Clapet de maintenance",
+          "x": 610,
+          "z": 132,
+          "w": 40,
+          "d": 125,
+          "h": 183,
+          "reach": 101,
+          "initialOpen": false,
+          "powered": false,
+          "manual": true
+        }
+      ],
+      "circuits": [
+        {
+          "id": "service",
+          "initialOn": true
+        },
+        {
+          "id": "network",
+          "initialOn": false
+        }
+      ],
+      "controls": [
+        {
+          "id": "relay-switch",
+          "name": "Relais Operations",
+          "x": 1238,
+          "z": 226,
+          "circuit": "network",
+          "reach": 66
+        },
+        {
+          "id": "service-switch",
+          "name": "Éclairage local",
+          "x": 464,
+          "z": 307,
+          "circuit": "service",
+          "reach": 58
+        }
+      ],
+      "props": [
+        {
+          "id": "relay-console",
+          "x": 1238,
+          "z": 226,
+          "support": "pied de l’armoire de relais",
+          "type": "console",
+          "circuit": "network"
+        },
+        {
+          "id": "service-console",
+          "x": 464,
+          "z": 307,
+          "support": "sol de maintenance",
+          "type": "console"
+        },
+        {
+          "id": "pump-pipes",
+          "x": 316,
+          "z": 40,
+          "support": "mur au-dessus du socle de pompage",
+          "type": "pipe"
+        },
+        {
+          "id": "service-lamp",
+          "x": 702,
+          "z": 24,
+          "support": "poutre nord",
+          "type": "lamp",
+          "circuit": "service"
+        },
+        {
+          "id": "transformer-cable",
+          "x": 1058,
+          "z": 28,
+          "support": "mur au-dessus du transformateur",
+          "type": "pipe"
+        },
+        {
+          "id": "service-crate",
+          "x": 837,
+          "z": 314,
+          "support": "table basse de câblage",
+          "supportId": "cable-rack",
+          "elevation": 69,
+          "type": "crate"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "service-entry",
+          "name": "Entrée maintenance",
+          "x": 137,
+          "z": 198
+        },
+        {
+          "id": "service-threshold",
+          "name": "Clapet manuel",
+          "x": 606,
+          "z": 195
+        },
+        {
+          "id": "relay",
+          "name": "Relais Operations",
+          "x": 1238,
+          "z": 226
+        },
+        {
+          "id": "medical-return",
+          "name": "Liaison médicale",
+          "x": 1325,
+          "z": 323
+        }
+      ],
+      "actors": [
+        {
+          "id": "service-contact",
+          "name": "Xénomorphe",
+          "kind": "enemy",
+          "role": "warrior",
+          "x": 946,
+          "z": 198,
+          "radius": 19,
+          "hp": 100,
+          "ammo": 0,
+          "speed": 63
+        }
+      ],
+      "connected": true,
+      "exits": [
+        {
+          "room": "v107-service",
+          "id": "service-to-ops",
+          "x": 68,
+          "z": 195,
+          "label": "Operations",
+          "arrival": {
+            "x": 140,
+            "z": 195
+          },
+          "linkId": "ops-service",
+          "to": {
+            "room": "v107-operations",
+            "id": "ops-to-service",
+            "x": 746,
+            "z": 43,
+            "label": "Maintenance",
+            "arrival": {
+              "x": 746,
+              "z": 115
+            }
+          }
+        },
+        {
+          "room": "v107-service",
+          "id": "service-to-medlab",
+          "x": 1346,
+          "z": 325,
+          "label": "Accès médical de service",
+          "arrival": {
+            "x": 1236,
+            "z": 325
+          },
+          "linkId": "medical-service",
+          "to": {
+            "room": "v106-medlab",
+            "id": "medlab-to-service",
+            "x": 1320,
+            "z": 77,
+            "label": "Relais de maintenance",
+            "arrival": {
+              "x": 1314,
+              "z": 171
+            }
+          }
+        },
+        {
+          "room": "v107-service",
+          "id": "service-to-reserve",
+          "x": 1300,
+          "z": 43,
+          "label": "Réserve technique",
+          "arrival": {
+            "x": 1300,
+            "z": 137
+          },
+          "linkId": "reserve-service",
+          "to": {
+            "room": "v109-reserve",
+            "id": "reserve-to-service",
+            "x": 1328,
+            "z": 43,
+            "label": "Maintenance",
+            "arrival": {
+              "x": 1300,
+              "z": 137
+            }
+          }
+        }
+      ],
+      "hatches": [
+        {
+          "id": "hatch:service-to-ops",
+          "x": 56,
+          "z": 158,
+          "w": 24,
+          "d": 74,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "ops-service",
+          "portalId": "service-to-ops"
+        },
+        {
+          "id": "hatch:service-to-medlab",
+          "x": 1334,
+          "z": 288,
+          "w": 24,
+          "d": 74,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "medical-service",
+          "portalId": "service-to-medlab"
+        },
+        {
+          "id": "hatch:service-to-reserve",
+          "x": 1263,
+          "z": 31,
+          "w": 74,
+          "d": 24,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "reserve-service",
+          "portalId": "service-to-reserve"
+        }
+      ]
+    },
+    {
+      "id": "v109-logistics",
+      "stageId": null,
+      "width": 1440,
+      "depth": 380,
+      "mode": "HYBRID",
+      "title": "Galerie logistique",
+      "subtitle": "Acheminement du bloc · stocks sous scellés",
+      "family": "logistics",
+      "goal": "Dégager le quai, récupérer une réserve et reconnaître la voie de service.",
+      "solids": [
+        {
+          "id": "freight-north",
+          "x": 670,
+          "z": 0,
+          "w": 38,
+          "d": 137,
+          "h": 186
+        },
+        {
+          "id": "freight-south",
+          "x": 670,
+          "z": 253,
+          "w": 38,
+          "d": 127,
+          "h": 175
+        },
+        {
+          "id": "parked-tug",
+          "x": 300,
+          "z": 56,
+          "w": 178,
+          "d": 86,
+          "h": 92,
+          "visual": "tug"
+        },
+        {
+          "id": "pallet-bay",
+          "x": 307,
+          "z": 282,
+          "w": 170,
+          "d": 70,
+          "h": 68
+        },
+        {
+          "id": "storage-plinth",
+          "x": 1030,
+          "z": 283,
+          "w": 175,
+          "d": 58,
+          "h": 80
+        },
+        {
+          "id": "north-shelf",
+          "x": 1090,
+          "z": 52,
+          "w": 176,
+          "d": 80,
+          "h": 118
+        },
+        {
+          "id": "body-log-ammo",
+          "x": 1156,
+          "z": 203,
+          "w": 68,
+          "d": 36,
+          "h": 43,
+          "material": "metal",
+          "blocksSight": false,
+          "visual": "supply"
+        }
+      ],
+      "doors": [
+        {
+          "id": "freight-shutter",
+          "name": "Rideau du quai",
+          "x": 670,
+          "z": 137,
+          "w": 38,
+          "d": 116,
+          "h": 182,
+          "reach": 100,
+          "initialOpen": false,
+          "powered": false,
+          "manual": true
+        }
+      ],
+      "circuits": [
+        {
+          "id": "service",
+          "initialOn": true
+        }
+      ],
+      "controls": [
+        {
+          "id": "freight-light",
+          "name": "Éclairage du quai",
+          "x": 525,
+          "z": 224,
+          "circuit": "service",
+          "reach": 62
+        }
+      ],
+      "props": [
+        {
+          "id": "tug-cabin",
+          "x": 389,
+          "z": 99,
+          "support": "châssis du tracteur stationné",
+          "bodyId": "parked-tug",
+          "type": "tug"
+        },
+        {
+          "id": "pallet-crate",
+          "x": 385,
+          "z": 317,
+          "support": "palette du quai",
+          "supportId": "pallet-bay",
+          "elevation": 68,
+          "type": "crate"
+        },
+        {
+          "id": "freight-lamp-a",
+          "x": 516,
+          "z": 24,
+          "support": "portique nord",
+          "type": "lamp",
+          "circuit": "service"
+        },
+        {
+          "id": "freight-lamp-b",
+          "x": 1031,
+          "z": 24,
+          "support": "portique nord",
+          "type": "lamp",
+          "circuit": "service"
+        },
+        {
+          "id": "sealed-ammo",
+          "x": 1190,
+          "z": 221,
+          "support": "desserte de ravitaillement fixée au sol",
+          "type": "supply",
+          "stockId": "log-ammo",
+          "bodyId": "body-log-ammo"
+        },
+        {
+          "id": "quay-console",
+          "x": 525,
+          "z": 224,
+          "support": "colonne de commande du quai",
+          "type": "console"
+        },
+        {
+          "id": "dispatch-sign",
+          "x": 944,
+          "z": 28,
+          "support": "mur de livraison",
+          "type": "pipe"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "quay-entry",
+          "name": "Liaison Operations",
+          "x": 138,
+          "z": 195
+        },
+        {
+          "id": "quay-center",
+          "name": "Rideau de fret",
+          "x": 620,
+          "z": 195
+        },
+        {
+          "id": "quay-stock",
+          "name": "Réserve sous scellés",
+          "x": 1190,
+          "z": 221
+        },
+        {
+          "id": "quay-east",
+          "name": "Réserve technique",
+          "x": 1345,
+          "z": 195
+        }
+      ],
+      "actors": [
+        {
+          "id": "logistics-pursuer",
+          "name": "Xénomorphe du quai",
+          "kind": "enemy",
+          "role": "warrior",
+          "x": 985,
+          "z": 196,
+          "radius": 19,
+          "hp": 100,
+          "ammo": 0,
+          "speed": 65
+        }
+      ],
+      "connected": true,
+      "exits": [
+        {
+          "room": "v109-logistics",
+          "id": "logistics-to-ops",
+          "x": 64,
+          "z": 195,
+          "label": "Operations",
+          "arrival": {
+            "x": 144,
+            "z": 195
+          },
+          "linkId": "ops-logistics",
+          "to": {
+            "room": "v107-operations",
+            "id": "ops-to-logistics",
+            "x": 164,
+            "z": 326,
+            "label": "Galerie logistique",
+            "arrival": {
+              "x": 164,
+              "z": 240
+            }
+          }
+        },
+        {
+          "room": "v109-logistics",
+          "id": "logistics-to-reserve",
+          "x": 1366,
+          "z": 195,
+          "label": "Réserve technique",
+          "arrival": {
+            "x": 1275,
+            "z": 195
+          },
+          "linkId": "logistics-reserve",
+          "to": {
+            "room": "v109-reserve",
+            "id": "reserve-to-logistics",
+            "x": 64,
+            "z": 195,
+            "label": "Galerie logistique",
+            "arrival": {
+              "x": 144,
+              "z": 195
+            }
+          }
+        }
+      ],
+      "hatches": [
+        {
+          "id": "hatch:logistics-to-ops",
+          "x": 52,
+          "z": 158,
+          "w": 24,
+          "d": 74,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "ops-logistics",
+          "portalId": "logistics-to-ops"
+        },
+        {
+          "id": "hatch:logistics-to-reserve",
+          "x": 1354,
+          "z": 158,
+          "w": 24,
+          "d": 74,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "logistics-reserve",
+          "portalId": "logistics-to-reserve"
+        }
+      ]
+    },
+    {
+      "id": "v109-reserve",
+      "stageId": null,
+      "width": 1440,
+      "depth": 380,
+      "mode": "HYBRID",
+      "title": "Réserve technique",
+      "subtitle": "Secours, munitions et sirène de diagnostic",
+      "family": "reserve",
+      "goal": "Préparer les ressources du groupe ou détourner un contact avec la sirène.",
+      "solids": [
+        {
+          "id": "reserve-north",
+          "x": 620,
+          "z": 0,
+          "w": 34,
+          "d": 135,
+          "h": 179
+        },
+        {
+          "id": "reserve-south",
+          "x": 620,
+          "z": 254,
+          "w": 34,
+          "d": 126,
+          "h": 162
+        },
+        {
+          "id": "service-locker",
+          "x": 286,
+          "z": 54,
+          "w": 110,
+          "d": 91,
+          "h": 128
+        },
+        {
+          "id": "battery-stack",
+          "x": 280,
+          "z": 281,
+          "w": 134,
+          "d": 67,
+          "h": 88
+        },
+        {
+          "id": "medical-counter",
+          "x": 835,
+          "z": 65,
+          "w": 188,
+          "d": 90,
+          "h": 67
+        },
+        {
+          "id": "reserve-cabinet",
+          "x": 967,
+          "z": 282,
+          "w": 157,
+          "d": 67,
+          "h": 119
+        },
+        {
+          "id": "body-reserve-sentry",
+          "x": 313,
+          "z": 198,
+          "w": 68,
+          "d": 36,
+          "h": 43,
+          "material": "metal",
+          "blocksSight": false,
+          "visual": "supply"
+        },
+        {
+          "id": "body-reserve-medical",
+          "x": 884,
+          "z": 200,
+          "w": 68,
+          "d": 36,
+          "h": 43,
+          "material": "metal",
+          "blocksSight": false,
+          "visual": "supply"
+        },
+        {
+          "id": "body-reserve-alarm",
+          "x": 1180,
+          "z": 220,
+          "w": 68,
+          "d": 36,
+          "h": 64,
+          "material": "metal",
+          "blocksSight": false,
+          "visual": "alarm"
+        }
+      ],
+      "doors": [
+        {
+          "id": "reserve-door",
+          "name": "Cloison de réserve",
+          "x": 620,
+          "z": 135,
+          "w": 34,
+          "d": 119,
+          "h": 177,
+          "reach": 100,
+          "initialOpen": false,
+          "powered": false,
+          "manual": true
+        }
+      ],
+      "circuits": [
+        {
+          "id": "service",
+          "initialOn": true
+        }
+      ],
+      "controls": [
+        {
+          "id": "reserve-light",
+          "name": "Éclairage réserve",
+          "x": 754,
+          "z": 293,
+          "circuit": "service",
+          "reach": 62
+        }
+      ],
+      "props": [
+        {
+          "id": "sentry-cartridge",
+          "x": 347,
+          "z": 216,
+          "support": "berceau de munitions au sol",
+          "type": "supply",
+          "stockId": "reserve-sentry",
+          "bodyId": "body-reserve-sentry"
+        },
+        {
+          "id": "medical-pack",
+          "x": 918,
+          "z": 218,
+          "support": "chariot de secours fixé au sol",
+          "type": "supply",
+          "stockId": "reserve-medical",
+          "bodyId": "body-reserve-medical"
+        },
+        {
+          "id": "alarm-desk",
+          "x": 1214,
+          "z": 238,
+          "support": "socle du testeur de sirène",
+          "type": "alarm",
+          "alarmId": "reserve-alarm",
+          "bodyId": "body-reserve-alarm"
+        },
+        {
+          "id": "reserve-monitor",
+          "x": 922,
+          "z": 111,
+          "support": "comptoir médical",
+          "supportId": "medical-counter",
+          "elevation": 67,
+          "type": "console"
+        },
+        {
+          "id": "reserve-lamp",
+          "x": 1012,
+          "z": 24,
+          "support": "rail médical nord",
+          "type": "lamp",
+          "circuit": "service"
+        },
+        {
+          "id": "reserve-switch",
+          "x": 754,
+          "z": 293,
+          "support": "potelet de commande",
+          "type": "console"
+        },
+        {
+          "id": "reserve-conduit",
+          "x": 1219,
+          "z": 27,
+          "support": "mur de distribution",
+          "type": "pipe"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "reserve-entry",
+          "name": "Galerie logistique",
+          "x": 138,
+          "z": 195
+        },
+        {
+          "id": "sentry-stocks",
+          "name": "Cartouche sentinelle",
+          "x": 347,
+          "z": 216
+        },
+        {
+          "id": "medical-stocks",
+          "name": "Chariot de secours",
+          "x": 918,
+          "z": 218
+        },
+        {
+          "id": "reserve-alarm-node",
+          "name": "Diagnostic sonore",
+          "x": 1214,
+          "z": 238
+        },
+        {
+          "id": "reserve-north-link",
+          "name": "Maintenance",
+          "x": 1328,
+          "z": 47
+        }
+      ],
+      "actors": [
+        {
+          "id": "reserve-stalker",
+          "name": "Xénomorphe de réserve",
+          "kind": "enemy",
+          "role": "warrior",
+          "x": 1114,
+          "z": 202,
+          "radius": 19,
+          "hp": 100,
+          "ammo": 0,
+          "speed": 61
+        }
+      ],
+      "connected": true,
+      "exits": [
+        {
+          "room": "v109-reserve",
+          "id": "reserve-to-logistics",
+          "x": 64,
+          "z": 195,
+          "label": "Galerie logistique",
+          "arrival": {
+            "x": 144,
+            "z": 195
+          },
+          "linkId": "logistics-reserve",
+          "to": {
+            "room": "v109-logistics",
+            "id": "logistics-to-reserve",
+            "x": 1366,
+            "z": 195,
+            "label": "Réserve technique",
+            "arrival": {
+              "x": 1275,
+              "z": 195
+            }
+          }
+        },
+        {
+          "room": "v109-reserve",
+          "id": "reserve-to-service",
+          "x": 1328,
+          "z": 43,
+          "label": "Maintenance",
+          "arrival": {
+            "x": 1300,
+            "z": 137
+          },
+          "linkId": "reserve-service",
+          "to": {
+            "room": "v107-service",
+            "id": "service-to-reserve",
+            "x": 1300,
+            "z": 43,
+            "label": "Réserve technique",
+            "arrival": {
+              "x": 1300,
+              "z": 137
+            }
+          }
+        }
+      ],
+      "hatches": [
+        {
+          "id": "hatch:reserve-to-logistics",
+          "x": 52,
+          "z": 158,
+          "w": 24,
+          "d": 74,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "logistics-reserve",
+          "portalId": "reserve-to-logistics"
+        },
+        {
+          "id": "hatch:reserve-to-service",
+          "x": 1291,
+          "z": 31,
+          "w": 74,
+          "d": 24,
+          "h": 155,
+          "material": "metal",
+          "blocksSight": true,
+          "blocksProjectiles": true,
+          "linkId": "reserve-service",
+          "portalId": "reserve-to-service"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "ok": true,
+    "failures": []
+  }
+}

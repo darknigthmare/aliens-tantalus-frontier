@@ -1,0 +1,272 @@
+{
+  "version": "0.9.0-candidate.1",
+  "htmlSHA256": "91ae538879b939018cea5dc3ba2eb9e45faea7693fdd952efbe8531b33cdfced",
+  "cases": [
+    {
+      "name": "Boot du HTML exact, 47 lieux",
+      "passed": true
+    },
+    {
+      "name": "Déplacement clavier depuis une nouvelle partie",
+      "passed": true
+    },
+    {
+      "name": "E franchit le râtelier voisin au lieu de parler à distance",
+      "passed": true
+    },
+    {
+      "name": "Dossier armement visible",
+      "passed": true
+    },
+    {
+      "name": "Prélèvement physique terminé, carburant fini",
+      "passed": true
+    },
+    {
+      "name": "Pas de double dotation",
+      "passed": true
+    },
+    {
+      "name": "M240 consomme du carburant, pas les cartouches",
+      "passed": true
+    },
+    {
+      "name": "Vrai téléchargement export-armement-v09",
+      "passed": true
+    },
+    {
+      "name": "Import réel conserve la dotation",
+      "passed": true
+    },
+    {
+      "name": "M41A rééquipé",
+      "passed": true
+    },
+    {
+      "name": "Jet touche l’adulte de la scène ciblée",
+      "passed": true
+    },
+    {
+      "name": "Grenade engagée, coût unique",
+      "passed": true
+    },
+    {
+      "name": "Vrai export de la grenade en vol",
+      "passed": true
+    },
+    {
+      "name": "Reprise et impact sans double prélèvement",
+      "passed": true
+    },
+    {
+      "name": "Adulte atteint après impact",
+      "passed": true
+    },
+    {
+      "name": "Le point familial représente Russ",
+      "passed": true
+    },
+    {
+      "name": "Observation de l’unité médicale accessible sans chirurgie fictive",
+      "passed": true
+    },
+    {
+      "name": "Le coffre voisin n’intercepte plus le seuil de la serre",
+      "passed": true
+    },
+    {
+      "name": "Corde franchie vers la vraie salle inférieure",
+      "passed": true
+    },
+    {
+      "name": "Retour réel de la cale vers la chambre",
+      "passed": true
+    },
+    {
+      "name": "Al Simpson possède une identité et un dialogue distincts",
+      "passed": true
+    },
+    {
+      "name": "Newt sans dotation militaire",
+      "passed": true
+    },
+    {
+      "name": "Anne reste désarmée",
+      "passed": true
+    },
+    {
+      "name": "Registre des références sans revendication 1:1",
+      "passed": true
+    },
+    {
+      "name": "Quatorze silhouettes dans le dossier",
+      "passed": true
+    },
+    {
+      "name": "Quatre espaces hors colonie signalés comme manquants",
+      "passed": true
+    },
+    {
+      "name": "Plan sans téléportation, 47 lieux annoncés",
+      "passed": true
+    },
+    {
+      "name": "Vrai export 0.8 chargé, conducteur conservé",
+      "passed": true
+    },
+    {
+      "name": "Migration ne donne pas de dotation fictive",
+      "passed": true
+    },
+    {
+      "name": "Arsenal accessible à 130 % 390",
+      "passed": true
+    },
+    {
+      "name": "Pas de débordement horizontal 390",
+      "passed": true
+    },
+    {
+      "name": "Arsenal accessible à 130 % 844",
+      "passed": true
+    },
+    {
+      "name": "Pas de débordement horizontal 844",
+      "passed": true
+    },
+    {
+      "name": "Aucune erreur JavaScript de page",
+      "passed": true
+    },
+    {
+      "name": "Aucune dépendance HTTP de jeu",
+      "passed": true
+    }
+  ],
+  "captures": [
+    {
+      "file": "01-menu.png",
+      "caption": "Menu de la version courante.",
+      "fixture": "Nouvelle partie / commandes ordinaires",
+      "room": "pad"
+    },
+    {
+      "file": "02-seuil-armurerie.png",
+      "caption": "Seuil de l’armurerie après franchissement réel par E.",
+      "fixture": "armory-door",
+      "room": "armory"
+    },
+    {
+      "file": "03-armement.png",
+      "caption": "Dotation réellement prélevée ; bouton de second prélèvement désactivé.",
+      "fixture": "armory",
+      "room": "armory"
+    },
+    {
+      "file": "04-m240.png",
+      "caption": "M240 utilisé au clavier dans une scène ciblée.",
+      "fixture": "flame",
+      "room": "armory"
+    },
+    {
+      "file": "05-jorden.png",
+      "caption": "Anne et Russ distincts au point familial, sans Brackett substitué.",
+      "fixture": "family",
+      "room": "jorden"
+    },
+    {
+      "file": "06-medical.png",
+      "caption": "Service médical, Komiskey et équipements identifiés.",
+      "fixture": "medical",
+      "room": "med"
+    },
+    {
+      "file": "07-unite-medicale.png",
+      "caption": "Observation documentaire de l’unité obstétricale ; emplacement interprété.",
+      "fixture": "medical-unit",
+      "room": "med"
+    },
+    {
+      "file": "08-serre.png",
+      "caption": "Serre vitrée ajoutée : présence attestée, cultures et plan originaux.",
+      "fixture": "greenhouse",
+      "room": "greenhouse"
+    },
+    {
+      "file": "09-pilote.png",
+      "caption": "Pilote fossile fixé à son siège ; appui organique collisionnable.",
+      "fixture": "pilot",
+      "room": "pilot_chamber"
+    },
+    {
+      "file": "10-corde.png",
+      "caption": "Franchissement à la corde vers la cale ; raccord animé, pas verticalité libre.",
+      "fixture": "rope",
+      "room": "pilot_chamber"
+    },
+    {
+      "file": "11-cale.png",
+      "caption": "Cale dédiée aux œufs ; aucun mobilier colonial dans cette nouvelle salle.",
+      "fixture": "vault",
+      "room": "egg_vault"
+    },
+    {
+      "file": "12-piste.png",
+      "caption": "Accès extérieur représenté comme un chemin et non comme une porte isolée.",
+      "fixture": "road",
+      "room": "road"
+    },
+    {
+      "file": "13-escalier.png",
+      "caption": "Accès avec marches et support architectural.",
+      "fixture": "stairs",
+      "room": "science"
+    },
+    {
+      "file": "14-simpson.png",
+      "caption": "Conversation originale avec Al Simpson ; référence de rôle et interprétation signalées.",
+      "fixture": "colony",
+      "room": "ops"
+    },
+    {
+      "file": "15-newt.png",
+      "caption": "Newt, silhouette enfant et tenue distincte, sans casque de Hicks.",
+      "fixture": "newt",
+      "room": "vent_hab"
+    },
+    {
+      "file": "16-personnages.png",
+      "caption": "Dossier d’apparences : détails attestés et choix provisoires sont séparés.",
+      "fixture": "anne-arsenal",
+      "room": "armory"
+    },
+    {
+      "file": "17-manques.png",
+      "caption": "Espaces narratifs manquants visibles, sans porte fictive reliant l’orbite à la colonie.",
+      "fixture": "anne-arsenal",
+      "room": "armory"
+    },
+    {
+      "file": "18-plan.png",
+      "caption": "Plan colonial agrandi ; diagramme de connexions, pas plan officiel.",
+      "fixture": "anne-arsenal",
+      "room": "armory"
+    },
+    {
+      "file": "19-portrait.png",
+      "caption": "Arsenal à 130 % sur format émulé, pas matériel réel.",
+      "fixture": "armory",
+      "room": "armory"
+    },
+    {
+      "file": "20-paysage-court.png",
+      "caption": "Arsenal à 130 % sur format émulé, pas matériel réel.",
+      "fixture": "armory",
+      "room": "armory"
+    }
+  ],
+  "errors": [],
+  "network": [],
+  "method": "Exact portable HTML via set_content; ordinary keyboard, buttons and file chooser; prevalidated fixtures explicitly labelled. No live position/health/objective/time rewrites.",
+  "passed": true
+}

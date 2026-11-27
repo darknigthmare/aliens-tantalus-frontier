@@ -1,0 +1,51 @@
+{
+  "agentBrowser": null,
+  "errors": [],
+  "http": false,
+  "httpError": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:33379/JOUER.html\nCall log:\n  - navigating to \"http://127.0.0.1:33379/JOUER.html\", waiting until \"load\"\n",
+  "title": "ALIEN — Fleuve de la Douleur",
+  "buttons": [
+    "ENTRER DANS HADLEY’S HOPE →",
+    "CHARGER UN FICHIER",
+    "À PROPOS DE CETTE RECONSTITUTION"
+  ],
+  "state": {
+    "revision": 8,
+    "rover": {
+      "room": "road",
+      "x": 660,
+      "z": 0.79,
+      "hp": 100,
+      "battery": 99.98583333333335,
+      "speed": 0,
+      "heading": 1,
+      "driver": "anne",
+      "lights": false,
+      "wheels": 0,
+      "hurt": 0,
+      "horn": 0,
+      "hornCooldown": 0
+    },
+    "stations": {
+      "service-road": {
+        "repairs": 1,
+        "charges": 1
+      },
+      "service-plateau": {
+        "repairs": 1,
+        "charges": 1
+      }
+    },
+    "stats": {
+      "boarded": 1,
+      "exits": 0,
+      "crossings": 0,
+      "collisions": 0,
+      "repairs": 0,
+      "charges": 0,
+      "horns": 0,
+      "distance": 0
+    }
+  },
+  "loaded": true
+}

@@ -1,0 +1,268 @@
+{
+  "version": "0.8.0-candidate.1",
+  "part": "A",
+  "htmlSHA256": "53cafebbf4a43b9c2cf6d406452a7b491ac818c7f47bc5d40b21eef13dde83b7",
+  "cases": [
+    {
+      "name": "Current HTML and new module load without external assets",
+      "passed": true
+    },
+    {
+      "name": "Title version 0.8 visible",
+      "passed": true
+    },
+    {
+      "name": "First principal objective played using walking and E",
+      "passed": true
+    },
+    {
+      "name": "Equipment retains seven on-foot actions and adds explicit rover access",
+      "passed": true
+    },
+    {
+      "name": "No premature vehicle or remote board from initial room",
+      "passed": true
+    },
+    {
+      "name": "Actual 0.7 in-duct export imports with identity and progress preserved, no invented driving",
+      "passed": true
+    },
+    {
+      "name": "Local boarding command enabled near the actual vehicle",
+      "passed": true
+    },
+    {
+      "name": "Cabin menu pauses reading, not an active manipulation",
+      "passed": true
+    },
+    {
+      "name": "Timed boarding clears crouch input; cabin HUD replaces combat HUD and throttle works",
+      "passed": true
+    },
+    {
+      "name": "L operates vehicle headlights, not pocket light",
+      "passed": true
+    },
+    {
+      "name": "F uses horn without ammunition or bullets",
+      "passed": true
+    },
+    {
+      "name": "Stopped descent restores on-foot controls and combat HUD",
+      "passed": true
+    },
+    {
+      "name": "Walking away interrupts boarding without false boarded state",
+      "passed": true
+    }
+  ],
+  "captures": [
+    {
+      "file": "captures/01-title-v08.png",
+      "description": "Menu initial de la version courante",
+      "setup": "New game",
+      "state": {
+        "room": "pad",
+        "chapter": 0,
+        "character": "brackett",
+        "mode": "hybrid",
+        "elapsed": 0,
+        "mobility": {
+          "revision": 8,
+          "rover": {
+            "room": "road",
+            "x": 660,
+            "z": 0.79,
+            "hp": 100,
+            "battery": 100,
+            "speed": 0,
+            "heading": 1,
+            "driver": null,
+            "lights": false,
+            "wheels": 0,
+            "hurt": 0,
+            "horn": 0,
+            "hornCooldown": 0
+          },
+          "stations": {
+            "service-road": {
+              "repairs": 1,
+              "charges": 1
+            },
+            "service-plateau": {
+              "repairs": 1,
+              "charges": 1
+            }
+          },
+          "stats": {
+            "boarded": 0,
+            "exits": 0,
+            "crossings": 0,
+            "collisions": 0,
+            "repairs": 0,
+            "charges": 0,
+            "horns": 0,
+            "distance": 0
+          }
+        },
+        "modal": null
+      }
+    },
+    {
+      "file": "captures/02-first-task-v08.png",
+      "description": "Premier objectif accompli au clavier, depuis une partie neuve",
+      "setup": "New game",
+      "state": {
+        "room": "pad",
+        "chapter": 0,
+        "character": "brackett",
+        "mode": "hybrid",
+        "elapsed": 2.3499999999999965,
+        "mobility": {
+          "revision": 8,
+          "rover": {
+            "room": "road",
+            "x": 660,
+            "z": 0.79,
+            "hp": 100,
+            "battery": 100,
+            "speed": 0,
+            "heading": 1,
+            "driver": null,
+            "lights": false,
+            "wheels": 0,
+            "hurt": 0,
+            "horn": 0,
+            "hornCooldown": 0
+          },
+          "stations": {
+            "service-road": {
+              "repairs": 1,
+              "charges": 1
+            },
+            "service-plateau": {
+              "repairs": 1,
+              "charges": 1
+            }
+          },
+          "stats": {
+            "boarded": 0,
+            "exits": 0,
+            "crossings": 0,
+            "collisions": 0,
+            "repairs": 0,
+            "charges": 0,
+            "horns": 0,
+            "distance": 0
+          }
+        },
+        "modal": null
+      }
+    },
+    {
+      "file": "captures/03-cabin-panel-v08.png",
+      "description": "Dossier de cabine ouvert à portée du tracteur",
+      "setup": "Localized prepared fixture: parked.json",
+      "state": {
+        "room": "road",
+        "chapter": 3,
+        "character": "anne",
+        "mode": "hybrid",
+        "elapsed": 0,
+        "mobility": {
+          "revision": 8,
+          "rover": {
+            "room": "road",
+            "x": 660,
+            "z": 0.79,
+            "hp": 100,
+            "battery": 100,
+            "speed": 0,
+            "heading": 1,
+            "driver": null,
+            "lights": false,
+            "wheels": 0,
+            "hurt": 0,
+            "horn": 0,
+            "hornCooldown": 0
+          },
+          "stations": {
+            "service-road": {
+              "repairs": 1,
+              "charges": 1
+            },
+            "service-plateau": {
+              "repairs": 1,
+              "charges": 1
+            }
+          },
+          "stats": {
+            "boarded": 0,
+            "exits": 0,
+            "crossings": 0,
+            "collisions": 0,
+            "repairs": 0,
+            "charges": 0,
+            "horns": 0,
+            "distance": 0
+          }
+        },
+        "modal": "rover"
+      }
+    },
+    {
+      "file": "captures/04-boarded-v08.png",
+      "description": "Anne en cabine après la manœuvre de montée",
+      "setup": "Localized prepared fixture: parked.json",
+      "state": {
+        "room": "road",
+        "chapter": 3,
+        "character": "anne",
+        "mode": "hybrid",
+        "elapsed": 2.2333333333333303,
+        "mobility": {
+          "revision": 8,
+          "rover": {
+            "room": "road",
+            "x": 676.2916666666666,
+            "z": 0.79,
+            "hp": 100,
+            "battery": 99.97268429487178,
+            "speed": 0,
+            "heading": 1,
+            "driver": "anne",
+            "lights": false,
+            "wheels": 0.5091145833333321,
+            "hurt": 0,
+            "horn": 0,
+            "hornCooldown": 0
+          },
+          "stations": {
+            "service-road": {
+              "repairs": 1,
+              "charges": 1
+            },
+            "service-plateau": {
+              "repairs": 1,
+              "charges": 1
+            }
+          },
+          "stats": {
+            "boarded": 1,
+            "exits": 0,
+            "crossings": 0,
+            "collisions": 0,
+            "repairs": 0,
+            "charges": 0,
+            "horns": 0,
+            "distance": 16.29166666666663
+          }
+        },
+        "modal": null
+      }
+    }
+  ],
+  "errors": [],
+  "method": "Exact standalone via set_content after HTTP was blocked (SMOKE_V08.json). Public keyboard/buttons, ordinary file import, real downloads. No live state/health/objective/clock writes. Localized prepared fixtures are labelled.",
+  "passed": true
+}

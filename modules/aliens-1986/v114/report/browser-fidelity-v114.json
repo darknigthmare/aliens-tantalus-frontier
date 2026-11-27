@@ -1,0 +1,559 @@
+{
+  "tests": [
+    {
+      "name": "25 lieux inspectables chargés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "28 repères du film et huit manques explicites",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "16 profils de personnage distincts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "24 équipements avec statuts non confondus",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Recherche montre la limite du loader",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Quatre contraintes de continuité visibles",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v106-hadley",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v106-medlab",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v106-sentry",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v106-sulaco",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v107-operations",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v107-service",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v109-logistics",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v109-reserve",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v112-workshop",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v112-conduit",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-gateway-medical",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Affichage civil sans arme : v114-gateway-medical",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Gateway désarmée : v114-gateway-medical",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-gateway-inquiry",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Affichage civil sans arme : v114-gateway-inquiry",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Gateway désarmée : v114-gateway-inquiry",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-sulaco-cryo",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-sulaco-mess",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-sulaco-armory",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-sulaco-cargo",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-dropship",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-apc",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-colony-mess",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-colony-drain",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-processor-entry",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-processor-gallery",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-hive-cocoons",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-queen-nursery",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection et état réel : v114-landing-pad",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise réelle de la collecte d’armurerie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause conserve collecte et réserves",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Déplacement interrompt sans donner les armes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Râtelier attribue les réserves une fois à la fin",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "F2 affiche l’armement hors terrain sans pause",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les huit profils sont sélectionnables après la collecte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Arme tenue sélectionnée : shotgun",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tir effectif et réserve indépendante : shotgun",
+      "ok": true,
+      "detail": {
+        "before": 12,
+        "after": 11
+      }
+    },
+    {
+      "name": "Réserve M41A non consommée par shotgun",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Arme tenue sélectionnée : flame",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tir effectif et réserve indépendante : flame",
+      "ok": true,
+      "detail": {
+        "before": 80,
+        "after": 79
+      }
+    },
+    {
+      "name": "Réserve M41A non consommée par flame",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Arme tenue sélectionnée : smartgun",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tir effectif et réserve indépendante : smartgun",
+      "ok": true,
+      "detail": {
+        "before": 120,
+        "after": 119
+      }
+    },
+    {
+      "name": "Réserve M41A non consommée par smartgun",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Arme tenue sélectionnée : pistol",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tir effectif et réserve indépendante : pistol",
+      "ok": true,
+      "detail": {
+        "before": 30,
+        "after": 29
+      }
+    },
+    {
+      "name": "Réserve M41A non consommée par pistol",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Arme tenue sélectionnée : launcher",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tir effectif et réserve indépendante : launcher",
+      "ok": true,
+      "detail": {
+        "before": 4,
+        "after": 3
+      }
+    },
+    {
+      "name": "Réserve M41A non consommée par launcher",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Projectile explosif encore en trajet : launcher",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise en pause à mi-vol : launcher",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Résolution après temps de vol : launcher",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Arme tenue sélectionnée : grenade",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tir effectif et réserve indépendante : grenade",
+      "ok": true,
+      "detail": {
+        "before": 2,
+        "after": 1
+      }
+    },
+    {
+      "name": "Réserve M41A non consommée par grenade",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Projectile explosif encore en trajet : grenade",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise en pause à mi-vol : grenade",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Résolution après temps de vol : grenade",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Arme tenue sélectionnée : knife",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tir effectif et réserve indépendante : knife",
+      "ok": true,
+      "detail": {
+        "before": 0,
+        "after": 0
+      }
+    },
+    {
+      "name": "Arme tenue sélectionnée : pulse",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tir effectif et réserve indépendante : pulse",
+      "ok": true,
+      "detail": {
+        "before": 48,
+        "after": 47
+      }
+    },
+    {
+      "name": "Shotgun de Hicks et dotation finie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Choix du shotgun conserve la réserve pulse de Hicks",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "M240 obtenu par le vrai parcours depuis l’insertion",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Newt absente du sélecteur d’arme",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Arsenal et HUD hors terrain 844x390",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de débordement horizontal 844x390",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Arsenal et HUD hors terrain 390x844",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de débordement horizontal 390x844",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import atomique : fuel inventé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import atomique : arme de Newt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import atomique : coffret inconnu",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import atomique : origine modifiée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Migration V113 conserve équipe et anciennes ressources",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Migration n’offre aucune réserve secondaire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Nouveau parcours arrive au bilan",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune requête externe nécessaire",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "Aucune erreur JavaScript ou console",
+      "ok": true,
+      "detail": {
+        "page": [],
+        "console": []
+      }
+    }
+  ],
+  "captures": [
+    {
+      "file": "64_atlas_et_manques.png",
+      "origin": "Atlas consulté depuis le menu : liste de référence, pas preuve de scènes jouées.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "65_armurerie_ripley.png",
+      "origin": "Reprise de 04_armory_ready, export non modifié du pilote, puis F2 dans l’interface.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "66_m240_essai.png",
+      "origin": "Armurerie : choix M240 et pressions F réelles ; banc d’essai hors chronologie, pas un combat de campagne.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "67_vasquez_drake_dietrich.png",
+      "origin": "Export 06_armory_cast non modifié : NPC de briefing, armes décoratives distinctes, pas renforts dans l’opération.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "68_bishop_apone_gorman.png",
+      "origin": "Export non modifié 02_sulaco_briefing du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "69_hangar_preparation.png",
+      "origin": "Export non modifié 07_clean_cargo du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "70_gateway_burke.png",
+      "origin": "Export non modifié 09_gateway_inquiry du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "71_processeur_galeries.png",
+      "origin": "Export non modifié 10_processor_gallery du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "72_nurserie_inspection.png",
+      "origin": "Export non modifié 12_queen_nursery du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "73_mess_colonial.png",
+      "origin": "Export non modifié 16_colony_mess du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "74_drain_newt.png",
+      "origin": "Export non modifié 17_drain_escorte du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "75_armement_paysage.png",
+      "origin": "Viewport émulé 844×390 ; véritable interface après import non modifié. Aucun téléphone physique testé.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "76_repli_m240.png",
+      "origin": "Export final inchangé du parcours avec mess, canalisation et M240 ; pas de progression injectée.",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "requests": [],
+  "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+  "nativeTantalus": false
+}

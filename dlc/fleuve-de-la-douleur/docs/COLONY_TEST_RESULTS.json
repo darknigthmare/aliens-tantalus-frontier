@@ -1,0 +1,308 @@
+{
+  "version": "0.9.0-candidate.1",
+  "passed": true,
+  "cases": 75,
+  "scope": "Isolated deterministic model fixtures; physical traversal covered by tests/traversal.cjs",
+  "results": [
+    {
+      "name": "Données cumulées : 6 tableaux, 24 cachettes, 2 jets, 47 lieux",
+      "passed": true
+    },
+    {
+      "name": "Tableau grid : proximité et objectif obligatoires",
+      "passed": true
+    },
+    {
+      "name": "Tableau grid : mauvais réglage ne valide rien",
+      "passed": true
+    },
+    {
+      "name": "Tableau grid : commande, durée et conséquence réelle",
+      "passed": true
+    },
+    {
+      "name": "Tableau grid : interruption et reprise, pas de crédit anticipé",
+      "passed": true
+    },
+    {
+      "name": "Tableau grid : état des commandes conservé par le codec",
+      "passed": true
+    },
+    {
+      "name": "Tableau shelter : proximité et objectif obligatoires",
+      "passed": true
+    },
+    {
+      "name": "Tableau shelter : mauvais réglage ne valide rien",
+      "passed": true
+    },
+    {
+      "name": "Tableau shelter : commande, durée et conséquence réelle",
+      "passed": true
+    },
+    {
+      "name": "Tableau shelter : interruption et reprise, pas de crédit anticipé",
+      "passed": true
+    },
+    {
+      "name": "Tableau shelter : état des commandes conservé par le codec",
+      "passed": true
+    },
+    {
+      "name": "Tableau emergency : proximité et objectif obligatoires",
+      "passed": true
+    },
+    {
+      "name": "Tableau emergency : mauvais réglage ne valide rien",
+      "passed": true
+    },
+    {
+      "name": "Tableau emergency : commande, durée et conséquence réelle",
+      "passed": true
+    },
+    {
+      "name": "Tableau emergency : interruption et reprise, pas de crédit anticipé",
+      "passed": true
+    },
+    {
+      "name": "Tableau emergency : état des commandes conservé par le codec",
+      "passed": true
+    },
+    {
+      "name": "Tableau last_power : proximité et objectif obligatoires",
+      "passed": true
+    },
+    {
+      "name": "Tableau last_power : mauvais réglage ne valide rien",
+      "passed": true
+    },
+    {
+      "name": "Tableau last_power : commande, durée et conséquence réelle",
+      "passed": true
+    },
+    {
+      "name": "Tableau last_power : interruption et reprise, pas de crédit anticipé",
+      "passed": true
+    },
+    {
+      "name": "Tableau last_power : état des commandes conservé par le codec",
+      "passed": true
+    },
+    {
+      "name": "Tableau pressure : proximité et objectif obligatoires",
+      "passed": true
+    },
+    {
+      "name": "Tableau pressure : mauvais réglage ne valide rien",
+      "passed": true
+    },
+    {
+      "name": "Tableau pressure : commande, durée et conséquence réelle",
+      "passed": true
+    },
+    {
+      "name": "Tableau pressure : interruption et reprise, pas de crédit anticipé",
+      "passed": true
+    },
+    {
+      "name": "Tableau pressure : état des commandes conservé par le codec",
+      "passed": true
+    },
+    {
+      "name": "Tableau reroute : proximité et objectif obligatoires",
+      "passed": true
+    },
+    {
+      "name": "Tableau reroute : mauvais réglage ne valide rien",
+      "passed": true
+    },
+    {
+      "name": "Tableau reroute : commande, durée et conséquence réelle",
+      "passed": true
+    },
+    {
+      "name": "Tableau reroute : interruption et reprise, pas de crédit anticipé",
+      "passed": true
+    },
+    {
+      "name": "Tableau reroute : état des commandes conservé par le codec",
+      "passed": true
+    },
+    {
+      "name": "Tableau électrique : surcharge distincte du mauvais routage",
+      "passed": true
+    },
+    {
+      "name": "Tableau : index négatif, fractionnaire ou inconnu refusé",
+      "passed": true
+    },
+    {
+      "name": "Coupure habitat : phase 2, puis circuit restauré uniquement dans son secteur",
+      "passed": true
+    },
+    {
+      "name": "Changement de phase : un réseau restauré peut retomber",
+      "passed": true
+    },
+    {
+      "name": "Avant-crise : alimentation disponible sans puzzle validé",
+      "passed": true
+    },
+    {
+      "name": "Jet jet-processor6 : cycle, dégâts, arrêt par drapeau",
+      "passed": true
+    },
+    {
+      "name": "Jet jet-pump : cycle, dégâts, arrêt par drapeau",
+      "passed": true
+    },
+    {
+      "name": "Jet : autre profondeur protégée",
+      "passed": true
+    },
+    {
+      "name": "Cachette : entrée physique, lampe coupée, reprise par E",
+      "passed": true
+    },
+    {
+      "name": "Cachette : pas de tir ni fusée, sortie par déplacement",
+      "passed": true
+    },
+    {
+      "name": "Cachette : ennemi témoin retrouve le joueur",
+      "passed": true
+    },
+    {
+      "name": "Cachette : aucune détection magique sans témoin",
+      "passed": true
+    },
+    {
+      "name": "Cachette : sauvegarde restaure exactement le refuge occupé",
+      "passed": true
+    },
+    {
+      "name": "Cachette : pas d’entrée à distance",
+      "passed": true
+    },
+    {
+      "name": "Lampe : consommation, extinction, récupération bornée",
+      "passed": true
+    },
+    {
+      "name": "Détecteur : Anne et Newt ne reçoivent pas celui des Marines",
+      "passed": true
+    },
+    {
+      "name": "Détecteur : contacts vivants locaux, cadence de proximité",
+      "passed": true
+    },
+    {
+      "name": "Escorte : attendre puis suivre change le déplacement",
+      "passed": true
+    },
+    {
+      "name": "Escorte : ordre attendre bloque la porte même à proximité",
+      "passed": true
+    },
+    {
+      "name": "Escorte : soins consomment la trousse du joueur",
+      "passed": true
+    },
+    {
+      "name": "Escorte : rassurer demande proximité et souffle",
+      "passed": true
+    },
+    {
+      "name": "Escorte : peur augmente au contact d’une menace et redescend",
+      "passed": true
+    },
+    {
+      "name": "Escorte : mort, message et point de contrôle",
+      "passed": true
+    },
+    {
+      "name": "Escorte : santé, peur et ordre reviennent après import",
+      "passed": true
+    },
+    {
+      "name": "Cloison : aucune usure spontanée sans poursuite",
+      "passed": true
+    },
+    {
+      "name": "Cloison : pression ennemie, rupture puis passage réel",
+      "passed": true
+    },
+    {
+      "name": "Repères : maximum 12, ancien retiré, sauvegarde conservée",
+      "passed": true
+    },
+    {
+      "name": "Dotations : Brackett conserve ses munitions après le chapitre d’Anne",
+      "passed": true
+    },
+    {
+      "name": "Migration v01 : systèmes absents reconstruits avec objectifs acquis",
+      "passed": true
+    },
+    {
+      "name": "Import v02 invalide rejeté · battery",
+      "passed": true
+    },
+    {
+      "name": "Import v02 invalide rejeté · circuit",
+      "passed": true
+    },
+    {
+      "name": "Import v02 invalide rejeté · board",
+      "passed": true
+    },
+    {
+      "name": "Import v02 invalide rejeté · unknownBoard",
+      "passed": true
+    },
+    {
+      "name": "Import v02 invalide rejeté · switch",
+      "passed": true
+    },
+    {
+      "name": "Import v02 invalide rejeté · integrity",
+      "passed": true
+    },
+    {
+      "name": "Import v02 invalide rejeté · unknownDoor",
+      "passed": true
+    },
+    {
+      "name": "Import v02 invalide rejeté · hide",
+      "passed": true
+    },
+    {
+      "name": "Import v02 invalide rejeté · marker",
+      "passed": true
+    },
+    {
+      "name": "Import v02 invalide rejeté · markers",
+      "passed": true
+    },
+    {
+      "name": "Import v02 invalide rejeté · gear",
+      "passed": true
+    },
+    {
+      "name": "Import v02 invalide rejeté · alienGear",
+      "passed": true
+    },
+    {
+      "name": "Newt : la possession globale du poste à souder ne lui donne pas l’outil",
+      "passed": true
+    },
+    {
+      "name": "Escorte : le validateur refuse un achèvement hors destination",
+      "passed": true
+    },
+    {
+      "name": "Export réel v01 : import et nouvelle enveloppe v02 sans perte de lieu",
+      "passed": true
+    }
+  ]
+}

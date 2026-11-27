@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "scope": "Copie jetable hors de la release, références non régénérées",
+  "checks": [
+    {
+      "name": "Paquet non modifié accepté",
+      "ok": true
+    },
+    {
+      "name": "Vérification ne réécrit pas le manifeste",
+      "ok": true
+    },
+    {
+      "name": "Modification d’un composant refusée",
+      "ok": true
+    },
+    {
+      "name": "Fichier ajouté non listé refusé",
+      "ok": true
+    },
+    {
+      "name": "Fichier requis manquant refusé",
+      "ok": true
+    },
+    {
+      "name": "Restauration des octets à nouveau acceptée",
+      "ok": true
+    }
+  ]
+}

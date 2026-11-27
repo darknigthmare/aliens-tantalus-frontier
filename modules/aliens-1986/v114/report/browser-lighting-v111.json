@@ -1,0 +1,270 @@
+{
+  "tests": [
+    {
+      "name": "Insertion schema111 et torche sans ressources offertes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Huit circuits service existants conservés nominaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import exact avant manœuvre électrique",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "K déclenche une préparation réelle de 0,95 s",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Lampe reste alimentée durant la préparation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause conserve exactement le geste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Marcher annule la coupure",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tirer annule et dépense une balle ordinaire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import mi-geste ne remet pas le temps à zéro",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Circuit coupé à l’achèvement seulement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune porte de scène ou sas modifié par coupure",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune population créée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "L éteint la torche indépendamment du circuit",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Instrument indique ombre sans coordonnées ennemies",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Orientation et torche ont été reprises du parcours",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La souris oriente réellement la torche",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Obscurité conservée au retour après maintenance",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Circuit rétabli sans soin ni recharge offert",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Défense achevée dans un circuit coupé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sentinelle consomme ses munitions réelles",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Refus atomique : angle non fini",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Refus atomique : bilan incohérent",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Refus atomique : propriété inconnue",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Refus atomique : identité équipe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Migration V110 garde équipe et réserves",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Migration garde tous les circuits et ajoute seulement la torche",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton torche reflète la touche L",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton torche réactive indépendamment du clavier",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Carte reste séparée et sans radar",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Réglages accessibilité disponibles",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "HUD et boutons hors terrain 844x390",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Scène non écrasée 844x390",
+      "ok": true,
+      "detail": {
+        "x": 0,
+        "y": 44,
+        "width": 844,
+        "height": 194
+      }
+    },
+    {
+      "name": "Torche et contrôle présents 844x390",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "HUD et boutons hors terrain 390x844",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Scène non écrasée 390x844",
+      "ok": true,
+      "detail": {
+        "x": 0,
+        "y": 45,
+        "width": 390,
+        "height": 412
+      }
+    },
+    {
+      "name": "Torche et contrôle présents 390x844",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Opération importée complète donne le bilan",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Zéro requête externe nécessaire",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "Aucune erreur JS/console",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "35_coupure_electrique.png",
+      "origin": "Clic Éclairage depuis l’export réel 01-avant-coupure ; préparation avant modification du circuit",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "36_operations_obscurite.png",
+      "origin": "Coupure achevée et touche L dans Chromium, depuis le parcours continu",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "37_piste_dans_le_noir.png",
+      "origin": "Export non modifié 04-ombre-et-poursuite ; mêmes ennemis actifs dans le réseau, torche éteinte",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "38_faisceau_contact.png",
+      "origin": "Export réel 05-torche-contact : orientation publique du faisceau vers un contact après sa poursuite",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "39_faisceau_cloison.png",
+      "origin": "Visée à la souris depuis l’export 06-defense-dans-le-noir ; cône tronqué par les volumes opaques",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "40_retour_lampes.png",
+      "origin": "Export 08-operations-retablie : seconde manœuvre effectuée par le pilote sans ressources ajoutées",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "41_defense_nocturne.png",
+      "origin": "Export 10-defense-tenue-noir : défense terminée sans rallumer les lampes, munitions persistantes",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "42_eclairage_paysage.png",
+      "origin": "Viewport émulé 844 × 390, contrôles tactiques hors du canvas ; pas un téléphone physique",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "43_repli_circuits.png",
+      "origin": "Export complet 11-repli-noir du parcours, affichage du bilan sans modification",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "requests": [],
+  "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+  "nativeTantalus": false
+}

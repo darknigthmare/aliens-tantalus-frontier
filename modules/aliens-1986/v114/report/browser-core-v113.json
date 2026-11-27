@@ -1,0 +1,174 @@
+{
+  "browser": "Chromium through Python Playwright",
+  "transport": "distributed offline HTML via set_content; unchanged Blob module loader",
+  "htmlSHA256": "d7e6a797fda5a6c7774f32ba6191757e305734382c3f6b23407555372c992a0f",
+  "nativeTantalus": false,
+  "tests": [
+    {
+      "name": "Dix inspections et une opération distincte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Démarrage opération à Hadley",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Newt dans son lieu avant le secours",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "État contient les dix lieux sans HTML de contrôle",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ordre tenir au clavier conserve la position",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ouverture réellement différée",
+      "ok": true,
+      "detail": {
+        "kind": "open",
+        "roomId": "v106-hadley",
+        "id": "service-gate",
+        "elapsed": 0.36669999999999986,
+        "duration": 0.88,
+        "x": 572.6000000000007,
+        "z": 198,
+        "hp": 100
+      }
+    },
+    {
+      "name": "Pause ne consomme pas le temps du geste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Déplacement annule le geste sans ouvrir",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ouverture achevée au clavier",
+      "ok": true,
+      "detail": {
+        "action": null,
+        "p": {
+          "id": "ripley",
+          "x": 572.6000000000007,
+          "z": 198,
+          "roomId": "v106-hadley",
+          "hp": 100,
+          "ammo": 48,
+          "alive": true,
+          "invulnerable": 0,
+          "phase": "idle",
+          "clock": 0,
+          "aim": null,
+          "order": "follow",
+          "anchor": null,
+          "facing": 1,
+          "recruited": true
+        },
+        "note": "Passage ouvert."
+      }
+    },
+    {
+      "name": "Tirs réels consomment les munitions",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux contacts neutralisés par les tirs UI",
+      "ok": true,
+      "detail": [
+        {
+          "id": "warrior-a",
+          "x": 757.1811819629803,
+          "z": 193.34767027188417,
+          "hp": 0,
+          "ammo": 0,
+          "alive": false,
+          "invulnerable": 0,
+          "phase": "dead",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        },
+        {
+          "id": "warrior-b",
+          "x": 994.9518110247271,
+          "z": 224.4400707025107,
+          "hp": 0,
+          "ammo": 0,
+          "alive": false,
+          "invulnerable": 0,
+          "phase": "dead",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        }
+      ]
+    },
+    {
+      "name": "Premier raccord traversé avec la vraie équipe",
+      "ok": true,
+      "detail": "v107-operations"
+    },
+    {
+      "name": "Porte de la salle quittée conservée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Objectif avancé seulement après transfert",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export/import exact de tous les lieux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Champ de rôle injecté refusé sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "État de porte erroné refusé sans mutation",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "captures": [
+    {
+      "file": "00_menu.png",
+      "origin": "HTML distribué au menu",
+      "htmlSHA256": "d7e6a797fda5a6c7774f32ba6191757e305734382c3f6b23407555372c992a0f",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "01_ouverture_en_cours.png",
+      "origin": "Approche et ouverture au clavier depuis le début du parcours",
+      "htmlSHA256": "d7e6a797fda5a6c7774f32ba6191757e305734382c3f6b23407555372c992a0f",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "02_operations_arrivee.png",
+      "origin": "Premier raccord depuis Hadley joué au clavier/souris",
+      "htmlSHA256": "d7e6a797fda5a6c7774f32ba6191757e305734382c3f6b23407555372c992a0f",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ]
+}

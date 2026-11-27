@@ -1,0 +1,90 @@
+{
+  "browser": "Chromium through Python Playwright",
+  "tests": [
+    {
+      "name": "R lance une ouverture temporisée réelle",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause fige le sas et toutes les mémoires",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Marche annule la réouverture sans libérer la liaison",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Réouverture à terme modifie le seul état partagé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Carte reste sans liste de menaces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "V active la prudence dans la simulation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "L’interface reflète la prudence",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import V107 préserve les ressources et le jalon",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune poursuite inventée à la migration",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Audio local activable sans média externe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune erreur JavaScript contacts",
+      "ok": true,
+      "detail": {
+        "page": [],
+        "console": []
+      }
+    }
+  ],
+  "captures": [
+    {
+      "file": "12_sas_isole.png",
+      "origin": "État d’isolement obtenu par le pilote avec R, sans modification du fichier",
+      "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "13_reouverture_sas.png",
+      "origin": "Commande R réelle sur la liaison fermée",
+      "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "14_carte_isolement.png",
+      "origin": "Carte relevée affichée par M sur le même état d’isolement, sans contacts radar",
+      "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+  "nativeTantalus": false
+}

@@ -1,0 +1,456 @@
+{
+  "version": "0.9.0-candidate.1",
+  "passed": true,
+  "cases": 112,
+  "results": [
+    {
+      "name": "Five two-ended ducts; ten unique mouths; extended player graph",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-concourse: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-concourse: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-concourse: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-garage: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-garage: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-garage: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-stores: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-stores: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-stores: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-power: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-power: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-power: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-service: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-service: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-service: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-pump: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-pump: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-pump: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-med: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-med: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-med: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-science: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-science: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-science: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-hive: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-hive: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-hive: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-coolant: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-coolant: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "hybrid duct-coolant: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "classic duct-concourse: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "classic duct-concourse: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "classic duct-concourse: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "classic duct-garage: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "classic duct-garage: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "classic duct-garage: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "classic duct-stores: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "classic duct-stores: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "classic duct-stores: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "classic duct-power: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "classic duct-power: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "classic duct-power: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "classic duct-service: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "classic duct-service: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "classic duct-service: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "classic duct-pump: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "classic duct-pump: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "classic duct-pump: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "classic duct-med: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "classic duct-med: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "classic duct-med: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "classic duct-science: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "classic duct-science: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "classic duct-science: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "classic duct-hive: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "classic duct-hive: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "classic duct-hive: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "classic duct-coolant: free mouth, reachable controls and no main interaction interception",
+      "passed": true
+    },
+    {
+      "name": "classic duct-coolant: interruptible close, open keeps integrity, listen records only here",
+      "passed": true
+    },
+    {
+      "name": "classic duct-coolant: existing adult departs, ID and damage retained, no clone",
+      "passed": true
+    },
+    {
+      "name": "No transfers before phase 2 and no fabricated specimens",
+      "passed": true
+    },
+    {
+      "name": "Facehugger stays in the ordinary floor simulation",
+      "passed": true
+    },
+    {
+      "name": "A directly seen player cancels an entry; damage still applies to the same adult",
+      "passed": true
+    },
+    {
+      "name": "Flare fear retains priority over maintenance-duct seeking",
+      "passed": true
+    },
+    {
+      "name": "Visible companion prevents vent escape",
+      "passed": true
+    },
+    {
+      "name": "Sealed origin or destination prevents new entry",
+      "passed": true
+    },
+    {
+      "name": "Closing refuses a physically entering adult, then refuses again at completion",
+      "passed": true
+    },
+    {
+      "name": "Close interrupted by motion or injury consumes nothing",
+      "passed": true
+    },
+    {
+      "name": "Newt cannot use industrial locks but can listen; no weapon or tracker granted",
+      "passed": true
+    },
+    {
+      "name": "Anne can lock grilles without gaining a weapon",
+      "passed": true
+    },
+    {
+      "name": "Player inside the clearance zone prevents emergence indefinitely without injury",
+      "passed": true
+    },
+    {
+      "name": "Companion also reserves exit clearance",
+      "passed": true
+    },
+    {
+      "name": "Offscreen time never silently breaks a locked grille or materializes a creature",
+      "passed": true
+    },
+    {
+      "name": "Announced pressure breaks the grille, then a fresh warning precedes the arrival",
+      "passed": true
+    },
+    {
+      "name": "A source lock applied after departure does not teleport its occupant back",
+      "passed": true
+    },
+    {
+      "name": "A full destination queues rather than deleting its twelfth-plus-one specimen",
+      "passed": true
+    },
+    {
+      "name": "Tracker echo locates the mouth, not a hidden exact creature coordinate",
+      "passed": true
+    },
+    {
+      "name": "Echo does not initialize remote rooms or disclose the transit to unrelated rooms",
+      "passed": true
+    },
+    {
+      "name": "Listen records an in-flight movement, never updates the stored reading remotely",
+      "passed": true
+    },
+    {
+      "name": "Loud motion cancels a duct listen",
+      "passed": true
+    },
+    {
+      "name": "Import/export mid-flight retains the only specimen, its timer and health",
+      "passed": true
+    },
+    {
+      "name": "Import while handling a grille cancels work but does not grant a closed state",
+      "passed": true
+    },
+    {
+      "name": "Retry restores grille and observations from the checkpoint",
+      "passed": true
+    },
+    {
+      "name": "Dead model does not run hidden transit clocks",
+      "passed": true
+    },
+    {
+      "name": "A lethal projectile clears an entering body without queuing a dead specimen",
+      "passed": true
+    },
+    {
+      "name": "Reject corrupted grille registry: revision",
+      "passed": true
+    },
+    {
+      "name": "Reject corrupted grille registry: missing",
+      "passed": true
+    },
+    {
+      "name": "Reject corrupted grille registry: hp",
+      "passed": true
+    },
+    {
+      "name": "Reject corrupted grille registry: brokenHealthy",
+      "passed": true
+    },
+    {
+      "name": "Reject corrupted grille registry: infinite",
+      "passed": true
+    },
+    {
+      "name": "Reject corrupted grille registry: cooldown",
+      "passed": true
+    },
+    {
+      "name": "Reject corrupted grille registry: unknown",
+      "passed": true
+    },
+    {
+      "name": "Reject corrupted grille registry: stats",
+      "passed": true
+    },
+    {
+      "name": "Reject corrupted grille registry: observation",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid or duplicate transfer: negative",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid or duplicate transfer: overflow",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid or duplicate transfer: badRoom",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid or duplicate transfer: sameEnd",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid or duplicate transfer: wrongRoute",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid or duplicate transfer: hp",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid or duplicate transfer: kind",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid or duplicate transfer: nan",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid or duplicate transfer: position",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid or duplicate transfer: duplicate",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid or duplicate transfer: routeTwice",
+      "passed": true
+    },
+    {
+      "name": "Actual legacy export 01: no invented past grille actions",
+      "passed": true
+    },
+    {
+      "name": "Actual legacy export 02: no invented past grille actions",
+      "passed": true
+    },
+    {
+      "name": "Actual legacy export 03: no invented past grille actions",
+      "passed": true
+    },
+    {
+      "name": "Actual legacy export 04: no invented past grille actions",
+      "passed": true
+    },
+    {
+      "name": "Actual legacy export 05: no invented past grille actions",
+      "passed": true
+    },
+    {
+      "name": "Actual legacy export 06: no invented past grille actions",
+      "passed": true
+    }
+  ],
+  "method": "Explicit localized model fixtures. No test claims a manual playthrough. Live enemy queues and grilles use Simulation.update; source and destination population initialized for conservation assertions."
+}

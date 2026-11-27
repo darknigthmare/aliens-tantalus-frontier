@@ -1,0 +1,941 @@
+{
+  "schema": 111,
+  "contract": "cfdfea91",
+  "mode": "operation",
+  "roomId": "v106-sentry",
+  "elapsed": 67.34999999999819,
+  "status": "active",
+  "step": 3,
+  "flags": {
+    "relay": true,
+    "newt": true,
+    "defense": false
+  },
+  "defenseTime": 0,
+  "visitedRooms": [
+    "v106-hadley",
+    "v107-operations",
+    "v107-service",
+    "v106-medlab",
+    "v106-sentry"
+  ],
+  "transitions": 6,
+  "stats": {
+    "opensCompleted": 3,
+    "opensCancelled": 0,
+    "transfers": 6,
+    "orders": 15,
+    "allyShots": 2,
+    "allyBlocks": 156
+  },
+  "worlds": {
+    "v106-hadley": {
+      "schema": 106,
+      "roomId": "v106-hadley",
+      "geometry": "97c35eec",
+      "time": 67.34999999999819,
+      "doors": {
+        "service-gate": {
+          "open": true,
+          "powered": true
+        }
+      },
+      "circuits": {
+        "service": true
+      },
+      "visited": [
+        "entry",
+        "threshold"
+      ],
+      "stats": {
+        "shots": 0,
+        "hits": 0,
+        "doorUses": 1,
+        "blockedMoves": 0,
+        "committedMisses": 3
+      },
+      "actors": []
+    },
+    "v106-medlab": {
+      "schema": 106,
+      "roomId": "v106-medlab",
+      "geometry": "ee044eac",
+      "time": 67.34999999999819,
+      "doors": {
+        "quarantine-gate": {
+          "open": true,
+          "powered": true
+        }
+      },
+      "circuits": {
+        "service": true
+      },
+      "visited": [
+        "entry",
+        "threshold",
+        "east"
+      ],
+      "stats": {
+        "shots": 0,
+        "hits": 0,
+        "doorUses": 1,
+        "blockedMoves": 0,
+        "committedMisses": 0
+      },
+      "actors": []
+    },
+    "v106-sentry": {
+      "schema": 106,
+      "roomId": "v106-sentry",
+      "geometry": "832a370a",
+      "time": 67.34999999999819,
+      "doors": {
+        "defense-gate": {
+          "open": false,
+          "powered": true
+        }
+      },
+      "circuits": {
+        "service": false
+      },
+      "visited": [
+        "entry"
+      ],
+      "stats": {
+        "shots": 0,
+        "hits": 0,
+        "doorUses": 0,
+        "blockedMoves": 0,
+        "committedMisses": 0
+      },
+      "actors": [
+        {
+          "id": "sentry-a",
+          "x": 514,
+          "z": 198,
+          "hp": 100,
+          "ammo": 120,
+          "alive": true,
+          "invulnerable": 0,
+          "phase": "idle",
+          "clock": 0,
+          "aim": null,
+          "waiting": true
+        },
+        {
+          "id": "rush-a",
+          "x": 918,
+          "z": 201,
+          "hp": 100,
+          "ammo": 0,
+          "alive": true,
+          "invulnerable": 0,
+          "phase": "idle",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        },
+        {
+          "id": "rush-b",
+          "x": 1110,
+          "z": 215,
+          "hp": 100,
+          "ammo": 0,
+          "alive": true,
+          "invulnerable": 0,
+          "phase": "idle",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        },
+        {
+          "id": "rush-c",
+          "x": 1250,
+          "z": 154,
+          "hp": 100,
+          "ammo": 0,
+          "alive": true,
+          "invulnerable": 0,
+          "phase": "idle",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        }
+      ]
+    },
+    "v106-sulaco": {
+      "schema": 106,
+      "roomId": "v106-sulaco",
+      "geometry": "2716be5b",
+      "time": 0,
+      "doors": {
+        "cargo-gate": {
+          "open": false,
+          "powered": true
+        },
+        "airlock-critical": {
+          "open": false,
+          "powered": true
+        }
+      },
+      "circuits": {
+        "service": true
+      },
+      "visited": [],
+      "stats": {
+        "shots": 0,
+        "hits": 0,
+        "doorUses": 0,
+        "blockedMoves": 0,
+        "committedMisses": 0
+      },
+      "actors": [
+        {
+          "id": "hangar-contact",
+          "x": 982,
+          "z": 180,
+          "hp": 100,
+          "ammo": 0,
+          "alive": true,
+          "invulnerable": 0,
+          "phase": "idle",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        }
+      ]
+    },
+    "v107-operations": {
+      "schema": 106,
+      "roomId": "v107-operations",
+      "geometry": "5fe949e6",
+      "time": 67.34999999999819,
+      "doors": {
+        "ops-bulkhead": {
+          "open": true,
+          "powered": true
+        }
+      },
+      "circuits": {
+        "service": true
+      },
+      "visited": [
+        "ops-west",
+        "ops-center",
+        "ops-medical",
+        "ops-north",
+        "ops-east"
+      ],
+      "stats": {
+        "shots": 7,
+        "hits": 7,
+        "doorUses": 0,
+        "blockedMoves": 0,
+        "committedMisses": 0
+      },
+      "actors": [
+        {
+          "id": "warrior-b",
+          "x": 600.882079030627,
+          "z": 253.91128651472528,
+          "hp": 0,
+          "ammo": 0,
+          "alive": false,
+          "invulnerable": 0,
+          "phase": "dead",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        }
+      ]
+    },
+    "v107-service": {
+      "schema": 106,
+      "roomId": "v107-service",
+      "geometry": "f3ce2558",
+      "time": 67.34999999999819,
+      "doors": {
+        "maintenance-gate": {
+          "open": true,
+          "powered": false
+        }
+      },
+      "circuits": {
+        "service": true,
+        "network": true
+      },
+      "visited": [
+        "service-entry",
+        "service-threshold",
+        "relay"
+      ],
+      "stats": {
+        "shots": 23,
+        "hits": 23,
+        "doorUses": 1,
+        "blockedMoves": 0,
+        "committedMisses": 0
+      },
+      "actors": [
+        {
+          "id": "service-contact",
+          "x": 889.3016602223657,
+          "z": 197.72917818446774,
+          "hp": 0,
+          "ammo": 0,
+          "alive": false,
+          "invulnerable": 0,
+          "phase": "dead",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        },
+        {
+          "id": "parasite-b",
+          "x": 1178.148239919541,
+          "z": 298.3379697773571,
+          "hp": 0,
+          "ammo": 0,
+          "alive": false,
+          "invulnerable": 0,
+          "phase": "dead",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        },
+        {
+          "id": "warrior-a",
+          "x": 320.8254468564518,
+          "z": 200.18992650138193,
+          "hp": 0,
+          "ammo": 0,
+          "alive": false,
+          "invulnerable": 0,
+          "phase": "dead",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        },
+        {
+          "id": "reserve-stalker",
+          "x": 1264.7330118901164,
+          "z": 161.07341998257607,
+          "hp": 0,
+          "ammo": 0,
+          "alive": false,
+          "invulnerable": 0,
+          "phase": "dead",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        },
+        {
+          "id": "parasite-a",
+          "x": 1173.9074019640302,
+          "z": 310.7803210604643,
+          "hp": 0,
+          "ammo": 0,
+          "alive": false,
+          "invulnerable": 0,
+          "phase": "dead",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        }
+      ]
+    },
+    "v109-logistics": {
+      "schema": 106,
+      "roomId": "v109-logistics",
+      "geometry": "71829905",
+      "time": 67.34999999999819,
+      "doors": {
+        "freight-shutter": {
+          "open": false,
+          "powered": false
+        }
+      },
+      "circuits": {
+        "service": true
+      },
+      "visited": [],
+      "stats": {
+        "shots": 0,
+        "hits": 0,
+        "doorUses": 0,
+        "blockedMoves": 0,
+        "committedMisses": 0
+      },
+      "actors": [
+        {
+          "id": "logistics-pursuer",
+          "x": 985,
+          "z": 196,
+          "hp": 100,
+          "ammo": 0,
+          "alive": true,
+          "invulnerable": 0,
+          "phase": "idle",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        }
+      ]
+    },
+    "v109-reserve": {
+      "schema": 106,
+      "roomId": "v109-reserve",
+      "geometry": "c1d6868f",
+      "time": 67.34999999999819,
+      "doors": {
+        "reserve-door": {
+          "open": false,
+          "powered": false
+        }
+      },
+      "circuits": {
+        "service": true
+      },
+      "visited": [],
+      "stats": {
+        "shots": 0,
+        "hits": 0,
+        "doorUses": 0,
+        "blockedMoves": 0,
+        "committedMisses": 0
+      },
+      "actors": []
+    }
+  },
+  "team": [
+    {
+      "id": "ripley",
+      "x": 440.4347361618361,
+      "z": 283.32304963816915,
+      "roomId": "v106-sentry",
+      "hp": 100,
+      "ammo": 20,
+      "alive": true,
+      "invulnerable": 0,
+      "phase": "idle",
+      "clock": 0,
+      "aim": null,
+      "order": "follow",
+      "anchor": null,
+      "facing": 1,
+      "recruited": true
+    },
+    {
+      "id": "hicks",
+      "x": 371.99274278840863,
+      "z": 251.1779257939132,
+      "roomId": "v106-sentry",
+      "hp": 100,
+      "ammo": 23,
+      "alive": true,
+      "invulnerable": 0,
+      "phase": "idle",
+      "clock": 0,
+      "aim": null,
+      "order": "follow",
+      "anchor": null,
+      "facing": 1,
+      "recruited": true
+    },
+    {
+      "id": "hudson",
+      "x": 333.0965717906837,
+      "z": 308.72257639808856,
+      "roomId": "v106-sentry",
+      "hp": 86,
+      "ammo": 23,
+      "alive": true,
+      "invulnerable": 0,
+      "phase": "idle",
+      "clock": 0,
+      "aim": null,
+      "order": "follow",
+      "anchor": null,
+      "facing": 1,
+      "recruited": true
+    },
+    {
+      "id": "newt",
+      "x": 293.667811511083,
+      "z": 250.45337502327843,
+      "roomId": "v106-sentry",
+      "hp": 100,
+      "ammo": 0,
+      "alive": true,
+      "invulnerable": 0,
+      "phase": "idle",
+      "clock": 0,
+      "aim": null,
+      "order": "follow",
+      "anchor": null,
+      "facing": 1,
+      "recruited": true
+    }
+  ],
+  "action": null,
+  "transition": null,
+  "contacts": {
+    "schema": 108,
+    "pace": "normal",
+    "stride": 47.30000000000006,
+    "footAt": 66.0499999999979,
+    "serial": 129,
+    "noises": [
+      {
+        "seq": 114,
+        "roomId": "v106-medlab",
+        "x": 584.7223840842037,
+        "z": 205.10060427200682,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 59.52499999999769,
+        "radius": 250
+      },
+      {
+        "seq": 115,
+        "roomId": "v106-medlab",
+        "x": 511.62747825076013,
+        "z": 204.23762037867348,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 59.949999999997665,
+        "radius": 250
+      },
+      {
+        "seq": 116,
+        "roomId": "v106-medlab",
+        "x": 438.5325724173175,
+        "z": 203.37463648534015,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 60.37499999999764,
+        "radius": 250
+      },
+      {
+        "seq": 117,
+        "roomId": "v106-medlab",
+        "x": 365.4376665838749,
+        "z": 202.5116525920068,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 60.79999999999762,
+        "radius": 250
+      },
+      {
+        "seq": 118,
+        "roomId": "v106-medlab",
+        "x": 292.34276075043226,
+        "z": 201.64866869867348,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 61.22499999999759,
+        "radius": 250
+      },
+      {
+        "seq": 119,
+        "roomId": "v106-medlab",
+        "x": 219.24785491698964,
+        "z": 200.78568480534014,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 61.64999999999757,
+        "radius": 250
+      },
+      {
+        "seq": 120,
+        "roomId": "v106-medlab",
+        "x": 146.152949083547,
+        "z": 199.922700912007,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 62.074999999997544,
+        "radius": 250
+      },
+      {
+        "seq": 121,
+        "roomId": "v106-medlab",
+        "x": 73.05804325010439,
+        "z": 199.0597170186739,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 62.49999999999752,
+        "radius": 250
+      },
+      {
+        "seq": 122,
+        "roomId": "v107-operations",
+        "x": 1187.8639019596521,
+        "z": 223.68934967339146,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 63.49999999999746,
+        "radius": 250
+      },
+      {
+        "seq": 123,
+        "roomId": "v107-operations",
+        "x": 1259.9692977917825,
+        "z": 211.67178370136986,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 63.92499999999744,
+        "radius": 250
+      },
+      {
+        "seq": 124,
+        "roomId": "v107-operations",
+        "x": 1332.074693623913,
+        "z": 199.65421772934792,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 64.34999999999751,
+        "radius": 250
+      },
+      {
+        "seq": 125,
+        "roomId": "v106-sentry",
+        "x": 185.17149113358835,
+        "z": 206.4059791164123,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 64.7749999999976,
+        "radius": 250
+      },
+      {
+        "seq": 126,
+        "roomId": "v106-sentry",
+        "x": 255.16302606068854,
+        "z": 227.49614361431324,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 65.1999999999977,
+        "radius": 250
+      },
+      {
+        "seq": 127,
+        "roomId": "v106-sentry",
+        "x": 325.1545609877887,
+        "z": 248.58630811221423,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 65.6249999999978,
+        "radius": 250
+      },
+      {
+        "seq": 128,
+        "roomId": "v106-sentry",
+        "x": 395.1460959148889,
+        "z": 269.6764726101155,
+        "kind": "footstep",
+        "source": "ripley",
+        "at": 66.0499999999979,
+        "radius": 250
+      },
+      {
+        "seq": 129,
+        "roomId": "v106-sentry",
+        "x": 446,
+        "z": 313,
+        "kind": "control",
+        "source": "service-switch",
+        "at": 67.29999999999818,
+        "radius": 350
+      }
+    ],
+    "brains": {
+      "warrior-a": {
+        "mode": "dead",
+        "stimulus": null,
+        "searchUntil": 22.55000000000007,
+        "searchStep": 2,
+        "nextPathAt": 39.399999999998876,
+        "travel": null,
+        "speed": 0,
+        "lastStep": 39.024999999998855
+      },
+      "warrior-b": {
+        "mode": "dead",
+        "stimulus": null,
+        "searchUntil": 0,
+        "searchStep": 0,
+        "nextPathAt": 22.14999999999985,
+        "travel": null,
+        "speed": 0,
+        "lastStep": 21.44999999999985
+      },
+      "parasite-a": {
+        "mode": "dead",
+        "stimulus": null,
+        "searchUntil": 0,
+        "searchStep": 0,
+        "nextPathAt": 40.59999999999881,
+        "travel": null,
+        "speed": 0,
+        "lastStep": 40.57499999999877
+      },
+      "parasite-b": {
+        "mode": "dead",
+        "stimulus": null,
+        "searchUntil": 0,
+        "searchStep": 0,
+        "nextPathAt": 35.4999999999991,
+        "travel": null,
+        "speed": 0,
+        "lastStep": 35.474999999999056
+      },
+      "rush-a": {
+        "mode": "idle",
+        "stimulus": null,
+        "searchUntil": 0,
+        "searchStep": 0,
+        "nextPathAt": 0,
+        "travel": null,
+        "speed": 0,
+        "lastStep": 0
+      },
+      "rush-b": {
+        "mode": "idle",
+        "stimulus": null,
+        "searchUntil": 0,
+        "searchStep": 0,
+        "nextPathAt": 0,
+        "travel": null,
+        "speed": 0,
+        "lastStep": 0
+      },
+      "rush-c": {
+        "mode": "idle",
+        "stimulus": null,
+        "searchUntil": 0,
+        "searchStep": 0,
+        "nextPathAt": 0,
+        "travel": null,
+        "speed": 0,
+        "lastStep": 0
+      },
+      "hangar-contact": {
+        "mode": "idle",
+        "stimulus": null,
+        "searchUntil": 0,
+        "searchStep": 0,
+        "nextPathAt": 0,
+        "travel": null,
+        "speed": 0,
+        "lastStep": 0
+      },
+      "service-contact": {
+        "mode": "dead",
+        "stimulus": null,
+        "searchUntil": 0,
+        "searchStep": 0,
+        "nextPathAt": 33.47499999999921,
+        "travel": null,
+        "speed": 0,
+        "lastStep": 32.9249999999992
+      },
+      "logistics-pursuer": {
+        "mode": "idle",
+        "stimulus": null,
+        "searchUntil": 0,
+        "searchStep": 0,
+        "nextPathAt": 0,
+        "travel": null,
+        "speed": 0,
+        "lastStep": 0
+      },
+      "reserve-stalker": {
+        "mode": "dead",
+        "stimulus": null,
+        "searchUntil": 0,
+        "searchStep": 0,
+        "nextPathAt": 37.89999999999896,
+        "travel": null,
+        "speed": 0,
+        "lastStep": 37.87499999999892
+      }
+    },
+    "links": {
+      "residential-ops": {
+        "open": true,
+        "changedAt": 0
+      },
+      "ops-service": {
+        "open": true,
+        "changedAt": 0
+      },
+      "ops-medlab": {
+        "open": true,
+        "changedAt": 0
+      },
+      "ops-sentry": {
+        "open": true,
+        "changedAt": 0
+      },
+      "medical-service": {
+        "open": true,
+        "changedAt": 0
+      },
+      "ops-logistics": {
+        "open": true,
+        "changedAt": 0
+      },
+      "logistics-reserve": {
+        "open": true,
+        "changedAt": 0
+      },
+      "reserve-service": {
+        "open": true,
+        "changedAt": 0
+      }
+    },
+    "tracker": {
+      "cooldown": 0,
+      "age": 20,
+      "samples": [],
+      "pulses": 0
+    },
+    "metrics": {
+      "noises": 129,
+      "heard": 42,
+      "sightings": 8,
+      "transfers": 6,
+      "blockedPassages": 0,
+      "seals": 0,
+      "searches": 1
+    }
+  },
+  "logistics": {
+    "schema": 109,
+    "collected": [],
+    "inventory": {
+      "ammo": 0,
+      "medical": 0,
+      "sentry": 0
+    },
+    "spent": {
+      "ammo": 0,
+      "medical": 0,
+      "sentry": 0
+    },
+    "alarms": {
+      "reserve-alarm": {
+        "remaining": 0,
+        "cooldown": 0,
+        "nextPulse": 0,
+        "activations": 0
+      }
+    },
+    "metrics": {
+      "opened": 0,
+      "medical": 0,
+      "ammo": 0,
+      "sentry": 0,
+      "interrupted": 0
+    }
+  },
+  "engineering": {
+    "schema": 110,
+    "collected": false,
+    "plates": 0,
+    "spent": 0,
+    "links": {
+      "residential-ops": {
+        "hp": 100,
+        "brace": 0,
+        "breached": false,
+        "hits": 0,
+        "lastImpact": 0
+      },
+      "ops-service": {
+        "hp": 100,
+        "brace": 0,
+        "breached": false,
+        "hits": 0,
+        "lastImpact": 0
+      },
+      "ops-medlab": {
+        "hp": 100,
+        "brace": 0,
+        "breached": false,
+        "hits": 0,
+        "lastImpact": 0
+      },
+      "ops-sentry": {
+        "hp": 100,
+        "brace": 0,
+        "breached": false,
+        "hits": 0,
+        "lastImpact": 0
+      },
+      "medical-service": {
+        "hp": 100,
+        "brace": 0,
+        "breached": false,
+        "hits": 0,
+        "lastImpact": 0
+      },
+      "ops-logistics": {
+        "hp": 100,
+        "brace": 0,
+        "breached": false,
+        "hits": 0,
+        "lastImpact": 0
+      },
+      "logistics-reserve": {
+        "hp": 100,
+        "brace": 0,
+        "breached": false,
+        "hits": 0,
+        "lastImpact": 0
+      },
+      "reserve-service": {
+        "hp": 100,
+        "brace": 0,
+        "breached": false,
+        "hits": 0,
+        "lastImpact": 0
+      }
+    },
+    "attacks": {
+      "warrior-a": null,
+      "warrior-b": null,
+      "parasite-a": null,
+      "parasite-b": null,
+      "rush-a": null,
+      "rush-b": null,
+      "rush-c": null,
+      "hangar-contact": null,
+      "service-contact": null,
+      "logistics-pursuer": null,
+      "reserve-stalker": null
+    },
+    "metrics": {
+      "stocks": 0,
+      "reinforced": 0,
+      "cut": 0,
+      "repaired": 0,
+      "started": 0,
+      "interrupted": 0,
+      "enemyHits": 0,
+      "breaches": 0
+    }
+  },
+  "lighting": {
+    "schema": 111,
+    "torch": {
+      "on": true,
+      "angle": 0.17155694559196266
+    },
+    "metrics": {
+      "started": 3,
+      "completed": 3,
+      "interrupted": 0,
+      "torchSwitches": 2
+    }
+  }
+}

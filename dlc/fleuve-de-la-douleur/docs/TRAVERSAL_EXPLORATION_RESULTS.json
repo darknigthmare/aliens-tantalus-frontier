@@ -1,0 +1,1364 @@
+[
+  {
+    "mode": "hybrid",
+    "difficulty": "story",
+    "passed": true,
+    "status": "complete",
+    "chapters": [
+      {
+        "chapter": 1,
+        "title": "La relève",
+        "time": 311,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 2,
+        "title": "Les gens d’ici",
+        "time": 340,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 3,
+        "title": "Sous pression",
+        "time": 354,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 4,
+        "title": "Les coordonnées",
+        "time": 389,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 5,
+        "title": "La porte blanche",
+        "time": 425,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 6,
+        "title": "Priorité de recherche",
+        "time": 442,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 7,
+        "title": "Derrière les grilles",
+        "time": 544,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 8,
+        "title": "Les absents",
+        "time": 567,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 9,
+        "title": "Les lumières rouges",
+        "time": 593,
+        "health": 100,
+        "shots": 0,
+        "escorts": 1
+      },
+      {
+        "chapter": 10,
+        "title": "Fermer, tenir",
+        "time": 632,
+        "health": 100,
+        "shots": 0,
+        "escorts": 1
+      },
+      {
+        "chapter": 11,
+        "title": "Sous le processeur",
+        "time": 681,
+        "health": 88,
+        "shots": 7,
+        "escorts": 1
+      },
+      {
+        "chapter": 12,
+        "title": "La dernière porte",
+        "time": 692,
+        "health": 100,
+        "shots": 7,
+        "escorts": 1
+      },
+      {
+        "chapter": 13,
+        "title": "Une issue réservée",
+        "time": 747,
+        "health": 100,
+        "shots": 7,
+        "escorts": 2
+      },
+      {
+        "chapter": 14,
+        "title": "La trajectoire imposée",
+        "time": 760,
+        "health": 88,
+        "shots": 11,
+        "escorts": 2
+      },
+      {
+        "chapter": 15,
+        "title": "Il reste quelqu’un",
+        "time": 799,
+        "health": 90,
+        "shots": 11,
+        "escorts": 2
+      },
+      {
+        "chapter": 16,
+        "title": "Jusqu’au prochain bruit",
+        "time": 816,
+        "health": 90
+      }
+    ],
+    "detours": [
+      {
+        "id": "pantry",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 50,
+        "room": "pantry",
+        "health": 100
+      },
+      {
+        "id": "biomed",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 40,
+        "room": "biomed",
+        "health": 100
+      },
+      {
+        "id": "aerial",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 53,
+        "room": "aerial",
+        "health": 100
+      },
+      {
+        "id": "workshop",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 47,
+        "room": "workshop",
+        "health": 100
+      },
+      {
+        "id": "drain",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 57,
+        "room": "drain",
+        "health": 100
+      },
+      {
+        "id": "nest",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 54,
+        "room": "nest",
+        "health": 100
+      }
+    ],
+    "life": [],
+    "defense": [],
+    "ducts": [],
+    "mobility": [],
+    "fidelity": [],
+    "stats": {
+      "shots": 11,
+      "shotsHit": 9,
+      "kills": 3,
+      "hits": 3,
+      "deaths": 0,
+      "temporaryShelters": 1,
+      "escorts": 2,
+      "chapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    "visited": 42,
+    "elapsedSeconds": 815.599999999806,
+    "ticks": 16312,
+    "inputs": 12624,
+    "method": "Sim.update movement + interact + equipment + three physical switch controls and boardSubmit; no teleport/completeTask call/health mutation; 6 detours / 18 steps, items physically retrieved, 6 new links traversed both ways"
+  },
+  {
+    "mode": "hybrid",
+    "difficulty": "standard",
+    "passed": true,
+    "status": "complete",
+    "chapters": [
+      {
+        "chapter": 1,
+        "title": "La relève",
+        "time": 311,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 2,
+        "title": "Les gens d’ici",
+        "time": 340,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 3,
+        "title": "Sous pression",
+        "time": 354,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 4,
+        "title": "Les coordonnées",
+        "time": 389,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 5,
+        "title": "La porte blanche",
+        "time": 425,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 6,
+        "title": "Priorité de recherche",
+        "time": 442,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 7,
+        "title": "Derrière les grilles",
+        "time": 544,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 8,
+        "title": "Les absents",
+        "time": 567,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 9,
+        "title": "Les lumières rouges",
+        "time": 593,
+        "health": 100,
+        "shots": 0,
+        "escorts": 1
+      },
+      {
+        "chapter": 10,
+        "title": "Fermer, tenir",
+        "time": 632,
+        "health": 100,
+        "shots": 0,
+        "escorts": 1
+      },
+      {
+        "chapter": 11,
+        "title": "Sous le processeur",
+        "time": 681,
+        "health": 76,
+        "shots": 7,
+        "escorts": 1
+      },
+      {
+        "chapter": 12,
+        "title": "La dernière porte",
+        "time": 692,
+        "health": 100,
+        "shots": 7,
+        "escorts": 1
+      },
+      {
+        "chapter": 13,
+        "title": "Une issue réservée",
+        "time": 747,
+        "health": 100,
+        "shots": 7,
+        "escorts": 2
+      },
+      {
+        "chapter": 14,
+        "title": "La trajectoire imposée",
+        "time": 760,
+        "health": 76,
+        "shots": 11,
+        "escorts": 2
+      },
+      {
+        "chapter": 15,
+        "title": "Il reste quelqu’un",
+        "time": 799,
+        "health": 80,
+        "shots": 11,
+        "escorts": 2
+      },
+      {
+        "chapter": 16,
+        "title": "Jusqu’au prochain bruit",
+        "time": 815,
+        "health": 80
+      }
+    ],
+    "detours": [
+      {
+        "id": "pantry",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 50,
+        "room": "pantry",
+        "health": 100
+      },
+      {
+        "id": "biomed",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 40,
+        "room": "biomed",
+        "health": 100
+      },
+      {
+        "id": "aerial",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 53,
+        "room": "aerial",
+        "health": 100
+      },
+      {
+        "id": "workshop",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 47,
+        "room": "workshop",
+        "health": 100
+      },
+      {
+        "id": "drain",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 57,
+        "room": "drain",
+        "health": 100
+      },
+      {
+        "id": "nest",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 54,
+        "room": "nest",
+        "health": 100
+      }
+    ],
+    "life": [],
+    "defense": [],
+    "ducts": [],
+    "mobility": [],
+    "fidelity": [],
+    "stats": {
+      "shots": 11,
+      "shotsHit": 9,
+      "kills": 3,
+      "hits": 3,
+      "deaths": 0,
+      "temporaryShelters": 1,
+      "escorts": 2,
+      "chapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    "visited": 42,
+    "elapsedSeconds": 815.499999999806,
+    "ticks": 16310,
+    "inputs": 12624,
+    "method": "Sim.update movement + interact + equipment + three physical switch controls and boardSubmit; no teleport/completeTask call/health mutation; 6 detours / 18 steps, items physically retrieved, 6 new links traversed both ways"
+  },
+  {
+    "mode": "hybrid",
+    "difficulty": "nightmare",
+    "passed": true,
+    "status": "complete",
+    "chapters": [
+      {
+        "chapter": 1,
+        "title": "La relève",
+        "time": 311,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 2,
+        "title": "Les gens d’ici",
+        "time": 340,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 3,
+        "title": "Sous pression",
+        "time": 354,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 4,
+        "title": "Les coordonnées",
+        "time": 389,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 5,
+        "title": "La porte blanche",
+        "time": 425,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 6,
+        "title": "Priorité de recherche",
+        "time": 442,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 7,
+        "title": "Derrière les grilles",
+        "time": 544,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 8,
+        "title": "Les absents",
+        "time": 567,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 9,
+        "title": "Les lumières rouges",
+        "time": 593,
+        "health": 100,
+        "shots": 0,
+        "escorts": 1
+      },
+      {
+        "chapter": 10,
+        "title": "Fermer, tenir",
+        "time": 632,
+        "health": 100,
+        "shots": 0,
+        "escorts": 1
+      },
+      {
+        "chapter": 11,
+        "title": "Sous le processeur",
+        "time": 681,
+        "health": 100,
+        "shots": 7,
+        "escorts": 1
+      },
+      {
+        "chapter": 12,
+        "title": "La dernière porte",
+        "time": 692,
+        "health": 100,
+        "shots": 7,
+        "escorts": 1
+      },
+      {
+        "chapter": 13,
+        "title": "Une issue réservée",
+        "time": 747,
+        "health": 100,
+        "shots": 7,
+        "escorts": 2
+      },
+      {
+        "chapter": 14,
+        "title": "La trajectoire imposée",
+        "time": 760,
+        "health": 100,
+        "shots": 11,
+        "escorts": 2
+      },
+      {
+        "chapter": 15,
+        "title": "Il reste quelqu’un",
+        "time": 799,
+        "health": 73,
+        "shots": 11,
+        "escorts": 2
+      },
+      {
+        "chapter": 16,
+        "title": "Jusqu’au prochain bruit",
+        "time": 816,
+        "health": 73
+      }
+    ],
+    "detours": [
+      {
+        "id": "pantry",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 50,
+        "room": "pantry",
+        "health": 100
+      },
+      {
+        "id": "biomed",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 40,
+        "room": "biomed",
+        "health": 100
+      },
+      {
+        "id": "aerial",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 53,
+        "room": "aerial",
+        "health": 100
+      },
+      {
+        "id": "workshop",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 47,
+        "room": "workshop",
+        "health": 100
+      },
+      {
+        "id": "drain",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 57,
+        "room": "drain",
+        "health": 100
+      },
+      {
+        "id": "nest",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 54,
+        "room": "nest",
+        "health": 100
+      }
+    ],
+    "life": [],
+    "defense": [],
+    "ducts": [],
+    "mobility": [],
+    "fidelity": [],
+    "stats": {
+      "shots": 11,
+      "shotsHit": 9,
+      "kills": 3,
+      "hits": 3,
+      "deaths": 0,
+      "temporaryShelters": 1,
+      "escorts": 2,
+      "chapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    "visited": 42,
+    "elapsedSeconds": 815.549999999806,
+    "ticks": 16311,
+    "inputs": 12624,
+    "method": "Sim.update movement + interact + equipment + three physical switch controls and boardSubmit; no teleport/completeTask call/health mutation; 6 detours / 18 steps, items physically retrieved, 6 new links traversed both ways"
+  },
+  {
+    "mode": "classic",
+    "difficulty": "story",
+    "passed": true,
+    "status": "complete",
+    "chapters": [
+      {
+        "chapter": 1,
+        "title": "La relève",
+        "time": 309,
+        "health": 95,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 2,
+        "title": "Les gens d’ici",
+        "time": 338,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 3,
+        "title": "Sous pression",
+        "time": 351,
+        "health": 95,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 4,
+        "title": "Les coordonnées",
+        "time": 385,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 5,
+        "title": "La porte blanche",
+        "time": 421,
+        "health": 95,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 6,
+        "title": "Priorité de recherche",
+        "time": 437,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 7,
+        "title": "Derrière les grilles",
+        "time": 539,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 8,
+        "title": "Les absents",
+        "time": 562,
+        "health": 95,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 9,
+        "title": "Les lumières rouges",
+        "time": 587,
+        "health": 100,
+        "shots": 0,
+        "escorts": 1
+      },
+      {
+        "chapter": 10,
+        "title": "Fermer, tenir",
+        "time": 625,
+        "health": 100,
+        "shots": 0,
+        "escorts": 1
+      },
+      {
+        "chapter": 11,
+        "title": "Sous le processeur",
+        "time": 674,
+        "health": 83,
+        "shots": 7,
+        "escorts": 1
+      },
+      {
+        "chapter": 12,
+        "title": "La dernière porte",
+        "time": 685,
+        "health": 100,
+        "shots": 7,
+        "escorts": 1
+      },
+      {
+        "chapter": 13,
+        "title": "Une issue réservée",
+        "time": 739,
+        "health": 100,
+        "shots": 11,
+        "escorts": 2
+      },
+      {
+        "chapter": 14,
+        "title": "La trajectoire imposée",
+        "time": 752,
+        "health": 83,
+        "shots": 15,
+        "escorts": 2
+      },
+      {
+        "chapter": 15,
+        "title": "Il reste quelqu’un",
+        "time": 791,
+        "health": 90,
+        "shots": 15,
+        "escorts": 2
+      },
+      {
+        "chapter": 16,
+        "title": "Jusqu’au prochain bruit",
+        "time": 807,
+        "health": 90
+      }
+    ],
+    "detours": [
+      {
+        "id": "pantry",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 50,
+        "room": "pantry",
+        "health": 100
+      },
+      {
+        "id": "biomed",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 40,
+        "room": "biomed",
+        "health": 100
+      },
+      {
+        "id": "aerial",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 53,
+        "room": "aerial",
+        "health": 100
+      },
+      {
+        "id": "workshop",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 46,
+        "room": "workshop",
+        "health": 100
+      },
+      {
+        "id": "drain",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 56,
+        "room": "drain",
+        "health": 100
+      },
+      {
+        "id": "nest",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 54,
+        "room": "nest",
+        "health": 100
+      }
+    ],
+    "life": [],
+    "defense": [],
+    "ducts": [],
+    "mobility": [],
+    "fidelity": [],
+    "stats": {
+      "shots": 15,
+      "shotsHit": 12,
+      "kills": 4,
+      "hits": 4,
+      "deaths": 0,
+      "temporaryShelters": 1,
+      "escorts": 2,
+      "chapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    "visited": 42,
+    "elapsedSeconds": 807.4499999998134,
+    "ticks": 16149,
+    "inputs": 12461,
+    "method": "Sim.update movement + interact + equipment + three physical switch controls and boardSubmit; no teleport/completeTask call/health mutation; 6 detours / 18 steps, items physically retrieved, 6 new links traversed both ways"
+  },
+  {
+    "mode": "classic",
+    "difficulty": "standard",
+    "passed": true,
+    "status": "complete",
+    "chapters": [
+      {
+        "chapter": 1,
+        "title": "La relève",
+        "time": 309,
+        "health": 90,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 2,
+        "title": "Les gens d’ici",
+        "time": 338,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 3,
+        "title": "Sous pression",
+        "time": 351,
+        "health": 90,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 4,
+        "title": "Les coordonnées",
+        "time": 385,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 5,
+        "title": "La porte blanche",
+        "time": 421,
+        "health": 90,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 6,
+        "title": "Priorité de recherche",
+        "time": 437,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 7,
+        "title": "Derrière les grilles",
+        "time": 539,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 8,
+        "title": "Les absents",
+        "time": 562,
+        "health": 90,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 9,
+        "title": "Les lumières rouges",
+        "time": 587,
+        "health": 100,
+        "shots": 0,
+        "escorts": 1
+      },
+      {
+        "chapter": 10,
+        "title": "Fermer, tenir",
+        "time": 625,
+        "health": 100,
+        "shots": 0,
+        "escorts": 1
+      },
+      {
+        "chapter": 11,
+        "title": "Sous le processeur",
+        "time": 674,
+        "health": 100,
+        "shots": 7,
+        "escorts": 1
+      },
+      {
+        "chapter": 12,
+        "title": "La dernière porte",
+        "time": 685,
+        "health": 100,
+        "shots": 7,
+        "escorts": 1
+      },
+      {
+        "chapter": 13,
+        "title": "Une issue réservée",
+        "time": 739,
+        "health": 100,
+        "shots": 12,
+        "escorts": 2
+      },
+      {
+        "chapter": 14,
+        "title": "La trajectoire imposée",
+        "time": 752,
+        "health": 100,
+        "shots": 16,
+        "escorts": 2
+      },
+      {
+        "chapter": 15,
+        "title": "Il reste quelqu’un",
+        "time": 791,
+        "health": 80,
+        "shots": 16,
+        "escorts": 2
+      },
+      {
+        "chapter": 16,
+        "title": "Jusqu’au prochain bruit",
+        "time": 807,
+        "health": 80
+      }
+    ],
+    "detours": [
+      {
+        "id": "pantry",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 50,
+        "room": "pantry",
+        "health": 100
+      },
+      {
+        "id": "biomed",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 40,
+        "room": "biomed",
+        "health": 100
+      },
+      {
+        "id": "aerial",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 53,
+        "room": "aerial",
+        "health": 100
+      },
+      {
+        "id": "workshop",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 46,
+        "room": "workshop",
+        "health": 100
+      },
+      {
+        "id": "drain",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 56,
+        "room": "drain",
+        "health": 100
+      },
+      {
+        "id": "nest",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 54,
+        "room": "nest",
+        "health": 100
+      }
+    ],
+    "life": [],
+    "defense": [],
+    "ducts": [],
+    "mobility": [],
+    "fidelity": [],
+    "stats": {
+      "shots": 16,
+      "shotsHit": 12,
+      "kills": 4,
+      "hits": 4,
+      "deaths": 0,
+      "temporaryShelters": 1,
+      "escorts": 2,
+      "chapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    "visited": 42,
+    "elapsedSeconds": 807.3499999998135,
+    "ticks": 16147,
+    "inputs": 12461,
+    "method": "Sim.update movement + interact + equipment + three physical switch controls and boardSubmit; no teleport/completeTask call/health mutation; 6 detours / 18 steps, items physically retrieved, 6 new links traversed both ways"
+  },
+  {
+    "mode": "classic",
+    "difficulty": "nightmare",
+    "passed": true,
+    "status": "complete",
+    "chapters": [
+      {
+        "chapter": 1,
+        "title": "La relève",
+        "time": 309,
+        "health": 86.5,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 2,
+        "title": "Les gens d’ici",
+        "time": 338,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 3,
+        "title": "Sous pression",
+        "time": 351,
+        "health": 86.5,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 4,
+        "title": "Les coordonnées",
+        "time": 385,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 5,
+        "title": "La porte blanche",
+        "time": 421,
+        "health": 86.5,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 6,
+        "title": "Priorité de recherche",
+        "time": 437,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 7,
+        "title": "Derrière les grilles",
+        "time": 539,
+        "health": 100,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 8,
+        "title": "Les absents",
+        "time": 562,
+        "health": 86.5,
+        "shots": 0,
+        "escorts": 0
+      },
+      {
+        "chapter": 9,
+        "title": "Les lumières rouges",
+        "time": 587,
+        "health": 100,
+        "shots": 0,
+        "escorts": 1
+      },
+      {
+        "chapter": 10,
+        "title": "Fermer, tenir",
+        "time": 625,
+        "health": 100,
+        "shots": 0,
+        "escorts": 1
+      },
+      {
+        "chapter": 11,
+        "title": "Sous le processeur",
+        "time": 674,
+        "health": 83.8,
+        "shots": 7,
+        "escorts": 1
+      },
+      {
+        "chapter": 12,
+        "title": "La dernière porte",
+        "time": 685,
+        "health": 100,
+        "shots": 7,
+        "escorts": 1
+      },
+      {
+        "chapter": 13,
+        "title": "Une issue réservée",
+        "time": 739,
+        "health": 100,
+        "shots": 10,
+        "escorts": 2
+      },
+      {
+        "chapter": 14,
+        "title": "La trajectoire imposée",
+        "time": 752,
+        "health": 83.8,
+        "shots": 14,
+        "escorts": 2
+      },
+      {
+        "chapter": 15,
+        "title": "Il reste quelqu’un",
+        "time": 791,
+        "health": 73,
+        "shots": 14,
+        "escorts": 2
+      },
+      {
+        "chapter": 16,
+        "title": "Jusqu’au prochain bruit",
+        "time": 807,
+        "health": 73
+      }
+    ],
+    "detours": [
+      {
+        "id": "pantry",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 50,
+        "room": "pantry",
+        "health": 100
+      },
+      {
+        "id": "biomed",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 40,
+        "room": "biomed",
+        "health": 100
+      },
+      {
+        "id": "aerial",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 53,
+        "room": "aerial",
+        "health": 100
+      },
+      {
+        "id": "workshop",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 46,
+        "room": "workshop",
+        "health": 100
+      },
+      {
+        "id": "drain",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 56,
+        "room": "drain",
+        "health": 100
+      },
+      {
+        "id": "nest",
+        "completed": true,
+        "steps": 3,
+        "unlockedBothWays": true,
+        "seconds": 54,
+        "room": "nest",
+        "health": 100
+      }
+    ],
+    "life": [],
+    "defense": [],
+    "ducts": [],
+    "mobility": [],
+    "fidelity": [],
+    "stats": {
+      "shots": 14,
+      "shotsHit": 12,
+      "kills": 4,
+      "hits": 6,
+      "deaths": 0,
+      "temporaryShelters": 1,
+      "escorts": 2,
+      "chapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    "visited": 42,
+    "elapsedSeconds": 807.2999999998135,
+    "ticks": 16146,
+    "inputs": 12461,
+    "method": "Sim.update movement + interact + equipment + three physical switch controls and boardSubmit; no teleport/completeTask call/health mutation; 6 detours / 18 steps, items physically retrieved, 6 new links traversed both ways"
+  }
+]

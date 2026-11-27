@@ -1,0 +1,31 @@
+{
+  "version": "114.0.0-rc.1",
+  "ok": true,
+  "scope": "Independent copy; six integrity probes, not gameplay tests",
+  "checks": [
+    {
+      "name": "Paquet intact accepté",
+      "ok": true
+    },
+    {
+      "name": "Manifeste strictement inchangé",
+      "ok": true
+    },
+    {
+      "name": "Composant modifié refusé",
+      "ok": true
+    },
+    {
+      "name": "Fichier non listé refusé",
+      "ok": true
+    },
+    {
+      "name": "Composant requis absent refusé",
+      "ok": true
+    },
+    {
+      "name": "Restauration des octets acceptée",
+      "ok": true
+    }
+  ]
+}

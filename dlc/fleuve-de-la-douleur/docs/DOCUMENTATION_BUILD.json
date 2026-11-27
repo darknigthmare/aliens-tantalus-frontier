@@ -1,0 +1,11 @@
+{
+  "version": "0.9.0-candidate.1",
+  "model": 1246,
+  "traversals": 42,
+  "browser": 35,
+  "captures": 20,
+  "reportCaptures": 14,
+  "codexLines": 3282,
+  "htmlSHA256": "91ae538879b939018cea5dc3ba2eb9e45faea7693fdd952efbe8531b33cdfced",
+  "reportSHA256": "111a29d05de9bf58ecdb02578fbfdb4aa4e8119013db56bbbc7eeb65da3379e6"
+}

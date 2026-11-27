@@ -1,0 +1,1 @@
+Localized test states built by fixtures-v07.cjs, not manual progression. Empty prepared populations isolate one real enemy transferred by update; room and player locations are set only while building fixture. Browser actions use ordinary import and controls. Narrative chapter/location associations are not claimed as canonical.

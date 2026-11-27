@@ -1,0 +1,105 @@
+name: River of Pain DLC integration
+on:
+  pull_request:
+    paths:
+      - 'dlc/fleuve-de-la-douleur/**'
+      - 'archives/river-of-pain/**'
+      - 'index.html'
+      - 'src/app.js'
+      - 'src/title-screen-v61.js'
+      - 'scripts/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'sw.js'
+      - 'vercel.json'
+      - '.github/workflows/river-of-pain.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'dlc/fleuve-de-la-douleur/**'
+      - 'archives/river-of-pain/**'
+      - 'index.html'
+      - 'src/app.js'
+      - 'src/title-screen-v61.js'
+      - 'scripts/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'sw.js'
+      - 'vercel.json'
+      - '.github/workflows/river-of-pain.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: river-of-pain-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  dlc:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Record source identity and install locked dependencies
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/atf-river-of-pain"
+          git rev-parse HEAD | tee "$RUNNER_TEMP/atf-river-of-pain/source-commit.txt"
+          npm ci --ignore-scripts --no-audit --no-fund
+      - name: Sprite contracts, canonical visual build and PNG inspection
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m pip install Pillow==13.0.0
+          node --test scripts/verify-river-of-pain-sprites.mjs 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/sprite-tests.log"
+          node scripts/build-river-of-pain-visuals.mjs 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/visual-build.json"
+          node scripts/build-river-of-pain-sprite-gallery.mjs 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/visual-gallery-build.json"
+          python -B scripts/inspect-river-of-pain-sprites.py dlc/fleuve-de-la-douleur/visual-v1/assets --report "$RUNNER_TEMP/atf-river-of-pain/sprite-inspection.json"
+      - name: Launcher contracts and recovered DLC model
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run test:dlc:river 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/integration-tests.log"
+          node --test scripts/verify-river-of-pain-succession.mjs 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/succession-tests.log"
+          npm run test:dlc:river:source 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/recovered-model-tests.log"
+      - name: Source admission and production build
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run check 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/source-check.log"
+          npm run build 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/build.log"
+          npm run check:built 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/distribution-check.log"
+          cp dist/build-info.json "$RUNNER_TEMP/atf-river-of-pain/build-info.json"
+      - name: Install pinned browser tooling
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Native menu, play, save, reload and return journey
+        shell: bash
+        run: |
+          set -o pipefail
+          python -B scripts/qa-river-of-pain.py --root dist --output "$RUNNER_TEMP/atf-river-of-pain/browser" 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/browser.log"
+          python -B scripts/qa-river-of-pain.py --root dist --no-slash-only --output "$RUNNER_TEMP/atf-river-of-pain/slashless" 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/slashless.log"
+      - name: Loaded PNGs, original presentation and local derivative journey
+        shell: bash
+        run: |
+          set -o pipefail
+          python -B scripts/verify-river-of-pain-sprites-browser.py --root dist --output "$RUNNER_TEMP/atf-river-of-pain/sprites-browser" 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/sprites-browser.log"
+          python -B scripts/verify-river-of-pain-sprites-browser.py --root dist --file-only --output "$RUNNER_TEMP/atf-river-of-pain/sprites-file" 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/sprites-file.log"
+      - name: Check that validation did not rewrite tracked sources
+        run: git diff --exit-code
+      - name: Retain exact integration evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: river-of-pain-integration-evidence
+          retention-days: 7
+          path: ${{ runner.temp }}/atf-river-of-pain
+          if-no-files-found: error

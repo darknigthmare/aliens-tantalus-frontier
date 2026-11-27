@@ -1,0 +1,282 @@
+{
+  "ok": true,
+  "version": "108.0.0-rc.1",
+  "htmlSha256": "dd0d86b8046aa354020df7155b0c5f59213b0cf14e44500d55e6e5d5c34ebbd7",
+  "baselineSha256": "be41861ba77b4c4aa80ff0360b00bafc1f2aaa9cc7023c9492a7c6795248008f",
+  "contract": "e6bf06fd",
+  "nativeActivated": false,
+  "nativeCampaignRuns": 0,
+  "nodeTestsPassed": 180,
+  "gameBrowserChecksPassed": 64,
+  "separateDistributionChecksPassed": 12,
+  "automatedFullOperations": 2,
+  "pursuitEnemyTransfers": 2,
+  "directBrowserCaptures": 16,
+  "directFileNavigation": "blocked by administrator policy; not validated",
+  "checks": [
+    {
+      "name": "Syntaxe preview/app.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe preview/audio.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe preview/renderer.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/adapter.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/contact-v108.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/core.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-operation.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-pursuit-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/installer.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/operation.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/aliens-1986-spatial-v106.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/contact-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-scenes-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/spatial-core-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/spatial-core.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/validation-scenes.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/export-contracts-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/stage-v106.mjs",
+      "ok": true
+    },
+    {
+      "name": "Tests Node complets et sans exclusion",
+      "ok": true
+    },
+    {
+      "name": "HTML joué identique à la livraison",
+      "ok": true
+    },
+    {
+      "name": "Dix modules dans le document",
+      "ok": true
+    },
+    {
+      "name": "Module distribué exact src/spatial-core.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/spatial-core.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module distribué exact src/spatial-core-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/spatial-core-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module distribué exact src/validation-scenes.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/validation-scenes.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module distribué exact src/operation-scenes-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-scenes-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module distribué exact src/operation-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module distribué exact src/contact-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/contact-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module distribué exact src/operation-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module distribué exact preview/audio.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus preview/audio.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module distribué exact preview/renderer.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus preview/renderer.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module distribué exact preview/app.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus preview/app.mjs",
+      "ok": true
+    },
+    {
+      "name": "64 contrôles navigateur réussis",
+      "ok": true
+    },
+    {
+      "name": "Aucune erreur observée navigateur",
+      "ok": true
+    },
+    {
+      "name": "Douze contrôles distribution réussis",
+      "ok": true
+    },
+    {
+      "name": "Deux parcours locaux terminés",
+      "ok": true
+    },
+    {
+      "name": "Parcours distinct de poursuite",
+      "ok": true
+    },
+    {
+      "name": "Six lieux hérités dont cinq reliés",
+      "ok": true
+    },
+    {
+      "name": "Cinq sas réciproques et dix volumes dérivés",
+      "ok": true
+    },
+    {
+      "name": "Six fiches Codex",
+      "ok": true
+    },
+    {
+      "name": "Seize captures uniques",
+      "ok": true
+    },
+    {
+      "name": "Captures sans recomposition dans le rapport",
+      "ok": true
+    },
+    {
+      "name": "Source héritée préservée src/spatial-core.mjs",
+      "ok": true
+    },
+    {
+      "name": "Source héritée préservée src/validation-scenes.mjs",
+      "ok": true
+    },
+    {
+      "name": "Source héritée préservée src/operation-scenes-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Source héritée préservée src/operation-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Source héritée préservée src/aliens-1986-spatial-v106.mjs",
+      "ok": true
+    },
+    {
+      "name": "Source héritée préservée qa/adapter.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Source héritée préservée qa/core.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Source héritée préservée qa/installer.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Source héritée préservée qa/operation.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Source héritée préservée tools/stage-v106.mjs",
+      "ok": true
+    },
+    {
+      "name": "Aucune police incluse",
+      "ok": true
+    },
+    {
+      "name": "Aucun lien symbolique",
+      "ok": true
+    }
+  ]
+}

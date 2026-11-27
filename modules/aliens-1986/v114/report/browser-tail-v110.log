@@ -1,0 +1,12 @@
+Inspection sentinelle sans progression True
+Sentinelle ne gaspille pas devant la porte True
+Sentinelle tire après ouverture True
+Carte hors scène et HUD True
+Archives remplacent la scène True
+Perte de focus met en pause True
+Bilan du parcours terminé True
+HUD et ordres hors canvas 844×390 True
+Pas de débordement horizontal True
+Options accessibilité activables True
+Aucune erreur JavaScript True
+{"passed": 11, "total": 11, "errors": [], "captures": 4}

@@ -1,0 +1,306 @@
+{
+  "tests": [
+    {
+      "name": "Insertion V110 sans plaque offerte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Huit battants réciproques intacts à l’insertion",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import exact après le premier choc réel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La pause suspend également la pression hors champ",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Préparation ennemie restaurée sans la remettre à zéro",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La pression exécute réellement les impacts restants",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le même sas est désormais traversable et bréché",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune identité ennemie créée par la brèche",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "E commence le déverrouillage de la caisse de maintenance",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Avant fin, aucune plaque créditée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Collecte terminée : exactement trois plaques",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La caisse ne recharge pas la réserve une seconde fois",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Réfection exacte à mi-geste et stock non débité",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "J restaure 100 points et ferme les deux faces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Réfection consomme une seule plaque à la fin",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "O engage une soudure réelle de 1,8 seconde",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Soudure en préparation : plaque toujours disponible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause garde exactement l’avancement du chalumeau",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Marche interrompt la soudure sans dépenser la plaque",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tirer interrompt aussi la soudure",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export/import réel ne remet pas le geste à zéro",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Soudure finie : 72 de renfort et une plaque dépensée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "R ne traverse pas le renfort soudé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Renforcer déjà renforcé est désactivé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "U démarre une découpe de 1,4 seconde",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Découpe en cours ne libère pas encore le passage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Découpe finie : sas ouvert sans plaque rendue",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse plaque inventée sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse renfort au-delà de sa capacité sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse battant indestructible sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse champ génie inconnu sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse pression avec acteur inconnu sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "V109 migre vers V110 en gardant équipe et ressources",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La migration ne donne aucune plaque et aucune réparation gratuite",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Carte de liaisons sans identités ou attaques ennemies",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Archives décrivent les nouvelles règles sans recouvrir le terrain",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Repli terminé inclut la dépense réelle des plaques",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Onglet Génie tactile hors terrain en paysage",
+      "ok": true,
+      "detail": {
+        "scene": {
+          "x": 0,
+          "y": 44,
+          "width": 844,
+          "height": 194
+        },
+        "bar": {
+          "x": 0,
+          "y": 284,
+          "width": 844,
+          "height": 43
+        }
+      }
+    },
+    {
+      "name": "Le volet génie remplace les stocks en écran court",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Retour aux réserves sans fermer le jeu",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Raccourci O expose le bon volet sur écran court",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Portrait sans débordement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les deux instruments restent disponibles en portrait",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun téléchargement externe nécessaire",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "Aucune erreur JavaScript ou console",
+      "ok": true,
+      "detail": {
+        "page": [],
+        "console": []
+      }
+    }
+  ],
+  "captures": [
+    {
+      "file": "25_battant_endommage.png",
+      "origin": "Export intact 02-premier-impact du parcours de brèche V110, puis reprise brève dans Chromium",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "26_breche_sous_pression.png",
+      "origin": "Export réel de préparation, puis plus de cinq secondes de simulation dans Chromium jusqu’à rupture du battant",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "27_plaques_recuperees.png",
+      "origin": "Caisse ouverte par E et attente réelle dans Chromium depuis l’export non modifié 06a-avant-les-plaques",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "28_refection_en_cours.png",
+      "origin": "Export intact 07-refection-en-cours, geste J poursuivi dans Chromium",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "29_soudure_chalumeau.png",
+      "origin": "Clic Renforcer depuis le point réel après réfection ; travail visible, avant consommation de la plaque",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "30_sas_soude.png",
+      "origin": "Soudure terminée dans Chromium ; tentative R refusée, battant fermé et plaque visible",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "31_decoupe_en_cours.png",
+      "origin": "Découpe déclenchée par U dans Chromium depuis la soudure achevée",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "32_repli_genie.png",
+      "origin": "Export final intact 13-repli-apres-breche du parcours continu, bilan rendu dans Chromium",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "33_genie_844x390.png",
+      "origin": "Même document, viewport émulé 844×390 ; commutation Réserves → Génie par bouton réel",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "requests": [],
+  "htmlSHA256": "7766a7ad6b024e2596e4395b2f6375d1189c50d7495572f206c6b79cf32daf87",
+  "nativeTantalus": false
+}
