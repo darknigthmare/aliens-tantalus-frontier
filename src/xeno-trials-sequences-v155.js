@@ -5,6 +5,8 @@ import { getXenoTrialsRenderMetricsV110 } from './xeno-trials-scale-v110.js';
 import { getXenoTrialsPresentationParticipantsV211, getXenoTrialsTauntRigV211 } from './xeno-trials-presentation-v211.js';
 import { getXenoTrialsSpriteAtlasV188 } from './xeno-trials-sprite-atlas-v188.js';
 import { getXenoTrialsSpriteAtlasV189 } from './xeno-trials-sprite-atlas-v189.js';
+import { getXenoTrialsRuntimeSpriteAtlas } from './xeno-trials-sprite-atlas-v191.js';
+import { createXenoTrialsDrawnExitV220, matchesXenoTrialsDrawnExitV220 } from './xeno-trials-spatial-outro-v220.js';
 
 // Original presentation choreography on the four admitted source plates. No
 // canonical animation, voiced line, relation or combat ability is asserted.
@@ -119,7 +121,8 @@ export function createXenoTrialsOutroV155(match, reducedMotion = false, images) 
 export function advanceXenoTrialsOutroV155(state, elapsedMs, frozen = false) {
  if (!state || state.phase !== 'playing' || state.paused || frozen || !Number.isFinite(elapsedMs) || elapsedMs <= 0) return state;
  const elapsed = Math.min(state.durationMs,state.elapsedMs+Math.min(XENO_TRIALS_SEQUENCE_TIMING_V155.maxStepMs,elapsedMs));
- return {...state,elapsedMs:elapsed,phase:elapsed+1e-7>=state.durationMs?'complete':'playing'};
+ const complete = elapsed + 1e-7 >= state.durationMs;
+ return {...state,elapsedMs:complete?state.durationMs:elapsed,phase:complete?'complete':'playing'};
 }
 export function skipXenoTrialsOutroV155(state) {
  return state?.phase === 'playing' && !state.paused ? {...state,elapsedMs:state.durationMs,phase:'complete',skipped:true} : state;
@@ -221,14 +224,20 @@ export function getXenoTrialsSequenceCueV156(rig, match, fighter, presentation, 
 export const XENO_TRIALS_EXIT_V157 = freeze({id:'native-spatial-exit-v157',turnMs:240,speed:48,maxTravelMs:12000,
  stride:40,footLift:3.2,canonExact:false,fullLocomotion:false});
 export const XENO_TRIALS_LANDING_V157 = freeze({id:'terminal-render-landing-v157',minMs:180,maxMs:600,canonExact:false});
-const drawnLandingsV219 = new Set(['warrior', 'runner', 'spitter', 'queen', 'ravager', 'burster']);
+const drawnLandingsV220 = new Set(['warrior', 'runner', 'spitter', 'queen', 'ravager', 'burster',
+ 'crusher-acm', 'defender', 'chrysalis', 'smasher', 'user-brute', 'synth-trooper', 'synth-guard', 'import-game-afe2-warden']);
+const groundedCollapsesV220 = new Set(['crusher-acm', 'defender']);
 
-function drawnLandingAtlasV219(match, fighter) {
- if (fighter.hp !== 0 || match.result.winner === fighter.side || !drawnLandingsV219.has(fighter.id)
+function drawnLandingAtlasV220(match, fighter) {
+ if (fighter.hp !== 0 || match.result.winner === fighter.side || !drawnLandingsV220.has(fighter.id)
+  || fighter.y === 0 && !groundedCollapsesV220.has(fighter.id)
   || match.result.matchId !== match.config.matchId || match.result.durationTicks !== match.tick) return null;
+ // A decisive Warden KO already has its own articulated pilot fall.
+ if (fighter.id === 'import-game-afe2-warden' && match.result.winner !== 'draw' && match.result.reason === 'ko') return null;
  const art = getXenoTrialsArtV96(fighter.id, fighter.variant);
- const atlas = getXenoTrialsSpriteAtlasV188(fighter, art) || getXenoTrialsSpriteAtlasV189(fighter, art);
- return atlas?.frames.some(frame => frame.id === 'ko-fall') && atlas.frames.some(frame => frame.id === 'ko-ground') ? atlas : null;
+ return [getXenoTrialsSpriteAtlasV188(fighter, art), getXenoTrialsSpriteAtlasV189(fighter, art),
+  getXenoTrialsRuntimeSpriteAtlas(fighter, art)].find(atlas => atlas?.frames.some(frame => frame.id === 'ko-fall')
+   && atlas.frames.some(frame => frame.id === 'ko-ground')) || null;
 }
 /** A verdict may freeze the engine in the middle of a jump. Settle only its
  * admitted render plate after the engine has fixed the verdict. */
@@ -236,8 +245,8 @@ export function createXenoTrialsLandingV157(match,reducedMotion=false,images) {
  if(match?.phase!=='match-over'||!match.result?.completed||!['player','opponent','draw'].includes(match.result.winner)
   ||!Array.isArray(match.fighters))return null;
  const participants=match.fighters.flatMap(f=>{
-  if(![f.x,f.y,f.vy].every(Number.isFinite)||f.y<=0||f.y>1000)return [];
-  const rig=historicalRigForV155(f), atlas=rig ? null : drawnLandingAtlasV219(match,f);
+  if(![f.x,f.y,f.vy].every(Number.isFinite)||f.y<0||f.y>1000)return [];
+  const rig=f.y>0 ? historicalRigForV155(f) : null, atlas=rig ? null : drawnLandingAtlasV220(match,f);
   if(!rig && !atlas)return [];
   if (atlas && images) {
    const texture = images.get(atlas.texture.path);
@@ -260,14 +269,14 @@ export function getXenoTrialsLandingViewV157(match,fighter,state,reducedMotion=f
   ||!Number.isFinite(state.elapsedMs)||state.elapsedMs<0)return null;
  const rig=historicalRigForV155(fighter);
  const p=state.participants?.find(p=>p.side===fighter.side&&p.fighterId===fighter.id);
- if(!p||![p.startY,p.landingMs].every(Number.isFinite)||p.startY<=0||p.landingMs<=0)return null;
- if (rig ? p.rigId !== rig.id : !p.atlasPathV219 || drawnLandingAtlasV219(match,fighter)?.texture.path !== p.atlasPathV219
+ if(!p||![p.startY,p.landingMs].every(Number.isFinite)||p.startY<0||p.landingMs<=0)return null;
+ if (rig ? p.rigId !== rig.id || p.startY === 0 : !p.atlasPathV219 || drawnLandingAtlasV220(match,fighter)?.texture.path !== p.atlasPathV219
   || p.startX !== fighter.x || p.startY !== fighter.y || p.startVy !== fighter.vy) return null;
  const progress=reducedMotion||state.reducedMotion||state.skipped?1:clamp(state.elapsedMs/p.landingMs);
  const renderY=p.startY*(1-smooth(progress));
  return{...p,renderY,ground:450-renderY,progress,settled:progress>=1,canonExact:false,physicalLanding:false};
 }
-export function createXenoTrialsExitV157(match, terminal, camera, reducedMotion=false, landing=null) {
+export function createXenoTrialsExitV157(match, terminal, camera, reducedMotion=false, landing=null, images) {
  if(match?.phase!=='match-over'||!match.result?.completed||!['player','opponent','draw'].includes(match.result.winner)
   ||reducedMotion||!Array.isArray(match.fighters)
   ||!Number.isFinite(camera?.translateX)||!Number.isFinite(camera?.zoom)||camera.zoom<=0)return null;
@@ -280,10 +289,12 @@ export function createXenoTrialsExitV157(match, terminal, camera, reducedMotion=
  const sorted=[...match.fighters].sort((a,b)=>a.x-b.x||a.side.localeCompare(b.side));
  const participants=sorted.flatMap((f,index)=>{
   const rig=historicalRigForV155(f);
+  const direction=index===0?-1:1;
+  const drawn = images && terminalReady && createXenoTrialsDrawnExitV220(match,f,terminal,camera,images,direction,XENO_TRIALS_EXIT_V157.maxTravelMs);
+  if(drawn)return [drawn];
   const landed=landingReady&&getXenoTrialsLandingViewV157(match,f,landing)?.settled;
   const grounded=f.y===0&&terminalReady&&terminal.participants?.some(p=>p.fighterId===f.id&&p.side===f.side&&p.rigId===rig?.id);
   if(!rig||!landed&&!grounded||!Number.isFinite(f.x)||![-1,1].includes(f.facing))return [];
-  const direction=index===0?-1:1;
   // Full native image and the bounded foot displacement must clear the frozen
   // viewport. A fixed300px margin overestimated small native plates enough to
   // refuse ordinary completed CPU outcomes at the twelve-second speed limit.
@@ -312,9 +323,9 @@ export function getXenoTrialsExitViewV157(match,fighter,state,reducedMotion=fals
   ||state?.matchId!==match.config.matchId||state.terminalTick!==match.tick||!['playing','complete'].includes(state.phase)
   ||!Number.isFinite(state.elapsedMs)||state.elapsedMs<0||!match.fighters?.includes(fighter))return null;
  const rig=historicalRigForV155(fighter);
- if(!rig)return null;
- const p=state.participants?.find(p=>p.side===fighter.side&&p.fighterId===fighter.id&&p.rigId===rig.id);
+ const p=state.participants?.find(p=>p.side===fighter.side&&p.fighterId===fighter.id);
  if(!p||![p.startX,p.endX,p.travelMs].every(Number.isFinite)||p.travelMs<=0||![-1,1].includes(p.direction))return null;
+ if(p.atlasPathV220 ? !matchesXenoTrialsDrawnExitV220(match,fighter,p) : !rig||p.rigId!==rig.id)return null;
  const omitted=reducedMotion||state.reducedMotion||state.skipped;
  const travel=omitted?1:clamp((state.elapsedMs-XENO_TRIALS_EXIT_V157.turnMs)/p.travelMs);
  // A short acceleration keeps the first planted foot from jerking. Travel is

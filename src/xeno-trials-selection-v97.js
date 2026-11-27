@@ -28,3 +28,9 @@ export function getXenoTrialsSelectionFamilyV119(fighter) {
   if (/unclassified|flesh-experiment|renaissance/.test(fighter.id)) return 'unknown';
   return ['xenomorph', 'pathogen', 'synthetic', 'human', 'engineer', 'fauna', 'hybrid'].includes(fighter.family) ? fighter.family : 'unknown';
 }
+
+export function getXenoTrialsOpponentCandidatesV119(fighters, faction, family = 'all') {
+  return fighters.filter(fighter => family === 'all'
+    ? faction.roster.includes(fighter.id)
+    : getXenoTrialsSelectionFamilyV119(fighter) === family);
+}

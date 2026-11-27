@@ -7,8 +7,10 @@ import { fileManifestV143, stampXenoTrialsHtmlV207 } from './build-release-v143.
 import { resolveSafeBuildOutput, resolveSafeTrialsBuildOutput } from './build-output-guard.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { normalizeAudioManifestV77 } from '../src/audio-assets-v77.js';
-import { XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_STAGES_V96, getXenoTrialsArtV96 } from '../src/xeno-trials-data-v96.js';
+import { XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_STAGES_V96,
+  getXenoTrialsArtV96, getXenoTrialsFighterV96 } from '../src/xeno-trials-data-v96.js';
 import { normalizeXenoTrialsConfigV96, XENO_TRIALS_STARTERS_V96 } from '../src/xeno-trials-progress-v96.js';
+import { getXenoTrialsOpponentCandidatesV119 } from '../src/xeno-trials-selection-v97.js';
 import { getXenoTrialsStageAssetsV180 } from '../src/xeno-trials-stage-depth-v180.js';
 import { getXenoTrialsStageAssetsV190 } from '../src/xeno-trials-stage-scenes-v190.js';
 import { getXenoTrialsFranchiseStageAssetsV192 } from '../src/xeno-trials-franchise-stage-scenes-v192.js';
@@ -30,7 +32,7 @@ const entryModule = 'src/xeno-trials-standalone.js';
 const launchPage = 'xeno-trials.html';
 const digest = value => createHash('sha256').update(value).digest('hex');
 
-export const XENO_TRIALS_BUILD_REVISION = 219;
+export const XENO_TRIALS_BUILD_REVISION = 220;
 export const xenoTrialsCacheName = fingerprint => `atf-trials-v${XENO_TRIALS_BUILD_REVISION}-${fingerprint.slice(0, 24)}`;
 
 function fighterAssets(id, variant) {
@@ -116,9 +118,16 @@ export async function planXenoTrialsBuildV207(base, info) {
   }
   const starter = normalizeXenoTrialsConfigV96();
   const starterStage = XENO_TRIALS_STAGES_V96.find(stage => stage.id === starter.stageId);
-  const starterArt = [...fighterAssets(starter.playerId, starter.playerVariant),
-    ...fighterAssets(starter.opponentId, starter.opponentVariant), ...stageAssets(starterStage),
-    ...XENO_TRIALS_STARTERS_V96.map(id => getXenoTrialsArtV96(id).path)].map(path => path.slice(1));
+  const [firstOpponent] = getXenoTrialsOpponentCandidatesV119(XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_FACTIONS_V96[0]);
+  assert.ok(firstOpponent, 'The Trials terminal must have a default opponent.');
+  // On a fresh terminal the browser selects the first available form option.
+  // The normalizer also supports callers that omit the opponent entirely.
+  const entranceFighters = new Set([...XENO_TRIALS_STARTERS_V96, starter.playerId, starter.opponentId, firstOpponent.id]);
+  const entranceStages = new Set([XENO_TRIALS_STAGES_V96[0], starterStage]);
+  const starterArt = [
+    ...[...entranceFighters].flatMap(id => [null, ...getXenoTrialsFighterV96(id).variants].flatMap(variant => fighterAssets(id, variant))),
+    ...[...entranceStages].flatMap(stageAssets)
+  ].map(path => required(path.slice(1)));
   const copyPaths = [...new Set([...modules, ...css, ...assets, required('LICENSE_NOTICE.md')])].sort();
   const shellPaths = [manifestPath, audioManifest, ...modules, ...css, ...bootstrapArt, ...starterArt, ...poseAssets, ...researchMedia]
     .map(path => '/' + path);

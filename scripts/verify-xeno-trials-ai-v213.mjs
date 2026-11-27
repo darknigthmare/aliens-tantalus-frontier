@@ -3,10 +3,14 @@ import test from 'node:test';
 import { createXenoTrialsDuelCheckpointV197 } from '../src/xeno-trials-duel-checkpoint-v197.js';
 import { createXenoTrialsMatchV96, getXenoTrialsSnapshotV96, setXenoTrialsPausedV96, XENO_TRIALS_ATTACKS_V96,
   stepXenoTrialsMatchV96, XENO_TRIALS_STEP_V96 as dt } from '../src/xeno-trials-engine-v96.js';
+import { getXenoTrialsFighterV96 } from '../src/xeno-trials-data-v96.js';
 import { XENO_TRIALS_GET_UP_V211 } from '../src/xeno-trials-defense-v211.js';
-import { getXenoTrialsBodyBoundsV105 as bounds } from '../src/xeno-trials-geometry-v105.js';
-import { getXenoTrialsHurtBoundsV207 as hurt, getXenoTrialsLowScaleV207 } from '../src/xeno-trials-moveset-v207.js';
+import { getXenoTrialsBodyBoundsV105 as bounds, getXenoTrialsBodyGapV105 as gapTo, XENO_TRIALS_ARENA_V105 }
+  from '../src/xeno-trials-geometry-v105.js';
+import { getXenoTrialsHurtBoundsV207 as hurt, getXenoTrialsLowScaleV207, XENO_TRIALS_GUARD_RETREAT_V213,
+  XENO_TRIALS_LOW_RETREAT_V213 } from '../src/xeno-trials-moveset-v207.js';
 import { beginXenoTrialsV96, createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
+import { getXenoTrialsAttackV147 } from '../src/xeno-trials-signatures-v147.js';
 
 function fixture({ playerId = 'runner', opponentId = 'warrior', difficulty = 'hard', seed = 1, gap = 79, meter = 100, rules } = {}) {
   const progress = createXenoTrialsProgressV96();
@@ -354,5 +358,92 @@ test('the shield counter needs a native block and a target within the low strike
     advance(match, 77);
     assert.equal(match.events.some(event => event.type === 'block' && event.side === 'opponent'), blocked);
     assert.ok(cpuAttacks(match).every(event => event.kind !== 'low'));
+  }
+});
+
+function heavyRetreatFixture(opponentId, margin) {
+  const attacker = getXenoTrialsFighterV96('warrior');
+  const spec = getXenoTrialsAttackV147(attacker, 'heavy', XENO_TRIALS_ATTACKS_V96.heavy);
+  const reach = spec.reach * attacker.reach;
+  return { ...fixture({ playerId: attacker.id, opponentId, gap: reach - margin, meter: 0, seed: 2 }), reach };
+}
+
+test('hard Spitter reads a real heavy windup and pays for a low retreat out of reach', () => {
+  const { match, player, cpu, config, reach } = heavyRetreatFixture('spitter', 2);
+  const x = cpu.x, hp = cpu.hp;
+  advance(match, 1, { heavy: true });
+  advance(match, 22);
+  assert.equal(cpu.x, x);
+  assert.equal(cpu.movesetV207?.evade, undefined);
+  assert.equal(match.ai.observation.attack.id, player.attack.id);
+  assert.ok(gapTo(player, cpu) < reach);
+  advance(match, 1);
+  assert.equal(cpu.movesetV207?.evade?.variantV213, XENO_TRIALS_LOW_RETREAT_V213.id);
+  assert.equal(cpu.movesetV207.low, true);
+  assert.equal(cpu.stamina, getXenoTrialsFighterV96(cpu.id).stamina - XENO_TRIALS_LOW_RETREAT_V213.cost);
+  const checkpoint = createXenoTrialsDuelCheckpointV197(getXenoTrialsSnapshotV96(match), config);
+  assert.ok(checkpoint);
+  const resumed = structuredClone(checkpoint.snapshot);
+  setXenoTrialsPausedV96(resumed, false);
+  for (const state of [match, resumed]) {
+    const [attacker, spitter] = state.fighters;
+    advance(state, 16);
+    assert.equal(attacker.attack.hit, false);
+    assert.equal(spitter.hp, hp);
+    assert.ok(gapTo(attacker, spitter) > reach);
+    assert.deepEqual(state.events.filter(event => event.type === 'evade-v207')
+      .map(event => [event.side, event.variantV213]), [['opponent', XENO_TRIALS_LOW_RETREAT_V213.id]]);
+  }
+  assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
+});
+
+test('hard Synth Guard takes only the guarded steps required to escape a heavy at its edge', () => {
+  const { match, player, cpu, config, reach } = heavyRetreatFixture('synth-guard', 1);
+  const x = cpu.x, hp = cpu.hp, facing = cpu.facing;
+  advance(match, 1, { heavy: true });
+  advance(match, 22);
+  assert.equal(cpu.x, x);
+  assert.equal(cpu.guard, true);
+  assert.equal(match.ai.observation.attack.id, player.attack.id);
+  const stamina = cpu.stamina;
+  advance(match, 1);
+  const step = getXenoTrialsFighterV96(cpu.id).speed * XENO_TRIALS_GUARD_RETREAT_V213.speedRatio * dt;
+  assert.ok(Math.abs(cpu.x - x - step) < 1e-8);
+  assert.equal(cpu.facing, facing);
+  assert.equal(cpu.guard, true);
+  assert.ok(Math.abs(cpu.stamina - stamina + (5 + XENO_TRIALS_GUARD_RETREAT_V213.additionalDrain) * dt) < 1e-8);
+  const checkpoint = createXenoTrialsDuelCheckpointV197(getXenoTrialsSnapshotV96(match), config);
+  assert.ok(checkpoint);
+  const resumed = structuredClone(checkpoint.snapshot);
+  setXenoTrialsPausedV96(resumed, false);
+  for (const state of [match, resumed]) {
+    const [attacker, guard] = state.fighters;
+    advance(state, 16);
+    assert.ok(Math.abs(guard.x - x - step * 2) < 1e-8);
+    assert.ok(gapTo(attacker, guard) > reach);
+    assert.equal(guard.guard, true);
+    assert.equal(attacker.attack.hit, false);
+    assert.equal(guard.hp, hp);
+  }
+  assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
+});
+
+test('the retreats respect walls, cost and a heavy too close to escape', () => {
+  const pinned = heavyRetreatFixture('spitter', 2);
+  const offset = XENO_TRIALS_ARENA_V105.right - pinned.cpu.x;
+  pinned.cpu.x += offset;
+  pinned.player.x += offset;
+  const tired = heavyRetreatFixture('spitter', 2);
+  const close = heavyRetreatFixture('synth-guard', 15);
+  for (const { match, cpu } of [pinned, tired, close]) {
+    advance(match, 1, { heavy: true });
+    advance(match, 22);
+    if (match === tired.match) cpu.stamina = 1;
+    const x = cpu.x;
+    advance(match, 1);
+    assert.equal(cpu.x, x);
+    assert.ok(!cpu.movesetV207?.evade);
+    advance(match, 16);
+    assert.equal(match.events.at(-1).type, match === tired.match ? 'guard-break' : 'block');
   }
 });

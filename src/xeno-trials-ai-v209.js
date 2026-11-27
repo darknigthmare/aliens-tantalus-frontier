@@ -1,8 +1,9 @@
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
-import { getXenoTrialsBodyBoundsV105, getXenoTrialsBodyGapV105 } from './xeno-trials-geometry-v105.js';
+import { getXenoTrialsBodyBoundsV105, getXenoTrialsBodyGapV105, XENO_TRIALS_ARENA_V105 } from './xeno-trials-geometry-v105.js';
 import { getXenoTrialsHurtBoundsV207, getXenoTrialsLowScaleV207, getXenoTrialsStrikeBandV207,
-  XENO_TRIALS_MOVE_CONTROLS_V207 } from './xeno-trials-moveset-v207.js';
+  XENO_TRIALS_GUARD_RETREAT_V213, XENO_TRIALS_LOW_RETREAT_V213, XENO_TRIALS_MOVE_CONTROLS_V207 } from './xeno-trials-moveset-v207.js';
 import { getXenoTrialsProjectileThreatV149 } from './xeno-trials-ai-v119.js';
+import { getXenoTrialsAcidEscapeV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsParryViewV208, isXenoTrialsParryingV208 } from './xeno-trials-defense-v208.js';
 import { getXenoTrialsRiposteReadinessV208, getXenoTrialsRiposteV208 } from './xeno-trials-ripostes-v208.js';
 import { getXenoTrialsAttackStyleV147, getXenoTrialsAttackV147 } from './xeno-trials-signatures-v147.js';
@@ -10,12 +11,13 @@ import { getXenoTrialsAlternateSignatureV208, XENO_TRIALS_SIGNATURE_KINDS_V208 }
 import { getXenoTrialsPhysicalSuper } from './xeno-trials-super-kits-v209.js';
 import { getXenoTrialsActiveStrikeV210 } from './xeno-trials-super-kits-v210.js';
 import { getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
-import { XENO_TRIALS_GRAVITY_V210 } from './xeno-trials-movement-v210.js';
+import { hasXenoTrialsDefensiveTravelV213, hasXenoTrialsGuardedWalkV218, XENO_TRIALS_GRAVITY_V210 } from './xeno-trials-movement-v210.js';
 import { getXenoTrialsGroundRecoveryV211, XENO_TRIALS_GET_UP_V211 } from './xeno-trials-defense-v211.js';
 
 const nonMeleeStyles = new Set(['acid', 'pulse', 'flame', 'detonation', 'ground-wave', 'acid-cluster', 'aimed-acid']);
 const signatureControls = { 'signature-2': 'signature2', 'signature-3': 'signature3' };
 const crouchControl = 1 << XENO_TRIALS_MOVE_CONTROLS_V207.indexOf('crouch');
+const evadeControl = 1 << XENO_TRIALS_MOVE_CONTROLS_V207.indexOf('evade');
 const antiAirControl = 1 << XENO_TRIALS_MOVE_CONTROLS_V207.indexOf('antiAir');
 const antiAirStates = new Set(['APPROACH', 'PRESSURE', 'PROBE', 'REPOSITION']);
 const runnerProfile = 'castes-film_runner_alien3_1992';
@@ -75,6 +77,47 @@ function duckPulseInput(match, cpu, definition, brain) {
     highPulse = true;
   }
   return highPulse ? { crouch: true } : null;
+}
+
+function heavyRetreatInput(match, cpu, target, definition, controls, brain, specs, dt) {
+  const sliding = definition.id === 'spitter' && hasXenoTrialsDefensiveTravelV213(definition);
+  const guarded = definition.id === 'synth-guard' && hasXenoTrialsGuardedWalkV218(definition) && controls.guard;
+  if (match.hordeV180 || (!sliding && !guarded) || cpu.movementV210?.kind === 'ground-turn'
+    || isXenoTrialsParryingV208(match, cpu)) return null;
+
+  const strike = target.attack, sampled = brain.observation?.attack;
+  if (strike?.kind !== 'heavy' || strike.hit || target.y !== 0 || sampled?.id !== strike.id || sampled.age < .075
+    || match.tick - brain.observation.tick < 2 || cpu.facing !== -strike.facing || brain.observation.projectileThreat) return null;
+  const attacker = getXenoTrialsFighterV96(target.id);
+  const heavy = getXenoTrialsAttackV147(attacker, 'heavy', specs.heavy);
+  if (!heavy || heavy.approachV208 || heavy.retreatV208 || heavy.liftV208 || heavy.unblockableV151
+    || heavy.contactBandV207 === 'low' || heavy.detonationV210 || heavy.projectileStyleV211) return null;
+  const remaining = heavy.startup - strike.age;
+  const reach = heavy.reach * attacker.reach;
+  if (remaining < dt || !inRange(target, cpu, heavy, reach, strike.facing)) return null;
+
+  const advanceTicks = Math.floor(remaining / dt);
+  // The engine's low retreat speed is at least 170. Count only whole steps
+  // before contact and use the shorter distance permitted by the arena wall.
+  const direction = -cpu.facing, arena = XENO_TRIALS_ARENA_V105;
+  const room = direction > 0 ? arena.right - cpu.x : cpu.x - arena.left;
+  const speed = sliding ? 170 : definition.speed * XENO_TRIALS_GUARD_RETREAT_V213.speedRatio;
+  const travelTicks = sliding ? Math.min(advanceTicks, XENO_TRIALS_LOW_RETREAT_V213.travelTicks) : advanceTicks;
+  const distance = Math.min(room, speed * travelTicks * dt);
+  const gap = getXenoTrialsBodyGapV105(target, cpu, strike.facing);
+  if (gap + distance <= reach + .5) return null;
+  if (sliding && (cpu.stamina < XENO_TRIALS_LOW_RETREAT_V213.cost
+    || (cpu.movesetV207?.rearm & (crouchControl | evadeControl)) || (cpu.movesetV207?.held & evadeControl))) return null;
+  if (guarded && (cpu.rearmControls.guard || cpu.stamina <= 1 + remaining * (5 + XENO_TRIALS_GUARD_RETREAT_V213.additionalDrain))) return null;
+
+  const body = getXenoTrialsBodyBoundsV105(cpu);
+  const maxTravel = sliding ? Math.min(room, 400 * dt * XENO_TRIALS_LOW_RETREAT_V213.travelTicks)
+    : Math.min(room, speed * dt);
+  const swept = { ...body, left: body.left + Math.min(0, direction * maxTravel),
+    right: body.right + Math.max(0, direction * maxTravel) };
+  if (getXenoTrialsAcidEscapeV152(match, cpu, swept, arena)) return null;
+  const movement = direction > 0 ? { right: true } : { left: true };
+  return sliding ? { ...movement, crouch: true, evade: true } : { ...movement, guard: true };
 }
 
 function riposteInput(match, cpu, target, definition) {
@@ -258,6 +301,8 @@ export function chooseXenoTrialsHardTacticsV209(match, cpu, target, brain, specs
   if (defense) return defense;
   const duck = duckPulseInput(match, cpu, definition, brain);
   if (duck) return duck;
+  const retreat = heavyRetreatInput(match, cpu, target, definition, controls, brain, specs, dt);
+  if (retreat) return retreat;
   if (!cpu.parryV208?.openingId && !decided) return controls;
   return riposteInput(match, cpu, target, definition)
     || (decided && antiAirInput(match, cpu, target, definition, brain, prior, controls, specs, dt))

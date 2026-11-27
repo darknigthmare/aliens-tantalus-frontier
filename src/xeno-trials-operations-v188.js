@@ -3,6 +3,7 @@ import {getXenoTrialsBodyBoundsV105} from './xeno-trials-geometry-v105.js';
 import {getArbiterOperationV191} from './xeno-arbiter-protocols-v191.js';
 import {getXenoTrialsIsolationOperationV212,XENO_TRIALS_ISOLATION_OPERATIONS_V212} from './xeno-trials-stage-isolation-v212.js';
 import {XENO_TRIALS_CARGO_OPERATION_V213} from './xeno-trials-cargo-interlock-v213.js';
+import {XENO_TRIALS_HORDE_LIMITS_V180} from './xeno-trials-horde-v180.js';
 
 // Original Tantalus objective simulations. The existing horde supplies pressure;
 // physical objectives decide the outcome independently of the remaining kills.
@@ -62,10 +63,22 @@ export const XENO_TRIALS_BEACON_OPERATION_V219=freeze({
   {id:'battery-east',kind:'beacon',label:'Balise est',x:1135,y:0,radius:88,requiredTicks:84,periodTicks:720,windowStartTicks:490,windowTicks:220}
  ],canonExact:false,canonStatus:'original-tantalus-simulation',revision:219
 });
+const reliefOrders='Neutralisez le dernier contact près du poste indiqué, puis maintenez Interagir pendant la relève. La vague suivante coupe la charge partielle. Les postes restent disponibles après la dernière vague.';
+export const XENO_TRIALS_RELIEF_OPERATION_V220=freeze({
+ id:'xto220-relief-corridor',kind:'relay',title:'COULOIR DE RELÈVE',label:'COULOIR DE RELÈVE',stageId:'xt179-ship-extraction',
+ hordeProtocolId:'xth220-evac-relief',difficulty:'easy',factionId:'containment',roundSeconds:175,reward:520,
+ instruction:reliefOrders,description:reliefOrders,startX:225,cargoStartX:225,cargoEndX:225,reliefV220:true,
+ objectives:[
+  {id:'relief-west',kind:'terminal',label:'Poste ouest',x:185,y:0,radius:90,requiredTicks:66},
+  {id:'relief-central',kind:'terminal',label:'Poste central',x:650,y:0,radius:94,requiredTicks:72},
+  {id:'relief-east',kind:'terminal',label:'Poste est',x:1150,y:0,radius:90,requiredTicks:78}
+ ],canonExact:false,canonStatus:'original-tantalus-simulation',revision:220
+});
 export const XENO_TRIALS_OPERATION_BOARD_V212=Object.freeze([...XENO_TRIALS_ISOLATION_OPERATIONS_V212,...XENO_TRIALS_OPERATIONS_V188]);
-export const XENO_TRIALS_OPERATION_BOARD_V213=Object.freeze([XENO_TRIALS_RELAY_OPERATION_V218,XENO_TRIALS_BEACON_OPERATION_V219,
+export const XENO_TRIALS_OPERATION_BOARD_V213=Object.freeze([XENO_TRIALS_RELAY_OPERATION_V218,XENO_TRIALS_BEACON_OPERATION_V219,XENO_TRIALS_RELIEF_OPERATION_V220,
  XENO_TRIALS_CARGO_OPERATION_V213,...XENO_TRIALS_OPERATION_BOARD_V212]);
-export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_BEACON_OPERATION_V219.id ? XENO_TRIALS_BEACON_OPERATION_V219
+export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_RELIEF_OPERATION_V220.id ? XENO_TRIALS_RELIEF_OPERATION_V220
+ :id===XENO_TRIALS_BEACON_OPERATION_V219.id ? XENO_TRIALS_BEACON_OPERATION_V219
  :id===XENO_TRIALS_RELAY_OPERATION_V218.id ? XENO_TRIALS_RELAY_OPERATION_V218
  :id===XENO_TRIALS_CARGO_OPERATION_V213.id ? XENO_TRIALS_CARGO_OPERATION_V213
  :catalogue.get(id)||getArbiterOperationV191(id)||getXenoTrialsIsolationOperationV212(id);
@@ -98,6 +111,13 @@ function nearby(player,target){
 function relayContested(match,objective){
  const perimeter={x:objective.x,radius:objective.pressureRadius};
  return match.fighters?.some(fighter=>fighter.side==='opponent'&&nearby(fighter,perimeter))===true;
+}
+function reliefWindow(match){
+ const horde=match.hordeV180;
+ if(horde?.phase==='complete')return {phase:'secured',open:true,remainingTicks:null};
+ if(horde?.phase==='intermission'&&horde.nextWaveTick>match.tick)
+  return {phase:'relief',open:true,remainingTicks:horde.nextWaveTick-match.tick};
+ return {phase:'combat',open:false,remainingTicks:null};
 }
 function windowOpen(objective,ticks){
  const phase=ticks%objective.periodTicks;
@@ -169,7 +189,8 @@ export function stepXenoTrialsOperationV188(state,match,dt,input={},emit=null){
   if(index>=0){
    const objective=entry.objectives[index];
    const canCharge=charging(index)&&(!entry.relayPressureV218||!relayContested(match,objective));
-   state.progress[index]=canCharge?state.progress[index]+1:Math.max(0,state.progress[index]-2);
+   if(entry.reliefV220&&!reliefWindow(match).open)state.progress[index]=0;
+   else state.progress[index]=canCharge?state.progress[index]+1:Math.max(0,state.progress[index]-2);
    if(state.progress[index]>=objective.requiredTicks)complete(index);
   }
  }else if(entry.kind==='purge'){
@@ -234,6 +255,18 @@ export function validateXenoTrialsOperationSnapshotV188(state,config,match=null)
   const next=state.completed.findIndex(value=>!value);
   if(next>=0&&state.progress.slice(next+1).some(value=>value!==0))return false;
   if(state.progress.reduce((sum,value)=>sum+value,0)>state.elapsedTicks)return false;
+  if(entry.reliefV220&&match){
+   const cleared=match.hordeV180?.wavesCleared,secured=doneCount(state);
+   if(!Number.isSafeInteger(cleared)||secured>cleared)return false;
+   if(state.status==='active'){
+    const relief=reliefWindow(match),partial=state.progress[next]??0;
+    const {intermissionTicks}=XENO_TRIALS_HORDE_LIMITS_V180;
+    // Each relief can fit only one completion. When every cleared wave
+    // supplied a post, account for the hold completed in the current window.
+    const justSecured=secured>0&&secured===cleared?entry.objectives[secured-1].requiredTicks:0;
+    if(!relief.open&&partial>0||relief.phase==='relief'&&partial+justSecured>intermissionTicks-relief.remainingTicks+1)return false;
+   }
+  }
  }
  const done=entry.kind==='extraction'?state.delivered.every(Boolean)&&state.exitTicks===entry.exit.requiredTicks:state.completed.every(Boolean);
  if(state.status==='active'&&(state.failureReason!==null||state.completedTick!==null||done||state.integrity<=0||state.elapsedTicks>=max))return false;
@@ -280,6 +313,7 @@ export function isXenoTrialsOperationForwardV188(previous,next){
 export function getXenoTrialsOperationViewV188(match){
  const state=match?.operationV188,entry=getXenoTrialsOperationV188(state?.operationId);if(!entry)return null;
  const nextRelay=entry.kind==='relay'?state.completed.findIndex(done=>!done):-1;
+ const relief=entry.reliefV220?reliefWindow(match):null;
  let entities=entry.objectives.map((objective,index)=>{
   const active=!state.completed[index]&&(entry.kind!=='relay'||index===nextRelay);
   return {...objective,active,completed:state.completed[index],progress:state.progress[index],
@@ -312,14 +346,16 @@ export function getXenoTrialsOperationViewV188(match){
  return{id:entry.id,title:entry.title,kind:entry.kind,status:state.status,phase:state.status==='active'?(state.carrying>=0?'carrying':'objective'):state.status,
   ...(entry.isolationV212?{isolationV212:true}:{}),
   ...(entry.relayPressureV218?{relayPressureV218:true}:{}),
+  ...(relief?{reliefV220:relief}:{}),
   ...(entry.batteryTicksV219?{batteryV219:{...batteryStatus(state,entry),depleted:state.failureReason==='structure-destroyed'}}:{}),
   instruction:entry.instruction,hint:state.status==='failed'?`Évaluation interrompue : ${failureLabel}.`:state.status==='completed'?'Objectifs validés.':
    target?.contested?'Écartez ou neutralisez les contacts dans le périmètre balisé.':
+   relief&&!relief.open?'Placez-vous près du poste avant de neutraliser le dernier contact.':
    target?`${target.label} · maintenez E à proximité${target.windowOpen===false?' pendant la fenêtre verte':''}.`:'Rejoignez le sas.',
   progress:{done,total:entry.objectives.length,label:entry.kind==='extraction'?`${done}/${entry.objectives.length} caissons livrés`:`${done}/${entry.objectives.length} objectifs validés`},
   timeRemaining:Math.max(0,entry.roundSeconds-state.elapsedTicks/120),integrity:state.integrity,carrying:state.carrying,entities,
   target:target?{x:target.x,radius:target.radius,label:target.label,
    ...(entry.kind==='beacon'?{id:target.id,windowOpen:target.windowOpen,windowRemainingTicks:target.windowRemainingTicks}:{}),
    ...(entry.relayPressureV218?{contested:target.contested}:{}),
-   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212||entry.relayPressureV218?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
+   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212||entry.relayPressureV218||relief?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
 }

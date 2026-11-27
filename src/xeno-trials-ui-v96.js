@@ -1,7 +1,7 @@
 import { XENO_TRIALS_RESEARCH_LABS_V209 } from './xeno-trials-research-lab-v209.js';
 import { createXenoTrialsResearchLabRuntimeV209 } from './xeno-trials-research-lab-ui-v209.js';
 import { normalizeXenoTrialsSandboxV208, XENO_TRIALS_SANDBOX_BEHAVIORS_V208, XENO_TRIALS_SANDBOX_ID_V208 } from './xeno-trials-practice-v208.js';
-import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V219 } from './xeno-trials-practice-v207.js';
+import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V220 } from './xeno-trials-practice-v207.js';
 import { usesXenoTrialsIndependentProps } from './xeno-trials-franchise-stage-scenes-v192.js';
 import { renderArbiterTerminalDossierV190 } from './xeno-arbiter-ui-v190.js';
 import { ARBITER_PROGRAMS_V191, ARBITER_HORDE_PROTOCOLS_V191, getArbiterProgramV191 } from './xeno-arbiter-protocols-v191.js';
@@ -28,7 +28,7 @@ import { normalizeXenoTrialsProgressV96, getXenoTrialsUnlockCostV96,
 import { createXenoTrialsRuntimeV96, XENO_TRIALS_TOUCH_ZONES_V217 } from './xeno-trials-runtime-v96.js';
 import { getXenoTrialsFinisherCopyV208 } from './xeno-trials-finishers-v208.js';
 import { filterXenoTrialsRosterV97, XENO_TRIALS_SELECTION_FAMILIES_V119 as FAMILIES,
-  getXenoTrialsSelectionFamilyV119 } from './xeno-trials-selection-v97.js';
+  getXenoTrialsOpponentCandidatesV119, getXenoTrialsSelectionFamilyV119 } from './xeno-trials-selection-v97.js';
 import { XENO_TRIALS_BRANCHES_V119 as BRANCHES, XENO_TRIALS_CAMPAIGN_V119 as CAMPAIGN,
   XENO_TRIALS_CHALLENGES_V119 as CHALLENGES, getXenoTrialsContractsV119, isXenoTrialsMissionOpenV119,
   resolveXenoTrialsActivityV119, getXenoTrialsRuleTextV119 } from './xeno-trials-modes-v119.js';
@@ -546,9 +546,7 @@ export class XenoTrialsUiV96 {
   updateOpponents() {
     const faction = FACTIONS.find(f => f.id === this.form.elements.factionId.value) || FACTIONS[0];
     const family = this.form.elements.opponentFamily.value || 'all';
-    const candidates = FIGHTERS.filter(f => (family === 'all' || getXenoTrialsSelectionFamilyV119(f) === family)
-      && (family !== 'all' || faction.roster.includes(f.id)));
-    this.form.elements.opponentId.innerHTML = options(candidates);
+    this.form.elements.opponentId.innerHTML = options(getXenoTrialsOpponentCandidatesV119(FIGHTERS, faction, family));
     this.el('doctrine').textContent = faction.description; this.updateVariants(); this.renderPreviews();
   }
   updateVariants() {
@@ -650,8 +648,8 @@ export class XenoTrialsUiV96 {
       this.el('practice-lab-list').innerHTML = XENO_TRIALS_RESEARCH_LABS_V209.map(lab => `<article class="xt-activity-v119${state.practiceLabsClearedV209?.includes(lab.id) ? ' validated' : ''}">
         <h3>${escapeHtml(lab.title)}</h3><p>${escapeHtml(lab.instruction)}</p><button type="button" class="button primary" data-xt-lab="${lab.id}">
         ${state.practiceLabsClearedV209?.includes(lab.id) ? 'VALIDÉ · REJOUER' : 'OUVRIR LE LABORATOIRE'}</button></article>`).join('');
-      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V219.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
-      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V219.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
+      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V220.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
+      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V220.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
         <h3>${escapeHtml(entry.title)}</h3><strong>${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.playerId).label)}</strong>
         <p>${escapeHtml(entry.briefing)}</p><button type="button" class="button primary" data-xt-practice="${entry.id}">${cleared.includes(entry.id) ? 'VALIDÉ · REJOUER' : 'LANCER L’ATELIER'}</button></article>`).join('');
       return;
@@ -786,7 +784,24 @@ export class XenoTrialsUiV96 {
     clearTimeout(this.resultRetryTimer);
     this.resultRetryTimer = null;
   }
-  closeRuntime() { this.labRuntimeV209?.stop(); this.labRuntimeV209 = null; this.el('practice-hud').hidden = this.el('practice-restart').hidden = true; this.practiceAnnouncementV207 = this.practiceContactV209 = this.practiceRecordingStatusV209 = null; this.cancelResultRetry(); this.runtime?.stop(); this.root.removeAttribute('data-xt-outro'); this.el('skip-sequence').hidden = true; this.el('finisher').hidden = this.el('finisher-alternative').hidden = true; this.el('finisher').disabled = this.el('finisher-alternative').disabled = true; this.el('finisher-status').textContent = ''; this.lastFinisherMessage = ''; this.el('taunt').hidden=true; this.el('taunt').disabled=true; this.generation++; this.runtime = null; this.loading = false; this.lastStatus = null; this.lastResumedTickV186 = null; this.lastGamepadHintV186 = null; }
+  closeRuntime() {
+    this.labRuntimeV209?.stop(); this.labRuntimeV209 = null;
+    this.el('practice-hud').hidden = this.el('practice-restart').hidden = true;
+    this.practiceAnnouncementV207 = this.practiceContactV209 = this.practiceRecordingStatusV209 = null;
+    this.cancelResultRetry();
+    this.runtime?.stop();
+    this.el('pause-overlay').hidden = true;
+    if (!this.el('controls').hidden) this.setPauseCommands(false);
+    this.root.removeAttribute('data-xt-paused');
+    this.root.removeAttribute('data-xt-outro');
+    this.el('skip-sequence').hidden = true;
+    this.el('finisher').hidden = this.el('finisher-alternative').hidden = true;
+    this.el('finisher').disabled = this.el('finisher-alternative').disabled = true;
+    this.el('finisher-status').textContent = ''; this.lastFinisherMessage = '';
+    this.el('taunt').hidden = this.el('taunt').disabled = true;
+    this.generation++; this.runtime = null; this.loading = false; this.lastStatus = null;
+    this.lastResumedTickV186 = null; this.lastGamepadHintV186 = null;
+  }
   setPauseCommands(show) {
     this.el('pause-main').hidden = show;
     this.el('controls').hidden = !show;
@@ -873,7 +888,6 @@ export class XenoTrialsUiV96 {
       onState: snapshot => { if (this.active && generation === this.generation) this.updateMatch(snapshot); },
       onResult: practiceV207 ? null : result => { if (this.active && generation === this.generation && this.canCommit()) this.finish(result); },
       onExit: () => this.runtime?.pause(),
-      onAssetError: () => { if (this.active && generation === this.generation) this.message('Liaison visuelle interrompue. Évaluation conservée : recommencez après rechargement.'); }
     });
     this.runtime = runtime;
       void runtime.unlockAudio?.(gesture);
@@ -889,7 +903,11 @@ export class XenoTrialsUiV96 {
         if (practiceV207) this.selectionStep = 'activities';
         this.render();
         if (practiceV207) this.el('activity-count').append(' · Liaison visuelle interrompue. Relancez l’atelier.');
-        else this.message('Liaison visuelle interrompue. Évaluation conservée : recommencez après rechargement.');
+        else {
+          this.message('Liaison visuelle interrompue. Rétablissez la connexion puis relancez l’évaluation sauvegardée.');
+          if (!this.el('restart').hidden && this.root.ownerDocument?.hasFocus?.() !== false)
+            this.el('restart').focus({ preventScroll: true });
+        }
         return false;
       }
       this.render(); this.root.scrollTop = 0;

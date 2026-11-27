@@ -70,6 +70,26 @@ const incompatibleScale = new Map([
   ['drive-v123-game-combat-synthetic-avp2', ['synth-sniper']],
 ]);
 
+// Ordered V220 pairs certified on the admitted upright synthetics. The guard
+// is shorter than the other initiators and has different supported targets.
+const combatSynths = ['combat-synth', 'acid-combat-synth', 'cryo-combat-synth', 'albino-combat-synth'];
+const armoredCaptives = ['armored-joe', 'import-joe-battle', 'import-game-dd-wy-commando'];
+const addedPairs = new Map([
+  ['synth-guard', ['synth-guard', 'synth-trooper', 'synth-sniper', 'combat-synth', 'armored-joe', 'import-joe-classic']],
+  ['combat-synth', ['synth-guard', 'synth-trooper', ...combatSynths.slice(1), ...armoredCaptives]],
+  ['synth-enforcer', [...combatSynths, ...armoredCaptives]],
+  ...combatSynths.slice(1).map(id => [id, [...combatSynths.filter(other => other !== id), 'synth-enforcer', ...armoredCaptives]])
+]);
+const addedProfiles = [
+  ['synth-guard', 'pose-v94-afe-synth-guard', 'standing'],
+  ['synth-enforcer', 'pose-v111-afe-synth-enforcer', 'braced'],
+  ['combat-synth', 'enemy-146-armored-combat-synthetic', 'braced'],
+  ['acid-combat-synth', 'enemy-198-acid-blooded-combat-synthetic', 'braced'],
+  ['cryo-combat-synth', 'enemy-250-cryo-adapted-combat-synthetic', 'braced'],
+  ['albino-combat-synth', 'enemy-094-albino-combat-synthetic', 'braced']
+];
+const addedProfileById = new Map(addedProfiles.map(([id, profileId]) => [id, profileId]));
+
 const types = {
   standing: {
     label: 'Prise au corps', labelEn: 'Body hold',
@@ -88,7 +108,7 @@ const types = {
   }
 };
 
-export const XENO_TRIALS_GROUND_GRABS_V212 = Object.freeze(rows.map(([fighterId, profileId, type]) => {
+function groundGrab([fighterId, profileId, type]) {
   const { label, labelEn, sourceBand, targetBand, minRatio, maxRatio, startup, cost, durationTicks, escapeTicks,
     firstDamageTick, damageIntervalTicks, damage } = types[type];
   const contactGap = 8;
@@ -101,8 +121,9 @@ export const XENO_TRIALS_GROUND_GRABS_V212 = Object.freeze(rows.map(([fighterId,
     spec: Object.freeze({ groundedOnly: true, startup, cost, damage: damage + 2, reach: contactGap,
       active: .10, recovery: .46, stun: .12, push: 0, cooldown: 1.25 }),
   });
-}));
-const byId = new Map(XENO_TRIALS_GROUND_GRABS_V212.map(grab => [grab.fighterId, grab]));
+}
+export const XENO_TRIALS_GROUND_GRABS_V212 = Object.freeze(rows.map(groundGrab));
+const byId = new Map([...XENO_TRIALS_GROUND_GRABS_V212, ...addedProfiles.map(groundGrab)].map(grab => [grab.fighterId, grab]));
 
 export function getXenoTrialsGroundGrabV212(definition) {
   const grab = byId.get(definition?.id);
@@ -111,6 +132,11 @@ export function getXenoTrialsGroundGrabV212(definition) {
 
 export function getXenoTrialsGroundGrabPairV212(initiator, receiver) {
   const grab = getXenoTrialsGroundGrabV212(initiator), captive = captives.get(receiver?.id);
+  const addedTargets = addedPairs.get(grab?.fighterId);
+  if (addedTargets) {
+    const receiverProfile = captive?.[0] ?? addedProfileById.get(receiver?.id);
+    return receiverProfile && receiverProfile === receiver.profileId && addedTargets.includes(receiver.id) ? grab : null;
+  }
   return grab && captive && captive[0] === receiver.profileId && (grab.type !== 'low' || captive[1] === 'biped-rise')
     && !incompatibleScale.get(grab.fighterId)?.includes(receiver.id) ? grab : null;
 }

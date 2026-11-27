@@ -1,3 +1,4 @@
+import { createXenoTrialsPracticeGoalsV220, XENO_TRIALS_NEW_DRILLS_V220 } from './xeno-trials-practice-v220.js';
 import { createXenoTrialsPracticeGoalsV219, XENO_TRIALS_NEW_DRILLS_V219 } from './xeno-trials-practice-v219.js';
 import { createXenoTrialsPracticeGoalsV218, XENO_TRIALS_NEW_DRILLS_V218 } from './xeno-trials-practice-v218.js';
 import { createXenoTrialsPracticeGoalsV217, XENO_TRIALS_NEW_DRILLS_V217 } from './xeno-trials-practice-v217.js';
@@ -58,9 +59,11 @@ export const XENO_TRIALS_PRACTICE_DRILLS_V218 = Object.freeze([...XENO_TRIALS_PR
   ...XENO_TRIALS_NEW_DRILLS_V218.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
 export const XENO_TRIALS_PRACTICE_DRILLS_V219 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V218,
   ...XENO_TRIALS_NEW_DRILLS_V219.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
-const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V219.map(entry => [entry.id, entry]));
+export const XENO_TRIALS_PRACTICE_DRILLS_V220 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V219,
+  ...XENO_TRIALS_NEW_DRILLS_V220.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
+const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V220.map(entry => [entry.id, entry]));
 export const getXenoTrialsPracticeV207 = id => LESSONS.get(id) || null;
-export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V219
+export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V220
   .filter(entry => Array.isArray(value) && value.includes(entry.id)).map(entry => entry.id);
 
 export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
@@ -84,6 +87,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   let [player, opponent] = match.fighters;
   if (player.id !== entry.playerId) return null;
   if (entry.hordeProtocolId ? match.hordeV180?.protocolId !== entry.hordeProtocolId : opponent?.id !== entry.opponentId) return null;
+  if (entry.operationIdV212 && match.operationV188?.operationId !== entry.operationIdV212) return null;
   const opponentDefinition = getXenoTrialsFighterV96(entry.opponentId);
   const opponentHeavy = getXenoTrialsAttackV147(opponentDefinition, 'heavy', XENO_TRIALS_ATTACKS_V96.heavy);
   const opponentSignature = id === 'interrupt' ? getXenoTrialsAttackV147(opponentDefinition, 'signature-2') : null;
@@ -101,11 +105,12 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   const hasImpact = (action, side) => ['hit', 'block', 'guard-break'].includes(action.type) && action.side === side;
   const advance = () => { if (++index === entry.targets.length) state = 'complete'; };
   const progress = { index: () => index, advance, retry: () => { if (state === 'active') state = 'retry'; } };
+  const goalsV220 = createXenoTrialsPracticeGoalsV220(id, match, progress);
   const goalsV219 = createXenoTrialsPracticeGoalsV219(id, match, progress);
   const goalsV218 = createXenoTrialsPracticeGoalsV218(id, match, progress);
   const goalsV217 = createXenoTrialsPracticeGoalsV217(id, match, progress);
   const goalsV213 = createXenoTrialsPracticeGoalsV213(id, match, progress);
-  const liveGoals = goalsV219 || goalsV218 || goalsV217 || goalsV213;
+  const liveGoals = goalsV220 || goalsV219 || goalsV218 || goalsV217 || goalsV213;
   const goals = liveGoals || createXenoTrialsPracticeGoalsV212(id, match, progress) || createXenoTrialsPracticeGoalsV211(id, match, progress);
   let cueV213 = '';
 

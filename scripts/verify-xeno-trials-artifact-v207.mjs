@@ -7,6 +7,10 @@ import vm from 'node:vm';
 import { fileManifestV143, stampXenoTrialsHtmlV207 } from './build-release-v143.mjs';
 import { resolveSafeBuildOutput, resolveSafeTrialsBuildOutput } from './build-output-guard.mjs';
 import { planXenoTrialsBuildV207, xenoTrialsWorkerV207, xenoTrialsCacheName, XENO_TRIALS_BUILD_REVISION } from './build-xeno-trials-v207.mjs';
+import { XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_STAGES_V96,
+  getXenoTrialsArtV96, getXenoTrialsFighterV96 } from '../src/xeno-trials-data-v96.js';
+import { XENO_TRIALS_STARTERS_V96 } from '../src/xeno-trials-progress-v96.js';
+import { getXenoTrialsOpponentCandidatesV119 } from '../src/xeno-trials-selection-v97.js';
 
 export async function verifyXenoTrialsArtifactV207(root) {
   const base = resolveSafeBuildOutput(root, process.env.ATF_BUILD_OUTPUT || 'dist');
@@ -44,6 +48,18 @@ export async function verifyXenoTrialsArtifactV207(root) {
   assert.equal(context.checked.CACHE, info.cacheName);
   assert.deepEqual(Array.from(context.checked.SHELL), plan.shell);
   const paths = new Set(shipped.map(row => '/' + row.path));
+  const offlinePaths = new Set(context.checked.SHELL);
+  // This checks the base images needed by an untouched terminal before any
+  // roster portrait or match asset has been warmed by a live request.
+  const [defaultOpponent] = getXenoTrialsOpponentCandidatesV119(XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_FACTIONS_V96[0]);
+  for (const id of [...XENO_TRIALS_STARTERS_V96, defaultOpponent.id]) {
+    for (const variant of [null, ...getXenoTrialsFighterV96(id).variants]) {
+      const { path } = getXenoTrialsArtV96(id, variant);
+      assert.ok(offlinePaths.has(path), `Fresh Trials terminal does not precache ${id} (${variant ?? 'default'}): ${path}`);
+    }
+  }
+  const defaultBackdrop = XENO_TRIALS_STAGES_V96[0].backdrop;
+  assert.ok(!defaultBackdrop || offlinePaths.has(defaultBackdrop), 'The first arena backdrop must be in the Trials offline shell.');
   for (const path of plan.shell) {
     const url = new URL(path, origin);
     assert.ok(path === '/' || paths.has(url.pathname), `Missing standalone offline resource: ${path}`);

@@ -66,6 +66,7 @@ import { drawXenoTrialsOperationV188, getXenoTrialsOperationHudV188 } from './xe
 import { drawXenoTrialsStageHazardsV188 } from './xeno-trials-stage-hazards-render-v188.js';
 import { createXenoTrialsAudioV189 } from './xeno-trials-audio-v189.js';
 import { getXenoTrialsSpriteAtlasV189, drawXenoTrialsSpriteAtlasV189, requestXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteEnvelopeV189 } from './xeno-trials-sprite-atlas-v189.js';
+import { drawXenoTrialsSpatialOutroV220 } from './xeno-trials-spatial-outro-v220.js';
 import { getXenoTrialsRuntimeSpriteAtlas, getXenoTrialsSpriteAtlasV197, drawXenoTrialsSpriteAtlasV191,
   requestXenoTrialsSpriteAtlasV191, getXenoTrialsSpriteEnvelopeV191, drawXenoTrialsRuntimeActionAtlas,
   requestXenoTrialsRuntimeActionAtlas, getXenoTrialsActionEnvelope } from './xeno-trials-sprite-atlas-v191.js';
@@ -427,14 +428,24 @@ export function createXenoTrialsRuntimeV96(options = {}) {
         return;
       }
     }
-    const { width, height, pivotX, bottom, sourceFacing } = getXenoTrialsRenderMetricsV110(fighter.id, fighter.variant, displayScale);
+    const metrics = getXenoTrialsRenderMetricsV110(fighter.id, fighter.variant, displayScale);
+    const { width, height, pivotX, bottom, sourceFacing } = metrics;
+    if (exitView?.atlasPathV220) {
+      const drawn = drawXenoTrialsSpatialOutroV220(context, match, fighter, images, exitView, metrics);
+      if (drawn) {
+        rigDrawsV154.set(fighter.side, drawn);
+        return;
+      }
+    }
     if (landingView?.atlasPathV219) {
       const visual = { ...fighter, y: 0 };
-      const options = { cue: { state: 'ko', progress: landingView.settled ? 1 : 0 },
-        x: drawX, y: ground, facing: drawFacing, reducedMotion: reduceMotion(),
-        metrics: { width, height, pivotX, bottom, sourceFacing } };
-      const drawn = drawXenoTrialsSpriteAtlasV188(context, visual, art, images, options)
-        || drawXenoTrialsSpriteAtlasV189(context, visual, art, images, options);
+      const options = { tick: match.tick, cue: { state: 'ko', progress: landingView.settled ? 1 : 0 },
+        x: drawX, y: ground, facing: drawFacing, reducedMotion: reduceMotion(), metrics };
+      const runtimeAtlas = getXenoTrialsRuntimeSpriteAtlas(visual, art);
+      const drawn = runtimeAtlas?.texture.path === landingView.atlasPathV219
+        ? drawXenoTrialsSpriteAtlasV191(context, visual, art, images, { ...options, includeV197: true })
+        : drawXenoTrialsSpriteAtlasV188(context, visual, art, images, options)
+          || drawXenoTrialsSpriteAtlasV189(context, visual, art, images, options);
       if (drawn) {
         rigDrawsV154.set(fighter.side, { ...drawn, landingV219: landingView });
         return;
@@ -1048,7 +1059,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
         if(exitV157?.phase==='playing')exitV157=advanceXenoTrialsOutroV155(exitV157,dt*1000);
         else if(terminalV156?.phase==='playing'){
           terminalV156=advanceXenoTrialsOutroV155(terminalV156,dt*1000);
-          if(terminalV156.phase==='complete' && !finisherPendingV207())exitV157=createXenoTrialsExitV157(match,terminalV156,cameraView,false,landingV157);
+          if(terminalV156.phase==='complete' && !finisherPendingV207())exitV157=createXenoTrialsExitV157(match,terminalV156,cameraView,false,landingV157,practiceV207 ? undefined : images);
         } else if(outroV155?.phase==='playing'){
           outroV155=advanceXenoTrialsOutroV155(outroV155,dt*1000);
           if (outroV155.phase === 'complete') {
@@ -1056,7 +1067,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
             terminalV156 = createXenoTrialsPilotReturnV212(match, terminal, outroV155, images);
           }
         } else if (!exitV157 && terminalV156?.phase === 'complete' && !finisherPendingV207()) {
-          exitV157 = createXenoTrialsExitV157(match, terminalV156, cameraView, false, landingV157);
+          exitV157 = createXenoTrialsExitV157(match, terminalV156, cameraView, false, landingV157, practiceV207 ? undefined : images);
         } else if(!outroV155&&!terminalV156&&landingV157?.phase==='complete'&&!exitV157){
           exitV157=createXenoTrialsExitV157(match,null,cameraView,false,landingV157);
         }

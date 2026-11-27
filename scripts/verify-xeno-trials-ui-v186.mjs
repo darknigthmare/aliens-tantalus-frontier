@@ -83,6 +83,25 @@ test('checkpoint UI commits a native snapshot, persists the last stop before clo
   assert.equal(h.commits, commits + 1);
 });
 
+test('closing a suspended runtime clears the pause dialog and preserves the ticket for recovery', () => {
+  const h = host(), snapshot = ticketSnapshot(h);
+  h.ui.updateMatch({ ...snapshot, paused: true });
+  h.ui.setPauseCommands(true);
+  assert.equal(h.el('pause-overlay').hidden, false);
+  assert.equal(h.el('controls').hidden, false);
+  const saved = structuredClone(h.state);
+  let stops = 0;
+  h.ui.runtime = { stop() { stops++; } };
+  h.ui.closeRuntime();
+  assert.equal(stops, 1);
+  assert.equal(h.el('pause-overlay').hidden, true);
+  assert.equal(h.el('pause-main').hidden, false);
+  assert.equal(h.el('controls').hidden, true);
+  assert.equal(h.ui.root.getAttribute('data-xt-paused'), undefined);
+  assert.equal(h.ui.isRunning(), false);
+  assert.deepEqual(h.state, saved);
+});
+
 test('checkpoint write failure is explicit and retains the durable ticket and economy', () => {
   const h = host(), snapshot = ticketSnapshot(h), before = structuredClone(h.state);
   h.setFailWrite(true); assert.equal(h.ui.persistCheckpointV186(snapshot, h.ui.generation), false);

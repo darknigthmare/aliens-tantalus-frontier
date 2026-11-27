@@ -19,6 +19,13 @@ export function getXenoTrialsOperationHudV188(match) {
       phase = battery.armed ? `BATTERIE · ${seconds} s` : 'BATTERIE EN VEILLE';
     }
   }
+  const relief = view.status === 'active' ? view.reliefV220 : null;
+  if (relief?.phase === 'combat') phase = 'POSTES VERROUILLÉS';
+  if (relief?.phase === 'secured') phase = 'SECTEUR SÉCURISÉ';
+  if (relief?.phase === 'relief') {
+    const tenths = Math.ceil(relief.remainingTicks * 10 / XENO_TRIALS_OPERATION_LIMITS_V188.ticksPerSecond);
+    phase = `RELÈVE · ${(tenths / 10).toFixed(1).replace('.', ',')} s`;
+  }
   const player = match.fighters?.[0], target = view.status === 'active' ? view.target : null;
   const body = player ? getXenoTrialsBodyBoundsV105(player) : null;
   let instruction = view.status === 'completed' ? 'Objectifs validés.' : view.status === 'failed' ? 'Évaluation interrompue.' : view.instruction;
@@ -40,6 +47,10 @@ export function getXenoTrialsOperationHudV188(match) {
       if (view.relayPressureV218) {
         if (target.contested) instruction = `${label} · PÉRIMÈTRE CONTESTÉ`;
         else if (contact) instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
+      }
+      if (relief && contact) {
+        instruction = relief.open ? `${instruction} · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`
+          : `${label} · PRÉPAREZ LA RELÈVE`;
       }
       if (view.kind === 'extraction' || purgeV204) {
         const work = { id: target.id, kind: target.kind, contact, progress: target.progress,
@@ -74,6 +85,7 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
   if (!view) return null;
   const floor = arena.floor, beacons = [];
   const battery = view.status === 'active' ? view.batteryV219 : null;
+  const relief = view.status === 'active' ? view.reliefV220 : null;
   const extraction = view.kind === 'extraction';
   if (extraction && plane === 'rear') {
     return { id: view.id, plane, entities: view.entities.length,
@@ -87,7 +99,9 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
   for (const entity of view.entities) {
     if (!Number.isFinite(entity.x) || !Number.isFinite(entity.radius)) continue;
     if (entity.kind === 'supply' && (entity.carried || entity.delivered)) continue;
-    const color = entity.contested ? '#ed997c' : entity.kind === 'beacon' ? beaconColor(entity) : entity.completed ? '#91bd8c' : entity.active ? '#ecd08c' : '#8a9d98';
+    const reliefOpen = relief && entity.active ? relief.open : null;
+    const color = entity.contested ? '#ed997c' : entity.kind === 'beacon' ? beaconColor(entity)
+      : entity.completed || reliefOpen ? '#91bd8c' : entity.active ? '#ecd08c' : '#8a9d98';
     const x = entity.x, width = entity.kind === 'cargo' ? 84 : entity.kind === 'depot' || entity.kind === 'exit' ? 100 : 42;
     ctx.strokeStyle = color; ctx.fillStyle = '#142124'; ctx.lineWidth = 2;
     if (plane === 'front') {
@@ -102,7 +116,8 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
       ctx.fillStyle = color; ctx.fill();
       if (entity.active) {
         ctx.font = 'bold 12px monospace'; ctx.textAlign = 'center';
-        ctx.fillText(entity.contested ? `${entity.label} · CONTESTÉ` : entity.label, x, floor + 34, 210);
+        const status = entity.contested ? 'CONTESTÉ' : reliefOpen ? 'OUVERT' : reliefOpen === false ? 'VERROUILLÉ' : '';
+        ctx.fillText(status ? `${entity.label} · ${status}` : entity.label, x, floor + 34, 210);
       }
       continue;
     }
@@ -117,7 +132,7 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
       ctx.fillRect(x + width / 2 - 12, floor - height + 6, 5, height - 14);
     } else {
       ctx.fillRect(x - width / 2 + 7, floor - height + 8, width - 14, 9);
-      ctx.fillStyle = entity.contested || entity.windowOpen === false && !entity.completed ? '#bd7658' : '#a9d79b';
+      ctx.fillStyle = entity.contested || reliefOpen === false || entity.windowOpen === false && !entity.completed ? '#bd7658' : '#a9d79b';
       ctx.fillRect(x - 4, floor - height + 27, 8, 8);
     }
     if (entity.requiredTicks > 0 && entity.progress > 0) {

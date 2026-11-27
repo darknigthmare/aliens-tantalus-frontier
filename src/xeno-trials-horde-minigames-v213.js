@@ -43,6 +43,18 @@ const layouts = [
       ['right', 'DÉTACHEMENT DE RELÈVE', ['synth-sniper', 'synth-trooper', 'prowler'], 5, 3, 17, .22],
       ['split', 'ASSAUT SUR LA PASSERELLE', ['synth-guard', 'runner', 'spitter'], 5, 4, 21, .24]
     ]
+  },
+  {
+    id: 'xth220-evac-relief', title: 'DERNIÈRE RELÈVE', stageId: 'xt179-ship-extraction',
+    description: 'Quatre vagues dans le sas d’extraction. Les éclaireurs entrent par l’ouest, la relève par l’est, puis les contacts prennent les deux accès.',
+    orders: 'Utilisez chaque pause pour changer de position. Le dernier détachement revient par le sas est.',
+    roundSeconds: 175, reward: 420,
+    waves: [
+      ['left', 'ÉCLAIREURS DU SAS', ['runner', 'prowler'], 4, 3, 15, .17],
+      ['right', 'DÉTACHEMENT DE RELÈVE', ['runner', 'armored-runner', 'prowler'], 4, 3, 17, .19],
+      ['split', 'ASSAUT AUX DEUX SAS', ['warrior', 'runner', 'prowler', 'panther'], 5, 4, 19, .20],
+      ['right', 'DERNIER DÉTACHEMENT', ['runner', 'albino-runner', 'armored-runner'], 6, 4, 21, .21]
+    ]
   }
 ];
 
