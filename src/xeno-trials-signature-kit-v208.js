@@ -258,7 +258,8 @@ export function validXenoTrialsSignatureActionV208(attack, spec, horde = false) 
 }
 
 export function validXenoTrialsSignatureEventV208(event, hasFighter) {
+  if (event.type !== 'attack') return event.signatureIdV208 === undefined;
   if (event.signatureIdV208 === undefined && !XENO_TRIALS_SIGNATURE_KINDS_V208.includes(event.kind)) return true;
   const move = byId.get(event.signatureIdV208);
-  return Boolean(move && event.type === 'attack' && move.kind === event.kind && hasFighter(move.fighterId));
+  return Boolean(move && move.kind === event.kind && hasFighter(move.fighterId));
 }

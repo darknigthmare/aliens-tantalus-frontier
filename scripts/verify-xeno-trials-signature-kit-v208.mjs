@@ -9,6 +9,7 @@ import { getXenoTrialsBodyBoundsV105 as body } from '../src/xeno-trials-geometry
 import { createXenoTrialsDuelCheckpointV197 } from '../src/xeno-trials-duel-checkpoint-v197.js';
 import { createXenoTrialsHordeCheckpointV186 } from '../src/xeno-trials-horde-checkpoint-v186.js';
 import { beginXenoTrialsV96, createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
+import { getXenoTrialsHordeProtocolV180, XENO_TRIALS_HORDE_LIMITS_V180 } from '../src/xeno-trials-horde-v180.js';
 import { getXenoTrialsAlternateSignatureV208, XENO_TRIALS_SIGNATURES_V208 } from '../src/xeno-trials-signature-kit-v208.js';
 
 const controlFor = kind => kind === 'signature-2' ? 'signature2' : 'signature3';
@@ -172,4 +173,35 @@ test('duel and horde checkpoints restore in-flight signatures and reject forged 
       assert.equal(admit(sample, ticket.config), null);
     }
   }
+});
+
+test('a native Ravager telegraph stays resumable and enemy signatures obey horde attack limits', () => {
+  const id = 'xth186-incoming-2', protocol = getXenoTrialsHordeProtocolV180(id);
+  const ticket = beginXenoTrialsV96(createXenoTrialsProgressV96(), { playerId: 'warrior',
+    activityV119: { branch: 'horde', id } });
+  assert.equal(ticket.applied, true);
+  const match = fight('warrior', ticket.config);
+  // Clear only the troop waves to reach the native authored boss fixture.
+  for (let tick = 0; tick < 12000 && match.hordeV180.wave < protocol.bossFinaleV186.wave; tick++) {
+    for (const enemy of match.fighters.slice(1)) enemy.hp = 0;
+    advance(match, 1);
+  }
+  const boss = match.fighters.find(fighter => fighter.enemyRankV186 === 'boss');
+  assert.equal(boss?.id, 'ravager');
+  const bothSignatures = { signature2: true, signature3: true };
+  advance(match, 1, {}, bothSignatures);
+  assert.ok(match.fighters.slice(1).every(fighter => fighter.attack === null), 'spawn grace applies to both signatures');
+  advance(match, XENO_TRIALS_HORDE_LIMITS_V180.spawnGraceTicks);
+  advance(match, 1, {}, bothSignatures);
+  const activeAttacks = match.fighters.slice(1).filter(fighter => fighter.attack !== null);
+  assert.equal(activeAttacks.length, 2);
+  assert.equal(boss.attack?.kind, 'signature-2');
+  const telegraph = match.events.find(event => event.type === 'horde-boss-telegraph-v186' && event.kind === 'signature-2');
+  assert.equal(telegraph?.attackId, boss.attack.id);
+  assert.equal(telegraph?.instanceId, boss.instanceIdV180);
+  const checkpoint = createXenoTrialsHordeCheckpointV186(getXenoTrialsSnapshotV96(match), ticket.config);
+  assert.ok(checkpoint);
+  assert.deepEqual(restoreXenoTrialsHordeMatchV180(checkpoint.snapshot), checkpoint.snapshot);
+  telegraph.signatureIdV208 = 'ravager::sig2';
+  assert.equal(createXenoTrialsHordeCheckpointV186(getXenoTrialsSnapshotV96(match), ticket.config), null);
 });

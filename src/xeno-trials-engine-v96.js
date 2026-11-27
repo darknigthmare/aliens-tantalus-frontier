@@ -618,7 +618,8 @@ function fixedHordeStepV180(match, playerControls, opponentControls, dt) {
       controls = reactToLowStrikeV207(match, enemy, player, controls);
     }
     if (!engaged.includes(enemy) || match.tick < enemy.spawnTickV180 + HORDE_LIMITS.spawnGraceTicks)
-      controls = { ...controls, light: false, heavy: false, special: false, super: false, antiAir: false };
+      controls = { ...controls, light: false, heavy: false, special: false, super: false, antiAir: false,
+        signature2: false, signature3: false };
     const previousAttackId = enemy.attack?.id;
     fighterStep(match, enemy, player, controls, dt);
     if (enemy.enemyRankV186 === 'boss' && enemy.attack && enemy.attack.id !== previousAttackId) {

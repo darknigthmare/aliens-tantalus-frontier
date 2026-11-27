@@ -176,7 +176,7 @@ export const XENO_GAMEPLAY_SUCCESSORS_V208 = freeze({
   },
   "src/xeno-trials-engine-v96.js": {
     "kind": "runtime",
-    "sha256": "9366e66249fad400bcceaa511b5bc2a30d0a77d1ea2673ab6850476889b34350",
+    "sha256": "f0cf28ecb57cc80ac48626d1cd35034219f118e8fa843139a6c5490f2599615d",
     "previousSha256": "dc2bf84ba6bbcc35db89e7392997625d7048a010731983ec4f440093891b70e1"
   },
   "src/xeno-trials-finishers-v207.js": {
@@ -267,7 +267,7 @@ export const XENO_GAMEPLAY_NEW_INPUTS_V208 = freeze({
   },
   "scripts/verify-xeno-trials-signature-kit-v208.mjs": {
     "kind": "tooling",
-    "sha256": "327b8807bd5ef0a4c5d9ad3d1feaa4cc8eb43827f512ab7719a3ce39818bd227"
+    "sha256": "f3b97b9cee87f076b5b2c04b3a00be1fd206322b7232aa5fd6962072bc471a79"
   },
   "src/xeno-trials-defense-v208.js": {
     "kind": "runtime",
@@ -287,7 +287,7 @@ export const XENO_GAMEPLAY_NEW_INPUTS_V208 = freeze({
   },
   "src/xeno-trials-signature-kit-v208.js": {
     "kind": "runtime",
-    "sha256": "63a412abb2a763e3722cac544136415ca285247550f45985cf6cd151129de0e2"
+    "sha256": "2e6a5b1fe7b65a2f82b1fcb7dda2c73cee8597a0703197710c6619d4cfd8fd77"
   }
 });
 export const XENO_GAMEPLAY_DECLARATIONS_V208 = freeze({
