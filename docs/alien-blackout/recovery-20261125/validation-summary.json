@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "date": "2026-11-25",
+  "edition": "ALIEN BLACKOUT v0.7.0",
+  "status": "recovered-source-checkpoint",
+  "originalArchive": {
+    "file": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+    "bytes": 33103752,
+    "sha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c",
+    "files": 400,
+    "driveUrl": "https://drive.google.com/file/d/1UfPC8srC0FOAfVy-g6yQ8-Y8Xy6GnC84/view?usp=drivesdk",
+    "driveReadback": "name, size, parent confirmed; no remote digest claimed"
+  },
+  "recovery": {
+    "portableBytes": 603801,
+    "portableGitBlob": "d725cdfd644b81d4e8d9df12d92a6a6091537262",
+    "modularJavaScript": 26,
+    "svgAssets": 41,
+    "modularReassemblyMatchesRecoveredPortable": true,
+    "containerUnavailableBeforeHostBuild": true,
+    "version08BackingContentUnavailable": true
+  },
+  "validationExecutedBeforeOutage": {
+    "node": "24.22.3",
+    "npmTestExit": 0,
+    "fixtures": {
+      "geometry": 3289,
+      "traversalAndCompatibility": 309,
+      "field": 57,
+      "rescue": 67,
+      "inherited": 82,
+      "installer": 27,
+      "passed": 3831,
+      "failed": 0
+    },
+    "campaignMatrix": {
+      "runs": 16,
+      "wins": 9,
+      "losses": 7,
+      "restoreChecks": 406,
+      "restoreFailures": 0,
+      "fieldRescue": {
+        "completed": 1,
+        "difficulty": "cauchemar",
+        "seed": 0,
+        "survivors": 3
+      }
+    },
+    "scope": "Fixture traversal uses prepared actors and quiet threats. Campaign matrix uses real AI with automated public commands; wins and defeats retained."
+  },
+  "validationExecutedAfterOutage": {
+    "scriptCompilation": 26,
+    "geometryChecks": 3289,
+    "geometryFailures": 0,
+    "modularReassembly": "exact text equality"
+  },
+  "notValidated": [
+    "Host menu and build integration",
+    "Browser return flow",
+    "Native MIRE/GameEngine/SaveSystem integration",
+    "Official 1:1 fidelity"
+  ],
+  "notRecoveredToThisCommit": [
+    "Historical reports, screenshots, original QA scripts and fixtures: preserved in the complete original archive on Drive",
+    "Detailed fresh QA output files: copied locally before outage, not available to the remote publisher"
+  ],
+  "pendingPatches": "Saved for review; not applied to the runnable release"
+}
