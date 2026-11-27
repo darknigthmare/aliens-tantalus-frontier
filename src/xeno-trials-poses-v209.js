@@ -10,14 +10,12 @@ const heavyFrames = [
   ['contact', '/assets/openai/xeno-trials-v209/characters/arachnoid-heavy-impact.png', [124, 15, 1675, 834], 986],
   ['recovery', '/assets/openai/xeno-trials-v209/characters/arachnoid-heavy-recovery.png', [275, 17, 1393, 851], 900],
 ].map(poseFrame);
-const groundedPounce = Object.freeze({
-  phase: 'contact',
-  path: '/assets/openai/xeno-trials-v209/characters/arachnoid-special-active-grounded.png',
-  bounds: Object.freeze([28, 243, 1737, 772]),
-  // The shoulder pivot sits about 33 source pixels behind the neutral origin.
-  // Keep that offset on the painted shoulder (x = 1156) at neutral density.
-  rootX: 1189
-});
+// Carry the shoulder-to-pivot offset of the neutral plate across the three grounded keys.
+const arachnoidPounceFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/arachnoid-special-windup.png', [129, 65, 1319, 981], 905],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/arachnoid-special-active-grounded.png', [28, 243, 1737, 772], 1189, 1774, 887],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/arachnoid-special-recovery.png', [172, 45, 1347, 980], 860]
+].map(poseFrame));
 const pantherFrames = Object.freeze([
   ['windup', '/assets/openai/xeno-trials-v209/characters/panther-special-windup.png', [82, 58, 1478, 952], 790],
   ['contact', '/assets/openai/xeno-trials-v209/characters/panther-special-active.png', [50, 56, 1504, 956], 780],
@@ -27,6 +25,12 @@ const gridFrames = Object.freeze([null,
   // Keep the rightmost claw with its existing 9-pixel source margin.
   poseFrame(['contact', '/assets/openai/xeno-trials-v209/characters/grid-heavy-impact.png', [17, 51, 1765, 860], 1176]),
   poseFrame(['recovery', '/assets/openai/xeno-trials-v209/characters/grid-heavy-recovery.png', [157, 39, 1462, 847], 1175])
+]);
+const gridTailFrames = Object.freeze([
+  // The painted shoulder centers (x = 1161 and x = 1104) retain the neutral 63-pixel offset.
+  poseFrame(['windup', '/assets/openai/xeno-trials-v209/characters/grid-special-windup.png', [231, 21, 1657, 822], 1224]),
+  null,
+  poseFrame(['recovery', '/assets/openai/xeno-trials-v209/characters/grid-special-recovery.png', [307, 48, 1495, 823], 1167])
 ]);
 const gorillaFrames = Object.freeze([
   // Match the chest axis of the neutral plate, using the same crest length to retain scale.
@@ -46,6 +50,10 @@ const pantherLightFrames = Object.freeze([
 ]);
 const pantherSource = ['pose-v94-kenner-panther', '/assets/openai/sprites/static-enemy-v94/kenner-panther-neca.png',
   '575f23d532b10eb34f2dd0df9e8a860e1511cdecf4e7ab20eb5fa7742acc549c', 1310, 1201];
+const arachnoidSource = ['castes-game_avp_capcom_arachnoid', artPath,
+  '84f47e12acfa88b5658a736863e4ad8b61a9b43bfa5cb61a34abe87649b2e3ee', 1536, 1024];
+const gridSource = ['castes-film_grid_avp_2004', '/assets/user/castes-v87/film_grid_avp_2004.png',
+  '49d756a01928adb1c3fa787d47efbb158da988699fd9d0008bf9a723a7002a74', 1536, 1024];
 
 const groundedActions = Object.freeze([
   ['panther', {
@@ -56,8 +64,7 @@ const groundedActions = Object.freeze([
   }],
   ['grid', {
     id: 'grid-heavy', action: 'heavy', revision: 222, animation: 'painted-grid-heavy-poses',
-    source: ['castes-film_grid_avp_2004', '/assets/user/castes-v87/film_grid_avp_2004.png',
-      '49d756a01928adb1c3fa787d47efbb158da988699fd9d0008bf9a723a7002a74', 1536, 1024],
+    source: gridSource,
     textureWidth: 1774, textureHeight: 887, density: 1, frames: gridFrames, limitations: ['contact-and-recovery-only']
   }],
   ['gorilla', {
@@ -68,8 +75,7 @@ const groundedActions = Object.freeze([
   }],
   ['arachnoid', {
     id: 'arachnoid-light', action: 'light', revision: 223, animation: 'painted-arachnoid-light-poses', variant: 'grey',
-    source: ['castes-game_avp_capcom_arachnoid', artPath,
-      '84f47e12acfa88b5658a736863e4ad8b61a9b43bfa5cb61a34abe87649b2e3ee', 1536, 1024],
+    source: arachnoidSource,
     // Keep the approximately 34-pixel shoulder-to-neutral-pivot offset in each plate.
     textureWidth: 1536, textureHeight: 1024, density: 1, frames: arachnoidLightFrames, limitations: ['grey-only', 'three-painted-poses']
   }],
@@ -77,16 +83,23 @@ const groundedActions = Object.freeze([
     id: 'panther-light', action: 'light', revision: 223, animation: 'painted-panther-light-poses', source: pantherSource,
     // The neutral shoulder-to-skull span is about 80% of the span in these light keys.
     textureWidth: 1536, textureHeight: 1024, density: .80, frames: pantherLightFrames, limitations: ['windup-and-recovery-only']
+  }],
+  ['arachnoid', {
+    id: 'arachnoid-pounce', action: 'special', revision: 224, animation: 'painted-grounded-pounce', variant: 'grey',
+    source: arachnoidSource, textureWidth: 1536, textureHeight: 1024, density: 1,
+    frames: arachnoidPounceFrames, limitations: ['grey-only', 'three-painted-poses']
+  }],
+  ['grid', {
+    id: 'grid-tail', action: 'special', revision: 224, animation: 'painted-grid-tail-poses',
+    source: gridSource, textureWidth: 1774, textureHeight: 887, density: 1,
+    frames: gridTailFrames, limitations: ['windup-and-recovery-only']
   }]
 ].map(([fighterId, entry]) => Object.freeze({ ...entry, fighterId, source: Object.freeze(entry.source), limitations: Object.freeze(entry.limitations),
   paths: Object.freeze(entry.frames.filter(Boolean).map(frame => frame.path)) })));
 const heavyPaths = Object.freeze(heavyFrames.map(frame => frame.path));
-const paths = Object.freeze([...heavyPaths, groundedPounce.path]);
-const allPaths = Object.freeze([...paths, ...groundedActions.flatMap(entry => entry.paths)]);
+const allPaths = Object.freeze([...heavyPaths, ...groundedActions.flatMap(entry => entry.paths)]);
 const supported = (fighter, art) => fighter?.id === 'arachnoid' && fighter.variant !== 'purple'
   && art?.path === artPath && art.sourceFacing === 1;
-const pounceSupported = (fighter, art) => fighter.variant === 'grey' && art.visualStateV95 === 'grey'
-  && art.profileId === 'castes-game_avp_capcom_arachnoid' && art.sourceHeight === 1024 && art.sourceWidth === 1536;
 
 export function getXenoTrialsGroundedPaintedActionsV223(fighter, art) {
   if (!fighter || !art) return [];
@@ -111,7 +124,7 @@ export function getXenoTrialsPantherPounceFramesV221(fighter, art) {
 export function getXenoTrialsPoseAssetsV209(fighter, art) {
   if (!fighter) return allPaths;
   const authoredPaths = getXenoTrialsGroundedPaintedActionsV223(fighter, art).flatMap(action => action.paths);
-  const legacyPaths = supported(fighter, art) ? (pounceSupported(fighter, art) ? paths : heavyPaths) : [];
+  const legacyPaths = supported(fighter, art) ? heavyPaths : [];
   return Object.freeze([...legacyPaths, ...authoredPaths]);
 }
 
@@ -124,17 +137,14 @@ export function drawXenoTrialsPoseV209(ctx, fighter, art, images, options) {
   const activeEnd = spec.startup + spec.active;
   if (attack.age >= activeEnd + spec.recovery) return null;
   const authored = getXenoTrialsGroundedPaintedActionsV223(fighter, art).find(action => action.action === attack.kind);
-  const arachnoid = supported(fighter, art);
-  const pounce = arachnoid && attack.kind === 'special' && pounceSupported(fighter, art)
-    && attack.age >= spec.startup && attack.age < activeEnd;
-  if (!authored && !pounce && (!arachnoid || attack.kind !== 'heavy')) return null;
+  if (!authored && (attack.kind !== 'heavy' || !supported(fighter, art))) return null;
   const phase = attack.age < spec.startup ? 0 : attack.age < activeEnd ? 1 : 2;
-  const frame = authored ? authored.frames[phase] : pounce ? groundedPounce : heavyFrames[phase];
+  const frame = authored ? authored.frames[phase] : heavyFrames[phase];
   if (!frame) return null;
   const image = images.get(frame.path);
   if (!image || image.complete === false || image.naturalWidth !== (frame.textureWidth ?? authored?.textureWidth ?? width)
     || image.naturalHeight !== (frame.textureHeight ?? authored?.textureHeight ?? height)) return null;
-  const scale = groundedHeight / (pounce || authored ? art.sourceHeight : 834) * (authored?.density ?? 1);
+  const scale = groundedHeight / (authored ? art.sourceHeight : 834) * (authored?.density ?? 1);
   const [left, top, right, bottom] = frame.bounds;
   const w = right - left, h = bottom - top;
   ctx.save();
@@ -143,7 +153,7 @@ export function drawXenoTrialsPoseV209(ctx, fighter, art, images, options) {
     ctx.scale(attack.facing, 1);
     ctx.drawImage(image, left, top, w, h, (left - frame.rootX) * scale, -h * scale, w * scale, h * scale);
   } finally { ctx.restore(); }
-  const animation = authored?.animation ?? (pounce ? 'painted-grounded-pounce' : 'three-painted-heavy-poses');
+  const animation = authored?.animation ?? 'three-painted-heavy-poses';
   return { drawn: true, animation, poseV209: {
     phase: frame.phase, path: frame.path, attackId: attack.id, attackAge: attack.age, ground, sourceRect: [left, top, w, h],
   } };

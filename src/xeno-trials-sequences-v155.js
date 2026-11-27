@@ -6,7 +6,8 @@ import { getXenoTrialsPresentationParticipantsV211, getXenoTrialsTauntRigV211 } 
 import { getXenoTrialsSpriteAtlasV188 } from './xeno-trials-sprite-atlas-v188.js';
 import { getXenoTrialsSpriteAtlasV189 } from './xeno-trials-sprite-atlas-v189.js';
 import { getXenoTrialsRuntimeSpriteAtlas } from './xeno-trials-sprite-atlas-v191.js';
-import { createXenoTrialsDrawnExitV220, matchesXenoTrialsDrawnExitV220 } from './xeno-trials-spatial-outro-v220.js';
+import { createXenoTrialsDrawnExitV220, getXenoTrialsAirborneWinnerPlatesV224,
+ matchesXenoTrialsDrawnExitV220 } from './xeno-trials-spatial-outro-v220.js';
 
 // Original presentation choreography on the four admitted source plates. No
 // canonical animation, voiced line, relation or combat ability is asserted.
@@ -239,13 +240,19 @@ function drawnLandingAtlasV220(match, fighter) {
   getXenoTrialsRuntimeSpriteAtlas(fighter, art)].find(atlas => atlas?.frames.some(frame => frame.id === 'ko-fall')
    && atlas.frames.some(frame => frame.id === 'ko-ground')) || null;
 }
+function landingDurationV157(height) {
+ return Math.min(XENO_TRIALS_LANDING_V157.maxMs,Math.max(XENO_TRIALS_LANDING_V157.minMs,200+Math.sqrt(height)*12));
+}
 /** A verdict may freeze the engine in the middle of a jump. Settle only its
  * admitted render plate after the engine has fixed the verdict. */
-export function createXenoTrialsLandingV157(match,reducedMotion=false,images) {
+export function createXenoTrialsLandingV157(match,reducedMotion=false,images,allowAirborneWinner=true) {
  if(match?.phase!=='match-over'||!match.result?.completed||!['player','opponent','draw'].includes(match.result.winner)
   ||!Array.isArray(match.fighters))return null;
  const participants=match.fighters.flatMap(f=>{
   if(![f.x,f.y,f.vy].every(Number.isFinite)||f.y<0||f.y>1000)return [];
+  const position={side:f.side,fighterId:f.id,startX:f.x,startY:f.y,startVy:f.vy,landingMs:landingDurationV157(f.y)};
+  const alive=allowAirborneWinner&&images&&getXenoTrialsAirborneWinnerPlatesV224(match,f,images);
+  if(alive)return [{...position,airAtlasPathV224:alive.motion.texture.path,idleAtlasPathV224:alive.idle.texture.path}];
   const rig=f.y>0 ? historicalRigForV155(f) : null, atlas=rig ? null : drawnLandingAtlasV220(match,f);
   if(!rig && !atlas)return [];
   if (atlas && images) {
@@ -253,9 +260,8 @@ export function createXenoTrialsLandingV157(match,reducedMotion=false,images) {
    if (!texture || texture.complete === false || texture.naturalWidth !== atlas.texture.width
     || texture.naturalHeight !== atlas.texture.height) return [];
   }
-  const landingMs=Math.min(XENO_TRIALS_LANDING_V157.maxMs,Math.max(XENO_TRIALS_LANDING_V157.minMs,200+Math.sqrt(f.y)*12));
   const artwork=rig ? {rigId:rig.id} : {atlasPathV219:atlas.texture.path};
-  return[{side:f.side,fighterId:f.id,...artwork,startX:f.x,startY:f.y,startVy:f.vy,landingMs}];
+  return[{...position,...artwork}];
  });
  if(!participants.length)return null;
  const durationMs=Math.max(...participants.map(p=>p.landingMs));
@@ -270,7 +276,12 @@ export function getXenoTrialsLandingViewV157(match,fighter,state,reducedMotion=f
  const rig=historicalRigForV155(fighter);
  const p=state.participants?.find(p=>p.side===fighter.side&&p.fighterId===fighter.id);
  if(!p||![p.startY,p.landingMs].every(Number.isFinite)||p.startY<0||p.landingMs<=0)return null;
- if (rig ? p.rigId !== rig.id || p.startY === 0 : !p.atlasPathV219 || drawnLandingAtlasV220(match,fighter)?.texture.path !== p.atlasPathV219
+ if(p.airAtlasPathV224) {
+  const alive=getXenoTrialsAirborneWinnerPlatesV224(match,fighter);
+  if(state.id!==XENO_TRIALS_LANDING_V157.id || !alive || p.airAtlasPathV224!==alive.motion.texture.path
+   || p.idleAtlasPathV224!==alive.idle.texture.path || p.startX!==fighter.x || p.startY!==fighter.y || p.startVy!==fighter.vy
+   || p.landingMs!==landingDurationV157(fighter.y) || state.durationMs<p.landingMs || state.elapsedMs>state.durationMs)return null;
+ } else if (rig ? p.rigId !== rig.id || p.startY === 0 : !p.atlasPathV219 || drawnLandingAtlasV220(match,fighter)?.texture.path !== p.atlasPathV219
   || p.startX !== fighter.x || p.startY !== fighter.y || p.startVy !== fighter.vy) return null;
  const progress=reducedMotion||state.reducedMotion||state.skipped?1:clamp(state.elapsedMs/p.landingMs);
  const renderY=p.startY*(1-smooth(progress));
@@ -287,10 +298,16 @@ export function createXenoTrialsExitV157(match, terminal, camera, reducedMotion=
   &&landing.matchId===match.config.matchId&&landing.terminalTick===match.tick;
  if(terminal?!terminalReady:!landingReady)return null;
  const sorted=[...match.fighters].sort((a,b)=>a.x-b.x||a.side.localeCompare(b.side));
+ const winner=sorted.find(f=>f.side===match.result.winner);
+ const winnerLanded=winner&&landingReady&&!landing.paused&&landing.elapsedMs===landing.durationMs
+  &&getXenoTrialsLandingViewV157(match,winner,landing);
+ const drawnLanding=winnerLanded?.airAtlasPathV224&&winnerLanded.settled;
  const participants=sorted.flatMap((f,index)=>{
+  if(drawnLanding&&f.hp<=0)return [];
   const rig=historicalRigForV155(f);
   const direction=index===0?-1:1;
-  const drawn = images && terminalReady && createXenoTrialsDrawnExitV220(match,f,terminal,camera,images,direction,XENO_TRIALS_EXIT_V157.maxTravelMs);
+  const drawn=images&&(terminalReady||drawnLanding)&&createXenoTrialsDrawnExitV220(match,f,terminal,camera,images,
+   direction,XENO_TRIALS_EXIT_V157.maxTravelMs,drawnLanding&&f===winner?winnerLanded:null);
   if(drawn)return [drawn];
   const landed=landingReady&&getXenoTrialsLandingViewV157(match,f,landing)?.settled;
   const grounded=f.y===0&&terminalReady&&terminal.participants?.some(p=>p.fighterId===f.id&&p.side===f.side&&p.rigId===rig?.id);

@@ -5,7 +5,7 @@ import {getXenoTrialsIsolationOperationV212,XENO_TRIALS_ISOLATION_OPERATIONS_V21
 import {XENO_TRIALS_CARGO_OPERATION_V213} from './xeno-trials-cargo-interlock-v213.js';
 import {getXenoTrialsHordeProtocolV180,XENO_TRIALS_HORDE_LIMITS_V180} from './xeno-trials-horde-v180.js';
 import {getXenoTrialsHordeBossViewV186} from './xeno-trials-horde-bosses-v186.js';
-import {getXenoTrialsStageHazardViewV188} from './xeno-trials-stage-hazards-v188.js';
+import {getXenoTrialsStageHazardViewV188,XENO_TRIALS_COLLECTOR_V224} from './xeno-trials-stage-hazards-v188.js';
 
 // Original Tantalus objective simulations. The existing horde supplies pressure;
 // physical objectives decide the outcome independently of the remaining kills.
@@ -115,10 +115,22 @@ export const XENO_TRIALS_GROUNDING_OPERATION_V223=freeze({
   {id:'reactor-exit',kind:'terminal',label:'Sas du réacteur',x:1140,y:0,radius:96,requiredTicks:84}
  ],canonExact:false,canonStatus:'original-tantalus-simulation',revision:223
 });
+const collectorOrders='Scellez les deux conduits dans l’ordre choisi. Après le premier, la vapeur et la pression se concentrent sur le conduit ouvert. Attendez l’ouverture du sas après le second scellé, puis validez la sortie.';
+export const XENO_TRIALS_DECOMPRESSION_OPERATION_V224=freeze({
+ id:XENO_TRIALS_COLLECTOR_V224.operationId,kind:'purge',title:'DÉCOMPRESSION DU COLLECTEUR',label:'DÉCOMPRESSION DU COLLECTEUR',
+ stageId:XENO_TRIALS_COLLECTOR_V224.stageId,hordeProtocolId:'xth224-colony-pressure',difficulty:'easy',factionId:'containment',roundSeconds:175,reward:580,
+ instruction:collectorOrders,description:collectorOrders,startX:650,cargoStartX:650,cargoEndX:650,decompressionOpeningTicksV224:66,
+ objectives:[
+  {id:'collector-west',kind:'vent',label:'Conduit ouest',x:205,y:0,radius:88,requiredTicks:132},
+  {id:'collector-east',kind:'vent',label:'Conduit est',x:1095,y:0,radius:88,requiredTicks:132},
+  {id:'collector-exit',kind:'terminal',label:'Sas du collecteur',x:650,y:0,radius:96,requiredTicks:84}
+ ],canonExact:false,canonStatus:'original-tantalus-simulation',revision:224
+});
 export const XENO_TRIALS_OPERATION_BOARD_V212=Object.freeze([...XENO_TRIALS_ISOLATION_OPERATIONS_V212,...XENO_TRIALS_OPERATIONS_V188]);
 export const XENO_TRIALS_OPERATION_BOARD_V213=Object.freeze([XENO_TRIALS_RELAY_OPERATION_V218,XENO_TRIALS_BEACON_OPERATION_V219,XENO_TRIALS_RELIEF_OPERATION_V220,XENO_TRIALS_BYPASS_OPERATION_V221,
- XENO_TRIALS_GANTRY_OPERATION_V222,XENO_TRIALS_GROUNDING_OPERATION_V223,XENO_TRIALS_CARGO_OPERATION_V213,...XENO_TRIALS_OPERATION_BOARD_V212]);
-export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_GROUNDING_OPERATION_V223.id ? XENO_TRIALS_GROUNDING_OPERATION_V223
+ XENO_TRIALS_GANTRY_OPERATION_V222,XENO_TRIALS_GROUNDING_OPERATION_V223,XENO_TRIALS_DECOMPRESSION_OPERATION_V224,XENO_TRIALS_CARGO_OPERATION_V213,...XENO_TRIALS_OPERATION_BOARD_V212]);
+export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_DECOMPRESSION_OPERATION_V224.id ? XENO_TRIALS_DECOMPRESSION_OPERATION_V224
+ :id===XENO_TRIALS_GROUNDING_OPERATION_V223.id ? XENO_TRIALS_GROUNDING_OPERATION_V223
  :id===XENO_TRIALS_GANTRY_OPERATION_V222.id ? XENO_TRIALS_GANTRY_OPERATION_V222
  :id===XENO_TRIALS_BYPASS_OPERATION_V221.id ? XENO_TRIALS_BYPASS_OPERATION_V221
  :id===XENO_TRIALS_RELIEF_OPERATION_V220.id ? XENO_TRIALS_RELIEF_OPERATION_V220
@@ -131,7 +143,8 @@ const stateKeys=['schema','operationId','matchId','seed','status','failureReason
 const batteryStateKeys=[...stateKeys,'batteryStartedTickV219'];
 const bypassStateKeys=[...stateKeys,'bypassStartedTickV221'];
 const groundingStateKeys=[...stateKeys,'groundingActivationV223'];
-const stateKeysFor=entry=>entry?.groundingOpeningTicksV223?groundingStateKeys:
+const decompressionStateKeys=[...stateKeys,'decompressionSealTicksV224'];
+const stateKeysFor=entry=>entry?.decompressionOpeningTicksV224?decompressionStateKeys:entry?.groundingOpeningTicksV223?groundingStateKeys:
  entry?.bypassOpeningTicksV221?bypassStateKeys:entry?.batteryTicksV219?batteryStateKeys:stateKeys;
 const integer=(value,min,max)=>Number.isSafeInteger(value)&&value>=min&&value<=max;
 const record=value=>value&&typeof value==='object'&&!Array.isArray(value);
@@ -147,7 +160,8 @@ export function createXenoTrialsOperationStateV188(id,config){
   elapsedTicks:0,startedTick:0,lastTick:0,completedTick:null,progress:entry.objectives.map(()=>0),completed:entry.objectives.map(()=>false),
   integrity:100,cargoTravelTicks:0,cargoX:entry.cargoStartX,carrying:-1,delivered:entry.objectives.map(()=>false),depotTicks:0,exitTicks:0,
   ...(entry.batteryTicksV219?{batteryStartedTickV219:null}:{}),...(entry.bypassOpeningTicksV221?{bypassStartedTickV221:null}:{}),
-  ...(entry.groundingOpeningTicksV223?{groundingActivationV223:null}:{})};
+  ...(entry.groundingOpeningTicksV223?{groundingActivationV223:null}:{}),
+  ...(entry.decompressionOpeningTicksV224?{decompressionSealTicksV224:[null,null]}:{})};
 }
 function nearby(player,target){
  if(!player||player.hp<=0||player.y!==0||!Number.isFinite(player.x))return false;
@@ -247,6 +261,37 @@ function validGroundingState(state,entry,match){
   config:{stageId:entry.stageId,operationV188:{id:entry.id}},operationV188:{operationId:entry.id,status:'active'} });
  return atActivation?.kind==='arc'&&atActivation.phase==='active';
 }
+const collectorLoss=(sealed)=>[2,4,0][sealed];
+function collectorStatus(state,entry){
+ const [west,east]=state.decompressionSealTicksV224;
+ const sealed=[west!==null,east!==null];
+ const count=Number(sealed[0])+Number(sealed[1]);
+ const opening=count===2?clamp((state.lastTick-Math.max(west,east))/entry.decompressionOpeningTicksV224,0,1):0;
+ return{sealed,openSide:count===1?(sealed[0]?'right':'left'):null,pressureLoss:collectorLoss(count),opening,
+  phase:count===2?(opening===1?'open':'opening'):count===1?'diverted':'pressurized'};
+}
+export function getXenoTrialsCollectorViewV224(match){
+ const state=match?.operationV188,entry=XENO_TRIALS_DECOMPRESSION_OPERATION_V224;
+ return state?.operationId===entry.id?collectorStatus(state,entry):null;
+}
+function validCollectorState(state,entry){
+ const seals=state.decompressionSealTicksV224;
+ if(!Array.isArray(seals)||seals.length!==2||seals.some((tick,index)=>state.completed[index]
+  ?!integer(tick,state.startedTick+entry.objectives[index].requiredTicks,state.lastTick):tick!==null))return false;
+ const [first=Infinity,second=Infinity]=seals.filter(tick=>tick!==null).sort((a,b)=>a-b);
+ if(Number.isFinite(second)&&first===second)return false;
+ if(Number.isFinite(second)&&second-state.startedTick<entry.objectives[0].requiredTicks+entry.objectives[1].requiredTicks)return false;
+ const work=state.progress.reduce((total,progress)=>total+progress,0);
+ if(work>state.elapsedTicks||state.progress[2]>Math.max(0,state.lastTick-second-entry.decompressionOpeningTicksV224+1))return false;
+ if(state.status==='active'&&state.integrity===0)return false;
+ // KO and timeout terminate before the pressure pulse for that tick. A
+ // structural failure, by definition, includes the pulse that caused it.
+ const elapsed=state.elapsedTicks-Number(state.status==='failed'&&['player-ko','time'].includes(state.failureReason));
+ const period=XENO_TRIALS_OPERATION_LIMITS_V188.purgePressureTicks;
+ const before=tick=>Math.floor(Math.min(elapsed,tick-state.startedTick-1)/period);
+ const unsealed=before(first),diverted=before(second)-unsealed;
+ return state.integrity===Math.max(0,100-unsealed*collectorLoss(0)-diverted*collectorLoss(1));
+}
 function windowOpen(objective,ticks){
  const phase=ticks%objective.periodTicks;
  return windowPhaseOpen(objective,phase);
@@ -305,6 +350,7 @@ export function stepXenoTrialsOperationV188(state,match,dt,input={},emit=null){
  const complete=index=>{state.completed[index]=true;state.progress[index]=entry.objectives[index].requiredTicks;
   if(entry.batteryTicksV219&&state.batteryStartedTickV219===null)state.batteryStartedTickV219=state.lastTick;
   if(entry.bypassOpeningTicksV221&&index===0)state.bypassStartedTickV221=state.lastTick;
+  if(entry.decompressionOpeningTicksV224&&index<2)state.decompressionSealTicksV224[index]=state.lastTick;
   emit?.('operation-objective-v188',{operationId:entry.id,objectiveId:entry.objectives[index].id,index});};
  if(entry.kind==='escort'){
   const cargo={x:state.cargoX,radius:entry.objectives[0].radius};
@@ -339,12 +385,17 @@ export function stepXenoTrialsOperationV188(state,match,dt,input={},emit=null){
    }
   }
  }else if(entry.kind==='purge'){
+  const collector=entry.decompressionOpeningTicksV224;
   for(let index=0;index<entry.objectives.length;index++)if(!state.completed[index]){
+   if(collector&&index===2&&collectorStatus(state,entry).phase!=='open')continue;
    if(charging(index))state.progress[index]++;
    else if(state.elapsedTicks%XENO_TRIALS_OPERATION_LIMITS_V188.purgeRegrowTicks===0)state.progress[index]=Math.max(0,state.progress[index]-1);
    if(state.progress[index]>=entry.objectives[index].requiredTicks)complete(index);
   }
-  if(state.elapsedTicks%XENO_TRIALS_OPERATION_LIMITS_V188.purgePressureTicks===0)state.integrity=Math.max(0,state.integrity-entry.objectives.length+doneCount(state));
+  if(state.elapsedTicks%XENO_TRIALS_OPERATION_LIMITS_V188.purgePressureTicks===0){
+   const loss=collector?collectorStatus(state,entry).pressureLoss:entry.objectives.length-doneCount(state);
+   state.integrity=Math.max(0,state.integrity-loss);
+  }
  }else if(entry.kind==='beacon'){
   for(let index=0;index<entry.objectives.length;index++)if(!state.completed[index]){
    state.progress[index]=charging(index)&&windowOpen(entry.objectives[index],state.elapsedTicks)?state.progress[index]+1:Math.max(0,state.progress[index]-2);
@@ -393,6 +444,7 @@ export function validateXenoTrialsOperationSnapshotV188(state,config,match=null)
  if(entry.kind!=='extraction'&&(state.carrying!==-1||state.delivered.some(Boolean)||state.depotTicks!==0||state.exitTicks!==0))return false;
  if(entry.batteryTicksV219){if(!validBatteryState(state,entry))return false;}
  else if(!['escort','purge'].includes(entry.kind)&&state.integrity!==100)return false;
+ if(entry.decompressionOpeningTicksV224&&!validCollectorState(state,entry))return false;
  if(entry.kind==='extraction'){
   if(state.delivered.some((value,index)=>value&&!state.completed[index])||state.carrying>=0&&(!state.completed[state.carrying]||state.delivered[state.carrying]))return false;
   if(doneCount(state)!==state.delivered.filter(Boolean).length+(state.carrying>=0?1:0)||state.exitTicks>0&&!state.delivered.every(Boolean))return false;
@@ -457,6 +509,10 @@ export function isXenoTrialsOperationForwardV188(previous,next){
   ||next.lastTick<previous.lastTick||next.elapsedTicks<previous.elapsedTicks||next.integrity>previous.integrity
   ||next.cargoTravelTicks<previous.cargoTravelTicks||previous.status!=='active'&&next.status!==previous.status)return false;
  const entry=getXenoTrialsOperationV188(previous.operationId);
+ if(entry?.decompressionOpeningTicksV224&&previous.decompressionSealTicksV224.some((tick,index)=>{
+  const accepted=next.decompressionSealTicksV224?.[index];
+  return tick===null?accepted!==null&&!(accepted>previous.lastTick):accepted!==tick;
+ }))return false;
  if(entry?.gantryRouteV222&&next.cargoTravelTicks-previous.cargoTravelTicks>next.elapsedTicks-previous.elapsedTicks)return false;
  if(entry?.groundingOpeningTicksV223){
   const before=previous.groundingActivationV223,after=next.groundingActivationV223;
@@ -480,8 +536,9 @@ export function getXenoTrialsOperationViewV188(match){
  const bypass=entry.bypassOpeningTicksV221?getXenoTrialsHangarBypassV221(match):null;
  const gantry=entry.gantryRouteV222?getXenoTrialsGantryConvoyV222(match):null;
  const grounding=entry.groundingOpeningTicksV223?getXenoTrialsGroundingDoorV223(match):null;
+ const collector=entry.decompressionOpeningTicksV224?getXenoTrialsCollectorViewV224(match):null;
  let entities=entry.objectives.map((objective,index)=>{
-  const active=!state.completed[index]&&(entry.kind!=='relay'||index===nextRelay);
+  const active=!state.completed[index]&&(entry.kind!=='relay'||index===nextRelay)&&(!collector||index!==2||collector.phase==='open');
   return {...objective,active,completed:state.completed[index],progress:state.progress[index],
    ...(entry.relayPressureV218?{contested:state.status==='active'&&active&&relayContested(match,objective)}:{}),
    ...(entry.kind==='beacon'?beaconWindow(objective,state.elapsedTicks):{})};
@@ -489,10 +546,9 @@ export function getXenoTrialsOperationViewV188(match){
  let target=entities.find(entity=>!entity.completed)||null;
  if(['beacon','purge'].includes(entry.kind)&&state.status==='active'){
   const player=match.fighters?.[0],remaining=entities.filter(entity=>!entity.completed);
-  const touching=remaining.filter(entity=>nearby(player,entity));
-  // All three receivers are valid starting points. Point toward the closest
-  // unfinished one while travelling instead of prescribing the western route.
-  if(entry.batteryTicksV219&&target&&Number.isFinite(player?.x))target=remaining.reduce((nearest,entity)=>
+  const touching=remaining.filter(entity=>entity.active&&nearby(player,entity));
+  // When the order is free, point toward the closest unfinished objective.
+  if((entry.batteryTicksV219||collector)&&target&&Number.isFinite(player?.x))target=remaining.filter(entity=>entity.active).reduce((nearest,entity)=>
    Math.abs(entity.x-player.x)<Math.abs(nearest.x-player.x)?entity:nearest,target);
   target=touching.find(entity=>entity.windowOpen)||touching[0]||target;
  }
@@ -523,6 +579,7 @@ export function getXenoTrialsOperationViewV188(match){
   ...(bypass?{bypassV221:bypass}:{}),
   ...(gantry?{gantryV222:gantry}:{}),
   ...(grounding?{groundingV223:grounding}:{}),
+  ...(collector?{decompressionV224:collector}:{}),
   ...(entry.batteryTicksV219?{batteryV219:{...batteryStatus(state,entry),depleted:state.failureReason==='structure-destroyed'}}:{}),
   instruction:entry.instruction,hint:state.status==='failed'?`Évaluation interrompue : ${failureLabel}.`:state.status==='completed'?'Objectifs validés.':
    target?.contested?'Écartez ou neutralisez les contacts dans le périmètre balisé.':
@@ -531,6 +588,7 @@ export function getXenoTrialsOperationViewV188(match){
    bypass?.phase==='opening'?'Attendez la fin de l’ouverture du volet.':
    grounding?.phase==='waiting'?'Attirez un contact dans la bande balisée avant la décharge.':
    grounding?.phase==='opening'?'Attendez l’ouverture du sas.':
+   collector?.phase==='opening'?'Attendez la décompression du sas.':
    target?`${target.label} · maintenez E à proximité${target.windowOpen===false?' pendant la fenêtre verte':''}.`:'Rejoignez le sas.',
   progress:{done,total:entry.objectives.length,label:entry.kind==='extraction'?`${done}/${entry.objectives.length} caissons livrés`:`${done}/${entry.objectives.length} objectifs validés`},
   timeRemaining:Math.max(0,entry.roundSeconds-state.elapsedTicks/120),integrity:state.integrity,carrying:state.carrying,entities,

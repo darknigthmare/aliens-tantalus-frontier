@@ -57,6 +57,7 @@ export const XENO_TRIALS_STAGE_HAZARDS_V188 = freeze(XENO_TRIALS_BOSS_STAGES_V17
 const definitions = new Map([...XENO_TRIALS_STAGE_HAZARDS_V188, ...ARBITER_STAGE_HAZARDS_V191,
   ...XENO_TRIALS_ISOLATION_HAZARDS_V212, XENO_TRIALS_CARGO_HAZARD_V213]
   .map(value => [value.stageId, value]));
+export const XENO_TRIALS_COLLECTOR_V224 = Object.freeze({ operationId: 'xto224-collector-decompression', stageId: 'xt179-colony-utility' });
 export function getXenoTrialsStageHazardV188(stageId, operationId = null) {
   const definition = definitions.get(stageId);
   return definition && (!definition.operationId || definition.operationId === operationId) ? definition : null;
@@ -154,7 +155,27 @@ function physicalView(match, tick) {
   const state = match.stageHazardsV188;
   const definition = definitions.get(state.stageId);
   const view = applyXenoTrialsStageIsolationV212(viewAt(state, tick), definition, match.operationV188, state);
-  return applyXenoTrialsCargoInterlockV213(view, definition, match.operationV188);
+  const cargo = applyXenoTrialsCargoInterlockV213(view, definition, match.operationV188);
+  return applyCollectorRouting(cargo, definition, match.operationV188);
+}
+
+function applyCollectorRouting(view, definition, operation) {
+  if (!view || definition.stageId !== XENO_TRIALS_COLLECTOR_V224.stageId
+    || operation.operationId !== XENO_TRIALS_COLLECTOR_V224.operationId || !operation.decompressionSealTicksV224) return view;
+  const [west, east] = operation.decompressionSealTicksV224;
+  if (west === null && east === null) return view;
+  const openSide = west === null ? 'left' : east === null ? 'right' : null;
+  const collectorV224 = { openSide };
+  const zone = view.zones[0];
+  if (!zone) return { ...view, collectorV224 };
+  const anchor = openSide === 'left' ? Math.min(...definition.anchors) : Math.max(...definition.anchors);
+  // A new lane cannot become live without a full warning. If this cycle was
+  // already announced on the freshly sealed branch, let it dissipate.
+  const cycleStart = view.startsTick - definition.warningTicks;
+  if (!openSide || (west ?? east) >= cycleStart && zone.left !== anchor - definition.width / 2) {
+    return { ...view, phase: 'idle', zones: [], remainingTicks: 0, warningProgress: 0, activeProgress: 0, collectorV224 };
+  }
+  return { ...view, zones: [{ ...zone, left: anchor - definition.width / 2, right: anchor + definition.width / 2 }], collectorV224 };
 }
 
 /** The native engine calls once after movement/contact resolution. Environmental

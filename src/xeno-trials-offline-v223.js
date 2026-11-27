@@ -1,4 +1,4 @@
-import { getXenoTrialsArtV96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
+import { getXenoTrialsArtV96, getXenoTrialsFighterV96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
 import { normalizeXenoTrialsConfigV96 } from './xeno-trials-progress-v96.js';
 import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
@@ -31,6 +31,15 @@ export function getXenoTrialsArenaAssetsV223(stage) {
     ...getXenoTrialsFranchiseStageAssetsV192(stage.id)].filter(Boolean);
 }
 
+function offlineSelectionV224({ playerId, playerVariant, opponentId, opponentVariant, stageId }) {
+  const supported = (id, variant) => getXenoTrialsFighterV96(id)?.variants.includes(variant) ? variant : null;
+  return [playerId, supported(playerId, playerVariant), opponentId, supported(opponentId, opponentVariant), stageId];
+}
+
+export function getXenoTrialsOfflineDuelKeyV224(config) {
+  return JSON.stringify(offlineSelectionV224(normalizeXenoTrialsConfigV96(config)));
+}
+
 export function getXenoTrialsOfflineDuelV223(selection) {
   const duel = normalizeXenoTrialsConfigV96(selection);
   const stage = XENO_TRIALS_STAGES_V96.find(entry => entry.id === duel.stageId);
@@ -39,29 +48,39 @@ export function getXenoTrialsOfflineDuelV223(selection) {
     ...getXenoTrialsFighterAssetsV223(duel.opponentId, duel.opponentVariant),
     ...getXenoTrialsArenaAssetsV223(stage), ...XENO_TRIALS_FIGHT_EFFECTS_V223,
   ])].sort();
-  return { key: assets.join('|'), assets };
+  const identity = offlineSelectionV224(duel);
+  return { key: JSON.stringify(identity), selection: identity, assets };
 }
 
 export function createXenoTrialsOfflineDuelClientV223(cacheName, browser = window) {
   const service = browser.navigator.serviceWorker;
   if (!/^atf-trials-v\d+-[a-f0-9]{24}$/.test(cacheName) || !service || !browser.MessageChannel) return null;
+  function send(mode, payload = {}) {
+    const controller = service.controller;
+    if (!controller) return Promise.resolve({ state: 'unavailable' });
+    return new Promise(resolve => {
+      const { port1, port2 } = new browser.MessageChannel();
+      const error = { state: 'error' };
+      const timeout = ['prepare', 'remove'].includes(mode) ? 120000 : 3000;
+      const timer = browser.setTimeout(() => finish(error), timeout);
+      function finish(reply) {
+        browser.clearTimeout(timer);
+        port1.close();
+        resolve(reply);
+      }
+      port1.onmessage = event => finish(event.data ?? error);
+      const expiry = mode === 'remove' ? { expiresAt: Date.now() + timeout } : {};
+      try { controller.postMessage({ type: 'XENO_TRIALS_OFFLINE_DUEL_V223', mode, cacheName, ...payload, ...expiry }, [port2]); }
+      catch { port2.close(); finish(error); }
+    });
+  }
   return {
     available: () => Boolean(service.controller),
-    request(mode, duel) {
-      const controller = service.controller;
-      if (!controller) return Promise.resolve('unavailable');
-      return new Promise(resolve => {
-        const { port1, port2 } = new browser.MessageChannel();
-        const timer = browser.setTimeout(() => finish('error'), mode === 'prepare' ? 120000 : 3000);
-        function finish(state) {
-          browser.clearTimeout(timer);
-          port1.close();
-          resolve(state);
-        }
-        port1.onmessage = event => finish(['ready', 'missing', 'error'].includes(event.data?.state) ? event.data.state : 'error');
-        try { controller.postMessage({ type: 'XENO_TRIALS_OFFLINE_DUEL_V223', mode, cacheName, assets: duel.assets }, [port2]); }
-        catch { port2.close(); finish('error'); }
-      });
+    async request(mode, duel) {
+      const { state } = await send(mode, { assets: duel.assets, selection: duel.selection });
+      return ['ready', 'missing', 'unavailable'].includes(state) ? state : 'error';
     },
+    list: () => send('list'),
+    async remove(key) { return (await send('remove', { key })).state === 'removed'; },
   };
 }

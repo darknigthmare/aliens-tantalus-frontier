@@ -66,7 +66,8 @@ import { drawXenoTrialsOperationV188, getXenoTrialsOperationHudV188 } from './xe
 import { drawXenoTrialsStageHazardsV188 } from './xeno-trials-stage-hazards-render-v188.js';
 import { createXenoTrialsAudioV189 } from './xeno-trials-audio-v189.js';
 import { getXenoTrialsSpriteAtlasV189, drawXenoTrialsSpriteAtlasV189, requestXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteEnvelopeV189 } from './xeno-trials-sprite-atlas-v189.js';
-import { drawXenoTrialsArrivalV221, drawXenoTrialsSpatialOutroV220, getXenoTrialsArrivalViewV221 } from './xeno-trials-spatial-outro-v220.js';
+import { drawXenoTrialsArrivalV221, drawXenoTrialsSpatialOutroV220, drawXenoTrialsWinnerLandingV224,
+  getXenoTrialsArrivalViewV221 } from './xeno-trials-spatial-outro-v220.js';
 import { getXenoTrialsRuntimeSpriteAtlas, getXenoTrialsSpriteAtlasV197, drawXenoTrialsSpriteAtlasV191,
   requestXenoTrialsSpriteAtlasV191, getXenoTrialsSpriteEnvelopeV191, drawXenoTrialsRuntimeActionAtlas,
   requestXenoTrialsRuntimeActionAtlas, getXenoTrialsActionEnvelope } from './xeno-trials-sprite-atlas-v191.js';
@@ -451,6 +452,13 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     }
     if (exitView?.atlasPathV220) {
       const drawn = drawXenoTrialsSpatialOutroV220(context, match, fighter, images, exitView, metrics);
+      if (drawn) {
+        rigDrawsV154.set(fighter.side, drawn);
+        return;
+      }
+    }
+    if (landingView?.airAtlasPathV224) {
+      const drawn = drawXenoTrialsWinnerLandingV224(context, match, fighter, images, landingView, metrics);
       if (drawn) {
         rigDrawsV154.set(fighter.side, drawn);
         return;
@@ -1073,26 +1081,27 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       } else {
         finisherV207 = advanceXenoTrialsFinisherV207(finisherV207, dt * 1000);
         // Landing has its own result-owned render clock and runs alongside the
-        // historical grounded clips. Two airborne rigs need no fabricated V156
-        // terminal: this completed V157 owner admits their spatial exit itself.
+        // grounded clips. A completed landing can admit the spatial exit.
         if (landingV157?.phase === 'playing') {
           landingV157 = advanceXenoTrialsOutroV155(landingV157, dt * 1000);
           finisherV207 = openXenoTrialsLandedContactV223(finisherV207, match, landingV157);
         }
-        if(exitV157?.phase==='playing')exitV157=advanceXenoTrialsOutroV155(exitV157,dt*1000);
-        else if(terminalV156?.phase==='playing'){
-          terminalV156=advanceXenoTrialsOutroV155(terminalV156,dt*1000);
-          if(terminalV156.phase==='complete' && !finisherPendingV207())exitV157=createXenoTrialsExitV157(match,terminalV156,cameraView,false,landingV157,practiceV207 ? undefined : images);
-        } else if(outroV155?.phase==='playing'){
-          outroV155=advanceXenoTrialsOutroV155(outroV155,dt*1000);
-          if (outroV155.phase === 'complete') {
-            const terminal = createXenoTrialsTerminalV156(match, 'outro', false, outroV155, images);
-            terminalV156 = createXenoTrialsPilotReturnV212(match, terminal, outroV155, images);
+        if (exitV157?.phase === 'playing') exitV157 = advanceXenoTrialsOutroV155(exitV157, dt * 1000);
+        else {
+          if (terminalV156?.phase === 'playing') terminalV156 = advanceXenoTrialsOutroV155(terminalV156, dt * 1000);
+          else if (outroV155?.phase === 'playing') {
+            outroV155 = advanceXenoTrialsOutroV155(outroV155, dt * 1000);
+            if (outroV155.phase === 'complete') {
+              const terminal = createXenoTrialsTerminalV156(match, 'outro', false, outroV155, images);
+              terminalV156 = createXenoTrialsPilotReturnV212(match, terminal, outroV155, images);
+            }
           }
-        } else if (!exitV157 && terminalV156?.phase === 'complete' && !finisherPendingV207()) {
-          exitV157 = createXenoTrialsExitV157(match, terminalV156, cameraView, false, landingV157, practiceV207 ? undefined : images);
-        } else if (!outroV155 && !terminalV156 && landingV157?.phase === 'complete' && !exitV157 && !finisherPendingV207()) {
-          exitV157=createXenoTrialsExitV157(match,null,cameraView,false,landingV157);
+          if (!exitV157 && !finisherPendingV207()) {
+            const landed = landingV157?.phase === 'complete' && !terminalV156 && (!outroV155
+              || outroV155.phase === 'complete' && landingV157.participants.some(entry => entry.airAtlasPathV224));
+            if (terminalV156?.phase === 'complete' || landed)
+              exitV157 = createXenoTrialsExitV157(match, terminalV156, cameraView, false, landingV157, practiceV207 ? undefined : images);
+          }
         }
       }
       const practicedTerminal = practiceV207?.terminalFinishedV221(finisherV207);
@@ -1133,7 +1142,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
         const reducedMotion = reduceMotion();
         outroV155 = createXenoTrialsPilotOutroV197(match, createXenoTrialsOutroV155(match, reducedMotion, images), reducedMotion);
         terminalV156 = createXenoTrialsTerminalV156(match, 'draw', reducedMotion, null, images);
-        landingV157 = createXenoTrialsLandingV157(match, reducedMotion, images);
+        landingV157 = createXenoTrialsLandingV157(match, reducedMotion, images, !practiceV207);
         if (!practiceV207 || practiceV207.allowsFinisherV221())
           finisherV207 = createXenoTrialsFinisherV207(match, images, reducedMotion, true, landingV157);
         tauntV156 = null; frameDelta = 0; clearInputs();

@@ -31,12 +31,14 @@ export function getXenoTrialsPurgeTelemetryV204(match, view, arena) {
   if (view.kind !== 'purge' || view.status !== 'active') return null;
   const state = match.operationV188;
   const { purgePressureTicks, ticksPerSecond } = XENO_TRIALS_OPERATION_LIMITS_V188;
-  const open = view.entities.filter(vent => !vent.completed).length;
+  const open = view.entities.filter(vent => vent.kind === 'vent' && !vent.completed).length;
+  const expectedLoss = view.decompressionV224?.pressureLoss ?? open;
   const remainingTicks = purgePressureTicks - state.elapsedTicks % purgePressureTicks;
-  return { pressure: { open, expectedLoss: Math.min(view.integrity, open), integrity: view.integrity,
+  const pressure = view.decompressionV224 && expectedLoss === 0 ? null : { open, expectedLoss: Math.min(view.integrity, expectedLoss), integrity: view.integrity,
     remainingTicks, seconds: Math.ceil(remainingTicks * 10 / ticksPerSecond) / 10,
     nextLossTick: state.lastTick + remainingTicks,
-    phase: remainingTicks <= warningTicks ? 'warning' : 'building' }, escape: getEscape(match, arena) };
+    phase: remainingTicks <= warningTicks ? 'warning' : 'building' };
+  return { pressure, escape: getEscape(match, arena) };
 }
 
 function drawValve(ctx, entity, floor, elapsed, pressure, reducedMotion) {
@@ -89,7 +91,8 @@ function drawEscape(ctx, escape, floor) {
 export function drawXenoTrialsPurgeV204(ctx, match, view, arena, reducedMotion) {
   const telemetry = getXenoTrialsPurgeTelemetryV204(match, view, arena);
   const pressure = telemetry?.pressure ?? null, escape = telemetry?.escape ?? null;
-  const vents = view.entities.map(entity => drawValve(ctx, entity, arena.floor, match.operationV188.elapsedTicks, pressure, reducedMotion));
+  const vents = view.entities.filter(entity => entity.kind === 'vent')
+    .map(entity => drawValve(ctx, entity, arena.floor, match.operationV188.elapsedTicks, pressure, reducedMotion));
   if (escape) drawEscape(ctx, escape, arena.floor);
   return { pressure, vents, escape, reducedMotion };
 }

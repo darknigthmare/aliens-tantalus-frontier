@@ -89,6 +89,17 @@ const layouts = [
       ['right', 'PATROUILLE EST', ['runner', 'panther', 'warrior'], 4, 3, 17, .16],
       ['split', 'PRISE EN TENAILLE', ['runner', 'prowler', 'armored-runner'], 5, 4, 19, .18]
     ]
+  },
+  {
+    id: 'xth224-colony-pressure', title: 'PRESSION DE LA COLONIE', stageId: 'xt179-colony-utility',
+    description: 'Dix-huit contacts fragiles débouchent sur les conduits de service en trois vagues.',
+    orders: 'Entre les vagues, dégagez la coursive centrale. La dernière vague avance par les deux sas.',
+    roundSeconds: 175, reward: 430,
+    waves: [
+      ['left', 'ÉCLAIREURS DES CONDUITS', ['runner', 'prowler'], 5, 3, 15, .13],
+      ['right', 'RENFORTS DE SERVICE', ['runner', 'warrior', 'panther'], 6, 4, 17, .15],
+      ['split', 'PRISE DES CONDUITS', ['runner', 'prowler', 'armored-runner'], 7, 4, 20, .18]
+    ]
   }
 ];
 

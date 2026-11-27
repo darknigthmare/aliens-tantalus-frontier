@@ -945,8 +945,15 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
   'scripts/verify-xeno-original-arenas-v193.mjs'
 ]);
 
-export const XENO_AUDIT_TERMINAL_PATH = 'scripts/audit-xeno-trials-v223.mjs';
+export const XENO_AUDIT_TERMINAL_PATH = 'scripts/audit-xeno-trials-v224.mjs';
+const XENO_GAMEPLAY_SOURCE_ONLY_V224 = new Set([
+  'docs/forge/xeno-trials/V224-GAMEPLAY.md',
+  'scripts/verify-xeno-trials-decompression-v224.mjs',
+  'scripts/verify-xeno-trials-practice-v224.mjs',
+  'scripts/verify-xeno-trials-spatial-outro-v224.mjs'
+]);
 const XENO_GAMEPLAY_SOURCE_ONLY_V223 = new Set([
+  'scripts/audit-xeno-trials-v223.mjs',
   'docs/forge/xeno-trials/V223-GAMEPLAY.md',
   'scripts/verify-xeno-trials-finishers-v223.mjs',
   'scripts/verify-xeno-trials-grounding-v223.mjs',
@@ -993,6 +1000,7 @@ const XENO_GAMEPLAY_SOURCE_ONLY_V219 = new Set([
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
   if (path === XENO_AUDIT_TERMINAL_PATH) return !built && !directory;
+  if (XENO_GAMEPLAY_SOURCE_ONLY_V224.has(path)) return !built && !directory;
   if (XENO_GAMEPLAY_SOURCE_ONLY_V223.has(path)) return !built && !directory;
   if (XENO_GAMEPLAY_SOURCE_ONLY_V222.has(path)) return !built && !directory;
   if (path === XENO_MENU_MEDIA_DIR_V222) return directory;

@@ -79,6 +79,33 @@ function duckPulseInput(match, cpu, definition, brain) {
   return highPulse ? { crouch: true } : null;
 }
 
+function floorWaveJumpInput(match, cpu, definition, brain, dt) {
+  const observed = brain.observation, attack = observed?.attack;
+  if (match.hordeV180 || definition.id !== 'runner' || definition.profileId !== runnerProfile
+    || !observed?.projectileThreat || attack?.kind !== 'special' || attack.age < attack.startup
+    || match.tick - observed.tick < 2 || cpu.previousInput.jump || cpu.rearmControls.jump
+    || isXenoTrialsParryingV208(match, cpu)) return null;
+  const body = getXenoTrialsBodyBoundsV105(cpu);
+  const heightAt = ticks => definition.jump * ticks * dt - XENO_TRIALS_GRAVITY_V210 * dt * dt * ticks * (ticks + 1) / 2;
+  let incomingWave = false;
+  for (const projectile of match.projectiles) {
+    const impact = getXenoTrialsProjectileThreatV149(projectile, cpu, .18);
+    if (!impact) continue;
+    const speed = Math.abs(projectile.vx);
+    if (projectile.signatureIdV147 !== 'pathogen-brute-ground-impact' || projectile.groupIdV147 !== attack.id
+      || projectile.vy || !(speed > definition.speed)) return null;
+    const leadingDistance = impact.contactSeconds * speed;
+    // Allow for approach or retreat on later ticks. The launch tick itself has no rise yet.
+    const first = Math.floor(leadingDistance / (speed + definition.speed) / dt) - 1;
+    const exitTime = (leadingDistance + body.width + 2 * projectile.radiusV147) / (speed - definition.speed);
+    const last = Math.ceil(Math.min(exitTime, projectile.life) / dt);
+    const top = projectile.y + projectile.radiusV147;
+    if (first <= 0 || heightAt(first) <= top || heightAt(last) <= top) return null;
+    incomingWave = true;
+  }
+  return incomingWave ? { jump: true } : null;
+}
+
 function heavyRetreatInput(match, cpu, target, definition, controls, brain, specs, dt) {
   const sliding = definition.id === 'spitter' && hasXenoTrialsDefensiveTravelV213(definition);
   const guarded = definition.id === 'synth-guard' && hasXenoTrialsGuardedWalkV218(definition) && controls.guard;
@@ -301,6 +328,8 @@ export function chooseXenoTrialsHardTacticsV209(match, cpu, target, brain, specs
   if (defense) return defense;
   const duck = duckPulseInput(match, cpu, definition, brain);
   if (duck) return duck;
+  const jump = floorWaveJumpInput(match, cpu, definition, brain, dt);
+  if (jump) return jump;
   const retreat = heavyRetreatInput(match, cpu, target, definition, controls, brain, specs, dt);
   if (retreat) return retreat;
   if (!cpu.parryV208?.openingId && !decided) return controls;

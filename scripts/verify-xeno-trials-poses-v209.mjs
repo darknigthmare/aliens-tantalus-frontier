@@ -38,7 +38,7 @@ test('Arachnoid grey draws three reviewed source poses on the same grounded anch
   assert.equal(drawXenoTrialsPoseV209(context, fighter, art, new Map(), options), null);
 });
 
-test('only the grounded active pounce selects the Arachnoid grey plate in native combat', async () => {
+test('Arachnoid Grey draws its admitted grounded contact plate when the other pounce images are absent', async () => {
   const path = '/assets/openai/xeno-trials-v209/characters/arachnoid-special-active-grounded.png';
   const imageBytes = readFileSync(new URL('..' + path, import.meta.url));
   const image = { naturalWidth: imageBytes.readUInt32BE(16), naturalHeight: imageBytes.readUInt32BE(20), complete: true };
@@ -171,8 +171,8 @@ test('Panther pounce plays all three grounded phases at one scale through a real
 const addedActions = [
   { id: 'grid', action: 'heavy', dimensions: [1774, 887], reachCases: [[70, true], [90, false]],
     frames: [null, ['grid-heavy-impact.png', 205, [17, 51, 1748, 809]], ['grid-heavy-recovery.png', 206, [157, 39, 1305, 808]]],
-    forbidden: 'grid-special-windup.png', animation: 'painted-grid-heavy-poses' },
-  { id: 'gorilla', action: 'special', dimensions: [1254, 1254], reachCases: [[155, true], [195, false]],
+    forbidden: 'grid-heavy-windup.png', animation: 'painted-grid-heavy-poses' },
+  { id: 'gorilla', action: 'special', style: 'ram', travels: true, dimensions: [1254, 1254], reachCases: [[155, true], [195, false]],
     frames: [['gorilla-special-windup.png', 206, [69, 166, 1119, 923]], null, ['gorilla-special-recovery.png', 206, [44, 116, 1150, 917]]],
     forbidden: 'gorilla-heavy-impact.png', animation: 'painted-gorilla-ram-poses' },
   { id: 'arachnoid', variant: 'grey', action: 'light', dimensions: [1536, 1024], reachCases: [[55, true], [65, false]],
@@ -180,11 +180,19 @@ const addedActions = [
       ['arachnoid-light-recovery.png', 205, [219, 19, 1083, 990]]], forbidden: 'arachnoid-special-active.png', animation: 'painted-arachnoid-light-poses' },
   { id: 'panther', action: 'light', dimensions: [1536, 1024], density: .80, reachCases: [[45, true], [62, false]],
     frames: [['panther-light-windup.png', 206, [109, 45, 1232, 887]], null, ['panther-light-recovery.png', 206, [168, 32, 1260, 950]]],
-    forbidden: 'panther-light-impact.png', animation: 'painted-panther-light-poses' }
+    forbidden: 'panther-light-impact.png', animation: 'painted-panther-light-poses' },
+  { id: 'arachnoid', variant: 'grey', action: 'special', style: 'pounce', travels: true, dimensions: [1536, 1024],
+    reachCases: [[150, true], [190, false]], frames: [['arachnoid-special-windup.png', 205, [129, 65, 1190, 916]],
+      ['arachnoid-special-active-grounded.png', 206, [28, 243, 1709, 529], [1774, 887]],
+      ['arachnoid-special-recovery.png', 205, [172, 45, 1175, 935]]],
+    forbidden: 'arachnoid-special-active.png', animation: 'painted-grounded-pounce' },
+  { id: 'grid', action: 'special', style: 'tail', dimensions: [1774, 887], reachCases: [[112, true], [125, false]],
+    frames: [['grid-special-windup.png', 206, [231, 21, 1426, 801]], null, ['grid-special-recovery.png', 206, [307, 48, 1188, 775]]],
+    forbidden: 'grid-special-active.png', animation: 'painted-grid-tail-poses' }
 ];
 const phases = ['windup', 'contact', 'recovery'];
 const publicDirectory = '/assets/openai/xeno-trials-v209/characters/';
-for (const { id, variant = null, action, dimensions, density = 1, reachCases, frames, forbidden, animation } of addedActions) {
+for (const { id, variant = null, action, style, travels = false, dimensions, density = 1, reachCases, frames, forbidden, animation } of addedActions) {
   test(`${id} ${action} advertises its exact painted phases and plays them through native hit and miss`, () => {
     const definition = getXenoTrialsFighterV96(id), art = getXenoTrialsArtV96(id, variant);
     const actorId = { id, variant };
@@ -216,7 +224,7 @@ for (const { id, variant = null, action, dimensions, density = 1, reachCases, fr
       images.set(path, { naturalWidth, naturalHeight, complete: true });
     }
     const spec = getXenoTrialsAttackV147(definition, action, XENO_TRIALS_ATTACKS_V96[action]);
-    if (id === 'gorilla') assert.equal(getXenoTrialsSpecialStyleV147(definition), 'ram');
+    if (style) assert.equal(getXenoTrialsSpecialStyleV147(definition), style);
     const context = { save() {}, translate() {}, scale() {},
       drawImage(_image, _sx, _sy, w, h, _x, y, dw, dh) { assert.deepEqual([y + dh, dw, dh], [0, w * density, h * density]); }, restore() {} };
     for (const [gap, shouldHit] of reachCases) {
@@ -245,7 +253,7 @@ for (const { id, variant = null, action, dimensions, density = 1, reachCases, fr
       }
       assert.deepEqual([...seen], phasesDrawn);
       assert.equal(rival.hp < hp, shouldHit);
-      assert.equal(actor.x > initialX, id === 'gorilla');
+      assert.equal(actor.x > initialX, travels);
       assert.deepEqual(match, noDraw);
     }
   });

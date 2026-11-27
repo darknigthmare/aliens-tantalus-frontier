@@ -4,6 +4,7 @@ import { createXenoTrialsDuelCheckpointV197 } from '../src/xeno-trials-duel-chec
 import { createXenoTrialsMatchV96, getXenoTrialsSnapshotV96, nextXenoTrialsRoundV96, setXenoTrialsPausedV96, XENO_TRIALS_ATTACKS_V96,
   stepXenoTrialsMatchV96, XENO_TRIALS_STEP_V96 as dt } from '../src/xeno-trials-engine-v96.js';
 import { getXenoTrialsFighterV96 } from '../src/xeno-trials-data-v96.js';
+import { getXenoTrialsProjectileThreatV149 } from '../src/xeno-trials-ai-v119.js';
 import { XENO_TRIALS_GET_UP_V211 } from '../src/xeno-trials-defense-v211.js';
 import { getXenoTrialsBodyBoundsV105 as bounds, getXenoTrialsBodyGapV105 as gapTo, XENO_TRIALS_ARENA_V105 }
   from '../src/xeno-trials-geometry-v105.js';
@@ -364,6 +365,71 @@ test('Synth Trooper keeps ordinary defense for a low pulse or on normal', () => 
     }
     assert.ok(match.events.some(event => event.type === 'block' && event.side === 'opponent'));
   }
+});
+
+const pathogenBrute = 'drive-v123-fte-pathogen-brute-profile-v13';
+
+test('hard Runner jumps over the observed near ground wave and repeats that choice after checkpoint', () => {
+  const { match, cpu, config } = fixture({ playerId: pathogenBrute, opponentId: 'runner', gap: 125, seed: 4, meter: 0 });
+  advance(match, 1, { special: true });
+  advance(match, 94);
+  const waves = match.projectiles.filter(projectile => projectile.signatureIdV147 === 'pathogen-brute-ground-impact');
+  assert.equal(waves.length, 2);
+  const approaching = waves.find(projectile => projectile.direction === 1);
+  assert.ok(approaching && approaching.x < bounds(cpu).left);
+  assert.equal(cpu.y, 0);
+  const checkpoint = createXenoTrialsDuelCheckpointV197(getXenoTrialsSnapshotV96(match), config);
+  assert.ok(checkpoint);
+  const resumed = structuredClone(checkpoint.snapshot);
+  setXenoTrialsPausedV96(resumed, false);
+  for (const state of [match, resumed]) {
+    const runner = state.fighters[1], hp = runner.hp;
+    for (let tick = 0; tick < 9 && runner.y === 0; tick++) advance(state, 1);
+    assert.ok(runner.y > 0);
+    assert.equal(runner.previousInput.jump, true);
+    assert.equal(runner.movesetV207?.evade, undefined);
+    assert.equal(state.ai.observation.attack.id, approaching.groupIdV147);
+    assert.ok(state.tick - state.ai.observation.tick >= 2);
+    assert.equal(runner.stats.specials, 0);
+    advance(state, 33);
+    assert.ok(!state.projectiles.some(projectile => projectile.id === approaching.id));
+    assert.equal(runner.hp, hp);
+    assert.equal(runner.stats.blocks, 0);
+    assert.equal(runner.superMeterV148, 0);
+  }
+  assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
+});
+
+test('normal Runner and a different hard body do not inherit the specialized wave jump', () => {
+  for (const options of [{ opponentId: 'runner', difficulty: 'normal' }, { opponentId: 'warrior' }]) {
+    const { match, cpu } = fixture({ playerId: pathogenBrute, gap: 125, seed: 4, meter: 0, ...options });
+    advance(match, 1, { special: true });
+    let observedWave = false;
+    for (let tick = 1; tick < 124; tick++) {
+      advance(match, 1);
+      observedWave ||= match.ai.observation?.projectileThreat === true
+        && match.projectiles.some(projectile => projectile.groupIdV147 === match.ai.observation.attack?.id);
+      assert.equal(cpu.y, 0, options.opponentId);
+    }
+    assert.equal(observedWave, true);
+  }
+});
+
+test('hard Runner stays grounded when the observed wave is too close for its physical takeoff', () => {
+  const { match, cpu } = fixture({ playerId: pathogenBrute, opponentId: 'runner', gap: 97, seed: 7, meter: 0 });
+  advance(match, 1, { special: true });
+  advance(match, 113);
+  const [approaching] = match.projectiles.filter(projectile => projectile.direction === 1);
+  assert.equal(match.ai.observation.attack.id, approaching.groupIdV147);
+  assert.equal(match.ai.observation.projectileThreat, true);
+  const threat = getXenoTrialsProjectileThreatV149(approaching, cpu);
+  assert.ok(threat && threat.contactSeconds <= 3 * dt);
+  for (let tick = 0; tick < 6; tick++) {
+    advance(match, 1);
+    assert.equal(cpu.y, 0);
+    assert.equal(cpu.previousInput.jump, false);
+  }
+  assert.ok(match.events.some(event => event.type === 'hit' && event.side === 'opponent'));
 });
 
 test('hard Synth Trooper releases guard and strikes below a blocked shield bash before its recovery ends', () => {

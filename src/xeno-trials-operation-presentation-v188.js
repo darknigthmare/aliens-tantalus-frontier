@@ -9,6 +9,7 @@ const bypassPhases = Object.freeze({ locked: 'POSTE VERROUILLÉ', ready: 'DÉRIV
   opening: 'VOLET EN OUVERTURE', open: 'VOLET OUVERT' });
 const groundingPhases = Object.freeze({ waiting: 'ATTENTE DE DÉCHARGE', manual: 'RÉARMEMENT MANUEL',
   opening: 'SAS EN OUVERTURE', open: 'SAS ALIMENTÉ' });
+const collectorPhases = Object.freeze({ pressurized: 'CONDUITS SOUS PRESSION', opening: 'SAS EN DÉCOMPRESSION', open: 'SAS OUVERT' });
 
 export function getXenoTrialsOperationHudV188(match) {
   const view = getXenoTrialsOperationViewV188(match);
@@ -36,6 +37,10 @@ export function getXenoTrialsOperationHudV188(match) {
   if (gantry) phase = gantry.stationIndex === null ? 'CONVOI EN TRANSIT' : 'CONTRÔLE DU PORTIQUE';
   const grounding = view.status === 'active' ? view.groundingV223 : null;
   if (grounding) phase = groundingPhases[grounding.phase];
+  const collector = view.status === 'active' ? view.decompressionV224 : null;
+  if (collector) phase = collector.phase === 'diverted'
+    ? collector.openSide === 'left' ? 'PRESSION DÉVIÉE À L’OUEST' : 'PRESSION DÉVIÉE À L’EST'
+    : collectorPhases[collector.phase];
   const player = match.fighters?.[0], target = view.status === 'active' ? view.target : null;
   const body = player ? getXenoTrialsBodyBoundsV105(player) : null;
   let instruction = view.status === 'completed' ? 'Objectifs validés.' : view.status === 'failed' ? 'Évaluation interrompue.' : view.instruction;
@@ -73,7 +78,9 @@ export function getXenoTrialsOperationHudV188(match) {
         else if (grounding.phase === 'opening') instruction = `${label} · SAS EN OUVERTURE · ${Math.floor(grounding.opening * 100)} %`;
         else if (contact) instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
       }
-      if (view.kind === 'extraction' || purgeV204) {
+      if (collector?.phase === 'opening') {
+        instruction = `${label} · ${phase} · ${Math.floor(collector.opening * 100)} %`;
+      } else if (view.kind === 'extraction' || purgeV204) {
         const work = { id: target.id, kind: target.kind, contact, progress: target.progress,
           requiredTicks: target.requiredTicks, percent: Math.floor(target.progress * 100 / target.requiredTicks) };
         if (purgeV204) purgeV204.work = work;
@@ -109,20 +116,22 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
   const relief = view.status === 'active' ? view.reliefV220 : null;
   const bypass = view.status === 'active' ? view.bypassV221 : null;
   const grounding = view.status === 'active' ? view.groundingV223 : null;
+  const collector = view.decompressionV224;
   const extraction = view.kind === 'extraction';
   if (extraction && plane === 'rear') {
     return { id: view.id, plane, entities: view.entities.length,
       extraction: drawXenoTrialsExtractionV203(ctx, match, view, floor, reducedMotion) };
   }
-  if (view.kind === 'purge' && plane === 'rear') {
-    return { id: view.id, plane, entities: view.entities.length,
-      purge: drawXenoTrialsPurgeV204(ctx, match, view, arena, reducedMotion) };
-  }
+  const purge = view.kind === 'purge' && plane === 'rear'
+    ? drawXenoTrialsPurgeV204(ctx, match, view, arena, reducedMotion) : null;
+  if (purge && !collector) return { id: view.id, plane, entities: view.entities.length, purge };
   ctx.save();
   for (const entity of view.entities) {
+    if (purge && entity.kind === 'vent') continue;
     if (!Number.isFinite(entity.x) || !Number.isFinite(entity.radius)) continue;
     if (entity.kind === 'supply' && (entity.carried || entity.delivered)) continue;
-    const access = !entity.active ? null : relief ? relief.open : bypass ? bypass.phase === 'ready' || bypass.phase === 'open'
+    const access = collector && entity.kind === 'terminal' && !entity.completed ? collector.phase === 'open'
+      : !entity.active ? null : relief ? relief.open : bypass ? bypass.phase === 'ready' || bypass.phase === 'open'
       : grounding ? grounding.phase === 'manual' || grounding.phase === 'open' : null;
     const color = entity.contested ? '#ed997c' : entity.kind === 'beacon' ? beaconColor(entity)
       : entity.completed || access ? '#91bd8c' : entity.active ? '#ecd08c' : '#8a9d98';
@@ -175,7 +184,7 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
     }
   }
   ctx.restore();
-  return { id: view.id, plane, entities: view.entities.length, ...(beacons.length ? { beacons } : {}) };
+  return { id: view.id, plane, entities: view.entities.length, ...(purge ? { purge } : {}), ...(beacons.length ? { beacons } : {}) };
 }
 
 function beaconColor(entity) {

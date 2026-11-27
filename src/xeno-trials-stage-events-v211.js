@@ -1,7 +1,7 @@
 import { getXenoTrialsHordeGateCueV213, getXenoTrialsHordeMinigameV213 } from './xeno-trials-horde-minigames-v213.js';
 import { getXenoTrialsReinforcementV201 } from './xeno-trials-reinforcements-v201.js';
 import { getXenoTrialsBossStageV179 } from './xeno-trials-boss-stages-v179.js';
-import { getXenoTrialsGantryConvoyV222, getXenoTrialsGroundingDoorV223, getXenoTrialsHangarBypassV221 } from './xeno-trials-operations-v188.js';
+import { getXenoTrialsCollectorViewV224, getXenoTrialsGantryConvoyV222, getXenoTrialsGroundingDoorV223, getXenoTrialsHangarBypassV221 } from './xeno-trials-operations-v188.js';
 
 // The V146 proposed rows map to the stage that now represents each room.
 // These are scene fixtures drawn behind the fight, not colliders or hazards.
@@ -140,6 +140,7 @@ export function createXenoTrialsStageEventsV211(stageId, match, arena) {
     const bypass = getXenoTrialsHangarBypassV221(match);
     const gantry = getXenoTrialsGantryConvoyV222(match);
     const grounding = getXenoTrialsGroundingDoorV223(match);
+    const collector = getXenoTrialsCollectorViewV224(match);
     if (gates) opening = Math.max(gates.left.opening, gates.right.opening);
     if (reducedMotion && phase === 'introduction') opening = 0;
     return {
@@ -148,6 +149,7 @@ export function createXenoTrialsStageEventsV211(stageId, match, arena) {
       ...(bypass ? { hangarBypassV221: bypass } : {}),
       ...(gantry ? { logisticsGantriesV222: gantry.gantries } : {}),
       ...(grounding ? { reactorGroundingV223: grounding } : {}),
+      ...(collector ? { collectorV224: collector } : {}),
       reducedMotion, affectsCombat: false,
       time: moving ? observedTick / 120 + (match.config.seed % 41) * .07 : 0,
       degraded: [...degraded]
@@ -306,6 +308,48 @@ function drawReactorShutter(ctx, gate, reducedMotion, x, y) {
   for (let index = 0; index < lamps; index++) ctx.fillRect(x - 15 + index * 12, top - 7, 6, 3);
 }
 
+function drawCollectorDuct(ctx, x, y, sealed, diverted, time) {
+  const lamp = sealed ? '#96ccb3' : diverted ? '#e4aa76' : '#b4a281';
+  ctx.globalAlpha = .62;
+  ctx.fillStyle = '#27343a';
+  ctx.fillRect(x - 25, y - 96, 50, 82);
+  ctx.strokeStyle = '#667479';
+  ctx.strokeRect(x - 25, y - 96, 50, 82);
+  ctx.fillRect(x - 35, y - 24, 70, 24);
+  ctx.strokeRect(x - 35, y - 24, 70, 24);
+  ctx.fillStyle = '#0e1a1f';
+  for (let slot = 0; slot < 4; slot++) ctx.fillRect(x - 17, y - 84 + slot * 11, 34, 6);
+  ctx.globalAlpha = .8;
+  ctx.fillStyle = lamp;
+  ctx.fillRect(x - 9, y - 17, 18, 4);
+  if (sealed) return;
+  const height = diverted ? 68 : 30;
+  const drift = Math.sin(time * 1.6) * 9;
+  ctx.globalAlpha = diverted ? .19 : .09;
+  ctx.beginPath(); ctx.moveTo(x - 12, y - 32); ctx.lineTo(x - 20 + drift, y - 32 - height);
+  ctx.lineTo(x + 25 + drift, y - 32 - height); ctx.lineTo(x + 12, y - 32); ctx.closePath(); ctx.fill();
+}
+
+function drawCollectorAirlock(ctx, state, reducedMotion, x, y) {
+  const opening = reducedMotion && state.phase === 'opening' ? 0 : state.opening;
+  const left = x - 81, top = y - 104;
+  ctx.globalAlpha = .8;
+  ctx.fillStyle = '#0f1c23';
+  ctx.fillRect(left, top, 162, 104);
+  ctx.strokeStyle = '#748186';
+  ctx.strokeRect(left, top, 162, 104);
+  const span = 69 * (1 - opening);
+  ctx.fillStyle = '#49565c';
+  ctx.fillRect(left + 12, top + 10, span, 93);
+  ctx.fillRect(left + 150 - span, top + 10, span, 93);
+  ctx.globalAlpha = .9;
+  ctx.fillStyle = state.phase === 'open' ? '#a1d3b8' : '#d4ad79';
+  state.sealed.forEach((sealed, index) => {
+    ctx.globalAlpha = sealed ? .85 : .24;
+    ctx.fillRect(x - 13 + index * 16, top - 8, 10, 4);
+  });
+}
+
 export function drawXenoTrialsStageEventsV211(ctx, stage, camera, view) {
   if (!view || view.stageId !== stage.id) return;
   const floor = clamp(camera.floor, 180, 530);
@@ -320,6 +364,13 @@ export function drawXenoTrialsStageEventsV211(ctx, stage, camera, view) {
     drawLogisticsGantry(ctx, gate, view.reducedMotion, 367 + index * 367 - (camera.center - 500) * .24, floor - 52));
   if (view.reactorGroundingV223) drawReactorShutter(ctx, view.reactorGroundingV223, view.reducedMotion,
     701 - (camera.center - 500) * .22, floor - 56);
+  if (view.collectorV224) {
+    const shift = camera.center - 500;
+    drawCollectorAirlock(ctx, view.collectorV224, view.reducedMotion, 500 - shift * .19, floor - 52);
+    view.collectorV224.sealed.forEach((sealed, index) => drawCollectorDuct(ctx,
+      240 + index * 520 - shift * .29, floor - 46, sealed,
+      view.collectorV224.openSide === (index === 0 ? 'left' : 'right'), view.time));
+  }
   drawFixture(ctx, view, stage, 105 - offset, floor - 30, 'left');
   drawFixture(ctx, view, stage, 895 - offset, floor - 30, 'right');
   ctx.restore();
