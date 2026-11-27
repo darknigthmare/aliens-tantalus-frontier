@@ -8,6 +8,7 @@ import { EXCLUDED_BUILD_ASSET_PATHS } from './build-asset-filter.mjs';
 import { AVP_HISTORICAL_ARCHIVE_BASELINE_20261126 as baseline, AVP_HISTORICAL_ARCHIVE_SUCCESSORS_20261126 as successors,
   AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126 as previous, reviewedHistoricalArchiveHostDigest20261126 as advance } from './audit-dlc-avp-2004-20261125.mjs';
 const root = new URL('../', import.meta.url);
+const lazareRoot = 'archives/dlc-historical-recovery-20261126/alien5-lazare';
 const earthRoot = 'archives/dlc-historical-recovery-20261126/alien-earth';
 const blackoutRoot = 'archives/dlc-historical-recovery-20261126/alien-blackout';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -69,7 +70,7 @@ test('reconciliation admits exactly the 123 preserved source paths and keeps the
   assert.equal(receipt.source.commit, '6ed9b9210a097bbdf90ec3a22043a3fe5845e541');
   assert.equal(receipt.files.length, 123);
   assert.equal(receipt.archives.length, 16);
-  assert.equal(Object.keys(files).filter(path => !path.startsWith(conversationRoot + '/') && !path.startsWith(blackoutRoot + '/') && !path.startsWith(earthRoot + '/')).length, 140);
+  assert.equal(Object.keys(files).filter(path => !path.startsWith(conversationRoot + '/') && !path.startsWith(blackoutRoot + '/') && !path.startsWith(earthRoot + '/') && !path.startsWith(lazareRoot + '/')).length, 140);
   const expectedPaths = receipt.files.map(entry => entry.path).sort();
   assert.equal(new Set(expectedPaths).size, 123);
   assert.deepEqual(Object.keys(files).filter(path => path.startsWith(recoveredRoot + '/')).sort(), expectedPaths);
@@ -269,7 +270,7 @@ const blackoutExpected = [
 
 test('Blackout v0.1-v0.6 preserves six complete ZIP inventories behind exact source paths', () => {
   const index = JSON.parse(readFileSync(new URL('archives/dlc-historical-recovery-20261126/INDEX.json', root), 'utf8'));
-  assert.equal(Object.keys(files).filter(path => !path.startsWith(blackoutRoot + '/') && !path.startsWith(earthRoot + '/')).length, 160);
+  assert.equal(Object.keys(files).filter(path => !path.startsWith(blackoutRoot + '/') && !path.startsWith(earthRoot + '/') && !path.startsWith(lazareRoot + '/')).length, 160);
   const paths = [blackoutRoot + '/README.md'];
   let members = 0, pngs = 0, bytes = 0, fragments = 0;
   for (const expected of blackoutExpected) {
@@ -437,7 +438,7 @@ const earthExpected = [
 
 test('Earth V1-V10 preserves ten exact ZIP inventories and closed source admissions', () => {
   const index = JSON.parse(readFileSync(new URL('archives/dlc-historical-recovery-20261126/INDEX.json', root), 'utf8'));
-  assert.equal(Object.keys(files).filter(path => !path.startsWith(earthRoot + '/')).length, 186);
+  assert.equal(Object.keys(files).filter(path => !path.startsWith(earthRoot + '/') && !path.startsWith(lazareRoot + '/')).length, 186);
   const paths = [earthRoot + '/README.md'];
   let members = 0, pngs = 0, bytes = 0, fragments = 0;
   for (const [position, expected] of earthExpected.entries()) {
@@ -509,5 +510,146 @@ test('Earth V1-V10 reconstruct their original SHA256 and Git hashes from all 27 
     assert.equal(offset, expected.bytes, expected.archiveId);
     assert.equal(archiveHash.digest('hex'), expected.sha256, expected.archiveId);
     assert.equal(archiveGit.digest('hex'), expected.wholeArchiveGitBlobSha1, expected.archiveId);
+  }
+});
+
+const lazareExpected = [
+  {
+    "archiveId": "alien5-lazare/v1",
+    "bytes": 7262597,
+    "sha256": "e83ca79e0d920a328db05f241855e50672bcee70ea4199e408f021f2a560a3b2",
+    "memberCount": 35,
+    "documentCount": 6,
+    "parts": 1
+  },
+  {
+    "archiveId": "alien5-lazare/v2",
+    "bytes": 12332131,
+    "sha256": "987cc0a799dc245f312af4993775e7aa96a08809d87322b2f6f3bc6df7356d61",
+    "memberCount": 106,
+    "documentCount": 6,
+    "parts": 2
+  },
+  {
+    "archiveId": "alien5-lazare/v3",
+    "bytes": 19057552,
+    "sha256": "e940e4a368093e273de4366fbc318f0c30f45fd63ad15ad9b9b709e88f0692fb",
+    "memberCount": 205,
+    "documentCount": 8,
+    "parts": 2
+  },
+  {
+    "archiveId": "alien5-lazare/v4",
+    "bytes": 34123255,
+    "sha256": "5b62b7bec7a09cf4fdf2d3fed4c8b958064ce8bb0c10f8430993fe750d2d79d9",
+    "memberCount": 401,
+    "documentCount": 11,
+    "parts": 4
+  },
+  {
+    "archiveId": "alien5-lazare/v5",
+    "bytes": 11589434,
+    "sha256": "72c7475bb91e7454f2ba264c5c4b494dde1e07e9925733613d8afd38a3d74b6d",
+    "memberCount": 186,
+    "documentCount": 9,
+    "parts": 2
+  },
+  {
+    "archiveId": "alien5-lazare/v6",
+    "bytes": 9004672,
+    "sha256": "bddee773751646401c31cea82c7d2224559f15547ffeaf17863f00e9ca85c9d1",
+    "memberCount": 231,
+    "documentCount": 10,
+    "parts": 1
+  },
+  {
+    "archiveId": "alien5-lazare/v7",
+    "bytes": 10588930,
+    "sha256": "fefe675976a9fb703909aa885645e07e2e711413ed531e68256f03e3d9c250a9",
+    "memberCount": 326,
+    "documentCount": 11,
+    "parts": 2
+  },
+  {
+    "archiveId": "alien5-lazare/v8",
+    "bytes": 8515512,
+    "sha256": "3c79d05fc31134c0e2befb5caf6677e590f579f8d7c3332c04ffe819ea22275f",
+    "memberCount": 314,
+    "documentCount": 8,
+    "parts": 1
+  },
+  {
+    "archiveId": "alien5-lazare/v9",
+    "bytes": 10684397,
+    "sha256": "f49adb8cb42b38e937aad15edcbbe3d9632f7b7df3706c0b045bfde4c988d5b3",
+    "memberCount": 375,
+    "documentCount": 8,
+    "parts": 2
+  },
+  {
+    "archiveId": "alien5-lazare/v10",
+    "bytes": 26689519,
+    "sha256": "4371df32994992335a9e8e101b1a54d93b0ea565c0768e7f7a1390666063b4ab",
+    "memberCount": 527,
+    "documentCount": 15,
+    "parts": 3
+  }
+];
+
+test('Lazare V1-V10 retains all prepared source paths and remains outside public builds', () => {
+  const index = JSON.parse(readFileSync(new URL('archives/dlc-historical-recovery-20261126/INDEX.json', root), 'utf8'));
+  const paths = [lazareRoot + '/README.md'];
+  let bytes = 0, members = 0, documents = 0, fragments = 0;
+  for (const expected of lazareExpected) {
+    const folder = 'archives/dlc-historical-recovery-20261126/' + expected.archiveId;
+    const manifest = JSON.parse(readFileSync(new URL(folder + '/MANIFEST.json', root), 'utf8'));
+    const inventory = JSON.parse(readFileSync(new URL(folder + '/ZIP_CONTENTS.json', root), 'utf8'));
+    for (const key of ['archiveId', 'bytes', 'sha256', 'memberCount']) assert.equal(manifest[key], expected[key]);
+    assert.equal(manifest.format, 'zip'); assert.equal(manifest.preservation, 'exact-original-bytes');
+    assert.equal(manifest.zipCrc32, 'pass-all-members');
+    assert.equal(manifest.documents.length, expected.documentCount); assert.equal(manifest.parts.length, expected.parts);
+    assert.equal(inventory.archive, manifest.originalFilename); assert.equal(inventory.archiveSha256, expected.sha256);
+    assert.equal(inventory.members.length, expected.memberCount);
+    assert.equal(new Set(inventory.members.map(x => x.path)).size, expected.memberCount);
+    assert.deepEqual(index.preserved.filter(x => x.archiveId === expected.archiveId), [manifest]);
+    const candidate = index.candidates.find(x => x.filename === manifest.originalFilename);
+    assert.equal(candidate.status, 'preserved-exact-in-this-recovery'); assert.equal(candidate.sha256, expected.sha256);
+    for (const item of [...manifest.documents, ...manifest.parts]) {
+      assert.deepEqual(files[item.path], {bytes:item.bytes, sha256:item.sha256}); paths.push(item.path);
+      assert.equal(admitted(item.path), true); assert.equal(admitted(item.path, {built:true}), false);
+    }
+    paths.push(manifest.manifest, manifest.contents);
+    bytes += manifest.bytes; members += manifest.memberCount; documents += manifest.documents.length; fragments += manifest.parts.length;
+  }
+  assert.equal(bytes, 149847999); assert.equal(members, 2706); assert.equal(documents, 92); assert.equal(fragments, 20);
+  assert.equal(paths.length, 133); assert.equal(new Set(paths).size, 133);
+  assert.deepEqual(Object.keys(files).filter(x => x.startsWith(lazareRoot + '/')).sort(), paths.sort());
+  assert.equal(index.sourcesPreserved, index.preserved.length);
+  assert.equal(index.originalBytesPreserved, index.preserved.reduce((n, x) => n + x.bytes, 0));
+  assert.equal(index.pendingCount, index.candidates.filter(x => x.status === 'pending-github-presence-and-byte-verification').length);
+  for (const path of [lazareRoot + '/unknown.zip', lazareRoot + '/v10/MANIFEST.json/extra', lazareRoot + '/../escape'])
+    for (const directory of [false,true]) for (const built of [false,true]) assert.equal(admitted(path,{directory,built}), false);
+});
+
+test('Lazare fragments and documents preserve every Git hash and reconstruct all ten original hashes', () => {
+  for (const expected of lazareExpected) {
+    const folder = 'archives/dlc-historical-recovery-20261126/' + expected.archiveId;
+    const manifest = JSON.parse(readFileSync(new URL(folder + '/MANIFEST.json', root), 'utf8'));
+    const inventory = JSON.parse(readFileSync(new URL(folder + '/ZIP_CONTENTS.json', root), 'utf8'));
+    const archiveHash = createHash('sha256'); let offset = 0;
+    for (const [i, part] of manifest.parts.entries()) {
+      assert.equal(part.offset, offset); assert.equal(part.path, folder + '/' + manifest.originalFilename + '.part' + String(i+1).padStart(3,'0'));
+      assert.ok(part.bytes > 0 && part.bytes <= 10485760);
+      const bytes = readFileSync(new URL(part.path, root)); assert.equal(bytes.length, part.bytes); assert.equal(hash(bytes), part.sha256);
+      assert.equal(createHash('sha1').update('blob ' + bytes.length + '\0').update(bytes).digest('hex'), part.gitBlobSha1);
+      archiveHash.update(bytes); offset += bytes.length;
+    }
+    assert.equal(offset, expected.bytes); assert.equal(archiveHash.digest('hex'), expected.sha256);
+    for (const document of manifest.documents) {
+      const bytes = readFileSync(new URL(document.path, root)); const member = inventory.members.find(x => x.path === document.member);
+      assert.ok(member && !member.directory); assert.equal(bytes.length, document.bytes); assert.equal(hash(bytes), document.sha256);
+      assert.equal(member.sha256, document.sha256); assert.equal(member.bytes, document.bytes);
+      assert.equal(createHash('sha1').update('blob ' + bytes.length + '\0').update(bytes).digest('hex'), document.gitBlobSha1);
+    }
   }
 });

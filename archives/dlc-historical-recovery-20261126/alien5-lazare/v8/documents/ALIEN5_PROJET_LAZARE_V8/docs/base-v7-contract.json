@@ -1,0 +1,23 @@
+{
+  "source": "DLC_ALIEN5_PROJET_LAZARE_V7_CANDIDAT.zip",
+  "sourceSha256": "fefe675976a9fb703909aa885645e07e2e711413ed531e68256f03e3d9c250a9",
+  "fields": {
+    "rooms": "53489abe09ac2d1dee5abc99b0fd5417eacab0334c209ac591cf1e103bd28afb",
+    "edges": "550a5c0f730bfe0e572ded2673b0c2f90188cd13c76355bc3bfa531e02bf1059",
+    "quests": "960c6d37148b0b37db46291a2cb6181560261fbaa35c8c88cc87519adfe91a8f",
+    "chapters": "60690f8b8c4da5bd48f080980be74742c4f22c4b76ffcda6c91266e282665ddb",
+    "enemyTypes": "81a7606f0f506146a95b58202eb1bc7428939fe701aec901481d505adfd9fd40",
+    "enemies": "0b0a7cfe8ec09b7ac64107637b1c99ec0d5d8d5b26fe5142182eefb1a9c21bf3",
+    "crew": "b1733226e3d24858f5cefb296df3174b4779ecdd0719ebf0acee401bc349493e",
+    "services": "a695236dce57e78af3e3d415b1c9a29acfaf42c9b0bd59d003361096db5ee137",
+    "cameras": "002f38560fdbf044bb97952426e12eb3b4bef0692cf37e7cbbc6b49e222d0ea4",
+    "bulkheads": "3aacf92ba3876d0f38f0c024ecb11a4eef4f9b0c09fc6760dc561eb98aaab3cc",
+    "hides": "36175d717aa235953985cafcc7b77833aa4e154322a22e870324e5065ac032f3",
+    "pursuitEdges": "4070a15ec02c4f8d14b7144cca25d97ff223f590a1e5526ec58d379ef84629b6",
+    "attackProfiles": "c2852ce1d3baa824a29a49405c8c262830b860b11913ca24ce8ec80c11928b6c",
+    "civil": "d54aafb2057363b89d034a7701e428760dbfde810b285df71288a5012c266015",
+    "machine": "713d770bc8723c504b9518f990d99c52e228f8d607d1104c3fdf58862da7158c",
+    "bio": "a2149fde41267aa64b73b04a58d853eb5614e66030b476399c585d68c44eb080"
+  },
+  "method": "Canonical sorted JSON hashes from the exact mounted V7 data; fields not modified in V8."
+}
