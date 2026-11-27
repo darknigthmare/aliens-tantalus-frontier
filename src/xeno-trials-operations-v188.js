@@ -5,6 +5,7 @@ import {getXenoTrialsIsolationOperationV212,XENO_TRIALS_ISOLATION_OPERATIONS_V21
 import {XENO_TRIALS_CARGO_OPERATION_V213} from './xeno-trials-cargo-interlock-v213.js';
 import {getXenoTrialsHordeProtocolV180,XENO_TRIALS_HORDE_LIMITS_V180} from './xeno-trials-horde-v180.js';
 import {getXenoTrialsHordeBossViewV186} from './xeno-trials-horde-bosses-v186.js';
+import {getXenoTrialsStageHazardViewV188} from './xeno-trials-stage-hazards-v188.js';
 
 // Original Tantalus objective simulations. The existing horde supplies pressure;
 // physical objectives decide the outcome independently of the remaining kills.
@@ -104,10 +105,21 @@ export const XENO_TRIALS_GANTRY_OPERATION_V222=freeze({
   {id:'gantry-east',kind:'terminal',label:'Borne est',x:1175,y:0,radius:58,requiredTicks:gantryRoute[3].endTick-gantryRoute[3].startTick}
  ],canonExact:false,canonStatus:'original-tantalus-simulation',revision:222
 });
+const groundingOrders='Attirez un contact dans la bande pendant la décharge pour alimenter le sas. Si tous les contacts sont neutralisés, réarmez la borne manuellement. Validez la sortie après l’ouverture.';
+export const XENO_TRIALS_GROUNDING_OPERATION_V223=freeze({
+ id:'xto223-grounding-transfer',kind:'relay',title:'PRISE DE TERRE',label:'PRISE DE TERRE',stageId:'xt179-reactor',
+ hordeProtocolId:'xth223-reactor-patrol',difficulty:'easy',factionId:'containment',roundSeconds:165,reward:550,
+ instruction:groundingOrders,description:groundingOrders,startX:550,cargoStartX:550,cargoEndX:550,groundingOpeningTicksV223:54,
+ objectives:[
+  {id:'reactor-ground',kind:'terminal',label:'Borne de réarmement',x:540,y:0,radius:82,requiredTicks:132},
+  {id:'reactor-exit',kind:'terminal',label:'Sas du réacteur',x:1140,y:0,radius:96,requiredTicks:84}
+ ],canonExact:false,canonStatus:'original-tantalus-simulation',revision:223
+});
 export const XENO_TRIALS_OPERATION_BOARD_V212=Object.freeze([...XENO_TRIALS_ISOLATION_OPERATIONS_V212,...XENO_TRIALS_OPERATIONS_V188]);
 export const XENO_TRIALS_OPERATION_BOARD_V213=Object.freeze([XENO_TRIALS_RELAY_OPERATION_V218,XENO_TRIALS_BEACON_OPERATION_V219,XENO_TRIALS_RELIEF_OPERATION_V220,XENO_TRIALS_BYPASS_OPERATION_V221,
- XENO_TRIALS_GANTRY_OPERATION_V222,XENO_TRIALS_CARGO_OPERATION_V213,...XENO_TRIALS_OPERATION_BOARD_V212]);
-export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_GANTRY_OPERATION_V222.id ? XENO_TRIALS_GANTRY_OPERATION_V222
+ XENO_TRIALS_GANTRY_OPERATION_V222,XENO_TRIALS_GROUNDING_OPERATION_V223,XENO_TRIALS_CARGO_OPERATION_V213,...XENO_TRIALS_OPERATION_BOARD_V212]);
+export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_GROUNDING_OPERATION_V223.id ? XENO_TRIALS_GROUNDING_OPERATION_V223
+ :id===XENO_TRIALS_GANTRY_OPERATION_V222.id ? XENO_TRIALS_GANTRY_OPERATION_V222
  :id===XENO_TRIALS_BYPASS_OPERATION_V221.id ? XENO_TRIALS_BYPASS_OPERATION_V221
  :id===XENO_TRIALS_RELIEF_OPERATION_V220.id ? XENO_TRIALS_RELIEF_OPERATION_V220
  :id===XENO_TRIALS_BEACON_OPERATION_V219.id ? XENO_TRIALS_BEACON_OPERATION_V219
@@ -118,7 +130,9 @@ export const XENO_TRIALS_OPERATION_LIMITS_V188=freeze({schema:188,maxObjectives:
 const stateKeys=['schema','operationId','matchId','seed','status','failureReason','elapsedTicks','startedTick','lastTick','completedTick','progress','completed','integrity','cargoTravelTicks','cargoX','carrying','delivered','depotTicks','exitTicks'];
 const batteryStateKeys=[...stateKeys,'batteryStartedTickV219'];
 const bypassStateKeys=[...stateKeys,'bypassStartedTickV221'];
-const stateKeysFor=entry=>entry?.bypassOpeningTicksV221?bypassStateKeys:entry?.batteryTicksV219?batteryStateKeys:stateKeys;
+const groundingStateKeys=[...stateKeys,'groundingActivationV223'];
+const stateKeysFor=entry=>entry?.groundingOpeningTicksV223?groundingStateKeys:
+ entry?.bypassOpeningTicksV221?bypassStateKeys:entry?.batteryTicksV219?batteryStateKeys:stateKeys;
 const integer=(value,min,max)=>Number.isSafeInteger(value)&&value>=min&&value<=max;
 const record=value=>value&&typeof value==='object'&&!Array.isArray(value);
 function configEntry(config){
@@ -132,7 +146,8 @@ export function createXenoTrialsOperationStateV188(id,config){
  return{schema:188,operationId:id,matchId:config.matchId,seed:config.seed,status:'active',failureReason:null,
   elapsedTicks:0,startedTick:0,lastTick:0,completedTick:null,progress:entry.objectives.map(()=>0),completed:entry.objectives.map(()=>false),
   integrity:100,cargoTravelTicks:0,cargoX:entry.cargoStartX,carrying:-1,delivered:entry.objectives.map(()=>false),depotTicks:0,exitTicks:0,
-  ...(entry.batteryTicksV219?{batteryStartedTickV219:null}:{}),...(entry.bypassOpeningTicksV221?{bypassStartedTickV221:null}:{})};
+  ...(entry.batteryTicksV219?{batteryStartedTickV219:null}:{}),...(entry.bypassOpeningTicksV221?{bypassStartedTickV221:null}:{}),
+  ...(entry.groundingOpeningTicksV223?{groundingActivationV223:null}:{})};
 }
 function nearby(player,target){
  if(!player||player.hp<=0||player.y!==0||!Number.isFinite(player.x))return false;
@@ -193,6 +208,44 @@ export function getXenoTrialsGantryConvoyV222(match){
   opening:clamp((ticks-leg.endTick)/64,0,1)
  }));
  return{stationIndex,gantries};
+}
+function groundingManualAvailable(match,entry){
+ const horde=match?.hordeV180;
+ if(horde?.protocolId!==entry.hordeProtocolId)return false;
+ const protocol=getXenoTrialsHordeProtocolV180(horde.protocolId);
+ return horde.wavesCleared===protocol.waves.length&&(horde.totalKills??horde.kills)===protocol.totalEnemies;
+}
+function groundingStatus(state,match,entry){
+ const activation=state.groundingActivationV223;
+ if(!activation)return{phase:groundingManualAvailable(match,entry)?'manual':'waiting',opening:0};
+ const opening=clamp((match.tick-activation.tick)/entry.groundingOpeningTicksV223,0,1);
+ return{phase:opening===1?'open':'opening',opening,method:activation.method};
+}
+export function getXenoTrialsGroundingDoorV223(match){
+ const state=match?.operationV188,entry=XENO_TRIALS_GROUNDING_OPERATION_V223;
+ return state?.operationId===entry.id?groundingStatus(state,match,entry):null;
+}
+function acceptedGroundingArc(match){
+ return match.events?.some(event=>event.type==='stage-hazard-contact-v188'&&event.tick===match.tick&&event.kind==='arc'
+  &&/^horde-[1-9]\d*$/.test(event.actorId)&&event.damage>0)===true;
+}
+function validGroundingState(state,entry,match){
+ const activation=state.groundingActivationV223;
+ const hazard=match?.stageHazardsV188;
+ const hostileDamage=hazard&&hazard.totalDamage-hazard.playerDamage;
+ if(activation===null)return !state.completed[0]&&(!match||((state.status!=='active'||hostileDamage===0)
+  &&(state.progress[0]===0||groundingManualAvailable(match,entry))));
+ if(!state.completed[0]||!record(activation)||Object.keys(activation).length!==2||!['arc','manual'].includes(activation.method)
+  ||!integer(activation.tick,state.startedTick+entry.objectives[0].requiredTicks,state.lastTick)
+  ||state.progress[1]>Math.max(0,state.lastTick-activation.tick-entry.groundingOpeningTicksV223+1))return false;
+ if(!match)return true;
+ if(activation.method==='manual')return hostileDamage===0&&groundingManualAvailable(match,entry);
+ if(!(hostileDamage>0))return false;
+ // The native arc clock survives checkpoints even after contact events have
+ // left the bounded replay buffer. Require a live discharge at the onset.
+ const atActivation=getXenoTrialsStageHazardViewV188({ tick:activation.tick,phase:'active',stageHazardsV188:hazard,
+  config:{stageId:entry.stageId,operationV188:{id:entry.id}},operationV188:{operationId:entry.id,status:'active'} });
+ return atActivation?.kind==='arc'&&atActivation.phase==='active';
 }
 function windowOpen(objective,ticks){
  const phase=ticks%objective.periodTicks;
@@ -273,11 +326,17 @@ export function stepXenoTrialsOperationV188(state,match,dt,input={},emit=null){
   if(index>=0){
    const objective=entry.objectives[index];
    const bypass=entry.bypassOpeningTicksV221?hangarBypassStatus(state,match,entry):null;
+   const grounding=entry.groundingOpeningTicksV223?groundingStatus(state,match,entry):null;
    const canCharge=charging(index)&&(!entry.relayPressureV218||!relayContested(match,objective))
-    &&(!bypass||bypass.phase===(index===0?'ready':'open'));
-   if(entry.reliefV220&&!reliefWindow(match).open)state.progress[index]=0;
+    &&(!bypass||bypass.phase===(index===0?'ready':'open'))&&(!grounding||grounding.phase===(index===0?'manual':'open'));
+   const arc=index===0&&grounding&&acceptedGroundingArc(match);
+   if(arc)state.progress[index]=objective.requiredTicks;
+   else if(entry.reliefV220&&!reliefWindow(match).open)state.progress[index]=0;
    else state.progress[index]=canCharge?state.progress[index]+1:Math.max(0,state.progress[index]-2);
-   if(state.progress[index]>=objective.requiredTicks)complete(index);
+   if(state.progress[index]>=objective.requiredTicks){
+    if(grounding&&index===0)state.groundingActivationV223={method:arc?'arc':'manual',tick:state.lastTick};
+    complete(index);
+   }
   }
  }else if(entry.kind==='purge'){
   for(let index=0;index<entry.objectives.length;index++)if(!state.completed[index]){
@@ -343,6 +402,7 @@ export function validateXenoTrialsOperationSnapshotV188(state,config,match=null)
   const next=state.completed.findIndex(value=>!value);
   if(next>=0&&state.progress.slice(next+1).some(value=>value!==0))return false;
   if(state.progress.reduce((sum,value)=>sum+value,0)>state.elapsedTicks)return false;
+  if(entry.groundingOpeningTicksV223&&!validGroundingState(state,entry,match))return false;
   if(entry.bypassOpeningTicksV221){
    const started=state.bypassStartedTickV221;
    const mayHold=match===null||isHangarWatchDefeated(match,entry);
@@ -398,6 +458,10 @@ export function isXenoTrialsOperationForwardV188(previous,next){
   ||next.cargoTravelTicks<previous.cargoTravelTicks||previous.status!=='active'&&next.status!==previous.status)return false;
  const entry=getXenoTrialsOperationV188(previous.operationId);
  if(entry?.gantryRouteV222&&next.cargoTravelTicks-previous.cargoTravelTicks>next.elapsedTicks-previous.elapsedTicks)return false;
+ if(entry?.groundingOpeningTicksV223){
+  const before=previous.groundingActivationV223,after=next.groundingActivationV223;
+  if(before?after?.tick!==before.tick||after?.method!==before.method:after&&after.tick<=previous.lastTick)return false;
+ }
  const timingKey=entry?.bypassOpeningTicksV221?'bypassStartedTickV221':entry?.batteryTicksV219?'batteryStartedTickV219':null;
  if(timingKey){
   const start=previous[timingKey],nextStart=next[timingKey];
@@ -415,6 +479,7 @@ export function getXenoTrialsOperationViewV188(match){
  const relief=entry.reliefV220?reliefWindow(match):null;
  const bypass=entry.bypassOpeningTicksV221?getXenoTrialsHangarBypassV221(match):null;
  const gantry=entry.gantryRouteV222?getXenoTrialsGantryConvoyV222(match):null;
+ const grounding=entry.groundingOpeningTicksV223?getXenoTrialsGroundingDoorV223(match):null;
  let entities=entry.objectives.map((objective,index)=>{
   const active=!state.completed[index]&&(entry.kind!=='relay'||index===nextRelay);
   return {...objective,active,completed:state.completed[index],progress:state.progress[index],
@@ -457,17 +522,20 @@ export function getXenoTrialsOperationViewV188(match){
   ...(relief?{reliefV220:relief}:{}),
   ...(bypass?{bypassV221:bypass}:{}),
   ...(gantry?{gantryV222:gantry}:{}),
+  ...(grounding?{groundingV223:grounding}:{}),
   ...(entry.batteryTicksV219?{batteryV219:{...batteryStatus(state,entry),depleted:state.failureReason==='structure-destroyed'}}:{}),
   instruction:entry.instruction,hint:state.status==='failed'?`Évaluation interrompue : ${failureLabel}.`:state.status==='completed'?'Objectifs validés.':
    target?.contested?'Écartez ou neutralisez les contacts dans le périmètre balisé.':
    relief&&!relief.open?'Placez-vous près du poste avant de neutraliser le dernier contact.':
    bypass?.phase==='locked'?'Neutralisez le vigile pour déverrouiller le poste.':
    bypass?.phase==='opening'?'Attendez la fin de l’ouverture du volet.':
+   grounding?.phase==='waiting'?'Attirez un contact dans la bande balisée avant la décharge.':
+   grounding?.phase==='opening'?'Attendez l’ouverture du sas.':
    target?`${target.label} · maintenez E à proximité${target.windowOpen===false?' pendant la fenêtre verte':''}.`:'Rejoignez le sas.',
   progress:{done,total:entry.objectives.length,label:entry.kind==='extraction'?`${done}/${entry.objectives.length} caissons livrés`:`${done}/${entry.objectives.length} objectifs validés`},
   timeRemaining:Math.max(0,entry.roundSeconds-state.elapsedTicks/120),integrity:state.integrity,carrying:state.carrying,entities,
   target:target?{x:target.x,radius:target.radius,label:target.label,
    ...(entry.kind==='beacon'?{id:target.id,windowOpen:target.windowOpen,windowRemainingTicks:target.windowRemainingTicks}:{}),
    ...(entry.relayPressureV218?{contested:target.contested}:{}),
-   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212||entry.relayPressureV218||relief||bypass||gantry?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
+   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212||entry.relayPressureV218||relief||bypass||gantry||grounding?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
 }

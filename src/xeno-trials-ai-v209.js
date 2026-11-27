@@ -189,7 +189,7 @@ function hasRepeatedBlocks(match, cpu, target, definition, specs, dt) {
   // successful hit or round start. Horde allies cannot establish the pattern.
   for (let index = match.events.length - 1; index >= 0; index--) {
     const event = match.events[index];
-    if (event.type === 'fight' || (match.tick - event.tick) * dt > 4) break;
+    if (event.type === 'round-start' || event.type === 'fight' || (match.tick - event.tick) * dt > 4) break;
     const ownInstance = !match.hordeV180 || event.attackerInstanceV180 === cpu.instanceIdV180;
     if (!ownInstance) continue;
     const sameTarget = event.side === target.side && event.attacker === cpu.side

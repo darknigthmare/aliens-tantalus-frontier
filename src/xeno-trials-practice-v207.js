@@ -1,3 +1,4 @@
+import { createXenoTrialsPracticeGoalsV223, XENO_TRIALS_NEW_DRILLS_V223 } from './xeno-trials-practice-v223.js';
 import { createXenoTrialsPracticeGoalsV222, XENO_TRIALS_NEW_DRILLS_V222 } from './xeno-trials-practice-v222.js';
 import { createXenoTrialsPracticeGoalsV221, XENO_TRIALS_NEW_DRILLS_V221 } from './xeno-trials-practice-v221.js';
 import { createXenoTrialsPracticeGoalsV220, XENO_TRIALS_NEW_DRILLS_V220 } from './xeno-trials-practice-v220.js';
@@ -67,9 +68,11 @@ export const XENO_TRIALS_PRACTICE_DRILLS_V221 = Object.freeze([...XENO_TRIALS_PR
   ...XENO_TRIALS_NEW_DRILLS_V221.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
 export const XENO_TRIALS_PRACTICE_DRILLS_V222 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V221,
   ...XENO_TRIALS_NEW_DRILLS_V222.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
-const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V222.map(entry => [entry.id, entry]));
+export const XENO_TRIALS_PRACTICE_DRILLS_V223 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V222,
+  ...XENO_TRIALS_NEW_DRILLS_V223.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
+const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V223.map(entry => [entry.id, entry]));
 export const getXenoTrialsPracticeV207 = id => LESSONS.get(id) || null;
-export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V222
+export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V223
   .filter(entry => Array.isArray(value) && value.includes(entry.id)).map(entry => entry.id);
 
 export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
@@ -111,6 +114,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   const hasImpact = (action, side) => ['hit', 'block', 'guard-break'].includes(action.type) && action.side === side;
   const advance = () => { if (++index === entry.targets.length) state = 'complete'; };
   const progress = { index: () => index, advance, retry: () => { if (state === 'active') state = 'retry'; } };
+  const goalsV223 = createXenoTrialsPracticeGoalsV223(id, match, progress);
   const goalsV222 = createXenoTrialsPracticeGoalsV222(id, match, progress);
   const goalsV221 = createXenoTrialsPracticeGoalsV221(id, match, progress);
   const goalsV220 = createXenoTrialsPracticeGoalsV220(id, match, progress);
@@ -118,7 +122,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   const goalsV218 = createXenoTrialsPracticeGoalsV218(id, match, progress);
   const goalsV217 = createXenoTrialsPracticeGoalsV217(id, match, progress);
   const goalsV213 = createXenoTrialsPracticeGoalsV213(id, match, progress);
-  const liveGoals = goalsV222 || goalsV221 || goalsV220 || goalsV219 || goalsV218 || goalsV217 || goalsV213;
+  const liveGoals = goalsV223 || goalsV222 || goalsV221 || goalsV220 || goalsV219 || goalsV218 || goalsV217 || goalsV213;
   const goals = liveGoals || createXenoTrialsPracticeGoalsV212(id, match, progress) || createXenoTrialsPracticeGoalsV211(id, match, progress);
   let cueV213 = '';
 

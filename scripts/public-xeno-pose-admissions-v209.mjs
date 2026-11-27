@@ -8,17 +8,20 @@ import { getXenoTrialsPoseAssetsV209 } from '../src/xeno-trials-poses-v209.js';
 
 const rootDirectory = 'assets/openai/xeno-trials-v209';
 export const PUBLIC_XENO_POSE_DIRECTORIES_V209 = Object.freeze([rootDirectory, rootDirectory + '/characters']);
-const approved = new Map([
+const approvedV205 = ['grid-heavy-impact.png', 'arachnoid-light-windup.png', 'arachnoid-light-impact.png', 'arachnoid-light-recovery.png'];
+const approvedV206 = [
   'arachnoid-heavy-windup.png', 'arachnoid-heavy-impact.png', 'arachnoid-heavy-recovery.png', 'arachnoid-special-active-grounded.png',
   'panther-special-windup.png', 'panther-special-active.png', 'panther-special-recovery.png',
-  'grid-heavy-impact.png', 'grid-heavy-recovery.png', 'gorilla-special-windup.png', 'gorilla-special-recovery.png'
-].map(name => {
-  const origin = name === 'grid-heavy-impact.png'
-    ? XENO_VISUAL_ASSETS_NEW_INPUTS_V205[`assets/openai/xeno-trials-v205/characters/${name}`]
-    : XENO_PRODUCTION_ASSETS_NEW_INPUTS_V206[`assets/openai/xeno-trials-v206/characters/${name}`];
+  'grid-heavy-recovery.png', 'gorilla-special-windup.png', 'gorilla-special-recovery.png',
+  'panther-light-windup.png', 'panther-light-recovery.png'
+];
+const approved = new Map([
+  [205, approvedV205, XENO_VISUAL_ASSETS_NEW_INPUTS_V205], [206, approvedV206, XENO_PRODUCTION_ASSETS_NEW_INPUTS_V206]
+].flatMap(([version, names, receipts]) => names.map(name => {
+  const origin = receipts[`assets/openai/xeno-trials-v${version}/characters/${name}`];
   assert.equal(origin?.kind, 'production-asset', 'V209 pose must have a production receipt: ' + name);
   return [`${rootDirectory}/characters/${name}`, origin.sha256];
-}));
+})));
 
 export function publicXenoPosePathAdmissionV209(path, { directory = false } = {}) {
   if (path !== rootDirectory && !path.startsWith(rootDirectory + '/')) return null;

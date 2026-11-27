@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createXenoTrialsDuelCheckpointV197 } from '../src/xeno-trials-duel-checkpoint-v197.js';
-import { createXenoTrialsMatchV96, getXenoTrialsSnapshotV96, setXenoTrialsPausedV96, XENO_TRIALS_ATTACKS_V96,
+import { createXenoTrialsMatchV96, getXenoTrialsSnapshotV96, nextXenoTrialsRoundV96, setXenoTrialsPausedV96, XENO_TRIALS_ATTACKS_V96,
   stepXenoTrialsMatchV96, XENO_TRIALS_STEP_V96 as dt } from '../src/xeno-trials-engine-v96.js';
 import { getXenoTrialsFighterV96 } from '../src/xeno-trials-data-v96.js';
 import { XENO_TRIALS_GET_UP_V211 } from '../src/xeno-trials-defense-v211.js';
@@ -236,6 +236,49 @@ test('Runner reads two standing blocks with a regular low strike while signature
     }
     assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
   }
+});
+
+test('Runner learns blocked attacks again after an actual round transition and checkpoint', () => {
+  const { match, cpu, config } = fixture({ playerId: 'synth-guard', opponentId: 'runner',
+    gap: 3, seed: 4, meter: 0, rules: { noSpecial: true } });
+  // Start at the end of a close first round so two real blocks remain in view.
+  cpu.hp = 5;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    advance(match, 1, { guard: true }, { light: true });
+    advance(match, 44, { guard: true }, {});
+  }
+  const priorBlocks = match.events.filter(event => event.type === 'block' && event.side === 'player');
+  assert.equal(priorBlocks.length, 2);
+  advance(match, 1, { light: true }, {});
+  for (let tick = 0; tick < 60 && match.phase === 'active'; tick++) advance(match, 1, {}, {});
+  assert.equal(match.roundWinner, 'player');
+  assert.equal(match.roundReason, 'ko');
+  advance(match, 217, {}, {});
+  assert.ok(match.phaseTime <= 0);
+  assert.equal(nextXenoTrialsRoundV96(match), true);
+  const roundStart = match.events.at(-1);
+  assert.deepEqual([roundStart.type, roundStart.round], ['round-start', 2]);
+  const [player, runner] = match.fighters;
+  for (let tick = 0; tick < 140 && gapTo(player, runner) > 18; tick++)
+    advance(match, 1, { right: true }, { left: true });
+  assert.ok(gapTo(player, runner) <= 18);
+
+  advance(match, 16, { guard: true });
+  assert.equal(runner.attack, null);
+  assert.ok(match.tick - priorBlocks[0].tick < 4 / dt);
+  const checkpoint = createXenoTrialsDuelCheckpointV197(getXenoTrialsSnapshotV96(match), config);
+  assert.ok(checkpoint);
+  const resumed = structuredClone(checkpoint.snapshot);
+  setXenoTrialsPausedV96(resumed, false);
+  for (const state of [match, resumed]) {
+    advance(state, 1, { guard: true });
+    assert.equal(state.fighters[1].attack?.kind, 'light');
+    advance(state, 19, { guard: true });
+    const blocks = state.events.filter(event => event.type === 'block' && event.side === 'player'
+      && event.tick > roundStart.tick);
+    assert.equal(blocks.length, 1);
+  }
+  assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
 });
 
 test('hard Synth Guard releases guard after a genuine break and re-arms once during recovery', () => {

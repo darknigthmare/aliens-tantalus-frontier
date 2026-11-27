@@ -41,7 +41,11 @@ const byPair = new Map(measurements.flatMap(([fighterId, motion, contactKey, sup
 
 export function getXenoTrialsPlantedContactFinisherV219(attacker, target, images) {
   const profile = byPair.get(attacker.id + ':' + target.id);
-  const result = getXenoTrialsMeasuredContactFinisherV211(attacker, target, images, profile, 219);
+  return getXenoTrialsMeasuredPlantedContactV219(attacker, target, images, profile, 219);
+}
+
+export function getXenoTrialsMeasuredPlantedContactV219(attacker, target, images, profile, revision) {
+  const result = getXenoTrialsMeasuredContactFinisherV211(attacker, target, images, profile, revision);
   if (!result) return null;
   const { lock } = result;
   const { rig, attackerMetrics } = lock;

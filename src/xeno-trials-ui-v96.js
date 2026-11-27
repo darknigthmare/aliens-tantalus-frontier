@@ -1,7 +1,7 @@
 import { XENO_TRIALS_RESEARCH_LABS_V209 } from './xeno-trials-research-lab-v209.js';
 import { createXenoTrialsResearchLabRuntimeV209 } from './xeno-trials-research-lab-ui-v209.js';
 import { normalizeXenoTrialsSandboxV208, XENO_TRIALS_SANDBOX_BEHAVIORS_V208, XENO_TRIALS_SANDBOX_ID_V208 } from './xeno-trials-practice-v208.js';
-import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V222 } from './xeno-trials-practice-v207.js';
+import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V223 } from './xeno-trials-practice-v207.js';
 import { usesXenoTrialsIndependentProps } from './xeno-trials-franchise-stage-scenes-v192.js';
 import { renderArbiterTerminalDossierV190 } from './xeno-arbiter-ui-v190.js';
 import { ARBITER_PROGRAMS_V191, ARBITER_HORDE_PROTOCOLS_V191, getArbiterProgramV191 } from './xeno-arbiter-protocols-v191.js';
@@ -34,6 +34,7 @@ import { XENO_TRIALS_BRANCHES_V119 as BRANCHES, XENO_TRIALS_CAMPAIGN_V119 as CAM
   resolveXenoTrialsActivityV119, getXenoTrialsRuleTextV119 } from './xeno-trials-modes-v119.js';
 import { renderEnemyImportPreviewV103 } from './enemy-import-admissions-v103.js';
 import { getXenoTrialsMenuTileV222 } from './xeno-trials-menu-media-v222.js';
+import { getXenoTrialsOfflineDuelV223 } from './xeno-trials-offline-v223.js';
 import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 import { getXenoTrialsRuntimeAnimationCoverage } from './xeno-trials-animation-coverage-v199.js';
@@ -145,9 +146,10 @@ const RESULT_RETRY_DELAY_MS = 500;
 /** UI owns no campaign money and never writes outside its current save owner. */
 export class XenoTrialsUiV96 {
   constructor({ root, getProgress, onCommit, canCommit, onReturn, audioDirector = null, getCampaignProgress = () => null,
-    onOpenArbiterDossier = null, standaloneV207 = false, getReducedMotion = () => false }) {
+    onOpenArbiterDossier = null, standaloneV207 = false, offlineDuels = null, getReducedMotion = () => false }) {
     Object.assign(this, { root, getProgress, onCommit, canCommit, onReturn, audioDirector, getCampaignProgress, onOpenArbiterDossier,
-      standaloneV207, getReducedMotion });
+      standaloneV207, offlineDuels, getReducedMotion });
+    this.offlineSelectionV223 = null;
     this.audioEnabledV189 = true;
     this.runtime = null; this.generation = 0; this.selected = 'warrior'; this.active = false;
     this.resultRetryTimer = null;
@@ -229,6 +231,10 @@ export class XenoTrialsUiV96 {
         <p class="xt-doctrine" data-xt="arena-rules">Deux manches gagnantes. Présentation des deux spécimens, puis décompte 3–2–1. Le chrono ne démarre qu’au signal de combat.</p>
         <button type="button" class="button" data-xt="back-fighters">← MODIFIER LES COMBATTANTS</button>
         <button type="submit" class="button primary" data-xt="start">LANCER LE DUEL</button>
+        <div class="xt-offline-duel-v223" data-xt="offline-duel" hidden>
+          <button type="button" class="button" data-xt="prepare-offline-duel">TÉLÉCHARGER CE DUEL</button>
+          <p data-xt="offline-duel-status" role="status" aria-live="polite"></p>
+        </div>
         </section>
         <button type="button" class="button" data-xt="restart" hidden>RECOMMENCER LE DUEL SAUVEGARDÉ</button>
         <button type="button" class="button" data-xt="restart-from-start" hidden>RECOMMENCER DEPUIS LA PREMIÈRE VAGUE</button><button type="button" class="button danger-outline" data-xt="abandon" hidden>ANNULER LE DUEL · SANS GAIN</button>
@@ -328,6 +334,7 @@ export class XenoTrialsUiV96 {
     this.el = key => root.querySelector(`[data-xt="${key}"]`);
     this.form = this.el('form');
     this.form.addEventListener('submit', event => { event.preventDefault(); this.begin(event); });
+    this.el('prepare-offline-duel').onclick = () => this.prepareOfflineDuelV223();
     this.el('start').onclick = event => {
       if (this.form.reportValidity?.() === false) return;
       event.preventDefault(); this.begin(event);
@@ -668,8 +675,8 @@ export class XenoTrialsUiV96 {
       this.el('practice-lab-list').innerHTML = XENO_TRIALS_RESEARCH_LABS_V209.map(lab => `<article class="xt-activity-v119${state.practiceLabsClearedV209?.includes(lab.id) ? ' validated' : ''}">
         <h3>${escapeHtml(lab.title)}</h3><p>${escapeHtml(lab.instruction)}</p><button type="button" class="button primary" data-xt-lab="${lab.id}">
         ${state.practiceLabsClearedV209?.includes(lab.id) ? 'VALIDÉ · REJOUER' : 'OUVRIR LE LABORATOIRE'}</button></article>`).join('');
-      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V222.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
-      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V222.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
+      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V223.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
+      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V223.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
         <h3>${escapeHtml(entry.title)}</h3><strong>${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.playerId).label)}</strong>
         <p>${escapeHtml(entry.briefing)}</p><button type="button" class="button primary" data-xt-practice="${entry.id}">${cleared.includes(entry.id) ? 'VALIDÉ · REJOUER' : 'LANCER L’ATELIER'}</button></article>`).join('');
       return;
@@ -788,6 +795,7 @@ export class XenoTrialsUiV96 {
     this.el('arena-matchup').textContent = horde ? `${FIGHTERS.find(f => f.id === this.selected)?.label} · ${horde.waveLabel} · ${horde.populationLabel} · ${horde.healthLabel}` : `${matchup} · Deux manches gagnantes`;
     this.el('arena-rules').textContent = horde?.operation ? horde.orders : horde ? `${horde.orders} Une seule évaluation ; votre santé est conservée entre les vagues.` : 'Deux manches gagnantes. Présentation des deux spécimens, puis décompte 3–2–1. Le chrono ne démarre qu’au signal de combat.';
     const locked = !this.active || this.selectionStep !== 'arena' || this.isRunning() || this.state().pending || this.unsavedResult;
+    this.updateOfflineDuelV223(locked);
     const media = XENO_TRIALS_STAGE_MEDIA_V192.some(entry => entry.id === this.el('stage-media').value) ? this.el('stage-media').value : 'all';
     const page = getXenoTrialsStagePageV192(STAGES, { media, page: this.stagePageV192, selectedId: stage.id,
       revealSelected: this.stageSelectionV192 !== stage.id, assignedStageId: activity?.stageId });
@@ -801,6 +809,52 @@ export class XenoTrialsUiV96 {
     const compact = this.usesLocalMenuMediaV222();
     this.el('arena-cards').innerHTML = page.stages.map(s => `<button type="button" class="xt-arena-card" data-xt-arena="${s.id}" aria-pressed="${s.id === stage.id}" ${locked || activity?.stageId && activity.stageId !== s.id ? 'disabled' : ''} style="--xt-back:${s.background};--xt-floor:${s.floor};--xt-accent:${s.accent}"><span class="xt-arena-thumbnail${s.stageRevision === 190 ? ' xt-atlas-preview-v190' : ''}">${stagePreviewImageV192(s, '', compact)}</span><strong>${escapeHtml(s.label)}</strong><small>${activity?.stageId ? 'Environnement assigné à l’évaluation' : s.backdrop ? 'SECTEUR RÉPERTORIÉ' : 'SECTEUR MIRE'} · 2D</small>${s.media ? `<small>${escapeHtml(stageMediaLabelV192(s))} · ${escapeHtml(s.sourceWork || '')}</small>` : ''}</button>`).join('') || '<p class="xt-help">Aucune arène pour ce support. Votre sélection est conservée.</p>';
     this.el('stage-preview').innerHTML = `<div class="xt-stage-scene${stage.stageRevision === 190 ? ' xt-atlas-preview-v190' : ''}" style="--xt-back:${stage.background};--xt-floor:${stage.floor};--xt-accent:${stage.accent}">${stagePreviewImageV192(stage, 'Aperçu du décor sélectionné', compact)}<span>${escapeHtml(stage.label)}</span></div><p>${horde ? `${horde.pressureLabel} · ${horde.waveLabel} · ${horde.healthLabel}` : matchup} · ${escapeHtml(stage.label)}</p>`;
+  }
+
+  updateOfflineDuelV223(locked) {
+    if (!this.offlineDuels) return;
+    const panel = this.el('offline-duel');
+    panel.hidden = Boolean(locked || this.branchV119 !== 'on-demand');
+    if (panel.hidden || !this.offlineDuels.available()) this.offlineSelectionV223 = null;
+    else {
+      const fields = this.form.elements;
+      const duel = getXenoTrialsOfflineDuelV223({ playerId: this.selected, playerVariant: fields.playerVariant.value,
+        opponentId: fields.opponentId.value, opponentVariant: fields.opponentVariant.value, stageId: fields.stageId.value });
+      if (duel.key !== this.offlineSelectionV223?.duel.key) {
+        const selection = this.offlineSelectionV223 = { duel, state: 'checking' };
+        void this.offlineDuels.request('status', duel).then(state => this.finishOfflineDuelRequestV223(selection, state));
+      }
+    }
+    this.renderOfflineDuelStatusV223();
+  }
+
+  renderOfflineDuelStatusV223() {
+    const state = this.offlineSelectionV223?.state ?? 'unavailable';
+    const offline = this.usesLocalMenuMediaV222();
+    this.el('prepare-offline-duel').disabled = offline || !['missing', 'error'].includes(state);
+    const message = {
+      unavailable: 'Rechargez le terminal après son installation pour activer la préparation hors connexion.',
+      checking: 'VÉRIFICATION DES MÉDIAS…', preparing: 'TÉLÉCHARGEMENT DU DUEL…',
+      ready: 'DUEL PRÊT HORS CONNEXION',
+      missing: offline ? 'Reconnectez-vous pour télécharger ce duel.' : 'Conservez les médias de ce duel sur cet appareil.',
+      error: 'Téléchargement incomplet. Réessayez quand la connexion est disponible.',
+    }[state];
+    this.el('offline-duel-status').textContent = message;
+    this.el('offline-duel').setAttribute('data-download', state);
+  }
+
+  finishOfflineDuelRequestV223(selection, state) {
+    if (this.offlineSelectionV223 !== selection) return;
+    selection.state = state;
+    this.renderOfflineDuelStatusV223();
+  }
+
+  prepareOfflineDuelV223() {
+    const selection = this.offlineSelectionV223;
+    if (!selection || this.el('prepare-offline-duel').disabled) return;
+    selection.state = 'preparing';
+    this.renderOfflineDuelStatusV223();
+    void this.offlineDuels.request('prepare', selection.duel).then(state => this.finishOfflineDuelRequestV223(selection, state));
   }
   cancelResultRetry() {
     if (this.resultRetryTimer == null) return;

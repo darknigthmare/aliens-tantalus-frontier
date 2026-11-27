@@ -10,14 +10,22 @@ import { getXenoTrialsContactApproachV213, getXenoTrialsContactApproachViewV213 
 import { getXenoTrialsPlantedContactFinisherV219 } from './xeno-trials-finishers-v219.js';
 import { getXenoTrialsFixtureWithdrawalV221 } from './xeno-trials-finishers-v221.js';
 import { getXenoTrialsCrossScanV222 } from './xeno-trials-finishers-v222.js';
+import { getXenoTrialsLandedContactV223, openXenoTrialsLandedContactV223 } from './xeno-trials-finishers-v223.js';
+
+export { openXenoTrialsLandedContactV223 };
 
 const offerMs = 3600;
 const clawTiming = Object.freeze({ approachMs: 240, holdMs: 420, retreatMs: 360 });
-const active = sequence => ['offered', 'playing'].includes(sequence?.phase);
+const active = sequence => ['landing', 'offered', 'playing'].includes(sequence?.phase);
 const smooth = progress => progress * progress * (3 - 2 * progress);
 
+function makeOffer(candidate, alternatives, phase = 'offered') {
+  return { ...candidate, alternatives, phase, elapsedMs: 0, durationMs: candidate.lock.neutral ? 2400 : offerMs,
+    paused: false, skipped: false, activated: false };
+}
+
 /** Optional displays share a post-verdict clock and use the terminal geometry. */
-export function createXenoTrialsFinisherV207(match, images, reducedMotion = false, neutralFallback = false) {
+export function createXenoTrialsFinisherV207(match, images, reducedMotion = false, neutralFallback = false, landing = null) {
   if (reducedMotion || match?.phase !== 'match-over' || match.hordeV180 || match.operationV188
     || !match.result?.completed || match.result.winner !== 'player' || match.result.reason !== 'ko'
     || match.result.matchId !== match.config?.matchId || match.result.durationTicks !== match.tick
@@ -25,7 +33,11 @@ export function createXenoTrialsFinisherV207(match, images, reducedMotion = fals
   const attacker = match.fighters.find(fighter => fighter.side === 'player');
   const target = match.fighters.find(fighter => fighter.side === 'opponent');
   if (!attacker || !target || match.result.playerId !== attacker.id || match.result.opponentId !== target.id
-    || attacker.hp <= 0 || target.hp !== 0 || attacker.y !== 0 || target.y !== 0) return null;
+    || attacker.hp <= 0 || target.hp !== 0 || attacker.y !== 0) return null;
+  if (target.y !== 0) {
+    const landed = neutralFallback && getXenoTrialsLandedContactV223(match, attacker, target, images, landing);
+    return landed ? makeOffer(landed, [], landing.phase === 'complete' ? 'offered' : 'landing') : null;
+  }
   const legacyTarget = isXenoTrialsGrappleTargetV153(getXenoTrialsFighterV96(target.id));
   const candidates = [getXenoTrialsExtendedFinisherV210(match, attacker, target, images), legacyTarget
     && (getXenoTrialsExtendedFinisherV209(match, attacker, target, images) || getXenoTrialsExtendedFinisherV208(match, attacker, target, images))].filter(Boolean);
@@ -50,9 +62,7 @@ export function createXenoTrialsFinisherV207(match, images, reducedMotion = fals
     }
   }
   const [candidate, ...alternatives] = candidates;
-  if (!candidate) return null;
-  return { ...candidate, alternatives, phase: 'offered', elapsedMs: 0,
-    durationMs: candidate.lock.neutral ? 2400 : offerMs, paused: false, skipped: false, activated: false };
+  return candidate ? makeOffer(candidate, alternatives) : null;
 }
 
 export function activateXenoTrialsFinisherV207(sequence, id = sequence?.id) {
@@ -69,7 +79,7 @@ export function pauseXenoTrialsFinisherV207(sequence, paused) {
 }
 
 export function advanceXenoTrialsFinisherV207(sequence, deltaMs) {
-  if (!active(sequence) || sequence.paused || !Number.isFinite(deltaMs) || deltaMs <= 0) return sequence;
+  if (!active(sequence) || sequence.phase === 'landing' || sequence.paused || !Number.isFinite(deltaMs) || deltaMs <= 0) return sequence;
   const elapsedMs = Math.min(sequence.durationMs, sequence.elapsedMs + deltaMs);
   const phase = elapsedMs < sequence.durationMs ? sequence.phase : sequence.activated ? 'complete' : 'declined';
   return { ...sequence, elapsedMs, phase };
@@ -98,5 +108,6 @@ export function getXenoTrialsFinisherStateV207(sequence) {
     ...(phase === 'offered' && sequence.alternatives.length ? { alternatives: sequence.alternatives.map(({ id, kind }) => ({ id, kind })) } : {}),
     ...(lock.fixture ? { fixtureId: lock.fixture.id } : {}),
     ...(lock.withdrawalV221 ? { withdrawalV221: { ...lock.withdrawalV221 } } : {}),
+    ...(lock.afterLandingV223 ? { afterLandingV223: { ...lock.afterLandingV223 } } : {}),
     ...(lock.crossScanV222 ? { crossScanV222: lock.crossScanV222.fixtures.map(fixture => fixture.id) } : {}) };
 }

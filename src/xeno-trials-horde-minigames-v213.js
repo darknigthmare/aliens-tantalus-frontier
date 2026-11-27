@@ -78,6 +78,17 @@ const layouts = [
       ['right', 'RONDE EST', ['runner', 'panther', 'synth-trooper'], 4, 3, 17, .18],
       ['split', 'PRISE DE LA VOIE', ['runner', 'prowler', 'synth-guard'], 5, 4, 20, .20]
     ]
+  },
+  {
+    id: 'xth223-reactor-patrol', title: 'RONDE DU RÉACTEUR', stageId: 'xt179-reactor',
+    description: 'Trois vagues de contacts fragiles encerclent le cœur des machines.',
+    orders: 'Repoussez les premiers contacts à l’ouest. Gardez le sas est en vue, puis ménagez une issue lors de la prise en tenaille.',
+    roundSeconds: 165, reward: 375,
+    waves: [
+      ['left', 'PATROUILLE OUEST', ['runner', 'prowler'], 4, 3, 15, .15],
+      ['right', 'PATROUILLE EST', ['runner', 'panther', 'warrior'], 4, 3, 17, .16],
+      ['split', 'PRISE EN TENAILLE', ['runner', 'prowler', 'armored-runner'], 5, 4, 19, .18]
+    ]
   }
 ];
 

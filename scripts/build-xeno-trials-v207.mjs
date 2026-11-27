@@ -8,48 +8,25 @@ import { resolveSafeBuildOutput, resolveSafeTrialsBuildOutput } from './build-ou
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { normalizeAudioManifestV77 } from '../src/audio-assets-v77.js';
 import { XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_STAGES_V96,
-  getXenoTrialsArtV96, getXenoTrialsFighterV96 } from '../src/xeno-trials-data-v96.js';
+  getXenoTrialsFighterV96 } from '../src/xeno-trials-data-v96.js';
 import { normalizeXenoTrialsConfigV96, XENO_TRIALS_STARTERS_V96 } from '../src/xeno-trials-progress-v96.js';
 import { getXenoTrialsOpponentCandidatesV119 } from '../src/xeno-trials-selection-v97.js';
-import { getXenoTrialsStageAssetsV180 } from '../src/xeno-trials-stage-depth-v180.js';
-import { getXenoTrialsStageAssetsV190 } from '../src/xeno-trials-stage-scenes-v190.js';
-import { getXenoTrialsFranchiseStageAssetsV192 } from '../src/xeno-trials-franchise-stage-scenes-v192.js';
-import { getXenoTrialsCaptureAssetsV163 } from '../src/xeno-trials-capture-v163.js';
-import { getXenoTrialsSpriteAtlasV188 } from '../src/xeno-trials-sprite-atlas-v188.js';
-import { getXenoTrialsSpriteAtlasV189 } from '../src/xeno-trials-sprite-atlas-v189.js';
-import { getXenoTrialsRuntimeSpriteAtlas } from '../src/xeno-trials-sprite-atlas-v191.js';
-import { getXenoTrialsRuntimeActionAtlases } from '../src/xeno-trials-action-atlas-v199.js';
-import { getEnemyImportAnimationV107 } from '../src/enemy-import-animation-v107.js';
-import { getEnemyImportAttackV109 } from '../src/enemy-import-attacks-v109.js';
-import { XENO_TRIALS_PROJECTILE_IMAGES_V205, XENO_TRIALS_EFFECT_IMAGES_V205 } from '../src/xeno-trials-visual-assets-v205.js';
 import { getXenoTrialsPoseAssetsV209 } from '../src/xeno-trials-poses-v209.js';
 import { getXenoTrialsResearchLabAssetsV209 } from '../src/xeno-trials-research-lab-v209.js';
 import { XENO_TRIALS_RESEARCH_FIGHTERS_V210, getXenoTrialsResearchAssetsV210 } from '../src/xeno-trials-research-v210.js';
 import { XENO_TRIALS_RESEARCH_MEDIA_V210 } from '../src/xeno-trials-research-media-v210.js';
 import { XENO_TRIALS_MENU_ASSETS_V222 } from '../src/xeno-trials-menu-media-v222.js';
+import { XENO_TRIALS_FIGHT_EFFECTS_V223, getXenoTrialsArenaAssetsV223 as stageAssets,
+  getXenoTrialsFighterAssetsV223 as fighterAssets } from '../src/xeno-trials-offline-v223.js';
+import { xenoTrialsOfflineWorkerV223 } from './xeno-trials-offline-worker-v223.mjs';
 
 const manifestPath = 'xeno-trials.webmanifest';
 const entryModule = 'src/xeno-trials-standalone.js';
 const launchPage = 'xeno-trials.html';
 const digest = value => createHash('sha256').update(value).digest('hex');
 
-export const XENO_TRIALS_BUILD_REVISION = 222;
+export const XENO_TRIALS_BUILD_REVISION = 223;
 export const xenoTrialsCacheName = fingerprint => `atf-trials-v${XENO_TRIALS_BUILD_REVISION}-${fingerprint.slice(0, 24)}`;
-
-function fighterAssets(id, variant) {
-  const art = getXenoTrialsArtV96(id, variant);
-  const fighter = { id, variant };
-  return [art.path, getEnemyImportAnimationV107(art)?.path, getEnemyImportAttackV109(art)?.path,
-    getXenoTrialsSpriteAtlasV188(fighter, art)?.texture.path, getXenoTrialsSpriteAtlasV189(fighter, art)?.texture.path,
-    getXenoTrialsRuntimeSpriteAtlas(fighter, art)?.texture.path,
-    ...getXenoTrialsRuntimeActionAtlases(fighter, art).map(atlas => atlas.texture.path),
-    ...getXenoTrialsCaptureAssetsV163([fighter])].filter(Boolean);
-}
-
-function stageAssets(stage) {
-  return [stage.backdrop, ...getXenoTrialsStageAssetsV180(stage.id), ...getXenoTrialsStageAssetsV190(stage.id),
-    ...getXenoTrialsFranchiseStageAssetsV192(stage.id)].filter(Boolean);
-}
 
 const icons = [192, 512].flatMap(size => ['any', 'maskable'].map(purpose => ({
   src: `/assets/openai/pwa/tantalus-frontier-${purpose === 'any' ? 'icon' : 'maskable'}-${size}-v68.png`,
@@ -107,17 +84,22 @@ export async function planXenoTrialsBuildV207(base, info) {
       if (paths.has(art.slice(1))) assets.add(required(art.slice(1)));
     }
   }
+  const duelPaths = new Set(XENO_TRIALS_FIGHT_EFFECTS_V223);
   for (const fighter of XENO_TRIALS_FIGHTERS_V96) {
     for (const variant of [null, ...fighter.variants]) {
-      for (const art of fighterAssets(fighter.id, variant)) assets.add(required(art.slice(1)));
+      for (const art of fighterAssets(fighter.id, variant)) duelPaths.add(art);
     }
   }
   for (const stage of XENO_TRIALS_STAGES_V96) {
-    for (const art of stageAssets(stage)) assets.add(required(art.slice(1)));
+    for (const art of stageAssets(stage)) duelPaths.add(art);
   }
-  for (const art of [...Object.values(XENO_TRIALS_PROJECTILE_IMAGES_V205), ...Object.values(XENO_TRIALS_EFFECT_IMAGES_V205)]) {
-    assets.add(required(art.slice(1)));
-  }
+  const assetHashes = new Map(info.files.map(file => [file.path, file.sha256]));
+  const duelMedia = [...duelPaths].sort().map(path => {
+    assets.add(required(path.slice(1)));
+    const checksum = assetHashes.get(path.slice(1));
+    assert.match(checksum, /^[a-f0-9]{64}$/u, path);
+    return [path, checksum];
+  });
   const starter = normalizeXenoTrialsConfigV96();
   const starterStage = XENO_TRIALS_STAGES_V96.find(stage => stage.id === starter.stageId);
   const [firstOpponent] = getXenoTrialsOpponentCandidatesV119(XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_FACTIONS_V96[0]);
@@ -137,11 +119,11 @@ export async function planXenoTrialsBuildV207(base, info) {
   const audioUrls = audioSources.map(({ path, sha256 }) => `${path}?v=${sha256.slice(0, 16)}`);
   const shell = ['/', ...[...new Set([...shellPaths, ...audioUrls])].sort()];
   const researchFighters = new Set(XENO_TRIALS_RESEARCH_FIGHTERS_V210.map(fighter => fighter.id)).size;
-  return { html: pageWithWorker(html), copyPaths, shell, fighters: XENO_TRIALS_FIGHTERS_V96.length,
+  return { html: pageWithWorker(html), copyPaths, shell, duelMedia, fighters: XENO_TRIALS_FIGHTERS_V96.length,
     researchFighters, stages: XENO_TRIALS_STAGES_V96.length };
 }
 
-export function xenoTrialsWorkerV207(baseWorker, cacheName, shell) {
+export function xenoTrialsWorkerV207(baseWorker, cacheName, shell, duelMedia = []) {
   const cacheAnchor = /^const CACHE = 'atf-v143-[a-z0-9-]+';$/m;
   const shellAnchor = /const SHELL = Object\.freeze\(\[[\s\S]*?\n\]\);/;
   const cleanupAnchor = "key.startsWith('atf-')";
@@ -163,13 +145,16 @@ function shellPathV207(request) {
     ['if (SHELL_PATHS.has(path)) return true;', 'if (SHELL_PATHS.has(path + url.search)) return true;'],
     ['!SHELL_PATHS.has(new URL(key.url).pathname)', '!SHELL_PATHS.has(shellPathV207(key))'],
     ['    const path = new URL(request.url).pathname;\n', ''],
-    ['if (SHELL_PATHS.has(path)) {', 'if (SHELL_PATHS.has(shellPathV207(request))) {']
+    ['if (SHELL_PATHS.has(path)) {', 'if (SHELL_PATHS.has(shellPathV207(request))) {'],
+    ['key !== CACHE', 'key !== CACHE && key !== offlineDuelCacheNameV223()'],
+    ['  if (!response) return null;\n  if (cacheableResponseV143(request, response)) return response;\n  await cache.delete(request);\n  return null;',
+      '  if (cacheableResponseV143(request, response)) return response;\n  if (response) await cache.delete(request);\n  return readOfflineDuelAssetV223(request);']
   ];
   for (const [anchor, replacement] of versionedAudio) {
     assert.equal(worker.split(anchor).length, 2, `Unrecognized dedicated worker anchor: ${anchor}`);
     worker = worker.replace(anchor, replacement);
   }
-  return worker;
+  return worker + xenoTrialsOfflineWorkerV223(duelMedia);
 }
 
 export async function buildXenoTrialsV207(root) {
@@ -183,7 +168,7 @@ export async function buildXenoTrialsV207(root) {
   const release = (await import(pathToFileURL(join(base, releasePath)).href)).APP_RELEASE_V143;
   const runtime = { ...release, cacheName };
   const baseWorker = await readFile(join(base, 'sw.js'), 'utf8');
-  const worker = xenoTrialsWorkerV207(baseWorker, cacheName, plan.shell);
+  const worker = xenoTrialsWorkerV207(baseWorker, cacheName, plan.shell, plan.duelMedia);
   const html = stampXenoTrialsHtmlV207(plan.html, runtime);
   const manifest = { id: 'xeno-trials', name: 'Xeno Trials', short_name: 'Xeno Trials', start_url: '/', scope: '/',
     display: 'standalone', background_color: '#071019', theme_color: '#071019', icons };

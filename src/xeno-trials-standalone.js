@@ -3,6 +3,7 @@ import { installAutoTranslationV185 } from './i18n-auto-v185.js';
 import { setLanguageV185 } from './i18n-v185.js';
 import { APP_RELEASE_V143 } from './release-info-v143.js';
 import { XenoTrialsUiV96 } from './xeno-trials-ui-v96.js';
+import { createXenoTrialsOfflineDuelClientV223 } from './xeno-trials-offline-v223.js';
 import {
   createStandaloneTrialsStore,
   STANDALONE_TRIALS_SAVE_LIMIT,
@@ -70,6 +71,7 @@ function localSaveStorage() {
 
 const store = createStandaloneTrialsStore(localSaveStorage());
 const audio = new AudioDirector();
+const offlineDuels = createXenoTrialsOfflineDuelClientV223(APP_RELEASE_V143.cacheName);
 const el = id => document.querySelector(`[data-xts="${id}"]`);
 const root = document.getElementById('xeno-trials-v96');
 const launcher = el('launcher');
@@ -126,6 +128,7 @@ const trials = new XenoTrialsUiV96({
   onReturn: returnToLauncher,
   audioDirector: audio,
   standaloneV207: true,
+  offlineDuels,
   getReducedMotion: () => store.settings().reducedMotion,
 });
 
@@ -142,6 +145,7 @@ function refreshMenuMedia() {
 }
 window.addEventListener('offline', refreshMenuMedia);
 window.addEventListener('online', refreshMenuMedia);
+if (offlineDuels) navigator.serviceWorker.addEventListener('controllerchange', refreshMenuMedia);
 
 function verifyOwnership() {
   if (store.issue !== 'storage-unavailable' && store.isCurrent()) return true;

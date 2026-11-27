@@ -7,6 +7,8 @@ const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
 const kinds = Object.freeze({ escort: 'ESCORTE', relay: 'RELAIS', purge: 'PURGE', beacon: 'BALISE', extraction: 'EXTRACTION' });
 const bypassPhases = Object.freeze({ locked: 'POSTE VERROUILLÉ', ready: 'DÉRIVATION DISPONIBLE',
   opening: 'VOLET EN OUVERTURE', open: 'VOLET OUVERT' });
+const groundingPhases = Object.freeze({ waiting: 'ATTENTE DE DÉCHARGE', manual: 'RÉARMEMENT MANUEL',
+  opening: 'SAS EN OUVERTURE', open: 'SAS ALIMENTÉ' });
 
 export function getXenoTrialsOperationHudV188(match) {
   const view = getXenoTrialsOperationViewV188(match);
@@ -32,6 +34,8 @@ export function getXenoTrialsOperationHudV188(match) {
   if (bypass) phase = bypassPhases[bypass.phase];
   const gantry = view.status === 'active' ? view.gantryV222 : null;
   if (gantry) phase = gantry.stationIndex === null ? 'CONVOI EN TRANSIT' : 'CONTRÔLE DU PORTIQUE';
+  const grounding = view.status === 'active' ? view.groundingV223 : null;
+  if (grounding) phase = groundingPhases[grounding.phase];
   const player = match.fighters?.[0], target = view.status === 'active' ? view.target : null;
   const body = player ? getXenoTrialsBodyBoundsV105(player) : null;
   let instruction = view.status === 'completed' ? 'Objectifs validés.' : view.status === 'failed' ? 'Évaluation interrompue.' : view.instruction;
@@ -64,6 +68,11 @@ export function getXenoTrialsOperationHudV188(match) {
         else if (contact) instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
       }
       if (gantry && contact && target.kind === 'terminal') instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
+      if (grounding) {
+        if (grounding.phase === 'waiting') instruction = 'ATTIREZ UN CONTACT DANS LA BANDE';
+        else if (grounding.phase === 'opening') instruction = `${label} · SAS EN OUVERTURE · ${Math.floor(grounding.opening * 100)} %`;
+        else if (contact) instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
+      }
       if (view.kind === 'extraction' || purgeV204) {
         const work = { id: target.id, kind: target.kind, contact, progress: target.progress,
           requiredTicks: target.requiredTicks, percent: Math.floor(target.progress * 100 / target.requiredTicks) };
@@ -99,6 +108,7 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
   const battery = view.status === 'active' ? view.batteryV219 : null;
   const relief = view.status === 'active' ? view.reliefV220 : null;
   const bypass = view.status === 'active' ? view.bypassV221 : null;
+  const grounding = view.status === 'active' ? view.groundingV223 : null;
   const extraction = view.kind === 'extraction';
   if (extraction && plane === 'rear') {
     return { id: view.id, plane, entities: view.entities.length,
@@ -112,7 +122,8 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
   for (const entity of view.entities) {
     if (!Number.isFinite(entity.x) || !Number.isFinite(entity.radius)) continue;
     if (entity.kind === 'supply' && (entity.carried || entity.delivered)) continue;
-    const access = !entity.active ? null : relief ? relief.open : bypass ? bypass.phase === 'ready' || bypass.phase === 'open' : null;
+    const access = !entity.active ? null : relief ? relief.open : bypass ? bypass.phase === 'ready' || bypass.phase === 'open'
+      : grounding ? grounding.phase === 'manual' || grounding.phase === 'open' : null;
     const color = entity.contested ? '#ed997c' : entity.kind === 'beacon' ? beaconColor(entity)
       : entity.completed || access ? '#91bd8c' : entity.active ? '#ecd08c' : '#8a9d98';
     const x = entity.x, width = entity.kind === 'cargo' ? 84 : entity.kind === 'depot' || entity.kind === 'exit' ? 100 : 42;

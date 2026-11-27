@@ -35,7 +35,7 @@ import { getXenoTrialsCaptureAssetsV163, getXenoTrialsCaptureViewV163, getXenoTr
  sampleXenoTrialsFloorLockV207 } from './xeno-trials-capture-v163.js';
 import { createXenoTrialsFinisherV207, activateXenoTrialsFinisherV207, pauseXenoTrialsFinisherV207,
  advanceXenoTrialsFinisherV207, skipXenoTrialsFinisherV207, getXenoTrialsFinisherStateV207,
- getXenoTrialsFinisherViewV207 } from './xeno-trials-finishers-v207.js';
+ getXenoTrialsFinisherViewV207, openXenoTrialsLandedContactV223 } from './xeno-trials-finishers-v207.js';
 import { drawXenoTrialsFinisherFixturesV208, getXenoTrialsFinisherCopyV208 } from './xeno-trials-finishers-v208.js';
 import { drawXenoTrialsFinisherFixturesV209 } from './xeno-trials-finishers-v209.js';
 import { drawXenoTrialsFinisherFixturesV210 } from './xeno-trials-finishers-v210.js';
@@ -162,7 +162,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     } });
   let cameraView = camera.getState(), frameDelta = 0;
   let presentation = (restored || practiceV207 && !practiceV207.showIntroV210) ? { phase: 'active', elapsedMs: 0, round: match.round } : createXenoPresentationV97(), outroV155 = null, terminalV156 = null, tauntV156 = null, exitV157 = null, landingV157 = null;
-  const finisherPendingV207 = () => finisherV207?.phase === 'offered' || finisherV207?.phase === 'playing';
+  const finisherPendingV207 = () => ['landing', 'offered', 'playing'].includes(finisherV207?.phase);
   const outroPlaying = () => finisherPendingV207() || outroV155?.phase === 'playing' || terminalV156?.phase === 'playing' || exitV157?.phase === 'playing' || landingV157?.phase === 'playing';
   const isPaused = () => match.paused || finisherV207?.paused === true || outroV155?.paused === true || terminalV156?.paused === true || exitV157?.paused === true || landingV157?.paused === true;
   const presentationView = () => getXenoPresentationViewV97(presentation);
@@ -1075,7 +1075,10 @@ export function createXenoTrialsRuntimeV96(options = {}) {
         // Landing has its own result-owned render clock and runs alongside the
         // historical grounded clips. Two airborne rigs need no fabricated V156
         // terminal: this completed V157 owner admits their spatial exit itself.
-        if(landingV157?.phase==='playing')landingV157=advanceXenoTrialsOutroV155(landingV157,dt*1000);
+        if (landingV157?.phase === 'playing') {
+          landingV157 = advanceXenoTrialsOutroV155(landingV157, dt * 1000);
+          finisherV207 = openXenoTrialsLandedContactV223(finisherV207, match, landingV157);
+        }
         if(exitV157?.phase==='playing')exitV157=advanceXenoTrialsOutroV155(exitV157,dt*1000);
         else if(terminalV156?.phase==='playing'){
           terminalV156=advanceXenoTrialsOutroV155(terminalV156,dt*1000);
@@ -1088,7 +1091,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
           }
         } else if (!exitV157 && terminalV156?.phase === 'complete' && !finisherPendingV207()) {
           exitV157 = createXenoTrialsExitV157(match, terminalV156, cameraView, false, landingV157, practiceV207 ? undefined : images);
-        } else if(!outroV155&&!terminalV156&&landingV157?.phase==='complete'&&!exitV157){
+        } else if (!outroV155 && !terminalV156 && landingV157?.phase === 'complete' && !exitV157 && !finisherPendingV207()) {
           exitV157=createXenoTrialsExitV157(match,null,cameraView,false,landingV157);
         }
       }
@@ -1132,7 +1135,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
         terminalV156 = createXenoTrialsTerminalV156(match, 'draw', reducedMotion, null, images);
         landingV157 = createXenoTrialsLandingV157(match, reducedMotion, images);
         if (!practiceV207 || practiceV207.allowsFinisherV221())
-          finisherV207 = createXenoTrialsFinisherV207(match, images, reducedMotion, true);
+          finisherV207 = createXenoTrialsFinisherV207(match, images, reducedMotion, true, landingV157);
         tauntV156 = null; frameDelta = 0; clearInputs();
       }
       const roundEnded = beforePhase === 'active' && match.phase === 'round-over';

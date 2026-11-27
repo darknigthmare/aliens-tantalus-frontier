@@ -2,7 +2,7 @@ import { getXenoTrialsAnimationCoverageV197 } from './xeno-trials-animation-cove
 import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsRigV199, getXenoTrialsRuntimeArticulatedRig, getXenoTrialsRuntimeDefenseRig } from './xeno-trials-rig-v154.js';
 import { getXenoTrialsActionAtlasV199, getXenoTrialsRuntimeActionAtlases } from './xeno-trials-action-atlas-v199.js';
-import { getXenoTrialsGroundedPaintedActionV222 } from './xeno-trials-poses-v209.js';
+import { getXenoTrialsGroundedPaintedActionsV223 } from './xeno-trials-poses-v209.js';
 
 const historicalCache = new Map(), runtimeCache = new Map();
 
@@ -17,14 +17,16 @@ function getCoverage(value, cache, runtime) {
   const base = getXenoTrialsAnimationCoverageV197(value);
   if (!base) return null;
   if (cache.has(base.id)) return cache.get(base.id);
-  const fighter = getXenoTrialsFighterV96(base.id), art = getXenoTrialsArtV96(base.id);
+  const fighter = getXenoTrialsFighterV96(base.id);
+  const variant = runtime ? fighter?.variants?.[0] ?? null : null;
+  const art = getXenoTrialsArtV96(base.id, variant);
   const atlases = runtime ? getXenoTrialsRuntimeActionAtlases(fighter, art)
     : [getXenoTrialsActionAtlasV199(fighter, art)].filter(Boolean);
   const sourceRig = (runtime ? getXenoTrialsRuntimeArticulatedRig : getXenoTrialsRigV199)(fighter, art);
   const rig = sourceRig?.presentationRevision >= 199 ? sourceRig : null;
   const defense = runtime && getXenoTrialsRuntimeDefenseRig(fighter, art);
-  const paintedAction = runtime && getXenoTrialsGroundedPaintedActionV222(fighter, art);
-  if (!atlases.length && !rig && !defense && !paintedAction) return base;
+  const paintedActions = runtime ? getXenoTrialsGroundedPaintedActionsV223({ ...fighter, variant }, art) : [];
+  if (!atlases.length && !rig && !defense && !paintedActions.length) return base;
   const states = { ...base.states };
 
   function admit(action, id, path, renderKind, frameIds, limitations, revision = 199, paths = null) {
@@ -56,7 +58,7 @@ function getCoverage(value, cache, runtime) {
     for (const action of ['light', 'heavy', 'special']) admit(action, rig.id, rig.path, 'mesh', ['recovery'],
       ['native-grounded-recovery-only', 'source-bound-mesh'], rig.presentationRevision);
   }
-  if (paintedAction) admit(paintedAction.action, paintedAction.id, paintedAction.paths[0], 'drawn',
+  for (const paintedAction of paintedActions) admit(paintedAction.action, paintedAction.id, paintedAction.paths[0], 'drawn',
     paintedAction.frames.filter(Boolean).map(frame => frame.phase),
     ['grounded-only', 'native-attack-windows', ...paintedAction.limitations], paintedAction.revision, paintedAction.paths);
   if (defense) {
@@ -67,7 +69,8 @@ function getCoverage(value, cache, runtime) {
   const drawnStates = Object.freeze(Object.keys(states).filter(action => states[action].renderKind === 'drawn'));
   const meshStates = Object.freeze(Object.keys(states).filter(action => states[action].renderKind === 'mesh'));
   const hasDrawnGestures = drawnStates.some(action => action !== 'idle');
-  const revision = Math.max(199, rig?.presentationRevision ?? 0, defense?.defenseRevision ?? 0, paintedAction?.revision ?? 0,
+  const revision = Math.max(199, rig?.presentationRevision ?? 0, defense?.defenseRevision ?? 0,
+    ...paintedActions.map(action => action.revision),
     ...atlases.filter(atlas => atlas.revision >= 201).map(atlas => atlas.revision));
   const result = Object.freeze({ ...base, states: Object.freeze(states), drawnStates, meshStates, hasDrawnGestures,
     playerLabel: hasDrawnGestures ? 'Gestes dessinés' : 'Gestes articulés',

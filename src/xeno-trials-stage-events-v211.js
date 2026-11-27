@@ -1,7 +1,7 @@
 import { getXenoTrialsHordeGateCueV213, getXenoTrialsHordeMinigameV213 } from './xeno-trials-horde-minigames-v213.js';
 import { getXenoTrialsReinforcementV201 } from './xeno-trials-reinforcements-v201.js';
 import { getXenoTrialsBossStageV179 } from './xeno-trials-boss-stages-v179.js';
-import { getXenoTrialsGantryConvoyV222, getXenoTrialsHangarBypassV221 } from './xeno-trials-operations-v188.js';
+import { getXenoTrialsGantryConvoyV222, getXenoTrialsGroundingDoorV223, getXenoTrialsHangarBypassV221 } from './xeno-trials-operations-v188.js';
 
 // The V146 proposed rows map to the stage that now represents each room.
 // These are scene fixtures drawn behind the fight, not colliders or hazards.
@@ -139,6 +139,7 @@ export function createXenoTrialsStageEventsV211(stageId, match, arena) {
     const gates = directedGates ? getDirectedGates(minigame, match, phase, opening, reducedMotion) : null;
     const bypass = getXenoTrialsHangarBypassV221(match);
     const gantry = getXenoTrialsGantryConvoyV222(match);
+    const grounding = getXenoTrialsGroundingDoorV223(match);
     if (gates) opening = Math.max(gates.left.opening, gates.right.opening);
     if (reducedMotion && phase === 'introduction') opening = 0;
     return {
@@ -146,6 +147,7 @@ export function createXenoTrialsStageEventsV211(stageId, match, arena) {
       ...(gates ? { gates } : {}),
       ...(bypass ? { hangarBypassV221: bypass } : {}),
       ...(gantry ? { logisticsGantriesV222: gantry.gantries } : {}),
+      ...(grounding ? { reactorGroundingV223: grounding } : {}),
       reducedMotion, affectsCombat: false,
       time: moving ? observedTick / 120 + (match.config.seed % 41) * .07 : 0,
       degraded: [...degraded]
@@ -285,6 +287,25 @@ function drawLogisticsGantry(ctx, gate, reducedMotion, x, y) {
   for (let index = 0; index < lamps; index++) ctx.fillRect(x - 13 + index * 10, top + 3, 6, 3);
 }
 
+function drawReactorShutter(ctx, gate, reducedMotion, x, y) {
+  const left = x - 66, top = y - 82;
+  const opening = reducedMotion && gate.phase === 'opening' ? 0 : gate.opening;
+  const color = gate.phase === 'waiting' ? '#be8077' : gate.phase === 'open' ? '#a4d6bc' : '#d6b278';
+  ctx.globalAlpha = .63;
+  ctx.fillStyle = '#252a31';
+  ctx.fillRect(left, top, 132, 82);
+  ctx.strokeStyle = '#796952';
+  ctx.strokeRect(left, top, 132, 82);
+  const span = 56 * (1 - opening);
+  ctx.fillStyle = '#585645';
+  ctx.fillRect(left + 10, top + 7, span, 68);
+  ctx.fillRect(left + 122 - span, top + 7, span, 68);
+  ctx.globalAlpha = .77;
+  ctx.fillStyle = color;
+  const lamps = gate.phase === 'waiting' ? 1 : gate.phase === 'open' ? 3 : 2;
+  for (let index = 0; index < lamps; index++) ctx.fillRect(x - 15 + index * 12, top - 7, 6, 3);
+}
+
 export function drawXenoTrialsStageEventsV211(ctx, stage, camera, view) {
   if (!view || view.stageId !== stage.id) return;
   const floor = clamp(camera.floor, 180, 530);
@@ -297,6 +318,8 @@ export function drawXenoTrialsStageEventsV211(ctx, stage, camera, view) {
   if (view.hangarBypassV221) drawHangarBulkhead(ctx, view, stage, 737 - (camera.center - 500) * .26, floor - 52);
   view.logisticsGantriesV222?.forEach((gate, index) =>
     drawLogisticsGantry(ctx, gate, view.reducedMotion, 367 + index * 367 - (camera.center - 500) * .24, floor - 52));
+  if (view.reactorGroundingV223) drawReactorShutter(ctx, view.reactorGroundingV223, view.reducedMotion,
+    701 - (camera.center - 500) * .22, floor - 56);
   drawFixture(ctx, view, stage, 105 - offset, floor - 30, 'left');
   drawFixture(ctx, view, stage, 895 - offset, floor - 30, 'right');
   ctx.restore();

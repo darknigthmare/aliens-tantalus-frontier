@@ -2,7 +2,9 @@ import { ENEMY_DISPLAY_ALPHA_V110 } from './enemy-display-alpha-v110.js';
 
 const width = 1774, height = 887;
 const artPath = '/assets/user/castes-v87/game_avp_capcom_arachnoid.png';
-const poseFrame = ([phase, path, bounds, rootX]) => Object.freeze({ phase, path, bounds: Object.freeze(bounds), rootX });
+const poseFrame = ([phase, path, bounds, rootX, textureWidth, textureHeight]) => Object.freeze({
+  phase, path, bounds: Object.freeze(bounds), rootX, textureWidth, textureHeight
+});
 const heavyFrames = [
   ['windup', '/assets/openai/xeno-trials-v209/characters/arachnoid-heavy-windup.png', [138, 18, 1658, 872], 1004],
   ['contact', '/assets/openai/xeno-trials-v209/characters/arachnoid-heavy-impact.png', [124, 15, 1675, 834], 986],
@@ -32,12 +34,23 @@ const gorillaFrames = Object.freeze([
   null,
   poseFrame(['recovery', '/assets/openai/xeno-trials-v209/characters/gorilla-special-recovery.png', [44, 116, 1194, 1033], 794])
 ]);
+const arachnoidLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/arachnoid-light-windup.png', [148, 25, 1368, 1006], 865],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/arachnoid-light-impact.png', [83, 119, 1700, 829], 1101, 1774, 887],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/arachnoid-light-recovery.png', [219, 19, 1302, 1009], 898]
+].map(poseFrame));
+const pantherLightFrames = Object.freeze([
+  poseFrame(['windup', '/assets/openai/xeno-trials-v209/characters/panther-light-windup.png', [109, 45, 1341, 932], 716]),
+  null,
+  poseFrame(['recovery', '/assets/openai/xeno-trials-v209/characters/panther-light-recovery.png', [168, 32, 1428, 982], 801])
+]);
+const pantherSource = ['pose-v94-kenner-panther', '/assets/openai/sprites/static-enemy-v94/kenner-panther-neca.png',
+  '575f23d532b10eb34f2dd0df9e8a860e1511cdecf4e7ab20eb5fa7742acc549c', 1310, 1201];
 
-const groundedActions = new Map([
+const groundedActions = Object.freeze([
   ['panther', {
     id: 'panther-pounce', action: 'special', revision: 221, animation: 'three-painted-panther-pounce-poses',
-    source: ['pose-v94-kenner-panther', '/assets/openai/sprites/static-enemy-v94/kenner-panther-neca.png',
-      '575f23d532b10eb34f2dd0df9e8a860e1511cdecf4e7ab20eb5fa7742acc549c', 1310, 1201],
+    source: pantherSource,
     // The neutral shoulder-to-hip and shoulder-to-skull spans are about 77% as long in source pixels.
     textureWidth: 1536, textureHeight: 1024, density: .77, frames: pantherFrames, limitations: ['three-painted-poses']
   }],
@@ -52,24 +65,43 @@ const groundedActions = new Map([
     source: ['pose-v94-kenner-gorilla', '/assets/openai/sprites/static-enemy-v94/kenner-gorilla-neca.png',
       'c91b539cebeb76fd69ac39ef5c9966166584a45f8a51a064c09a7306d54f4685', 1254, 1254],
     textureWidth: 1254, textureHeight: 1254, density: 1, frames: gorillaFrames, limitations: ['windup-and-recovery-only']
+  }],
+  ['arachnoid', {
+    id: 'arachnoid-light', action: 'light', revision: 223, animation: 'painted-arachnoid-light-poses', variant: 'grey',
+    source: ['castes-game_avp_capcom_arachnoid', artPath,
+      '84f47e12acfa88b5658a736863e4ad8b61a9b43bfa5cb61a34abe87649b2e3ee', 1536, 1024],
+    // Keep the approximately 34-pixel shoulder-to-neutral-pivot offset in each plate.
+    textureWidth: 1536, textureHeight: 1024, density: 1, frames: arachnoidLightFrames, limitations: ['grey-only', 'three-painted-poses']
+  }],
+  ['panther', {
+    id: 'panther-light', action: 'light', revision: 223, animation: 'painted-panther-light-poses', source: pantherSource,
+    // The neutral shoulder-to-skull span is about 80% of the span in these light keys.
+    textureWidth: 1536, textureHeight: 1024, density: .80, frames: pantherLightFrames, limitations: ['windup-and-recovery-only']
   }]
-].map(([id, entry]) => [id, Object.freeze({ ...entry, source: Object.freeze(entry.source), limitations: Object.freeze(entry.limitations),
-  paths: Object.freeze(entry.frames.filter(Boolean).map(frame => frame.path)) })]));
+].map(([fighterId, entry]) => Object.freeze({ ...entry, fighterId, source: Object.freeze(entry.source), limitations: Object.freeze(entry.limitations),
+  paths: Object.freeze(entry.frames.filter(Boolean).map(frame => frame.path)) })));
 const heavyPaths = Object.freeze(heavyFrames.map(frame => frame.path));
 const paths = Object.freeze([...heavyPaths, groundedPounce.path]);
-const allPaths = Object.freeze([...paths, ...[...groundedActions.values()].flatMap(entry => entry.paths)]);
+const allPaths = Object.freeze([...paths, ...groundedActions.flatMap(entry => entry.paths)]);
 const supported = (fighter, art) => fighter?.id === 'arachnoid' && fighter.variant !== 'purple'
   && art?.path === artPath && art.sourceFacing === 1;
 const pounceSupported = (fighter, art) => fighter.variant === 'grey' && art.visualStateV95 === 'grey'
   && art.profileId === 'castes-game_avp_capcom_arachnoid' && art.sourceHeight === 1024 && art.sourceWidth === 1536;
 
-export function getXenoTrialsGroundedPaintedActionV222(fighter, art) {
-  const entry = groundedActions.get(fighter?.id);
-  if (!entry || fighter.variant != null || !art) return null;
-  const [profileId, path, sha256, width, height] = entry.source;
+export function getXenoTrialsGroundedPaintedActionsV223(fighter, art) {
+  if (!fighter || !art) return [];
   const sourceHash = art.sha256 ?? ENEMY_DISPLAY_ALPHA_V110[art.path]?.sha256;
-  return art.profileId === profileId && art.path === path && sourceHash === sha256 && art.sourceFacing === 1
-    && art.sourceWidth === width && art.sourceHeight === height ? entry : null;
+  return groundedActions.filter(entry => {
+    if (entry.fighterId !== fighter.id || (entry.variant ?? null) !== (fighter.variant ?? null)
+      || entry.variant && entry.variant !== art.visualStateV95) return false;
+    const [profileId, path, sha256, width, height] = entry.source;
+    return art.profileId === profileId && art.path === path && sourceHash === sha256 && art.sourceFacing === 1
+      && art.sourceWidth === width && art.sourceHeight === height;
+  });
+}
+
+export function getXenoTrialsGroundedPaintedActionV222(fighter, art) {
+  return getXenoTrialsGroundedPaintedActionsV223(fighter, art)[0] ?? null;
 }
 
 export function getXenoTrialsPantherPounceFramesV221(fighter, art) {
@@ -78,10 +110,9 @@ export function getXenoTrialsPantherPounceFramesV221(fighter, art) {
 
 export function getXenoTrialsPoseAssetsV209(fighter, art) {
   if (!fighter) return allPaths;
-  const action = getXenoTrialsGroundedPaintedActionV222(fighter, art);
-  if (action) return action.paths;
-  if (!supported(fighter, art)) return [];
-  return pounceSupported(fighter, art) ? paths : heavyPaths;
+  const authoredPaths = getXenoTrialsGroundedPaintedActionsV223(fighter, art).flatMap(action => action.paths);
+  const legacyPaths = supported(fighter, art) ? (pounceSupported(fighter, art) ? paths : heavyPaths) : [];
+  return Object.freeze([...legacyPaths, ...authoredPaths]);
 }
 
 export function drawXenoTrialsPoseV209(ctx, fighter, art, images, options) {
@@ -92,8 +123,7 @@ export function drawXenoTrialsPoseV209(ctx, fighter, art, images, options) {
     || ![groundedHeight, x, ground, spec?.startup, spec?.active, spec?.recovery].every(Number.isFinite) || groundedHeight <= 0) return null;
   const activeEnd = spec.startup + spec.active;
   if (attack.age >= activeEnd + spec.recovery) return null;
-  const action = getXenoTrialsGroundedPaintedActionV222(fighter, art);
-  const authored = action?.action === attack.kind ? action : null;
+  const authored = getXenoTrialsGroundedPaintedActionsV223(fighter, art).find(action => action.action === attack.kind);
   const arachnoid = supported(fighter, art);
   const pounce = arachnoid && attack.kind === 'special' && pounceSupported(fighter, art)
     && attack.age >= spec.startup && attack.age < activeEnd;
@@ -102,8 +132,8 @@ export function drawXenoTrialsPoseV209(ctx, fighter, art, images, options) {
   const frame = authored ? authored.frames[phase] : pounce ? groundedPounce : heavyFrames[phase];
   if (!frame) return null;
   const image = images.get(frame.path);
-  if (!image || image.complete === false || image.naturalWidth !== (authored?.textureWidth ?? width)
-    || image.naturalHeight !== (authored?.textureHeight ?? height)) return null;
+  if (!image || image.complete === false || image.naturalWidth !== (frame.textureWidth ?? authored?.textureWidth ?? width)
+    || image.naturalHeight !== (frame.textureHeight ?? authored?.textureHeight ?? height)) return null;
   const scale = groundedHeight / (pounce || authored ? art.sourceHeight : 834) * (authored?.density ?? 1);
   const [left, top, right, bottom] = frame.bounds;
   const w = right - left, h = bottom - top;

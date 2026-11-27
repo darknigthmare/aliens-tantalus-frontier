@@ -42,13 +42,15 @@ export async function verifyXenoTrialsArtifactV207(root) {
   assert.deepEqual(shipped.filter(row => copied.has(row.path)), baseInfo.files.filter(row => copied.has(row.path)), 'Shared Trials files differ from the base release.');
 
   const worker = await readFile(join(output, 'sw.js'), 'utf8');
-  assert.equal(worker, xenoTrialsWorkerV207(await readFile(join(base, 'sw.js'), 'utf8'), info.cacheName, plan.shell));
+  assert.equal(worker, xenoTrialsWorkerV207(await readFile(join(base, 'sw.js'), 'utf8'), info.cacheName, plan.shell, plan.duelMedia));
   const origin = 'https://xeno-trials.example';
   const context = vm.createContext({ self: { addEventListener() {}, location: { origin } }, URL });
-  vm.runInContext(worker + ';globalThis.checked={CACHE,SHELL,cacheableRequestV143};', context);
+  vm.runInContext(worker + ';globalThis.checked={CACHE,SHELL,DUEL_MEDIA_V223,cacheableRequestV143};', context);
   assert.equal(context.checked.CACHE, info.cacheName);
   assert.deepEqual(Array.from(context.checked.SHELL), plan.shell);
   const paths = new Set(shipped.map(row => '/' + row.path));
+  const fingerprints = new Map(shipped.map(row => ['/' + row.path, row.sha256]));
+  for (const [path, hash] of context.checked.DUEL_MEDIA_V223) assert.equal(fingerprints.get(path), hash, path);
   const offlinePaths = new Set(context.checked.SHELL);
   for (const atlas of Object.values(XENO_TRIALS_MENU_ATLASES_V222)) {
     assert.ok(offlinePaths.has(atlas.path), `Missing offline menu atlas: ${atlas.path}`);
