@@ -1,0 +1,103 @@
+{
+  "rooms": [
+    "A5_52",
+    "A5_53",
+    "A5_54",
+    "A5_55"
+  ],
+  "name": "M-4 / MEMBRANE MIMÉTIQUE",
+  "description": "Interprétation de gameplay originale, sans propriété canonique attribuée aux recherches de production.",
+  "solution": [
+    1,
+    2,
+    0
+  ],
+  "dialLabels": [
+    [
+      "FERMÉ",
+      "BAS",
+      "HAUT"
+    ],
+    [
+      "NEUTRE",
+      "DIRECT",
+      "INVERSE"
+    ],
+    [
+      "ISOLÉ",
+      "RETOUR",
+      "PURGE"
+    ]
+  ],
+  "cells": [
+    {
+      "id": "CELL_1",
+      "room": "A5_54",
+      "x": 550,
+      "z": 0.31,
+      "w": 70,
+      "h": 105,
+      "depth": 0.12,
+      "triggerRadius": 145,
+      "duration": 1.6,
+      "hp": 55,
+      "enemy": "A5E31",
+      "gate": "bio_hatch_CELL_1"
+    },
+    {
+      "id": "CELL_2",
+      "room": "A5_54",
+      "x": 1060,
+      "z": 0.28,
+      "w": 70,
+      "h": 105,
+      "depth": 0.12,
+      "triggerRadius": 145,
+      "duration": 1.6,
+      "hp": 55,
+      "enemy": "A5E32",
+      "gate": "bio_hatch_CELL_2"
+    },
+    {
+      "id": "CELL_3",
+      "room": "A5_55",
+      "x": 1210,
+      "z": 0.68,
+      "w": 70,
+      "h": 105,
+      "depth": 0.12,
+      "triggerRadius": 145,
+      "duration": 1.6,
+      "hp": 55,
+      "enemy": "A5E33",
+      "gate": "bio_hatch_CELL_3"
+    }
+  ],
+  "milestones": [
+    {
+      "id": "analysis",
+      "label": "Comprendre les essais",
+      "room": "A5_52"
+    },
+    {
+      "id": "calibrated",
+      "label": "Calibrer et revêtir le M-4",
+      "room": "A5_53"
+    },
+    {
+      "id": "trial",
+      "label": "Récupérer le relevé d’épreuve",
+      "room": "A5_54"
+    },
+    {
+      "id": "archive",
+      "label": "Copier les témoins nominatifs",
+      "room": "A5_55"
+    },
+    {
+      "id": "purged",
+      "label": "Détruire les matrices de culture",
+      "room": "A5_55"
+    }
+  ]
+}

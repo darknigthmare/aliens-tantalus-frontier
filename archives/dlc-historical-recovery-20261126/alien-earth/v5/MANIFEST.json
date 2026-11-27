@@ -1,0 +1,30 @@
+{
+  "archiveId": "alien-earth/v5",
+  "originalFilename": "ALIEN_EARTH_DLC_V5_MODULE_COMPLET.zip",
+  "bytes": 19392814,
+  "sha256": "1df3294a24538ad636c8245e4b15353df97a469516ae14f54f74f3b437afa8c1",
+  "wholeArchiveGitBlobSha1": "e54015928b4afd7fa00e636361a6df586d4a9298",
+  "format": "zip",
+  "preservation": "exact-original-bytes",
+  "memberCount": 105,
+  "pngOccurrences": 37,
+  "zipCrc32": "verified",
+  "parts": [
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien-earth/v5/ALIEN_EARTH_DLC_V5_MODULE_COMPLET.zip.part001",
+      "offset": 0,
+      "bytes": 10485760,
+      "sha256": "148db2a969fc1a6dc66350b81cd699f67f8e15cfe3815009a4576f354a8769d0",
+      "gitBlobSha1": "8846cca5e17ab24955f22b5835f5a7dab4c7d442"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien-earth/v5/ALIEN_EARTH_DLC_V5_MODULE_COMPLET.zip.part002",
+      "offset": 10485760,
+      "bytes": 8907054,
+      "sha256": "bb57c7881d12d4b5259021216e8651262821b65a763ce644da22a5d56782678c",
+      "gitBlobSha1": "3d63fd4925aae7466913306f285fdd24cca46da4"
+    }
+  ],
+  "contents": "archives/dlc-historical-recovery-20261126/alien-earth/v5/ZIP_CONTENTS.json",
+  "manifest": "archives/dlc-historical-recovery-20261126/alien-earth/v5/MANIFEST.json"
+}

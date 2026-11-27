@@ -1,0 +1,90 @@
+{
+  "rooms": [
+    "A5_48",
+    "A5_49",
+    "A5_50",
+    "A5_51"
+  ],
+  "edges": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06"
+  ],
+  "dock": {
+    "room": "A5_48",
+    "x": 435,
+    "z": 0.48
+  },
+  "rig": {
+    "id": "P17",
+    "room": "A5_48",
+    "x": 435,
+    "z": 0.48,
+    "hp": 140,
+    "energy": 100,
+    "face": 1
+  },
+  "cargo": [
+    {
+      "id": "PF09",
+      "label": "Palette PF-09",
+      "room": "A5_49",
+      "x": 875,
+      "z": 0.49,
+      "w": 150,
+      "h": 96,
+      "depth": 0.36,
+      "mass": "780 kg",
+      "target": {
+        "room": "A5_49",
+        "x": 1300,
+        "z": 0.74,
+        "rx": 92,
+        "rz": 0.14
+      }
+    },
+    {
+      "id": "CP2",
+      "label": "Contrepoids CP-2",
+      "room": "A5_50",
+      "x": 810,
+      "z": 0.54,
+      "w": 110,
+      "h": 88,
+      "depth": 0.25,
+      "mass": "520 kg",
+      "target": {
+        "room": "A5_51",
+        "x": 1070,
+        "z": 0.67,
+        "rx": 82,
+        "rz": 0.14
+      }
+    }
+  ],
+  "milestones": [
+    {
+      "id": "licensed",
+      "label": "Déconsigner le P-17",
+      "room": "A5_48"
+    },
+    {
+      "id": "clearance",
+      "label": "Ranger PF-09 dans son aire",
+      "room": "A5_49"
+    },
+    {
+      "id": "counterweight",
+      "label": "Poser CP-2 sur la balance",
+      "room": "A5_51"
+    },
+    {
+      "id": "aux",
+      "label": "Alimenter les treuils de secours",
+      "room": "A5_51"
+    }
+  ]
+}

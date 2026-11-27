@@ -1,0 +1,30 @@
+{
+  "archiveId": "alien-blackout/v0.3.0",
+  "originalFilename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.3.0.zip",
+  "bytes": 15692851,
+  "sha256": "d6f9e904153ce91c31324897f77a1a7df93db92f88ec5db64675df8c44e08fc8",
+  "wholeArchiveGitBlobSha1": "d32f8893b6a36f0e73b5bc44ec15a86ac36a969e",
+  "format": "zip",
+  "preservation": "exact-original-bytes",
+  "memberCount": 220,
+  "pngOccurrences": 0,
+  "zipCrc32": "verified",
+  "parts": [
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien-blackout/v0.3.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.3.0.zip.part001",
+      "offset": 0,
+      "bytes": 10485760,
+      "sha256": "2be8d3269c3313b10465ec6e8a5f6ef2cef8e5c7aa4ff0b18b7a1e48ab6e4b69",
+      "gitBlobSha1": "b41616df9fc7565a99bb3c55e3415bace1b9ebcb"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien-blackout/v0.3.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.3.0.zip.part002",
+      "offset": 10485760,
+      "bytes": 5207091,
+      "sha256": "713f10cccae6d5a7090e07bd00e9548cfa68d7af83402f9011f0ca025d2d4b3c",
+      "gitBlobSha1": "8a1726d962270f2df05942f4d556c3a809db5276"
+    }
+  ],
+  "contents": "archives/dlc-historical-recovery-20261126/alien-blackout/v0.3.0/ZIP_CONTENTS.json",
+  "manifest": "archives/dlc-historical-recovery-20261126/alien-blackout/v0.3.0/MANIFEST.json"
+}
