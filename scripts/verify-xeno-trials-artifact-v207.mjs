@@ -37,12 +37,23 @@ export async function verifyXenoTrialsArtifactV207(root) {
 
   const worker = await readFile(join(output, 'sw.js'), 'utf8');
   assert.equal(worker, xenoTrialsWorkerV207(await readFile(join(base, 'sw.js'), 'utf8'), info.cacheName, plan.shell));
-  const context = vm.createContext({ self: { addEventListener() {} } });
-  vm.runInContext(worker + ';globalThis.checked={CACHE,SHELL};', context);
+  const origin = 'https://xeno-trials.example';
+  const context = vm.createContext({ self: { addEventListener() {}, location: { origin } }, URL });
+  vm.runInContext(worker + ';globalThis.checked={CACHE,SHELL,cacheableRequestV143};', context);
   assert.equal(context.checked.CACHE, info.cacheName);
   assert.deepEqual(Array.from(context.checked.SHELL), plan.shell);
   const paths = new Set(shipped.map(row => '/' + row.path));
-  for (const path of plan.shell) assert.ok(path === '/' || paths.has(path), `Missing standalone offline resource: ${path}`);
+  for (const path of plan.shell) {
+    const url = new URL(path, origin);
+    assert.ok(path === '/' || paths.has(url.pathname), `Missing standalone offline resource: ${path}`);
+    const request = new Request(url);
+    assert.equal(context.checked.cacheableRequestV143(request), true, path);
+    if (url.search) {
+      assert.match(path, /^\/assets\/audio\/(?:sfx|music)\/[a-z0-9_-]+\.[a-z]+\?v=[a-f0-9]{16}$/);
+      url.searchParams.set('unexpected', '1');
+      assert.equal(context.checked.cacheableRequestV143(new Request(url)), false, 'Unlisted query cannot enter the Trials cache.');
+    }
+  }
 
   const manifest = JSON.parse(await readFile(join(output, 'xeno-trials.webmanifest'), 'utf8'));
   assert.equal(manifest.name, 'Xeno Trials');

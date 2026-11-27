@@ -6,6 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { fileManifestV143, stampXenoTrialsHtmlV207 } from './build-release-v143.mjs';
 import { resolveSafeBuildOutput, resolveSafeTrialsBuildOutput } from './build-output-guard.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { normalizeAudioManifestV77 } from '../src/audio-assets-v77.js';
 import { XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_STAGES_V96, getXenoTrialsArtV96 } from '../src/xeno-trials-data-v96.js';
 import { normalizeXenoTrialsConfigV96, XENO_TRIALS_STARTERS_V96 } from '../src/xeno-trials-progress-v96.js';
 import { getXenoTrialsStageAssetsV180 } from '../src/xeno-trials-stage-depth-v180.js';
@@ -74,9 +75,9 @@ export async function planXenoTrialsBuildV207(base, info) {
     }
   }
   const audioManifest = required('assets/audio/manifest.json');
-  const audio = JSON.parse(await readFile(join(base, audioManifest), 'utf8'));
-  const audioAssets = [audioManifest, ...Object.values(audio.tracks).flatMap(tracks => Object.values(tracks)
-    .flatMap(track => track.sources.map(source => required(source.path.slice(1)))))];
+  const audio = normalizeAudioManifestV77(JSON.parse(await readFile(join(base, audioManifest), 'utf8')));
+  const audioSources = Object.values(audio.tracks).flatMap(tracks => Object.values(tracks).flatMap(track => track.sources));
+  const audioAssets = [audioManifest, ...audioSources.map(source => required(source.path.slice(1)))];
   const assets = new Set([...bootstrapArt, ...audioAssets]);
   for (const path of modules) {
     assert.notEqual(path, 'src/app.js', 'The Trials package cannot boot the campaign application.');
@@ -108,7 +109,10 @@ export async function planXenoTrialsBuildV207(base, info) {
     ...fighterAssets(starter.opponentId, starter.opponentVariant), ...stageAssets(starterStage),
     ...XENO_TRIALS_STARTERS_V96.map(id => getXenoTrialsArtV96(id).path)].map(path => path.slice(1));
   const copyPaths = [...new Set([...modules, ...css, ...assets, required('LICENSE_NOTICE.md')])].sort();
-  const shell = ['/', ...[...new Set([manifestPath, ...modules, ...css, ...bootstrapArt, ...audioAssets, ...starterArt])].sort().map(path => '/' + path)];
+  const shellPaths = [manifestPath, audioManifest, ...modules, ...css, ...bootstrapArt, ...starterArt].map(path => '/' + path);
+  // AudioAssetBankV77 uses the stamped sound hash in the request URL.
+  const audioUrls = audioSources.map(({ path, sha256 }) => `${path}?v=${sha256.slice(0, 16)}`);
+  const shell = ['/', ...[...new Set([...shellPaths, ...audioUrls])].sort()];
   return { html: pageWithWorker(html), copyPaths, shell, fighters: XENO_TRIALS_FIGHTERS_V96.length, stages: XENO_TRIALS_STAGES_V96.length };
 }
 
@@ -119,9 +123,28 @@ export function xenoTrialsWorkerV207(baseWorker, cacheName, shell) {
   assert.match(baseWorker, cacheAnchor);
   assert.match(baseWorker, shellAnchor);
   assert.ok(baseWorker.includes(cleanupAnchor), 'Unrecognized worker cache cleanup.');
-  return baseWorker.replace(cacheAnchor, `const CACHE = '${cacheName}';`)
+  let worker = baseWorker.replace(cacheAnchor, `const CACHE = '${cacheName}';`)
     .replace(shellAnchor, `const SHELL = Object.freeze(${JSON.stringify(shell, null, 2)});`)
     .replace(cleanupAnchor, "key.startsWith('atf-trials-')");
+  // Versioned URLs are available offline only when the exact query was stamped
+  // into this Trials shell. Keep all other query-bearing requests network-only.
+  const versionedAudio = [
+    ['const SHELL_PATHS = new Set(SHELL);', `const SHELL_PATHS = new Set(SHELL);
+function shellPathV207(request) {
+  const url = new URL(request.url);
+  return url.pathname + url.search;
+}`],
+    ['|| url.search || url.username || url.password', '|| (url.search && !SHELL_PATHS.has(url.pathname + url.search)) || url.username || url.password'],
+    ['if (SHELL_PATHS.has(path)) return true;', 'if (SHELL_PATHS.has(path + url.search)) return true;'],
+    ['!SHELL_PATHS.has(new URL(key.url).pathname)', '!SHELL_PATHS.has(shellPathV207(key))'],
+    ['    const path = new URL(request.url).pathname;\n', ''],
+    ['if (SHELL_PATHS.has(path)) {', 'if (SHELL_PATHS.has(shellPathV207(request))) {']
+  ];
+  for (const [anchor, replacement] of versionedAudio) {
+    assert.equal(worker.split(anchor).length, 2, `Unrecognized dedicated worker anchor: ${anchor}`);
+    worker = worker.replace(anchor, replacement);
+  }
+  return worker;
 }
 
 export async function buildXenoTrialsV207(root) {

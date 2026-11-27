@@ -471,7 +471,7 @@ export const XENO_STANDALONE_NEW_INPUTS_V207 = freeze({
   },
   "scripts/build-xeno-trials-v207.mjs": {
     "kind": "tooling",
-    "sha256": "144b1fc37f127e0aa33bb0300df1d7957a6a715252477df60d4c85cd44a67efa"
+    "sha256": "8f761f53c4cac71f56af764785a22f9daf3f6613ed8899d7fe04cd8f7e01e927"
   },
   "scripts/verify-xeno-standalone-audit-v207.mjs": {
     "kind": "tooling",
@@ -479,7 +479,7 @@ export const XENO_STANDALONE_NEW_INPUTS_V207 = freeze({
   },
   "scripts/verify-xeno-trials-artifact-v207.mjs": {
     "kind": "tooling",
-    "sha256": "8460c662ca3e8dfbc3556ff0c3d003aa2f9167b738375e3ca95024a52df1e16b"
+    "sha256": "8aa22943421b5283783ed5310ce3012141c4b287f55d2055daa95ca09c26a013"
   },
   "scripts/verify-xeno-trials-finishers-v207.mjs": {
     "kind": "tooling",
