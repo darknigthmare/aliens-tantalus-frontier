@@ -26,6 +26,8 @@ const trialLabels = new Map([
   ['Clavier', 'Keyboard'],
   ['Manette', 'Gamepad'],
   ['Tactile', 'Touch'],
+  ['Z / W / ↑ / ESPACE', 'Z / W / ↑ / SPACE'],
+  ['MAJ', 'SHIFT'],
   ['← RETOUR À LA PAUSE', '← BACK TO PAUSE'],
   ['T pour défier, F pour une finition disponible, P ou Échap pour la pause.', 'T to taunt, F for an available finisher, P or Esc to pause.'],
   ['Touchez ou maintenez une zone directement dans l’arène. Cette carte reprend la position des zones à l’écran.', 'Tap or hold a zone directly in the arena. This map shows where each zone is on the screen.'],

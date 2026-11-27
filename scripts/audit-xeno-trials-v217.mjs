@@ -183,7 +183,7 @@ export const XENO_TRIALS_SUCCESSORS_V217 = freeze({
   },
   "src/i18n-auto-v185.js": {
     "kind": "runtime",
-    "sha256": "e0f3f0af50ab2a82a42c3119e8a01e8859475edf704fbf3407721e5fbd86dd26",
+    "sha256": "f11b295cbeaf995f9c11e37eca78582bb83b7225ed2dac59d323977cc3433d66",
     "previousSha256": "44abd301fd7117a71357bf3571db0ce05e71f936728a21cfeeac64638f293e97"
   },
   "src/xeno-trials-ai-v209.js": {
