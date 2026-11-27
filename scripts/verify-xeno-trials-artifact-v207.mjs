@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import vm from 'node:vm';
 import { fileManifestV143, stampXenoTrialsHtmlV207 } from './build-release-v143.mjs';
 import { resolveSafeBuildOutput, resolveSafeTrialsBuildOutput } from './build-output-guard.mjs';
-import { planXenoTrialsBuildV207, xenoTrialsWorkerV207 } from './build-xeno-trials-v207.mjs';
+import { planXenoTrialsBuildV207, xenoTrialsWorkerV207, xenoTrialsCacheName, XENO_TRIALS_BUILD_REVISION } from './build-xeno-trials-v207.mjs';
 
 export async function verifyXenoTrialsArtifactV207(root) {
   const base = resolveSafeBuildOutput(root, process.env.ATF_BUILD_OUTPUT || 'dist');
@@ -17,9 +17,9 @@ export async function verifyXenoTrialsArtifactV207(root) {
   assert.deepEqual(shipped, info.files, 'Standalone files differ from the Trials manifest.');
   assert.equal(createHash('sha256').update(JSON.stringify(shipped)).digest('hex'), info.manifestSha256);
   assert.equal(info.product, 'xeno-trials');
-  assert.equal(info.revision, 207);
+  assert.equal(info.revision, XENO_TRIALS_BUILD_REVISION);
   assert.equal(info.baseManifestSha256, baseInfo.manifestSha256);
-  assert.equal(info.cacheName, `atf-trials-v207-${baseInfo.inputFingerprint.slice(0, 24)}`);
+  assert.equal(info.cacheName, xenoTrialsCacheName(baseInfo.inputFingerprint));
   for (const field of ['version', 'buildId', 'builtAt', 'sourceCommit', 'saveSchema']) assert.equal(info[field], baseInfo[field], field);
 
   const releasePath = 'src/release-info-v143.js';
@@ -60,7 +60,7 @@ export async function verifyXenoTrialsArtifactV207(root) {
   assert.equal(manifest.start_url, '/');
   assert.equal(manifest.scope, '/');
   for (const icon of manifest.icons) assert.ok(paths.has(icon.src), `Missing Trials install icon: ${icon.src}`);
-  return { ok: true, buildId: info.buildId, sourceCommit: info.sourceCommit, fighters: info.fighters, stages: info.stages,
+  return { ok: true, revision: info.revision, buildId: info.buildId, sourceCommit: info.sourceCommit, fighters: info.fighters, stages: info.stages,
     files: shipped.length, bytes: shipped.reduce((sum, file) => sum + file.bytes, 0), shell: plan.shell.length, manifestSha256: info.manifestSha256 };
 }
 

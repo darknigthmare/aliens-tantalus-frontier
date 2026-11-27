@@ -1,4 +1,5 @@
-import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_V207 } from './xeno-trials-practice-v207.js';
+import { normalizeXenoTrialsSandboxV208, XENO_TRIALS_SANDBOX_BEHAVIORS_V208, XENO_TRIALS_SANDBOX_ID_V208 } from './xeno-trials-practice-v208.js';
+import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V208 } from './xeno-trials-practice-v207.js';
 import { usesXenoTrialsIndependentProps } from './xeno-trials-franchise-stage-scenes-v192.js';
 import { renderArbiterTerminalDossierV190 } from './xeno-arbiter-ui-v190.js';
 import { ARBITER_PROGRAMS_V191, ARBITER_HORDE_PROTOCOLS_V191, getArbiterProgramV191 } from './xeno-arbiter-protocols-v191.js';
@@ -9,13 +10,18 @@ import { getXenoTrialsSequenceV155 } from './xeno-trials-sequences-v155.js';
 import { hasXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsSuperV148, getXenoTrialsSuperReadinessV148, getXenoTrialsSuperStatusV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsSignatureV147 } from './xeno-trials-signatures-v147.js';
+import { getXenoTrialsAlternateSignatureV208 } from './xeno-trials-signature-kit-v208.js';
+import { getXenoTrialsParryViewV208 } from './xeno-trials-defense-v208.js';
+import { hasXenoTrialsGroundTraversalV208 } from './xeno-trials-moveset-v207.js';
+import { getXenoTrialsRiposteV208, getXenoTrialsRiposteReadinessV208, getXenoTrialsRiposteStatusV208 } from './xeno-trials-ripostes-v208.js';
 import { XENO_TRIALS_FIGHTERS_V96 as FIGHTERS, XENO_TRIALS_FACTIONS_V96 as FACTIONS,
   XENO_TRIALS_STAGES_V96 as STAGES, getXenoTrialsArtV96 } from './xeno-trials-data-v96.js';
 import { normalizeXenoTrialsProgressV96, getXenoTrialsUnlockCostV96,
   beginXenoTrialsV96, settleXenoTrialsV96, abandonXenoTrialsV96, unlockXenoTrialsFighterV96, renewXenoTrialsContractsV119,
   checkpointXenoTrialsV186, clearXenoTrialsCheckpointV186,
-  checkpointXenoTrialsDuelV197, clearXenoTrialsDuelCheckpointV197, completeXenoTrialsPracticeV207 } from './xeno-trials-progress-v96.js';
+  checkpointXenoTrialsDuelV197, clearXenoTrialsDuelCheckpointV197, completeXenoTrialsPracticeV207, configureXenoTrialsSandboxV208 } from './xeno-trials-progress-v96.js';
 import { createXenoTrialsRuntimeV96 } from './xeno-trials-runtime-v96.js';
+import { getXenoTrialsFinisherCopyV208 } from './xeno-trials-finishers-v208.js';
 import { filterXenoTrialsRosterV97, XENO_TRIALS_SELECTION_FAMILIES_V119 as FAMILIES,
   getXenoTrialsSelectionFamilyV119 } from './xeno-trials-selection-v97.js';
 import { XENO_TRIALS_BRANCHES_V119 as BRANCHES, XENO_TRIALS_CAMPAIGN_V119 as CAMPAIGN,
@@ -97,9 +103,17 @@ export const getXenoTrialsFighterSpecialLabelV147 = fighter => getXenoTrialsSign
   || getXenoTrialsSpecialLabelV96(fighter?.special);
 const controlLabel = { left: 'Aller à gauche', right: 'Aller à droite', jump: 'Sauter', guard: 'Maintenir la garde',
   light: 'Frappe rapide', heavy: 'Frappe lourde', special: 'Attaque spéciale', super: 'Super chargé',
-  interact: 'Maintenir pour interagir avec l’objectif', crouch: 'S’accroupir', evade: 'Esquiver', antiAir: 'Frappe anti-aérienne' };
+  interact: 'Maintenir pour interagir avec l’objectif', crouch: 'S’accroupir', evade: 'Esquiver', antiAir: 'Frappe anti-aérienne',
+  parry: 'Parer au dernier moment', signature2: 'Deuxième signature', signature3: 'Troisième signature' };
 const moveHint = 'C maintenu pour s’accroupir · C + J pour frapper bas · Maj + direction pour esquiver · J en esquive avant pour avancer en frappant · U pour contrer un saut.';
 const movePadHint = 'Manette · Stick gauche vers le bas pour s’accroupir · R3 pour esquiver · Stick droit vers le haut pour contrer un saut.';
+const parryHint = 'V pour parer au contact · C + V contre une frappe basse · Après une parade, Garde + Super pour riposter avec un spécimen compatible et la jauge pleine.';
+const techniqueHint = 'H / O pour les signatures disponibles · Manette · Stick droit vers le bas pour parer, gauche / droite pour les signatures.';
+const signatureControls = [['signature2', 'signature-2', 'H'], ['signature3', 'signature-3', 'O']];
+const localizedTechnique = (entry, field) => currentLanguageV185() === 'en' ? entry[field + 'En'] ?? entry[field] : entry[field];
+const techniqueNote = (entry, keys) => entry
+  ? `<small data-xt-technique="${entry.id}"><b>${keys} · ${escapeHtml(localizedTechnique(entry, 'label'))}</b> — ${escapeHtml(localizedTechnique(entry, 'description'))}</small>`
+  : '';
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const hordeStatsV180 = view => view ? `<dl class="xt-horde-briefing-grid"><div><dt>VAGUES</dt><dd>${view.waves || '—'}</dd></div><div><dt>POPULATION</dt><dd>${view.total || '—'}</dd></div><div><dt>PV PAR CONTACT</dt><dd>${view.minimum && view.maximum ? `${view.minimum}–${view.maximum}` : '—'}</dd></div><div><dt>SIMULTANÉS MAX.</dt><dd>${view.simultaneous || '—'}</dd></div></dl>` : '';
 const combatBriefingV188 = activity => getXenoTrialsOperationBriefingV188(activity) || getXenoTrialsHordeBriefingV180(activity);
@@ -132,7 +146,22 @@ export class XenoTrialsUiV96 {
       <div class="xt-dashboard" data-xt="progress"></div>
       <nav class="xt-steps" aria-label="Préparation du duel" data-xt="steps"></nav>
       <section class="xt-home-v119" data-xt="home"><details class="xt-arbiter-dossier-v190"><summary>DOSSIER ARBITER / AB-40</summary><div data-xt="arbiter-dossier"></div></details><div class="xt-terminal-hero"><div class="xt-terminal-intro"><p class="eyebrow">SYSTÈME MIRE / PROGRAMME D’ÉVALUATION</p><h1>XENO<br><span>TRIALS</span><small>ÉTUDE COMPARATIVE DES ESPÈCES</small></h1><p>Observez. Engagez. Survivez.<br>Chaque contact enrichit le dossier.</p><dl class="xt-terminal-spec"><div><dt>SPÉCIMENS ADMIS</dt><dd>${FIGHTERS.length}</dd></div><div><dt>ENVIRONNEMENTS</dt><dd>${STAGES.length}</dd></div><div><dt>PROTOCOLES HORDE</dt><dd>${HORDE_PROTOCOLS.length + ARBITER_HORDE_PROTOCOLS_V191.length}</dd></div></dl></div><div class="xt-containment-monitor"><div class="xt-monitor-heading"><span>OBSERVATION / 001</span><span>CONFINEMENT MIRE</span></div><div class="xt-monitor-specimen">${renderEnemyImportPreviewV103(getXenoTrialsArtV96('warrior'), 'Warrior — observation MIRE', 'clamp(210px, 34vh, 360px)') || `<img src="${getXenoTrialsArtV96('warrior').path}" alt="Warrior — observation MIRE">`}<span class="xt-monitor-reticle" aria-hidden="true"></span></div><div class="xt-monitor-caption"><span>WARRIOR<br><strong>XX121 / SUJET D’ÉTUDE</strong></span><span>OBSERVATION<br><strong>CONTACT VISUEL</strong></span></div></div></div><div data-xt="series-resume" class="xt-series-recovery" hidden><button type="button" class="button primary" data-xt="resume-series">POURSUIVRE LA SÉRIE EN COURS</button><button type="button" class="button danger-outline" data-xt="abandon-series">ABANDONNER LA SÉRIE · SANS PRIME</button></div><div class="xt-program-heading"><span>RÉPERTOIRE DES PROGRAMMES</span><span>SÉLECTIONNEZ UNE LIGNE POUR CONTINUER</span></div><div class="xt-branches-v119" data-xt="branches"></div><div class="xt-terminal-foot"><span>MIRE / INTERFACE D’ÉVALUATION</span><span>WEYLAND-YUTANI · BUILDING BETTER WORLDS</span></div></section>
-      <section data-xt="activities" class="xt-activities-v119" hidden><div class="xt-activity-heading"><button type="button" class="button" data-xt="home-return">← PROGRAMME</button><h2><span data-xt="branch-title"></span></h2><button type="button" class="button" data-xt="renew-contracts" hidden>RENOUVELER LES CONTRATS</button></div><div class="xt-program-tools-v186" data-xt="program-tools"><label data-xt="program-filter-label">Type de protocole<select data-xt="program-filter"><option value="all">Tous les protocoles</option><option value="standard">Vagues standards</option><option value="boss">Finales avec boss</option></select></label><nav aria-label="Pages des programmes"><button type="button" class="button" data-xt="program-previous">← PAGE PRÉCÉDENTE</button><span data-xt="program-page" role="status" aria-live="polite"></span><button type="button" class="button" data-xt="program-next">PAGE SUIVANTE →</button></nav></div><p class="xt-activity-index" data-xt="activity-count" role="status"></p><div data-xt="activity-board" class="xt-activity-board-v119"></div></section>
+      <section data-xt="activities" class="xt-activities-v119" hidden><div class="xt-activity-heading"><button type="button" class="button" data-xt="home-return">← PROGRAMME</button><h2><span data-xt="branch-title"></span></h2><button type="button" class="button" data-xt="renew-contracts" hidden>RENOUVELER LES CONTRATS</button></div><div class="xt-program-tools-v186" data-xt="program-tools"><label data-xt="program-filter-label">Type de protocole<select data-xt="program-filter"><option value="all">Tous les protocoles</option><option value="standard">Vagues standards</option><option value="boss">Finales avec boss</option></select></label><nav aria-label="Pages des programmes"><button type="button" class="button" data-xt="program-previous">← PAGE PRÉCÉDENTE</button><span data-xt="program-page" role="status" aria-live="polite"></span><button type="button" class="button" data-xt="program-next">PAGE SUIVANTE →</button></nav></div><p class="xt-activity-index" data-xt="activity-count" role="status"></p><details data-xt="practice-sandbox" class="xt-practice-sandbox-v208" hidden><summary>BANC LIBRE</summary>
+      <form data-xt="practice-sandbox-form">
+        <p>Choisissez vos spécimens, l’arène et le comportement de la cible. Tous les spécimens sont prêtés pour la séance.</p>
+        <div class="xt-practice-sandbox-fields-v208">
+          <label>Votre spécimen<select name="sandbox-playerId">${FIGHTERS.map(fighter => `<option value="${fighter.id}">${escapeHtml(fighter.label)}</option>`).join('')}</select></label>
+          <label>Spécimen adverse<select name="sandbox-opponentId">${FIGHTERS.map(fighter => `<option value="${fighter.id}">${escapeHtml(fighter.label)}</option>`).join('')}</select></label>
+          <label>Arène<select name="sandbox-stageId">${STAGES.map(stage => `<option value="${stage.id}">${escapeHtml(stage.label)}</option>`).join('')}</select></label>
+          <label>Comportement adverse<select name="sandbox-behavior">${options(XENO_TRIALS_SANDBOX_BEHAVIORS_V208)}</select></label>
+          <label>Difficulté de l’IA<select name="sandbox-difficulty"><option value="easy">Facile</option><option value="normal">Normale</option><option value="hard">Difficile</option></select></label>
+          <label>Secondes par manche<select name="sandbox-roundSeconds">${[30,60,99,120].map(seconds => `<option>${seconds}</option>`).join('')}</select></label>
+          <label>Manches gagnantes<select name="sandbox-roundsToWin">${[1,2,3].map(rounds => `<option>${rounds}</option>`).join('')}</select></label>
+          <label class="xt-practice-checkbox"><input type="checkbox" name="sandbox-readySupers"> Super chargé au départ</label>
+          <label class="xt-practice-checkbox"><input type="checkbox" name="sandbox-noSpecial"> Désactiver les attaques spéciales</label>
+        </div>
+        <button type="submit" class="button primary">LANCER LE BANC LIBRE</button><p data-xt="practice-sandbox-status" role="status"></p>
+      </form></details><div data-xt="activity-board" class="xt-activity-board-v119"></div></section>
       <section data-xt="briefing" class="xt-briefing-v119" hidden></section>
       <div class="xt-layout" data-xt="layout"><aside class="xt-roster" data-xt="stable"><h3>RÉSERVE BIOLOGIQUE</h3>
       <nav class="xt-family-tabs-v119" data-xt="family-tabs" aria-label="Familles de spécimens"></nav>
@@ -176,6 +205,7 @@ export class XenoTrialsUiV96 {
         ${['player', 'opponent'].map((side, i) => `<div class="xt-vitals xt-vitals-${side}" data-xt="${side}-vitals"><span class="xt-side">${i ? 'ADVERSAIRE' : 'VOUS'}</span><strong data-xt="${side}-name"></strong>
         <span class="xt-vital-value" data-xt="${side}-hp-value"></span><progress class="xt-hp-meter" data-xt="${side}-hp" max="1" value="1" aria-label="Santé ${i ? 'adversaire' : 'joueur'}"></progress>
         <span class="xt-vital-value xt-stamina-value" data-xt="${side}-stamina-value"></span><progress class="xt-stamina-meter" data-xt="${side}-stamina" max="1" value="1" aria-label="Endurance ${i ? 'adversaire' : 'joueur'}"></progress>
+        ${i ? '' : '<span class="xt-parry-status-v208" data-xt="parry-status" role="status" hidden></span>'}
         <span class="xt-vital-value xt-super-value-v148" data-xt="${side}-super-value" hidden></span><progress class="xt-super-meter-v148" data-xt="${side}-super" max="100" value="0" aria-label="Jauge de super ${i ? 'adversaire' : 'joueur'}" hidden></progress></div>`).join('')}
         <div class="xt-match-clock"><span data-xt="round">MANCHE 1</span><strong data-xt="clock" role="timer" aria-live="off" aria-label="Secondes restantes">99</strong><span class="xt-clock-unit">SECONDES</span><strong data-xt="score" aria-label="Manches gagnées : joueur — adversaire">0 — 0</strong></div>
         <div class="xt-horde-telemetry" data-xt="horde-hud" hidden><span class="xt-horde-link">MIRE / TÉLÉMÉTRIE TACTIQUE</span><div class="xt-horde-counter-row"><div><span>CONTACTS ACTIFS</span><strong data-xt="horde-alive">0</strong></div><div><span>RENFORTS EN ATTENTE</span><strong data-xt="horde-remaining">0</strong></div></div><span data-xt="horde-phase" class="xt-horde-phase"></span><span class="xt-horde-total" data-xt="horde-kills"></span><progress data-xt="horde-progress" class="xt-horde-progress" max="1" value="0" aria-label="Contacts neutralisés sur la population totale"></progress></div>
@@ -192,10 +222,11 @@ export class XenoTrialsUiV96 {
       <div class="xt-arena"><canvas width="1000" height="560" tabindex="0" data-xt="canvas" aria-label="Arène de combat Xeno Trials" aria-describedby="xeno-trials-help-v96"></canvas>
       <p data-xt="health" class="xt-sr-only" aria-label="Santé et endurance des combattants"></p></div>
       <p data-xt="finisher-status" class="xt-sr-only" role="status"></p>
-      <div class="xt-actions"><button class="button" data-xt="pause" disabled>PAUSE</button><button type="button" class="button" data-xt="taunt" hidden disabled>T · DÉFI</button><button type="button" class="button" data-xt="finisher" aria-keyshortcuts="F" hidden disabled>F · VERROU FINAL</button><button type="button" class="button" data-xt="skip-sequence" hidden>PASSER LA PRÉSENTATION</button><button class="button" data-xt="next" hidden>MANCHE SUIVANTE</button><button class="button" data-xt="retry-save" hidden>RÉESSAYER LA SAUVEGARDE DU RÉSULTAT</button></div><section data-xt="pause-overlay" class="xt-pause-overlay-v119" role="dialog" aria-modal="true" aria-labelledby="xeno-trials-pause-title-v119" hidden><h2 id="xeno-trials-pause-title-v119">ÉVALUATION SUSPENDUE</h2><p>Q/D ou flèches · Saut Z/↑ · Garde S/↓ · Attaques J/K/L · Super I (jauge pleine) · P ou Échap pour reprendre.</p><p>${moveHint}</p><p>${movePadHint}</p><p data-xt="operation-input-hint" hidden>E / L3 / INTERAGIR : maintenez au sol près de la cible indiquée. Évitez les zones de danger annoncées avant leur activation.</p><p data-xt="operation-orders" hidden></p><p class="xt-input-hint-v186" data-xt="input-hint">CLAVIER / TACTILE / MANETTE STANDARD · Stick ou croix : déplacement · A : saut · LT : garde · X/Y/B : attaques · RT : super · Start/Back : pause. Relâchez les commandes après une reprise.</p><p>La simulation et le chrono sont arrêtés. Reprenez l’évaluation ou abandonnez-la sans gain.</p><button type="button" class="button" data-xt="audio-toggle" aria-label="Sons de Trials" aria-pressed="true">COUPER LES SONS DE TRIALS</button><p class="xt-audio-hint-v189">Le volume des effets suit les réglages audio du profil.</p><button type="button" class="button" data-xt="retry-checkpoint-overlay" hidden>RÉESSAYER LA SAUVEGARDE DE REPRISE</button><button type="button" class="button primary" data-xt="resume-overlay">REPRENDRE</button><button type="button" class="button danger-outline" data-xt="abandon-overlay">ABANDONNER · SANS GAIN</button></section>
+      <div class="xt-actions"><button class="button" data-xt="pause" disabled>PAUSE</button><button type="button" class="button" data-xt="taunt" hidden disabled>T · DÉFI</button><button type="button" class="button" data-xt="finisher" aria-keyshortcuts="F" hidden disabled>F · VERROU FINAL</button><button type="button" class="button" data-xt="skip-sequence" hidden>PASSER LA PRÉSENTATION</button><button class="button" data-xt="next" hidden>MANCHE SUIVANTE</button><button class="button" data-xt="retry-save" hidden>RÉESSAYER LA SAUVEGARDE DU RÉSULTAT</button></div><section data-xt="pause-overlay" class="xt-pause-overlay-v119" role="dialog" aria-modal="true" aria-labelledby="xeno-trials-pause-title-v119" hidden><h2 id="xeno-trials-pause-title-v119">ÉVALUATION SUSPENDUE</h2><p>Q/D ou flèches · Saut Z/↑ · Garde S/↓ · Attaques J/K/L · Super I (jauge pleine) · P ou Échap pour reprendre.</p><p>${moveHint}</p><p>${movePadHint}</p><p>${parryHint}</p><p>${techniqueHint}</p><p data-xt="operation-input-hint" hidden>E / L3 / INTERAGIR : maintenez au sol près de la cible indiquée. Évitez les zones de danger annoncées avant leur activation.</p><p data-xt="operation-orders" hidden></p><p class="xt-input-hint-v186" data-xt="input-hint">CLAVIER / TACTILE / MANETTE STANDARD · Stick ou croix : déplacement · A : saut · LT : garde · X/Y/B : attaques · RT : super · Start/Back : pause. Relâchez les commandes après une reprise.</p><p>La simulation et le chrono sont arrêtés. Reprenez l’évaluation ou abandonnez-la sans gain.</p><button type="button" class="button" data-xt="audio-toggle" aria-label="Sons de Trials" aria-pressed="true">COUPER LES SONS DE TRIALS</button><p class="xt-audio-hint-v189">Le volume des effets suit les réglages audio du profil.</p><button type="button" class="button" data-xt="retry-checkpoint-overlay" hidden>RÉESSAYER LA SAUVEGARDE DE REPRISE</button><button type="button" class="button primary" data-xt="resume-overlay">REPRENDRE</button><button type="button" class="button" data-xt="practice-restart" hidden>RECOMMENCER L’ATELIER</button><button type="button" class="button danger-outline" data-xt="abandon-overlay">ABANDONNER · SANS GAIN</button></section>
       <div data-xt="controls" class="xt-controls" role="group" aria-label="Commandes de combat tactiles">
-        ${[['left','←'],['right','→'],['jump','SAUT'],['guard','GARDE'],['light','J · RAPIDE'],['heavy','K · LOURD'],['special','L · SPÉCIAL'],['super','I · SUPER'],['interact','E · INTERAGIR'],['crouch','C · BAS'],['evade','MAJ · ESQUIVE'],['antiAir','U · ANTI-AIR']].map(([key,label]) => `<button type="button" data-xeno-action="${key}" ${key === 'interact' ? 'hidden' : ''} aria-label="${controlLabel[key]}">${label}</button>`).join('')}
-      </div><details class="xt-combat-help"><summary>COMMANDES ET CONSIGNES</summary><p data-xt="mode-help" class="xt-help"></p><p id="xeno-trials-help-v96" class="xt-help">Déplacement : Q/D ou flèches · Saut : Z/↑/Espace · Garde : S/↓ · Attaques : J/K/L · Super : I, pour les spécimens compatibles. Jauge gagnée sur les contacts effectifs, conservée entre manches et consommée au départ. Défi : T lorsque disponible ; annulé par déplacement, attaque, garde ou impact. La simulation continue. Pause : P ou Échap. Lors d’une saisie, maintenir GARDE permet le dégagement sans marteler une touche. La garde ordinaire consomme de l’endurance. Coups lourds pour briser une garde épuisée.</p><p class="xt-help">${moveHint}</p><p class="xt-help">${movePadHint}</p></details></section>
+        ${[['left','←'],['right','→'],['jump','SAUT'],['guard','GARDE'],['light','J · RAPIDE'],['heavy','K · LOURD'],['special','L · SPÉCIAL'],['super','I · SUPER'],['interact','E · INTERAGIR'],['crouch','C · BAS'],['evade','MAJ · ESQUIVE'],['antiAir','U · ANTI-AIR'],['parry','V · PARADE'],['signature2','H · SIG. 2'],['signature3','O · SIG. 3']]
+          .map(([key, label]) => `<button type="button" data-xeno-action="${key}" ${['interact', 'signature2', 'signature3'].includes(key) ? 'hidden' : ''} aria-label="${controlLabel[key]}">${label}</button>`).join('')}
+      </div><details class="xt-combat-help"><summary>COMMANDES ET CONSIGNES</summary><p data-xt="mode-help" class="xt-help"></p><p id="xeno-trials-help-v96" class="xt-help">Déplacement : Q/D ou flèches · Saut : Z/↑/Espace · Garde : S/↓ · Attaques : J/K/L · Super : I, pour les spécimens compatibles. Jauge gagnée sur les contacts effectifs, conservée entre manches et consommée au départ. Défi : T lorsque disponible ; annulé par déplacement, attaque, garde ou impact. La simulation continue. Pause : P ou Échap. Lors d’une saisie, maintenir GARDE permet le dégagement sans marteler une touche. La garde ordinaire consomme de l’endurance. Coups lourds pour briser une garde épuisée.</p><p class="xt-help">${moveHint}</p><p class="xt-help">${movePadHint}</p><p class="xt-help">${parryHint}</p><p class="xt-help">${techniqueHint}</p></details></section>
       <button type="button" class="button" data-xt="new-duel" hidden>PRÉPARER UN AUTRE DUEL</button>
       <div data-xt="result" class="xt-result" role="status" aria-live="polite"></div>
       <details class="xt-history"><summary>Journal des évaluations</summary><div data-xt="history"></div></details></div></div>`;
@@ -271,9 +302,27 @@ export class XenoTrialsUiV96 {
     this.el('practice-repeat').onclick = event => void this.startPracticeV207(this.runtime?.getState().practiceV207?.id, event);
     this.el('practice-list').onclick = () => this.chooseBranchV119('practice');
     this.el('practice-save').onclick = () => this.persistPracticeV207(this.runtime?.getState().practiceV207);
+    this.el('practice-restart').onclick = event => {
+      const practice = this.runtime?.getState().practiceV207;
+      if (!practice || !this.active || !this.canCommit()) return;
+      this.closeRuntime();
+      void this.startPracticeV207(practice.id, event);
+    };
+    this.el('practice-sandbox-form').addEventListener('submit', event => {
+      event.preventDefault();
+      if (this.branchV119 !== 'practice' || this.selectionStep !== 'activities' || !this.active || !this.canCommit() || this.isRunning()) return;
+      const values = Object.fromEntries([...new FormData(event.currentTarget)]
+        .map(([name, value]) => [name.slice('sandbox-'.length), value]));
+      const transaction = configureXenoTrialsSandboxV208(this.getProgress(), {
+        ...values, roundSeconds: Number(values.roundSeconds), roundsToWin: Number(values.roundsToWin),
+        readySupers: Object.hasOwn(values, 'readySupers'), noSpecial: Object.hasOwn(values, 'noSpecial'),
+      });
+      if (transaction.unchanged || this.commit(transaction, { pauseOnFailure: false })) void this.startPracticeV207(XENO_TRIALS_SANDBOX_ID_V208, event);
+      else this.el('practice-sandbox-status').textContent = 'Réglages du banc libre non sauvegardés.';
+    });
     this.el('pause-overlay').addEventListener('keydown', event => {
       if (event.code !== 'Tab' || this.el('pause-overlay').hidden) return;
-      const actions = [this.el('audio-toggle'), this.el('retry-checkpoint-overlay'), this.el('resume-overlay'), this.el('abandon-overlay')]
+      const actions = [this.el('audio-toggle'), this.el('retry-checkpoint-overlay'), this.el('resume-overlay'), this.el('practice-restart'), this.el('abandon-overlay')]
         .filter(button => !button.hidden && !button.disabled);
       if (!actions.length) return;
       const first = actions[0], last = actions.at(-1);
@@ -430,10 +479,18 @@ export class XenoTrialsUiV96 {
     this.el('branch-title').textContent = TERMINAL_BRANCHES_V191.find(branch => branch.id === this.branchV119)?.label || '';
     this.el('renew-contracts').hidden = this.branchV119 !== 'contracts';
     this.el('program-tools').hidden = this.branchV119 === 'practice';
+    const sandboxForm = this.el('practice-sandbox-form');
+    this.el('practice-sandbox').hidden = this.branchV119 !== 'practice';
     if (this.branchV119 === 'practice') {
       const cleared = state.practiceClearedV207 || [];
-      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_V207.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
-      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_V207.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
+      if (sandboxForm.elements) for (const [name, value] of Object.entries(normalizeXenoTrialsSandboxV208(state.practiceSandboxV208))) {
+        const field = sandboxForm.elements.namedItem(`sandbox-${name}`);
+        if (typeof value === 'boolean') field.checked = value;
+        else field.value = String(value);
+      }
+      this.el('practice-sandbox-status').textContent = '';
+      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V208.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
+      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V208.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
         <h3>${escapeHtml(entry.title)}</h3><strong>${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.playerId).label)}</strong>
         <p>${escapeHtml(entry.briefing)}</p><button type="button" class="button primary" data-xt-practice="${entry.id}">${cleared.includes(entry.id) ? 'VALIDÉ · REJOUER' : 'LANCER L’ATELIER'}</button></article>`).join('');
       return;
@@ -504,6 +561,9 @@ export class XenoTrialsUiV96 {
       const walk = getEnemyImportAnimationV107(art);
       const attack = getEnemyImportAttackV109(art);
       const signature = getXenoTrialsSignatureV147(f);
+      const techniques = signatureControls.map(([, kind, key]) => techniqueNote(getXenoTrialsAlternateSignatureV208(f, kind), key)).join('')
+        + techniqueNote(getXenoTrialsRiposteV208(f), currentLanguageV185() === 'en' ? 'GUARD + I' : 'GARDE + I')
+        + (hasXenoTrialsGroundTraversalV208(f) ? '<small>La commande de saut déclenche un franchissement au sol.</small>' : '');
       const rig=getXenoTrialsRigV154(f,art);
       const coverage = getXenoTrialsRuntimeAnimationCoverage(f.id);
       const admittedActions = getXenoTrialsRuntimeActionAtlases(f, art).map(atlas => drawnActionLabels[atlas.kind]);
@@ -514,7 +574,7 @@ export class XenoTrialsUiV96 {
       const sourceFacing = art?.sourceFacing === 1 ? 1 : -1;
       const family = FAMILIES.find(entry => entry.id === getXenoTrialsSelectionFamilyV119(f))?.label || 'À DÉFINIR';
       const profile = getXenoTrialsRosterProfileV179(f);
-      return `<figure><figcaption>${i ? horde ? 'CONTACT TYPE' : 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption><div class="xt-facing-preview" data-facing="${desiredFacing}" style="transform:scaleX(${desiredFacing * sourceFacing});width:100%">${portrait}</div><strong>${escapeHtml(f.label)}</strong><span>${family} · ${roleLabel[f.role]} · ${horde && i ? horde.healthLabel : `${f.hp} PV`} · ${f.speed} mobilité</span><small>${escapeHtml(getXenoTrialsFighterSpecialLabelV147(f))}</small>${profile ? `<p class="xt-help">${escapeHtml(profile.tactic)}</p>` : ''}${signature ? `<small data-xt-signature="${signature.id}">${escapeHtml(signature.description.replace('La prise au sol complète reste à produire.', '').trim())}</small>` : ''}${hasXenoTrialsGrappleV153(f) ? '<small>Saisie rapprochée sur Commando WY, Guardian et Cultiste Darwin Era. Maintenir GARDE pour se dégager. Contre les autres spécimens, le bond reste une attaque de contact.</small>' : ''}<small>DOSSIER : ${escapeHtml(art?.sourceWork || art?.sourceName || 'MIRE')}</small>${gestures}</figure>`;
+      return `<figure><figcaption>${i ? horde ? 'CONTACT TYPE' : 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption><div class="xt-facing-preview" data-facing="${desiredFacing}" style="transform:scaleX(${desiredFacing * sourceFacing});width:100%">${portrait}</div><strong>${escapeHtml(f.label)}</strong><span>${family} · ${roleLabel[f.role]} · ${horde && i ? horde.healthLabel : `${f.hp} PV`} · ${f.speed} mobilité</span><small>${escapeHtml(getXenoTrialsFighterSpecialLabelV147(f))}</small>${profile ? `<p class="xt-help">${escapeHtml(profile.tactic)}</p>` : ''}${signature ? `<small data-xt-signature="${signature.id}">${escapeHtml(signature.description.replace('La prise au sol complète reste à produire.', '').trim())}</small>` : ''}${hasXenoTrialsGrappleV153(f) ? '<small>Saisie rapprochée sur Commando WY, Guardian et Cultiste Darwin Era. Maintenir GARDE pour se dégager. Contre les autres spécimens, le bond reste une attaque de contact.</small>' : ''}<small>DOSSIER : ${escapeHtml(art?.sourceWork || art?.sourceName || 'MIRE')}</small>${gestures}${techniques}</figure>`;
     }).join(`<span class="xt-versus" aria-hidden="true">${horde ? '×' : 'VS'}</span>`);
     const stage = STAGES.find(s => s.id === this.form.elements.stageId.value) || STAGES[0];
     const matchup = ids.map(id => FIGHTERS.find(f => f.id === id)?.label || '').join(' contre ');
@@ -539,7 +599,7 @@ export class XenoTrialsUiV96 {
     clearTimeout(this.resultRetryTimer);
     this.resultRetryTimer = null;
   }
-  closeRuntime() { this.el('practice-hud').hidden = true; this.practiceAnnouncementV207 = null; this.cancelResultRetry(); this.runtime?.stop(); this.root.removeAttribute('data-xt-outro'); this.el('skip-sequence').hidden = true; this.el('finisher').hidden = true; this.el('finisher').disabled = true; this.el('finisher-status').textContent = ''; this.lastFinisherMessage = ''; this.el('taunt').hidden=true; this.el('taunt').disabled=true; this.generation++; this.runtime = null; this.loading = false; this.lastStatus = null; this.lastResumedTickV186 = null; this.lastGamepadHintV186 = null; }
+  closeRuntime() { this.el('practice-hud').hidden = this.el('practice-restart').hidden = true; this.practiceAnnouncementV207 = null; this.cancelResultRetry(); this.runtime?.stop(); this.root.removeAttribute('data-xt-outro'); this.el('skip-sequence').hidden = true; this.el('finisher').hidden = true; this.el('finisher').disabled = true; this.el('finisher-status').textContent = ''; this.lastFinisherMessage = ''; this.el('taunt').hidden=true; this.el('taunt').disabled=true; this.generation++; this.runtime = null; this.loading = false; this.lastStatus = null; this.lastResumedTickV186 = null; this.lastGamepadHintV186 = null; }
   close() {
     if (this.unsavedResult) this.finish(this.unsavedResult);
     this.closeRuntime(); this.active = false; this.unsavedResult = null; this.lastStatus = null;
@@ -562,18 +622,19 @@ export class XenoTrialsUiV96 {
   }
   startPracticeV207(id, gesture) {
     if (this.branchV119 !== 'practice' || this.state().pending || !['activities', 'combat'].includes(this.selectionStep)) return false;
-    const config = getXenoTrialsPracticeConfigV207(id);
+    const practiceSandboxV208 = id === XENO_TRIALS_SANDBOX_ID_V208 ? this.state().practiceSandboxV208 : undefined;
+    const config = getXenoTrialsPracticeConfigV207(id, practiceSandboxV208);
     if (!config) return false;
-    return this.launch(config, gesture, id);
+    return this.launch(config, gesture, id, practiceSandboxV208);
   }
-  async launch(config, gesture = null, practiceV207 = null) {
+  async launch(config, gesture = null, practiceV207 = null, practiceSandboxV208 = undefined) {
     if (!config || !this.active || !this.canCommit() || this.isRunning() || this.unsavedResult) return false;
     this.closeRuntime(); const generation = this.generation;
     if (practiceV207) this.el('result').textContent = '';
     this.selectionStep = 'combat'; this.loading = true; this.render(); this.message(config.activityV119?.branch === 'horde' || config.hordeV180 ? 'MIRE / PRÉPARATION DU SECTEUR ET DES CONTACTS…' : 'MIRE / PRÉPARATION DES DEUX SPÉCIMENS…');
     try {
     const ticket = practiceV207 ? null : this.state().pending;
-    const runtime = createXenoTrialsRuntimeV96({ practiceV207, canvas: this.el('canvas'), config,
+    const runtime = createXenoTrialsRuntimeV96({ practiceV207, practiceSandboxV208, canvas: this.el('canvas'), config,
       controlsRoot: this.el('controls'), statusElement: null, htmlHud: true,
       audioDirector: this.audioDirector, audioEnabled: this.audioEnabledV189, reducedMotion: this.getReducedMotion(),
       canActivateFinisher: () => this.active && generation === this.generation && this.canCommit()
@@ -651,11 +712,14 @@ export class XenoTrialsUiV96 {
     this.practiceAnnouncementV207 = announcement;
     hud.dataset.state = practice.state;
     const progress = this.el('practice-progress');
-    progress.max = practice.objectives.length;
+    progress.hidden = Boolean(practice.sandbox);
+    progress.max = Math.max(1, practice.objectives.length);
     progress.value = practice.index;
     this.el('practice-title').textContent = practice.title;
     this.el('practice-tip').textContent = practice.briefing;
-    this.el('practice-target').textContent = practice.state === 'complete' ? 'ATELIER VALIDÉ'
+    this.el('practice-target').textContent = practice.sandbox ? (practice.result
+      ? { player: 'BANC LIBRE · VICTOIRE', opponent: 'BANC LIBRE · DÉFAITE', draw: 'BANC LIBRE · ÉGALITÉ' }[practice.result] : '')
+      : practice.state === 'complete' ? 'ATELIER VALIDÉ'
       : practice.state === 'retry' ? 'EXERCICE INTERROMPU · REJOUER' : `${practice.objectives[practice.index]}${practice.cue ? ` · ${practice.cue}` : ''}`;
     this.el('practice-actions').hidden = practice.state === 'active';
     this.el('practice-save').hidden = true;
@@ -772,18 +836,41 @@ export class XenoTrialsUiV96 {
       meter.setAttribute('title', getXenoTrialsSuperStatusV148(state));
       label.textContent = `SUPER ${Math.floor(state.meter)} / ${state.maximum}${state.ready ? ' · PRÊT' : ''}`;
       if (!i) {
+        const parry = getXenoTrialsParryViewV208(snapshot, fighter);
+        const riposte = getXenoTrialsRiposteReadinessV208(snapshot, fighter, definition);
+        const crossing = hasXenoTrialsGroundTraversalV208(definition);
+        if (this.groundTraversalV208 !== crossing) {
+          this.groundTraversalV208 = crossing;
+          const jump = this.root.querySelector('[data-xeno-action="jump"]');
+          jump.textContent = crossing ? 'FRANCHIR' : 'SAUT';
+          jump.setAttribute('aria-label', crossing ? 'Franchir au sol' : controlLabel.jump);
+        }
+        const hint = this.el('parry-status');
+        const notice = riposte.ready ? 'RIPOSTE · GARDE + SUPER' : parry.openingTicks > 0 ? 'OUVERTURE' : parry.active ? 'PARADE' : '';
+        if (this.lastParryNoticeV208 !== notice) {
+          this.lastParryNoticeV208 = notice;
+          hint.hidden = !notice;
+          hint.textContent = notice;
+        }
+        for (const [action, kind] of signatureControls) {
+          const control = this.root.querySelector(`[data-xeno-action="${action}"]`);
+          const technique = getXenoTrialsAlternateSignatureV208(definition, kind);
+          control.hidden = !technique || Boolean(snapshot.config?.rulesV119?.noSpecial);
+          if (technique) control.setAttribute('title', localizedTechnique(technique, 'label'));
+        }
         const button = this.root.querySelector('[data-xeno-action="super"]');
+        const superHint = riposte.ready ? getXenoTrialsRiposteStatusV208(riposte, currentLanguageV185()) : getXenoTrialsSuperStatusV148(state);
         button.hidden = !state.supported;
-        button.setAttribute('aria-disabled', String(!state.ready));
-        button.setAttribute('title', getXenoTrialsSuperStatusV148(state));
-        button.setAttribute('aria-label', getXenoTrialsSuperStatusV148(state));
+        button.setAttribute('aria-disabled', String(!state.ready && !riposte.ready));
+        button.setAttribute('title', superHint);
+        button.setAttribute('aria-label', superHint);
       }
     }
     this.el('clock').textContent = String(Math.ceil(snapshot.timeRemaining));
     this.el('clock').setAttribute('data-low', String(snapshot.timeRemaining <= 10));
-    this.el('round').textContent = practice ? 'ATELIER' : operation ? 'OPÉRATION' : horde ? horde.waveLabel : `MANCHE ${snapshot.round}`;
-    this.el('score').textContent = practice ? `${practice.index} / ${practice.objectives.length}` : operation ? `${operation.progress.done} / ${operation.progress.total}` : horde ? `${horde.kills} / ${horde.total}` : `${snapshot.wins.player} — ${snapshot.wins.opponent}`;
-    this.el('score').setAttribute('aria-label', practice || operation ? 'Objectifs validés' : horde ? 'Contacts neutralisés sur la population totale' : 'Manches gagnées : joueur — adversaire');
+    this.el('round').textContent = practice && !practice.sandbox ? `ATELIER · ${snapshot.round}` : operation ? 'OPÉRATION' : horde ? horde.waveLabel : `MANCHE ${snapshot.round}`;
+    this.el('score').textContent = practice && !practice.sandbox ? `${practice.index} / ${practice.objectives.length}` : operation ? `${operation.progress.done} / ${operation.progress.total}` : horde ? `${horde.kills} / ${horde.total}` : `${snapshot.wins.player} — ${snapshot.wins.opponent}`;
+    this.el('score').setAttribute('aria-label', practice && !practice.sandbox || operation ? 'Objectifs validés' : horde ? 'Contacts neutralisés sur la population totale' : 'Manches gagnées : joueur — adversaire');
     const phase = snapshot.paused ? 'PAUSE' : snapshot.presentation?.blocksSimulation ? snapshot.presentation.countdown ? `DÉPART DANS ${snapshot.presentation.countdown}` : 'PRÉSENTATION DES SPÉCIMENS' : { intro: 'PRÉPARATION', active: 'COMBAT', 'round-over': 'FIN DE MANCHE', 'match-over': 'ÉVALUATION TERMINÉE' }[snapshot.phase];
     const grapple = snapshot.grappleViewV153;
     const text = practice ? `${practice.title}${snapshot.paused ? ' · PAUSE' : ''}` : operation ? `${operation.phase} · ${operation.instruction}` : horde ? `${horde.phase} · ${horde.waveLabel}` : `${grapple?.target === 'player' ? 'SAISIE · MAINTENIR S / GARDE POUR SE DÉGAGER · ' : ''}${phase} · Manche ${snapshot.round} · ${snapshot.wins.player} — ${snapshot.wins.opponent} · ${Math.ceil(snapshot.timeRemaining)} s`;
@@ -796,8 +883,12 @@ export class XenoTrialsUiV96 {
       this.el('canvas').focus({ preventScroll: true });
     finisherButton.hidden = finisherButton.disabled = !canActivateFinisher;
     const finisherStatus = this.el('finisher-status');
-    const finisherMessage = canActivateFinisher ? 'Victoire confirmée. Verrou final disponible avec F.'
-      : snapshot.finisherV207?.phase === 'playing' ? 'Verrou final en cours.' : '';
+    const finisherCopy = getXenoTrialsFinisherCopyV208(snapshot.finisherV207?.kind);
+    if (this.lastFinisherButton !== finisherCopy.button) {
+      this.lastFinisherButton = finisherCopy.button;
+      finisherButton.textContent = finisherCopy.button;
+    }
+    const finisherMessage = canActivateFinisher ? finisherCopy.offered : snapshot.finisherV207?.phase === 'playing' ? finisherCopy.playing : '';
     if (this.lastFinisherMessage !== finisherMessage) {
       this.lastFinisherMessage = finisherMessage;
       finisherStatus.textContent = finisherMessage;
@@ -813,6 +904,7 @@ export class XenoTrialsUiV96 {
     // A completed result has already settled its ticket. Its presentation can
     // pause, but offering abandonment here would be an impossible no-op.
     const canAbandon = snapshot.phase !== 'match-over' && Boolean(practice?.state === 'active' || this.getProgress()?.pending) && !this.unsavedResult;
+    this.el('practice-restart').hidden = practice?.state !== 'active';
     this.el('abandon-overlay').hidden = !canAbandon;
     this.el('abandon-overlay').disabled = !canAbandon;
     // A newly visible modal must own keyboard focus. Background/visibility

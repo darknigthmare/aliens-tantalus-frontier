@@ -26,6 +26,9 @@ const entryModule = 'src/xeno-trials-standalone.js';
 const launchPage = 'xeno-trials.html';
 const digest = value => createHash('sha256').update(value).digest('hex');
 
+export const XENO_TRIALS_BUILD_REVISION = 208;
+export const xenoTrialsCacheName = fingerprint => `atf-trials-v${XENO_TRIALS_BUILD_REVISION}-${fingerprint.slice(0, 24)}`;
+
 function fighterAssets(id, variant) {
   const art = getXenoTrialsArtV96(id, variant);
   const fighter = { id, variant };
@@ -153,7 +156,7 @@ export async function buildXenoTrialsV207(root) {
   const info = JSON.parse(await readFile(join(base, 'build-info.json'), 'utf8'));
   assert.match(info.inputFingerprint, /^[a-f0-9]{64}$/, 'The base distribution must be stamped first.');
   const plan = await planXenoTrialsBuildV207(base, info);
-  const cacheName = `atf-trials-v207-${info.inputFingerprint.slice(0, 24)}`;
+  const cacheName = xenoTrialsCacheName(info.inputFingerprint);
   const releasePath = 'src/release-info-v143.js';
   const release = (await import(pathToFileURL(join(base, releasePath)).href)).APP_RELEASE_V143;
   const runtime = { ...release, cacheName };
@@ -174,7 +177,7 @@ export async function buildXenoTrialsV207(root) {
   await writeFile(join(output, releasePath), `export const APP_RELEASE_V143 = Object.freeze(${JSON.stringify(runtime, null, 2)});\n`);
   const files = await fileManifestV143(output);
   const { version, sourceCommit, buildId, builtAt, saveSchema } = info;
-  const result = { product: 'xeno-trials', revision: 207, version, sourceCommit, buildId, builtAt, cacheName, saveSchema,
+  const result = { product: 'xeno-trials', revision: XENO_TRIALS_BUILD_REVISION, version, sourceCommit, buildId, builtAt, cacheName, saveSchema,
     baseManifestSha256: info.manifestSha256, manifestSha256: digest(JSON.stringify(files)), fighters: plan.fighters, stages: plan.stages, files };
   await writeFile(join(output, 'build-info.json'), JSON.stringify(result, null, 2) + '\n');
   return result;

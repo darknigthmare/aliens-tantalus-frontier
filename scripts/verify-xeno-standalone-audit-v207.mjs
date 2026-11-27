@@ -6,6 +6,7 @@ import test from 'node:test';
 import { XENO_STANDALONE_PARENTS_V207, XENO_STANDALONE_SUCCESSORS_V207, XENO_STANDALONE_NEW_INPUTS_V207,
   reviewedXenoStandaloneDigestV207, verifyXenoStandaloneV207 } from './audit-xeno-standalone-v207.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { XENO_GAMEPLAY_BASELINE_V208, reviewedXenoGameplayDigestV208 } from './audit-xeno-gameplay-v208.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = value => createHash('sha256').update(value).digest('hex');
@@ -15,9 +16,10 @@ test('V207 chains exact source bytes from the public main and V206 parents', () 
   const { merged, trials, main } = XENO_STANDALONE_PARENTS_V207;
   assert.equal(git('show', '-s', '--format=%P', merged).toString().trim(), [trials, main].join(' '));
   for (const [path, receipt] of Object.entries(XENO_STANDALONE_SUCCESSORS_V207)) {
+    assert.equal(sha(git('show', XENO_GAMEPLAY_BASELINE_V208 + ':' + path)), receipt.sha256, path);
     for (const [parent, expected] of Object.entries(receipt.parents)) {
       assert.equal(sha(git('show', XENO_STANDALONE_PARENTS_V207[parent] + ':' + path)), expected, path);
-      assert.equal(reviewedXenoStandaloneDigestV207(path, expected), receipt.sha256, path);
+      assert.equal(reviewedXenoStandaloneDigestV207(path, expected), reviewedXenoGameplayDigestV208(path, receipt.sha256), path);
     }
     assert.throws(() => reviewedXenoStandaloneDigestV207(path, '0'.repeat(64)), /Incorrect V207 predecessor/);
   }
@@ -28,8 +30,8 @@ test('V207 chains exact source bytes from the public main and V206 parents', () 
   });
 });
 
-test('standalone admission is terminal and rejects modified sources', () => {
-  const terminal = 'scripts/audit-xeno-standalone-v207.mjs';
+test('standalone admission rejects modified sources and connects the terminal review', () => {
+  const terminal = 'scripts/audit-xeno-gameplay-v208.mjs';
   assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   assert.ok(!Object.hasOwn(XENO_STANDALONE_SUCCESSORS_V207, terminal));
   assert.ok(!Object.hasOwn(XENO_STANDALONE_NEW_INPUTS_V207, terminal));

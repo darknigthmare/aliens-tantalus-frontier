@@ -1,6 +1,8 @@
 import { getXenoTrialsCasteV151 } from './xeno-trials-castes-v151.js';
 import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
+import { getXenoTrialsRiposteV208, XENO_TRIALS_RIPOSTE_KIND_V208 } from './xeno-trials-ripostes-v208.js';
 import { getSynthTrialAttackV110 } from './synth-combat-v110.js';
+import { getXenoTrialsAlternateSignatureV208, XENO_TRIALS_SIGNATURE_KINDS_V208 } from './xeno-trials-signature-kit-v208.js';
 
 /** Capability references, not motion capture or canonical balance.
  * Exact IDs + admitted profile IDs prevent accidental inheritance by a namesake,
@@ -70,6 +72,8 @@ export function getXenoTrialsSpecialStyleV147(definition) {
 }
 export function getXenoTrialsAttackV147(definition, kind, fallback) {
   if (kind === 'super') return getXenoTrialsSuperV148(definition)?.spec || null;
+  if (kind === XENO_TRIALS_RIPOSTE_KIND_V208) return getXenoTrialsRiposteV208(definition)?.spec || null;
+  if (XENO_TRIALS_SIGNATURE_KINDS_V208.includes(kind)) return getXenoTrialsAlternateSignatureV208(definition, kind)?.spec || null;
   const entry = getXenoTrialsSignatureV147(definition);
   return (kind === 'special' ? entry?.spec : kind === 'heavy' ? entry?.heavy : null)
     || getSynthTrialAttackV110(definition, kind, fallback);

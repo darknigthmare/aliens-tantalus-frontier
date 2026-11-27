@@ -1,3 +1,4 @@
+import { normalizeXenoTrialsSandboxV208 } from './xeno-trials-practice-v208.js';
 import { getXenoTrialsPracticeV207, normalizeXenoTrialsPracticeV207 } from './xeno-trials-practice-v207.js';
 import { XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
 import { createXenoTrialsModesProgressV119, normalizeXenoTrialsModesProgressV119, normalizeXenoTrialsRulesV119,
@@ -58,6 +59,7 @@ export function normalizeXenoTrialsProgressV96(value) {
   base.modesV119 = normalizeXenoTrialsModesProgressV119(value.modesV119);
   const practice = normalizeXenoTrialsPracticeV207(value.practiceClearedV207);
   if (practice.length) base.practiceClearedV207 = practice;
+  if (record(value.practiceSandboxV208)) base.practiceSandboxV208 = normalizeXenoTrialsSandboxV208(value.practiceSandboxV208);
   if (base.modesV119.challengeRun && !base.unlocked.includes(base.modesV119.challengeRun.playerId)) base.modesV119.challengeRun = null;
   base.ledger = (Array.isArray(value.ledger) ? value.ledger : []).filter(e => record(e)
     && /^xt96-\d+$/.test(e.matchId) && ['player', 'opponent', 'draw', 'abandoned'].includes(e.winner))
@@ -106,6 +108,15 @@ export function normalizeXenoTrialsProgressV96(value) {
 
 /** A save-owner guarded caller supplies a live snapshot. The transaction never
  * creates a ticket, grants a reward, changes economy or consumes a result. */
+export function configureXenoTrialsSandboxV208(value, settings) {
+  const state = normalizeXenoTrialsProgressV96(value);
+  if (state.pending) return { applied: false, state };
+  const next = normalizeXenoTrialsSandboxV208(settings);
+  if (JSON.stringify(next) === JSON.stringify(state.practiceSandboxV208)) return { applied: false, unchanged: true, state };
+  state.practiceSandboxV208 = next;
+  return { applied: true, state };
+}
+
 export function completeXenoTrialsPracticeV207(value, id) {
   const state = normalizeXenoTrialsProgressV96(value);
   if (state.pending || !getXenoTrialsPracticeV207(id) || state.practiceClearedV207?.includes(id))

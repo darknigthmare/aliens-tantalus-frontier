@@ -30,9 +30,9 @@ function worldPoint(rig,metrics,fighter,p){
   450-fighter.y+(p[1]-metrics.bottom*rig.sourceHeight)*metrics.height/rig.sourceHeight];
 }
 const nonfolding=(mesh,vertices)=>vertices.every(validPoint)&&mesh.triangles.every(ids=>xenoTrialsTriangleAreaV154(...ids.map(i=>vertices[i]))>=xenoTrialsTriangleAreaV154(...ids.map(i=>mesh.vertices[i].source))*.2);
-function limbMeasures(rig,before,after){
+function limbMeasures(rig,before,after,pattern=/^(upper|fore|hand)/){
  const measures=[];
- for(const bone of rig.bones.filter(b=>/^(upper|fore|hand)/.test(b.id))){
+ for(const bone of rig.bones.filter(b=>pattern.test(b.id))){
   const points=[before,after].map(frame=>[bone.pivot,bone.tip].map(p=>projectXenoTrialsMeshPointV157(rig,frame,p)));
   if(points.flat().some(p=>!validPoint(p)))return null;
   const [[a,b],[c,d]]=points,ratio=distance(c,d)/distance(a,b);
@@ -204,8 +204,7 @@ export function getXenoTrialsCaptureReceiptV163(view,role){
   bounds:{...view.layout.bounds},floor:view.layout.ground,supportY:view.layout.frame.supportY,scale:view.layout.scale,
   engineBodiesUnchanged:true,referenceStatus:view.sourceStatus,statureMethod:view.layout.frame.statureMethod};
 }
-/** Use the ankle anchor of the native floor plate at the terminal engine root. */
-export function getXenoTrialsFloorLockV207(attacker, target, images) {
+function getFloorPair(attacker, target, images) {
  const direction = Math.sign(target.x - attacker.x);
  if (!direction || attacker.facing !== direction) return null;
  const atlas = getXenoTrialsCaptureAtlasV163(getXenoTrialsFighterV96(target.id), getXenoTrialsArtV96(target.id, target.variant));
@@ -215,21 +214,74 @@ export function getXenoTrialsFloorLockV207(attacker, target, images) {
  const targetMetrics = getXenoTrialsRenderMetricsV110(target.id, target.variant);
  const layout = frameLayout(atlas, 3, targetMetrics, target.x, direction, 450);
  const rest = sampleXenoTrialsRigV154(rig, { clip: 'release', progress: 1, elapsed: .25, role: 'captor' });
+ if (!rest || !layout.frame.fullFloorPin) return null;
+ return { attacker, target, rig, atlas, attackerMetrics, layout, rest };
+}
+function drawnAnchor(pair, pose, key) {
+ return worldPoint(pair.rig, pair.attackerMetrics, pair.attacker,
+  projectXenoTrialsMeshPointV157(pair.rig, pose, pair.rig.contacts[key].point));
+}
+function clawLock(pair, targetAnchor) {
+ const { rig, attackerMetrics, attacker } = pair;
  const approach = sampleXenoTrialsRigV154(rig, { clip: 'restraint', progress: 1, elapsed: .12, role: 'captor' });
- if (!rest || !approach || !layout.frame.fullFloorPin) return null;
- const handAt = (pose, key) => worldPoint(rig, attackerMetrics, attacker,
-  projectXenoTrialsMeshPointV157(rig, pose, rig.contacts[key].point));
- const targetAnchor = layout.contacts.supportNear;
- const hold = pairedCaptor(rig, approach, attackerMetrics, attacker, [handAt(approach, 'handNear'), targetAnchor]);
- const contactGap = distance(handAt(hold, 'handFar'), targetAnchor);
+ if (!approach) return null;
+ const hold = pairedCaptor(rig, approach, attackerMetrics, attacker, [drawnAnchor(pair, approach, 'handNear'), targetAnchor]);
+ const contactGap = distance(drawnAnchor(pair, hold, 'handFar'), targetAnchor);
  if (!Number.isFinite(contactGap) || contactGap > 8) return null;
- return { attacker, target, rig, atlas, attackerMetrics, layout, rest, hold, targetAnchor, contactGap };
+ return { ...pair, hold, targetAnchor, contactGap, contactKey: 'handFar' };
+}
+/** Use the ankle anchor of the native floor plate at the terminal engine root. */
+export function getXenoTrialsFloorLockV207(attacker, target, images) {
+ const pair = getFloorPair(attacker, target, images);
+ return pair && clawLock(pair, pair.layout.contacts.supportNear);
+}
+export function getXenoTrialsCircuitLockV208(attacker, target, images, fixture) {
+ const pair = getFloorPair(attacker, target, images);
+ if (!pair) return null;
+ const { hips, neck } = pair.layout.contacts;
+ if (hips[0] < fixture.left + 8 || hips[0] > fixture.right - 8 || neck[0] < fixture.left || neck[0] > fixture.right) return null;
+ const fromLeft = pair.layout.direction > 0;
+ const pad = fromLeft ? fixture.pads[0] : fixture.pads[1];
+ if (fromLeft ? attacker.x >= fixture.left : attacker.x <= fixture.right) return null;
+ const lock = clawLock(pair, pad);
+ return lock && lock.contactGap <= 5 ? { ...lock, fixture, motion: 'circuit' } : null;
+}
+export function getXenoTrialsBootLockV208(attacker, target, images, contactKey) {
+ const pair = getFloorPair(attacker, target, images);
+ if (!pair) return null;
+ const { rig, layout, attackerMetrics, rest } = pair;
+ const counterKey = contactKey === 'footNear' ? 'footFar' : 'footNear';
+ const targetAnchor = layout.contacts.supportNear;
+ const shoe = drawnAnchor(pair, rest, contactKey);
+ if (distance(shoe, targetAnchor) > 13) return null;
+ const mesh = getXenoTrialsRigMeshV154(rig);
+ const source = rig.contacts[contactKey].point;
+ const support = rig.contacts[counterKey].point;
+ const weights = mesh.vertices.map(({ source: point }) => smooth((point[1] - source[1] + 320) / 200)
+  * smooth(distance(point, support) / 155) * Math.exp(-(((point[0] - source[0]) / 155) ** 2 + ((point[1] - source[1]) / 240) ** 2)));
+ const field = { ...rest, vertices: weights.map(weight => [weight, 0]) };
+ const response = projectXenoTrialsMeshPointV157(rig, field, source)?.[0];
+ if (!response || response < .08) return null;
+ const dx = (targetAnchor[0] - shoe[0]) * rig.sourceWidth / (attackerMetrics.width * attacker.facing * rig.sourceFacing * response);
+ const dy = (targetAnchor[1] - shoe[1]) * rig.sourceHeight / (attackerMetrics.height * response);
+ const deform = (xOffset, yOffset) => ({ ...rest, vertices: rest.vertices.map(([x, y], id) => [x + xOffset * weights[id], y + yOffset * weights[id]]) });
+ const hold = deform(dx, dy);
+ const lift = deform(dx * .66, -6 * rig.sourceHeight / (attackerMetrics.height * response));
+ const contactGap = distance(drawnAnchor(pair, hold, contactKey), targetAnchor);
+ const stable = frame => distance(drawnAnchor(pair, rest, counterKey), drawnAnchor(pair, frame, counterKey)) <= 1.5;
+ if (!nonfolding(mesh, lift.vertices) || !nonfolding(mesh, hold.vertices) || !stable(lift) || !stable(hold)
+  || ![lift, hold].every(frame => limbMeasures(rig, rest, frame, /^(thigh|shin|foot)/)) || contactGap > 8
+  || drawnAnchor(pair, lift, contactKey)[1] >= shoe[1] - 2) return null;
+ return { ...pair, hold, lift, targetAnchor, contactGap, contactKey, motion: 'boot' };
 }
 export function sampleXenoTrialsFloorLockV207(lock, gain) {
- const { rig, rest, hold } = lock;
- const blend = smooth(gain);
- const vertices = rest.vertices.map((point, index) => point.map((value, axis) => value * (1 - blend) + hold.vertices[index][axis] * blend));
- const frame = { ...hold, clip: 'floor-lock-v207', active: true, vertices, animation: 'original-native-floor-lock-v207' };
+ const { rig, rest, hold, lift, motion } = lock;
+ const afterLift = lift && gain >= .5;
+ const from = afterLift ? lift : rest, to = lift && !afterLift ? lift : hold;
+ const blend = smooth(lift ? gain * 2 - Number(afterLift) : gain);
+ const vertices = from.vertices.map((point, index) => point.map((value, axis) => value * (1 - blend) + to.vertices[index][axis] * blend));
+ const frame = { ...hold, clip: motion ? `${motion}-lock-v208` : 'floor-lock-v207', active: true, vertices,
+  animation: motion ? `original-native-${motion}-lock-v208` : 'original-native-floor-lock-v207' };
  frame.contacts = projectContacts(rig, frame);
  return frame;
 }

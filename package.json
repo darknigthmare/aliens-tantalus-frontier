@@ -107,6 +107,7 @@
     "test:trials:visuals:v205": "node --test scripts/verify-xeno-trials-visual-assets-v205.mjs scripts/verify-xeno-visual-assets-audit-v205.mjs",
     "test:trials:production:v206": "node --test scripts/verify-xeno-production-assets-v206.mjs",
     "test:trials:v207": "node --test scripts/verify-xeno-trials-moveset-v207.mjs scripts/verify-xeno-trials-practice-v207.mjs scripts/verify-xeno-trials-finishers-v207.mjs scripts/verify-xeno-trials-standalone.mjs scripts/verify-xeno-standalone-audit-v207.mjs",
+    "test:trials:v208": "node --test scripts/verify-xeno-trials-defense-v208.mjs scripts/verify-xeno-trials-finishers-v208.mjs scripts/verify-xeno-trials-practice-v208.mjs scripts/verify-xeno-trials-ripostes-v208.mjs scripts/verify-xeno-trials-signature-kit-v208.mjs scripts/verify-xeno-gameplay-audit-v208.mjs",
     "test:dlc:river": "node --test scripts/verify-river-of-pain-launcher.mjs scripts/verify-river-of-pain-integration.mjs",
     "test:dlc:river:source": "node scripts/test-river-of-pain-source.mjs",
     "qa:dlc:river": "python3 scripts/qa-river-of-pain.py",

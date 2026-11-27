@@ -64,6 +64,24 @@ test('V207 stick and R3 actions are independent of guard and require neutral aft
   assert.equal(adapter.sample([fixture], options).input.crouch, true);
 });
 
+test('V208 right stick chooses one technique and re-arms after an observed neutral frame', () => {
+  const adapter = createXenoTrialsGamepadV186(), fixture = pad();
+  const advanced = { ...active, allowMoves: true, allowAdvanced: true };
+  adapter.sample([fixture], advanced);
+  for (const [x, y, action] of [[.9, .7, 'signature3'], [-.9, -.7, 'signature2'], [.7, .9, 'parry'], [.7, -.9, 'antiAir']]) {
+    fixture.axes = [0, 0, x, y];
+    const { input } = adapter.sample([fixture], advanced);
+    assert.deepEqual(Object.keys(input).filter(key => input[key]), [action]);
+  }
+  assertReleased(adapter.sample([fixture], { ...advanced, paused: true }));
+  assertReleased(adapter.sample([fixture], advanced));
+  fixture.axes[2] = fixture.axes[3] = 0;
+  assertReleased(adapter.sample([fixture], advanced));
+  fixture.axes[3] = .8;
+  assert.equal(adapter.sample([fixture], advanced).input.parry, true);
+  assert.equal(Object.hasOwn(adapter.sample([fixture], { ...active, allowMoves: true }).input, 'parry'), false);
+});
+
 test('Start and Back toggle once per neutral press and can resume while combat is unavailable', () => {
   for (const index of [8, 9]) {
     const adapter = createXenoTrialsGamepadV186(), fixture = pad(); adapter.sample([fixture], active);

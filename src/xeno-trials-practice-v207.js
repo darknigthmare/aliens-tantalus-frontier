@@ -1,7 +1,10 @@
+import { XENO_TRIALS_PARRY_V208 } from './xeno-trials-defense-v208.js';
 import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
 import { getXenoTrialsStrikeBandV207 } from './xeno-trials-moveset-v207.js';
 import { getXenoTrialsAttackV147 } from './xeno-trials-signatures-v147.js';
 import { getXenoTrialsBodyBoundsV105, getXenoTrialsBodyGapV105 } from './xeno-trials-geometry-v105.js';
+import { XENO_TRIALS_NEW_DRILLS_V208, XENO_TRIALS_SANDBOX_ID_V208, getMirroredXenoTrialsInputV208,
+  getXenoTrialsSandboxConfigV208, normalizeXenoTrialsSandboxV208 } from './xeno-trials-practice-v208.js';
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { XENO_TRIALS_SUPER_METER_V148 } from './xeno-trials-supers-v148.js';
 
@@ -28,79 +31,133 @@ export const XENO_TRIALS_PRACTICE_V207 = Object.freeze([
     ['Dépenser la jauge du super', 'Toucher avec une salve'], { playerId: 'import-game-afe2-warden' })
 ]);
 
-const LESSONS = new Map(XENO_TRIALS_PRACTICE_V207.map(entry => [entry.id, entry]));
+export const XENO_TRIALS_PRACTICE_DRILLS_V208 = Object.freeze([...XENO_TRIALS_PRACTICE_V207,
+  ...XENO_TRIALS_NEW_DRILLS_V208.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
+const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V208.map(entry => [entry.id, entry]));
 export const getXenoTrialsPracticeV207 = id => LESSONS.get(id) || null;
-export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_V207
+export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V208
   .filter(entry => Array.isArray(value) && value.includes(entry.id)).map(entry => entry.id);
 
-export function getXenoTrialsPracticeConfigV207(id) {
+export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
+  if (id === XENO_TRIALS_SANDBOX_ID_V208) return getXenoTrialsSandboxConfigV208(sandboxSettings);
   const entry = getXenoTrialsPracticeV207(id);
   if (!entry) return null;
   return { playerId: entry.playerId, opponentId: entry.opponentId, stageId: 'containment-deck',
-    factionId: 'containment', roundsToWin: 1, roundSeconds: 60, matchId: `practice-${entry.id}` };
+    factionId: 'containment', roundsToWin: entry.roundsToWin || 1, roundSeconds: entry.roundSeconds || 60, matchId: `practice-${entry.id}`,
+    ...(entry.singleHit ? { rulesV119: { initialHp: 1 } } : {}) };
 }
 
 // This coach drives the same opponent controls and observes contacts from the same fixed-step fight as a duel.
-export function createXenoTrialsPracticeV207(id, match) {
-  const entry = getXenoTrialsPracticeV207(id);
+export function createXenoTrialsPracticeV207(id, match, sandboxSettings) {
+  const sandbox = id === XENO_TRIALS_SANDBOX_ID_V208 ? normalizeXenoTrialsSandboxV208(sandboxSettings) : null;
+  const entry = sandbox ? lesson(id, 'Banc libre', 'Essayez vos techniques dans les conditions sélectionnées.', [], sandbox) : getXenoTrialsPracticeV207(id);
   if (!entry) return null;
-  const [player, opponent] = match.fighters;
+  let [player, opponent] = match.fighters;
   if (player.id !== entry.playerId || opponent?.id !== entry.opponentId) return null;
   const opponentDefinition = getXenoTrialsFighterV96(entry.opponentId);
   const opponentHeavy = getXenoTrialsAttackV147(opponentDefinition, 'heavy', XENO_TRIALS_ATTACKS_V96.heavy);
-  if (id === 'super') player.superMeterV148 = XENO_TRIALS_SUPER_METER_V148.maximum;
+  const opponentSignature = id === 'interrupt' ? getXenoTrialsAttackV147(opponentDefinition, 'signature-2') : null;
+  if (id === 'super' || id === 'riposte') player.superMeterV148 = XENO_TRIALS_SUPER_METER_V148.maximum;
+  if (sandbox?.readySupers) for (const fighter of match.fighters) {
+    if (fighter.superMeterV148 !== undefined) fighter.superMeterV148 = XENO_TRIALS_SUPER_METER_V148.maximum;
+  }
   if (id === 'rupture') opponent.stamina = 34;
 
   let index = 0, state = 'active', lastEvent = match.serial, due = null;
   let playerAttack = null, incomingAttack = null, targetWasGuarding = false;
+  let armedBeforeStep = null, interruption = null, parryOpeningUntil = 0;
   const hasAttack = (action, side) => action.type === 'attack' && action.side === side;
   const hasImpact = (action, side) => ['hit', 'block', 'guard-break'].includes(action.type) && action.side === side;
   const advance = () => { if (++index === entry.targets.length) state = 'complete'; };
 
-  function opponentInput() {
+  function opponentInput(playerInput = {}) {
+    [player, opponent] = match.fighters;
+    if (entry.behavior === 'mirror') return getMirroredXenoTrialsInputV208(playerInput);
+    if (sandbox) {
+      if (sandbox.behavior === 'cpu') return null;
+      if (sandbox.behavior === 'guard') return { guard: true };
+      if (sandbox.behavior === 'jump') return { jump: opponent.y === 0 && !opponent.previousInput.jump };
+      return {};
+    }
+    const pressure = id === 'rounds' && match.round === 2 ? 'light' : entry.pressure;
+    if (id === 'interrupt') armedBeforeStep = opponent.attack?.kind === 'signature-2'
+      ? { id: opponent.attack.id, age: opponent.attack.age } : null;
     if (entry.standingGuard) {
       targetWasGuarding = opponent.guard;
       return { guard: true };
     }
-    if (!entry.pressure || match.grappleV153) return {};
+    if (!pressure || match.grappleV153) return {};
     const gap = getXenoTrialsBodyGapV105(player, opponent);
-    const approach = entry.pressure === 'special' ? 6 : 26;
+    const approach = pressure === 'special' ? 6 : 26;
     if (gap > approach) {
       due = null;
       return player.x < opponent.x ? { left: true } : { right: true };
     }
     due ??= match.tick + 72;
-    if (entry.pressure === 'jump' && opponent.y > 0) {
+    if (pressure === 'jump' && opponent.y > 0) {
       due = match.tick + 96;
       return {};
     }
     if (match.tick < due || opponent.stun > 0 || opponent.attack || opponent.specialCooldown > 0) return {};
-    return { [entry.pressure]: true };
+    return { [pressure]: true };
   }
 
   function observe() {
     if (state !== 'active') return;
+    [player, opponent] = match.fighters;
+    if (sandbox) {
+      if (match.result) state = 'finished';
+      return;
+    }
     for (const action of match.events) {
       if (action.id <= lastEvent) continue;
       lastEvent = action.id;
+      if (action.type === 'round-start') {
+        due = null;
+        if (id === 'rounds' && index === 2 && action.round === 3 && player.hp === 1 && opponent.hp === 1) advance();
+      }
+      if (id === 'rounds' && action.type === 'round-end') {
+        if (index === 0 && action.round === 1 && action.winner === 'player') advance();
+        else if (index === 1 && action.round === 2 && action.winner === 'opponent') advance();
+        else state = 'retry';
+      }
+      if (id === 'draw' && action.type === 'round-end') {
+        if (index === 0 && action.winner === 'draw') advance();
+        else if (action.winner !== 'draw') state = 'retry';
+      }
+      if (id === 'draw' && index === 1 && action.type === 'match-end' && action.winner === 'draw') advance();
+      if (['parry', 'riposte'].includes(id) && action.type === 'parry-v208' && action.side === 'player' && action.attacker === 'opponent') {
+        parryOpeningUntil = action.tick + XENO_TRIALS_PARRY_V208.openingTicks;
+        if (index === 0) advance();
+      }
       if (id === 'advance' && index === 0 && action.type === 'evade-v207' && action.side === 'player'
         && action.direction === player.facing) advance();
       if (hasAttack(action, 'player')) {
         playerAttack = { kind: action.kind, contact: false };
         if (id === 'super' && action.kind === 'super' && player.superMeterV148 === 0 && index === 0) advance();
+        if (id === 'riposte' && action.kind === 'super-riposte' && player.superMeterV148 === 0 && index === 1) advance();
       }
       if (hasAttack(action, 'opponent')) {
         due = action.tick + 188;
         incomingAttack = { contact: false, above: false, x: player.x };
+        if (id === 'interrupt' && action.kind === 'signature-2' && opponentSignature) {
+          incomingAttack.id = opponent.attack?.id;
+          incomingAttack.closeTick = action.tick + Math.ceil((opponentSignature.startup + opponentSignature.active) * 120);
+          if (index === 0) advance();
+        }
       }
       if (hasImpact(action, 'opponent') && action.attacker === 'player' && playerAttack) {
         playerAttack.contact = true;
         if (id === 'distance' && index === 1 && playerAttack.kind === 'light' && action.type === 'hit') advance();
         if (id === 'rupture' && action.type === 'guard-break') advance();
+        if (id === 'parry' && index === 1 && action.tick < parryOpeningUntil && action.type === 'hit') advance();
+        if (id === 'interrupt' && action.type === 'hit' && incomingAttack?.id && armedBeforeStep?.id === incomingAttack.id
+          && !opponent.attack && armedBeforeStep.age + 1 / 120 < opponentSignature.startup) interruption = incomingAttack;
         if (id === 'low' && targetWasGuarding && playerAttack.kind === 'low' && action.type === 'hit') advance();
         if (id === 'anti-air' && playerAttack.kind === 'anti-air' && action.type === 'hit') advance();
         if (id === 'advance' && index === 1 && playerAttack.kind === 'advance' && action.type === 'hit') advance();
         if (id === 'super' && index === 1 && playerAttack.kind === 'super' && action.type === 'hit') advance();
+        if (id === 'riposte' && index === 2 && playerAttack.kind === 'super-riposte' && action.type === 'hit') advance();
       }
       if (hasImpact(action, 'player') && action.attacker === 'opponent') {
         if (incomingAttack) incomingAttack.contact = true;
@@ -127,13 +184,17 @@ export function createXenoTrialsPracticeV207(id, match) {
         incomingAttack = null;
       }
     }
-    if (id === 'super' && index === 1 && !player.attack && !match.projectiles.some(projectile => projectile.owner === 'player')) state = 'retry';
+    if (interruption && !interruption.contact && match.tick >= interruption.closeTick) advance();
+    if ((id === 'super' && index === 1 || id === 'riposte' && index === 2) && !player.attack
+      && !match.projectiles.some(projectile => projectile.owner === 'player')) state = 'retry';
     if (match.phase === 'match-over' && state === 'active') state = 'retry';
   }
 
   function view() {
     return { id, title: entry.title, briefing: entry.briefing, objectives: entry.targets, index, state,
-      cue: entry.pressure === 'heavy' && opponent.attack?.kind === 'heavy' ? 'FRAPPE LOURDE EN COURS'
+      ...(sandbox ? { sandbox: true, result: match.result?.winner || null } : {}),
+      cue: id === 'interrupt' && opponent.attack?.kind === 'signature-2' ? 'PERCUSSION EN COURS'
+        : entry.pressure === 'heavy' && opponent.attack?.kind === 'heavy' ? 'FRAPPE LOURDE EN COURS'
         : id === 'anti-air' && opponent.y > 0 ? 'CONTACT EN L’AIR' : '' };
   }
   return { get active() { return state === 'active'; }, opponentInput, observe, view };

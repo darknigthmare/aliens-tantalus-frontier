@@ -29,9 +29,10 @@ const recipes = Object.freeze({
 function cueFor(event, snapshot) {
   switch (event.type) {
     case 'fight': return 'fight';
-    case 'attack': return ['light', 'heavy', 'special', 'super'].includes(event.kind) ? event.kind : null;
+    case 'attack': return ['light', 'heavy', 'special', 'super'].includes(event.kind) ? event.kind
+      : ['signature-2', 'signature-3'].includes(event.kind) ? 'special' : event.kind === 'super-riposte' ? 'super' : null;
     case 'hit': return event.damage > 0 ? event.side === 'player' ? 'hurt' : 'hit' : null;
-    case 'block': return 'block';
+    case 'block': case 'parry-v208': return 'block';
     case 'guard-break': return 'guardBreak';
     case 'horde-boss-incoming-v186': case 'horde-boss-spawn-v186': return 'boss';
     case 'horde-boss-telegraph-v186': case 'stage-hazard-warning-v188': return 'warning';

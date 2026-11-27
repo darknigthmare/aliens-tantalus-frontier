@@ -22,6 +22,25 @@ function positionForContact(match, gap = 15) {
   return [player, opponent];
 }
 
+test('V208 Snake and Power Loader traverse on the floor, with endurance, without repeat or collision bypass', () => {
+  for (const playerId of ['drive-v123-neca-snake-series13-v14', 'synth-automated-powerloader']) {
+    const match = fight({ playerId }), [player, target] = match.fighters;
+    const start = player.x, stamina = player.stamina;
+    advance(match, 1, { jump: true });
+    assert.equal(player.movesetV207.evade.direction, 1);
+    assert.ok(player.x > start);
+    assert.ok(Math.abs(stamina - player.stamina - evade.cost) < .21);
+    advance(match, 45, { jump: true });
+    assert.equal(player.y, 0);
+    assert.equal(player.movesetV207.evade, null);
+    assert.equal(match.events.filter(event => event.type === 'evade-v207').length, 1);
+    assert.ok(player.x < target.x);
+  }
+  const ordinary = fight();
+  advance(ordinary, 1, { jump: true });
+  assert.ok(ordinary.fighters[0].y > 0);
+});
+
 test('low stance preserves push width and low attacks require low guard', () => {
   for (const crouch of [false, true]) {
     const match = fight(), [player, target] = positionForContact(match), hp = target.hp;

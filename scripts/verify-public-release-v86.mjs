@@ -730,6 +730,17 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+const XENO_GAMEPLAY_SOURCE_ONLY_V208 = new Set([
+  'docs/forge/xeno-trials/V208-GAMEPLAY.md',
+  'scripts/audit-xeno-gameplay-v208.mjs',
+  'scripts/verify-xeno-gameplay-audit-v208.mjs',
+  'scripts/verify-xeno-trials-defense-v208.mjs',
+  'scripts/verify-xeno-trials-finishers-v208.mjs',
+  'scripts/verify-xeno-trials-practice-v208.mjs',
+  'scripts/verify-xeno-trials-ripostes-v208.mjs',
+  'scripts/verify-xeno-trials-signature-kit-v208.mjs'
+]);
+
 const XENO_STANDALONE_SOURCE_ONLY_V207 = new Set([
   '.github/workflows/xeno-trials-standalone-v207.yml',
   'docs/forge/xeno-trials/V207-STANDALONE-GAMEPLAY.md',
@@ -870,6 +881,7 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_GAMEPLAY_SOURCE_ONLY_V208.has(path)) return !built && !directory;
   if (XENO_STANDALONE_SOURCE_ONLY_V207.has(path)) return !built;
   if (XENO_PRODUCTION_SOURCE_ONLY_V206.has(path)) return !built;
   const productionAdmissionV206 = publicXenoProductionPathAdmissionV206(path, { directory, built });

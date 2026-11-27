@@ -3,6 +3,7 @@ import { getXenoTrialsHordeProtocolV180, XENO_TRIALS_HORDE_LIMITS_V180 as LIMITS
 import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
 import { getXenoTrialsAttackV147, getXenoTrialsSignatureV147, getXenoTrialsSpecialStyleV147 } from './xeno-trials-signatures-v147.js';
 import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
+import { getXenoTrialsRiposteV208, validXenoTrialsRiposteAttackV208, XENO_TRIALS_RIPOSTE_KIND_V208 } from './xeno-trials-ripostes-v208.js';
 import { XENO_TRIALS_AI_STATES_V119 } from './xeno-trials-ai-v119.js';
 import { XENO_TRIALS_ACID_POOL_V152 as ACID, hasXenoTrialsAcidPoolsV152 } from './xeno-trials-acid-pools-v152.js';
 import { XENO_TRIALS_ARENA_V105 as ARENA } from './xeno-trials-geometry-v105.js';
@@ -10,6 +11,9 @@ import { getXenoTrialsOperationV188, validateXenoTrialsOperationSnapshotV188,
   isXenoTrialsOperationForwardV188 } from './xeno-trials-operations-v188.js';
 import { validateXenoTrialsStageHazardsV188, isXenoTrialsStageHazardsForwardV188 } from './xeno-trials-stage-hazards-v188.js';
 import { XENO_TRIALS_MOVE_ATTACKS_V207, validXenoTrialsMovesetV207, xenoTrialsMovePoseV207 } from './xeno-trials-moveset-v207.js';
+import { XENO_TRIALS_SIGNATURE_KINDS_V208, validXenoTrialsSignatureActionV208,
+  validXenoTrialsSignatureEventV208 } from './xeno-trials-signature-kit-v208.js';
+import { validXenoTrialsParryEventV208, validXenoTrialsParryStateV208, xenoTrialsParryStateV208 } from './xeno-trials-defense-v208.js';
 
 export const XENO_TRIALS_CHECKPOINT_LIMITS_V186 = Object.freeze({ maxCharacters: 524288, maxNodes: 40000, maxDepth: 24 });
 const actions = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super', 'interact'];
@@ -61,11 +65,17 @@ function validBrain(brain, ticks) {
 }
 function validAttack(attack, fighter, match) {
   if (attack === null) return true;
-  const spec = getXenoTrialsAttackV147(getXenoTrialsFighterV96(fighter.id), attack?.kind, XENO_TRIALS_ATTACKS_V96[attack?.kind]);
-  if (!record(attack) || !spec || !['light', 'heavy', 'special', 'super', ...XENO_TRIALS_MOVE_ATTACKS_V207].includes(attack.kind)
+  const definition = getXenoTrialsFighterV96(fighter.id);
+  const spec = getXenoTrialsAttackV147(definition, attack?.kind, XENO_TRIALS_ATTACKS_V96[attack?.kind]);
+  if (!record(attack) || !spec || !['light', 'heavy', 'special', 'super', XENO_TRIALS_RIPOSTE_KIND_V208,
+    ...XENO_TRIALS_MOVE_ATTACKS_V207, ...XENO_TRIALS_SIGNATURE_KINDS_V208].includes(attack.kind)
     || !integer(attack.id, 1, match.serial) || !number(attack.age, 0, spec.startup + spec.active + spec.recovery)
-    || ![-1, 1].includes(attack.facing) || typeof attack.hit !== 'boolean' || typeof attack.emitted !== 'boolean') return false;
+    || ![-1, 1].includes(attack.facing) || typeof attack.hit !== 'boolean' || typeof attack.emitted !== 'boolean'
+    || match.config.rulesV119.noSpecial && attack.kind === XENO_TRIALS_RIPOSTE_KIND_V208
+    || !validXenoTrialsRiposteAttackV208(attack, fighter, match, getXenoTrialsRiposteV208(definition))) return false;
   if (attack.kind === 'super' && !(fighter.stats.supersV148 > 0)) return false;
+  if (XENO_TRIALS_SIGNATURE_KINDS_V208.includes(attack.kind) && (fighter.stats.specials < 1 || match.config.rulesV119.noSpecial
+    || !validXenoTrialsSignatureActionV208(attack, spec, true))) return false;
   const historyLimit = Math.min(match.hordeV180.totalEnemies,
     LIMITS.maxConcurrent + Math.ceil(spec.active * 120 / LIMITS.reinforcementTicks) + 1);
   for (const key of ['hitTargetsV180', 'flameTargetsV180']) if (attack[key] !== undefined
@@ -204,6 +214,7 @@ function admitSnapshot(snapshot, ticket) {
       || !number(fighter.specialCooldown, 0, 60) || !number(fighter.hitFlash, 0, 1)
       || typeof fighter.guard !== 'boolean' || !controls(fighter.previousInput) || !controls(fighter.rearmControls)
       || !validXenoTrialsMovesetV207(fighter) || raw.phase !== 'active' && xenoTrialsMovePoseV207(fighter)
+      || !validXenoTrialsParryStateV208(raw, fighter)
       || !validStats(fighter.stats, raw.tick, index ? playerDefinition.hp : healthSpent) || !validAttack(fighter.attack, fighter, raw)) return null;
     if (fighter.superMeterV148 !== undefined && (!getXenoTrialsSuperV148(definition) || !number(fighter.superMeterV148, 0, 100)
       || fighter.superMeterV148 > Math.max(0, fighter.stats.damage * .6
@@ -219,7 +230,11 @@ function admitSnapshot(snapshot, ticket) {
   if (!validStats(horde.opponentStats, raw.tick, playerDefinition.hp) || !validBrain(raw.ai, raw.tick)
     || !validProjectiles(raw) || !validAcid(raw, protocol)
     || !Array.isArray(raw.events) || raw.events.length > 32 || raw.events.some(event => !integer(event.id, 1, raw.serial)
-      || !integer(event.tick, 0, raw.tick) || typeof event.type !== 'string' || ['match-end', 'round-end'].includes(event.type))) return null;
+      || !integer(event.tick, 0, raw.tick) || typeof event.type !== 'string' || ['match-end', 'round-end'].includes(event.type)
+      || !validXenoTrialsSignatureEventV208(event, id => event.side === 'player' ? id === playerDefinition.id
+        : event.side === 'opponent' && protocol.waves.some(item => item.opponentIds.includes(id)
+          || item.enemySlotsV186?.some(slot => slot.fighterId === id)))
+      || event.type === 'parry-v208' && !validXenoTrialsParryEventV208(raw, event))) return null;
   const receivedDamage = horde.opponentStats.damage + raw.fighters.slice(1).reduce((sum, enemy) => sum + enemy.stats.damage, 0);
   if (receivedDamage + (operation ? raw.stageHazardsV188.playerDamage : 0) !== playerDefinition.hp - raw.fighters[0].hp) return null;
   if (raw.synthEffectsV110 !== undefined && (!Array.isArray(raw.synthEffectsV110) || raw.synthEffectsV110.length > LIMITS.maxEffects
@@ -259,6 +274,7 @@ export function isXenoTrialsCheckpointForwardV186(previous, next) {
       for (const fighter of copy.fighters) {
         delete fighter.previousInput; delete fighter.rearmControls;
         fighter.movesetV207 = xenoTrialsMovePoseV207(fighter);
+        fighter.parryV208 = xenoTrialsParryStateV208(fighter);
       }
       return copy;
     };

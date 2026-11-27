@@ -1,9 +1,18 @@
 import { XENO_TRIALS_ARENA_V105, getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
 
-export const XENO_TRIALS_MOVE_CONTROLS_V207 = Object.freeze(['crouch', 'evade', 'antiAir']);
+export const XENO_TRIALS_MOVE_CONTROLS_V207 = Object.freeze(['crouch', 'evade', 'antiAir', 'signature2', 'signature3']);
 export const XENO_TRIALS_MOVE_ATTACKS_V207 = Object.freeze(['low', 'anti-air', 'advance']);
-const CROUCH = 1, EVADE = 2, ANTI_AIR = 4, ALL = CROUCH | EVADE | ANTI_AIR;
+const CROUCH = 1, EVADE = 2, ANTI_AIR = 4, SIGNATURE_2 = 8, SIGNATURE_3 = 16;
+const ALL = CROUCH | EVADE | ANTI_AIR | SIGNATURE_2 | SIGNATURE_3;
 export const XENO_TRIALS_EVADE_V207 = Object.freeze({ cost: 14, travelTicks: 18, recoveryTicks: 8, advanceMinimum: 8 });
+const groundedTraversal = new Map([
+  ['drive-v123-neca-snake-series13-v14', 'pose-v123-drive-neca-snake-series13-v14'],
+  ['synth-automated-powerloader', 'pose-v116-automated-powerloader']
+]);
+
+export function hasXenoTrialsGroundTraversalV208(definition) {
+  return Boolean(definition?.profileId && groundedTraversal.get(definition.id) === definition.profileId);
+}
 
 function readControls(controls) {
   return XENO_TRIALS_MOVE_CONTROLS_V207.reduce((mask, name, index) => mask | (controls[name] === true ? 1 << index : 0), 0);
@@ -42,12 +51,13 @@ export function clearXenoTrialsMovePoseV207(fighter) {
 export function readXenoTrialsMovesetV207(fighter, controls) {
   const held = readControls(controls);
   const state = ensureMoveset(fighter, held);
-  if (!state) return { low: false, evade: false, antiAir: false };
+  if (!state) return { low: false, evade: false, antiAir: false, signature2: false, signature3: false };
   state.rearm &= held;
   const active = held & ~state.rearm;
   const fresh = active & ~state.held;
   state.held = held;
-  return { low: Boolean(active & CROUCH), evade: Boolean(fresh & EVADE), antiAir: Boolean(fresh & ANTI_AIR) };
+  return { low: Boolean(active & CROUCH), evade: Boolean(fresh & EVADE), antiAir: Boolean(fresh & ANTI_AIR),
+    signature2: Boolean(fresh & SIGNATURE_2), signature3: Boolean(fresh & SIGNATURE_3) };
 }
 
 export function getXenoTrialsLowScaleV207(body) {
