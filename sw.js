@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-xeno-trials-gameplay-v213';
+const CACHE = 'atf-v143-xeno-trials-tablet-v216';
 const SHELL = Object.freeze([
   '/src/xeno-trials-cargo-interlock-v213.js',
   '/src/xeno-trials-finishers-v213.js',
@@ -263,6 +263,7 @@ const SHELL = Object.freeze([
   '/assets/openai/ui/title/v90/orbitals/narcissus-side-depth.png',
   '/assets/openai/ui/title/v90/orbitals/nostromo-threequarter.png',
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
+  '/assets/openai/xeno-trials-v216/tablet-chassis.png',
   '/bioforge-v80.css',
   '/catalog-v62.css',
   '/command-v110.css',

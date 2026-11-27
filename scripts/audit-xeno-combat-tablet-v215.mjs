@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedXenoTabletSpriteDigestV216, xenoTabletSpriteRuntimeSourcesV216,
+  verifyXenoTabletSpriteV216 } from './audit-xeno-tablet-sprite-v216.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -174,20 +176,22 @@ export const XENO_COMBAT_TABLET_SUCCESSORS_V215 = freeze({
 });
 
 export function reviewedXenoCombatTabletDigestV215(path, endpoint) {
-  if (!Object.hasOwn(XENO_COMBAT_TABLET_SUCCESSORS_V215, path)) return endpoint;
+  if (!Object.hasOwn(XENO_COMBAT_TABLET_SUCCESSORS_V215, path)) return reviewedXenoTabletSpriteDigestV216(path, endpoint);
   const receipt = XENO_COMBAT_TABLET_SUCCESSORS_V215[path];
   assert.equal(endpoint, receipt.previousSha256, 'Incorrect V214 endpoint for V215: ' + path);
-  return receipt.sha256;
+  return reviewedXenoTabletSpriteDigestV216(path, receipt.sha256);
 }
 
 export function xenoCombatTabletRuntimeSourcesV215(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(XENO_COMBAT_TABLET_SUCCESSORS_V215)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined && result[path] !== receipt.sha256) reviewedXenoCombatTabletDigestV215(path, result[path]);
-    result[path] = receipt.sha256;
+    const current = reviewedXenoTabletSpriteDigestV216(path, receipt.sha256);
+    if (result[path] !== undefined && result[path] !== receipt.sha256 && result[path] !== current)
+      reviewedXenoCombatTabletDigestV215(path, result[path]);
+    result[path] = current;
   }
-  return Object.freeze(result);
+  return xenoTabletSpriteRuntimeSourcesV216(result);
 }
 
 export function verifyXenoCombatTabletV215(readSource = readRepository) {
@@ -199,7 +203,7 @@ export function verifyXenoCombatTabletV215(readSource = readRepository) {
     assert.notEqual(path, 'scripts/audit-xeno-combat-tablet-v215.mjs', 'V215 cannot admit its own bytes');
     assert.ok(['runtime', 'tooling'].includes(receipt.kind) && isHash(receipt.sha256), 'Invalid V215 receipt: ' + path);
     assert.ok(isHash(receipt.previousSha256) && receipt.previousSha256 !== receipt.sha256, 'Invalid V215 predecessor: ' + path);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V215 source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedXenoTabletSpriteDigestV216(path, receipt.sha256), 'Unreviewed V215 source bytes: ' + path);
   }
   for (const [path, receipt] of Object.entries(XENO_COMBAT_TABLET_DECLARATIONS_V215)) {
     const source = readSource(path).toString();
@@ -208,6 +212,7 @@ export function verifyXenoCombatTabletV215(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing V214 declaration boundaries: ' + path);
     assert.equal(sha(source.slice(start, end)), receipt.sha256, 'Historical V214 declarations changed: ' + path);
   }
+  verifyXenoTabletSpriteV216(readSource);
   return Object.freeze({ baseline: XENO_COMBAT_TABLET_BASELINE_V215, successors: successors.length,
     historicalResultsTransferred: false });
 }

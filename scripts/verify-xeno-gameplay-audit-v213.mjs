@@ -9,6 +9,9 @@ import { XENO_SELECTION_BASELINE_V214, XENO_SELECTION_DECLARATIONS_V214, XENO_SE
   reviewedXenoSelectionDigestV214, xenoSelectionRuntimeSourcesV214, verifyXenoSelectionV214 } from './audit-xeno-selection-v214.mjs';
 import { XENO_COMBAT_TABLET_BASELINE_V215, XENO_COMBAT_TABLET_DECLARATIONS_V215, XENO_COMBAT_TABLET_SUCCESSORS_V215,
   reviewedXenoCombatTabletDigestV215, xenoCombatTabletRuntimeSourcesV215, verifyXenoCombatTabletV215 } from './audit-xeno-combat-tablet-v215.mjs';
+import { XENO_TABLET_SPRITE_BASELINE_V216, XENO_TABLET_SPRITE_DECLARATIONS_V216, XENO_TABLET_SPRITE_SUCCESSORS_V216,
+  XENO_TABLET_SPRITE_NEW_INPUTS_V216, reviewedXenoTabletSpriteDigestV216, xenoTabletSpriteRuntimeSourcesV216,
+  verifyXenoTabletSpriteV216 } from './audit-xeno-tablet-sprite-v216.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 
 const root = new URL('..', import.meta.url);
@@ -91,20 +94,18 @@ test('V215 binds the combat tablet changes to the V214 Git sources and rejects c
   assert.equal(XENO_COMBAT_TABLET_BASELINE_V215, '7e22ceb1134d79c5353080932aa7ae9c259327cb');
   const runtimePaths = Object.entries(XENO_COMBAT_TABLET_SUCCESSORS_V215)
     .filter(([, receipt]) => receipt.kind === 'runtime').map(([path]) => path).sort();
-  const allowed = ['src/i18n-auto-v185.js', 'src/xeno-trials-runtime-v96.js', 'src/xeno-trials-ui-v96.js', 'xeno-trials-fullscreen-v119.css'];
-  const expected = allowed.filter(path => sha(read(path)) !== sha(git('show', `${XENO_COMBAT_TABLET_BASELINE_V215}:${path}`)));
-  assert.deepEqual(runtimePaths, expected);
-  assert.ok(runtimePaths.includes('src/xeno-trials-ui-v96.js'));
-  assert.ok(runtimePaths.includes('src/xeno-trials-runtime-v96.js'));
-  assert.ok(runtimePaths.includes('xeno-trials-fullscreen-v119.css'));
+  assert.deepEqual(runtimePaths, ['src/i18n-auto-v185.js', 'src/xeno-trials-runtime-v96.js', 'src/xeno-trials-ui-v96.js',
+    'xeno-trials-fullscreen-v119.css']);
   for (const [path, receipt] of Object.entries(XENO_COMBAT_TABLET_SUCCESSORS_V215)) {
     assert.equal(sha(git('show', `${XENO_COMBAT_TABLET_BASELINE_V215}:${path}`)), receipt.previousSha256, path);
+    assert.equal(sha(git('show', `${XENO_TABLET_SPRITE_BASELINE_V216}:${path}`)), receipt.sha256, path);
     assert.equal(reviewedXenoCombatTabletDigestV215(path, receipt.previousSha256), sha(read(path)), path);
     assert.throws(() => reviewedXenoCombatTabletDigestV215(path, receipt.sha256), /Incorrect V214 endpoint for V215/);
   }
   verifyHistoricalDeclarations(XENO_COMBAT_TABLET_DECLARATIONS_V215, XENO_COMBAT_TABLET_BASELINE_V215);
   const runtime = xenoSelectionRuntimeSourcesV214({ historical: 'untouched' });
-  for (const path of runtimePaths) assert.equal(runtime[path], XENO_COMBAT_TABLET_SUCCESSORS_V215[path].sha256);
+  for (const path of runtimePaths)
+    assert.equal(runtime[path], reviewedXenoTabletSpriteDigestV216(path, XENO_COMBAT_TABLET_SUCCESSORS_V215[path].sha256));
   assert.deepEqual(xenoCombatTabletRuntimeSourcesV215(runtime), runtime);
   assert.equal(verifyXenoCombatTabletV215().historicalResultsTransferred, false);
   const css = 'xeno-trials-fullscreen-v119.css';
@@ -112,11 +113,70 @@ test('V215 binds the combat tablet changes to the V214 Git sources and rejects c
     error => error.message.includes(css) && error.message.includes('Unreviewed'));
 });
 
-test('V215 remains the independent terminal and the audit is admitted only as source', () => {
+test('V215 relays the tablet sprite revision and the audit is admitted only as source', () => {
   const path = 'scripts/audit-xeno-combat-tablet-v215.mjs';
-  assert.doesNotMatch(read(path).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.match(read(path).toString(), /from '\.\/audit-xeno-tablet-sprite-v216\.mjs'/);
   assert.ok(!Object.hasOwn(XENO_COMBAT_TABLET_SUCCESSORS_V215, path));
   assert.equal(isPublicDistributionPathV86(path), true);
   assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
   assert.equal(isPublicDistributionPathV86('scripts/audit-xeno-unreviewed-v215.mjs'), false);
+});
+
+test('V216 preserves the V215 declarations and projects the exact sprite styles into the runtime', () => {
+  const css = 'xeno-trials-fullscreen-v119.css';
+  assert.equal(XENO_TABLET_SPRITE_BASELINE_V216, 'fc2c6549295521cc731fa3d90b79b24c304d769a');
+  assert.deepEqual(Object.entries(XENO_TABLET_SPRITE_SUCCESSORS_V216)
+    .filter(([, receipt]) => receipt.kind === 'runtime').map(([path]) => path).sort(), ['sw.js', css]);
+  verifyHistoricalDeclarations(XENO_TABLET_SPRITE_DECLARATIONS_V216, XENO_TABLET_SPRITE_BASELINE_V216);
+  const runtime = xenoGameplayRuntimeSourcesV213({ historical: 'untouched' });
+  assert.equal(runtime.historical, 'untouched');
+  for (const [path, receipt] of Object.entries(XENO_TABLET_SPRITE_SUCCESSORS_V216)) {
+    assert.equal(sha(git('show', `${XENO_TABLET_SPRITE_BASELINE_V216}:${path}`)), receipt.previousSha256, path);
+    assert.equal(reviewedXenoTabletSpriteDigestV216(path, receipt.previousSha256), sha(read(path)), path);
+    assert.throws(() => reviewedXenoTabletSpriteDigestV216(path, receipt.sha256), /Incorrect V215 endpoint for V216/);
+    if (receipt.kind === 'runtime') assert.equal(runtime[path], receipt.sha256, path);
+  }
+  assert.deepEqual(xenoTabletSpriteRuntimeSourcesV216(runtime), runtime);
+  assert.equal(verifyXenoTabletSpriteV216().historicalResultsTransferred, false);
+  assert.throws(() => verifyXenoCombatTabletV215(path => path === css ? Buffer.from('unreviewed sprite styles') : read(path)),
+    error => error.message.includes(css) && error.message.includes('Unreviewed'));
+});
+
+test('V216 admits only exact public sprite assets and keeps its terminal audit out of the build', () => {
+  const terminal = 'scripts/audit-xeno-tablet-sprite-v216.mjs';
+  assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.ok(!Object.hasOwn(XENO_TABLET_SPRITE_SUCCESSORS_V216, terminal));
+  assert.ok(!Object.hasOwn(XENO_TABLET_SPRITE_NEW_INPUTS_V216, terminal));
+  assert.equal(isPublicDistributionPathV86(terminal), true);
+  assert.equal(isPublicDistributionPathV86(terminal, { built: true }), false);
+  assert.equal(isPublicDistributionPathV86('scripts/audit-xeno-unreviewed-v216.mjs'), false);
+  const inputs = Object.entries(XENO_TABLET_SPRITE_NEW_INPUTS_V216);
+  const directory = 'assets/openai/xeno-trials-v216';
+  assert.deepEqual(inputs.map(([path]) => path), [directory + '/tablet-chassis.png']);
+  for (const built of [false, true]) {
+    assert.equal(isPublicDistributionPathV86(directory, { built, directory: true }), true);
+    assert.equal(isPublicDistributionPathV86(directory + '/draft.png', { built }), false);
+    assert.equal(isPublicDistributionPathV86(directory + '/tablet-chassis.png', { built, directory: true }), false);
+  }
+  const baseline = new Set(git('ls-tree', '-r', '--name-only', XENO_TABLET_SPRITE_BASELINE_V216).toString().split('\n'));
+  for (const [path, receipt] of inputs) {
+    assert.equal(receipt.kind, 'asset', path);
+    assert.equal(baseline.has(path), false, path);
+    assert.equal(isPublicDistributionPathV86(path), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), true, path);
+    assert.throws(() => verifyXenoCombatTabletV215(candidate => candidate === path ? Buffer.from('unreviewed art') : read(candidate)),
+      error => error.message.split('\n', 1)[0] === 'Unreviewed V216 source bytes: ' + path);
+  }
+});
+
+test('V216 connects the RGBA tablet sprite to the combat styles and offline shell', () => {
+  const asset = 'assets/openai/xeno-trials-v216/tablet-chassis.png';
+  const png = read(asset);
+  assert.deepEqual(png.subarray(0, 8), Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+  assert.equal(png.subarray(12, 16).toString(), 'IHDR');
+  assert.equal(png[24], 8);
+  assert.equal(png[25], 6);
+  const css = read('xeno-trials-fullscreen-v119.css').toString();
+  assert.match(css, /border-image:\s*url\(['"]?assets\/openai\/xeno-trials-v216\/tablet-chassis\.png['"]?\)/);
+  assert.ok(read('sw.js').toString().includes("'/" + asset + "'"), 'The main shell precaches the tablet sprite');
 });
