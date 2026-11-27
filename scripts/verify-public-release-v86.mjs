@@ -36,6 +36,7 @@ import { publicXenoSpritePathAdmissionV188, verifyXenoSpriteAdmissionsV188 } fro
 import { publicCampaignArtPathAdmissionV180, verifyCampaignArtAdmissionsV180 } from './public-campaign-art-admissions-v180.mjs';
 
 const ROOT_FILES = new Set([
+  'xeno-trials.html', 'xeno-trials-standalone.css',
   'xeno-arbiter-v190.css',
   'campaign-lethe-continuity-v163.css',
   'campaign-convoy-history-v162.css',
@@ -729,6 +730,19 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+const XENO_STANDALONE_SOURCE_ONLY_V207 = new Set([
+  '.github/workflows/xeno-trials-standalone-v207.yml',
+  'docs/forge/xeno-trials/V207-STANDALONE-GAMEPLAY.md',
+  'scripts/audit-xeno-standalone-v207.mjs',
+  'scripts/build-xeno-trials-v207.mjs',
+  'scripts/verify-xeno-standalone-audit-v207.mjs',
+  'scripts/verify-xeno-trials-standalone.mjs',
+  'scripts/verify-xeno-trials-artifact-v207.mjs',
+  'scripts/verify-xeno-trials-finishers-v207.mjs',
+  'scripts/verify-xeno-trials-moveset-v207.mjs',
+  'scripts/verify-xeno-trials-practice-v207.mjs'
+]);
+
 const XENO_PRODUCTION_SOURCE_ONLY_V206 = new Set([
   'scripts/audit-xeno-production-assets-v206.mjs',
   'scripts/public-xeno-production-admissions-v206.mjs',
@@ -856,6 +870,7 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_STANDALONE_SOURCE_ONLY_V207.has(path)) return !built;
   if (XENO_PRODUCTION_SOURCE_ONLY_V206.has(path)) return !built;
   const productionAdmissionV206 = publicXenoProductionPathAdmissionV206(path, { directory, built });
   if (productionAdmissionV206 !== null) return productionAdmissionV206;
@@ -968,7 +983,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const path = prefix + entry.name;
       assert.equal(entry.isSymbolicLink(), false, `Unexpected symbolic link: ${path}`);
-      if (!prefix && ROOT_IGNORES.has(entry.name)) continue;
+      if (!prefix && (ROOT_IGNORES.has(entry.name) || (!built && entry.name === 'dist-xeno-trials' && entry.isDirectory()))) continue;
       assert.equal(isPublicDistributionPathV86(path, { directory: entry.isDirectory(), built }), true, `Unapproved distribution path: ${path}`);
       if (entry.isDirectory()) { await walk(join(directory, entry.name), path + '/'); continue; }
       assert.equal(entry.isFile(), true, `Unsupported filesystem entry: ${path}`);

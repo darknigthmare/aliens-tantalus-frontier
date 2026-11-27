@@ -43,6 +43,27 @@ test('deadzone, analog triggers, D-pad and conflicting directions preserve bound
   assertReleased(adapter.sample([fixture], active));
 });
 
+test('V207 stick and R3 actions are independent of guard and require neutral after pause', () => {
+  const adapter = createXenoTrialsGamepadV186(), fixture = pad();
+  const options = { ...active, allowMoves: true, allowInteract: true };
+  adapter.sample([fixture], options);
+  fixture.axes[1] = .75; fixture.axes[3] = -.75;
+  press(fixture, 11);
+  const input = adapter.sample([fixture], options).input;
+  assert.equal(input.crouch, true);
+  assert.equal(input.evade, true);
+  assert.equal(input.antiAir, true);
+  assert.equal(input.guard, false);
+  assert.equal(input.interact, false);
+  assertReleased(adapter.sample([fixture], { ...options, paused: true }));
+  assertReleased(adapter.sample([fixture], options));
+  fixture.axes[1] = fixture.axes[3] = 0;
+  fixture.buttons[11] = { value: 0 };
+  adapter.sample([fixture], options);
+  fixture.axes[1] = .75;
+  assert.equal(adapter.sample([fixture], options).input.crouch, true);
+});
+
 test('Start and Back toggle once per neutral press and can resume while combat is unavailable', () => {
   for (const index of [8, 9]) {
     const adapter = createXenoTrialsGamepadV186(), fixture = pad(); adapter.sample([fixture], active);

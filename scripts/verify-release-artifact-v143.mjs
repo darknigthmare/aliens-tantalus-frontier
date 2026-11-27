@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { resolve, join, posix } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import vm from 'node:vm';
-import { fileManifestV143, stampReleaseHtmlV143 } from './build-release-v143.mjs';
+import { fileManifestV143, stampReleaseHtmlV143, stampXenoTrialsHtmlV207 } from './build-release-v143.mjs';
 import { verifyPublicReleaseV86 } from './verify-public-release-v86.mjs';
 
 export async function verifyReleaseArtifactV143(root) {
@@ -16,6 +16,8 @@ export async function verifyReleaseArtifactV143(root) {
   for (const field of ['version', 'sourceCommit', 'buildId', 'builtAt', 'cacheName', 'saveSchema']) assert.equal(release[field], info[field], field);
   const html = await readFile(join(root, 'index.html'), 'utf8');
   assert.equal(stampReleaseHtmlV143(html, release), html, 'Visible HTML labels differ from the shipped release.');
+  const trialsHtml = await readFile(join(root, 'xeno-trials.html'), 'utf8');
+  assert.equal(stampXenoTrialsHtmlV207(trialsHtml, release), trialsHtml, 'The Trials launch page differs from the shipped release.');
   const context = vm.createContext({ self: { addEventListener() {} }, URL, Request, Response });
   vm.runInContext(await readFile(join(root, 'sw.js'), 'utf8') + ';globalThis.checked={CACHE,SHELL};', context);
   assert.equal(context.checked.CACHE, info.cacheName);

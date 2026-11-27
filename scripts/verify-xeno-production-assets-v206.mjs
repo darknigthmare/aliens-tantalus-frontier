@@ -8,6 +8,7 @@ import { XENO_PRODUCTION_ASSETS_BASELINE_V206 as baseline, XENO_PRODUCTION_ASSET
   XENO_PRODUCTION_ASSETS_SUCCESSORS_V206 as successors, XENO_PRODUCTION_ASSETS_NEW_INPUTS_V206 as inputs,
   reviewedXenoProductionAssetsDigestV206 as advance, verifyXenoProductionAssetsV206 as verify } from './audit-xeno-production-assets-v206.mjs';
 import { verifyXenoVisualAssetsV205 as verifyPrior, xenoVisualAssetsRuntimeSourcesV205 as runtimeSources } from './audit-xeno-visual-assets-v205.mjs';
+import { XENO_STANDALONE_PARENTS_V207, reviewedXenoStandaloneDigestV207 } from './audit-xeno-standalone-v207.mjs';
 import { publicXenoProductionPathAdmissionV206, verifyXenoProductionAdmissionsV206 } from './public-xeno-production-admissions-v206.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
 import { createBuildAssetFilter } from './build-asset-filter.mjs';
@@ -64,7 +65,9 @@ test('V206 extends the published V205 commit while preserving its complete histo
     assert.throws(() => advance(path, receipt.currentSha256), /Incorrect V205 endpoint for V206/, path);
   }
   for (const [path, receipt] of Object.entries(inputs)) {
-    assert.equal(publishedPaths.has(path), false, path); assert.equal(sha(read(path)), receipt.sha256, path);
+    assert.equal(publishedPaths.has(path), false, path);
+    assert.equal(sha(git(['show', XENO_STANDALONE_PARENTS_V207.trials + ':' + path])), receipt.sha256, path);
+    assert.equal(sha(read(path)), reviewedXenoStandaloneDigestV207(path, receipt.sha256), path);
   }
   assert.equal(advance('constructor', 'untouched'), 'untouched');
 });
@@ -112,7 +115,8 @@ test('corrupt production bytes fail through the V205 relay without granting a ru
   assert.deepEqual(runtimeSources(runtime), runtime);
   assert.equal(Object.keys(runtime).some(path => path.includes('v206')), false);
   const audit = 'scripts/audit-xeno-production-assets-v206.mjs';
-  assert.doesNotMatch(read(audit).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.match(read(audit).toString(), /from '\.\/audit-xeno-standalone-v207\.mjs'/);
+  assert.doesNotMatch(read('scripts/audit-xeno-standalone-v207.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   assert.match(read('scripts/audit-xeno-visual-assets-v205.mjs').toString(), /from '\.\/audit-xeno-production-assets-v206\.mjs'/);
   assert.equal(Object.hasOwn(inputs, audit), false); assert.equal(Object.hasOwn(successors, audit), false);
   const tests = collectReleaseTestsV143(JSON.parse(read('package.json')).scripts);

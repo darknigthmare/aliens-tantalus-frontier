@@ -194,3 +194,9 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active{
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="interact"]{grid-column:1/span 2;grid-row:3}
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls:has([data-xeno-action="super"][hidden]) [data-xeno-action="interact"]{grid-column:1/-1}
 }
+
+@media(max-width:760px) and (orientation:portrait), (max-height:520px) and (orientation:landscape){
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="crouch"]{grid-column:1;grid-row:4}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="evade"]{grid-column:2;grid-row:4}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="antiAir"]{grid-column:3/span 2;grid-row:4}
+}

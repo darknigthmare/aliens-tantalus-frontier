@@ -7,7 +7,7 @@ import { extname, join, normalize } from 'node:path';
 import { AUDIO_MIME_V77 } from '../src/audio-assets-v77.js';
 import { writeAudioManifestV77 } from './audio-scan-v77.mjs';
 import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
-import { stampReleaseHtmlV143 } from './build-release-v143.mjs';
+import { stampReleaseHtmlV143, stampXenoTrialsHtmlV207 } from './build-release-v143.mjs';
 
 const root = process.cwd();
 const port = Number(process.env.PORT || 4173);
@@ -25,6 +25,7 @@ function safePath(url) {
   catch { return null; }
   const relative = normalize(requested === '/' ? 'index.html' : requested.replace(/^\/+/, ''));
   if (relative.startsWith('..')) return null;
+  if (relative === 'xeno-trials') return join(root, 'xeno-trials.html');
   if (relative === 'archives' || relative.startsWith('archives/')) return null;
   if (relative.startsWith('dlc/') && relative !== RIVER_OF_PAIN_ROOT && relative !== RIVER_OF_PAIN_ROOT + '/'
     && relative !== ALIENS1986_RUNTIME_ROOT && relative !== ALIENS1986_RUNTIME_ROOT + '/'
@@ -43,6 +44,7 @@ createServer(async (request, response) => {
     if (info.isDirectory()) file = join(file, 'index.html');
     const bytes = await readFile(file);
     const body = file === join(root, 'index.html') ? stampReleaseHtmlV143(bytes.toString('utf8'), APP_RELEASE_V143)
+      : file === join(root, 'xeno-trials.html') ? stampXenoTrialsHtmlV207(bytes.toString('utf8'), APP_RELEASE_V143)
       : file === join(root, ALIENS1986_RUNTIME_ROOT, 'game.html') ? aliens1986Development.html : bytes;
     response.writeHead(200, {
       'content-type': mime[extname(file)] || 'application/octet-stream',

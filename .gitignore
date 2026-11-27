@@ -1,4 +1,5 @@
 dist/
+dist-xeno-trials/
 .vercel/
 node_modules/
 .qa/

@@ -1,0 +1,38 @@
+name: Xeno Trials standalone distribution
+on:
+  pull_request:
+  push:
+    branches: [main, feat/xeno-trials-standalone-v207]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: xeno-trials-standalone-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  standalone:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify source and the two distributions from one release build
+        run: |
+          npm run check
+          npm run build:trials
+          npm run check:built
+          npm run check:trials:built
+      - name: Retain the deployable standalone game
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: xeno-trials-standalone
+          path: dist-xeno-trials/
+          if-no-files-found: error
+          compression-level: 0

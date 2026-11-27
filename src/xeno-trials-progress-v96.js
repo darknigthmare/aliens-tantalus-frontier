@@ -1,3 +1,4 @@
+import { getXenoTrialsPracticeV207, normalizeXenoTrialsPracticeV207 } from './xeno-trials-practice-v207.js';
 import { XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
 import { createXenoTrialsModesProgressV119, normalizeXenoTrialsModesProgressV119, normalizeXenoTrialsRulesV119,
   resolveXenoTrialsActivityV119, settleXenoTrialsActivityV119 } from './xeno-trials-modes-v119.js';
@@ -9,7 +10,8 @@ import { createXenoTrialsDuelCheckpointV197, normalizeXenoTrialsDuelCheckpointV1
 import { getXenoTrialsOperationV188, validateXenoTrialsOperationSnapshotV188,
   getXenoTrialsOperationReceiptV188, isXenoTrialsOperationForwardV188 } from './xeno-trials-operations-v188.js';
 import { validateXenoTrialsStageHazardsV188, isXenoTrialsStageHazardsForwardV188 } from './xeno-trials-stage-hazards-v188.js';
-import { getArbiterProgramV191, getArbiterArchiveAccessV191 } from './xeno-arbiter-protocols-v191.js';
+import { getArbiterProgramV191 } from './xeno-arbiter-protocols-v191.js';
+import { getXenoTrialsArchiveAccessV207 } from './xeno-trials-archive-access-v207.js';
 
 const fighterIds = new Set(XENO_TRIALS_FIGHTERS_V96.map(f => f.id));
 const factionIds = new Set(XENO_TRIALS_FACTIONS_V96.map(f => f.id));
@@ -54,6 +56,8 @@ export function normalizeXenoTrialsProgressV96(value) {
   base.unlocked = [...new Set([...base.unlocked, ...(Array.isArray(value.unlocked) ? value.unlocked.filter(id => fighterIds.has(id)) : [])])];
   for (const id of factionIds) base.factionWins[id] = integer(value.factionWins?.[id]);
   base.modesV119 = normalizeXenoTrialsModesProgressV119(value.modesV119);
+  const practice = normalizeXenoTrialsPracticeV207(value.practiceClearedV207);
+  if (practice.length) base.practiceClearedV207 = practice;
   if (base.modesV119.challengeRun && !base.unlocked.includes(base.modesV119.challengeRun.playerId)) base.modesV119.challengeRun = null;
   base.ledger = (Array.isArray(value.ledger) ? value.ledger : []).filter(e => record(e)
     && /^xt96-\d+$/.test(e.matchId) && ['player', 'opponent', 'draw', 'abandoned'].includes(e.winner))
@@ -102,6 +106,14 @@ export function normalizeXenoTrialsProgressV96(value) {
 
 /** A save-owner guarded caller supplies a live snapshot. The transaction never
  * creates a ticket, grants a reward, changes economy or consumes a result. */
+export function completeXenoTrialsPracticeV207(value, id) {
+  const state = normalizeXenoTrialsProgressV96(value);
+  if (state.pending || !getXenoTrialsPracticeV207(id) || state.practiceClearedV207?.includes(id))
+    return { applied: false, state };
+  state.practiceClearedV207 = normalizeXenoTrialsPracticeV207([...(state.practiceClearedV207 || []), id]);
+  return { applied: true, state };
+}
+
 export function checkpointXenoTrialsV186(value, snapshot) {
   const state = normalizeXenoTrialsProgressV96(value), ticket = state.pending;
   if (!ticket || !['horde', 'operations'].includes(ticket.config.activityV119?.branch))
@@ -164,14 +176,14 @@ export function unlockXenoTrialsFighterV96(value, id) {
   return { applied: true, state };
 }
 
-export function beginXenoTrialsV96(value, configuration, { arbiterProgressV190 } = {}) {
+export function beginXenoTrialsV96(value, configuration, { arbiterProgressV190, standaloneV207 } = {}) {
   const state = normalizeXenoTrialsProgressV96(value);
   if (state.pending) return { applied: false, state, reason: 'pending-duel' };
   const config = normalizeXenoTrialsConfigV96(configuration);
   const archive = getArbiterProgramV191(config.activityV119?.id);
   if (archive && archive.branch !== config.activityV119.branch)
     return { applied: false, state, reason: 'activity-unavailable' };
-  if (archive && !getArbiterArchiveAccessV191(arbiterProgressV190).available)
+  if (archive && !getXenoTrialsArchiveAccessV207({ arbiterProgressV190, standaloneV207, trialsProgress: state }).available)
     return { applied: false, state, reason: 'arbiter-archives-locked' };
   if (!state.unlocked.includes(config.playerId)) return { applied: false, state, reason: 'fighter-locked' };
   if (state.modesV119.challengeRun && !config.activityV119) return { applied: false, state, reason: 'activity-unavailable' };

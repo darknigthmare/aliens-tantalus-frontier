@@ -204,16 +204,58 @@ export function getXenoTrialsCaptureReceiptV163(view,role){
   bounds:{...view.layout.bounds},floor:view.layout.ground,supportY:view.layout.frame.supportY,scale:view.layout.scale,
   engineBodiesUnchanged:true,referenceStatus:view.sourceStatus,statureMethod:view.layout.frame.statureMethod};
 }
+/** Use the ankle anchor of the native floor plate at the terminal engine root. */
+export function getXenoTrialsFloorLockV207(attacker, target, images) {
+ const direction = Math.sign(target.x - attacker.x);
+ if (!direction || attacker.facing !== direction) return null;
+ const atlas = getXenoTrialsCaptureAtlasV163(getXenoTrialsFighterV96(target.id), getXenoTrialsArtV96(target.id, target.variant));
+ const rig = getXenoTrialsRigV154(getXenoTrialsFighterV96(attacker.id), getXenoTrialsArtV96(attacker.id, attacker.variant));
+ if (!atlas || !rig || !ready(images?.get(atlas.path), atlas) || !ready(images?.get(rig.path), rig)) return null;
+ const attackerMetrics = getXenoTrialsRenderMetricsV110(attacker.id, attacker.variant);
+ const targetMetrics = getXenoTrialsRenderMetricsV110(target.id, target.variant);
+ const layout = frameLayout(atlas, 3, targetMetrics, target.x, direction, 450);
+ const rest = sampleXenoTrialsRigV154(rig, { clip: 'release', progress: 1, elapsed: .25, role: 'captor' });
+ const approach = sampleXenoTrialsRigV154(rig, { clip: 'restraint', progress: 1, elapsed: .12, role: 'captor' });
+ if (!rest || !approach || !layout.frame.fullFloorPin) return null;
+ const handAt = (pose, key) => worldPoint(rig, attackerMetrics, attacker,
+  projectXenoTrialsMeshPointV157(rig, pose, rig.contacts[key].point));
+ const targetAnchor = layout.contacts.supportNear;
+ const hold = pairedCaptor(rig, approach, attackerMetrics, attacker, [handAt(approach, 'handNear'), targetAnchor]);
+ const contactGap = distance(handAt(hold, 'handFar'), targetAnchor);
+ if (!Number.isFinite(contactGap) || contactGap > 8) return null;
+ return { attacker, target, rig, atlas, attackerMetrics, layout, rest, hold, targetAnchor, contactGap };
+}
+export function sampleXenoTrialsFloorLockV207(lock, gain) {
+ const { rig, rest, hold } = lock;
+ const blend = smooth(gain);
+ const vertices = rest.vertices.map((point, index) => point.map((value, axis) => value * (1 - blend) + hold.vertices[index][axis] * blend));
+ const frame = { ...hold, clip: 'floor-lock-v207', active: true, vertices, animation: 'original-native-floor-lock-v207' };
+ frame.contacts = projectContacts(rig, frame);
+ return frame;
+}
+function paintCaptureFrame(ctx, image, layout, alpha) {
+ if (alpha <= 0) return;
+ const [x0, y0, x1, y1] = layout.frame.rect;
+ ctx.save();
+ try {
+  ctx.globalAlpha *= alpha;
+  ctx.translate(layout.originX, layout.originY);
+  ctx.scale(layout.direction * layout.scale, layout.scale);
+  ctx.drawImage(image, x0, y0, x1 - x0, y1 - y0, x0, y0, x1 - x0, y1 - y0);
+ } finally { ctx.restore(); }
+}
+export function drawXenoTrialsFloorLockTargetV207(ctx, image, lock, alpha) {
+ if (!ready(image, lock.atlas) || typeof ctx?.drawImage !== 'function') return null;
+ paintCaptureFrame(ctx, image, lock.layout, alpha);
+ return { drawn: alpha > 0, sourcePath: lock.atlas.path, sourceSha256: lock.atlas.sourceSha256,
+  frameId: lock.layout.frame.id, visualRoot: lock.layout.rootX, floor: lock.layout.ground };
+}
 export function drawXenoTrialsCaptureTargetV163(ctx,image,view){
  if(!view||!ready(image,view.atlas)||typeof ctx?.drawImage!=='function')return null;
- const paint=(layout,alpha)=>{if(alpha<=0)return;const[x0,y0,x1,y1]=layout.frame.rect;
-  ctx.save();try{ctx.globalAlpha*=alpha;ctx.translate(layout.originX,layout.originY);ctx.scale(layout.direction*layout.scale,layout.scale);
-   ctx.drawImage(image,x0,y0,x1-x0,y1-y0,x0,y0,x1-x0,y1-y0);
-  }finally{ctx.restore();}};
  // Very short transitions between actual articulated poses, never a rigidly
  // rotated portrait. Stable hold/resistance paint one opaque frame only.
- if(view.previous&&view.mix<1)paint(view.previous,1-view.mix);
- paint(view.layout,view.previous?view.mix:1);
+ if(view.previous&&view.mix<1)paintCaptureFrame(ctx,image,view.previous,1-view.mix);
+ paintCaptureFrame(ctx,image,view.layout,view.previous?view.mix:1);
  return{rigId:'capture-atlas-v163-'+view.target.id,clip:view.record.phase==='recovery'?'release':view.record.escapeProgress>0?'struggle':'restraint',
   drawn:true,animation:'original-native-nine-pose-capture-v163',sourcePath:view.atlas.path,sourceSha256:view.atlas.sourceSha256,
   contacts:{...view.layout.contacts,head:view.layout.contacts.neck},canonExact:false,captureV163:getXenoTrialsCaptureReceiptV163(view,'captive')};

@@ -8,15 +8,16 @@ import { XENO_TRIALS_ACID_POOL_V152 as ACID, hasXenoTrialsAcidPoolsV152 } from '
 import { XENO_TRIALS_GRAPPLE_V153 as GRAPPLE, hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153 } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsCasteV151 } from './xeno-trials-castes-v151.js';
 import { normalizeXenoTrialsRulesV119 } from './xeno-trials-modes-v119.js';
+import { XENO_TRIALS_MOVE_ATTACKS_V207, validXenoTrialsMovesetV207, xenoTrialsMovePoseV207 } from './xeno-trials-moveset-v207.js';
 
 const sides = ['player', 'opponent'];
 const actions = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super'];
-const attacks = ['light', 'heavy', 'special', 'super'];
+const attacks = ['light', 'heavy', 'special', 'super', ...XENO_TRIALS_MOVE_ATTACKS_V207];
 const statKeys = ['hits', 'damage', 'blocks', 'specials', 'supersV148', 'acidTicksV152', 'grapplesV153', 'grappleTicksV153', 'grappleEscapesV153'];
 const fighterKeys = new Set(['side', 'id', 'variant', 'x', 'y', 'vy', 'facing', 'hp', 'stamina', 'guard', 'stun', 'attack',
-  'specialCooldown', 'hitFlash', 'previousInput', 'rearmControls', 'stats', 'superMeterV148', 'guardBrokenV147', 'deathBurstV151']);
+  'specialCooldown', 'hitFlash', 'previousInput', 'rearmControls', 'stats', 'superMeterV148', 'guardBrokenV147', 'deathBurstV151', 'movesetV207']);
 const eventTypes = ['attack', 'hit', 'block', 'guard-break', 'round-start', 'round-end', 'synth-detonation', 'xeno-detonation',
-  'acid-contact-v152', 'grapple-start-v153', 'grapple-end-v153', 'burster-death-v151'];
+  'acid-contact-v152', 'grapple-start-v153', 'grapple-end-v153', 'burster-death-v151', 'evade-v207'];
 const coreKeys = ['version', 'config', 'rng', 'accumulator', 'tick', 'round', 'opponentInputSourceV163', 'phase', 'phaseTime',
   'paused', 'timeRemaining', 'wins', 'roundWinner', 'roundReason', 'result', 'fighters', 'projectiles', 'events', 'serial', 'ai',
   'synthEffectsV110', 'acidDropsV152', 'acidPoolsV152', 'acidNextHitV152', 'grappleV153'];
@@ -77,6 +78,7 @@ function validFighter(fighter, side, definition, variant, hpLimit, otherLimit, m
     || !number(fighter.y, 0, 5000) || !number(fighter.vy, -5000, 5000) || !number(fighter.stamina, 0, definition.stamina)
     || !number(fighter.stun, 0, 5) || !number(fighter.hitFlash, 0, 1) || !number(fighter.specialCooldown, 0, 60)
     || typeof fighter.guard !== 'boolean' || !controls(fighter.previousInput) || !controls(fighter.rearmControls)
+    || !validXenoTrialsMovesetV207(fighter) || match.phase !== 'active' && xenoTrialsMovePoseV207(fighter)
     || (fighter.deathBurstV151 !== undefined && (fighter.deathBurstV151 !== true || fighter.hp !== 0 || !getXenoTrialsCasteV151(definition)?.deathBurst))
     || (fighter.guardBrokenV147 !== undefined && typeof fighter.guardBrokenV147 !== 'boolean')) return false;
   const stats = fighter.stats;
@@ -279,7 +281,9 @@ export function isXenoTrialsDuelCheckpointForwardV197(previous, next) {
       && b.rng === a.rng && b.projectiles.length === 0 && b.ai.decisions === 0 && fromRoundSpawn(b.fighters, hpLimits)
       && a.fighters.every((fighter, i) => same(fighter.stats, b.fighters[i].stats) && fighter.superMeterV148 === b.fighters[i].superMeterV148);
   }
-  const compare = snapshot => ({ ...snapshot, fighters: snapshot.fighters.map(({ previousInput, rearmControls, ...fighter }) => fighter) });
+  const compare = snapshot => ({ ...snapshot,
+    fighters: snapshot.fighters.map(({ previousInput, rearmControls, movesetV207, ...fighter }) => ({
+      ...fighter, movesetV207: xenoTrialsMovePoseV207({ movesetV207 }) })) });
   return same(compare(a), compare(b));
 }
 

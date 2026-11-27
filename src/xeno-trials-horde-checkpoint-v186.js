@@ -9,6 +9,7 @@ import { XENO_TRIALS_ARENA_V105 as ARENA } from './xeno-trials-geometry-v105.js'
 import { getXenoTrialsOperationV188, validateXenoTrialsOperationSnapshotV188,
   isXenoTrialsOperationForwardV188 } from './xeno-trials-operations-v188.js';
 import { validateXenoTrialsStageHazardsV188, isXenoTrialsStageHazardsForwardV188 } from './xeno-trials-stage-hazards-v188.js';
+import { XENO_TRIALS_MOVE_ATTACKS_V207, validXenoTrialsMovesetV207, xenoTrialsMovePoseV207 } from './xeno-trials-moveset-v207.js';
 
 export const XENO_TRIALS_CHECKPOINT_LIMITS_V186 = Object.freeze({ maxCharacters: 524288, maxNodes: 40000, maxDepth: 24 });
 const actions = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super', 'interact'];
@@ -61,7 +62,7 @@ function validBrain(brain, ticks) {
 function validAttack(attack, fighter, match) {
   if (attack === null) return true;
   const spec = getXenoTrialsAttackV147(getXenoTrialsFighterV96(fighter.id), attack?.kind, XENO_TRIALS_ATTACKS_V96[attack?.kind]);
-  if (!record(attack) || !spec || !['light', 'heavy', 'special', 'super'].includes(attack.kind)
+  if (!record(attack) || !spec || !['light', 'heavy', 'special', 'super', ...XENO_TRIALS_MOVE_ATTACKS_V207].includes(attack.kind)
     || !integer(attack.id, 1, match.serial) || !number(attack.age, 0, spec.startup + spec.active + spec.recovery)
     || ![-1, 1].includes(attack.facing) || typeof attack.hit !== 'boolean' || typeof attack.emitted !== 'boolean') return false;
   if (attack.kind === 'super' && !(fighter.stats.supersV148 > 0)) return false;
@@ -202,6 +203,7 @@ function admitSnapshot(snapshot, ticket) {
       || !number(fighter.y, 0, 5000) || !number(fighter.vy, -5000, 5000) || !number(fighter.stun, 0, 5)
       || !number(fighter.specialCooldown, 0, 60) || !number(fighter.hitFlash, 0, 1)
       || typeof fighter.guard !== 'boolean' || !controls(fighter.previousInput) || !controls(fighter.rearmControls)
+      || !validXenoTrialsMovesetV207(fighter) || raw.phase !== 'active' && xenoTrialsMovePoseV207(fighter)
       || !validStats(fighter.stats, raw.tick, index ? playerDefinition.hp : healthSpent) || !validAttack(fighter.attack, fighter, raw)) return null;
     if (fighter.superMeterV148 !== undefined && (!getXenoTrialsSuperV148(definition) || !number(fighter.superMeterV148, 0, 100)
       || fighter.superMeterV148 > Math.max(0, fighter.stats.damage * .6
@@ -254,7 +256,10 @@ export function isXenoTrialsCheckpointForwardV186(previous, next) {
   if (next.tick === previous.tick) {
     const comparable = snapshot => {
       const copy = JSON.parse(JSON.stringify(snapshot)); delete copy.paused; delete copy.accumulator;
-      for (const fighter of copy.fighters) { delete fighter.previousInput; delete fighter.rearmControls; }
+      for (const fighter of copy.fighters) {
+        delete fighter.previousInput; delete fighter.rearmControls;
+        fighter.movesetV207 = xenoTrialsMovePoseV207(fighter);
+      }
       return copy;
     };
     if (!same(comparable(a), comparable(b))) return false;

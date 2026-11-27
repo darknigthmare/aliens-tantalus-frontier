@@ -1,10 +1,14 @@
+import { XENO_TRIALS_MOVE_CONTROLS_V207 } from './xeno-trials-moveset-v207.js';
+
 /** Standard Gamepad sampling only. The runtime owns polling, pause and the
  * simulation; this adapter never reads the DOM, RAF, navigator or saved state. */
 export const XENO_TRIALS_GAMEPAD_ACTIONS_V186 = Object.freeze(['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super']);
 export const XENO_TRIALS_GAMEPAD_MAPPING_V186 = Object.freeze({ deadzone: .30, triggerThreshold: .55,
   left: 'Left stick / D-pad left', right: 'Left stick / D-pad right', jump: 'A / D-pad up',
   guard: 'LT / LB / D-pad down', light: 'X', heavy: 'Y', special: 'B', super: 'RT / RB', pause: 'Start / Back' });
-const empty = () => Object.fromEntries(XENO_TRIALS_GAMEPAD_ACTIONS_V186.map(action => [action, false]));
+const empty = allowMoves => Object.fromEntries((allowMoves
+  ? [...XENO_TRIALS_GAMEPAD_ACTIONS_V186, ...XENO_TRIALS_MOVE_CONTROLS_V207]
+  : XENO_TRIALS_GAMEPAD_ACTIONS_V186).map(action => [action, false]));
 const axis = value => Number.isFinite(value) ? Math.max(-1, Math.min(1, value)) : 0;
 const button = (pad, index, threshold = .5) => {
   const value = pad.buttons?.[index];
@@ -16,7 +20,7 @@ const compatible = pad => pad && pad.connected !== false && pad.mapping === 'sta
 export function createXenoTrialsGamepadV186() {
   let owner = null, needsNeutral = true, pauseArmed = false;
   function reset() { needsNeutral = true; pauseArmed = false; }
-  function sample(gamepads, { active = false, paused = false, focused = true, allowInteract = false } = {}) {
+  function sample(gamepads, { active = false, paused = false, focused = true, allowInteract = false, allowMoves = false } = {}) {
     const pads = Array.from(gamepads || []).filter(compatible);
     let pad = owner === null ? null : pads.find(pad => pad.index === owner);
     const disconnected = owner !== null && !pad;
@@ -27,7 +31,7 @@ export function createXenoTrialsGamepadV186() {
       pad = pads[0] || null;
       if (pad) { owner = pad.index; reset(); }
     }
-    if (!pad) return { input: empty(), pauseToggle: false, connected: false, disconnected,
+    if (!pad) return { input: empty(allowMoves), pauseToggle: false, connected: false, disconnected,
       index: null, needsNeutral: true };
     const horizontal = axis(pad.axes?.[0]);
     const input = {
@@ -36,13 +40,15 @@ export function createXenoTrialsGamepadV186() {
       guard: button(pad, 6, .55) || button(pad, 4) || button(pad, 13),
       light: button(pad, 2), heavy: button(pad, 3), special: button(pad, 1),
       super: button(pad, 7, .55) || button(pad, 5),
+      ...(allowMoves ? { crouch: axis(pad.axes?.[1]) > .55, evade: button(pad, 11),
+        antiAir: axis(pad.axes?.[3]) < -.55 } : {}),
       ...(allowInteract ? { interact: button(pad, 10) } : {})
     };
     const combatHeld = Object.values(input).some(Boolean);
     if (input.left && input.right) input.left = input.right = false;
     const pausePressed = button(pad, 9) || button(pad, 8);
     const neutral = !pausePressed && !combatHeld;
-    if (!focused) { reset(); return { input: empty(), pauseToggle: false, connected: true, disconnected: false,
+    if (!focused) { reset(); return { input: empty(allowMoves), pauseToggle: false, connected: true, disconnected: false,
       index: owner, needsNeutral }; }
     const pauseToggle = pausePressed && pauseArmed;
     if (pausePressed) pauseArmed = false;
@@ -50,7 +56,7 @@ export function createXenoTrialsGamepadV186() {
     if (!active || paused || pauseToggle) needsNeutral = true;
     // A neutral frame acknowledges release; it never also dispatches an action.
     if (neutral) needsNeutral = false;
-    return { input: active && !paused && !needsNeutral && !pauseToggle ? input : empty(), pauseToggle,
+    return { input: active && !paused && !needsNeutral && !pauseToggle ? input : empty(allowMoves), pauseToggle,
       connected: true, disconnected: false, index: owner, needsNeutral };
   }
   return Object.freeze({ sample, reset });

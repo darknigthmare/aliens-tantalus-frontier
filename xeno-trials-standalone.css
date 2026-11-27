@@ -1,0 +1,153 @@
+.xts-page {
+  --xts-light: #e5efea;
+  --xts-subtle: #b4c6bf;
+  --xts-accent: #eac378;
+  background: #080e0e;
+  color: var(--xts-light);
+}
+
+.xts-page [hidden] { display: none !important; }
+
+.xts-launcher {
+  width: min(100%, 1500px);
+  margin-inline: auto;
+  padding: 0 clamp(16px, 3vw, 44px) clamp(24px, 5vw, 64px);
+}
+
+.xts-header {
+  display: flex;
+  min-height: 70px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font: 600 .75rem var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.xts-brand {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(8px, 1.6vw, 20px);
+  margin: 0;
+  color: var(--xts-accent);
+}
+
+.xts-brand span:last-child, .xts-build { color: var(--xts-subtle); }
+
+.xts-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: end;
+  min-height: clamp(500px, 68vh, 700px);
+  overflow: hidden;
+  border: 1px solid #44564c;
+  background: #121a16;
+}
+
+.xts-hero-picture, .xts-hero::after {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.xts-hero-picture { object-fit: cover; object-position: center; }
+
+.xts-hero::after {
+  z-index: -1;
+  content: '';
+  background: linear-gradient(to top, #070d0b 4%, #070d0bcc 35%, transparent 76%),
+    linear-gradient(to right, #08110ecf, #08110e5c 40%, #08110e0d 75%);
+}
+
+.xts-intro { width: 100%; padding: clamp(24px, 5vw, 72px); }
+
+.xts-kicker, .xts-stats {
+  margin: 0;
+  color: var(--xts-accent);
+  font: 600 clamp(.66rem, 1.35vw, .86rem) var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.xts-intro h1 {
+  margin: .18em 0 .2em;
+  color: var(--xts-light);
+  font: 900 clamp(3rem, 9.1vw, 8rem)/.86 var(--sans);
+  text-transform: uppercase;
+  letter-spacing: -.065em;
+}
+
+.xts-intro h1 span { color: var(--xts-accent); }
+
+.xts-description {
+  max-width: 52ch;
+  margin-block: 1rem 1.45rem;
+  color: var(--xts-light);
+  font-size: clamp(.97rem, 1.7vw, 1.16rem);
+  line-height: 1.5;
+}
+
+.xts-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem 1.2rem; }
+.xts-page .xts-launcher .button { min-height: 44px; font-size: .72rem; }
+.xts-page .xts-actions .primary { background: var(--xts-accent); border-color: var(--xts-accent); color: #181407; }
+.xts-page .xts-actions .primary:disabled { opacity: .55; cursor: default; }
+.xts-settings-link { color: var(--xts-light); text-underline-offset: .2rem; }
+.xts-stats { min-height: 1em; margin-top: 1rem; }
+.xts-status { width: fit-content; color: var(--xts-accent); }
+.xts-status:empty { margin: 0; }
+
+.xts-settings {
+  margin-top: clamp(28px, 4vw, 54px);
+  padding: clamp(18px, 3vw, 38px);
+  border: 1px solid #44564c;
+  background: #0d1714;
+}
+
+.xts-settings h2 { margin: 0 0 1.1rem; font-size: clamp(1.1rem, 3vw, 1.4rem); }
+.xts-settings-form { margin: 0; }
+.xts-settings fieldset {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  align-items: start;
+  gap: 1.2rem;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.xts-settings label { display: grid; gap: .55rem; color: var(--xts-light); }
+.xts-settings input[type="range"], .xts-motion input { accent-color: var(--xts-accent); }
+.xts-settings input, .xts-settings select { width: 100%; min-width: 0; min-height: 34px; }
+.xts-settings select { padding-inline: .5rem; }
+.xts-settings label.xts-motion {
+  display: flex;
+  align-self: end;
+  align-items: center;
+  min-height: 44px;
+}
+.xts-settings .xts-motion input {
+  flex: 0 0 20px;
+  width: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  margin: 0;
+}
+.xts-backup { display: flex; flex-wrap: wrap; gap: .65rem; border-top: 1px solid #394942; margin-top: 1.4rem; padding-top: 1rem; }
+.xts-backup p { flex-basis: 100%; color: var(--xts-subtle); margin: 0 0 .35rem; }
+.xts-launcher :focus-visible { outline: 2px solid var(--xts-accent); outline-offset: 4px; }
+
+.xts-page .xt-arbiter-dossier-v190 { display: none; }
+
+@media (max-width: 600px) {
+  .xts-header { min-height: 56px; font-size: .62rem; }
+  .xts-hero-picture { object-position: 43%; }
+  .xts-hero::after { background: linear-gradient(to top, #070d0b 5%, #070d0bde 34%, #070d0b22 75%); }
+  .xts-hero { min-height: max(430px, 68svh); }
+}
+
+html.xts-reduced-motion { scroll-behavior: auto; }
+@media (prefers-reduced-motion: reduce) { html:has(.xts-page) { scroll-behavior: auto; } }

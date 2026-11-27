@@ -8,6 +8,7 @@
  */
 import assert from 'node:assert/strict';
 import { reviewedCompletionDigestV186 } from './audit-xeno-trials-completion-v186.mjs';
+import { reviewedXenoStandaloneDigestV207 } from './audit-xeno-standalone-v207.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
@@ -55,11 +56,11 @@ export const ALIENS1986_MAIN_SUCCESSORS_V116 = freeze({
 
 export function reviewedAliens1986MainDigestV116(path, endpoint) {
   const receipt = ALIENS1986_MAIN_SUCCESSORS_V116[path];
-  if (!receipt) return endpoint;
+  if (!receipt) return reviewedXenoStandaloneDigestV207(path, endpoint);
   assert.equal(endpoint, receipt.previousSha256, 'Broken Aliens main predecessor: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid Aliens main digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'Aliens main successor must change bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedXenoStandaloneDigestV207(path, receipt.currentSha256);
 }
 
 export function verifyAliens1986MainSuccessionV116(readSource = readRepository) {
@@ -240,11 +241,19 @@ export const NATIVE_QA_RESOURCES_SOURCE_ONLY_PATHS_V187 = Object.freeze([
 
 export function reviewedNativeQaResourcesDigestV187(path, endpoint) {
   const receipt = NATIVE_QA_RESOURCES_SUCCESSORS_V187[path];
-  if (!receipt) return reviewedCompletionDigestV186(path, endpoint);
-  assert.equal(endpoint, receipt.previousSha256, 'Broken V186-to-V187 source chain: ' + path);
-  assert.ok(validHash(receipt.currentSha256), 'Invalid V187 source digest: ' + path);
-  assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V187 successor must identify changed bytes: ' + path);
-  return reviewedCompletionDigestV186(path, receipt.currentSha256);
+  if (receipt) {
+    assert.equal(endpoint, receipt.previousSha256, 'Broken V186-to-V187 source chain: ' + path);
+    assert.ok(validHash(receipt.currentSha256), 'Invalid V187 source digest: ' + path);
+    assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V187 successor must identify changed bytes: ' + path);
+  }
+  const reviewed = receipt?.currentSha256 ?? endpoint;
+  const obscura = OBSCURA_VERIFIER_SUCCESSOR_20261115;
+  if (path === obscura.path && reviewed === obscura.previousSha256) return reviewedObscuraDigest20261115(path, reviewed);
+  if (Object.hasOwn(RIVER_OF_PAIN_SUCCESSORS_20261125, path)
+    && reviewed === RIVER_OF_PAIN_SUCCESSORS_20261125[path].previousSha256) return reviewedRiverOfPainDigest20261125(path, reviewed);
+  if (Object.hasOwn(ALIENS1986_MAIN_SUCCESSORS_V116, path)
+    && reviewed === ALIENS1986_MAIN_SUCCESSORS_V116[path].previousSha256) return reviewedAliens1986MainDigestV116(path, reviewed);
+  return reviewedCompletionDigestV186(path, reviewed);
 }
 
 export function reviewedNativeQaDependencyGuardDigestV187(endpoint) {

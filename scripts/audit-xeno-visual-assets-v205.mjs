@@ -1,6 +1,7 @@
 /** Reviewed source inputs for Xeno Trials V205, anchored to the public V204 commit. */
 import assert from 'node:assert/strict';
 import { reviewedXenoProductionAssetsDigestV206, verifyXenoProductionAssetsV206 } from './audit-xeno-production-assets-v206.mjs';
+import { xenoStandaloneRuntimeSourcesV207 } from './audit-xeno-standalone-v207.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
@@ -302,17 +303,19 @@ export function xenoVisualAssetsRuntimeSourcesV205(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(XENO_VISUAL_ASSETS_SUCCESSORS_V205)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined && result[path] !== receipt.currentSha256)
+    const current = reviewedXenoProductionAssetsDigestV206(path, receipt.currentSha256);
+    if (result[path] !== undefined && result[path] !== current && result[path] !== receipt.currentSha256)
       assert.equal(result[path], receipt.previousSha256, 'Incorrect V205 runtime view predecessor: ' + path);
-    result[path] = receipt.currentSha256;
+    result[path] = current;
   }
   for (const [path, receipt] of Object.entries(XENO_VISUAL_ASSETS_NEW_INPUTS_V205)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined)
-      assert.equal(result[path], receipt.sha256, 'Incorrect new V205 runtime digest: ' + path);
-    result[path] = receipt.sha256;
+    const current = reviewedXenoProductionAssetsDigestV206(path, receipt.sha256);
+    if (result[path] !== undefined && result[path] !== receipt.sha256)
+      assert.equal(result[path], current, 'Incorrect new V205 runtime digest: ' + path);
+    result[path] = current;
   }
-  return Object.freeze(result);
+  return xenoStandaloneRuntimeSourcesV207(result);
 }
 
 export function verifyXenoVisualAssetsV205(readSource = readRepository) {

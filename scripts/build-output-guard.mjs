@@ -43,3 +43,11 @@ export function resolveSafeBuildOutput(projectRoot, requestedOutput = 'dist') {
   assertRealDirectoryChain(output);
   return output;
 }
+
+export function resolveSafeTrialsBuildOutput(projectRoot) {
+  const root = resolve(projectRoot);
+  if (root === parse(root).root) throw new Error('Unsafe Xeno Trials build root.');
+  const output = resolve(root, 'dist-xeno-trials');
+  assertRealDirectoryChain(output);
+  return output;
+}

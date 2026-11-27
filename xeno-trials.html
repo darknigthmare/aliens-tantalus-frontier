@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080e0e">
+  <meta name="description" content="Xeno Trials, édition autonome du simulateur MIRE. Campagne, duels, hordes et opérations.">
+  <meta name="atf-release" content="development">
+  <meta name="xeno-trials-worker" content="">
+  <meta name="application-name" content="Xeno Trials">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/openai/pwa/tantalus-frontier-icon-192-v68.png">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/xeno-trials-v96.css">
+  <link rel="stylesheet" href="/xeno-trials-fullscreen-v119.css">
+  <link rel="stylesheet" href="/xeno-trials-standalone.css">
+  <title>Xeno Trials</title>
+</head>
+<body class="xts-page">
+  <main class="xts-launcher" data-xts="launcher" data-i18n-skip>
+    <header class="xts-header">
+      <p class="xts-brand">MIRE<span aria-hidden="true">/</span><span data-xts-copy="unit">Liaison autonome</span></p>
+      <span class="xts-build" data-xts="build"></span>
+    </header>
+    <section class="xts-hero" aria-labelledby="xts-title">
+      <img class="xts-hero-picture" src="/assets/openai/campaign/xeno-arbiter-v190/arbiter-recovery.png" alt="" width="1672" height="941" fetchpriority="high">
+      <div class="xts-intro">
+        <p class="xts-kicker" data-xts-copy="intro">Dispositif de simulation biologique</p>
+        <h1 id="xts-title">Xeno <span>Trials</span></h1>
+        <p class="xts-description" data-xts-copy="description">Un terminal MIRE récupéré donne accès aux simulations clandestines de Weyland-Yutani. Traversez la campagne, tenez face aux hordes et remontez jusqu’aux archives Arbiter.</p>
+        <div class="xts-actions">
+          <button type="button" class="button primary" data-xts="play" disabled>Ouvrir le terminal</button>
+          <a class="xts-settings-link" href="#xts-settings" data-xts-copy="settings">Paramètres et sauvegarde</a>
+        </div>
+        <p class="xts-stats" data-xts="stats"></p>
+      </div>
+    </section>
+    <p class="xts-status" data-xts="status" role="status" aria-live="polite"></p>
+    <button type="button" class="button" data-xts="reload" data-xts-copy="reload" hidden>Recharger la sauvegarde</button>
+    <section class="xts-settings" id="xts-settings" aria-labelledby="xts-settings-title">
+      <h2 id="xts-settings-title" data-xts-copy="settings">Paramètres et sauvegarde</h2>
+      <form data-xts="settings" class="xts-settings-form">
+        <fieldset data-xts="settings-fields" disabled>
+          <label><span data-xts-copy="language">Langue</span>
+            <select name="language"><option value="fr" lang="fr">Français</option><option value="en" lang="en">English</option></select>
+          </label>
+          <label><span data-xts-copy="music">Musique</span><input type="range" name="music" min="0" max="100"></label>
+          <label><span data-xts-copy="effects">Effets sonores</span><input type="range" name="effects" min="0" max="100"></label>
+          <label class="xts-motion"><input type="checkbox" name="reducedMotion"><span data-xts-copy="motion">Réduire les animations</span></label>
+        </fieldset>
+      </form>
+      <div class="xts-backup">
+        <p data-xts-copy="save-explainer">La progression est enregistrée dans ce navigateur. Exportez un fichier pour la conserver ou la transférer.</p>
+        <button type="button" class="button" data-xts="export" data-xts-copy="export" disabled>Exporter la sauvegarde</button>
+        <button type="button" class="button" data-xts="import" data-xts-copy="import" disabled>Restaurer un fichier</button>
+        <input type="file" data-xts="file" accept=".json,application/json" hidden>
+      </div>
+    </section>
+    <noscript>JavaScript est nécessaire pour utiliser le terminal MIRE.</noscript>
+  </main>
+  <section id="xeno-trials-v96" class="view" data-panel="xenotrials" aria-label="Terminal MIRE Xeno Trials" hidden></section>
+  <script type="module" src="/src/xeno-trials-standalone.js"></script>
+</body>
+</html>

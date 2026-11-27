@@ -78,6 +78,9 @@ await cp(join(root, 'xeno-arbiter-v190.css'), join(output, 'xeno-arbiter-v190.cs
 await cp(join(root, 'echo9-v110.css'), join(output, 'echo9-v110.css'));
 await cp(join(root, 'player-appearance-v126.css'), join(output, 'player-appearance-v126.css'));
 await cp(join(root, 'xeno-trials-fullscreen-v119.css'), join(output, 'xeno-trials-fullscreen-v119.css'));
+for (const path of ['xeno-trials.html', 'xeno-trials-standalone.css']) {
+  await cp(join(root, path), join(output, path));
+}
 // QA masters, production intermediates and superseded duplicate atlases remain local, never deployed.
 await rm(join(output, 'assets', 'openai', 'sprites', 'raw'), { recursive: true, force: true });
 await rm(join(output, 'assets', 'openai', 'sprites', 'normalized', 'equipment'), { recursive: true, force: true });

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { XENO_TRIALS_FIGHTERS_V96 } from '../src/xeno-trials-data-v96.js';
 import { createXenoTrialsRuntimeV96 } from '../src/xeno-trials-runtime-v96.js';
 import { createXenoTrialsMatchV96, stepXenoTrialsMatchV96, getXenoTrialsSnapshotV96 } from '../src/xeno-trials-engine-v96.js';
+import { getXenoTrialsPracticeConfigV207 } from '../src/xeno-trials-practice-v207.js';
 import { beginXenoTrialsV96, createXenoTrialsProgressV96, settleXenoTrialsV96 } from '../src/xeno-trials-progress-v96.js';
 
 // Real runtime/engine, deterministic host. Browser APIs and image decoding only
@@ -284,5 +285,34 @@ test('a fast terminal KO does not freeze the fight announcement behind its resul
   assert.ok(h.text.includes('DÉFAITE'));
   assert.equal(h.text.includes('COMBAT'), false);
   assert.equal(h.queue.size, 0);
+  h.runtime.stop();
+});
+
+
+test('the native practice clock pauses, awards no ticket and stops after its last objective', async () => {
+  let checkpoints = 0;
+  const h = host({ practiceV207: 'guard', config: getXenoTrialsPracticeConfigV207('guard'),
+    onCheckpoint: () => { checkpoints++; return true; } });
+  await h.start();
+  h.key('KeyS');
+  h.frames(90);
+  assert.equal(h.runtime.getState().practiceV207.state, 'active');
+  assert.equal(h.runtime.pause(), true);
+  const before = h.runtime.getState();
+  h.frames(150);
+  assert.equal(h.runtime.getState().tick, before.tick);
+  assert.equal(h.runtime.getState().timeRemaining, before.timeRemaining);
+  assert.equal(h.runtime.getState().practiceV207.index, before.practiceV207.index);
+  h.key('KeyS', false);
+  assert.equal(h.runtime.resume(), true);
+  h.key('KeyS');
+  h.frames(240);
+  assert.equal(h.runtime.getState().practiceV207.state, 'complete');
+  assert.equal(h.runtime.getState().practiceV207.index, 2);
+  assert.equal(h.runtime.getState().fighters[0].stats.blocks, 2);
+  assert.equal(h.runtime.getState().result, null);
+  assert.equal(h.queue.size, 0);
+  assert.equal(checkpoints, 0);
+  assert.deepEqual(h.results, []);
   h.runtime.stop();
 });

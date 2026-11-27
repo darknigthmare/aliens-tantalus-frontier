@@ -68,7 +68,7 @@
       "id": "arachnoid-light-impact",
       "category": "characters",
       "batch": 3,
-      "generatedOriginal": "exec-42779ab5-4ce6-4b93-930f-77ce08a33751.png",
+      "generatedOriginal": "review-2d213e1f7718fefe9d9eb612.png",
       "prompt": "Use case: stylized-concept. Create ONE full-body game sprite of the EXACT GREY ARACHNOID ALIEN in the provided reference, the Capcom Alien vs. Predator arcade 1994 incarnation adapted for Xeno Trials. Use the image as identity reference; preserve its elongated segmented crest-like head silhouette, steel-grey and muted blue-purple palette, ribbed biomechanical torso, slim muscular four-limbed body, long finger-claws, dorsal tubes, full segmented tail ending in a narrow spear blade. NOT the NECA movie-deco variant, not a spider, never add limbs. Match the reference's crisp highly detailed 2D pixel-painted style. Strict lateral SIDE PROFILE facing RIGHT; transparent RGBA background, no floor or floor shadow, no halo, no scenery, no text, no VFX, no other creature. One character, one pose only. Complete anatomy and tail inside frame with generous margin. Landscape canvas, fixed camera and body proportions. Pose: LIGHT CLAW ATTACK CONTACT: low forward lunge, near-side arm extends straight RIGHT at chest height, long fingers splayed forward, far arm drawn back; two feet stay planted. Head lowers over attacking shoulder; tail counterbalances LEFT. No enemy, no blood, no impact spark.",
       "reference": {
         "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
@@ -113,7 +113,7 @@
       "id": "arachnoid-light-recovery",
       "category": "characters",
       "batch": 3,
-      "generatedOriginal": "exec-09ca910d-fbed-4641-b73a-637a642b819a.png",
+      "generatedOriginal": "review-69beae3f4dc5025255b6ecc4.png",
       "prompt": "Use case: stylized-concept. Create ONE full-body game sprite of the EXACT GREY ARACHNOID ALIEN in the provided reference, the Capcom Alien vs. Predator arcade 1994 incarnation adapted for Xeno Trials. Use the image as identity reference; preserve its elongated segmented crest-like head silhouette, steel-grey and muted blue-purple palette, ribbed biomechanical torso, slim muscular four-limbed body, long finger-claws, dorsal tubes, full segmented tail ending in a narrow spear blade. NOT the NECA movie-deco variant, not a spider, never add limbs. Match the reference's crisp highly detailed 2D pixel-painted style. Strict lateral SIDE PROFILE facing RIGHT; transparent RGBA background, no floor or floor shadow, no halo, no scenery, no text, no VFX, no other creature. One character, one pose only. Complete anatomy and tail inside frame with generous margin. Landscape canvas, fixed camera and body proportions. Pose: LIGHT CLAW ATTACK RECOVERY: retract the attacking forearm toward the chest, weight returns to the rear leg, still crouched low in stalking stance, both feet planted; head looking right, tail lifted behind LEFT. This is a distinct following-through recovery pose, no motion ghosts.",
       "reference": {
         "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
@@ -158,7 +158,7 @@
       "id": "arachnoid-light-windup",
       "category": "characters",
       "batch": 3,
-      "generatedOriginal": "exec-24485dc5-8ad0-4b09-bfbe-61717ebb9ffe.png",
+      "generatedOriginal": "review-f75893371783ee9d79a14bae.png",
       "prompt": "Use case: stylized-concept. Create ONE full-body game sprite of the EXACT GREY ARACHNOID ALIEN in the provided reference, the Capcom Alien vs. Predator arcade 1994 incarnation adapted for Xeno Trials. Use the image as identity reference; preserve its elongated segmented crest-like head silhouette, steel-grey and muted blue-purple palette, ribbed biomechanical torso, slim muscular four-limbed body, long finger-claws, dorsal tubes, full segmented tail ending in a narrow spear blade. NOT the NECA movie-deco variant, not a spider, never add limbs. Match the reference's crisp highly detailed 2D pixel-painted style. Strict lateral SIDE PROFILE facing RIGHT; transparent RGBA background, no floor or floor shadow, no halo, no scenery, no text, no VFX, no other creature. One character, one pose only. Complete anatomy and tail inside frame with generous margin. Landscape canvas, fixed camera and body proportions. Pose: LIGHT CLAW ATTACK ANTICIPATION: low stalking stance, weight shifted onto bent rear leg, near-side claw drawn back beside the ribs, far-side hand held forward to balance; two feet planted on the same invisible baseline. Tail arcs up behind to the LEFT; not crossing body.",
       "reference": {
         "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
@@ -203,7 +203,7 @@
       "id": "arachnoid-special-active",
       "category": "characters",
       "batch": 3,
-      "generatedOriginal": "exec-466a0d5f-a38d-417f-9d11-36b9fdde10e1.png",
+      "generatedOriginal": "review-81ad6b960a225f6d900e714d.png",
       "prompt": "Use case: stylized-concept. Create ONE full-body game sprite of the EXACT GREY ARACHNOID ALIEN in the provided reference, the Capcom Alien vs. Predator arcade 1994 incarnation adapted for Xeno Trials. Use the image as identity reference; preserve its elongated segmented crest-like head silhouette, steel-grey and muted blue-purple palette, ribbed biomechanical torso, slim muscular four-limbed body, long finger-claws, dorsal tubes, full segmented tail ending in a narrow spear blade. NOT the NECA movie-deco variant, not a spider, never add limbs. Match the reference's crisp highly detailed 2D pixel-painted style. Strict lateral SIDE PROFILE facing RIGHT; transparent RGBA background, no floor or floor shadow, no halo, no scenery, no text, no VFX, no other creature. One character, one pose only. Complete anatomy and tail inside frame with generous margin. Landscape canvas, fixed camera and body proportions. Pose: POUNCE SPECIAL ACTIVE FLIGHT: whole body horizontal, fully airborne leaping to the RIGHT, head forward, both long clawed forelimbs reaching toward the right, bent hindlegs trailing left, long tail extended behind LEFT with a gentle curve; exactly four limbs. No ground contact, no motion streaks.",
       "reference": {
         "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
@@ -248,7 +248,7 @@
       "id": "arachnoid-special-recovery",
       "category": "characters",
       "batch": 3,
-      "generatedOriginal": "exec-89846a09-ca4d-4a66-b662-252088f293c9.png",
+      "generatedOriginal": "review-77faa6fce749fb4b9bee862e.png",
       "prompt": "Use case: stylized-concept. Create ONE full-body game sprite of the EXACT GREY ARACHNOID ALIEN in the provided reference, the Capcom Alien vs. Predator arcade 1994 incarnation adapted for Xeno Trials. Use the image as identity reference; preserve its elongated segmented crest-like head silhouette, steel-grey and muted blue-purple palette, ribbed biomechanical torso, slim muscular four-limbed body, long finger-claws, dorsal tubes, full segmented tail ending in a narrow spear blade. NOT the NECA movie-deco variant, not a spider, never add limbs. Match the reference's crisp highly detailed 2D pixel-painted style. Strict lateral SIDE PROFILE facing RIGHT; transparent RGBA background, no floor or floor shadow, no halo, no scenery, no text, no VFX, no other creature. One character, one pose only. Complete anatomy and tail inside frame with generous margin. Landscape canvas, fixed camera and body proportions. Pose: POUNCE SPECIAL LANDING RECOVERY: both clawed hands planted on invisible ground in front, chest and head low facing right, hindlegs bent and feet contacting the same baseline behind, weight absorbed into a crouch, tail still lifted behind LEFT. Exactly four limbs, no dust or floor.",
       "reference": {
         "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
@@ -293,7 +293,7 @@
       "id": "arachnoid-special-windup",
       "category": "characters",
       "batch": 3,
-      "generatedOriginal": "exec-26a6b8bf-44e7-48ca-87b9-874b6c49ba3f.png",
+      "generatedOriginal": "review-d3bb167f218b5417fe3f7303.png",
       "prompt": "Use case: stylized-concept. Create ONE full-body game sprite of the EXACT GREY ARACHNOID ALIEN in the provided reference, the Capcom Alien vs. Predator arcade 1994 incarnation adapted for Xeno Trials. Use the image as identity reference; preserve its elongated segmented crest-like head silhouette, steel-grey and muted blue-purple palette, ribbed biomechanical torso, slim muscular four-limbed body, long finger-claws, dorsal tubes, full segmented tail ending in a narrow spear blade. NOT the NECA movie-deco variant, not a spider, never add limbs. Match the reference's crisp highly detailed 2D pixel-painted style. Strict lateral SIDE PROFILE facing RIGHT; transparent RGBA background, no floor or floor shadow, no halo, no scenery, no text, no VFX, no other creature. One character, one pose only. Complete anatomy and tail inside frame with generous margin. Landscape canvas, fixed camera and body proportions. Pose: POUNCE SPECIAL ANTICIPATION: compress into a deep grounded crouch, hindlegs coiled for takeoff, both clawed hands touching invisible ground just in front of the chest, head low facing right, tail high and curved behind LEFT. Four limbs visible and distinct, no additional legs.",
       "reference": {
         "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
@@ -338,10 +338,10 @@
       "id": "gorilla-heavy-impact",
       "category": "characters",
       "batch": 5,
-      "generatedOriginal": "exec-bbbe09c6-0d18-4960-b94e-0bf7547910fd.png",
+      "generatedOriginal": "review-de0112100b9f011deeeb2d5e.png",
       "prompt": "Edit the provided isolated fictional biomechanical creature into ONE new neutral exercise pose for a 2D game animation. Preserve EXACTLY this creature's blue-black exoskeleton, long smooth black head dome, ornate dorsal crest, very large arms, forearm spikes, openwork three-pronged tail tip, body proportions and detailed 2D painted material rendering. Same right-facing side camera as reference. Keep complete body and entire tail with at least 50 pixels transparent margin on all sides. True transparent background with no floor, no haze, no aura, no text, no other subject. This is a single isolated creature pose, no victim, no contact with anybody, no gore and no action effects. Square image. Pose: a low stable crouch, both huge closed hands resting on the invisible baseline ahead of the bent feet, shoulders low, head looking right, rear hips low and feet planted behind the hands. Tail curves behind to the left, entirely visible. No scene floor and no marks on the ground. Exactly two arms and two legs, same recognizable character.",
       "reference": {
-        "path": "generated-originals/exec-6ce056b5-c5da-4b7c-901b-a5deaa0daade.png",
+        "path": "generated-originals/review-8f97e8cf0041bc358ffe3ae9.png",
         "sha256": "57cf5faba41e805a424e4b699ce57340ef470a296571f1440b56ca332a6cb54b",
         "kind": "generated-predecessor"
       },
@@ -383,7 +383,7 @@
       "id": "gorilla-heavy-recovery",
       "category": "characters",
       "batch": 1,
-      "generatedOriginal": "exec-6ce056b5-c5da-4b7c-901b-a5deaa0daade.png",
+      "generatedOriginal": "review-8f97e8cf0041bc358ffe3ae9.png",
       "prompt": "Create ONE isolated full-body 2D fighting-game sprite, exactly one character and one pose in the entire image, genuinely transparent RGBA background. Use the attached image as the identity, anatomy, palette, material, and rendering reference. Preserve that specific character; only change pose and camera to strict side-on lateral view facing RIGHT. Crisp detailed hand-painted videogame sprite, no backdrop, no floor, no shadow cloud, no glow, no text, no panels, no duplicate limbs or character, no cropping. All feet, fingers, head and entire tail safely inside canvas with generous transparent margin. Subject: the blue-black NECA Kenner Tribute GORILLA ALIEN shown. Preserve the long smooth BLACK dome, blue ridged exoskeleton, enormously muscular arms, the three curved spikes on each forearm, dorsal spines and ornate forked openwork tail blade. Pose: recovery just after a heavy ground slam, rising from a low crouch, both huge fists lifted slightly above the invisible baseline and returning toward chest guard, knees still bent, tail curling behind to LEFT. Same full character proportions, same black dome, no redesigned horn or extra spike. Strict side profile, square canvas.",
       "reference": {
         "path": "assets/openai/sprites/static-enemy-v94/kenner-gorilla-neca.png",
@@ -428,10 +428,10 @@
       "id": "gorilla-heavy-windup",
       "category": "characters",
       "batch": 5,
-      "generatedOriginal": "exec-fe4f984f-888d-4686-9280-9d09dc0520c8.png",
+      "generatedOriginal": "review-7761f7203560b5ebd78e9e46.png",
       "prompt": "Edit the provided isolated fictional biomechanical creature into ONE new neutral exercise pose for a 2D game animation. Preserve EXACTLY this creature's blue-black exoskeleton, long smooth black head dome, ornate dorsal crest, very large arms, forearm spikes, openwork three-pronged tail tip, body proportions and detailed 2D painted material rendering. Same right-facing side camera as reference. Keep complete body and entire tail with at least 50 pixels transparent margin on all sides. True transparent background with no floor, no haze, no aura, no text, no other subject. This is a single isolated creature pose, no victim, no contact with anybody, no gore and no action effects. Square image. Pose: a stretching preparation posture, bent knees and planted feet, torso upright, both huge arms raised high over the head with the fingers curled, head still looking right. Tail rests in an upward curve to the left. Show BOTH arms as distinct complete limbs; do not obscure the dome silhouette. The same character remains recognizable.",
       "reference": {
-        "path": "generated-originals/exec-6ce056b5-c5da-4b7c-901b-a5deaa0daade.png",
+        "path": "generated-originals/review-8f97e8cf0041bc358ffe3ae9.png",
         "sha256": "57cf5faba41e805a424e4b699ce57340ef470a296571f1440b56ca332a6cb54b",
         "kind": "generated-predecessor"
       },
@@ -473,7 +473,7 @@
       "id": "grid-heavy-impact",
       "category": "characters",
       "batch": 1,
-      "generatedOriginal": "exec-23c597b0-de82-4664-902d-3361c79d504b.png",
+      "generatedOriginal": "review-733cc4616a3cbc39169cb1d6.png",
       "prompt": "Create ONE isolated full-body 2D fighting-game sprite, exactly one character and one pose in the entire image, genuinely transparent RGBA background. Use the attached image as the identity, anatomy, palette, material, and rendering reference. Preserve that specific character; only change pose and camera to strict side-on lateral view facing RIGHT. Crisp detailed hand-painted videogame sprite, no backdrop, no floor, no shadow cloud, no glow, no text, no panels, no duplicate limbs or character, no cropping. All feet, fingers, head and entire tail safely inside canvas with generous transparent margin. Subject: GRID Alien from AVP 2004, preserve the reference's black glossy biomechanical body and distinctive narrow yellow-green crosshatched acid scars on the dome and shoulder, ribbed chest, four dorsal tubes, long segmented blade-tipped tail. Pose: grounded heavy CLAW STRIKE CONTACT keyframe, facing right, front leg lunges, one long arm reaches forcefully forward at chest height with open claws, other arm counterbalances, tail sweeps behind left without crossing the body. Fully visible right-facing profile and entire tail. No victim, no blood, no projectile or VFX. Landscape canvas.",
       "reference": {
         "path": "assets/user/castes-v87/film_grid_avp_2004.png",
@@ -518,7 +518,7 @@
       "id": "acid-cluster",
       "category": "projectiles",
       "batch": 4,
-      "generatedOriginal": "exec-20d83711-5f09-4c47-8147-122adbb7e28e.png",
+      "generatedOriginal": "review-9577e373639f112886e910a2.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE thick irregular green-yellow acid glob PROJECTILE flying RIGHT, swollen viscous central bolus with a lobed front and a short coherent stringy trailing tail to LEFT. Small internal bubbles, wet specular highlights, darker olive translucent edge. It is one projectile, not a pattern of several separate projectiles and not an impact. Width about twice height, centered. No neon magic ring, no solid shadow.",
       "path": "assets/openai/xeno-trials-v205/projectiles/acid-cluster.png",
       "sha256": "266820b9fe0754bd7e34c18bafbe716b25ce2c1b7042e4ecb7e00194dbddda27",
@@ -550,7 +550,7 @@
       "id": "acid-drop",
       "category": "projectiles",
       "batch": 7,
-      "generatedOriginal": "exec-99f3db0a-59ff-4217-9fb9-d9d5e7eceabd.png",
+      "generatedOriginal": "review-dab0053c51594040c355ab14.png",
       "prompt": "Use case: precise-object-edit. Using the provided yellow-green acid projectile as a MATERIAL AND PALETTE reference, create ONE new tiny falling-acid-droplet sprite for a side-view 2D game. Exactly one coherent glossy liquid droplet, vertical orientation, the heavy rounded bulb at the BOTTOM and a short tapered liquid tail pointing UP, so it clearly falls DOWN. Keep the same olive rim, translucent vivid yellow-green body and wet pale specular highlight from the reference, detailed painted game art. Shape width about two thirds of its height, bold compact silhouette legible at 4 by 6 gameplay pixels. No wide horizontal trail, no mist, no glow cloud, no smoke, no secondary droplets. One droplet only, genuine transparent RGBA background, no scenery, no floor, no text, no shadow. Keep the full droplet centered within generous transparent margins of at least 15% on every edge. Portrait canvas.",
       "reference": {
         "path": "assets/openai/xeno-trials-v205/projectiles/aimed-acid.png",
@@ -587,7 +587,7 @@
       "id": "aimed-acid",
       "category": "projectiles",
       "batch": 4,
-      "generatedOriginal": "exec-51094d50-0ecb-492f-b451-7de76eef1cd8.png",
+      "generatedOriginal": "review-5ade7048b029701e884100ae.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE elongated aimed-acid PROJECTILE traveling RIGHT, sharp stretched yellow-green leading droplet on RIGHT and thinner viscous connected wake to LEFT. Acid is organic liquid with tiny bubbles and wet highlights, ochre-lime core and olive green rim. Width about 3 times height. No splash at the nose, no cluster of independent projectiles, no magical energy symbols.",
       "path": "assets/openai/xeno-trials-v205/projectiles/aimed-acid.png",
       "sha256": "dac8cf71bee006671ca8f9a5a6e6906c993b9ca1bd831ebd485617e0833d664e",
@@ -619,7 +619,7 @@
       "id": "ground-wave",
       "category": "projectiles",
       "batch": 4,
-      "generatedOriginal": "exec-81f2d916-e075-4669-a7c4-5bd729c97857.png",
+      "generatedOriginal": "review-6d1b29c66862961e5d36df14.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE ground-skimming concussive shock front traveling RIGHT, a low wedge-shaped spray of dark broken mineral grit and grey-white compressed dust. Strong upward-curving front at RIGHT, tapering gritty tail LEFT, bottom perfectly aligned to an invisible horizontal ground baseline. The effect alone is visible with no actual floor. A heavy creature's physical impact wave, no magic, no fire, no neon.",
       "path": "assets/openai/xeno-trials-v205/projectiles/ground-wave.png",
       "sha256": "21692cbb51235b51e89d0f0edca55c5a36bacc78a9117e0fed02a0954e4036f7",
@@ -651,7 +651,7 @@
       "id": "pulse-bolt",
       "category": "projectiles",
       "batch": 4,
-      "generatedOriginal": "exec-39beac2a-3f3b-4947-bda5-7dee5fe0df03.png",
+      "generatedOriginal": "review-70d86aa9c53678ff5a00991e.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE compact pale icy-blue PULSE BOLT flying RIGHT, bright near-white narrow core, sharply tapered blue-white head on RIGHT, short turquoise energy wake extending LEFT. Width approximately three times height. Small industrial sci-fi energy shot, not a lightning storm, not a beam spanning frame. Transparent around the complete bolt; no black compositing plate.",
       "path": "assets/openai/xeno-trials-v205/projectiles/pulse-bolt.png",
       "sha256": "c2902bde2a987be0b6b9cb6745a092c846e10a8a087db145c1762e90b0427e9e",
@@ -683,7 +683,7 @@
       "id": "containment-deck",
       "category": "stages",
       "batch": 2,
-      "generatedOriginal": "exec-a55445ba-4a11-4778-aa0d-24f80dcd12e3.png",
+      "generatedOriginal": "review-5834aab6db396211b7a44772.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE complete landscape background for Xeno Trials, a polished 2D side-view Alien-universe fighting game. Original Tantalus simulation environment matching established retro-industrial science-fiction materials. 16:9 wide composition, orthographic lateral camera, a completely horizontal uninterrupted combat platform at approximately 85% image height. Show the platform edge across the bottom, no vanishing-point runway. The central 70% stays spacious and readable for combatants. Detailed painted game art, crisp metallic/organic textures, high-quality cinematic lighting restrained enough for sprites to read. No characters, no creatures, no weapons, no GUI, no text, no labels, no logos, no collage, no inset or multiple panels. This is a game environment asset, not a poster. Environment: BANC DE CONFINEMENT, an austere containment-testing deck inside a Weyland-era spacecraft. Massive ribbed blue-black steel wall frames, three sealed thick-glass specimen chambers set into the BACK wall, empty interiors with dim sterile green light, heavy pipes and sealed blast doors at either end, recessed analog instrumentation without lettering, grated floor. Accent lighting cold teal #48aab1 against charcoal #14292e. Ground walkway straight and unblocked. Real materials, subtle condensation behind glass; absolutely no active VFX, no smoke occluding arena, no people. Slight depth only in background architecture, gameplay plane perfectly side-on.",
       "path": "assets/openai/xeno-trials-v205/stages/containment-deck.png",
       "sha256": "20d1924a46e9284d5759b8eee511c5f652c64cf3b8a0da32688f89174bc7f87a",
@@ -716,7 +716,7 @@
       "id": "hive-vault",
       "category": "stages",
       "batch": 2,
-      "generatedOriginal": "exec-a0eeb6d2-6cf1-46e6-bbda-5f986ce35412.png",
+      "generatedOriginal": "review-0f48241845708672ab62dc96.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE complete landscape background for Xeno Trials, a polished 2D side-view Alien-universe fighting game. Original Tantalus simulation environment matching established retro-industrial science-fiction materials. 16:9 wide composition, orthographic lateral camera, a completely horizontal uninterrupted combat platform at approximately 85% image height. Show the platform edge across the bottom, no vanishing-point runway. The central 70% stays spacious and readable for combatants. Detailed painted game art, crisp metallic/organic textures, high-quality cinematic lighting restrained enough for sprites to read. No characters, no creatures, no weapons, no GUI, no text, no labels, no logos, no collage, no inset or multiple panels. This is a game environment asset, not a poster. Environment: CHAMBRE DE RUCHE SIMULEE, an empty biomechanical hive vault built over a ruined spaceship hold. Giger-inspired black lacquered resin ribs and sinewy columns climb the back wall and roof, cables partly absorbed by dark organic resin, recessed tunnel mouths behind the arena. Palette black, charcoal violet and subtle muted purple #9970b7 highlights, tiny damp glints. An empty horizontal rough resin-coated steel combat floor spans entire width. Keep all stalagmites, pipes and structural ribs BEHIND the combat plane. Menacing atmospheric depth but crisp foreground. No alien eggs, no creatures, no silhouettes, no cocooned humans, no fog layer or particles baked in.",
       "path": "assets/openai/xeno-trials-v205/stages/hive-vault.png",
       "sha256": "67341abdf53a20eb598323f66682c6e142b85a934060b21043de7b02762931a3",
@@ -749,7 +749,7 @@
       "id": "reactor-ring",
       "category": "stages",
       "batch": 2,
-      "generatedOriginal": "exec-cfeecfb2-8f17-442f-8254-038ee5f5544e.png",
+      "generatedOriginal": "review-6e8523e541b5dcab2b58258f.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE complete landscape background for Xeno Trials, a polished 2D side-view Alien-universe fighting game. Original Tantalus simulation environment matching established retro-industrial science-fiction materials. 16:9 wide composition, orthographic lateral camera, a completely horizontal uninterrupted combat platform at approximately 85% image height. Show the platform edge across the bottom, no vanishing-point runway. The central 70% stays spacious and readable for combatants. Detailed painted game art, crisp metallic/organic textures, high-quality cinematic lighting restrained enough for sprites to read. No characters, no creatures, no weapons, no GUI, no text, no labels, no logos, no collage, no inset or multiple panels. This is a game environment asset, not a poster. Environment: ANNEAU REACTEUR SIMULE, lateral maintenance ring of an enormous industrial fusion reactor. A colossal circular reactor collar in the rear wall, dark copper and rust-orange turbine housings, staggered black steel braces, bundles of thick insulated coolant pipes, recessed orange status light strips, grated catwalk across entire foreground. Warm burnt-orange #ce7645 glow in reactor recesses, dark brown-black steel. Entire combat walkway remains horizontal and empty. Reactor looks engineered with grounded Alien-era utilitarian production design. No fantasy energy orb, no blue holograms, no fire or particles baked in, no people.",
       "path": "assets/openai/xeno-trials-v205/stages/reactor-ring.png",
       "sha256": "90fc4cf3834b17540a1cb8f54322e8dade6189c9659cbecc153735b3f1e3d240",
@@ -782,10 +782,10 @@
       "id": "acid-pool",
       "category": "vfx",
       "batch": 6,
-      "generatedOriginal": "exec-fb5803d8-354c-45ec-b705-2cf8f8319f74.png",
+      "generatedOriginal": "review-cffbebfdaf334014649db09a.png",
       "prompt": "Use case: precise-object-edit. Edit the supplied isolated acid-pool sprite for a 2D side-view game. Keep the yellow-green liquid's material, detailed wet highlights, olive rim and broad uneven puddle shape. REMOVE ALL of the tall steam wisps above it. Make the complete visible silhouette a very flat shallow horizontal strip approximately TWELVE TIMES wider than its total height, including bubbles. Only tiny low bubbles hugging the liquid surface, nothing protruding far above it. Strict side-on low angle, no top-down oval. Preserve true transparency, with ample empty transparent space above and below, and at least 60px margin at left and right. One whole shallow puddle only, no floor, no black or colored background, no shadow, no extra effects, no text. Do not crop any edge of the puddle.",
       "reference": {
-        "path": "generated-originals/exec-f36045a7-dae0-4ca5-a170-ae67068c2352.png",
+        "path": "generated-originals/review-8c9f17cf21e703b09b3a3c89.png",
         "sha256": "6e85a72c6ca80f9ec72dd5741f9afad6a443448a2e6084ed90f3a54792cfb21a",
         "kind": "generated-predecessor"
       },
@@ -819,10 +819,10 @@
       "id": "acid-splash",
       "category": "vfx",
       "batch": 6,
-      "generatedOriginal": "exec-ab202025-7ec4-4d70-9884-dd7a8cf4a71f.png",
+      "generatedOriginal": "review-8e678c34ad19a2a227e0622f.png",
       "prompt": "Use case: precise-object-edit. Fix ONLY the framing of the supplied isolated yellow-green acid-splash game sprite. Pull the camera back so the ENTIRE splash including the uppermost rising curved tendril and every small droplet is fully visible, with at least 10% fully transparent margin on ALL FOUR sides. Reconstruct the top tendril's rounded liquid tip where it was cut off by the canvas. Keep the same substance, yellow-green and olive colors, wet specular highlights, dynamic side-view crown silhouette and small bubbles. One single complete splash, no victim or surface, no scenery, no added objects, no text, genuine transparent RGBA background. It must not touch the canvas edges.",
       "reference": {
-        "path": "generated-originals/exec-9c35ccc1-321a-4e60-8292-5aec6a2366b0.png",
+        "path": "generated-originals/review-58659b8ac3dce746c9502612.png",
         "sha256": "2e45917b85651e1ab90bbdcb9d773a2c1e589ee60e040c762eca94b08df2ca3a",
         "kind": "generated-predecessor"
       },
@@ -856,7 +856,7 @@
       "id": "cryo-burst",
       "category": "vfx",
       "batch": 4,
-      "generatedOriginal": "exec-0ede584b-4441-4846-b60b-b36c43f206e4.png",
+      "generatedOriginal": "review-b1eb6843b4ada87936ef172b.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE CRYOGENIC BURST erupting upward from a thin horizontal invisible ground line, frosty pale cyan vapor and a handful of small crystalline ice shards, compact low spreading cloud, bright icy-white lower core and translucent blue-grey edges. Wide two-to-one shape with gently raised center. No circular magical glyph, no snow-covered landscape, no pipe, no floor.",
       "path": "assets/openai/xeno-trials-v205/vfx/cryo-burst.png",
       "sha256": "089a84f3adf5b53423d38c6e5b54d1b290064d061b26a05e7c34edaaada59795",
@@ -888,7 +888,7 @@
       "id": "debris-impact",
       "category": "vfx",
       "batch": 4,
-      "generatedOriginal": "exec-4ce7b065-671b-462d-bc7c-2d471ed06b17.png",
+      "generatedOriginal": "review-22ea8adab8d5c83142f6c817.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE industrial DEBRIS IMPACT effect from falling steel wreckage, a compact irregular fan of dark metallic fragments and charcoal grit bouncing upward and outward from one invisible ground contact point, restrained pale grey dust at the bottom, a few tiny dull orange friction sparks. Grounded realistic Alien-era materials. Wide low silhouette, clear transparent gaps, no floor, no entire wall, no flames or giant explosion.",
       "path": "assets/openai/xeno-trials-v205/vfx/debris-impact.png",
       "sha256": "3983d3f9b5e53725f7f9862d8a85488be648489e897657574466c7bee71ac5a5",
@@ -920,7 +920,7 @@
       "id": "detonation",
       "category": "vfx",
       "batch": 7,
-      "generatedOriginal": "exec-9c67dffb-b7d4-4474-a782-5a71fc0d7deb.png",
+      "generatedOriginal": "review-665752814f5dda4f288108a8.png",
       "prompt": "Use case: stylized-concept. Create ONE isolated detonation impact VFX sprite for Xeno Trials, a detailed painted 2D side-view industrial science-fiction game. Pure effect only, one complete radial fiery burst centered in a square transparent canvas. Bright pale yellow-white compact core, hot amber and orange turbulent flame petals radiating evenly in every direction, a few short sparks, restrained smoky dark-orange outer fringe. Crisp readable silhouette, mostly compact circular proportions, no directional plume, no mushroom cloud. This represents an existing synthetic overload burst in the game; original effect design. Absolutely no person, robot, alien, victim, machinery, ground, debris props, environment, text, panels, logos, or background. True transparent RGBA, including gaps between sparks and flame tongues; no black or colored rectangle. Keep the entire effect and every spark fully inside the canvas with generous 15% transparent margin all around. Rich rendered material consistent with high quality painted fighting-game VFX, not a flat icon.",
       "path": "assets/openai/xeno-trials-v205/vfx/detonation.png",
       "sha256": "c9170b01f5e59db6795294cd632336bb1ca0ccbb69cd49cc42b2e764d2c871a3",
@@ -952,7 +952,7 @@
       "id": "electric-arc",
       "category": "vfx",
       "batch": 4,
-      "generatedOriginal": "exec-42484ee1-600c-4b50-9361-db3e3f4977b0.png",
+      "generatedOriginal": "review-a5be8d3004b0369c3ea00be3.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE horizontal industrial ELECTRICAL ARC, a single branching zigzag discharge connecting an invisible left electrode to an invisible right electrode. Blue-white bright core, cyan secondary short branches, jagged shape about three times wider than tall, sparse clean transparent space between strands. NO electrodes drawn, no surrounding ring, no magical symbols, no scattered disconnected lightning bolts, no black background.",
       "path": "assets/openai/xeno-trials-v205/vfx/electric-arc.png",
       "sha256": "67a901c91679fd8895ddeb61081c57396bd6faf6c496a66915d80d6e6cac42b8",
@@ -984,7 +984,7 @@
       "id": "steam-jet",
       "category": "vfx",
       "batch": 4,
-      "generatedOriginal": "exec-3b819f6f-93c4-4506-94a3-881451465a59.png",
+      "generatedOriginal": "review-4ea36886975f97b58b1a786e.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE pressurized industrial STEAM JET rising vertically UP from one narrow point at bottom center, dense near-white core at its origin widening into pale cool grey billowing curls higher up, ragged translucent wisps at top. Tall vertical plume, approximately twice as tall as wide. No pipe, vent grate or floor; effect only. Crisp structured curls, lots of clean transparent space around it.",
       "path": "assets/openai/xeno-trials-v205/vfx/steam-jet.png",
       "sha256": "f36d54267a048e803de8db44485aac6c7a527ffd2b1d9a1e25fb2c8aa2d279b6",
@@ -1016,7 +1016,7 @@
       "id": "synth-flame-cone",
       "category": "vfx",
       "batch": 7,
-      "generatedOriginal": "exec-56dc12da-cdb2-4875-bd85-a381a3d53881.png",
+      "generatedOriginal": "review-939467e69b183c075a19a72d.png",
       "prompt": "Use case: stylized-concept. Create ONE isolated horizontal flame-cone VFX sprite for a detailed painted 2D side-view industrial science-fiction fighting game, Xeno Trials. Strict side view, jet travels from LEFT to RIGHT. A tiny narrow pale yellow-white hot origin at the left, steadily widening to a broad rounded fan of orange and ember-red flame tongues at the right. The complete visible flame silhouette must fit a simple cone envelope approximately TWICE as wide as its maximum height; axis exactly horizontal. Compact clearly bounded fire, wispy natural branching internally, taper at left, wide opening at right. It is a flamethrower jet only, no weapon or operator. No big explosion bulb at the left, no curling smoke far outside the cone, no floor, no environment, no text, no framing, no multiple effects. True transparent RGBA background, no black/colored rectangle and no opaque haze. Every flame tongue fully visible with at least 10% empty transparent margin on every edge. Landscape canvas. Warm palette pale yellow #fff2ad at origin, amber #ffb447 middle, red orange #ef502a at the broad tip; crisp detailed painted game art readable when reduced.",
       "path": "assets/openai/xeno-trials-v205/vfx/synth-flame-cone.png",
       "sha256": "5310429910cb227a729306f01c8f1a3b76a64f3e93e19cef69d793d23c08cd6c",
@@ -1050,7 +1050,7 @@
       "id": "gorilla-heavy-recovery",
       "category": "characters",
       "batch": 1,
-      "generatedOriginal": "exec-6ce056b5-c5da-4b7c-901b-a5deaa0daade.png",
+      "generatedOriginal": "review-8f97e8cf0041bc358ffe3ae9.png",
       "prompt": "Create ONE isolated full-body 2D fighting-game sprite, exactly one character and one pose in the entire image, genuinely transparent RGBA background. Use the attached image as the identity, anatomy, palette, material, and rendering reference. Preserve that specific character; only change pose and camera to strict side-on lateral view facing RIGHT. Crisp detailed hand-painted videogame sprite, no backdrop, no floor, no shadow cloud, no glow, no text, no panels, no duplicate limbs or character, no cropping. All feet, fingers, head and entire tail safely inside canvas with generous transparent margin. Subject: the blue-black NECA Kenner Tribute GORILLA ALIEN shown. Preserve the long smooth BLACK dome, blue ridged exoskeleton, enormously muscular arms, the three curved spikes on each forearm, dorsal spines and ornate forked openwork tail blade. Pose: recovery just after a heavy ground slam, rising from a low crouch, both huge fists lifted slightly above the invisible baseline and returning toward chest guard, knees still bent, tail curling behind to LEFT. Same full character proportions, same black dome, no redesigned horn or extra spike. Strict side profile, square canvas.",
       "reference": {
         "path": "assets/openai/sprites/static-enemy-v94/kenner-gorilla-neca.png",
@@ -1063,7 +1063,7 @@
       "id": "grid-heavy-impact",
       "category": "characters",
       "batch": 1,
-      "generatedOriginal": "exec-23c597b0-de82-4664-902d-3361c79d504b.png",
+      "generatedOriginal": "review-733cc4616a3cbc39169cb1d6.png",
       "prompt": "Create ONE isolated full-body 2D fighting-game sprite, exactly one character and one pose in the entire image, genuinely transparent RGBA background. Use the attached image as the identity, anatomy, palette, material, and rendering reference. Preserve that specific character; only change pose and camera to strict side-on lateral view facing RIGHT. Crisp detailed hand-painted videogame sprite, no backdrop, no floor, no shadow cloud, no glow, no text, no panels, no duplicate limbs or character, no cropping. All feet, fingers, head and entire tail safely inside canvas with generous transparent margin. Subject: GRID Alien from AVP 2004, preserve the reference's black glossy biomechanical body and distinctive narrow yellow-green crosshatched acid scars on the dome and shoulder, ribbed chest, four dorsal tubes, long segmented blade-tipped tail. Pose: grounded heavy CLAW STRIKE CONTACT keyframe, facing right, front leg lunges, one long arm reaches forcefully forward at chest height with open claws, other arm counterbalances, tail sweeps behind left without crossing the body. Fully visible right-facing profile and entire tail. No victim, no blood, no projectile or VFX. Landscape canvas.",
       "reference": {
         "path": "assets/user/castes-v87/film_grid_avp_2004.png",
@@ -1076,7 +1076,7 @@
       "id": "containment-deck",
       "category": "stages",
       "batch": 2,
-      "generatedOriginal": "exec-a55445ba-4a11-4778-aa0d-24f80dcd12e3.png",
+      "generatedOriginal": "review-5834aab6db396211b7a44772.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE complete landscape background for Xeno Trials, a polished 2D side-view Alien-universe fighting game. Original Tantalus simulation environment matching established retro-industrial science-fiction materials. 16:9 wide composition, orthographic lateral camera, a completely horizontal uninterrupted combat platform at approximately 85% image height. Show the platform edge across the bottom, no vanishing-point runway. The central 70% stays spacious and readable for combatants. Detailed painted game art, crisp metallic/organic textures, high-quality cinematic lighting restrained enough for sprites to read. No characters, no creatures, no weapons, no GUI, no text, no labels, no logos, no collage, no inset or multiple panels. This is a game environment asset, not a poster. Environment: BANC DE CONFINEMENT, an austere containment-testing deck inside a Weyland-era spacecraft. Massive ribbed blue-black steel wall frames, three sealed thick-glass specimen chambers set into the BACK wall, empty interiors with dim sterile green light, heavy pipes and sealed blast doors at either end, recessed analog instrumentation without lettering, grated floor. Accent lighting cold teal #48aab1 against charcoal #14292e. Ground walkway straight and unblocked. Real materials, subtle condensation behind glass; absolutely no active VFX, no smoke occluding arena, no people. Slight depth only in background architecture, gameplay plane perfectly side-on.",
       "selected": true
     },
@@ -1084,7 +1084,7 @@
       "id": "reactor-ring",
       "category": "stages",
       "batch": 2,
-      "generatedOriginal": "exec-cfeecfb2-8f17-442f-8254-038ee5f5544e.png",
+      "generatedOriginal": "review-6e8523e541b5dcab2b58258f.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE complete landscape background for Xeno Trials, a polished 2D side-view Alien-universe fighting game. Original Tantalus simulation environment matching established retro-industrial science-fiction materials. 16:9 wide composition, orthographic lateral camera, a completely horizontal uninterrupted combat platform at approximately 85% image height. Show the platform edge across the bottom, no vanishing-point runway. The central 70% stays spacious and readable for combatants. Detailed painted game art, crisp metallic/organic textures, high-quality cinematic lighting restrained enough for sprites to read. No characters, no creatures, no weapons, no GUI, no text, no labels, no logos, no collage, no inset or multiple panels. This is a game environment asset, not a poster. Environment: ANNEAU REACTEUR SIMULE, lateral maintenance ring of an enormous industrial fusion reactor. A colossal circular reactor collar in the rear wall, dark copper and rust-orange turbine housings, staggered black steel braces, bundles of thick insulated coolant pipes, recessed orange status light strips, grated catwalk across entire foreground. Warm burnt-orange #ce7645 glow in reactor recesses, dark brown-black steel. Entire combat walkway remains horizontal and empty. Reactor looks engineered with grounded Alien-era utilitarian production design. No fantasy energy orb, no blue holograms, no fire or particles baked in, no people.",
       "selected": true
     },
@@ -1092,7 +1092,7 @@
       "id": "hive-vault",
       "category": "stages",
       "batch": 2,
-      "generatedOriginal": "exec-a0eeb6d2-6cf1-46e6-bbda-5f986ce35412.png",
+      "generatedOriginal": "review-0f48241845708672ab62dc96.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE complete landscape background for Xeno Trials, a polished 2D side-view Alien-universe fighting game. Original Tantalus simulation environment matching established retro-industrial science-fiction materials. 16:9 wide composition, orthographic lateral camera, a completely horizontal uninterrupted combat platform at approximately 85% image height. Show the platform edge across the bottom, no vanishing-point runway. The central 70% stays spacious and readable for combatants. Detailed painted game art, crisp metallic/organic textures, high-quality cinematic lighting restrained enough for sprites to read. No characters, no creatures, no weapons, no GUI, no text, no labels, no logos, no collage, no inset or multiple panels. This is a game environment asset, not a poster. Environment: CHAMBRE DE RUCHE SIMULEE, an empty biomechanical hive vault built over a ruined spaceship hold. Giger-inspired black lacquered resin ribs and sinewy columns climb the back wall and roof, cables partly absorbed by dark organic resin, recessed tunnel mouths behind the arena. Palette black, charcoal violet and subtle muted purple #9970b7 highlights, tiny damp glints. An empty horizontal rough resin-coated steel combat floor spans entire width. Keep all stalagmites, pipes and structural ribs BEHIND the combat plane. Menacing atmospheric depth but crisp foreground. No alien eggs, no creatures, no silhouettes, no cocooned humans, no fog layer or particles baked in.",
       "selected": true
     },
@@ -1100,7 +1100,7 @@
       "id": "arachnoid-light-windup",
       "category": "characters",
       "batch": 3,
-      "generatedOriginal": "exec-24485dc5-8ad0-4b09-bfbe-61717ebb9ffe.png",
+      "generatedOriginal": "review-f75893371783ee9d79a14bae.png",
       "prompt": "Use case: stylized-concept. Create ONE full-body game sprite of the EXACT GREY ARACHNOID ALIEN in the provided reference, the Capcom Alien vs. Predator arcade 1994 incarnation adapted for Xeno Trials. Use the image as identity reference; preserve its elongated segmented crest-like head silhouette, steel-grey and muted blue-purple palette, ribbed biomechanical torso, slim muscular four-limbed body, long finger-claws, dorsal tubes, full segmented tail ending in a narrow spear blade. NOT the NECA movie-deco variant, not a spider, never add limbs. Match the reference's crisp highly detailed 2D pixel-painted style. Strict lateral SIDE PROFILE facing RIGHT; transparent RGBA background, no floor or floor shadow, no halo, no scenery, no text, no VFX, no other creature. One character, one pose only. Complete anatomy and tail inside frame with generous margin. Landscape canvas, fixed camera and body proportions. Pose: LIGHT CLAW ATTACK ANTICIPATION: low stalking stance, weight shifted onto bent rear leg, near-side claw drawn back beside the ribs, far-side hand held forward to balance; two feet planted on the same invisible baseline. Tail arcs up behind to the LEFT; not crossing body.",
       "reference": {
         "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
@@ -1113,7 +1113,7 @@
       "id": "arachnoid-light-impact",
       "category": "characters",
       "batch": 3,
-      "generatedOriginal": "exec-42779ab5-4ce6-4b93-930f-77ce08a33751.png",
+      "generatedOriginal": "review-2d213e1f7718fefe9d9eb612.png",
       "prompt": "Use case: stylized-concept. Create ONE full-body game sprite of the EXACT GREY ARACHNOID ALIEN in the provided reference, the Capcom Alien vs. Predator arcade 1994 incarnation adapted for Xeno Trials. Use the image as identity reference; preserve its elongated segmented crest-like head silhouette, steel-grey and muted blue-purple palette, ribbed biomechanical torso, slim muscular four-limbed body, long finger-claws, dorsal tubes, full segmented tail ending in a narrow spear blade. NOT the NECA movie-deco variant, not a spider, never add limbs. Match the reference's crisp highly detailed 2D pixel-painted style. Strict lateral SIDE PROFILE facing RIGHT; transparent RGBA background, no floor or floor shadow, no halo, no scenery, no text, no VFX, no other creature. One character, one pose only. Complete anatomy and tail inside frame with generous margin. Landscape canvas, fixed camera and body proportions. Pose: LIGHT CLAW ATTACK CONTACT: low forward lunge, near-side arm extends straight RIGHT at chest height, long fingers splayed forward, far arm drawn back; two feet stay planted. Head lowers over attacking shoulder; tail counterbalances LEFT. No enemy, no blood, no impact spark.",
       "reference": {
         "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
@@ -1126,7 +1126,7 @@
       "id": "arachnoid-light-recovery",
       "category": "characters",
       "batch": 3,
-      "generatedOriginal": "exec-09ca910d-fbed-4641-b73a-637a642b819a.png",
+      "generatedOriginal": "review-69beae3f4dc5025255b6ecc4.png",
       "prompt": "Use case: stylized-concept. Create ONE full-body game sprite of the EXACT GREY ARACHNOID ALIEN in the provided reference, the Capcom Alien vs. Predator arcade 1994 incarnation adapted for Xeno Trials. Use the image as identity reference; preserve its elongated segmented crest-like head silhouette, steel-grey and muted blue-purple palette, ribbed biomechanical torso, slim muscular four-limbed body, long finger-claws, dorsal tubes, full segmented tail ending in a narrow spear blade. NOT the NECA movie-deco variant, not a spider, never add limbs. Match the reference's crisp highly detailed 2D pixel-painted style. Strict lateral SIDE PROFILE facing RIGHT; transparent RGBA background, no floor or floor shadow, no halo, no scenery, no text, no VFX, no other creature. One character, one pose only. Complete anatomy and tail inside frame with generous margin. Landscape canvas, fixed camera and body proportions. Pose: LIGHT CLAW ATTACK RECOVERY: retract the attacking forearm toward the chest, weight returns to the rear leg, still crouched low in stalking stance, both feet planted; head looking right, tail lifted behind LEFT. This is a distinct following-through recovery pose, no motion ghosts.",
       "reference": {
         "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
@@ -1139,7 +1139,7 @@
       "id": "arachnoid-special-windup",
       "category": "characters",
       "batch": 3,
-      "generatedOriginal": "exec-26a6b8bf-44e7-48ca-87b9-874b6c49ba3f.png",
+      "generatedOriginal": "review-d3bb167f218b5417fe3f7303.png",
       "prompt": "Use case: stylized-concept. Create ONE full-body game sprite of the EXACT GREY ARACHNOID ALIEN in the provided reference, the Capcom Alien vs. Predator arcade 1994 incarnation adapted for Xeno Trials. Use the image as identity reference; preserve its elongated segmented crest-like head silhouette, steel-grey and muted blue-purple palette, ribbed biomechanical torso, slim muscular four-limbed body, long finger-claws, dorsal tubes, full segmented tail ending in a narrow spear blade. NOT the NECA movie-deco variant, not a spider, never add limbs. Match the reference's crisp highly detailed 2D pixel-painted style. Strict lateral SIDE PROFILE facing RIGHT; transparent RGBA background, no floor or floor shadow, no halo, no scenery, no text, no VFX, no other creature. One character, one pose only. Complete anatomy and tail inside frame with generous margin. Landscape canvas, fixed camera and body proportions. Pose: POUNCE SPECIAL ANTICIPATION: compress into a deep grounded crouch, hindlegs coiled for takeoff, both clawed hands touching invisible ground just in front of the chest, head low facing right, tail high and curved behind LEFT. Four limbs visible and distinct, no additional legs.",
       "reference": {
         "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
@@ -1152,7 +1152,7 @@
       "id": "arachnoid-special-active",
       "category": "characters",
       "batch": 3,
-      "generatedOriginal": "exec-466a0d5f-a38d-417f-9d11-36b9fdde10e1.png",
+      "generatedOriginal": "review-81ad6b960a225f6d900e714d.png",
       "prompt": "Use case: stylized-concept. Create ONE full-body game sprite of the EXACT GREY ARACHNOID ALIEN in the provided reference, the Capcom Alien vs. Predator arcade 1994 incarnation adapted for Xeno Trials. Use the image as identity reference; preserve its elongated segmented crest-like head silhouette, steel-grey and muted blue-purple palette, ribbed biomechanical torso, slim muscular four-limbed body, long finger-claws, dorsal tubes, full segmented tail ending in a narrow spear blade. NOT the NECA movie-deco variant, not a spider, never add limbs. Match the reference's crisp highly detailed 2D pixel-painted style. Strict lateral SIDE PROFILE facing RIGHT; transparent RGBA background, no floor or floor shadow, no halo, no scenery, no text, no VFX, no other creature. One character, one pose only. Complete anatomy and tail inside frame with generous margin. Landscape canvas, fixed camera and body proportions. Pose: POUNCE SPECIAL ACTIVE FLIGHT: whole body horizontal, fully airborne leaping to the RIGHT, head forward, both long clawed forelimbs reaching toward the right, bent hindlegs trailing left, long tail extended behind LEFT with a gentle curve; exactly four limbs. No ground contact, no motion streaks.",
       "reference": {
         "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
@@ -1165,7 +1165,7 @@
       "id": "arachnoid-special-recovery",
       "category": "characters",
       "batch": 3,
-      "generatedOriginal": "exec-89846a09-ca4d-4a66-b662-252088f293c9.png",
+      "generatedOriginal": "review-77faa6fce749fb4b9bee862e.png",
       "prompt": "Use case: stylized-concept. Create ONE full-body game sprite of the EXACT GREY ARACHNOID ALIEN in the provided reference, the Capcom Alien vs. Predator arcade 1994 incarnation adapted for Xeno Trials. Use the image as identity reference; preserve its elongated segmented crest-like head silhouette, steel-grey and muted blue-purple palette, ribbed biomechanical torso, slim muscular four-limbed body, long finger-claws, dorsal tubes, full segmented tail ending in a narrow spear blade. NOT the NECA movie-deco variant, not a spider, never add limbs. Match the reference's crisp highly detailed 2D pixel-painted style. Strict lateral SIDE PROFILE facing RIGHT; transparent RGBA background, no floor or floor shadow, no halo, no scenery, no text, no VFX, no other creature. One character, one pose only. Complete anatomy and tail inside frame with generous margin. Landscape canvas, fixed camera and body proportions. Pose: POUNCE SPECIAL LANDING RECOVERY: both clawed hands planted on invisible ground in front, chest and head low facing right, hindlegs bent and feet contacting the same baseline behind, weight absorbed into a crouch, tail still lifted behind LEFT. Exactly four limbs, no dust or floor.",
       "reference": {
         "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
@@ -1178,7 +1178,7 @@
       "id": "acid-cluster",
       "category": "projectiles",
       "batch": 4,
-      "generatedOriginal": "exec-20d83711-5f09-4c47-8147-122adbb7e28e.png",
+      "generatedOriginal": "review-9577e373639f112886e910a2.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE thick irregular green-yellow acid glob PROJECTILE flying RIGHT, swollen viscous central bolus with a lobed front and a short coherent stringy trailing tail to LEFT. Small internal bubbles, wet specular highlights, darker olive translucent edge. It is one projectile, not a pattern of several separate projectiles and not an impact. Width about twice height, centered. No neon magic ring, no solid shadow.",
       "selected": true
     },
@@ -1186,7 +1186,7 @@
       "id": "aimed-acid",
       "category": "projectiles",
       "batch": 4,
-      "generatedOriginal": "exec-51094d50-0ecb-492f-b451-7de76eef1cd8.png",
+      "generatedOriginal": "review-5ade7048b029701e884100ae.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE elongated aimed-acid PROJECTILE traveling RIGHT, sharp stretched yellow-green leading droplet on RIGHT and thinner viscous connected wake to LEFT. Acid is organic liquid with tiny bubbles and wet highlights, ochre-lime core and olive green rim. Width about 3 times height. No splash at the nose, no cluster of independent projectiles, no magical energy symbols.",
       "selected": true
     },
@@ -1194,7 +1194,7 @@
       "id": "pulse-bolt",
       "category": "projectiles",
       "batch": 4,
-      "generatedOriginal": "exec-39beac2a-3f3b-4947-bda5-7dee5fe0df03.png",
+      "generatedOriginal": "review-70d86aa9c53678ff5a00991e.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE compact pale icy-blue PULSE BOLT flying RIGHT, bright near-white narrow core, sharply tapered blue-white head on RIGHT, short turquoise energy wake extending LEFT. Width approximately three times height. Small industrial sci-fi energy shot, not a lightning storm, not a beam spanning frame. Transparent around the complete bolt; no black compositing plate.",
       "selected": true
     },
@@ -1202,7 +1202,7 @@
       "id": "ground-wave",
       "category": "projectiles",
       "batch": 4,
-      "generatedOriginal": "exec-81f2d916-e075-4669-a7c4-5bd729c97857.png",
+      "generatedOriginal": "review-6d1b29c66862961e5d36df14.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE ground-skimming concussive shock front traveling RIGHT, a low wedge-shaped spray of dark broken mineral grit and grey-white compressed dust. Strong upward-curving front at RIGHT, tapering gritty tail LEFT, bottom perfectly aligned to an invisible horizontal ground baseline. The effect alone is visible with no actual floor. A heavy creature's physical impact wave, no magic, no fire, no neon.",
       "selected": true
     },
@@ -1210,7 +1210,7 @@
       "id": "acid-splash",
       "category": "vfx",
       "batch": 4,
-      "generatedOriginal": "exec-9c35ccc1-321a-4e60-8292-5aec6a2366b0.png",
+      "generatedOriginal": "review-58659b8ac3dce746c9502612.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE acid IMPACT SPLASH, a radial crown of corrosive yellow-green liquid erupting from a small central point, dynamic side-view suspended shape with thick curving tendrils and a few tiny detached drops. Wet olive edges, acidic chartreuse body, bright pale specular core. All droplets enclosed. Transparent negative space between tendrils. No target or floor, no skulls, no body parts, no smoke.",
       "selected": false
     },
@@ -1218,7 +1218,7 @@
       "id": "acid-pool",
       "category": "vfx",
       "batch": 4,
-      "generatedOriginal": "exec-f36045a7-dae0-4ca5-a170-ae67068c2352.png",
+      "generatedOriginal": "review-8c9f17cf21e703b09b3a3c89.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE shallow ACID PUDDLE hazard viewed at very low side angle, a wide thin horizontal yellow-green pool with uneven organic edge, a few rounded bubbles at its center, short thin rising wisps. Width at least three times total height. The bottom of the pool sits on an invisible horizontal floor. Clear shiny lime liquid and darker olive rim, no visible floor tile, no object casting shadow, no top-down camera.",
       "selected": false
     },
@@ -1226,7 +1226,7 @@
       "id": "steam-jet",
       "category": "vfx",
       "batch": 4,
-      "generatedOriginal": "exec-3b819f6f-93c4-4506-94a3-881451465a59.png",
+      "generatedOriginal": "review-4ea36886975f97b58b1a786e.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE pressurized industrial STEAM JET rising vertically UP from one narrow point at bottom center, dense near-white core at its origin widening into pale cool grey billowing curls higher up, ragged translucent wisps at top. Tall vertical plume, approximately twice as tall as wide. No pipe, vent grate or floor; effect only. Crisp structured curls, lots of clean transparent space around it.",
       "selected": true
     },
@@ -1234,7 +1234,7 @@
       "id": "cryo-burst",
       "category": "vfx",
       "batch": 4,
-      "generatedOriginal": "exec-0ede584b-4441-4846-b60b-b36c43f206e4.png",
+      "generatedOriginal": "review-b1eb6843b4ada87936ef172b.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE CRYOGENIC BURST erupting upward from a thin horizontal invisible ground line, frosty pale cyan vapor and a handful of small crystalline ice shards, compact low spreading cloud, bright icy-white lower core and translucent blue-grey edges. Wide two-to-one shape with gently raised center. No circular magical glyph, no snow-covered landscape, no pipe, no floor.",
       "selected": true
     },
@@ -1242,7 +1242,7 @@
       "id": "electric-arc",
       "category": "vfx",
       "batch": 4,
-      "generatedOriginal": "exec-42484ee1-600c-4b50-9361-db3e3f4977b0.png",
+      "generatedOriginal": "review-a5be8d3004b0369c3ea00be3.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE horizontal industrial ELECTRICAL ARC, a single branching zigzag discharge connecting an invisible left electrode to an invisible right electrode. Blue-white bright core, cyan secondary short branches, jagged shape about three times wider than tall, sparse clean transparent space between strands. NO electrodes drawn, no surrounding ring, no magical symbols, no scattered disconnected lightning bolts, no black background.",
       "selected": true
     },
@@ -1250,7 +1250,7 @@
       "id": "debris-impact",
       "category": "vfx",
       "batch": 4,
-      "generatedOriginal": "exec-4ce7b065-671b-462d-bc7c-2d471ed06b17.png",
+      "generatedOriginal": "review-22ea8adab8d5c83142f6c817.png",
       "prompt": "Use case: stylized-concept. Asset type: ONE isolated 2D videogame effect sprite for Xeno Trials, detailed crisp painted raster effect suitable for a dark Alien-universe fighting game. Genuine transparent RGBA background, no black background, no checkerboard baked in, no scenery, no frame, no labels or letters. Exactly one effect with its entire silhouette and all trailing wisps contained comfortably inside the image. High-contrast readable core, subtle antialiased alpha edges, not a large diffuse rectangular haze. Do not include any creature, weapon, person or environment. Side-on game camera, never top-down. ONE industrial DEBRIS IMPACT effect from falling steel wreckage, a compact irregular fan of dark metallic fragments and charcoal grit bouncing upward and outward from one invisible ground contact point, restrained pale grey dust at the bottom, a few tiny dull orange friction sparks. Grounded realistic Alien-era materials. Wide low silhouette, clear transparent gaps, no floor, no entire wall, no flames or giant explosion.",
       "selected": true
     },
@@ -1258,10 +1258,10 @@
       "id": "gorilla-heavy-windup",
       "category": "characters",
       "batch": 5,
-      "generatedOriginal": "exec-fe4f984f-888d-4686-9280-9d09dc0520c8.png",
+      "generatedOriginal": "review-7761f7203560b5ebd78e9e46.png",
       "prompt": "Edit the provided isolated fictional biomechanical creature into ONE new neutral exercise pose for a 2D game animation. Preserve EXACTLY this creature's blue-black exoskeleton, long smooth black head dome, ornate dorsal crest, very large arms, forearm spikes, openwork three-pronged tail tip, body proportions and detailed 2D painted material rendering. Same right-facing side camera as reference. Keep complete body and entire tail with at least 50 pixels transparent margin on all sides. True transparent background with no floor, no haze, no aura, no text, no other subject. This is a single isolated creature pose, no victim, no contact with anybody, no gore and no action effects. Square image. Pose: a stretching preparation posture, bent knees and planted feet, torso upright, both huge arms raised high over the head with the fingers curled, head still looking right. Tail rests in an upward curve to the left. Show BOTH arms as distinct complete limbs; do not obscure the dome silhouette. The same character remains recognizable.",
       "reference": {
-        "path": "generated-originals/exec-6ce056b5-c5da-4b7c-901b-a5deaa0daade.png",
+        "path": "generated-originals/review-8f97e8cf0041bc358ffe3ae9.png",
         "sha256": "57cf5faba41e805a424e4b699ce57340ef470a296571f1440b56ca332a6cb54b",
         "kind": "generated-predecessor"
       },
@@ -1271,10 +1271,10 @@
       "id": "gorilla-heavy-impact",
       "category": "characters",
       "batch": 5,
-      "generatedOriginal": "exec-bbbe09c6-0d18-4960-b94e-0bf7547910fd.png",
+      "generatedOriginal": "review-de0112100b9f011deeeb2d5e.png",
       "prompt": "Edit the provided isolated fictional biomechanical creature into ONE new neutral exercise pose for a 2D game animation. Preserve EXACTLY this creature's blue-black exoskeleton, long smooth black head dome, ornate dorsal crest, very large arms, forearm spikes, openwork three-pronged tail tip, body proportions and detailed 2D painted material rendering. Same right-facing side camera as reference. Keep complete body and entire tail with at least 50 pixels transparent margin on all sides. True transparent background with no floor, no haze, no aura, no text, no other subject. This is a single isolated creature pose, no victim, no contact with anybody, no gore and no action effects. Square image. Pose: a low stable crouch, both huge closed hands resting on the invisible baseline ahead of the bent feet, shoulders low, head looking right, rear hips low and feet planted behind the hands. Tail curves behind to the left, entirely visible. No scene floor and no marks on the ground. Exactly two arms and two legs, same recognizable character.",
       "reference": {
-        "path": "generated-originals/exec-6ce056b5-c5da-4b7c-901b-a5deaa0daade.png",
+        "path": "generated-originals/review-8f97e8cf0041bc358ffe3ae9.png",
         "sha256": "57cf5faba41e805a424e4b699ce57340ef470a296571f1440b56ca332a6cb54b",
         "kind": "generated-predecessor"
       },
@@ -1284,10 +1284,10 @@
       "id": "acid-pool",
       "category": "vfx",
       "batch": 6,
-      "generatedOriginal": "exec-fb5803d8-354c-45ec-b705-2cf8f8319f74.png",
+      "generatedOriginal": "review-cffbebfdaf334014649db09a.png",
       "prompt": "Use case: precise-object-edit. Edit the supplied isolated acid-pool sprite for a 2D side-view game. Keep the yellow-green liquid's material, detailed wet highlights, olive rim and broad uneven puddle shape. REMOVE ALL of the tall steam wisps above it. Make the complete visible silhouette a very flat shallow horizontal strip approximately TWELVE TIMES wider than its total height, including bubbles. Only tiny low bubbles hugging the liquid surface, nothing protruding far above it. Strict side-on low angle, no top-down oval. Preserve true transparency, with ample empty transparent space above and below, and at least 60px margin at left and right. One whole shallow puddle only, no floor, no black or colored background, no shadow, no extra effects, no text. Do not crop any edge of the puddle.",
       "reference": {
-        "path": "generated-originals/exec-f36045a7-dae0-4ca5-a170-ae67068c2352.png",
+        "path": "generated-originals/review-8c9f17cf21e703b09b3a3c89.png",
         "sha256": "6e85a72c6ca80f9ec72dd5741f9afad6a443448a2e6084ed90f3a54792cfb21a",
         "kind": "generated-predecessor"
       },
@@ -1297,10 +1297,10 @@
       "id": "acid-splash",
       "category": "vfx",
       "batch": 6,
-      "generatedOriginal": "exec-ab202025-7ec4-4d70-9884-dd7a8cf4a71f.png",
+      "generatedOriginal": "review-8e678c34ad19a2a227e0622f.png",
       "prompt": "Use case: precise-object-edit. Fix ONLY the framing of the supplied isolated yellow-green acid-splash game sprite. Pull the camera back so the ENTIRE splash including the uppermost rising curved tendril and every small droplet is fully visible, with at least 10% fully transparent margin on ALL FOUR sides. Reconstruct the top tendril's rounded liquid tip where it was cut off by the canvas. Keep the same substance, yellow-green and olive colors, wet specular highlights, dynamic side-view crown silhouette and small bubbles. One single complete splash, no victim or surface, no scenery, no added objects, no text, genuine transparent RGBA background. It must not touch the canvas edges.",
       "reference": {
-        "path": "generated-originals/exec-9c35ccc1-321a-4e60-8292-5aec6a2366b0.png",
+        "path": "generated-originals/review-58659b8ac3dce746c9502612.png",
         "sha256": "2e45917b85651e1ab90bbdcb9d773a2c1e589ee60e040c762eca94b08df2ca3a",
         "kind": "generated-predecessor"
       },
@@ -1310,7 +1310,7 @@
       "id": "acid-drop",
       "category": "projectiles",
       "batch": 7,
-      "generatedOriginal": "exec-99f3db0a-59ff-4217-9fb9-d9d5e7eceabd.png",
+      "generatedOriginal": "review-dab0053c51594040c355ab14.png",
       "prompt": "Use case: precise-object-edit. Using the provided yellow-green acid projectile as a MATERIAL AND PALETTE reference, create ONE new tiny falling-acid-droplet sprite for a side-view 2D game. Exactly one coherent glossy liquid droplet, vertical orientation, the heavy rounded bulb at the BOTTOM and a short tapered liquid tail pointing UP, so it clearly falls DOWN. Keep the same olive rim, translucent vivid yellow-green body and wet pale specular highlight from the reference, detailed painted game art. Shape width about two thirds of its height, bold compact silhouette legible at 4 by 6 gameplay pixels. No wide horizontal trail, no mist, no glow cloud, no smoke, no secondary droplets. One droplet only, genuine transparent RGBA background, no scenery, no floor, no text, no shadow. Keep the full droplet centered within generous transparent margins of at least 15% on every edge. Portrait canvas.",
       "reference": {
         "path": "assets/openai/xeno-trials-v205/projectiles/aimed-acid.png",
@@ -1323,7 +1323,7 @@
       "id": "detonation",
       "category": "vfx",
       "batch": 7,
-      "generatedOriginal": "exec-9c67dffb-b7d4-4474-a782-5a71fc0d7deb.png",
+      "generatedOriginal": "review-665752814f5dda4f288108a8.png",
       "prompt": "Use case: stylized-concept. Create ONE isolated detonation impact VFX sprite for Xeno Trials, a detailed painted 2D side-view industrial science-fiction game. Pure effect only, one complete radial fiery burst centered in a square transparent canvas. Bright pale yellow-white compact core, hot amber and orange turbulent flame petals radiating evenly in every direction, a few short sparks, restrained smoky dark-orange outer fringe. Crisp readable silhouette, mostly compact circular proportions, no directional plume, no mushroom cloud. This represents an existing synthetic overload burst in the game; original effect design. Absolutely no person, robot, alien, victim, machinery, ground, debris props, environment, text, panels, logos, or background. True transparent RGBA, including gaps between sparks and flame tongues; no black or colored rectangle. Keep the entire effect and every spark fully inside the canvas with generous 15% transparent margin all around. Rich rendered material consistent with high quality painted fighting-game VFX, not a flat icon.",
       "selected": true
     },
@@ -1331,7 +1331,7 @@
       "id": "synth-flame-cone",
       "category": "vfx",
       "batch": 7,
-      "generatedOriginal": "exec-56dc12da-cdb2-4875-bd85-a381a3d53881.png",
+      "generatedOriginal": "review-939467e69b183c075a19a72d.png",
       "prompt": "Use case: stylized-concept. Create ONE isolated horizontal flame-cone VFX sprite for a detailed painted 2D side-view industrial science-fiction fighting game, Xeno Trials. Strict side view, jet travels from LEFT to RIGHT. A tiny narrow pale yellow-white hot origin at the left, steadily widening to a broad rounded fan of orange and ember-red flame tongues at the right. The complete visible flame silhouette must fit a simple cone envelope approximately TWICE as wide as its maximum height; axis exactly horizontal. Compact clearly bounded fire, wispy natural branching internally, taper at left, wide opening at right. It is a flamethrower jet only, no weapon or operator. No big explosion bulb at the left, no curling smoke far outside the cone, no floor, no environment, no text, no framing, no multiple effects. True transparent RGBA background, no black/colored rectangle and no opaque haze. Every flame tongue fully visible with at least 10% empty transparent margin on every edge. Landscape canvas. Warm palette pale yellow #fff2ad at origin, amber #ffb447 middle, red orange #ef502a at the broad tip; crisp detailed painted game art readable when reduced.",
       "selected": true
     }
