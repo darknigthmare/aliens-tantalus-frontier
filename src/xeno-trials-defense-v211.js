@@ -4,21 +4,41 @@ export const XENO_TRIALS_AIR_HIT_V211 = 'air-hit';
 export const XENO_TRIALS_GET_UP_V211 = Object.freeze({ fallTicks: 10, opensAt: 52, closesAt: 72, assistedTicks: 8, stun: .72 });
 const timestep = 1 / 120;
 
-// Runner's pounce and Prowler's leap already have exact motion contracts.
-// Their arena air strike uses a separate downward band, at its real altitude.
+const aerialStrike = (profileId, cost, damage, reach, startup, active, recovery, stun, push, descendingReachV211) =>
+  Object.freeze({ profileId, cost, damage, reach, startup, active, recovery, stun, push, descendingReachV211 });
+
+// The admitted air-light keys of V199–V204 retain their own body and scale.
+// These specs govern a fresh descending input and do not change jump physics.
 const air = new Map([
-  ['runner', Object.freeze({ profileId: 'castes-film_runner_alien3_1992', cost: 15, damage: 17, reach: 58, startup: .075,
-    active: .085, recovery: .235, stun: .16, push: 19, descendingReachV211: 35 })],
-  ['prowler', Object.freeze({ profileId: 'castes-game_afe_prowler', cost: 18, damage: 20, reach: 64, startup: .085,
-    active: .1, recovery: .275, stun: .19, push: 24, descendingReachV211: 45 })]
+  ['runner', aerialStrike('castes-film_runner_alien3_1992', 15, 17, 58, .075, .085, .235, .16, 19, 35)],
+  ['prowler', aerialStrike('castes-game_afe_prowler', 18, 20, 64, .085, .1, .275, .19, 24, 45)],
+  ['warrior', aerialStrike('castes-film_warrior_aliens_1986', 17, 20, 60, .1, .092, .27, .17, 22, 42)],
+  ['import-game-afe2-warden', aerialStrike('pose-v106-import-game-afe2-warden', 23, 26, 64, .133, .108, .36, .24, 30, 38)],
+  ['queen', aerialStrike('castes-film_queen_aliens_1986', 26, 27, 73, .142, .117, .39, .24, 36, 53)],
+  ['ravager', aerialStrike('castes-game_avp_extinction_ravager', 21, 24, 69, .108, .108, .32, .22, 29, 47)],
+  ['chrysalis', aerialStrike('castes-game_avp_capcom_chrysalis', 20, 23, 59, .125, .108, .33, .22, 29, 43)],
+  ['razor-claws', aerialStrike('castes-game_avp_capcom_razor_claws', 18, 21, 66, .092, .092, .28, .19, 24, 44)],
+  ['synth-containment', aerialStrike('pose-v110-afe-synth-containment', 21, 23, 55, .125, .1, .36, .23, 29, 32)],
+  ['smasher', aerialStrike('castes-game_avp_capcom_smasher', 23, 25, 64, .133, .108, .36, .25, 32, 40)]
 ]);
-// Alpha heights of the V188 grounded keys over their reference idle heights.
+// Alpha heights of the admitted V188–V197 grounded keys over their reference idle heights.
 // Apply the ratio to the native hurtbox only; push width and body pivot stay put.
 const down = new Map([
-  ['warrior', { profileId: 'castes-film_warrior_aliens_1986', heightRatio: 136 / 314 }],
-  ['runner', { profileId: 'castes-film_runner_alien3_1992', heightRatio: 85 / 172 }],
-  ['prowler', { profileId: 'castes-game_afe_prowler', heightRatio: 122 / 259 }],
-  ['spitter', { profileId: 'castes-game_acm_spitter', heightRatio: 120 / 259 }]
+  ['warrior', { profileId: 'castes-film_warrior_aliens_1986', heightRatio: 136 / 314, legacy: true }],
+  ['runner', { profileId: 'castes-film_runner_alien3_1992', heightRatio: 85 / 172, legacy: true }],
+  ['prowler', { profileId: 'castes-game_afe_prowler', heightRatio: 122 / 259, legacy: true }],
+  ['spitter', { profileId: 'castes-game_acm_spitter', heightRatio: 120 / 259, legacy: true }],
+  ['queen', { profileId: 'castes-film_queen_aliens_1986', heightRatio: 116 / 222 }],
+  ['crusher-acm', { profileId: 'castes-game_acm_crusher', heightRatio: 124 / 209 }],
+  ['ravager', { profileId: 'castes-game_avp_extinction_ravager', heightRatio: 103 / 210 }],
+  ['burster', { profileId: 'castes-game_afe_burster', heightRatio: 102 / 239 }],
+  ['defender', { profileId: 'pose-v95-user-xeno-defender', heightRatio: 124 / 351 }],
+  ['chrysalis', { profileId: 'castes-game_avp_capcom_chrysalis', heightRatio: 116 / 237 }],
+  ['smasher', { profileId: 'castes-game_avp_capcom_smasher', heightRatio: 112 / 261 }],
+  ['user-brute', { profileId: 'pose-v95-user-xeno-brute', heightRatio: 177 / 324 }],
+  ['synth-trooper', { profileId: 'pose-v94-afe-synth-trooper', heightRatio: 99 / 319 }],
+  ['synth-guard', { profileId: 'pose-v94-afe-synth-guard', heightRatio: 141 / 359 }],
+  ['import-game-afe2-warden', { profileId: 'pose-v106-import-game-afe2-warden', heightRatio: 128 / 244 }]
 ]);
 const downSupported = definition => definition?.profileId && down.get(definition.id)?.profileId === definition.profileId;
 
@@ -49,8 +69,11 @@ export function validXenoTrialsAirAttackV211(match, fighter, attack, spec) {
   return match.hordeV180 ? attack.hit === Boolean(attack.hitTargetsV180?.length) : attack.hitTargetsV180 === undefined;
 }
 
-export function startXenoTrialsGroundRecoveryV211(match, fighter, definition) {
-  if (!downSupported(definition) || fighter.hp <= 0 || fighter.y !== 0 || match.grappleV153) return;
+export function canStartXenoTrialsGroundRecoveryV212(match, fighter, definition) {
+  return Boolean(downSupported(definition) && fighter.hp > 0 && fighter.y === 0 && !match.grappleV153);
+}
+
+export function startXenoTrialsGroundRecoveryV211(match, fighter) {
   fighter.groundRecoveryV211 = { tick: match.tick, breakId: match.serial, assistedAt: 0 };
 }
 
@@ -108,7 +131,9 @@ function actorMatches(match, fighter, event) {
 
 export function validXenoTrialsGroundRecoveryV211(match, fighter, definition) {
   const state = fighter.groundRecoveryV211;
-  if (state === undefined) return true;
+  if (state === undefined) return !canStartXenoTrialsGroundRecoveryV212(match, fighter, definition)
+    || match.phase !== 'active' || !fighter.guardBrokenV147 || fighter.stun <= 1e-9 || !Array.isArray(match.events)
+    || !match.events.findLast(event => event?.type === 'guard-break' && actorMatches(match, fighter, event))?.floorRecoveryV212;
   if (!state || typeof state !== 'object' || Array.isArray(state) || Object.keys(state).length !== 3
     || !downSupported(definition) || match.phase !== 'active' || fighter.hp <= 0 || fighter.y !== 0 || fighter.vy !== 0
     || fighter.guard || fighter.attack || !fighter.guardBrokenV147 || fighter.stun <= 0 || match.grappleV153
@@ -118,6 +143,7 @@ export function validXenoTrialsGroundRecoveryV211(match, fighter, definition) {
     || !Array.isArray(match.events)) return false;
   const receipt = match.events.find(event => event?.id === state.breakId);
   if (receipt ? receipt.type !== 'guard-break' || receipt.tick !== state.tick || !actorMatches(match, fighter, receipt)
+    || receipt.floorRecoveryV212 !== true && !down.get(fighter.id).legacy
     : match.events.length !== 32 || !(state.breakId < match.events[0]?.id)) return false;
   const elapsed = (match.tick - state.tick) * timestep;
   if (!state.assistedAt) return Math.abs(fighter.stun - (XENO_TRIALS_GET_UP_V211.stun - elapsed)) < 1e-7;

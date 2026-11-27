@@ -28,6 +28,7 @@ export function getXenoTrialsOperationHudV188(match) {
       beaconWindow = { id: target.id, open, contact, remainingTicks: target.windowRemainingTicks, seconds };
     } else {
       instruction = contact ? `${label} · MAINTENEZ INTERAGIR` : label;
+      if (contact && view.isolationV212) instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
       if (view.kind === 'extraction' || purgeV204) {
         const work = { id: target.id, kind: target.kind, contact, progress: target.progress,
           requiredTicks: target.requiredTicks, percent: Math.floor(target.progress * 100 / target.requiredTicks) };
@@ -48,7 +49,7 @@ export function getXenoTrialsOperationBriefingV188(activity) {
   return Object.freeze({ operation: true, title: operation.title,
     waves: activity.waveCount, total: activity.totalEnemies,
     minimum: activity.enemyHpMin, maximum: activity.enemyHpMax, simultaneous: activity.maxConcurrent,
-    waveLabel: kinds[operation.kind] || 'OPÉRATION', populationLabel: 'OBJECTIF PHYSIQUE',
+    waveLabel: operation.isolationV212 ? 'ISOLEMENT' : kinds[operation.kind] || 'OPÉRATION', populationLabel: 'OBJECTIF PHYSIQUE',
     healthLabel: `${activity.enemyHpMin}–${activity.enemyHpMax} PV`,
     pressureLabel: 'INTERACTION AU SOL · E / L3 / TACTILE',
     orders: `${operation.description} Maintenez E, L3 ou INTERAGIR au contact de la cible indiquée. La réussite dépend de l’objectif, même si des contacts restent actifs.` });

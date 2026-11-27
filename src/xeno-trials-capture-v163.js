@@ -66,6 +66,7 @@ function activeRecord(match){
  if(match?.phase!=='active'||!Array.isArray(match.fighters))return null;
  const hold=match.grappleV153;
  if(hold){
+  if(hold.grabIdV212)return null;
   const attacker=match.fighters.find(f=>f.side===hold.attacker),target=match.fighters.find(f=>f.side===hold.target);
   if(!attacker||!target)return null;
   const direction=Math.sign(hold.targetX-hold.attackerX);

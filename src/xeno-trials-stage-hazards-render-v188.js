@@ -6,7 +6,17 @@ import { getXenoTrialsStageHazardViewV188 } from './xeno-trials-stage-hazards-v1
  */
 export function drawXenoTrialsStageHazardsV188(ctx, match, arena, { plane = 'rear', reducedMotion = false } = {}) {
   const view = getXenoTrialsStageHazardViewV188(match);
-  if (!view || !view.zones.length || !['rear', 'front'].includes(plane)) return view;
+  if (!view || !['rear', 'front'].includes(plane)) return view;
+  if (plane === 'front' && view.isolationV212?.isolated) {
+    ctx.save();
+    ctx.strokeStyle = '#8bc7a4';
+    ctx.lineWidth = 2;
+    for (const circuit of view.isolationV212.circuits) {
+      if (circuit.isolated) ctx.strokeRect(circuit.left, arena.floor + 3, circuit.right - circuit.left, 4);
+    }
+    ctx.restore();
+  }
+  if (!view.zones.length) return view;
   const zone = view.zones[0], width = zone.right - zone.left, floor = arena.floor;
   ctx.save(); ctx.strokeStyle = view.color; ctx.fillStyle = view.color; ctx.lineWidth = 2;
   if (plane === 'front') {

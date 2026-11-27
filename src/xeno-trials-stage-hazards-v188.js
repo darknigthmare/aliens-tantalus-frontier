@@ -1,5 +1,6 @@
 import { XENO_TRIALS_BOSS_STAGES_V179 } from './xeno-trials-boss-stages-v179.js';
 import { ARBITER_STAGE_HAZARDS_V191 } from './xeno-arbiter-protocols-v191.js';
+import { XENO_TRIALS_ISOLATION_HAZARDS_V212, applyXenoTrialsStageIsolationV212 } from './xeno-trials-stage-isolation-v212.js';
 
 /** Original physical machinery for the forty Tantalus operation settings.
  * The old duels and eighty horde protocols never enable this system. All times
@@ -52,8 +53,12 @@ export const XENO_TRIALS_STAGE_HAZARDS_V188 = freeze(XENO_TRIALS_BOSS_STAGES_V17
     hitIntervalTicks: limits.hitIntervalTicks, affectsCombat: true,
     canonExact: false, canonStatus: 'original-tantalus-simulation' };
 }));
-const definitions = new Map([...XENO_TRIALS_STAGE_HAZARDS_V188, ...ARBITER_STAGE_HAZARDS_V191].map(value => [value.stageId, value]));
-export function getXenoTrialsStageHazardV188(stageId) { return definitions.get(stageId) || null; }
+const definitions = new Map([...XENO_TRIALS_STAGE_HAZARDS_V188, ...ARBITER_STAGE_HAZARDS_V191, ...XENO_TRIALS_ISOLATION_HAZARDS_V212]
+  .map(value => [value.stageId, value]));
+export function getXenoTrialsStageHazardV188(stageId, operationId = null) {
+  const definition = definitions.get(stageId);
+  return definition && (!definition.operationId || definition.operationId === operationId) ? definition : null;
+}
 const integer = (value, min = 0, max = limits.maximumTick) => Number.isSafeInteger(value) && value >= min && value <= max;
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const exactKeys = (value, keys) => record(value) && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
@@ -61,8 +66,8 @@ const stateKeys = ['revision', 'stageId', 'seed', 'startedTick', 'lastTick', 'pl
 const actorId = actor => actor.side === 'player' ? 'player' : actor.instanceIdV180;
 const validActorId = id => typeof id === 'string' && (id === 'player' || /^horde-[1-9]\d{0,3}$/.test(id));
 
-export function createXenoTrialsStageHazardsV188(stageId, seed = 1, startedTick = 0) {
-  if (!definitions.has(stageId) || !integer(seed, 0, 0xffffffff) || !integer(startedTick)) return null;
+export function createXenoTrialsStageHazardsV188(stageId, seed = 1, startedTick = 0, operationId = null) {
+  if (!getXenoTrialsStageHazardV188(stageId, operationId) || !integer(seed, 0, 0xffffffff) || !integer(startedTick)) return null;
   return { revision: 188, stageId, seed, startedTick, lastTick: startedTick,
     playerDamage: 0, totalDamage: 0, contacts: 0, nextHits: [] };
 }
@@ -70,13 +75,14 @@ export function createXenoTrialsStageHazardsV188(stageId, seed = 1, startedTick 
 /** No geometry, damage tuning, cached visual phase or arbitrary object keys are
  * admitted from a save. They are always reconstructed from the authored stage.
  */
-export function validateXenoTrialsStageHazardsV188(state, { stageId, seed, tick } = {}) {
-  if (!exactKeys(state, stateKeys) || state.revision !== 188 || !definitions.has(stageId)
+export function validateXenoTrialsStageHazardsV188(state, { stageId, seed, tick, operationId } = {}) {
+  const definition = getXenoTrialsStageHazardV188(stageId, operationId);
+  if (!exactKeys(state, stateKeys) || state.revision !== 188 || !definition
     || state.stageId !== stageId || state.seed !== seed || !integer(seed, 0, 0xffffffff)
     || !integer(tick) || !integer(state.startedTick, 0, tick) || !integer(state.lastTick, state.startedTick, tick)
     || !integer(state.contacts, 0, limits.maximumContacts) || !integer(state.totalDamage, 0, limits.maximumDamage)
     || !integer(state.playerDamage, 0, state.totalDamage) || state.totalDamage < state.contacts
-    || state.totalDamage > state.contacts * 8 || (state.contacts === 0 && state.totalDamage !== 0)
+    || state.totalDamage > state.contacts * definition.damage
     || !Array.isArray(state.nextHits) || state.nextHits.length > limits.maximumActors
     || state.nextHits.length > state.contacts) return false;
   const upperBound = Math.ceil((state.lastTick - state.startedTick) / limits.hitIntervalTicks) * limits.maximumActors;
@@ -109,7 +115,8 @@ function operationEnabled(match) {
   return Boolean(match?.config?.operationV188?.id && match.operationV188
     && match.config.operationV188.id === match.operationV188.operationId && !match.result
     && !['completed', 'failed'].includes(match.operationV188.status)
-    && match.phase === 'active' && match.stageHazardsV188?.stageId === match.config.stageId);
+    && match.phase === 'active' && match.stageHazardsV188?.stageId === match.config.stageId
+    && getXenoTrialsStageHazardV188(match.config.stageId, match.operationV188.operationId));
 }
 function viewAt(state, tick) {
   const definition = definitions.get(state.stageId);
@@ -136,7 +143,12 @@ function viewAt(state, tick) {
 }
 
 export function getXenoTrialsStageHazardViewV188(match) {
-  return operationEnabled(match) ? viewAt(match.stageHazardsV188, match.tick) : null;
+  return operationEnabled(match) ? physicalView(match, match.tick) : null;
+}
+
+function physicalView(match, tick) {
+  const state = match.stageHazardsV188;
+  return applyXenoTrialsStageIsolationV212(viewAt(state, tick), definitions.get(state.stageId), match.operationV188, state);
 }
 
 /** The native engine calls once after movement/contact resolution. Environmental
@@ -147,7 +159,7 @@ export function getXenoTrialsStageHazardViewV188(match) {
 export function stepXenoTrialsStageHazardsV188(match, bounds, arena, onHit, emit = () => {}) {
   if (!operationEnabled(match) || match.paused || typeof bounds !== 'function' || typeof onHit !== 'function'
     || !integer(match.tick) || match.tick <= match.stageHazardsV188.lastTick) return 0;
-  const state = match.stageHazardsV188, previous = viewAt(state, state.lastTick), view = viewAt(state, match.tick);
+  const state = match.stageHazardsV188, previous = physicalView(match, state.lastTick), view = physicalView(match, match.tick);
   if (!view) return 0;
   state.lastTick = match.tick;
   const living = match.fighters.filter(actor => actor.hp > 0 && validActorId(actorId(actor))).slice(0, limits.maximumActors);

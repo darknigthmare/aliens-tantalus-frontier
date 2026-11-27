@@ -732,6 +732,18 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+const XENO_GAMEPLAY_SOURCE_ONLY_V212 = new Set([
+  'docs/forge/xeno-trials/V212-GAMEPLAY.md',
+  'scripts/audit-xeno-gameplay-v212.mjs',
+  'scripts/verify-xeno-gameplay-audit-v212.mjs',
+  'scripts/verify-xeno-trials-finishers-v212.mjs',
+  'scripts/verify-xeno-trials-grapple-v212.mjs',
+  'scripts/verify-xeno-trials-movement-v212.mjs',
+  'scripts/verify-xeno-trials-practice-v212.mjs',
+  'scripts/verify-xeno-trials-presentation-v212.mjs',
+  'scripts/verify-xeno-trials-stage-isolation-v212.mjs'
+]);
+
 const XENO_GAMEPLAY_SOURCE_ONLY_V211 = new Set([
   'docs/forge/xeno-trials/V211-GAMEPLAY.md',
   'scripts/audit-xeno-gameplay-v211.mjs',
@@ -924,6 +936,7 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_GAMEPLAY_SOURCE_ONLY_V212.has(path)) return !built && !directory;
   if (XENO_GAMEPLAY_SOURCE_ONLY_V211.has(path)) return !built && !directory;
   if (XENO_GAMEPLAY_SOURCE_ONLY_V210.has(path)) return !built && !directory;
   const researchAdmissionV210 = publicXenoResearchPathAdmissionV210(path, { directory });

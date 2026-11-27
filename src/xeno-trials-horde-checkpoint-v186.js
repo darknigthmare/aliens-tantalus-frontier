@@ -2,6 +2,7 @@ import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsHordeProtocolV180, XENO_TRIALS_HORDE_LIMITS_V180 as LIMITS } from './xeno-trials-horde-v180.js';
 import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
 import { getXenoTrialsAttackV147, getXenoTrialsSignatureV147, getXenoTrialsSpecialStyleV147 } from './xeno-trials-signatures-v147.js';
+import { XENO_TRIALS_GROUND_GRAB_KIND_V212 } from './xeno-trials-grapple-v212.js';
 import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsPhysicalSuper, validXenoTrialsPhysicalSuperV209 } from './xeno-trials-super-kits-v209.js';
 import { getXenoTrialsRiposteV208, validXenoTrialsRiposteAttackV208, XENO_TRIALS_RIPOSTE_KIND_V208 } from './xeno-trials-ripostes-v208.js';
@@ -189,7 +190,7 @@ function admitSnapshot(snapshot, ticket) {
   if (operation) {
     if (!same(config.operationV188, { id: operation.id }) || raw.operationV188?.status !== 'active'
       || !validateXenoTrialsOperationSnapshotV188(raw.operationV188, ticket, raw)
-      || !validateXenoTrialsStageHazardsV188(raw.stageHazardsV188, { stageId: config.stageId, seed: config.seed, tick: raw.tick })
+      || !validateXenoTrialsStageHazardsV188(raw.stageHazardsV188, { stageId: config.stageId, seed: config.seed, tick: raw.tick, operationId: operation.id })
       || raw.stageHazardsV188.startedTick !== 0
       || raw.stageHazardsV188.nextHits.some(row => row.actorId !== 'player'
         && Number(row.actorId.slice(6)) > raw.hordeV180?.serial)
@@ -248,6 +249,7 @@ function admitSnapshot(snapshot, ticket) {
     || !validProjectiles(raw) || !validAcid(raw, protocol)
     || !Array.isArray(raw.events) || raw.events.length > 32 || raw.events.some(event => !integer(event.id, 1, raw.serial)
       || !integer(event.tick, 0, raw.tick) || typeof event.type !== 'string' || ['match-end', 'round-end'].includes(event.type)
+      || event.kind === XENO_TRIALS_GROUND_GRAB_KIND_V212 || event.grabIdV212 !== undefined
       || !validXenoTrialsSignatureEventV208(event, id => event.side === 'player' ? id === playerDefinition.id
         : event.side === 'opponent' && protocol.waves.some(item => item.opponentIds.includes(id)
           || item.enemySlotsV186?.some(slot => slot.fighterId === id)))

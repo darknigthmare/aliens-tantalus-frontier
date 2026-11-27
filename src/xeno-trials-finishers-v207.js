@@ -5,6 +5,7 @@ import { getXenoTrialsExtendedFinisherV208 } from './xeno-trials-finishers-v208.
 import { getXenoTrialsExtendedFinisherV209 } from './xeno-trials-finishers-v209.js';
 import { getXenoTrialsExtendedFinisherV210 } from './xeno-trials-finishers-v210.js';
 import { getXenoTrialsContactFinisherV211, getXenoTrialsNeutralFinishersV211 } from './xeno-trials-finishers-v211.js';
+import { getXenoTrialsContactFinisherV212, getXenoTrialsIsolationApproachV212 } from './xeno-trials-finishers-v212.js';
 
 const offerMs = 3600;
 const clawTiming = Object.freeze({ approachMs: 240, holdMs: 420, retreatMs: 360 });
@@ -30,7 +31,9 @@ export function createXenoTrialsFinisherV207(match, images, reducedMotion = fals
   }
   if (neutralFallback) {
     const additions = [getXenoTrialsContactFinisherV211(attacker, target, images),
-      ...getXenoTrialsNeutralFinishersV211(match, attacker, target)].filter(Boolean);
+      getXenoTrialsContactFinisherV212(attacker, target, images),
+      ...getXenoTrialsNeutralFinishersV211(match, attacker, target),
+      getXenoTrialsIsolationApproachV212(match, attacker, target, images)].filter(Boolean);
     for (const fallback of additions) {
       if (!candidates.some(candidate => candidate.id === fallback.id)) candidates.push(fallback);
     }

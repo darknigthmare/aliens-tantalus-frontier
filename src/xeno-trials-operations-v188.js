@@ -1,6 +1,7 @@
 import {XENO_TRIALS_BOSS_STAGES_V179 as STAGES} from './xeno-trials-boss-stages-v179.js';
 import {getXenoTrialsBodyBoundsV105} from './xeno-trials-geometry-v105.js';
 import {getArbiterOperationV191} from './xeno-arbiter-protocols-v191.js';
+import {getXenoTrialsIsolationOperationV212,XENO_TRIALS_ISOLATION_OPERATIONS_V212} from './xeno-trials-stage-isolation-v212.js';
 
 // Original Tantalus objective simulations. The existing horde supplies pressure;
 // physical objectives decide the outcome independently of the remaining kills.
@@ -38,7 +39,8 @@ export const XENO_TRIALS_OPERATIONS_V188=freeze(kinds.flatMap((kind,family)=>Arr
   objectives,canonStatus:'original-tantalus-simulation',canonExact:false,revision:188};
 })));
 const catalogue=new Map(XENO_TRIALS_OPERATIONS_V188.map(entry=>[entry.id,entry]));
-export const getXenoTrialsOperationV188=id=>catalogue.get(id)||getArbiterOperationV191(id);
+export const XENO_TRIALS_OPERATION_BOARD_V212=Object.freeze([...XENO_TRIALS_ISOLATION_OPERATIONS_V212,...XENO_TRIALS_OPERATIONS_V188]);
+export const getXenoTrialsOperationV188=id=>catalogue.get(id)||getArbiterOperationV191(id)||getXenoTrialsIsolationOperationV212(id);
 export const XENO_TRIALS_OPERATION_LIMITS_V188=freeze({schema:188,maxObjectives:3,ticksPerSecond:120,maxIntegrity:100,cargoPressureTicks:120,purgePressureTicks:240,purgeRegrowTicks:18});
 const stateKeys=['schema','operationId','matchId','seed','status','failureReason','elapsedTicks','startedTick','lastTick','completedTick','progress','completed','integrity','cargoTravelTicks','cargoX','carrying','delivered','depotTicks','exitTicks'];
 const integer=(value,min,max)=>Number.isSafeInteger(value)&&value>=min&&value<=max;
@@ -143,8 +145,8 @@ export function validateXenoTrialsOperationSnapshotV188(state,config,match=null)
   ||!integer(state.startedTick,0,max+600)||!integer(state.lastTick,0,max+600)
   ||(state.elapsedTicks>0&&state.lastTick-state.startedTick!==state.elapsedTicks)
   ||!integer(state.integrity,0,100)||!integer(state.cargoTravelTicks,0,entry.objectives[0].requiredTicks)
-  ||!integer(state.carrying,-1,entry.objectives.length-1)||!integer(state.depotTicks,0,entry.depot.requiredTicks)
-  ||!integer(state.exitTicks,0,entry.exit.requiredTicks))return false;
+  ||!integer(state.carrying,-1,entry.objectives.length-1)||!integer(state.depotTicks,0,entry.depot?.requiredTicks??0)
+  ||!integer(state.exitTicks,0,entry.exit?.requiredTicks??0))return false;
  for(const key of ['progress','completed','delivered'])if(!Array.isArray(state[key])||state[key].length!==entry.objectives.length)return false;
  for(let index=0;index<entry.objectives.length;index++)if(!integer(state.progress[index],0,entry.objectives[index].requiredTicks)
   ||typeof state.completed[index]!=='boolean'||typeof state.delivered[index]!=='boolean'
@@ -224,11 +226,12 @@ export function getXenoTrialsOperationViewV188(match){
  const done=entry.kind==='extraction'?state.delivered.filter(Boolean).length:doneCount(state);
  const failureLabel={'player-ko':'Spécimen neutralisé',time:'Temps écoulé','structure-destroyed':'Intégrité épuisée'}[state.failureReason]||'Évaluation interrompue';
  return{id:entry.id,title:entry.title,kind:entry.kind,status:state.status,phase:state.status==='active'?(state.carrying>=0?'carrying':'objective'):state.status,
+  ...(entry.isolationV212?{isolationV212:true}:{}),
   instruction:entry.instruction,hint:state.status==='failed'?`Évaluation interrompue : ${failureLabel}.`:state.status==='completed'?'Objectifs validés.':
    target?`${target.label} · maintenez E à proximité${target.windowOpen===false?' pendant la fenêtre verte':''}.`:'Rejoignez le sas.',
   progress:{done,total:entry.objectives.length,label:entry.kind==='extraction'?`${done}/${entry.objectives.length} caissons livrés`:`${done}/${entry.objectives.length} objectifs validés`},
   timeRemaining:Math.max(0,entry.roundSeconds-state.elapsedTicks/120),integrity:state.integrity,carrying:state.carrying,entities,
   target:target?{x:target.x,radius:target.radius,label:target.label,
    ...(entry.kind==='beacon'?{id:target.id,windowOpen:target.windowOpen,windowRemainingTicks:target.windowRemainingTicks}:{}),
-   ...(['extraction','purge'].includes(entry.kind)?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
+   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
 }

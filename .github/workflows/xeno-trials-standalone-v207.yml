@@ -9,6 +9,7 @@ on:
       - feat/xeno-trials-gameplay-v209
       - feat/xeno-trials-gameplay-v210
       - feat/xeno-trials-gameplay-v211
+      - feat/xeno-trials-gameplay-v212
   workflow_dispatch:
 permissions:
   contents: read
@@ -32,7 +33,7 @@ jobs:
       - name: Verify source and the two distributions from one release build
         run: |
           npm run check
-          npm run test:trials:v211
+          npm run test:trials:v212
           npm run build:trials
           npm run check:built
           npm run check:trials:built

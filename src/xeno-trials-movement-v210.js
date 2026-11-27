@@ -12,7 +12,13 @@ const landingProfiles = new Map([
 ]);
 const turnProfiles = new Map([
   ['drive-v123-neca-snake-series13-v14', 'pose-v123-drive-neca-snake-series13-v14'],
-  ['synth-automated-powerloader', 'pose-v116-automated-powerloader']
+  ['synth-automated-powerloader', 'pose-v116-automated-powerloader'],
+  ['queen', 'castes-film_queen_aliens_1986'],
+  ['crusher-acm', 'castes-game_acm_crusher'],
+  ['ravager', 'castes-game_avp_extinction_ravager'],
+  ['defender', 'pose-v95-user-xeno-defender'],
+  ['chrysalis', 'castes-game_avp_capcom_chrysalis'],
+  ['smasher', 'castes-game_avp_capcom_smasher']
 ]);
 const matches = (profiles, definition) => definition?.profileId && profiles.get(definition.id) === definition.profileId;
 export const hasXenoTrialsGroundTurnV210 = definition => Boolean(matches(turnProfiles, definition));

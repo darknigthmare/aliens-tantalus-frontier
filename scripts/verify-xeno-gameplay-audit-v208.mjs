@@ -26,7 +26,7 @@ test('V208 retains the released V207 endpoints and rejects a fabricated predeces
 });
 
 test('V208 admits only exact new runtime paths and checks changed bytes', () => {
-  const terminal = 'scripts/audit-xeno-gameplay-v211.mjs';
+  const terminal = 'scripts/audit-xeno-gameplay-v212.mjs';
   assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   const runtime = xenoGameplayRuntimeSourcesV208({ legacy: 'untouched' });
   assert.equal(runtime.legacy, 'untouched');

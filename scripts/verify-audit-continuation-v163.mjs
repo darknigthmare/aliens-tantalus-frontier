@@ -4,6 +4,7 @@ import { XENO_GAMEPLAY_SUCCESSORS_V208, XENO_GAMEPLAY_NEW_INPUTS_V208 } from './
 import { XENO_GAMEPLAY_SUCCESSORS_V209, XENO_GAMEPLAY_NEW_INPUTS_V209 } from './audit-xeno-gameplay-v209.mjs';
 import { XENO_GAMEPLAY_SUCCESSORS_V210, XENO_GAMEPLAY_NEW_INPUTS_V210 } from './audit-xeno-gameplay-v210.mjs';
 import { XENO_GAMEPLAY_SUCCESSORS_V211, XENO_GAMEPLAY_NEW_INPUTS_V211 } from './audit-xeno-gameplay-v211.mjs';
+import { XENO_GAMEPLAY_SUCCESSORS_V212, XENO_GAMEPLAY_NEW_INPUTS_V212 } from './audit-xeno-gameplay-v212.mjs';
 import test from 'node:test';
 import { COMPLETION_SOURCES_V186, completionRuntimeSourcesV186, reviewedCompletionDigestV186 } from './audit-xeno-trials-completion-v186.mjs';
 import { STAGE_OPERATIONS_SUCCESSORS_V188, STAGE_OPERATIONS_NEW_INPUTS_V188 } from './audit-xeno-stage-operations-v188.mjs';
@@ -720,7 +721,8 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
     ...XENO_GAMEPLAY_SUCCESSORS_V208, ...XENO_GAMEPLAY_NEW_INPUTS_V208,
     ...XENO_GAMEPLAY_SUCCESSORS_V209, ...XENO_GAMEPLAY_NEW_INPUTS_V209,
     ...XENO_GAMEPLAY_SUCCESSORS_V210, ...XENO_GAMEPLAY_NEW_INPUTS_V210,
-    ...XENO_GAMEPLAY_SUCCESSORS_V211, ...XENO_GAMEPLAY_NEW_INPUTS_V211
+    ...XENO_GAMEPLAY_SUCCESSORS_V211, ...XENO_GAMEPLAY_NEW_INPUTS_V211,
+    ...XENO_GAMEPLAY_SUCCESSORS_V212, ...XENO_GAMEPLAY_NEW_INPUTS_V212
   };
   const introducedRuntimePaths = [
     'src/tactical-reload-v77.js', 'src/weapon-actions-v130.js',

@@ -30,7 +30,7 @@ const entryModule = 'src/xeno-trials-standalone.js';
 const launchPage = 'xeno-trials.html';
 const digest = value => createHash('sha256').update(value).digest('hex');
 
-export const XENO_TRIALS_BUILD_REVISION = 211;
+export const XENO_TRIALS_BUILD_REVISION = 212;
 export const xenoTrialsCacheName = fingerprint => `atf-trials-v${XENO_TRIALS_BUILD_REVISION}-${fingerprint.slice(0, 24)}`;
 
 function fighterAssets(id, variant) {

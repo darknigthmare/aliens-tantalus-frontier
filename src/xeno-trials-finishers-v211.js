@@ -27,7 +27,8 @@ const supports = new Map([
 ].map(([id, motion, contactKey, supportKeys, targets]) => [id, { motion, contactKey, supportKeys, targets }]));
 const supportTimings = Object.freeze({
   boot: Object.freeze({ approachMs: 310, holdMs: 350, retreatMs: 360 }),
-  paw: Object.freeze({ approachMs: 340, holdMs: 420, retreatMs: 420 })
+  paw: Object.freeze({ approachMs: 340, holdMs: 420, retreatMs: 420 }),
+  knuckle: Object.freeze({ approachMs: 400, holdMs: 510, retreatMs: 430 })
 });
 const isolationStages = new Map([
   ['containment-deck', [390, 680]],
@@ -46,13 +47,19 @@ const isolationStages = new Map([
   ['xt198-covenant-maintenance-workshop', [374, 685]],
   ['xt192-renaissance-cryo-chamber', [395, 713]],
   ['xt198-arcade-containment-laboratory', [422, 688]]
-].map(([stageId, anchors]) => [stageId, anchors.map((x, index) => Object.freeze({
+].map(([stageId, anchors]) => [stageId, Object.freeze(anchors.map((x, index) => Object.freeze({
   id: `${stageId}-mire-isolation-${index + 1}`, kind: 'isolation',
   x, left: x - 65, right: x + 65
-}))]));
+})))]));
 
 const sealTiming = Object.freeze({ approachMs: 280, holdMs: 420, retreatMs: 280 });
 const isolationTiming = Object.freeze({ approachMs: 250, holdMs: 650, retreatMs: 350 });
+const noFixtures = Object.freeze([]);
+export const XENO_TRIALS_ISOLATION_REACH_V211 = 168;
+export const getXenoTrialsIsolationFixturesV211 = stageId => isolationStages.get(stageId) ?? noFixtures;
+export const getXenoTrialsIsolationFixtureV211 = (stageId, targetX, center) =>
+  getXenoTrialsIsolationFixturesV211(stageId).find(({ left, right }) =>
+    targetX >= left && targetX <= right && center >= left && center <= right);
 export const XENO_TRIALS_FINISHER_COPY_V211 = Object.freeze({
   seal: Object.freeze({ button: 'F · CONFIRMER LA NEUTRALISATION',
     offered: 'Victoire confirmée. Vérification du spécimen disponible avec F.', playing: 'Vérification du spécimen en cours.' }),
@@ -61,7 +68,10 @@ export const XENO_TRIALS_FINISHER_COPY_V211 = Object.freeze({
 });
 
 export function getXenoTrialsContactFinisherV211(attacker, target, images) {
-  const profile = supports.get(attacker.id);
+  return getXenoTrialsMeasuredContactFinisherV211(attacker, target, images, supports.get(attacker.id), 211);
+}
+
+export function getXenoTrialsMeasuredContactFinisherV211(attacker, target, images, profile, revision) {
   const anchor = profile?.targets[target.id];
   if (!Number.isInteger(anchor)) return null;
   const fighter = getXenoTrialsFighterV96(attacker.id);
@@ -71,7 +81,7 @@ export function getXenoTrialsContactFinisherV211(attacker, target, images) {
   if (!rig || rig.profileId !== fighter?.profileId) return null;
   const { motion, contactKey, supportKeys } = profile;
   const lock = getXenoTrialsGroundSupportLockV210(attacker, target, images, rig,
-    { motion, contactKey, supportKeys, liftHeight: 6, range: 15, revision: 211 }, anchor);
+    { motion, contactKey, supportKeys, liftHeight: 6, range: 15, revision }, anchor);
   return lock && { id: `${attacker.id}::fin1`, kind: motion, timing: supportTimings[motion], lock };
 }
 
@@ -83,16 +93,17 @@ export function getXenoTrialsNeutralFinishersV211(match, attacker, target) {
   const source = getXenoTrialsBodyBoundsV105(attacker), body = getXenoTrialsBodyBoundsV105(target);
   const lock = { neutral: true, target, attacker, left: body.left, right: body.right };
   const fin1 = { id: `${attacker.id}::fin1`, kind: 'seal', timing: sealTiming, lock };
-  const fixture = isolationStages.get(stage)?.find(({ left, right }) => target.x >= left && target.x <= right
-    && body.center >= left && body.center <= right && source.right >= left - 168 && source.left <= right + 168);
-  return fixture ? [fin1, { id: `${attacker.id}::fin2`, kind: 'isolation', timing: isolationTiming,
+  const fixture = getXenoTrialsIsolationFixtureV211(stage, target.x, body.center);
+  const inRange = fixture && source.right >= fixture.left - XENO_TRIALS_ISOLATION_REACH_V211
+    && source.left <= fixture.right + XENO_TRIALS_ISOLATION_REACH_V211;
+  return inRange ? [fin1, { id: `${attacker.id}::fin2`, kind: 'isolation', timing: isolationTiming,
     lock: { ...lock, fixture } }] : [fin1];
 }
 
 export function drawXenoTrialsNeutralFinisherV211(ctx, stageId, view, reducedMotion) {
   const lock = view?.lock.neutral ? view.lock : null;
-  const active = lock && !reducedMotion && view.gain > 0 ? lock : null;
-  const fixtures = isolationStages.get(stageId) ?? [];
+  const active = lock && !reducedMotion && view.gain > 0 && (!lock.approachV212 || view.contact) ? lock : null;
+  const fixtures = getXenoTrialsIsolationFixturesV211(stageId);
   for (const fixture of fixtures) {
     const engaged = active?.fixture === fixture;
     ctx.save();

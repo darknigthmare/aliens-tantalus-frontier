@@ -171,6 +171,7 @@ export function getXenoTrialsRigCueV154(rig,match,fighter,presentation=null){
  if(match.phase!=='active'||presentation?.blocksSimulation||fighter.hp<=0)return null;
  const hold=match.grappleV153;
  if(hold&&[hold.attacker,hold.target].includes(fighter.side)){
+  if(hold.grabIdV212)return null;
   const elapsed=Math.max(0,(match.tick-hold.bornTick)/120);
   const direction=Math.sign(hold.targetX-hold.attackerX);
   receptionContactsV158.set(match,{grappleId:hold.id,round:match.round,direction});
@@ -183,7 +184,7 @@ export function getXenoTrialsRigCueV154(rig,match,fighter,presentation=null){
  if(fighter.attack||fighter.y>0)return null;
  const end=[...(match.events||[])].reverse().find(e=>e.type==='grapple-end-v153'&&[e.side,e.attacker].includes(fighter.side));
  const roundStart=[...(match.events||[])].reverse().find(e=>e.type==='round-start');
- if(end&&(!roundStart||end.id>roundStart.id)&&match.tick>=end.tick&&(match.tick-end.tick)/120<T.release){
+ if(end&&!end.grabIdV212&&(!roundStart||end.id>roundStart.id)&&match.tick>=end.tick&&(match.tick-end.tick)/120<T.release){
   const elapsed=(match.tick-end.tick)/120,start=[...(match.events||[])].reverse().find(e=>e.type==='grapple-start-v153'&&e.grappleId===end.grappleId&&e.tick<=end.tick);
   const contact=receptionContactsV158.get(match);
   return{clip:'release',progress:elapsed/T.release,elapsed,role:end.attacker===fighter.side?'captor':'captive',

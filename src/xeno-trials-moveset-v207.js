@@ -9,6 +9,8 @@ export const XENO_TRIALS_EVADE_V207 = Object.freeze({ cost: 14, travelTicks: 18,
 const groundedTraversal = new Map([
   ['drive-v123-neca-snake-series13-v14', 'pose-v123-drive-neca-snake-series13-v14'],
   ['synth-automated-powerloader', 'pose-v116-automated-powerloader'],
+  ['crusher-acm', 'castes-game_acm_crusher'],
+  ['defender', 'pose-v95-user-xeno-defender'],
   ['mire-v209-chestburster', 'castes-film_chestburster_alien_1979']
 ]);
 

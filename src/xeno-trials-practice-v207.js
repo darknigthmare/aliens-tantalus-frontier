@@ -1,3 +1,4 @@
+import { createXenoTrialsPracticeGoalsV212, XENO_TRIALS_NEW_DRILLS_V212 } from './xeno-trials-practice-v212.js';
 import { createXenoTrialsPracticeGoalsV211, XENO_TRIALS_NEW_DRILLS_V211 } from './xeno-trials-practice-v211.js';
 import { XENO_TRIALS_NEW_DRILLS_V210 } from './xeno-trials-practice-v210.js';
 import { createXenoTrialsPracticeObserverV209, XENO_TRIALS_NEW_DRILLS_V209 } from './xeno-trials-practice-v209.js';
@@ -43,9 +44,11 @@ export const XENO_TRIALS_PRACTICE_DRILLS_V210 = Object.freeze([...XENO_TRIALS_PR
   ...XENO_TRIALS_NEW_DRILLS_V210.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
 export const XENO_TRIALS_PRACTICE_DRILLS_V211 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V210,
   ...XENO_TRIALS_NEW_DRILLS_V211.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
-const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V211.map(entry => [entry.id, entry]));
+export const XENO_TRIALS_PRACTICE_DRILLS_V212 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V211,
+  ...XENO_TRIALS_NEW_DRILLS_V212.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
+const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V212.map(entry => [entry.id, entry]));
 export const getXenoTrialsPracticeV207 = id => LESSONS.get(id) || null;
-export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V211
+export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V212
   .filter(entry => Array.isArray(value) && value.includes(entry.id)).map(entry => entry.id);
 
 export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
@@ -56,6 +59,7 @@ export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
     factionId: 'containment', roundsToWin: entry.roundsToWin || 1, roundSeconds: entry.roundSeconds || 60, matchId: `practice-${entry.id}`,
     ...(entry.difficulty ? { difficulty: entry.difficulty } : {}),
     ...(entry.hordeProtocolId ? { hordeV180: { protocolId: entry.hordeProtocolId } } : {}),
+    ...(entry.operationIdV212 ? { operationV188: { id: entry.operationIdV212 } } : {}),
     rulesV119: { ...(entry.singleHit ? { initialHp: 1 } : {}), ...(entry.noSpecial ? { noSpecial: true } : {}) } };
 }
 
@@ -84,13 +88,13 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   const hasAttack = (action, side) => action.type === 'attack' && action.side === side;
   const hasImpact = (action, side) => ['hit', 'block', 'guard-break'].includes(action.type) && action.side === side;
   const advance = () => { if (++index === entry.targets.length) state = 'complete'; };
-  const goalsV211 = createXenoTrialsPracticeGoalsV211(id, match, { index: () => index, advance,
-    retry: () => { if (state === 'active') state = 'retry'; } });
+  const progress = { index: () => index, advance, retry: () => { if (state === 'active') state = 'retry'; } };
+  const goals = createXenoTrialsPracticeGoalsV212(id, match, progress) || createXenoTrialsPracticeGoalsV211(id, match, progress);
 
   function opponentInput(playerInput = {}) {
     [player, opponent] = match.fighters;
-    goalsV211?.beforeStep();
-    const programmed = goalsV211?.opponentInput();
+    goals?.beforeStep(playerInput);
+    const programmed = goals?.opponentInput();
     if (programmed !== undefined) return programmed;
     if (entry.behavior === 'mirror') return getMirroredXenoTrialsInputV208(playerInput);
     if (entry.behavior === 'cpu') return null;
@@ -110,7 +114,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
     }
     if (!pressure || match.grappleV153 || id === 'acid-floor' && index >= 1) return {};
     const gap = getXenoTrialsBodyGapV105(player, opponent);
-    const approach = pressure === 'special' ? 6 : 26;
+    const approach = entry.approachV212 ?? (pressure === 'special' ? 6 : 26);
     if (!entry.stationary && gap > approach) {
       due = null;
       return player.x < opponent.x ? { left: true } : { right: true };
@@ -133,7 +137,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
       if (match.result) { observer.stopRecording(); state = 'finished'; }
       return;
     }
-    if (goalsV211) { goalsV211.observe(); return; }
+    if (goals) { goals.observe(playerInput, activeTick); return; }
     if (id === 'intro-rearm' && index === 0 && activeTick) { state = 'retry'; return; }
     if (id === 'landing-evasion' && index === 0 && player.y > .001 && player.vy > 0) advance();
     if (id === 'acid-floor' && index === 0 && match.acidPoolsV152?.some(pool => pool.owner === 'opponent')) advance();
@@ -237,8 +241,8 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   function view() {
     return { id, title: entry.title, briefing: entry.briefing, objectives: entry.targets, index, state,
       ...(sandbox ? { sandbox: true, result: match.result?.winner || null, telemetryV209: observer.view() } : {}),
-      ...(goalsV211?.terminalReady() ? { awaitingOutroV211: true } : {}),
-      cue: goalsV211 ? goalsV211.cue() : id === 'low-defense' && opponent.attack?.kind === 'low' ? 'FRAPPE BASSE EN COURS'
+      ...(goals?.terminalReady?.() ? { awaitingOutroV211: true } : {}),
+      cue: goals ? goals.cue() : id === 'low-defense' && opponent.attack?.kind === 'low' ? 'FRAPPE BASSE EN COURS'
         : id === 'landing-evasion' && player.y > .001 && player.vy < 0 ? 'DESCENTE EN COURS'
         : id === 'interrupt' && opponent.attack?.kind === 'signature-2' ? 'PERCUSSION EN COURS'
         : entry.pressure === 'heavy' && opponent.attack?.kind === 'heavy' ? 'FRAPPE LOURDE EN COURS'
@@ -246,8 +250,8 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   }
   return { get active() { return state === 'active'; }, opponentInput, observe, view,
     showIntroV210: entry.showIntroV210 === true,
-    canCloseOutroV211: () => goalsV211?.terminalReady() === true,
-    closedOutroV211: () => goalsV211?.closeOutro() === true,
+    canCloseOutroV211: () => goals?.terminalReady?.() === true,
+    closedOutroV211: () => goals?.closeOutro?.() === true,
     skippedIntroV210() { if (entry.showIntroV210 && index === 0 && match.tick === 0) advance(); },
     recordingV209: observer ? { start: observer.startRecording, stop: observer.stopRecording,
       pending: observer.pendingRecording, acknowledge: observer.acknowledgeRecording } : null };

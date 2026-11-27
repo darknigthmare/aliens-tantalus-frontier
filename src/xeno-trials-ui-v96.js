@@ -1,7 +1,7 @@
 import { XENO_TRIALS_RESEARCH_LABS_V209 } from './xeno-trials-research-lab-v209.js';
 import { createXenoTrialsResearchLabRuntimeV209 } from './xeno-trials-research-lab-ui-v209.js';
 import { normalizeXenoTrialsSandboxV208, XENO_TRIALS_SANDBOX_BEHAVIORS_V208, XENO_TRIALS_SANDBOX_ID_V208 } from './xeno-trials-practice-v208.js';
-import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V211 } from './xeno-trials-practice-v207.js';
+import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V212 } from './xeno-trials-practice-v207.js';
 import { usesXenoTrialsIndependentProps } from './xeno-trials-franchise-stage-scenes-v192.js';
 import { renderArbiterTerminalDossierV190 } from './xeno-arbiter-ui-v190.js';
 import { ARBITER_PROGRAMS_V191, ARBITER_HORDE_PROTOCOLS_V191, getArbiterProgramV191 } from './xeno-arbiter-protocols-v191.js';
@@ -11,6 +11,7 @@ import { currentLanguageV185 } from './i18n-v185.js';
 import { getXenoTrialsRigV154 } from './xeno-trials-rig-v154.js';
 import { getXenoTrialsSequenceV155 } from './xeno-trials-sequences-v155.js';
 import { hasXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
+import { getXenoTrialsGroundGrabPairV212 } from './xeno-trials-grapple-v212.js';
 import { getXenoTrialsSuperV148, getXenoTrialsSuperReadinessV148, getXenoTrialsSuperStatusV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsSignatureV147 } from './xeno-trials-signatures-v147.js';
 import { getXenoTrialsAlternateSignatureV208 } from './xeno-trials-signature-kit-v208.js';
@@ -37,7 +38,7 @@ import { getXenoTrialsRuntimeAnimationCoverage } from './xeno-trials-animation-c
 import { getXenoTrialsRuntimeActionAtlases } from './xeno-trials-action-atlas-v199.js';
 import { getXenoTrialsRosterPageV179, getXenoTrialsRosterProfileV179 } from './xeno-trials-roster-v179.js';
 import { XENO_TRIALS_HORDE_PROTOCOLS_V186 as HORDE_PROTOCOLS } from './xeno-trials-horde-v180.js';
-import { XENO_TRIALS_OPERATIONS_V188 as OPERATIONS } from './xeno-trials-operations-v188.js';
+import { XENO_TRIALS_OPERATION_BOARD_V212 as OPERATIONS } from './xeno-trials-operations-v188.js';
 import { getXenoTrialsOperationBriefingV188, getXenoTrialsOperationHudV188 } from './xeno-trials-operation-presentation-v188.js';
 import { getXenoTrialsProgramPageV186 } from './xeno-trials-programs-v186.js';
 import { getXenoTrialsHordeBriefingV180, getXenoTrialsHordeViewV180, isXenoTrialsHordeActivityV180 } from './xeno-trials-horde-ui-v180.js';
@@ -532,8 +533,8 @@ export class XenoTrialsUiV96 {
       this.el('practice-lab-list').innerHTML = XENO_TRIALS_RESEARCH_LABS_V209.map(lab => `<article class="xt-activity-v119${state.practiceLabsClearedV209?.includes(lab.id) ? ' validated' : ''}">
         <h3>${escapeHtml(lab.title)}</h3><p>${escapeHtml(lab.instruction)}</p><button type="button" class="button primary" data-xt-lab="${lab.id}">
         ${state.practiceLabsClearedV209?.includes(lab.id) ? 'VALIDÉ · REJOUER' : 'OUVRIR LE LABORATOIRE'}</button></article>`).join('');
-      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V211.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
-      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V211.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
+      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V212.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
+      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V212.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
         <h3>${escapeHtml(entry.title)}</h3><strong>${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.playerId).label)}</strong>
         <p>${escapeHtml(entry.briefing)}</p><button type="button" class="button primary" data-xt-practice="${entry.id}">${cleared.includes(entry.id) ? 'VALIDÉ · REJOUER' : 'LANCER L’ATELIER'}</button></article>`).join('');
       return;
@@ -604,8 +605,10 @@ export class XenoTrialsUiV96 {
       const walk = getEnemyImportAnimationV107(art);
       const attack = getEnemyImportAttackV109(art);
       const signature = getXenoTrialsSignatureV147(f);
+      const grab = horde ? null : getXenoTrialsGroundGrabPairV212(f, FIGHTERS.find(entry => entry.id === ids[1 - i]));
       const techniques = signatureControls.map(([, kind, key]) => techniqueNote(getXenoTrialsAlternateSignatureV208(f, kind), key)).join('')
         + techniqueNote(getXenoTrialsRiposteV208(f), currentLanguageV185() === 'en' ? 'GUARD + I' : 'GARDE + I')
+        + techniqueNote(grab, currentLanguageV185() === 'en' ? 'GUARD + K / LT + Y' : 'GARDE + K / LT + Y')
         + (hasXenoTrialsGroundTraversalV208(f) ? '<small>La commande de saut déclenche un franchissement au sol.</small>' : '');
       const rig=getXenoTrialsRigV154(f,art);
       const coverage = getXenoTrialsRuntimeAnimationCoverage(f.id);
@@ -900,7 +903,11 @@ export class XenoTrialsUiV96 {
       const hazard = snapshot.stageHazardViewV188;
       const escape = purge?.escape;
       const escapeHint = escape ? `SORTIE DE ZONE · ${escape.preferred === 'left' ? '←' : '→'}` : hazard?.hint || 'Quittez la zone balisée.';
-      this.el('operation-hazard').textContent = hazard && ['warning', 'active'].includes(hazard.phase) ? `${hazard.phase === 'warning' ? 'DANGER ANNONCÉ' : 'DANGER ACTIF'} · ${hazard.label} · ${escapeHint}` : '';
+      const hazardLabel = hazard && ['warning', 'active'].includes(hazard.phase)
+        ? `${hazard.phase === 'warning' ? 'DANGER ANNONCÉ' : 'DANGER ACTIF'} · ${hazard.label} · ${escapeHint}` : '';
+      const isolation = hazard?.isolationV212;
+      const isolationLabel = isolation ? `CIRCUITS ISOLÉS · ${isolation.isolated}/${isolation.circuits.length}` : '';
+      this.el('operation-hazard').textContent = hazardLabel || isolationLabel;
       this.el('operation-hazard').setAttribute('data-active', String(hazard?.phase === 'active'));
     }
     if (!horde || snapshot.phase === 'match-over')
@@ -1030,8 +1037,9 @@ export class XenoTrialsUiV96 {
     this.el('taunt').hidden = Boolean(horde) || snapshot.phase === 'match-over' || !getXenoTrialsSequenceV155(getXenoTrialsRigV154(FIGHTERS.find(f=>f.id===snapshot.fighters[0].id),getXenoTrialsArtV96(snapshot.fighters[0].id,snapshot.fighters[0].variant)), 'taunt');
     this.el('taunt').disabled=!snapshot.canTauntV156 || Boolean(this.unsavedResult);
     this.root.setAttribute('data-xt-outro',String(outroPlaying));
-    this.el('skip-sequence').hidden = !(outroPlaying || practice?.awaitingOutroV211 || snapshot.presentation?.fighterSlot !== null && snapshot.presentation?.blocksSimulation) || snapshot.paused;
-    this.el('skip-sequence').textContent = outroPlaying ? 'PASSER LA SÉQUENCE FINALE'
+    const skip = this.el('skip-sequence');
+    skip.hidden = skip.disabled = !snapshot.canSkipSequenceV212;
+    skip.textContent = outroPlaying ? 'PASSER LA SÉQUENCE FINALE'
       : practice?.awaitingOutroV211 ? 'FERMER LA PRÉSENTATION FINALE' : 'PASSER LA PRÉSENTATION';
     this.el('pause').disabled = Boolean(practice && practice.state !== 'active' || snapshot.phase === 'match-over' && !outroPlaying || this.unsavedResult);
     this.el('pause').textContent = snapshot.paused ? 'REPRENDRE' : 'PAUSE';

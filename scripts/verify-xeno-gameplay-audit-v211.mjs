@@ -6,6 +6,7 @@ import { readFileSync } from 'node:fs';
 import { XENO_GAMEPLAY_BASELINE_V211, XENO_GAMEPLAY_SUCCESSORS_V211, XENO_GAMEPLAY_NEW_INPUTS_V211,
   reviewedXenoGameplayDigestV211, xenoGameplayRuntimeSourcesV211, verifyXenoGameplayV211 } from './audit-xeno-gameplay-v211.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { XENO_GAMEPLAY_BASELINE_V212, reviewedXenoGameplayDigestV212 } from './audit-xeno-gameplay-v212.mjs';
 
 const root = new URL('..', import.meta.url);
 const read = path => readFileSync(new URL(path, root));
@@ -16,7 +17,8 @@ test('V211 continues the published V210 byte receipts and rejects forged predece
   assert.equal(XENO_GAMEPLAY_BASELINE_V211, 'b721fe98bc62b2374e9aac012c302e42e9768b4b');
   for (const [path, receipt] of Object.entries(XENO_GAMEPLAY_SUCCESSORS_V211)) {
     assert.equal(sha(git('show', `${XENO_GAMEPLAY_BASELINE_V211}:${path}`)), receipt.previousSha256, path);
-    assert.equal(reviewedXenoGameplayDigestV211(path, receipt.previousSha256), sha(read(path)), path);
+    assert.equal(sha(git('show', `${XENO_GAMEPLAY_BASELINE_V212}:${path}`)), receipt.sha256, path);
+    assert.equal(reviewedXenoGameplayDigestV211(path, receipt.previousSha256), reviewedXenoGameplayDigestV212(path, receipt.sha256), path);
     assert.throws(() => reviewedXenoGameplayDigestV211(path, '0'.repeat(64)), /Incorrect V210 endpoint for V211/);
   }
   const historical = new Set(git('ls-tree', '-r', '--name-only', XENO_GAMEPLAY_BASELINE_V211).toString().split('\n'));

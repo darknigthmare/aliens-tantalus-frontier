@@ -47,8 +47,11 @@ function objectiveControls(match, entry) {
     ? state.carrying >= 0 ? entry.depot.x : state.delivered.every(Boolean) ? entry.exit.x
       : entry.objectives[state.completed.findIndex(value => !value)]?.x ?? entry.exit.x
     : entry.objectives[state.completed.findIndex(value => !value)]?.x ?? player.x;
+  // The Queen's six-tick pivots can consume an attack opportunity. Retry
+  // through the native input cadence while under pressure at each objective.
+  const attackCycleTicks = 65;
   return { left: player.x > target + 15, right: player.x < target - 15, interact: true,
-    heavy: match.tick % 180 === 0, light: match.tick % 180 === 90 };
+    heavy: match.tick % attackCycleTicks === 0, light: match.tick % attackCycleTicks === 50 };
 }
 function combatControls(match) {
   const player = match.fighters[0], target = match.fighters.slice(1).sort((a, b) => Math.abs(a.x - player.x) - Math.abs(b.x - player.x))[0];

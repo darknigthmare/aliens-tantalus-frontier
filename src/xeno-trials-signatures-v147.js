@@ -4,6 +4,7 @@ import { getXenoTrialsRiposteV208, XENO_TRIALS_RIPOSTE_KIND_V208 } from './xeno-
 import { getSynthTrialAttackV110 } from './synth-combat-v110.js';
 import { getXenoTrialsAlternateSignatureV208, XENO_TRIALS_SIGNATURE_KINDS_V208 } from './xeno-trials-signature-kit-v208.js';
 import { getXenoTrialsAirHitV211, XENO_TRIALS_AIR_HIT_V211 } from './xeno-trials-defense-v211.js';
+import { getXenoTrialsGroundGrabV212, XENO_TRIALS_GROUND_GRAB_KIND_V212 } from './xeno-trials-grapple-v212.js';
 
 /** Capability references, not motion capture or canonical balance.
  * Exact IDs + admitted profile IDs prevent accidental inheritance by a namesake,
@@ -78,6 +79,7 @@ export function getXenoTrialsAttackStyleV147(definition, kind) {
     || getXenoTrialsSpecialStyleV147(definition);
 }
 export function getXenoTrialsAttackV147(definition, kind, fallback) {
+  if (kind === XENO_TRIALS_GROUND_GRAB_KIND_V212) return getXenoTrialsGroundGrabV212(definition)?.spec || null;
   if (kind === XENO_TRIALS_AIR_HIT_V211) return getXenoTrialsAirHitV211(definition);
   if (kind === 'super') return getXenoTrialsSuperV148(definition)?.spec || null;
   if (kind === XENO_TRIALS_RIPOSTE_KIND_V208) return getXenoTrialsRiposteV208(definition)?.spec || null;

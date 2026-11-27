@@ -4,7 +4,7 @@ import { XENO_PRESENTATION_V97 } from './xeno-trials-presentation-v97.js';
 import {
   getXenoTrialsRigV154, projectXenoTrialsMeshPointV157, sampleXenoTrialsSequenceAnglesV197
 } from './xeno-trials-rig-v154.js';
-import { XENO_TRIALS_SEQUENCE_TIMING_V155 } from './xeno-trials-sequences-v155.js';
+import { XENO_TRIALS_SEQUENCE_TIMING_V155, XENO_TRIALS_SEQUENCE_TIMING_V156 } from './xeno-trials-sequences-v155.js';
 
 const clamp = value => Math.max(0, Math.min(1, value));
 const ease = value => value * value * (3 - 2 * value);
@@ -94,6 +94,11 @@ const pilots = new Map(Object.entries(styles).map(([id, style]) => {
     pixelsPerWorldUnit: rig?.sourceHeight / scale.height }];
 }));
 
+export const XENO_TRIALS_PILOT_RETURNS_V212 = Object.freeze([...pilots].flatMap(([fighterId, { rig }]) => rig ? [Object.freeze({
+  id: `${fighterId}::outro`, fighterId, profileId: rig.profileId, rigId: rig.id,
+  sourcePath: rig.path, sourceSha256: rig.sourceSha256, canonExact: false,
+})] : []));
+
 function isDuel(match) {
   return Array.isArray(match?.fighters) && match.fighters.length === 2 && !match.hordeV180 && !match.operationV188;
 }
@@ -130,6 +135,37 @@ export function createXenoTrialsPilotOutroV197(match, historicalOutro = null, re
     participants: [...(historicalOutro?.participants || []), ...participants],
     phase: reducedMotion ? 'complete' : 'playing', elapsedMs: reducedMotion ? durationMs : 0, durationMs,
     paused: false, skipped: false, reducedMotion
+  };
+}
+
+/** A living pilot releases the pose which actually ended its signed verdict. */
+export function createXenoTrialsPilotReturnV212(match, terminal, previousOutro, images, reducedMotion = false) {
+  if (reducedMotion || !hasTerminalVerdict(match) || previousOutro?.phase !== 'complete'
+    || previousOutro.skipped || previousOutro.reducedMotion || previousOutro.matchId !== match.config.matchId
+    || previousOutro.terminalTick !== match.tick) return terminal;
+  if (terminal && (terminal.kind !== 'outro' || terminal.matchId !== match.config.matchId
+    || terminal.terminalTick !== match.tick || terminal.skipped || terminal.reducedMotion)) return terminal;
+  const additions = match.fighters.flatMap(fighter => {
+    const rig = pilots.get(fighter.id)?.rig;
+    const art = getXenoTrialsArtV96(fighter.id, fighter.variant);
+    const kind = terminalClip(match, fighter);
+    if (!rig || kind === 'outro-ko' || !kind || !canPoseAtHeight(fighter)
+      || getXenoTrialsRigV154(getXenoTrialsFighterV96(fighter.id), art) !== rig) return [];
+    const plate = images?.get(rig.path);
+    if (images && (!plate || plate.complete === false || plate.naturalWidth !== rig.sourceWidth
+      || plate.naturalHeight !== rig.sourceHeight)) return [];
+    const previous = previousOutro.participants?.find(entry => entry.revision === 197 && entry.side === fighter.side
+      && entry.fighterId === fighter.id && entry.rigId === rig.id && entry.kind === kind
+      && entry.sequenceId === `${fighter.id}::${kind}::v197`);
+    return previous ? [{ side: fighter.side, fighterId: fighter.id, rigId: rig.id, kind: 'outro',
+      sequenceId: `${fighter.id}::outro`, previousKind: kind, revision: 212 }] : [];
+  });
+  if (!additions.length) return terminal;
+  return {
+    kind: 'outro', matchId: match.config.matchId, terminalTick: match.tick,
+    phase: 'playing', elapsedMs: 0, durationMs: XENO_TRIALS_SEQUENCE_TIMING_V156.exitMs,
+    paused: false, skipped: false, reducedMotion: false, ...terminal,
+    participants: [...(terminal?.participants || []), ...additions],
   };
 }
 
@@ -202,9 +238,38 @@ function settleHeight(pose, style, height, progress) {
     ...(pose.contactV197 && { contactV197: { ...pose.contactV197, sourcePoint: place(pose.contactV197.sourcePoint) } }) };
 }
 
-export function getXenoTrialsPilotSequenceV197(rig, match, fighter, presentation, outro, reducedMotion = false) {
+function pilotReturn(match, fighter, style, terminal, reducedMotion) {
+  if (!hasTerminalVerdict(match) || terminal?.kind !== 'outro' || terminal.matchId !== match.config.matchId
+    || terminal.terminalTick !== match.tick || !['playing', 'complete'].includes(terminal.phase)
+    || !Number.isFinite(terminal.elapsedMs) || terminal.elapsedMs < 0 || !Number.isFinite(terminal.durationMs)
+    || terminal.durationMs <= 0 || fighter.hp <= 0) return null;
+  const kind = terminalClip(match, fighter);
+  const returnId = `${fighter.id}::outro`;
+  const entry = terminal.participants?.find(participant => participant.revision === 212
+    && participant.side === fighter.side && participant.fighterId === fighter.id && participant.rigId === style.rigId
+    && participant.kind === 'outro' && participant.sequenceId === returnId && participant.previousKind === kind);
+  if (!entry) return null;
+  const fixed = reducedMotion || terminal.reducedMotion || terminal.skipped;
+  const progress = fixed ? 1 : clamp(terminal.elapsedMs / terminal.durationMs);
+  const initial = sampleKeys(style.clips[kind], 1).angles;
+  const keys = [makeKey(0, 'last-verdict-pose', initial),
+    makeKey(.38, style.recovery, Object.fromEntries(Object.entries(style.release).map(([bone, angle]) => [bone, angle * .55]))),
+    makeKey(.72, 'settle-support', Object.fromEntries(Object.entries(style.scan).map(([bone, angle]) => [bone, angle * .19]))),
+    makeKey(1, 'vigilance')];
+  const sample = sampleKeys(keys, progress);
+  const frame = sampleXenoTrialsSequenceAnglesV197(style.rig, { clip: 'outro', progress, elapsed: terminal.elapsedMs / 1000 }, sample.angles);
+  if (!frame) return null;
+  // The verdict can end with a fighter still airborne in the physical snapshot.
+  // Preserve the settled presentation height while returning to the neutral pose.
+  const placed = settleHeight(frame, style, fighter.y, 1);
+  return { ...placed, reducedMotion, sequenceIdV212: returnId, beatV212: sample.beat };
+}
+
+export function getXenoTrialsPilotSequenceV197(rig, match, fighter, presentation, outro, reducedMotion = false, terminal = null) {
   const style = pilots.get(fighter?.id);
   if (!style?.rig || rig !== style.rig || !isDuel(match) || !match.fighters.includes(fighter) || !canPoseAtHeight(fighter)) return null;
+  const returning = pilotReturn(match, fighter, style, terminal, reducedMotion);
+  if (returning) return returning;
   const cue = selectCue(match, fighter, presentation, outro, reducedMotion);
   if (!cue || !Number.isFinite(cue.progress) || !Number.isFinite(cue.elapsed) || cue.elapsed < 0) return null;
   const { angles, beat } = sampleKeys(style.clips[cue.clip], cue.progress);

@@ -5,9 +5,11 @@ import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsPhysicalSuper, hasLegacyXenoTrialsSuperMeterV209, validXenoTrialsPhysicalSuperV209 } from './xeno-trials-super-kits-v209.js';
 import { getXenoTrialsRiposteV208, validXenoTrialsRiposteAttackV208, XENO_TRIALS_RIPOSTE_KIND_V208 } from './xeno-trials-ripostes-v208.js';
 import { XENO_TRIALS_AI_STATES_V119 } from './xeno-trials-ai-v119.js';
-import { XENO_TRIALS_ARENA_V105 as ARENA, resolveXenoTrialsBodiesV105 } from './xeno-trials-geometry-v105.js';
+import { XENO_TRIALS_ARENA_V105 as ARENA, getXenoTrialsBodyBoundsV105, resolveXenoTrialsBodiesV105 } from './xeno-trials-geometry-v105.js';
 import { XENO_TRIALS_ACID_POOL_V152 as ACID, hasXenoTrialsAcidPoolsV152 } from './xeno-trials-acid-pools-v152.js';
 import { XENO_TRIALS_GRAPPLE_V153 as GRAPPLE, hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153 } from './xeno-trials-grapple-v153.js';
+import { getXenoTrialsGroundGrabPairV212, getXenoTrialsGroundGrabV212, hasXenoTrialsGroundGrabContactV212,
+  XENO_TRIALS_GROUND_GRAB_KIND_V212 } from './xeno-trials-grapple-v212.js';
 import { getXenoTrialsCasteV151 } from './xeno-trials-castes-v151.js';
 import { normalizeXenoTrialsRulesV119 } from './xeno-trials-modes-v119.js';
 import { XENO_TRIALS_MOVE_ATTACKS_V207, validXenoTrialsMovesetV207, xenoTrialsMovePoseV207 } from './xeno-trials-moveset-v207.js';
@@ -20,7 +22,7 @@ import { XENO_TRIALS_AIR_HIT_V211, validXenoTrialsAirAttackV211, validXenoTrials
 const sides = ['player', 'opponent'];
 const actions = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super'];
 const attacks = ['light', 'heavy', 'special', 'super', XENO_TRIALS_RIPOSTE_KIND_V208, XENO_TRIALS_AIR_HIT_V211,
-  ...XENO_TRIALS_MOVE_ATTACKS_V207, ...XENO_TRIALS_SIGNATURE_KINDS_V208];
+  XENO_TRIALS_GROUND_GRAB_KIND_V212, ...XENO_TRIALS_MOVE_ATTACKS_V207, ...XENO_TRIALS_SIGNATURE_KINDS_V208];
 const statKeys = ['hits', 'damage', 'blocks', 'specials', 'supersV148', 'acidTicksV152', 'grapplesV153', 'grappleTicksV153', 'grappleEscapesV153'];
 const fighterKeys = new Set(['side', 'id', 'variant', 'x', 'y', 'vy', 'facing', 'hp', 'stamina', 'guard', 'stun', 'attack',
   'specialCooldown', 'hitFlash', 'previousInput', 'rearmControls', 'stats', 'superMeterV148', 'guardBrokenV147', 'deathBurstV151',
@@ -64,6 +66,28 @@ function boundedClone(value) {
   } catch { return null; }
 }
 
+function boundedGrappleReceipt(events, id, lastTick, predicate) {
+  if (!Array.isArray(events)) return false;
+  const receipt = events.find(event => event?.id === id);
+  return receipt ? predicate(receipt) : events.length === 32 && id < events[0]?.id && lastTick <= events[0]?.tick;
+}
+
+function validGroundGrabAttack(attack, definition, fighter, match, spec) {
+  const grab = getXenoTrialsGroundGrabV212(definition);
+  const elapsed = Math.round(attack.age * 120);
+  const actionTick = match.tick - elapsed + 1;
+  const actionClock = match.config.roundSeconds - match.timeRemaining - elapsed / 120;
+  return grab?.spec === spec && match.phase === 'active' && !match.config.rulesV119.noSpecial
+    && actionClock >= match.config.rulesV119.specialLockSeconds - 1e-8
+    && fighter.y === 0 && fighter.vy === 0 && fighter.stun === 0 && !fighter.guard
+    && attack.facing === fighter.facing && !attack.emitted && fighter.stats.specials > 0
+    && (!attack.hit || attack.age >= spec.startup) && elapsed >= 1 && Math.abs(attack.age - elapsed / 120) < 1e-8
+    && attack.id < match.serial && Object.keys(attack).length === 6
+    && boundedGrappleReceipt(match.events, attack.id + 1, actionTick, event =>
+      event.tick === actionTick && event.type === 'attack' && event.kind === attack.kind
+      && event.side === fighter.side && event.grabIdV212 === grab.id);
+}
+
 function validAttack(attack, definition, fighter, match) {
   if (attack === null) return true;
   if (!record(attack) || !attacks.includes(attack.kind) || !integer(attack.id, 1, match.serial)
@@ -73,6 +97,7 @@ function validAttack(attack, definition, fighter, match) {
     || !validXenoTrialsAirAttackV211(match, fighter, attack, spec)
     || match.config.rulesV119.noSpecial && ['special', 'super', XENO_TRIALS_RIPOSTE_KIND_V208].includes(attack.kind)
     || !validXenoTrialsRiposteAttackV208(attack, fighter, match, getXenoTrialsRiposteV208(definition))) return false;
+  if (attack.kind === XENO_TRIALS_GROUND_GRAB_KIND_V212) return validGroundGrabAttack(attack, definition, fighter, match, spec);
   if (XENO_TRIALS_SIGNATURE_KINDS_V208.includes(attack.kind) && (fighter.stats.specials < 1 || match.config.rulesV119.noSpecial
     || !validXenoTrialsSignatureActionV208(attack, spec))) return false;
   if (attack.kind === 'super') {
@@ -164,20 +189,59 @@ function validAcid(match, definitions) {
     .every(([key, value]) => sides.includes(key) && integer(value, 0, match.tick + ACID.intervalTicks));
 }
 
+function validGrabEvent(event, definitions, match) {
+  if (event.kind !== XENO_TRIALS_GROUND_GRAB_KIND_V212 && event.grabIdV212 === undefined) return true;
+  if (match.config.rulesV119.noSpecial) return false;
+  if (event.type === 'attack') {
+    const grab = getXenoTrialsGroundGrabV212(definitions[sides.indexOf(event.side)]);
+    return event.kind === XENO_TRIALS_GROUND_GRAB_KIND_V212 && Boolean(grab) && event.grabIdV212 === grab.id;
+  }
+  if (!['grapple-start-v153', 'grapple-end-v153'].includes(event.type) || event.attacker === event.side
+    || !integer(event.grappleId, 1, event.id - 1)) return false;
+  const grab = getXenoTrialsGroundGrabPairV212(definitions[sides.indexOf(event.attacker)], definitions[sides.indexOf(event.side)]);
+  return Boolean(grab && event.grabIdV212 === grab.id)
+    && (event.type === 'grapple-start-v153' ? event.id === event.grappleId + 1
+      : ['escaped', 'timeout', 'separated', 'interrupted'].includes(event.reason));
+}
+
 function validGrapple(match, definitions) {
   const hold = match.grappleV153;
-  if (hold === undefined) return true;
+  if (hold === undefined) {
+    const last = match.events.findLast(event => event.type === 'grapple-start-v153' && event.grabIdV212);
+    return !last || match.phase !== 'active' || match.events.some(event => event.id > last.id
+      && (event.type === 'round-start' || event.type === 'grapple-end-v153' && event.grappleId === last.grappleId));
+  }
   if (!record(hold) || !sides.includes(hold.attacker) || !sides.includes(hold.target) || hold.attacker === hold.target) return false;
   const attacker = sides.indexOf(hold.attacker), target = sides.indexOf(hold.target);
-  return match.phase === 'active' && !match.config.rulesV119.noSpecial && hasXenoTrialsGrappleV153(definitions[attacker])
-    && isXenoTrialsGrappleTargetV153(definitions[target]) && match.fighters[attacker].stats.grapplesV153 > 0
+  const grounded = hold.grabIdV212 !== undefined;
+  const grab = grounded ? getXenoTrialsGroundGrabPairV212(definitions[attacker], definitions[target]) : GRAPPLE;
+  if (!(grab && match.phase === 'active' && !match.config.rulesV119.noSpecial && match.fighters[attacker].stats.grapplesV153 > 0
     && match.fighters.every(fighter => fighter.attack === null && !fighter.guard) && match.fighters[target].y === 0
     && integer(hold.id, 1, match.serial) && integer(hold.bornTick, 1, match.tick)
-    && hold.expiresTick === hold.bornTick + GRAPPLE.durationTicks && hold.expiresTick > match.tick
-    && integer(hold.nextDamageTick, match.tick + 1, hold.expiresTick + GRAPPLE.damageIntervalTicks)
-    && (hold.nextDamageTick - hold.bornTick - GRAPPLE.firstDamageTick) % GRAPPLE.damageIntervalTicks === 0
-    && integer(hold.escapeProgress, 0, Math.min(GRAPPLE.escapeTicks - 1, match.tick - hold.bornTick))
-    && inArena(hold.attackerX) && inArena(hold.targetX);
+    && hold.expiresTick === hold.bornTick + grab.durationTicks && hold.expiresTick > match.tick
+    && integer(hold.nextDamageTick, match.tick + 1, hold.expiresTick + grab.damageIntervalTicks)
+    && (hold.nextDamageTick - hold.bornTick - grab.firstDamageTick) % grab.damageIntervalTicks === 0
+    && integer(hold.escapeProgress, 0, Math.min(grab.escapeTicks - 1, match.tick - hold.bornTick))
+    && inArena(hold.attackerX) && inArena(hold.targetX))) return false;
+  if (!grounded) return hasXenoTrialsGrappleV153(definitions[attacker]) && isXenoTrialsGrappleTargetV153(definitions[target]);
+  const from = match.fighters[attacker], to = match.fighters[target];
+  const firstDamage = hold.bornTick + grab.firstDamageTick;
+  const nextDamage = firstDamage + Math.max(0, Math.floor((match.tick - firstDamage) / grab.damageIntervalTicks) + 1) * grab.damageIntervalTicks;
+  const latestWindup = hold.bornTick - Math.ceil(grab.spec.startup * 120) + 1;
+  const earliestWindup = hold.bornTick - Math.ceil((grab.spec.startup + grab.spec.active) * 120) + 2;
+  return hold.grabIdV212 === grab.id && Object.keys(hold).length === 12 && hold.nextDamageTick === nextDamage
+    && integer(hold.attackIdV212, 1, hold.id - 2) && hold.id < match.serial && hold.facingV212 === from.facing
+    && from.vy === 0 && to.vy === 0 && from.stun === 0 && from.stats.specials > 0
+    && !from.movesetV207?.low && !to.movesetV207?.low && !from.groundRecoveryV211 && !to.groundRecoveryV211
+    && Math.abs(from.x - hold.attackerX) <= grab.releaseGap && Math.abs(to.x - hold.targetX) <= grab.releaseGap
+    && hasXenoTrialsGroundGrabContactV212(grab, getXenoTrialsBodyBoundsV105(from), getXenoTrialsBodyBoundsV105(to),
+      hold.facingV212, grab.releaseGap)
+    && boundedGrappleReceipt(match.events, hold.attackIdV212 + 1, latestWindup, event =>
+      event.type === 'attack' && event.kind === XENO_TRIALS_GROUND_GRAB_KIND_V212 && event.grabIdV212 === grab.id
+      && event.side === hold.attacker && integer(event.tick, earliestWindup, latestWindup))
+    && boundedGrappleReceipt(match.events, hold.id + 1, hold.bornTick, event =>
+      event.type === 'grapple-start-v153' && event.grabIdV212 === grab.id && event.grappleId === hold.id
+      && event.tick === hold.bornTick && event.attacker === hold.attacker && event.side === hold.target);
 }
 
 function validClockAndScore(match, limits) {
@@ -263,6 +327,7 @@ export function createXenoTrialsDuelCheckpointV197(snapshot, ticket) {
     && eventTypes.includes(event.type) && integer(event.id, (raw.events[i - 1]?.id || 0) + 1, raw.serial)
     && integer(event.tick, raw.events[i - 1]?.tick || 0, raw.tick)
     && validXenoTrialsSignatureEventV208(event, id => definitions[sides.indexOf(event.side)]?.id === id)
+    && validGrabEvent(event, definitions, raw)
     && validXenoTrialsMovementEventV210(raw, event)
     && (event.type !== 'get-up-v211' || validXenoTrialsGetUpEventV211(raw, event))
     && (event.type !== 'parry-v208' || validXenoTrialsParryEventV208(raw, event)))) return null;

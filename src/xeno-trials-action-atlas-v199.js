@@ -14,6 +14,7 @@ import { XENO_TRIALS_SPRITE_REFERENCES_V189 } from './xeno-trials-sprite-atlas-v
 import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147 } from './xeno-trials-signatures-v147.js';
 import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
+import { getXenoTrialsAirHitV211, XENO_TRIALS_AIR_HIT_V211 } from './xeno-trials-defense-v211.js';
 
 const freeze = value => {
   if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); }
@@ -32,7 +33,8 @@ const groundSpecialStyles = {
   201: { mantis: 'slash', 'synth-sniper': 'pulse' }, 202: { rhino: 'ram', 'synth-heavy': 'pulse' },
   203: { 'armored-joe': 'ram', 'synth-good-boy': 'pulse' }, 204: { 'synth-tecsek': 'slash', 'import-xeno-kingrogue': 'tail' }
 };
-const atlasKinds = new Map([['light', 'air-combat'], ['heavy', 'air-combat'], ['special', 'ground-special'], ['super', 'super']]);
+const atlasKinds = new Map([['light', 'air-combat'], ['heavy', 'air-combat'], [XENO_TRIALS_AIR_HIT_V211, 'air-combat'],
+  ['special', 'ground-special'], ['super', 'super']]);
 export const XENO_TRIALS_ACTION_FRAME_IDS_V199 = freeze({
   'air-combat': ['light', 'heavy'].flatMap(action => phaseKeys.map(key => `air-${action}-${key}`)),
   super: superKeys.flatMap(phase => [0, 1].map(key => `super-${phase}-${key}`))
@@ -161,7 +163,8 @@ export function sampleXenoTrialsActionFrameV199(atlas, fighter, options = {}) {
   const attack = fighter.attack, isAir = atlas.kind === 'air-combat', spec = options.spec;
   const definition = getXenoTrialsFighterV96(fighter.id);
   const expectedKind = atlas.kind === 'super' ? 'super' : 'special';
-  if (!attack || (isAir ? fighter.y <= 0 || !['light', 'heavy'].includes(attack.kind) || spec?.groundedOnly
+  if (!attack || (isAir ? fighter.y <= 0 || !['light', 'heavy', XENO_TRIALS_AIR_HIT_V211].includes(attack.kind) || spec?.groundedOnly
+    || attack.kind === XENO_TRIALS_AIR_HIT_V211 && spec !== getXenoTrialsAirHitV211(definition)
     : attack.kind !== expectedKind || spec !== getXenoTrialsAttackV147(definition, expectedKind, XENO_TRIALS_ATTACKS_V96[expectedKind]))
     || ![spec?.startup, spec?.active, spec?.recovery].every(positive)
     || !Number.isFinite(attack.age) || attack.age < 0 || attack.age >= spec.startup + spec.active + spec.recovery) return null;
