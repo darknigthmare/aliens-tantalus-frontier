@@ -140,7 +140,8 @@ test('a state owner closing on terminal admission still prevents a late result c
  let h,count=0;h=host({onState:s=>{if(s.phase==='match-over')h.r.stop();},onResult:()=>count++});await h.start();h.terminal();assert.equal(count,0);assert.equal(h.queue.size,0);h.r.stop();
 });
 test('unsupported opponents keep instantaneous static results and zero extra frames',async()=>{
- const h=host({config:{playerId:'warrior',opponentId:'runner',seed:145,roundSeconds:30,rulesV119:{initialHp:1}}});await h.start();h.terminal();assert.equal(h.r.getState().outroV155,null);assert.equal(h.queue.size,0);h.r.stop();
+ const h=host({config:{playerId:'mire-v210-scorched',opponentId:'mire-v210-striker',seed:145,roundSeconds:30,rulesV119:{initialHp:1}}});
+ await h.start();h.terminal();assert.equal(h.r.getState().outroV155,null);assert.equal(h.queue.size,0);h.r.stop();
 });
 test('reduced motion omits the outro wait and restoring the preference cannot resurrect it',async()=>{
  let reduced=true;const h=host();h.window.matchMedia=()=>({matches:reduced});await h.start();h.terminal();assert.equal(h.r.getState().outroV155.phase,'complete');assert.equal(h.queue.size,0);assert.equal(h.results.length,1);

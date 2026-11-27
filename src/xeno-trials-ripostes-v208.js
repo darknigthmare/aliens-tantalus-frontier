@@ -1,6 +1,7 @@
 import { getXenoTrialsSuperMeterV148, getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
 import { XENO_TRIALS_PARRY_V208, getXenoTrialsParryOpeningV208, getXenoTrialsParryReceiptV208 } from './xeno-trials-defense-v208.js';
 import { getXenoTrialsPhysicalCounter } from './xeno-trials-super-kits-v209.js';
+import { XENO_TRIALS_EXPLODER_COUNTER_V211 } from './xeno-trials-super-kits-v211.js';
 
 export const XENO_TRIALS_RIPOSTE_KIND_V208 = 'super-riposte';
 
@@ -10,7 +11,7 @@ function entry(fighterId, label, description, labelEn, descriptionEn, spec) {
 }
 
 // Original Trials responses using the existing actor's supported body, never
-// a new caste, weapon or canon sequence. Exploder keeps its sacrificial super.
+// a new caste, weapon or canon sequence.
 export const XENO_TRIALS_RIPOSTES_V208 = Object.freeze([
   entry('drive-v123-fte-pathogen-brute-profile-v13', 'Marteau rasant',
     'Les bras en massues rabattent l’assaillant à courte portée. Une garde basse ou une sortie de portée arrête la réponse.',
@@ -33,7 +34,10 @@ export const XENO_TRIALS_RIPOSTES_V208 = Object.freeze([
 const byFighter = new Map(XENO_TRIALS_RIPOSTES_V208.map(move => [move.fighterId, move]));
 
 export function getXenoTrialsRiposteV208(definition) {
-  return getXenoTrialsSuperV148(definition) ? byFighter.get(definition.id) ?? getXenoTrialsPhysicalCounter(definition) : null;
+  if (!getXenoTrialsSuperV148(definition)) return null;
+  if (definition.id === XENO_TRIALS_EXPLODER_COUNTER_V211.fighterId && definition.profileId === XENO_TRIALS_EXPLODER_COUNTER_V211.profileId)
+    return XENO_TRIALS_EXPLODER_COUNTER_V211;
+  return byFighter.get(definition.id) ?? getXenoTrialsPhysicalCounter(definition);
 }
 
 export function getXenoTrialsRiposteReadinessV208(match, fighter, definition) {

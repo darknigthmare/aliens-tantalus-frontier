@@ -4,6 +4,7 @@ import { hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153 } from './xeno-
 import { getXenoTrialsExtendedFinisherV208 } from './xeno-trials-finishers-v208.js';
 import { getXenoTrialsExtendedFinisherV209 } from './xeno-trials-finishers-v209.js';
 import { getXenoTrialsExtendedFinisherV210 } from './xeno-trials-finishers-v210.js';
+import { getXenoTrialsContactFinisherV211, getXenoTrialsNeutralFinishersV211 } from './xeno-trials-finishers-v211.js';
 
 const offerMs = 3600;
 const clawTiming = Object.freeze({ approachMs: 240, holdMs: 420, retreatMs: 360 });
@@ -11,7 +12,7 @@ const active = sequence => ['offered', 'playing'].includes(sequence?.phase);
 const smooth = progress => progress * progress * (3 - 2 * progress);
 
 /** Optional displays share a post-verdict clock and use the terminal geometry. */
-export function createXenoTrialsFinisherV207(match, images, reducedMotion = false) {
+export function createXenoTrialsFinisherV207(match, images, reducedMotion = false, neutralFallback = false) {
   if (reducedMotion || match?.phase !== 'match-over' || match.hordeV180 || match.operationV188
     || !match.result?.completed || match.result.winner !== 'player' || match.result.reason !== 'ko'
     || match.result.matchId !== match.config?.matchId || match.result.durationTicks !== match.tick
@@ -27,9 +28,17 @@ export function createXenoTrialsFinisherV207(match, images, reducedMotion = fals
     const lock = getXenoTrialsFloorLockV207(attacker, target, images);
     if (lock) candidates.push({ id: 'prowler::fin1', kind: 'claw', timing: clawTiming, lock });
   }
+  if (neutralFallback) {
+    const additions = [getXenoTrialsContactFinisherV211(attacker, target, images),
+      ...getXenoTrialsNeutralFinishersV211(match, attacker, target)].filter(Boolean);
+    for (const fallback of additions) {
+      if (!candidates.some(candidate => candidate.id === fallback.id)) candidates.push(fallback);
+    }
+  }
   const [candidate, ...alternatives] = candidates;
   if (!candidate) return null;
-  return { ...candidate, alternatives, phase: 'offered', elapsedMs: 0, durationMs: offerMs, paused: false, skipped: false, activated: false };
+  return { ...candidate, alternatives, phase: 'offered', elapsedMs: 0,
+    durationMs: candidate.lock.neutral ? 2400 : offerMs, paused: false, skipped: false, activated: false };
 }
 
 export function activateXenoTrialsFinisherV207(sequence, id = sequence?.id) {

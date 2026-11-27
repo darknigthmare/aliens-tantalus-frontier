@@ -1,4 +1,5 @@
 import { XENO_TRIALS_SUPER_RECIPES_V210 } from './xeno-trials-super-kits-v210.js';
+import { XENO_TRIALS_SUPER_RECIPES_V211 } from './xeno-trials-super-kits-v211.js';
 
 function move(fighterId, profileId, slot, label, labelEn, description, descriptionEn, spec) {
   return Object.freeze({
@@ -113,7 +114,9 @@ export const XENO_TRIALS_SUPER_KITS_V209 = Object.freeze([
 ]);
 
 export const XENO_TRIALS_SUPER_KITS_V210 = Object.freeze(XENO_TRIALS_SUPER_RECIPES_V210.map(args => pair(...args)));
-const byFighter = new Map([...XENO_TRIALS_SUPER_KITS_V209, ...XENO_TRIALS_SUPER_KITS_V210].map(kit => [kit.first.fighterId, kit]));
+export const XENO_TRIALS_SUPER_KITS_V211 = Object.freeze(XENO_TRIALS_SUPER_RECIPES_V211.map(args => pair(...args)));
+const byFighter = new Map([...XENO_TRIALS_SUPER_KITS_V209, ...XENO_TRIALS_SUPER_KITS_V210, ...XENO_TRIALS_SUPER_KITS_V211]
+  .map(kit => [kit.first.fighterId, kit]));
 function getKit(definition) {
   const kit = byFighter.get(definition?.id);
   return kit && kit.first.profileId === definition.profileId ? kit : null;

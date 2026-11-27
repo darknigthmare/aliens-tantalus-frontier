@@ -3,6 +3,7 @@ import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsRiposteV208, XENO_TRIALS_RIPOSTE_KIND_V208 } from './xeno-trials-ripostes-v208.js';
 import { getSynthTrialAttackV110 } from './synth-combat-v110.js';
 import { getXenoTrialsAlternateSignatureV208, XENO_TRIALS_SIGNATURE_KINDS_V208 } from './xeno-trials-signature-kit-v208.js';
+import { getXenoTrialsAirHitV211, XENO_TRIALS_AIR_HIT_V211 } from './xeno-trials-defense-v211.js';
 
 /** Capability references, not motion capture or canonical balance.
  * Exact IDs + admitted profile IDs prevent accidental inheritance by a namesake,
@@ -71,11 +72,13 @@ export function getXenoTrialsSpecialStyleV147(definition) {
   return getXenoTrialsSignatureV147(definition)?.style || definition?.special;
 }
 export function getXenoTrialsAttackStyleV147(definition, kind) {
-  if (getXenoTrialsAlternateSignatureV208(definition, kind)?.spec.detonationV210) return 'detonation';
-  return (kind === 'super' ? getXenoTrialsSuperV148(definition)?.styleV209 : null)
+  const alternate = getXenoTrialsAlternateSignatureV208(definition, kind);
+  if (alternate?.spec.detonationV210) return 'detonation';
+  return alternate?.style || (kind === 'super' ? getXenoTrialsSuperV148(definition)?.styleV209 : null)
     || getXenoTrialsSpecialStyleV147(definition);
 }
 export function getXenoTrialsAttackV147(definition, kind, fallback) {
+  if (kind === XENO_TRIALS_AIR_HIT_V211) return getXenoTrialsAirHitV211(definition);
   if (kind === 'super') return getXenoTrialsSuperV148(definition)?.spec || null;
   if (kind === XENO_TRIALS_RIPOSTE_KIND_V208) return getXenoTrialsRiposteV208(definition)?.spec || null;
   if (XENO_TRIALS_SIGNATURE_KINDS_V208.includes(kind)) return getXenoTrialsAlternateSignatureV208(definition, kind)?.spec || null;
@@ -114,8 +117,8 @@ export function createXenoTrialsSignatureProjectilesV147(entry, fighter, body, t
     x: direction > 0 ? body.right : body.left, y: spec.projectileHeight / 2,
     direction, vx: direction * spec.projectileSpeed, vy: 0, style: 'ground-wave', radiusV147: spec.projectileHeight / 2 }));
   const x = attack.facing > 0 ? body.right : body.left, y = body.bottom + body.height * .55;
-  const dx = Math.max(32, (targetBody.center - x) * attack.facing);
-  const dy = (targetBody.bottom + targetBody.height * .5) - y;
+  const dx = targetBody ? Math.max(32, (targetBody.center - x) * attack.facing) : 32;
+  const dy = targetBody ? (targetBody.bottom + targetBody.height * .5) - y : 0;
   const angle = Math.max(-1.2, Math.min(1.2, Math.atan2(dy, dx)));
   return (entry.style === 'acid-cluster' ? [-spec.spread, 0, spec.spread] : [0]).map(spread => ({ ...common,
     x, y, direction: attack.facing, vx: attack.facing * Math.cos(angle + spread) * spec.projectileSpeed,

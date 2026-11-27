@@ -7,7 +7,7 @@ import { getXenoTrialsFighterV96, XENO_TRIALS_FIGHTERS_V96 } from '../src/xeno-t
 import { getXenoTrialsBodyBoundsV105 as bounds } from '../src/xeno-trials-geometry-v105.js';
 import { getXenoTrialsSuperV148 } from '../src/xeno-trials-supers-v148.js';
 import { getXenoTrialsRiposteV208, getXenoTrialsRiposteReadinessV208 } from '../src/xeno-trials-ripostes-v208.js';
-import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210, getXenoTrialsPhysicalSuper } from '../src/xeno-trials-super-kits-v209.js';
+import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210, XENO_TRIALS_SUPER_KITS_V211, getXenoTrialsPhysicalSuper } from '../src/xeno-trials-super-kits-v209.js';
 import { getXenoTrialsAttackStyleV147, getXenoTrialsAttackV147 } from '../src/xeno-trials-signatures-v147.js';
 import { createXenoTrialsDuelCheckpointV197 } from '../src/xeno-trials-duel-checkpoint-v197.js';
 import { createXenoTrialsHordeCheckpointV186 } from '../src/xeno-trials-horde-checkpoint-v186.js';
@@ -45,10 +45,10 @@ test('the sixteen pairs bind both original supers to exact roster profiles and B
   const bible = JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/xeno-trials-plan-v146.json', import.meta.url), 'utf8'));
   const known = new Map(bible.tables['07_Supers'].rows.map(row => [row[0], row[1]]));
   assert.equal(XENO_TRIALS_SUPER_KITS_V209.length, 16);
-  const addedLater = new Set(XENO_TRIALS_SUPER_KITS_V210.map(kit => kit.first.fighterId));
+  const addedLater = new Set([...XENO_TRIALS_SUPER_KITS_V210, ...XENO_TRIALS_SUPER_KITS_V211].map(kit => kit.first.fighterId));
   const original = XENO_TRIALS_FIGHTERS_V96.filter(fighter => !addedLater.has(fighter.id));
   assert.equal(original.filter(getXenoTrialsSuperV148).length, 21);
-  assert.equal(original.filter(getXenoTrialsRiposteV208).length, 20);
+  assert.equal(original.filter(fighter => fighter.id !== 'import-game-afe2-exploder' && getXenoTrialsRiposteV208(fighter)).length, 20);
   const records = XENO_TRIALS_SUPER_KITS_V209.flatMap(kit => [kit.first, kit.counter]);
   assert.equal(new Set(records.map(move => move.id)).size, 32);
   assert.equal(new Set(records.map(move => JSON.stringify(move.spec))).size, 32);

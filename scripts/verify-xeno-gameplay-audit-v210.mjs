@@ -6,6 +6,7 @@ import { readFileSync } from 'node:fs';
 import { XENO_GAMEPLAY_BASELINE_V210, XENO_GAMEPLAY_SUCCESSORS_V210, XENO_GAMEPLAY_NEW_INPUTS_V210,
   reviewedXenoGameplayDigestV210, xenoGameplayRuntimeSourcesV210, verifyXenoGameplayV210 } from './audit-xeno-gameplay-v210.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { XENO_GAMEPLAY_BASELINE_V211, reviewedXenoGameplayDigestV211 } from './audit-xeno-gameplay-v211.mjs';
 
 const root = new URL('..', import.meta.url);
 const read = path => readFileSync(new URL(path, root));
@@ -15,7 +16,8 @@ test('V210 retains the released V209 endpoints and rejects a fabricated predeces
   const git = (...args) => execFileSync('git', args, { cwd: root, maxBuffer: 8 * 1024 * 1024 });
   for (const [path, receipt] of Object.entries(XENO_GAMEPLAY_SUCCESSORS_V210)) {
     assert.equal(sha(git('show', XENO_GAMEPLAY_BASELINE_V210 + ':' + path)), receipt.previousSha256, path);
-    assert.equal(reviewedXenoGameplayDigestV210(path, receipt.previousSha256), receipt.sha256, path);
+    assert.equal(sha(git('show', XENO_GAMEPLAY_BASELINE_V211 + ':' + path)), receipt.sha256, path);
+    assert.equal(reviewedXenoGameplayDigestV210(path, receipt.previousSha256), reviewedXenoGameplayDigestV211(path, receipt.sha256), path);
     assert.throws(() => reviewedXenoGameplayDigestV210(path, '0'.repeat(64)), /Incorrect V209 endpoint for V210/);
   }
   const historical = git('ls-tree', '-r', '--name-only', XENO_GAMEPLAY_BASELINE_V210).toString().split('\n');
@@ -25,7 +27,8 @@ test('V210 retains the released V209 endpoints and rejects a fabricated predeces
 
 test('V210 admits only exact new runtime paths and checks changed bytes', () => {
   const terminal = 'scripts/audit-xeno-gameplay-v210.mjs';
-  assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.deepEqual([...read(terminal).toString().matchAll(/(?:from\s*|import\s*\(?\s*)['"]\.\/([^'"\n]+)['"]/g)]
+    .map(match => match[1]), ['audit-xeno-gameplay-v211.mjs']);
   const runtime = xenoGameplayRuntimeSourcesV210({ legacy: 'untouched' });
   assert.equal(runtime.legacy, 'untouched');
   assert.deepEqual(xenoGameplayRuntimeSourcesV210(runtime), runtime);

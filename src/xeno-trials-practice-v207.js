@@ -1,3 +1,4 @@
+import { createXenoTrialsPracticeGoalsV211, XENO_TRIALS_NEW_DRILLS_V211 } from './xeno-trials-practice-v211.js';
 import { XENO_TRIALS_NEW_DRILLS_V210 } from './xeno-trials-practice-v210.js';
 import { createXenoTrialsPracticeObserverV209, XENO_TRIALS_NEW_DRILLS_V209 } from './xeno-trials-practice-v209.js';
 import { XENO_TRIALS_ACID_POOL_V152 } from './xeno-trials-acid-pools-v152.js';
@@ -40,9 +41,11 @@ export const XENO_TRIALS_PRACTICE_DRILLS_V209 = Object.freeze([...XENO_TRIALS_PR
   ...XENO_TRIALS_NEW_DRILLS_V209.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
 export const XENO_TRIALS_PRACTICE_DRILLS_V210 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V209,
   ...XENO_TRIALS_NEW_DRILLS_V210.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
-const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V210.map(entry => [entry.id, entry]));
+export const XENO_TRIALS_PRACTICE_DRILLS_V211 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V210,
+  ...XENO_TRIALS_NEW_DRILLS_V211.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
+const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V211.map(entry => [entry.id, entry]));
 export const getXenoTrialsPracticeV207 = id => LESSONS.get(id) || null;
-export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V210
+export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V211
   .filter(entry => Array.isArray(value) && value.includes(entry.id)).map(entry => entry.id);
 
 export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
@@ -52,6 +55,7 @@ export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
   return { playerId: entry.playerId, opponentId: entry.opponentId, stageId: 'containment-deck',
     factionId: 'containment', roundsToWin: entry.roundsToWin || 1, roundSeconds: entry.roundSeconds || 60, matchId: `practice-${entry.id}`,
     ...(entry.difficulty ? { difficulty: entry.difficulty } : {}),
+    ...(entry.hordeProtocolId ? { hordeV180: { protocolId: entry.hordeProtocolId } } : {}),
     rulesV119: { ...(entry.singleHit ? { initialHp: 1 } : {}), ...(entry.noSpecial ? { noSpecial: true } : {}) } };
 }
 
@@ -62,7 +66,8 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   const entry = sandbox ? lesson(id, 'Banc libre', 'Essayez vos techniques dans les conditions sélectionnées.', [], sandbox) : getXenoTrialsPracticeV207(id);
   if (!entry) return null;
   let [player, opponent] = match.fighters;
-  if (player.id !== entry.playerId || opponent?.id !== entry.opponentId) return null;
+  if (player.id !== entry.playerId) return null;
+  if (entry.hordeProtocolId ? match.hordeV180?.protocolId !== entry.hordeProtocolId : opponent?.id !== entry.opponentId) return null;
   const opponentDefinition = getXenoTrialsFighterV96(entry.opponentId);
   const opponentHeavy = getXenoTrialsAttackV147(opponentDefinition, 'heavy', XENO_TRIALS_ATTACKS_V96.heavy);
   const opponentSignature = id === 'interrupt' ? getXenoTrialsAttackV147(opponentDefinition, 'signature-2') : null;
@@ -79,9 +84,14 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   const hasAttack = (action, side) => action.type === 'attack' && action.side === side;
   const hasImpact = (action, side) => ['hit', 'block', 'guard-break'].includes(action.type) && action.side === side;
   const advance = () => { if (++index === entry.targets.length) state = 'complete'; };
+  const goalsV211 = createXenoTrialsPracticeGoalsV211(id, match, { index: () => index, advance,
+    retry: () => { if (state === 'active') state = 'retry'; } });
 
   function opponentInput(playerInput = {}) {
     [player, opponent] = match.fighters;
+    goalsV211?.beforeStep();
+    const programmed = goalsV211?.opponentInput();
+    if (programmed !== undefined) return programmed;
     if (entry.behavior === 'mirror') return getMirroredXenoTrialsInputV208(playerInput);
     if (entry.behavior === 'cpu') return null;
     if (sandbox) {
@@ -123,6 +133,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
       if (match.result) { observer.stopRecording(); state = 'finished'; }
       return;
     }
+    if (goalsV211) { goalsV211.observe(); return; }
     if (id === 'intro-rearm' && index === 0 && activeTick) { state = 'retry'; return; }
     if (id === 'landing-evasion' && index === 0 && player.y > .001 && player.vy > 0) advance();
     if (id === 'acid-floor' && index === 0 && match.acidPoolsV152?.some(pool => pool.owner === 'opponent')) advance();
@@ -226,7 +237,8 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   function view() {
     return { id, title: entry.title, briefing: entry.briefing, objectives: entry.targets, index, state,
       ...(sandbox ? { sandbox: true, result: match.result?.winner || null, telemetryV209: observer.view() } : {}),
-      cue: id === 'low-defense' && opponent.attack?.kind === 'low' ? 'FRAPPE BASSE EN COURS'
+      ...(goalsV211?.terminalReady() ? { awaitingOutroV211: true } : {}),
+      cue: goalsV211 ? goalsV211.cue() : id === 'low-defense' && opponent.attack?.kind === 'low' ? 'FRAPPE BASSE EN COURS'
         : id === 'landing-evasion' && player.y > .001 && player.vy < 0 ? 'DESCENTE EN COURS'
         : id === 'interrupt' && opponent.attack?.kind === 'signature-2' ? 'PERCUSSION EN COURS'
         : entry.pressure === 'heavy' && opponent.attack?.kind === 'heavy' ? 'FRAPPE LOURDE EN COURS'
@@ -234,6 +246,8 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   }
   return { get active() { return state === 'active'; }, opponentInput, observe, view,
     showIntroV210: entry.showIntroV210 === true,
+    canCloseOutroV211: () => goalsV211?.terminalReady() === true,
+    closedOutroV211: () => goalsV211?.closeOutro() === true,
     skippedIntroV210() { if (entry.showIntroV210 && index === 0 && match.tick === 0) advance(); },
     recordingV209: observer ? { start: observer.startRecording, stop: observer.stopRecording,
       pending: observer.pendingRecording, acknowledge: observer.acknowledgeRecording } : null };

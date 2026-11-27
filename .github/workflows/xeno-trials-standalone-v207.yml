@@ -2,7 +2,13 @@ name: Xeno Trials standalone distribution
 on:
   pull_request:
   push:
-    branches: [main, feat/xeno-trials-standalone-v207, feat/xeno-trials-gameplay-v208, feat/xeno-trials-gameplay-v209, feat/xeno-trials-gameplay-v210]
+    branches:
+      - main
+      - feat/xeno-trials-standalone-v207
+      - feat/xeno-trials-gameplay-v208
+      - feat/xeno-trials-gameplay-v209
+      - feat/xeno-trials-gameplay-v210
+      - feat/xeno-trials-gameplay-v211
   workflow_dispatch:
 permissions:
   contents: read
@@ -26,7 +32,7 @@ jobs:
       - name: Verify source and the two distributions from one release build
         run: |
           npm run check
-          npm run test:trials:v210
+          npm run test:trials:v211
           npm run build:trials
           npm run check:built
           npm run check:trials:built

@@ -2,6 +2,7 @@ import { XENO_TRIALS_RIGS_V154, getXenoTrialsRigV154, getXenoTrialsRigCueV154, s
 import { getXenoTrialsFighterV96, getXenoTrialsArtV96 } from './xeno-trials-data-v96.js';
 import { XENO_PRESENTATION_V97 } from './xeno-trials-presentation-v97.js';
 import { getXenoTrialsRenderMetricsV110 } from './xeno-trials-scale-v110.js';
+import { getXenoTrialsPresentationParticipantsV211, getXenoTrialsTauntRigV211 } from './xeno-trials-presentation-v211.js';
 
 // Original presentation choreography on the four admitted source plates. No
 // canonical animation, voiced line, relation or combat ability is asserted.
@@ -97,7 +98,7 @@ export function sampleXenoTrialsSequenceV155(rig, cue, reducedMotion = false) {
   ...(s.version===156?{sequenceIdV156:s.id,animation:'authored-native-sequence-v156'}:{})};
 }
 
-export function createXenoTrialsOutroV155(match, reducedMotion = false) {
+export function createXenoTrialsOutroV155(match, reducedMotion = false, images) {
  if (match?.phase !== 'match-over' || !match.result?.completed || !['player','opponent'].includes(match.result.winner)
   || match.result.reason === 'double-ko' || !Array.isArray(match.fighters)) return null;
  const participants = match.fighters.flatMap(f => {
@@ -107,6 +108,7 @@ export function createXenoTrialsOutroV155(match, reducedMotion = false) {
   const sequence = getXenoTrialsSequenceV155(rig,kind);
   return sequence ? [{side:f.side,fighterId:f.id,rigId:rig.id,sequenceId:sequence.id,kind}] : [];
  });
+ participants.push(...getXenoTrialsPresentationParticipantsV211(match, 'verdict', null, images));
  if (!participants.length) return null;
  return {matchId:match.config.matchId,terminalTick:match.tick,winner:match.result.winner,participants,
   phase:reducedMotion ? 'complete' : 'playing',elapsedMs:0,durationMs:XENO_TRIALS_SEQUENCE_TIMING_V155.outroMs,
@@ -140,7 +142,7 @@ export function skipXenoTrialsIntroV155(state) {
 
 
 /** A detached terminal presentation cannot create, change, or replay a result. */
-export function createXenoTrialsTerminalV156(match, kind, reducedMotion=false, previousOutro=null) {
+export function createXenoTrialsTerminalV156(match, kind, reducedMotion=false, previousOutro=null, images) {
  if(match?.phase!=='match-over' || !match.result?.completed || !Array.isArray(match.fighters))return null;
  if(kind==='draw') { if(match.result.winner!=='draw')return null; }
  else if(kind==='outro') {
@@ -153,17 +155,21 @@ export function createXenoTrialsTerminalV156(match, kind, reducedMotion=false, p
   if(!rig || f.y!==0 || kind==='outro'&&(!previous || previous.kind!==(f.side===match.result.winner?'outro-win':'outro-loss')))return [];
   return [{side:f.side,fighterId:f.id,rigId:rig.id,kind,sequenceId:`${f.id}::${kind}`,...(previous?{previousKind:previous.kind}:{})}];
  });
+ participants.push(...getXenoTrialsPresentationParticipantsV211(match, kind, previousOutro, images));
  if(!participants.length)return null;
  return {kind,matchId:match.config.matchId,terminalTick:match.tick,participants,phase:reducedMotion?'complete':'playing',elapsedMs:0,
   durationMs:kind==='draw'?XENO_TRIALS_SEQUENCE_TIMING_V156.drawMs:XENO_TRIALS_SEQUENCE_TIMING_V156.exitMs,
   paused:false,skipped:false,reducedMotion:reducedMotion===true};
 }
-export function createXenoTrialsTauntV156(match, presentation, controls={}, reducedMotion=false) {
+export function createXenoTrialsTauntV156(match, presentation, controls={}, reducedMotion=false, images) {
  const f=match?.fighters?.[0];
  if(match?.phase!=='active' || match.paused || presentation?.blocksSimulation || !f || f.side!=='player'
   || f.hp<=0 || f.y!==0 || f.vy!==0 || f.attack || f.guard || f.stun>0 || f.hitFlash>0 || Object.values(controls).some(Boolean))return null;
- const rig=historicalRigForV155(f);
- if(!rig || !getXenoTrialsSequenceV155(rig,'taunt') || getXenoTrialsRigCueV154(rig,match,f,presentation))return null;
+ const historical=historicalRigForV155(f);
+ const rig=historical || getXenoTrialsTauntRigV211(match,f,images);
+ const activeRig=getXenoTrialsRigV154(getXenoTrialsFighterV96(f.id),getXenoTrialsArtV96(f.id,f.variant));
+ if(!rig || historical && !getXenoTrialsSequenceV155(historical,'taunt')
+  || getXenoTrialsRigCueV154(activeRig,match,f,presentation))return null;
  return {kind:'taunt',matchId:match.config.matchId,round:match.round,startedTick:match.tick,fighterId:f.id,rigId:rig.id,
   healthAtStart:f.hp,phase:reducedMotion?'complete':'playing',elapsedMs:0,durationMs:XENO_TRIALS_SEQUENCE_TIMING_V156.tauntMs,
   paused:false,skipped:false,reducedMotion:reducedMotion===true};

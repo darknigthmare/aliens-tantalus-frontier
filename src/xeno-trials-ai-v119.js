@@ -119,12 +119,15 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
   };
   const rules = match.config.rulesV119;
   const specialForbidden = rules?.noSpecial || match.config.roundSeconds - match.timeRemaining < (rules?.specialLockSeconds || 0);
+  const physicalSuper = getXenoTrialsPhysicalSuper(definition);
+  const superAllowed = difficulty === 'hard' || !physicalSuper?.spec.hardCpuV211;
   const choose = kind => {
     const spec = getXenoTrialsAttackV147(definition, kind, specs[kind]);
     const lock = match.config.rulesV119;
     const specialLocked = ['special', 'super'].includes(kind) && (lock?.noSpecial || match.config.roundSeconds - match.timeRemaining < (lock?.specialLockSeconds || 0));
     if (!spec || specialLocked || spec.groundedOnly && !view.grounded || cpu.stamina < spec.cost || (['special', 'super'].includes(kind) && cpu.specialCooldown > 0) || brain.input[kind]) return false;
-    if (kind === 'super' && getXenoTrialsPhysicalSuper(definition)) {
+    if (kind === 'super' && !superAllowed) return false;
+    if (kind === 'super' && physicalSuper) {
       const target = match.fighters[0], hurt = getXenoTrialsHurtBoundsV207(target);
       const viable = strike => {
         const band = getXenoTrialsStrikeBandV207(body, strike);
@@ -135,7 +138,8 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
     }
     next[kind] = true; transition(brain, ['special', 'super'].includes(kind) ? 'SPECIAL_SETUP' : 'COMMIT_ATTACK'); return true;
   };
-  const chooseSignature = () => getXenoTrialsSuperReadinessV148(match, cpu, definition).ready && choose('super') || choose('special');
+  const readySuper = () => superAllowed && getXenoTrialsSuperReadinessV148(match, cpu, definition).ready;
+  const chooseSignature = () => readySuper() && choose('super') || choose('special');
   const light = getXenoTrialsAttackV147(definition, 'light', specs.light), heavy = getXenoTrialsAttackV147(definition, 'heavy', specs.heavy);
   const reach = light.reach * definition.reach, heavyReach = heavy.reach * definition.reach;
   const withinMelee = view.overlap && view.gap <= heavyReach;
@@ -194,7 +198,7 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
     if (view.grounded && view.selfHeight < 260 && random() < profile.jumpUsage) next.jump = true;
   } else if (withinMelee) {
     transition(brain, view.gap <= reach ? 'PRESSURE' : 'PROBE');
-    if (getXenoTrialsSuperReadinessV148(match, cpu, definition).ready && !view.targetAirborne && random() < .65 && choose('super')) { /* earned finite meter */ }
+    if (readySuper() && !view.targetAirborne && random() < .65 && choose('super')) { /* earned finite meter */ }
     else if (view.targetAirborne && view.heightRatio > 1.2 && !view.overlap) transition(brain, 'OBSERVE');
     else if (view.gap <= reach) {
       if (random() < profile.aggression) choose(cpu.stamina > 60 && random() < profile.comboPressure && view.gap <= heavyReach ? 'heavy' : 'light');

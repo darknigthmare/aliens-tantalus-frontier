@@ -31,6 +31,8 @@ import { clearXenoTrialsParryV208, gateXenoTrialsParryV208, isXenoTrialsParrying
 import { getXenoTrialsAlternateSignatureV208 } from './xeno-trials-signature-kit-v208.js';
 import { XENO_TRIALS_GRAVITY_V210, bufferXenoTrialsLandingV210, clearXenoTrialsMovementV210, hasXenoTrialsGroundTurnV210,
   stepXenoTrialsGroundTurnV210, takeXenoTrialsLandingV210, validXenoTrialsMovementV210 } from './xeno-trials-movement-v210.js';
+import { XENO_TRIALS_AIR_HIT_V211, XENO_TRIALS_GET_UP_V211, clearXenoTrialsGroundRecoveryV211, getXenoTrialsAirHitV211, startXenoTrialsGroundRecoveryV211,
+  stepXenoTrialsGroundRecoveryV211, validXenoTrialsAirAttackV211, validXenoTrialsGroundRecoveryV211 } from './xeno-trials-defense-v211.js';
 export { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
 
 export const XENO_TRIALS_STEP_V96 = 1 / 120;
@@ -128,6 +130,7 @@ function finishRound(match, reason) {
   for (const fighter of match.fighters) {
     fighter.attack = null; fighter.guard = false; clearXenoTrialsMovePoseV207(fighter);
     clearXenoTrialsMovementV210(fighter);
+    clearXenoTrialsGroundRecoveryV211(fighter);
     fighter.rearmControls = releaseGate(fighter);
     gateXenoTrialsMovesetV207(fighter);
     clearXenoTrialsParryV208(fighter, true);
@@ -252,6 +255,9 @@ function fighterStep(match, fighter, enemy, controls, dt) {
     if (fighter.rearmControls[action]) controls[action] = false;
   }
   fighter.stun = Math.max(0, fighter.stun - dt);
+  if (stepXenoTrialsGroundRecoveryV211(match, fighter, controls.guard && !fighter.previousInput.guard))
+    event(match, 'get-up-v211', { side: fighter.side, breakIdV211: fighter.groundRecoveryV211.breakId,
+      ...(match.hordeV180 ? { targetInstanceV180: fighter.instanceIdV180 || 'player' } : {}) });
   if (fighter.stun === 0) fighter.guardBrokenV147 = false; fighter.hitFlash = Math.max(0, fighter.hitFlash - dt);
   fighter.specialCooldown = Math.max(0, fighter.specialCooldown - dt);
   const wasAirborne = fighter.y > 0;
@@ -262,6 +268,7 @@ function fighterStep(match, fighter, enemy, controls, dt) {
   if (isXenoTrialsGrappledV153(match, fighter)) {
     clearXenoTrialsMovePoseV207(fighter);
     clearXenoTrialsMovementV210(fighter);
+    clearXenoTrialsGroundRecoveryV211(fighter);
     clearXenoTrialsParryV208(fighter);
     stepXenoTrialsParryV208(match, fighter, heldParry, false);
     fighter.guard = false; fighter.attack = null; fighter.previousInput = controls; return;
@@ -318,20 +325,23 @@ function fighterStep(match, fighter, enemy, controls, dt) {
       if (jumpPressed && !groundTraversal && fighter.y === 0 && !moveset?.low) { fighter.vy = definition.jump; fighter.y = .001; }
     }
     const freshLight = controls.light && !fighter.previousInput.light;
+    const airHit = freshLight && fighter.y > 0 && fighter.vy < 0 && getXenoTrialsAirHitV211(definition);
     const signatures = specialLocked ? [] : [
       ...(moves.signature2 ? ['signature-2'] : []), ...(moves.signature3 ? ['signature-3'] : [])
     ];
     const actions = evade ? (advance && freshLight ? ['advance'] : []) : ['super', ...signatures, 'special', 'heavy',
-      ...(moves.antiAir ? ['anti-air'] : []), ...(moveset?.low && freshLight ? ['low'] : ['light'])];
+      ...(moves.antiAir ? ['anti-air'] : []), ...(airHit ? [XENO_TRIALS_AIR_HIT_V211] : moveset?.low && freshLight ? ['low'] : ['light'])];
     for (const action of actions) {
       const spec = getXenoTrialsAttackV147(definition, action, XENO_TRIALS_ATTACKS_V96[action]);
       const signature = getXenoTrialsAlternateSignatureV208(definition, action);
-      const requested = signature || ['advance', 'anti-air', 'low'].includes(action) || controls[action] && !fighter.previousInput[action];
+      const requested = signature || ['advance', 'anti-air', 'low', XENO_TRIALS_AIR_HIT_V211].includes(action)
+        || controls[action] && !fighter.previousInput[action];
       if (!spec || !requested || spec.groundedOnly && fighter.y > 0 || fighter.stamina < spec.cost
         || (signature || ['special', 'super'].includes(action)) && fighter.specialCooldown > 0
         || action === 'super' && !getXenoTrialsSuperReadinessV148(match, fighter, definition).ready) continue;
       fighter.attack = { kind: action, age: 0, hit: false, emitted: false, facing: fighter.facing, id: ++match.serial };
       clearXenoTrialsMovementV210(fighter);
+      if (action === XENO_TRIALS_AIR_HIT_V211) fighter.attack.takeoffV211 = { height: fighter.y, velocity: fighter.vy };
       if (moveset) { moveset.low = action === 'low'; moveset.evade = null; }
       fighter.stamina -= spec.cost;
       if (action === 'super') {
@@ -385,11 +395,20 @@ function collectAttack(match, fighter, enemy, impacts) {
   const definition = getXenoTrialsFighterV96(fighter.id), style = getXenoTrialsAttackStyleV147(definition, attack.kind);
   const baseSpec = getXenoTrialsAttackV147(definition, attack.kind, XENO_TRIALS_ATTACKS_V96[attack.kind]);
   const spec = getXenoTrialsActiveStrikeV210(baseSpec, attack.age);
-  if (!enemy && !spec.detonationV210) return;
+  if (!enemy && !spec.detonationV210 && !spec.projectileStyleV211) return;
   const hordeTarget = match.hordeV180 && enemy ? enemy.instanceIdV180 || enemy.side : null;
   if (attack.age < spec.startup || attack.age >= spec.startup + spec.active
     || (match.hordeV180 ? attack.hitTargetsV180?.includes(hordeTarget) : attack.hit)) return;
   if (match.hordeV180 && spec.hordeTargetsV209 && (attack.hitTargetsV180?.length || 0) >= spec.hordeTargetsV209) return;
+  if (spec.projectileStyleV211) {
+    if (attack.emitted) return;
+    const signature = getXenoTrialsAlternateSignatureV208(definition, attack.kind);
+    const projectiles = createXenoTrialsSignatureProjectilesV147(signature, fighter, getXenoTrialsBodyBoundsV105(fighter),
+      enemy ? getXenoTrialsBodyBoundsV105(enemy) : null, attack);
+    for (const projectile of projectiles) match.projectiles.push({ ...projectile, id: ++match.serial, power: definition.power });
+    attack.emitted = true;
+    return;
+  }
   if (['special', 'super'].includes(attack.kind) && ['ground-wave', 'acid-cluster', 'aimed-acid'].includes(style)) {
     const count = spec.volleyCount || 1, interval = spec.volleyInterval || 1;
     const due = Math.min(count, 1 + Math.floor((attack.age - spec.startup + 1e-9) / interval));
@@ -454,7 +473,8 @@ function collectAttack(match, fighter, enemy, impacts) {
     }
     return;
   }
-  if (attack.kind === 'anti-air' && enemy.y <= 0 || spec.groundedTargetV208 && enemy.y > 0) return;
+  if (attack.kind === 'anti-air' && enemy.y <= 0 || spec.groundedTargetV208 && enemy.y > 0
+    || attack.kind === XENO_TRIALS_AIR_HIT_V211 && fighter.y === 0) return;
   const body = getXenoTrialsBodyBoundsV105(fighter), other = getXenoTrialsHurtBoundsV207(enemy);
   const horizontal = getXenoTrialsBodyGapV105(fighter, enemy, attack.facing);
   const band = getXenoTrialsStrikeBandV207(body, spec);
@@ -502,9 +522,10 @@ function applyImpact(match, impact) {
   if (spec.continuousV152 || spec.continuousV153) { /* Exposure must not stun-lock an escape or cancel an accepted action. */ }
   else if (guarded) { to.stamina -= guardCost; to.stats.blocks++; }
   else {
-    to.stun = guardBreak ? .72 : spec.stun; to.guardBrokenV147 = guardBreak; to.guard = false; to.attack = null;
+    to.stun = guardBreak ? XENO_TRIALS_GET_UP_V211.stun : spec.stun; to.guardBrokenV147 = guardBreak; to.guard = false; to.attack = null;
     clearXenoTrialsMovePoseV207(to);
     clearXenoTrialsMovementV210(to);
+    clearXenoTrialsGroundRecoveryV211(to);
     clearXenoTrialsParryV208(to);
     if (guardBreak) to.stamina = 0;
   }
@@ -516,11 +537,15 @@ function applyImpact(match, impact) {
     (type, details) => event(match, type, details))) {
     clearXenoTrialsMovementV210(from);
     clearXenoTrialsMovementV210(to);
+    clearXenoTrialsGroundRecoveryV211(from);
+    clearXenoTrialsGroundRecoveryV211(to);
     clearXenoTrialsParryV208(from);
     clearXenoTrialsParryV208(to);
   }
   event(match, guardBreak ? 'guard-break' : guarded ? 'block' : 'hit', { side: to.side, attacker: from.side, damage,
     ...(match.hordeV180 ? { targetInstanceV180: to.instanceIdV180 || 'player', attackerInstanceV180: from.instanceIdV180 || 'player' } : {}) });
+  if (guardBreak && impact.meleeAttackIdV208 && !spec.continuousV152 && !spec.continuousV153)
+    startXenoTrialsGroundRecoveryV211(match, to, getXenoTrialsFighterV96(to.id));
 }
 
 function makeHordeFighterV180(match, id, wave, serial, slotIndex) {
@@ -568,6 +593,7 @@ function finishHordeV180(match, winner, reason) {
     fighter.attack = null; fighter.guard = false; fighter.rearmControls = releaseGate(fighter);
     clearXenoTrialsMovePoseV207(fighter); gateXenoTrialsMovesetV207(fighter);
     clearXenoTrialsMovementV210(fighter);
+    clearXenoTrialsGroundRecoveryV211(fighter);
     clearXenoTrialsParryV208(fighter, true); gateXenoTrialsParryV208(fighter);
   }
   match.result = { version: 96, completed: true, matchId: match.config.matchId, seed: match.config.seed,
@@ -587,8 +613,7 @@ function finishHordeV180(match, winner, reason) {
 }
 
 function collectHordeAttackV180(match, fighter, targets, impacts) {
-  if (!targets.length) collectAttack(match, fighter, null, impacts);
-  for (const target of targets) {
+  for (const target of targets.length ? targets : [null]) {
     const start = match.projectiles.length;
     collectAttack(match, fighter, target, impacts);
     for (const projectile of match.projectiles.slice(start)) projectile.ownerInstanceV180 = fighter.instanceIdV180 || 'player';
@@ -873,6 +898,9 @@ export function restoreXenoTrialsHordeMatchV180(snapshot) {
       || fighter.y < 0 || fighter.stamina < 0 || fighter.stamina > getXenoTrialsFighterV96(fighter.id).stamina
       || !fighter.previousInput || !fighter.rearmControls || !fighter.stats || !validXenoTrialsMovesetV207(fighter)
       || !validXenoTrialsMovementV210(value, fighter, getXenoTrialsFighterV96(fighter.id))
+      || !validXenoTrialsGroundRecoveryV211(value, fighter, getXenoTrialsFighterV96(fighter.id))
+      || fighter.attack?.kind === XENO_TRIALS_AIR_HIT_V211
+        && !validXenoTrialsAirAttackV211(value, fighter, fighter.attack, getXenoTrialsAirHitV211(getXenoTrialsFighterV96(fighter.id)))
       || !validXenoTrialsParryStateV208(value, fighter)) return null;
     if (index > 0 && (!Number.isInteger(serial) || serial <= preceding || serial > state.serial
       || fighter.id !== (slot?.fighterId || wave.opponentIds[(slotIndex + state.wave - 1) % wave.opponentIds.length])

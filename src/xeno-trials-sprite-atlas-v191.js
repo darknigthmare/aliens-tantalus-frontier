@@ -4,6 +4,7 @@ import { XENO_TRIALS_SPRITE_COMBAT_DATA_V197 } from './xeno-trials-sprite-combat
 import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsSpecialStyleV147 } from './xeno-trials-signatures-v147.js';
 import { XENO_TRIALS_SPRITE_REFERENCES_V188, XENO_TRIALS_SPRITE_FRAME_IDS_V188 } from './xeno-trials-sprite-atlas-v188.js';
+import { getXenoTrialsGroundRecoveryFrameV211 } from './xeno-trials-defense-v211.js';
 import { getXenoTrialsSpriteEnvelopeV189 } from './xeno-trials-sprite-atlas-v189.js';
 import { XENO_TRIALS_RUNTIME_ACTION_ATLASES,
   getXenoTrialsActionAtlasV199, getXenoTrialsActiveActionAtlas, getXenoTrialsRuntimeActionAtlases,
@@ -168,10 +169,12 @@ export function sampleXenoTrialsSpriteAtlasV191(atlas, fighter, options = {}) {
     if ((selected.supportMode === 'free') !== (fighter.y > 0)) return null;
   } else {
     if (fighter.y !== 0) return null;
+    const recovery = getXenoTrialsGroundRecoveryFrameV211(cue, options.reducedMotion);
     if (fighter.hp <= 0) {
       const progress = cue?.state === 'ko' && Number.isFinite(cue.progress) ? clamp(cue.progress) : 1;
       id = options.reducedMotion || progress >= .65 ? 'ko-ground' : 'ko-fall'; phase = 'ko';
-    } else if (['hurt', 'guard-break'].includes(cue?.state)) { id = 'hit-recoil'; phase = 'hurt'; }
+    } else if (recovery) { id = recovery; phase = 'ground-recovery'; }
+    else if (['hurt', 'guard-break'].includes(cue?.state)) { id = 'hit-recoil'; phase = 'hurt'; }
     else if (fighter.stun > 0 || fighter.hitFlash > 0) return null;
     else if (attack) {
       if (!['light', 'heavy'].includes(attack.kind) || !Number.isFinite(attack.age) || attack.age < 0

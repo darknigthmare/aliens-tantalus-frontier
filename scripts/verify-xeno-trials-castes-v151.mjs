@@ -27,9 +27,7 @@ test('four explicit Fireteam identities are separate from film, ACM and invented
     assert.equal(label(definition(c.fighterId)),c.label);assert.equal(style(definition(c.fighterId)),c.style);
     assert.ok(Object.isFrozen(c)&&Object.isFrozen(c.spec));assert.equal(c.canonExact,false);
     assert.equal(c.animation,'existing-static-pose');assert.equal(sources[c.sourceId].directAccess,'blocked');
-    const move = superProfile(definition(c.fighterId));
-    if (['prowler', 'burster'].includes(c.fighterId)) assert.equal(move?.id, c.fighterId + '::super1');
-    else assert.equal(move, null);
+    assert.equal(superProfile(definition(c.fighterId))?.id, c.fighterId + '::super1');
     assert.equal(caste({...definition(c.fighterId),profileId:'wrong'}),null);
     assert.equal(caste({...definition(c.fighterId),id:'albino-'+c.fighterId}),null);
   }

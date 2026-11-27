@@ -7,7 +7,7 @@ import { getXenoTrialsFighterV96, XENO_TRIALS_FIGHTERS_V96 } from '../src/xeno-t
 import { getXenoTrialsBodyBoundsV105 as bounds } from '../src/xeno-trials-geometry-v105.js';
 import { getXenoTrialsSuperV148 } from '../src/xeno-trials-supers-v148.js';
 import { getXenoTrialsRiposteV208, getXenoTrialsRiposteReadinessV208 } from '../src/xeno-trials-ripostes-v208.js';
-import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210 } from '../src/xeno-trials-super-kits-v209.js';
+import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210, XENO_TRIALS_SUPER_KITS_V211 } from '../src/xeno-trials-super-kits-v209.js';
 import { getXenoTrialsActiveStrikeV210 } from '../src/xeno-trials-super-kits-v210.js';
 import { getXenoTrialsAttackStyleV147, getXenoTrialsAttackV147 } from '../src/xeno-trials-signatures-v147.js';
 import { createXenoTrialsDuelCheckpointV197 } from '../src/xeno-trials-duel-checkpoint-v197.js';
@@ -48,9 +48,10 @@ test('the 24 new pairs reference exact bible rows, including all starters, witho
   const moves = XENO_TRIALS_SUPER_KITS_V210.flatMap(({ first, counter }) => [first, counter]);
   assert.equal(new Set(moves.map(move => move.id)).size, 48);
   assert.equal(new Set(moves.map(move => JSON.stringify(move.spec))).size, 48);
-  const roster = XENO_TRIALS_FIGHTERS_V96;
+  const addedLater = new Set(XENO_TRIALS_SUPER_KITS_V211.map(kit => kit.first.fighterId));
+  const roster = XENO_TRIALS_FIGHTERS_V96.filter(fighter => !addedLater.has(fighter.id));
   assert.equal(roster.filter(getXenoTrialsSuperV148).length, 45);
-  assert.equal(roster.filter(getXenoTrialsRiposteV208).length, 44);
+  assert.equal(roster.filter(fighter => fighter.id !== 'import-game-afe2-exploder' && getXenoTrialsRiposteV208(fighter)).length, 44);
   for (const id of ['warrior', 'runner', 'arachnoid']) assert.ok(getXenoTrialsRiposteV208(getXenoTrialsFighterV96(id)));
   for (const move of moves) {
     assert.equal(identities.get(move.id), move.fighterId);

@@ -1,5 +1,6 @@
 import { XENO_TRIALS_SPRITE_ATLAS_DATA_V188 } from './xeno-trials-sprite-atlas-data-v188.js';
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
+import { getXenoTrialsGroundRecoveryFrameV211 } from './xeno-trials-defense-v211.js';
 
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
 const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
@@ -94,11 +95,13 @@ export function sampleXenoTrialsSpriteAtlasV188(atlas, fighter, options = {}) {
   if (!constructed.has(atlas) || fighter?.id !== atlas.fighterId || !Number.isFinite(fighter.hp)
     || fighter.y !== 0 || options.blocked) return null;
   const cue = options.cue;
+  const recovery = getXenoTrialsGroundRecoveryFrameV211(cue, options.reducedMotion);
   let id = 'idle', phase = 'idle';
   if (fighter.hp <= 0) {
     const p = cue?.state === 'ko' && Number.isFinite(cue.progress) ? clamp(cue.progress) : 1;
     id = options.reducedMotion || p >= .65 ? 'ko-ground' : 'ko-fall'; phase = 'ko';
-  } else if (cue?.state === 'hurt' || cue?.state === 'guard-break') { id = 'hit-recoil'; phase = 'hurt'; }
+  } else if (recovery) { id = recovery; phase = 'ground-recovery'; }
+  else if (cue?.state === 'hurt' || cue?.state === 'guard-break') { id = 'hit-recoil'; phase = 'hurt'; }
   else if (fighter.attack) {
     const attack = fighter.attack, spec = options.spec;
     // These drawings depict a primary claw strike, never acid, a leap, a

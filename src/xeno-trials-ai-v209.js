@@ -35,7 +35,7 @@ function parryInput(match, cpu, target, controls, brain, specs, dt) {
   const definition = getXenoTrialsFighterV96(target.id);
   if (['special', 'super'].includes(attack.kind) && nonMeleeStyles.has(getXenoTrialsAttackStyleV147(definition, attack.kind))) return null;
   const spec = getXenoTrialsAttackV147(definition, attack.kind, specs[attack.kind]);
-  if (!spec || spec.unblockableV151 || spec.detonationV210 || spec.startup < .15) return null;
+  if (!spec || spec.unblockableV151 || spec.detonationV210 || spec.projectileStyleV211 || spec.startup < .15) return null;
   const remaining = spec.startup - attack.age;
   if (remaining < -dt * .5 || remaining > dt * 4 || roll(match, cpu, attack.id, 0x736fa51d) >= .38
     || !getXenoTrialsParryViewV208(match, cpu).ready

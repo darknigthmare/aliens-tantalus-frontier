@@ -87,7 +87,7 @@ test('four Bible super2 rows bind distinct original attacks to actual native con
     assert.equal(player.superMeterV148, 0, 'the super does not refund meter on contact');
     assert.equal(match.projectiles.length, 0);
   }
-  assert.equal(getXenoTrialsRiposteV208(getXenoTrialsFighterV96('import-game-afe2-exploder')), null);
+  assert.equal(getXenoTrialsRiposteV208(getXenoTrialsFighterV96('import-game-afe2-exploder'))?.id, 'import-game-afe2-exploder::super2');
   assert.equal(getXenoTrialsRiposteV208({ ...getXenoTrialsFighterV96(warden), profileId: 'copied-profile' }), null);
 });
 

@@ -1,7 +1,7 @@
 import { XENO_TRIALS_RESEARCH_LABS_V209 } from './xeno-trials-research-lab-v209.js';
 import { createXenoTrialsResearchLabRuntimeV209 } from './xeno-trials-research-lab-ui-v209.js';
 import { normalizeXenoTrialsSandboxV208, XENO_TRIALS_SANDBOX_BEHAVIORS_V208, XENO_TRIALS_SANDBOX_ID_V208 } from './xeno-trials-practice-v208.js';
-import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V210 } from './xeno-trials-practice-v207.js';
+import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V211 } from './xeno-trials-practice-v207.js';
 import { usesXenoTrialsIndependentProps } from './xeno-trials-franchise-stage-scenes-v192.js';
 import { renderArbiterTerminalDossierV190 } from './xeno-arbiter-ui-v190.js';
 import { ARBITER_PROGRAMS_V191, ARBITER_HORDE_PROTOCOLS_V191, getArbiterProgramV191 } from './xeno-arbiter-protocols-v191.js';
@@ -532,8 +532,8 @@ export class XenoTrialsUiV96 {
       this.el('practice-lab-list').innerHTML = XENO_TRIALS_RESEARCH_LABS_V209.map(lab => `<article class="xt-activity-v119${state.practiceLabsClearedV209?.includes(lab.id) ? ' validated' : ''}">
         <h3>${escapeHtml(lab.title)}</h3><p>${escapeHtml(lab.instruction)}</p><button type="button" class="button primary" data-xt-lab="${lab.id}">
         ${state.practiceLabsClearedV209?.includes(lab.id) ? 'VALIDÉ · REJOUER' : 'OUVRIR LE LABORATOIRE'}</button></article>`).join('');
-      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V210.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
-      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V210.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
+      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V211.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
+      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V211.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
         <h3>${escapeHtml(entry.title)}</h3><strong>${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.playerId).label)}</strong>
         <p>${escapeHtml(entry.briefing)}</p><button type="button" class="button primary" data-xt-practice="${entry.id}">${cleared.includes(entry.id) ? 'VALIDÉ · REJOUER' : 'LANCER L’ATELIER'}</button></article>`).join('');
       return;
@@ -990,9 +990,9 @@ export class XenoTrialsUiV96 {
     }
     this.el('clock').textContent = String(Math.ceil(snapshot.timeRemaining));
     this.el('clock').setAttribute('data-low', String(snapshot.timeRemaining <= 10));
-    this.el('round').textContent = practice && !practice.sandbox ? `ATELIER · ${snapshot.round}` : operation ? 'OPÉRATION' : horde ? horde.waveLabel : `MANCHE ${snapshot.round}`;
-    this.el('score').textContent = practice && !practice.sandbox ? `${practice.index} / ${practice.objectives.length}` : operation ? `${operation.progress.done} / ${operation.progress.total}` : horde ? `${horde.kills} / ${horde.total}` : `${snapshot.wins.player} — ${snapshot.wins.opponent}`;
-    this.el('score').setAttribute('aria-label', practice && !practice.sandbox || operation ? 'Objectifs validés' : horde ? 'Contacts neutralisés sur la population totale' : 'Manches gagnées : joueur — adversaire');
+    this.el('round').textContent = practice && !practice.sandbox && !horde ? `ATELIER · ${snapshot.round}` : operation ? 'OPÉRATION' : horde ? horde.waveLabel : `MANCHE ${snapshot.round}`;
+    this.el('score').textContent = practice && !practice.sandbox && !horde ? `${practice.index} / ${practice.objectives.length}` : operation ? `${operation.progress.done} / ${operation.progress.total}` : horde ? `${horde.kills} / ${horde.total}` : `${snapshot.wins.player} — ${snapshot.wins.opponent}`;
+    this.el('score').setAttribute('aria-label', practice && !practice.sandbox && !horde || operation ? 'Objectifs validés' : horde ? 'Contacts neutralisés sur la population totale' : 'Manches gagnées : joueur — adversaire');
     const phase = snapshot.paused ? 'PAUSE' : snapshot.presentation?.blocksSimulation ? snapshot.presentation.countdown ? `DÉPART DANS ${snapshot.presentation.countdown}` : 'PRÉSENTATION DES SPÉCIMENS' : { intro: 'PRÉPARATION', active: 'COMBAT', 'round-over': 'FIN DE MANCHE', 'match-over': 'ÉVALUATION TERMINÉE' }[snapshot.phase];
     const grapple = snapshot.grappleViewV153;
     const text = practice ? `${practice.title}${snapshot.paused ? ' · PAUSE' : ''}` : operation ? `${operation.phase} · ${operation.instruction}` : horde ? `${horde.phase} · ${horde.waveLabel}` : `${grapple?.target === 'player' ? 'SAISIE · MAINTENIR S / GARDE POUR SE DÉGAGER · ' : ''}${phase} · Manche ${snapshot.round} · ${snapshot.wins.player} — ${snapshot.wins.opponent} · ${Math.ceil(snapshot.timeRemaining)} s`;
@@ -1030,8 +1030,9 @@ export class XenoTrialsUiV96 {
     this.el('taunt').hidden = Boolean(horde) || snapshot.phase === 'match-over' || !getXenoTrialsSequenceV155(getXenoTrialsRigV154(FIGHTERS.find(f=>f.id===snapshot.fighters[0].id),getXenoTrialsArtV96(snapshot.fighters[0].id,snapshot.fighters[0].variant)), 'taunt');
     this.el('taunt').disabled=!snapshot.canTauntV156 || Boolean(this.unsavedResult);
     this.root.setAttribute('data-xt-outro',String(outroPlaying));
-    this.el('skip-sequence').hidden = !(outroPlaying || snapshot.presentation?.fighterSlot !== null && snapshot.presentation?.blocksSimulation) || snapshot.paused;
-    this.el('skip-sequence').textContent = outroPlaying ? 'PASSER LA SÉQUENCE FINALE' : 'PASSER LA PRÉSENTATION';
+    this.el('skip-sequence').hidden = !(outroPlaying || practice?.awaitingOutroV211 || snapshot.presentation?.fighterSlot !== null && snapshot.presentation?.blocksSimulation) || snapshot.paused;
+    this.el('skip-sequence').textContent = outroPlaying ? 'PASSER LA SÉQUENCE FINALE'
+      : practice?.awaitingOutroV211 ? 'FERMER LA PRÉSENTATION FINALE' : 'PASSER LA PRÉSENTATION';
     this.el('pause').disabled = Boolean(practice && practice.state !== 'active' || snapshot.phase === 'match-over' && !outroPlaying || this.unsavedResult);
     this.el('pause').textContent = snapshot.paused ? 'REPRENDRE' : 'PAUSE';
     this.el('pause-overlay').hidden = !snapshot.paused || snapshot.phase === 'match-over' && !outroPlaying;

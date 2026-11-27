@@ -1,5 +1,6 @@
 import { XENO_TRIALS_SIGNATURES_V209 } from './xeno-trials-signature-kit-v209.js';
 import { XENO_TRIALS_SIGNATURES_V210 } from './xeno-trials-signature-kit-v210.js';
+import { XENO_TRIALS_SIGNATURES_V211 } from './xeno-trials-signature-kit-v211.js';
 import { XENO_TRIALS_RESEARCH_SIGNATURES_V210 } from './xeno-trials-research-v210.js';
 
 export const XENO_TRIALS_SIGNATURE_KINDS_V208 = Object.freeze(['signature-2', 'signature-3']);
@@ -246,6 +247,7 @@ export const XENO_TRIALS_SIGNATURES_V208 = Object.freeze(authored.flatMap(([figh
 
 const byId = new Map([
   ...XENO_TRIALS_SIGNATURES_V208, ...XENO_TRIALS_SIGNATURES_V209, ...XENO_TRIALS_SIGNATURES_V210,
+  ...XENO_TRIALS_SIGNATURES_V211,
   ...XENO_TRIALS_RESEARCH_SIGNATURES_V210,
 ].map(move => [move.id, move]));
 
@@ -255,10 +257,39 @@ export function getXenoTrialsAlternateSignatureV208(definition, kind) {
   return move && move.profileId === definition.profileId ? move : null;
 }
 
+export function getXenoTrialsAlternateProjectileV211(definition, signatureId) {
+  const move = byId.get(signatureId);
+  return move?.spec.projectileStyleV211 && move.fighterId === definition?.id && move.profileId === definition.profileId
+    ? move : null;
+}
+
+export function validXenoTrialsAlternateProjectileV211(match, fighter, projectile, move, groups) {
+  const { spec } = move;
+  const wave = move.style === 'ground-wave';
+  const receiptId = projectile.groupIdV147 + 1;
+  const flight = (spec.reach / spec.projectileSpeed - projectile.life) * 120;
+  const flightTicks = Math.round(flight);
+  // The first windup tick includes acceptance, and the launch tick includes travel.
+  const actionTick = match.tick - flightTicks - Math.ceil(spec.startup * 120) + 2;
+  const group = projectile.groupIdV147 + ':' + (wave ? projectile.direction : 0);
+  if (!Array.isArray(match.events) || !(fighter.stats.specials > 0) || projectile.id <= receiptId || actionTick < 1 || flightTicks < 1
+    || Math.abs(flight - flightTicks) > 1e-7 || projectile.vx * projectile.direction <= 0 || groups.has(group)
+    || wave && (projectile.y !== spec.projectileHeight / 2 || projectile.vy !== 0)) return false;
+  const receipt = match.events.find(event => event?.id === receiptId);
+  if (receipt ? receipt.type !== 'attack' || receipt.kind !== move.kind || receipt.signatureIdV208 !== move.id
+    || receipt.side !== fighter.side || receipt.tick !== actionTick
+    || match.hordeV180 && receipt.attackerInstanceV180 !== (fighter.instanceIdV180 || 'player')
+    : match.events.length !== 32 || !(receiptId < match.events[0]?.id) || !(actionTick <= match.events[0]?.tick)) return false;
+  groups.add(group);
+  return true;
+}
+
 export function validXenoTrialsSignatureActionV208(attack, spec, horde = false) {
   if (!XENO_TRIALS_SIGNATURE_KINDS_V208.includes(attack.kind)) return true;
   const launched = spec.liftV208 && attack.age >= spec.startup ? true : undefined;
-  return attack.emitted === false && attack.launchedV147 === launched
+  const projectile = Boolean(spec.projectileStyleV211);
+  return attack.emitted === (projectile && attack.age >= spec.startup) && attack.launchedV147 === launched
+    && (!projectile || !attack.hit && attack.hitTargetsV180 === undefined)
     && (attack.age >= spec.startup || !attack.hit && !attack.hitTargetsV180?.length)
     && (!spec.detonationV210 || attack.age < spec.startup + spec.chargeDuration
       && !attack.hit && attack.hitTargetsV180 === undefined)

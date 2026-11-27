@@ -241,3 +241,12 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active{
     inset-inline-start:46%;flex-wrap:wrap;
   }
 }
+
+.xt-fullscreen-v119 [data-xt-step="combat"] [data-xt="combat-panel"]:has(.xt-match-hud[data-horde="true"]) .xt-practice-hud-v207{
+  --xt-practice-top:max(236px,calc(env(safe-area-inset-top) + 224px));
+}
+@media(orientation:landscape) and (max-height:520px){
+  .xt-fullscreen-v119 [data-xt-step="combat"] [data-xt="combat-panel"]:has(.xt-match-hud[data-horde="true"]) .xt-practice-hud-v207{
+    --xt-practice-top:max(152px,calc(env(safe-area-inset-top) + 144px));
+  }
+}

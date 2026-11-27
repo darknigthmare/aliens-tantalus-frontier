@@ -14,7 +14,7 @@ import { XENO_TRIALS_SUPERS_V148 as supers, getXenoTrialsSuperV148 as profile,
 import { createXenoTrialsRuntimeV96 } from '../src/xeno-trials-runtime-v96.js';
 import { XenoTrialsUiV96 } from '../src/xeno-trials-ui-v96.js';
 import { createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
-import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210 } from '../src/xeno-trials-super-kits-v209.js';
+import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210, XENO_TRIALS_SUPER_KITS_V211 } from '../src/xeno-trials-super-kits-v209.js';
 
 // Pure-engine boundary fixtures can set position, HP or meter to isolate a
 // contract. They are not represented as ordinary browser-playthrough evidence.
@@ -42,19 +42,20 @@ test('five immutable supers are original simulation extensions on exact fighter/
     assert.equal(spec(definition(s.fighterId),'super',null),s.spec);
   }
 });
-test('fighters outside the explicit super admissions retain their original attack contracts', () => {
-  const physical = [...XENO_TRIALS_SUPER_KITS_V209, ...XENO_TRIALS_SUPER_KITS_V210];
-  const admitted = new Set([...supers.map(s => s.fighterId), ...physical.map(kit => kit.first.fighterId)]);
-  const others = fighters.filter(f => !admitted.has(f.id)); assert.equal(others.length, fighters.length - admitted.size);
-  for(const f of others) {
-    assert.equal(profile(f),null);
-    assert.equal(spec(f,'super',base.special),null);
+test('all explicit super admissions preserve the original attack contracts and start with an empty gauge', () => {
+  const physical = [...XENO_TRIALS_SUPER_KITS_V209, ...XENO_TRIALS_SUPER_KITS_V210, ...XENO_TRIALS_SUPER_KITS_V211];
+  const admitted = new Map([...supers, ...physical.map(kit => kit.first)].map(move => [move.fighterId, move]));
+  assert.equal(admitted.size, 189);
+  for(const f of fighters) {
+    assert.equal(profile(f),admitted.get(f.id) ?? null);
     for(const kind of ['light','heavy','special']) {
       const caste = getXenoTrialsSignatureV147(f);
-      const expected = kind === 'special' && caste ? caste.spec : getSynthTrialAttackV110(f,kind,base[kind]);
+      const authored = kind === 'special' ? caste?.spec : kind === 'heavy' ? caste?.heavy : null;
+      const expected = authored || getSynthTrialAttackV110(f,kind,base[kind]);
       assert.equal(spec(f,kind,base[kind]),expected);
     }
-    const m=make(f.id);tick(m,.1,{super:true});assert.equal(count(m),0);assert.equal(m.fighters[0].superMeterV148,undefined);
+    const m=make(f.id);tick(m,.1,{super:true});assert.equal(count(m),0);
+    assert.equal(m.fighters[0].superMeterV148,admitted.has(f.id) ? 0 : undefined);
   }
   for(const f of [null,{}, {id:'constructor'},{id:WARDEN,profileId:null}])assert.equal(profile(f),null);
 });
@@ -240,7 +241,7 @@ test('HTML meter and control are pilot-specific and rendering performs no resour
  ui.getProgress=()=>progress;
  ui.commit=ui.onCommit=()=>assert.fail('Meter rendering must not create a resource transaction');
  ui.root={getAttribute:()=> 'false',setAttribute(){},querySelector:()=>button,ownerDocument:{hidden:false,hasFocus:()=>true}};
- for(const id of [WARDEN,'warrior','import-joe-tactical']){const m=make(id),before=snapshot(m);ui.updateMatch(m);assert.equal(el('player-super').hidden,id==='import-joe-tactical');assert.equal(button.hidden,id==='import-joe-tactical');assert.deepEqual(snapshot(m),before);}
+ for(const id of [WARDEN,'warrior','import-joe-tactical']){const m=make(id),before=snapshot(m);ui.updateMatch(m);assert.equal(el('player-super').hidden,false);assert.equal(button.hidden,false);assert.equal(button.attrs['aria-disabled'],'true');assert.deepEqual(snapshot(m),before);}
  const m=full(make());ui.updateMatch(m);assert.equal(el('player-super').value,100);assert.equal(button.attrs['aria-disabled'],'false');
  m.paused=true;ui.updateMatch(m);assert.equal(button.attrs['aria-disabled'],'true');assert.equal(meter(m.fighters[0]),100);
  assert.deepEqual(progress,progressBefore);

@@ -1,5 +1,6 @@
 import { XENO_TRIALS_SPRITE_ATLAS_DATA_V189 } from './xeno-trials-sprite-atlas-data-v189.js';
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
+import { XENO_TRIALS_AIR_HIT_V211 } from './xeno-trials-defense-v211.js';
 import { XENO_TRIALS_SPRITE_REFERENCES_V188, XENO_TRIALS_SPRITE_FRAME_IDS_V188,
   getXenoTrialsSpriteEnvelopeV188 } from './xeno-trials-sprite-atlas-v188.js';
 
@@ -90,7 +91,7 @@ export function sampleXenoTrialsSpriteAtlasV189(atlas, fighter, options = {}) {
   let id, phase;
   const cue = options.cue, height = visibleHeight(atlas, options.metrics);
   if (atlas.kind === 'motion') {
-    if (fighter.hp <= 0 || fighter.attack || fighter.guard || fighter.stun > 0 || fighter.hitFlash > 0
+    if (fighter.hp <= 0 || fighter.attack && fighter.attack.kind !== XENO_TRIALS_AIR_HIT_V211 || fighter.guard || fighter.stun > 0 || fighter.hitFlash > 0
       || ['hurt', 'guard-break', 'recover', 'ko'].includes(cue?.state)) return null;
     if (fighter.y > 0) {
       if (!Number.isFinite(fighter.vy)) return null;

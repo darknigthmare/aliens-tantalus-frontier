@@ -1,4 +1,5 @@
 import { XENO_TRIALS_ARENA_V105, getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
+import { getXenoTrialsGroundHurtScaleV211 } from './xeno-trials-defense-v211.js';
 
 export const XENO_TRIALS_MOVE_CONTROLS_V207 = Object.freeze(['crouch', 'evade', 'antiAir', 'signature2', 'signature3']);
 export const XENO_TRIALS_MOVE_ATTACKS_V207 = Object.freeze(['low', 'anti-air', 'advance']);
@@ -68,12 +69,14 @@ export function getXenoTrialsLowScaleV207(body) {
 
 export function getXenoTrialsHurtBoundsV207(fighter) {
   const body = getXenoTrialsBodyBoundsV105(fighter);
-  if (!fighter.movesetV207?.low) return body;
-  const height = body.height * getXenoTrialsLowScaleV207(body);
+  const scale = fighter.movesetV207?.low ? getXenoTrialsLowScaleV207(body) : getXenoTrialsGroundHurtScaleV211(fighter);
+  if (scale === 1) return body;
+  const height = body.height * scale;
   return { ...body, height, top: body.bottom + height };
 }
 
 export function getXenoTrialsStrikeBandV207(body, spec) {
+  if (spec.descendingReachV211) return { bottom: Math.max(0, body.bottom - spec.descendingReachV211), top: body.bottom + body.height * .54 };
   if (spec.contactBandV207 === 'low') return { bottom: body.bottom, top: body.bottom + body.height * .36 };
   if (spec.contactBandV207 === 'anti-air')
     return { bottom: body.bottom + body.height * .45, top: body.bottom + body.height * 1.32 };

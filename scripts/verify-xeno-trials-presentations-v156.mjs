@@ -9,6 +9,7 @@ import { XENO_TRIALS_SEQUENCES_V155 as historical, XENO_TRIALS_ADDED_SEQUENCES_V
  createXenoTrialsOutroV155 as outro,advanceXenoTrialsOutroV155 as advance,skipXenoTrialsOutroV155 as skip } from '../src/xeno-trials-sequences-v155.js';
 import { XENO_TRIALS_RIGS_V154 as rigs,getXenoTrialsRigMeshV154 as mesh,drawXenoTrialsRigV154 as draw,xenoTrialsTriangleAreaV154 as area,sampleXenoTrialsExitPoseV157 as exitPose,projectXenoTrialsMeshPointV157 as projectMeshPoint } from '../src/xeno-trials-rig-v154.js';
 import { XENO_TRIALS_FIGHTERS_V96 as roster } from '../src/xeno-trials-data-v96.js';
+import { XENO_TRIALS_RESEARCH_FIGHTERS_V210 as researchRoster } from '../src/xeno-trials-research-v210.js';
 import { createXenoTrialsMatchV96 as create,stepXenoTrialsMatchV96 as step,nextXenoTrialsRoundV96 as next } from '../src/xeno-trials-engine-v96.js';
 import { createXenoTrialsRuntimeV96 as runtime } from '../src/xeno-trials-runtime-v96.js';
 import { getXenoTrialsRenderMetricsV110 as physicalMetrics } from '../src/xeno-trials-scale-v110.js';
@@ -174,7 +175,7 @@ test('taunt admission rejects every unavailable physical state and all unsupport
  const released=copy(m);released.events.push({id:1,tick:0,type:'grapple-end-v153',side:'player',attacker:'opponent',grappleId:1,reason:'escaped'});assert.equal(taunt(released,activeView),null);
  assert.equal(taunt(m,{blocksSimulation:true}),null);assert.equal(taunt(m,activeView,{right:true}),null);
  for(const [key,value] of [['hp',0],['y',2],['vy',1],['attack',{kind:'light'}],['guard',true],['stun',.1],['hitFlash',.1]]){const c=copy(m);c.fighters[0][key]=value;assert.equal(taunt(c,activeView),null,key);}
- for(const f of roster.filter(f=>!rigs.some(r=>r.fighterId===f.id)))assert.equal(taunt(create({playerId:f.id,introSeconds:0}),activeView),null);
+ for(const f of researchRoster)assert.equal(taunt(create({playerId:f.id,introSeconds:0}),activeView),null);
  assert.equal(taunt({...m,paused:true},activeView),null);assert.equal(taunt({...m,phase:'round-over'},activeView),null);
 });
 test('taunt runs alongside combat, cancels on physical intervention and never restores a cancelled pose',()=>{
@@ -390,7 +391,7 @@ test('native landing pause, hidden window, skip, live reduced motion and stop fr
  }
 });
 test('accepted jump commands can produce two real airborne CPU finalists and the runtime lands then exits without a historical terminal',async()=>{
- const h=host({config:{playerId:HUMAN,opponentId:'prowler',seed:4,difficulty:'hard',roundSeconds:30,rulesV119:{initialHp:1}}});
+ const h=host({config:{playerId:HUMAN,opponentId:'prowler',seed:14,difficulty:'hard',roundSeconds:30,rulesV119:{initialHp:1}}});
  await h.start();
  for(let i=0;i<3000&&h.r.getState().phase!=='match-over';i++){
   const s=h.r.getState();h.r.setInput('jump',s.fighters[0].y===0);h.frames();

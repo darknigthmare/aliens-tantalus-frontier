@@ -31,7 +31,7 @@ test('V207 chains exact source bytes from the public main and V206 parents', () 
 });
 
 test('standalone admission rejects modified sources and connects the terminal review', () => {
-  const terminal = 'scripts/audit-xeno-gameplay-v210.mjs';
+  const terminal = 'scripts/audit-xeno-gameplay-v211.mjs';
   assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   assert.ok(!Object.hasOwn(XENO_STANDALONE_SUCCESSORS_V207, terminal));
   assert.ok(!Object.hasOwn(XENO_STANDALONE_NEW_INPUTS_V207, terminal));

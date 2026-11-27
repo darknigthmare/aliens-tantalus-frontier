@@ -114,7 +114,10 @@ test('match results are emitted once and the terminal screen does not keep rende
   await h.start(); h.runtime.setInput('right', true);
   for (let i = 0; i < 8000 && h.runtime.getState().phase !== 'match-over'; i++) h.frames(1);
   assert.equal(h.runtime.getState().phase, 'match-over'); assert.equal(h.results.length, 1);
+  const terminalTick = h.runtime.getState().tick;
+  for (let i = 0; i < 600 && h.queue.size; i++) h.frames(1);
   assert.equal(h.queue.size, 0);
+  assert.equal(h.runtime.getState().tick, terminalTick);
   assert.equal(h.runtime.resume(), false); h.frames(30); assert.equal(h.results.length, 1); h.runtime.stop();
 });
 
@@ -284,7 +287,9 @@ test('a fast terminal KO does not freeze the fight announcement behind its resul
   assert.equal(h.runtime.getState().presentation.phase, 'fight', 'Reproduce a KO while its short fight signal still exists.');
   assert.ok(h.text.includes('DÉFAITE'));
   assert.equal(h.text.includes('COMBAT'), false);
+  for (let i = 0; i < 600 && h.queue.size; i++) h.frames(1);
   assert.equal(h.queue.size, 0);
+  assert.equal(h.results.length, 1);
   h.runtime.stop();
 });
 

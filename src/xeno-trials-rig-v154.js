@@ -263,6 +263,11 @@ export function sampleXenoTrialsSequenceAnglesV197(rig, cue, keyedAngles, reduce
  if (!admittedRigsV163.includes(rig) || pilotProfilesV197.get(rig.fighterId) !== rig.profileId) return null;
  return sampleXenoTrialsSequenceAngles(rig, cue, keyedAngles, reducedMotion, true);
 }
+export function sampleXenoTrialsSequenceAnglesV211(rig, cue, keyedAngles) {
+ if (!admittedRigs.has(rig)) return null;
+ const frame = sampleXenoTrialsSequenceAngles(rig, cue, keyedAngles, false, true);
+ return frame && { ...frame, animation: 'authored-native-sequence-v211' };
+}
 function sampleXenoTrialsSequenceAngles(rig, cue, keyedAngles, reducedMotion, projectContacts = false) {
  if (!cue || !Number.isFinite(cue.progress)
   || !Number.isFinite(cue.elapsed) || cue.elapsed < 0 || !keyedAngles || typeof keyedAngles !== 'object') return null;
