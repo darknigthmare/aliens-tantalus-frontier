@@ -250,3 +250,592 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active{
     --xt-practice-top:max(152px,calc(env(safe-area-inset-top) + 144px));
   }
 }
+
+/* MIRE specimen assignment, shared by the integrated and standalone terminals. */
+html.xt-fullscreen-v119 #xeno-trials-v96.active:is([data-xt-step="fighters"],[data-xt-step="target"]) {
+  --xt-crt: #f3eee3;
+  --xt-dim: #b2b9b9;
+  --xt-line: #3b4344;
+  --xt-amber: #f1c36c;
+  --xt-selection-panel: #141a1c;
+  --xt-selection-type: "Arial Narrow", "Roboto Condensed", system-ui, sans-serif;
+  color: var(--xt-crt);
+  background: radial-gradient(ellipse at 50% 0, #262e2d, transparent 65%),
+    repeating-linear-gradient(90deg, #afbbbd08 0 1px, transparent 1px 56px), #0b1012;
+  box-shadow: inset 0 0 0 6px #161d20, inset 0 0 0 7px #3b4344;
+  padding: clamp(15px, 2vw, 28px) clamp(16px, 3.2vw, 52px) 30px;
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) > :is(
+  .xt-terminal-header, .xt-terminal-link, .xt-dashboard, .xt-notice, .xt-steps, .xt-briefing-v119, .xt-layout, .xt-status
+) {
+  max-width: 1520px;
+  margin-inline: auto;
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) .xt-terminal-header {
+  padding-bottom: 9px;
+  margin-bottom: 0;
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) > .xt-notice {
+  display: none;
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) .xt-terminal-mark {
+  color: var(--xt-amber);
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) .xt-terminal-link {
+  padding-block: 7px;
+  color: #d2d4ce;
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) .xt-dashboard {
+  background: #101619;
+  border-left-color: var(--xt-amber);
+  margin-block: 9px;
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) .xt-steps {
+  margin-block: 8px;
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) .xt-steps [aria-current] {
+  color: var(--xt-amber);
+  border-color: var(--xt-amber);
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) .xt-steps span {
+  padding: 7px 11px;
+}
+
+#xeno-trials-v96[data-xt-step="fighters"] .xt-layout {
+  grid-template-columns: minmax(0, 1fr) clamp(246px, 24vw, 324px);
+  gap: clamp(12px, 1.4vw, 22px);
+}
+
+#xeno-trials-v96[data-xt-step="target"] .xt-layout {
+  gap: 16px;
+}
+
+#xeno-trials-v96 .xt-portraits:has(.xt-selection-preview) {
+  position: relative;
+  grid-template-columns: minmax(0, 1fr) clamp(34px, 5vw, 72px) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0;
+  padding: 5px 0 0;
+  overflow: hidden;
+  background: linear-gradient(90deg, #2f2518cf, #12181ca8 50%, #15252bcf),
+    repeating-linear-gradient(0deg, #b6c9c319 0 1px, transparent 1px 5px),
+    center 51% / cover url("assets/openai/xeno-trials-v205/stages/containment-deck.png"), #171e21;
+  border: 1px solid #586160;
+}
+
+#xeno-trials-v96 .xt-portraits:has(.xt-selection-preview)::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: repeating-linear-gradient(135deg, #f1c36c 0 6px, #292117 6px 12px);
+}
+
+#xeno-trials-v96 .xt-selection-preview {
+  --xt-slot-color: #ffcf7a;
+  display: grid;
+  grid-template-columns: minmax(9rem, 44%) minmax(0, 1fr);
+  grid-template-areas: "identity art" "dossier dossier";
+  align-items: center;
+  align-content: start;
+  gap: 0;
+  text-align: start;
+}
+
+#xeno-trials-v96 .xt-selection-preview[data-slot="target"] {
+  --xt-slot-color: #a9deea;
+  grid-template-columns: minmax(0, 1fr) minmax(9rem, 44%);
+  grid-template-areas: "art identity" "dossier dossier";
+  text-align: end;
+}
+
+#xeno-trials-v96 .xt-specimen-window {
+  grid-area: art;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: clamp(146px, 22dvh, 258px);
+  padding: 10px 3px;
+  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--xt-slot-color) 23%, transparent), transparent 68%);
+}
+
+#xeno-trials-v96 .xt-specimen-window .xt-facing-preview {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  filter: drop-shadow(0 5px 8px #000d);
+}
+
+#xeno-trials-v96 .xt-specimen-window :is(img, svg) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#xeno-trials-v96 .xt-specimen-identity {
+  grid-area: identity;
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  padding: 12px clamp(11px, 2.4vw, 33px);
+  color: var(--xt-crt);
+  font: 500 clamp(11px, 1vw, 14px)/1.25 var(--xt-selection-type);
+  letter-spacing: 0;
+}
+
+#xeno-trials-v96 .xt-specimen-slot {
+  color: var(--xt-slot-color);
+  font: 700 clamp(9px, .85vw, 12px)/1.3 monospace;
+  letter-spacing: .08em;
+}
+
+#xeno-trials-v96 .xt-specimen-identity > strong {
+  color: #faf7ec;
+  font: 900 clamp(21px, 3.1vw, 51px)/.98 var(--xt-selection-type);
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+  text-shadow: 0 2px 8px #000c;
+}
+
+#xeno-trials-v96 .xt-specimen-family {
+  color: #e4e4d8;
+}
+
+#xeno-trials-v96 .xt-specimen-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 14px;
+  margin: 4px 0 0;
+}
+
+#xeno-trials-v96 [data-slot="target"] .xt-specimen-stats {
+  justify-content: flex-end;
+}
+
+#xeno-trials-v96 .xt-specimen-stats > div {
+  min-width: 0;
+  padding-inline-start: 7px;
+  border-inline-start: 2px solid var(--xt-slot-color);
+}
+
+#xeno-trials-v96 .xt-specimen-stats dt {
+  color: #c8cbc3;
+  font: 10px/1.4 monospace;
+  text-transform: uppercase;
+}
+
+#xeno-trials-v96 .xt-specimen-stats dd {
+  margin: 2px 0 0;
+  color: #faf7ec;
+  font: 700 clamp(12px, 1.45vw, 19px)/1.1 var(--xt-selection-type);
+}
+
+#xeno-trials-v96 .xt-specimen-hold {
+  color: var(--xt-amber);
+  font: 700 10px/1.4 monospace;
+}
+
+#xeno-trials-v96 .xt-versus {
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  color: #f6ddad;
+  border-inline: 1px solid #96967b44;
+  background: linear-gradient(135deg, #f1c36c12, transparent 70%), #111719bf;
+  font: 900 clamp(16px, 3.3vw, 44px)/1 var(--xt-selection-type);
+  letter-spacing: -.06em;
+}
+
+#xeno-trials-v96 :is(.xt-specimen-dossier, .xt-roster-filters) summary {
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 13px 11px;
+  color: #e9e4d5;
+  cursor: pointer;
+  font: 700 12px/1.4 monospace;
+}
+
+#xeno-trials-v96 :is(.xt-specimen-dossier, .xt-roster-filters) summary::marker {
+  color: var(--xt-amber);
+}
+
+#xeno-trials-v96 .xt-specimen-dossier {
+  grid-area: dossier;
+  width: 100%;
+  text-align: start;
+  border-top: 1px solid #6a726661;
+  background: #111719dc;
+}
+
+#xeno-trials-v96 .xt-specimen-dossier > div {
+  display: grid;
+  gap: 7px;
+  padding: 0 14px 16px;
+  color: #d8dfdb;
+}
+
+#xeno-trials-v96 .xt-specimen-dossier p {
+  margin: 0;
+}
+
+#xeno-trials-v96[data-xt-step="fighters"] .xt-roster {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  min-width: 0;
+  background: var(--xt-selection-panel);
+  padding: 12px;
+}
+
+#xeno-trials-v96 .xt-roster > :is(.xt-roster-heading, nav, .xt-fighters),
+#xeno-trials-v96 .xt-roster-filters[open],
+#xeno-trials-v96 .xt-roster:has(.xt-roster-filters[open]) .xt-roster-search {
+  grid-column: 1 / -1;
+}
+
+#xeno-trials-v96 .xt-roster-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+#xeno-trials-v96 .xt-roster-heading :is(h3, p) {
+  margin: 0;
+}
+
+#xeno-trials-v96 .xt-roster-heading h3:focus {
+  outline: none;
+}
+
+#xeno-trials-v96 .xt-roster-heading h3,
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) [data-xt="fighter-config-title"] {
+  color: var(--xt-crt);
+  font: 850 clamp(15px, 1.5vw, 21px)/1.15 var(--xt-selection-type);
+  text-transform: uppercase;
+  letter-spacing: .035em;
+}
+
+#xeno-trials-v96 .xt-roster-heading p {
+  font-family: monospace;
+  color: #c1c7c3;
+}
+
+#xeno-trials-v96[data-xt-step="fighters"] .xt-family-tabs-v119 {
+  margin: 0;
+  padding-bottom: 3px;
+}
+
+#xeno-trials-v96[data-xt-step="fighters"] .xt-family-tabs-v119 button[aria-pressed="true"] {
+  color: #17120b;
+  background: var(--xt-amber);
+  border-color: var(--xt-amber);
+}
+
+#xeno-trials-v96 .xt-roster-search {
+  min-width: 0;
+}
+
+#xeno-trials-v96 .xt-roster-search > input {
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  border: 1px solid var(--xt-line);
+  font-size: 13px;
+}
+
+#xeno-trials-v96 .xt-roster-filters {
+  border: 1px solid var(--xt-line);
+  background: #1b2528;
+}
+
+#xeno-trials-v96 .xt-roster-filters[open] {
+  padding: 0 10px 10px;
+}
+
+#xeno-trials-v96 .xt-roster-filters .xt-filters {
+  margin-bottom: 10px;
+}
+
+#xeno-trials-v96 .xt-roster > .xt-roster-pages {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2px 0;
+  gap: 5px 8px;
+}
+
+#xeno-trials-v96 .xt-roster-pages .button {
+  min-height: 44px;
+  padding: 7px 9px;
+  font-size: 10px;
+  white-space: normal;
+}
+
+#xeno-trials-v96 [data-xt="roster-selection"] {
+  margin-inline-start: auto;
+}
+
+#xeno-trials-v96[data-xt-step="fighters"] .xt-fighters {
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+  gap: 6px;
+  max-height: clamp(254px, 44dvh, 520px);
+  padding: 4px;
+  scrollbar-color: #626a68 #101517;
+  scrollbar-gutter: stable;
+}
+
+#xeno-trials-v96 .xt-fighters > p {
+  grid-column: 1 / -1;
+}
+
+#xeno-trials-v96[data-xt-step="fighters"] .xt-fighter {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  border: 1px solid #465153;
+  background: #0c1215;
+  min-width: 0;
+}
+
+#xeno-trials-v96[data-xt-step="fighters"] .xt-fighter.selected {
+  border-color: var(--xt-amber);
+  box-shadow: 0 0 0 1px var(--xt-amber);
+  background: #292113;
+}
+
+#xeno-trials-v96 .xt-fighter > [data-xt-fighter] {
+  position: relative;
+  padding: 0;
+  color: var(--xt-crt);
+}
+
+#xeno-trials-v96 .xt-fighter > [data-xt-fighter]:focus-visible {
+  z-index: 1;
+  outline-offset: -3px;
+}
+
+#xeno-trials-v96 .xt-fighter-thumbnail {
+  display: block;
+  width: 100%;
+  height: clamp(58px, 7vw, 92px);
+  padding: 4px 5px 0;
+  background: radial-gradient(ellipse at center, #526063, #182023 72%);
+  box-sizing: border-box;
+}
+
+#xeno-trials-v96 .xt-fighter.selected .xt-fighter-thumbnail {
+  background: radial-gradient(ellipse at center, #776041, #33261b 72%);
+}
+
+#xeno-trials-v96 .xt-fighter-thumbnail > :is(img, svg) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#xeno-trials-v96 [data-owned="false"] .xt-fighter-thumbnail > :is(img, svg) {
+  filter: saturate(.48);
+}
+
+#xeno-trials-v96 .xt-fighter > [data-xt-fighter]:hover .xt-fighter-thumbnail {
+  box-shadow: inset 0 0 0 1px var(--xt-amber);
+}
+
+#xeno-trials-v96 .xt-fighter > button strong {
+  display: grid;
+  place-items: center;
+  min-height: 2.65em;
+  width: 100%;
+  padding: 5px 4px;
+  color: var(--xt-crt);
+  font: 750 12px/1.16 var(--xt-selection-type);
+  overflow-wrap: anywhere;
+}
+
+#xeno-trials-v96 .xt-fighter > :is(.xt-owned, .xt-unlock) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  min-height: 44px;
+  border-top: 1px solid #465153;
+  background: #1c2528;
+  color: #f2d39a;
+  font: 700 10px/1.2 monospace;
+}
+
+#xeno-trials-v96 .xt-fighter > .xt-owned {
+  color: #c5ddd5;
+}
+
+#xeno-trials-v96 .xt-fighter > .xt-unlock:disabled {
+  cursor: not-allowed;
+  color: #bcbbb1;
+  background: #141a1e;
+}
+
+#xeno-trials-v96 .xt-lock {
+  position: relative;
+  width: 9px;
+  height: 6px;
+  margin-top: 4px;
+  border: 1px solid currentColor;
+  border-radius: 1px;
+}
+
+#xeno-trials-v96 .xt-lock::before {
+  content: "";
+  position: absolute;
+  inset: -5px 1px auto;
+  height: 4px;
+  border: 1px solid currentColor;
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) [data-xt="fighter-config"] {
+  padding: 14px;
+  border: 1px solid var(--xt-line);
+  border-top: 2px solid var(--xt-amber);
+  color: var(--xt-crt);
+  background: var(--xt-selection-panel);
+}
+
+#xeno-trials-v96[data-xt-step="fighters"] [data-xt="fighter-config"] {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+#xeno-trials-v96 [data-xt="fighter-config-title"] {
+  margin: 0;
+}
+
+#xeno-trials-v96 [data-xt="fighter-config"] label:has(> :is([name="playerVariant"],[name="opponentVariant"]):disabled) {
+  display: none;
+}
+
+#xeno-trials-v96 .xt-selection-rules {
+  margin: 0;
+  color: #d7d2c6;
+  font: 11px/1.5 monospace;
+}
+
+#xeno-trials-v96[data-xt-step="fighters"] [data-xt="doctrine"] {
+  margin: 0;
+  font-size: 12px;
+}
+
+#xeno-trials-v96 .xt-selection-hold {
+  margin: 0;
+  color: #f5cf89;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) [data-xt="fighter-config"] .button {
+  min-height: 44px;
+  white-space: normal;
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) [data-xt="fighter-config"] .button.primary {
+  color: #201509;
+  background: var(--xt-amber);
+  border-color: var(--xt-amber);
+}
+
+#xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) [data-xt="fighter-config"] .button.primary:hover:not(:disabled) {
+  background: #ffdda0;
+}
+
+@media (max-width: 880px) {
+  #xeno-trials-v96[data-xt-step="fighters"] .xt-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #xeno-trials-v96[data-xt-step="fighters"] .xt-fighters {
+    max-height: clamp(230px, 37dvh, 390px);
+  }
+}
+
+@media (max-width: 640px) {
+  #xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) .xt-terminal-header {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 8px;
+    text-align: start;
+  }
+
+  #xeno-trials-v96:is([data-xt-step="fighters"],[data-xt-step="target"]) .xt-terminal-header > button {
+    flex: 0 0 auto;
+    max-width: 38%;
+    white-space: normal;
+  }
+
+  #xeno-trials-v96 .xt-selection-preview,
+  #xeno-trials-v96 .xt-selection-preview[data-slot="target"] {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "art" "identity" "dossier";
+    grid-template-rows: auto 1fr auto;
+    align-items: stretch;
+    text-align: start;
+  }
+
+  #xeno-trials-v96 .xt-specimen-window {
+    height: clamp(96px, 26vw, 155px);
+    padding: 5px 7px;
+  }
+
+  #xeno-trials-v96 .xt-specimen-identity {
+    align-content: start;
+    gap: 5px;
+    padding: 4px 8px 9px;
+  }
+
+  #xeno-trials-v96 .xt-specimen-identity > strong {
+    font-size: clamp(17px, 4.9vw, 30px);
+  }
+
+  #xeno-trials-v96 [data-slot="target"] .xt-specimen-stats {
+    justify-content: flex-start;
+  }
+
+  #xeno-trials-v96 .xt-specimen-stats {
+    gap: 4px 7px;
+  }
+
+  #xeno-trials-v96 .xt-specimen-stats dt {
+    font-size: 9px;
+  }
+
+  #xeno-trials-v96[data-xt-step="fighters"] .xt-fighters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #xeno-trials-v96 .xt-roster-pages {
+    justify-content: space-between;
+  }
+
+  #xeno-trials-v96 [data-xt="roster-selection"] {
+    margin-inline-start: 0;
+  }
+}
+
+@media (max-width: 340px) {
+  #xeno-trials-v96[data-xt-step="fighters"] .xt-fighters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

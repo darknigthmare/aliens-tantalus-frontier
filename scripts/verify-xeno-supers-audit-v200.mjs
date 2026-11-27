@@ -31,7 +31,7 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const prior = 'scripts/audit-xeno-priorities-v199.mjs';
 const relay = 'scripts/audit-xeno-supers-v200.mjs';
 const successor = 'scripts/audit-xeno-priorities-v201.mjs';
-const terminal = 'scripts/audit-xeno-gameplay-v213.mjs';
+const terminal = 'scripts/audit-xeno-selection-v214.mjs';
 const verifier = 'scripts/verify-xeno-supers-audit-v200.mjs';
 const report = 'docs/forge/xeno-trials/V200-SUPERS.md';
 const spritePrefix = 'assets/openai/sprites/xeno-trials-v200/';

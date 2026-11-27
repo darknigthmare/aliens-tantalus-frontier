@@ -21,7 +21,7 @@ const hash = value => createHash('sha256').update(JSON.stringify(Object.fromEntr
 function target(properties = {}) {
   const handlers = new Map();
   return Object.assign({ value: '', hidden: false, disabled: false, innerHTML: '', textContent: '',
-    setAttribute() {}, replaceChildren() {}, append() {}, focus() { this.focused = true; },
+    setAttribute() {}, replaceChildren() {}, append() {}, focus() { this.focused = true; }, querySelectorAll() { return []; },
     addEventListener(type, handler) { handlers.set(type, handler); },
     emit(type) { handlers.get(type)?.({ preventDefault() {}, target: this }); }
   }, properties);
@@ -43,17 +43,29 @@ function terminal() {
 const cardIds = html => [...html.matchAll(/data-xt-arena="([^"]+)"/g)].map(match => match[1]);
 
 test('opponent and player previews label the admitted actions on the selected plates', () => {
-  const h = terminal();
+  const h = terminal(), preview = h.el('portraits');
+  h.ui.selectionStep = 'fighters';
   h.ui.selected = 'import-game-afe2-warden';
   h.ui.form.elements.opponentId.value = 'rhino';
   h.ui.renderPreviews();
-  const [player, opponent] = h.el('portraits').innerHTML.match(/<figure>[\s\S]*?<\/figure>/g);
+  assert.equal(preview.hidden, false);
+  const figure = slot => preview.innerHTML.match(new RegExp(`<figure[^>]*data-slot="${slot}"[^>]*>[\\s\\S]*?<\\/figure>`))?.[0];
+  const player = figure('player'), opponent = figure('target');
   assert.match(player, /<small>Super dessiné<\/small><small>Frappes aériennes dessinées<\/small>/);
   assert.match(opponent, /<small>Spéciale dessinée<\/small>/);
   assert.doesNotMatch(opponent, /Frappes aériennes dessinées|Super dessiné/);
+  preview.querySelectorAll = selector => {
+    assert.equal(selector, 'details[open]');
+    return [{ dataset: { profile: '1-rhino' } }];
+  };
   h.ui.selected = 'prowler';
   h.ui.renderPreviews();
-  assert.match(h.el('portraits').innerHTML.match(/<figure>[\s\S]*?<\/figure>/)[0], /<small>Frappes aériennes dessinées<\/small>/);
+  assert.match(figure('player'), /<small>Frappes aériennes dessinées<\/small>/);
+  assert.doesNotMatch(figure('player'), /data-profile="0-prowler"\s+open/);
+  assert.match(figure('target'), /data-profile="1-rhino"\s+open/);
+  h.ui.selectionStep = 'arena'; h.ui.renderPreviews();
+  assert.equal(preview.hidden, true);
+  assert.equal(preview.innerHTML, '');
 });
 
 test('one hundred declared stage entries remain reachable once each in nine bounded pages without changing selection', () => {

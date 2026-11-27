@@ -68,7 +68,7 @@ test('the complete legacy bridge validates the joined view while default metadat
 });
 
 test('the completion reaches the current source-only audit through the historical relays', () => {
-  const terminal = 'scripts/audit-xeno-gameplay-v213.mjs';
+  const terminal = 'scripts/audit-xeno-selection-v214.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.match(read('scripts/audit-xeno-trials-completion-v186.mjs').toString(), /from '\.\/audit-xeno-stage-operations-v188\.mjs'/);
   assert.equal(Object.hasOwn(COMPLETION_SOURCES_V186, terminal), false);

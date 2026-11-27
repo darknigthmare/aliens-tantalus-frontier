@@ -22,6 +22,15 @@ const arenaLabels = new Map([
   [label.toUpperCase(), labelEn.toUpperCase()]
 ]));
 const trialLabels = new Map([
+  ['Filtres du registre', 'Roster filters'],
+  ['SPÉCIMEN AFFECTÉ', 'ASSIGNED SPECIMEN'],
+  ['CIBLE D’ESSAI', 'TRIAL TARGET'],
+  ['AFFECTATION VERROUILLÉE', 'ASSIGNMENT LOCKED'],
+  ['Dossier de combat', 'Combat dossier'],
+  ['Autorisation d’essai', 'Trial clearance'],
+  ['Désignation de la cible', 'Target designation'],
+  ['Ce spécimen ne répond pas aux critères de l’évaluation.', 'This specimen does not meet the trial requirements.'],
+  ['Débloquez le spécimen dans le registre pour l’affecter.', 'Unlock this specimen in the roster to assign it.'],
   ['MODÈLE ORIGINAL MIRE', 'ORIGINAL MIRE MODEL'],
   ['DOSSIERS EXPÉRIMENTAUX MIRE', 'MIRE EXPERIMENTAL FILES'],
   ['LANCER L’ÉPREUVE ASYMÉTRIQUE', 'START ASYMMETRIC TRIAL'],

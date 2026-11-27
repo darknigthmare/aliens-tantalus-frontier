@@ -180,19 +180,24 @@ export class XenoTrialsUiV96 {
       </details><div data-xt="activity-board" class="xt-activity-board-v119"></div></section>
       <section data-xt="practice-lab-panel" hidden></section>
       <section data-xt="briefing" class="xt-briefing-v119" hidden></section>
-      <div class="xt-layout" data-xt="layout"><aside class="xt-roster" data-xt="stable"><h3>RÉSERVE BIOLOGIQUE</h3>
+      <div class="xt-layout" data-xt="layout">
+      <div data-xt="portraits" class="xt-portraits" hidden></div>
+      <aside class="xt-roster" data-xt="stable" aria-labelledby="xt-roster-heading">
+      <header class="xt-roster-heading"><h3 id="xt-roster-heading" tabindex="-1">RÉSERVE BIOLOGIQUE</h3><p data-xt="count" class="xt-help" role="status"></p></header>
       <nav class="xt-family-tabs-v119" data-xt="family-tabs" aria-label="Familles de spécimens"></nav>
+      <label class="xt-roster-search"><span class="xt-sr-only">Rechercher</span><input type="search" data-xt="search" placeholder="Nom du spécimen" maxlength="80"></label>
+      <details class="xt-roster-filters"><summary>Filtres du registre</summary>
       <div class="xt-filters">
-        <label>Rechercher<input type="search" data-xt="search" placeholder="Nom du spécimen" maxlength="80"></label>
         <label>Famille<select data-xt="family">${options(FAMILIES)}</select></label>
         <label>Rôle<select data-xt="role"><option value="all">Tous les rôles</option>${Object.entries(roleLabel).map(([id,label]) => `<option value="${id}">${label}</option>`).join('')}</select></label>
         <label>Faction simulée<select data-xt="faction-filter"><option value="all">Toutes les factions</option>${options(FACTIONS)}</select></label>
         <label>Animation<select data-xt="animation"><option value="all">Tous les gestes</option><option value="drawn">Gestes dessinés</option><option value="articulated">Gestes articulés</option></select></label><label>Disponibilité<select data-xt="ownership"><option value="all">Toute l’écurie</option><option value="owned">Acquis</option><option value="locked">À débloquer</option></select></label>
         <label>Trier<select data-xt="sort"><option value="catalog">Catalogue</option><option value="name">Nom A–Z</option><option value="health">Santé décroissante</option><option value="speed">Vitesse décroissante</option><option value="cost">Coût de déblocage croissant</option></select></label>
-      </div><button type="button" class="button" data-xt="reset-filters">RÉINITIALISER LES FILTRES</button><p data-xt="count" class="xt-help" role="status"></p><nav aria-label="Lots de 40 spécimens"><button type="button" class="button" data-xt="roster-previous">← LOT PRÉCÉDENT</button><span data-xt="roster-page" role="status" aria-live="polite"></span><button type="button" class="button" data-xt="roster-next">LOT SUIVANT →</button><button type="button" class="button" data-xt="roster-selection">RETROUVER MA SÉLECTION</button></nav><div data-xt="roster" class="xt-fighters"></div></aside>
+      </div><button type="button" class="button" data-xt="reset-filters">RÉINITIALISER LES FILTRES</button></details>
+      <nav class="xt-roster-pages" aria-label="Lots de 40 spécimens"><button type="button" class="button" data-xt="roster-previous">← LOT PRÉCÉDENT</button><span data-xt="roster-page" role="status" aria-live="polite"></span><button type="button" class="button" data-xt="roster-next">LOT SUIVANT →</button><button type="button" class="button" data-xt="roster-selection">RETROUVER MA SÉLECTION</button></nav><div data-xt="roster" class="xt-fighters"></div></aside>
       <div class="xt-main"><form data-xt="form" class="xt-config">
-        <section class="xt-selection-fields" data-xt="fighter-config"><h3>01 / Choisissez les combattants</h3>
-        <div data-xt="portraits" class="xt-portraits"></div>
+        <section class="xt-selection-fields" data-xt="fighter-config"><h3 data-xt="fighter-config-title">Autorisation d’essai</h3>
+        <p class="xt-selection-rules" data-xt="selection-rules" hidden></p>
         <div data-xt="opponent-fields" class="xt-opponent-fields-v119"><label>Famille adverse<select name="opponentFamily">${options(FAMILIES)}</select></label>
         <label>Cellule adverse<select name="factionId">${options(FACTIONS)}</select></label>
         <label>Spécimen adverse<select name="opponentId"></select></label><label>Règles<select name="requestedRules"><option value="standard">Standard</option><option value="no-special">Sans spécial</option><option value="one-hp">1 PV</option><option value="thirty-seconds">30 secondes</option></select></label><button type="button" class="button primary" data-xt="confirm-target">CIBLE CONFIRMÉE · CHOISIR MON SPÉCIMEN →</button></div>
@@ -200,6 +205,7 @@ export class XenoTrialsUiV96 {
         <label>Votre Arachnoid<select name="playerVariant"><option value="grey">Grey</option><option value="purple">Purple</option></select></label>
         <label>Arachnoid adverse<select name="opponentVariant"><option value="grey">Grey</option><option value="purple">Purple</option></select></label>
         <p data-xt="doctrine" class="xt-doctrine"></p>
+        <p data-xt="selection-hold" class="xt-selection-hold" role="status" hidden></p>
         <button type="button" class="button primary" data-xt="confirm-fighters">CONFIRMER · CHOISIR L’ARÈNE →</button><button type="button" class="button" data-xt="branch-return">← ÉVALUATIONS</button>
         </section>
         <section class="xt-selection-fields" data-xt="arena-config" hidden><h3>02 / Choisissez l’arène</h3>
@@ -297,17 +303,35 @@ export class XenoTrialsUiV96 {
       const researchLab = event.target.closest('[data-xt-research-lab]');
       if (researchLab) this.startResearchLabV209(researchLab.dataset.xtResearchLab);
       const family = event.target.closest('[data-xt-family-tab]');
-      if (family && !this.isRunning()) { this.el('family').value = family.dataset.xtFamilyTab; this.rosterPageV179 = 0; this.render(); }
+      if (family && !this.isRunning()) {
+        this.el('family').value = family.dataset.xtFamilyTab; this.rosterPageV179 = 0; this.render();
+        this.el('family-tabs').querySelector('[aria-pressed="true"]')?.focus({ preventScroll: true });
+      }
       const fighter = event.target.closest('[data-xt-fighter]');
       if (fighter && this.active && !this.isRunning() && !this.state().pending) {
         const activity = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, this.state().modesV119);
         if (!activity?.forcedPlayerId && !this.state().modesV119.challengeRun) this.selected = fighter.dataset.xtFighter;
         this.render();
+        this.el('roster').querySelector(`[data-xt-fighter="${fighter.dataset.xtFighter}"]`)?.focus({ preventScroll: true });
       }
       const unlock = event.target.closest('[data-xt-unlock]');
-      if (unlock && !this.unsavedResult) this.commit(unlockXenoTrialsFighterV96(this.getProgress(), unlock.dataset.xtUnlock));
+      if (unlock && !this.unsavedResult && this.commit(unlockXenoTrialsFighterV96(this.getProgress(), unlock.dataset.xtUnlock))) {
+        this.el('roster').querySelector(`[data-xt-fighter="${unlock.dataset.xtUnlock}"]`)?.focus({ preventScroll: true });
+      }
       const arena = event.target.closest('[data-xt-arena]');
       if (arena) this.selectArena(arena.dataset.xtArena);
+    });
+    this.el('roster').addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)
+        || !event.target.matches('[data-xt-fighter]') || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      const cards = [...this.el('roster').querySelectorAll('[data-xt-fighter]:enabled')];
+      const index = cards.indexOf(event.target);
+      const firstRow = cards[0].getBoundingClientRect().top;
+      const rowSize = cards.findIndex(card => card.getBoundingClientRect().top !== firstRow);
+      const columns = rowSize < 0 ? cards.length : rowSize;
+      const offset = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -columns, ArrowDown: columns }[event.key];
+      event.preventDefault();
+      cards[index + offset]?.focus();
     });
     this.el('return').onclick = () => { this.close(); this.onReturn(); };
     this.el('confirm-fighters').onclick = () => this.confirmFighters();
@@ -318,7 +342,12 @@ export class XenoTrialsUiV96 {
     this.el('abandon-series').onclick = () => { if (!this.unsavedResult && this.commit(abandonXenoTrialsV96(this.getProgress()))) this.showHomeV119(); };
     this.el('branch-return').onclick = () => this.branchV119 === 'on-demand' ? this.showHomeV119() : this.chooseBranchV119(this.branchV119 || 'on-demand');
     this.el('renew-contracts').onclick = () => this.commit(renewXenoTrialsContractsV119(this.getProgress()));
-    this.el('confirm-target').onclick = () => { if (!this.active || !this.canCommit() || this.isRunning() || this.state().pending || this.unsavedResult) return; this.updateRequestedRulesV119(); this.selectionStep = 'fighters'; this.render(); };
+    this.el('confirm-target').onclick = () => {
+      if (!this.active || !this.canCommit() || this.isRunning() || this.state().pending || this.unsavedResult) return;
+      this.updateRequestedRulesV119(); this.selectionStep = 'fighters'; this.render();
+      this.root.scrollTop = 0;
+      this.root.querySelector('#xt-roster-heading').focus({ preventScroll: true });
+    };
     this.el('resume-overlay').onclick = event => { this.runtime?.unlockAudio?.(event); this.runtime?.resume(); };
     this.el('audio-toggle').onclick = event => {
       if (!this.runtime || this.unsavedResult) return;
@@ -368,6 +397,7 @@ export class XenoTrialsUiV96 {
     for (const [key, delta] of [['roster-previous', -1], ['roster-next', 1]]) this.el(key).onclick = () => {
       if (!this.active || this.isRunning() || this.state().pending || this.unsavedResult || this.el(key).disabled) return;
       this.rosterPageV179 += delta; this.render();
+      this.el('roster').scrollTop = 0;
       this.el(this.el(key).disabled ? delta > 0 ? 'roster-previous' : 'roster-next' : key).focus({ preventScroll: true });
     };
     this.el('reset-filters').onclick = () => {
@@ -378,7 +408,7 @@ export class XenoTrialsUiV96 {
       if (!this.active || this.isRunning() || this.state().pending || this.unsavedResult) return;
       for (const key of ['family', 'role', 'ownership', 'faction-filter', 'animation']) this.el(key).value = 'all';
       this.el('sort').value = 'catalog'; this.el('search').value = ''; this.rosterSelectionV179 = null; this.render();
-      this.root.querySelector(`[data-xt-fighter="${this.selected}"]`)?.focus({ preventScroll: true });
+      this.el('roster').querySelector(`[data-xt-fighter="${this.selected}"]`)?.focus();
     };
     this.el('search').addEventListener('input', () => { this.rosterPageV179 = 0; this.render(); });
     this.el('restart').onclick = event => this.launch(this.state().pending?.config, event);
@@ -598,10 +628,15 @@ export class XenoTrialsUiV96 {
     const activity = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, this.state().modesV119);
     const horde = combatBriefingV188(activity);
     const ids = [this.selected, this.form.elements.opponentId.value];
-    this.el('portraits').innerHTML = ids.map((id, i) => {
+    const previews = this.el('portraits');
+    const openDossiers = new Set([...previews.querySelectorAll('details[open]')].map(dossier => dossier.dataset.profile));
+    const showPreviews = ['fighters', 'target'].includes(this.selectionStep);
+    const healthUnit = currentLanguageV185() === 'en' ? 'HP' : 'PV';
+    previews.hidden = !showPreviews;
+    previews.innerHTML = !showPreviews ? '' : ids.map((id, i) => {
       const f = FIGHTERS.find(entry => entry.id === id); if (!f) return '';
       const art = getXenoTrialsArtV96(id, this.form.elements[i ? 'opponentVariant' : 'playerVariant'].value);
-      const portrait = art ? renderEnemyImportPreviewV103(art, f.label, 'clamp(180px, 40vh, 430px)') || `<img src="${art.path}" alt="${escapeHtml(f.label)}">` : '<p>VISUEL À DÉFINIR</p>';
+      const portrait = art ? renderEnemyImportPreviewV103(art) || `<img src="${escapeHtml(art.path)}" alt="">` : '<p>VISUEL À DÉFINIR</p>';
       const walk = getEnemyImportAnimationV107(art);
       const attack = getEnemyImportAttackV109(art);
       const signature = getXenoTrialsSignatureV147(f);
@@ -620,7 +655,26 @@ export class XenoTrialsUiV96 {
       const sourceFacing = art?.sourceFacing === 1 ? 1 : -1;
       const family = FAMILIES.find(entry => entry.id === getXenoTrialsSelectionFamilyV119(f))?.label || 'À DÉFINIR';
       const profile = getXenoTrialsRosterProfileV179(f);
-      return `<figure><figcaption>${i ? horde ? 'CONTACT TYPE' : 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption><div class="xt-facing-preview" data-facing="${desiredFacing}" style="transform:scaleX(${desiredFacing * sourceFacing});width:100%">${portrait}</div><strong>${escapeHtml(f.label)}</strong><span>${family} · ${roleLabel[f.role]} · ${horde && i ? horde.healthLabel : `${f.hp} PV`} · ${f.speed} mobilité</span><small>${escapeHtml(getXenoTrialsFighterSpecialLabelV147(f))}</small>${profile ? `<p class="xt-help">${escapeHtml(profile.tactic)}</p>` : ''}${signature ? `<small data-xt-signature="${signature.id}">${escapeHtml(signature.description.replace('La prise au sol complète reste à produire.', '').trim())}</small>` : ''}${hasXenoTrialsGrappleV153(f) ? '<small>Saisie rapprochée sur Commando WY, Guardian et Cultiste Darwin Era. Maintenir GARDE pour se dégager. Contre les autres spécimens, le bond reste une attaque de contact.</small>' : ''}<small>DOSSIER : ${escapeHtml(art?.sourceWork || art?.sourceName || 'MIRE')}</small>${gestures}${techniques}</figure>`;
+      const playerLocked = !i && !this.state().unlocked.includes(id);
+      const dossier = `${i}-${id}`;
+      return `<figure class="xt-selection-preview" data-slot="${i ? 'target' : 'player'}">
+        <div class="xt-specimen-window"><div class="xt-facing-preview" data-facing="${desiredFacing}" style="transform:scaleX(${desiredFacing * sourceFacing})">${portrait}</div></div>
+        <figcaption class="xt-specimen-identity">
+          <span class="xt-specimen-slot">${i ? horde ? 'CONTACT TYPE' : 'CIBLE D’ESSAI' : 'SPÉCIMEN AFFECTÉ'}</span>
+          <strong>${escapeHtml(f.label)}</strong>
+          <span class="xt-specimen-family">${family} · ${roleLabel[f.role]}</span>
+          <dl class="xt-specimen-stats"><div><dt>${horde && i ? 'Contact' : 'Santé'}</dt><dd>${escapeHtml(horde && i ? horde.healthLabel : `${f.hp} ${healthUnit}`)}</dd></div><div><dt>Mobilité</dt><dd>${f.speed}</dd></div></dl>
+          ${playerLocked ? '<span class="xt-specimen-hold">AFFECTATION VERROUILLÉE</span>' : ''}
+        </figcaption>
+        <details class="xt-specimen-dossier" data-profile="${dossier}" ${openDossiers.has(dossier) ? 'open' : ''}>
+          <summary>Dossier de combat</summary>
+          <div><strong>${escapeHtml(getXenoTrialsFighterSpecialLabelV147(f))}</strong>
+          ${profile ? `<p class="xt-help">${escapeHtml(profile.tactic)}</p>` : ''}
+          ${signature ? `<small data-xt-signature="${signature.id}">${escapeHtml(signature.description.replace('La prise au sol complète reste à produire.', '').trim())}</small>` : ''}
+          ${hasXenoTrialsGrappleV153(f) ? '<small>Saisie rapprochée sur Commando WY, Guardian et Cultiste Darwin Era. Maintenir GARDE pour se dégager. Contre les autres spécimens, le bond reste une attaque de contact.</small>' : ''}
+          <small>DOSSIER : ${escapeHtml(art?.sourceWork || art?.sourceName || 'MIRE')}</small>${gestures}${techniques}</div>
+        </details>
+      </figure>`;
     }).join(`<span class="xt-versus" aria-hidden="true">${horde ? '×' : 'VS'}</span>`);
     const stage = STAGES.find(s => s.id === this.form.elements.stageId.value) || STAGES[0];
     const matchup = ids.map(id => FIGHTERS.find(f => f.id === id)?.label || '').join(' contre ');
@@ -1101,7 +1155,8 @@ export class XenoTrialsUiV96 {
     this.el('home').hidden = this.selectionStep !== 'home'; this.el('activities').hidden = this.selectionStep !== 'activities';
     this.el('practice-lab-panel').hidden = this.selectionStep !== 'lab';
     this.el('layout').hidden = ['home', 'activities', 'lab'].includes(this.selectionStep);
-    this.el('briefing').hidden = !this.activityV119 || !['fighters', 'arena', 'target'].includes(this.selectionStep);
+    this.el('briefing').hidden = !this.activityV119 || !['fighters', 'arena', 'target'].includes(this.selectionStep)
+      || this.branchV119 === 'on-demand' && this.selectionStep !== 'arena';
     this.el('family-tabs').innerHTML = FAMILIES.map(family => `<button type="button" data-xt-family-tab="${family.id}" aria-pressed="${this.el('family').value === family.id}">${family.label}</button>`).join('');
     this.el('progress').textContent = `DIVISION ${Math.floor(state.xp / 300) + 1} · ${state.xp} XP · ${state.credits} crédits de simulation · ${state.wins} V / ${state.losses} D / ${state.draws} N · ${state.unlocked.length}/${FIGHTERS.length} spécimens`;
     let filtered = filterXenoTrialsRosterV97(FIGHTERS, { family: this.el('family').value || 'all', role: this.el('role').value || 'all', ownership: this.el('ownership').value || 'all', sort: this.el('sort').value || 'catalog', query: this.el('search').value, unlocked: state.unlocked,
@@ -1112,15 +1167,22 @@ export class XenoTrialsUiV96 {
       getXenoTrialsRuntimeAnimationCoverage(fighter.id)?.meshStates.some(action => action !== 'presentation'));
     const page = getXenoTrialsRosterPageV179(filtered, { page: this.rosterPageV179, selectedId: this.selected, revealSelected: this.rosterSelectionV179 !== this.selected });
     this.rosterPageV179 = page.page; this.rosterSelectionV179 = this.selected;
-    this.el('count').textContent = `${filtered.length} / ${FIGHTERS.length} spécimens · Sélection : ${FIGHTERS.find(f => f.id === this.selected).label}`;
+    const rosterCountLabel = currentLanguageV185() === 'en' ? 'specimens' : 'spécimens';
+    this.el('count').textContent = `${filtered.length} / ${FIGHTERS.length} ${rosterCountLabel}`;
     this.el('roster-page').textContent = `LOT ${page.page + 1} / ${page.pageCount} · ${page.start}–${page.end}`;
     this.el('roster-previous').disabled = running || Boolean(state.pending) || Boolean(this.unsavedResult) || !page.hasPrevious;
     this.el('roster-next').disabled = running || Boolean(state.pending) || Boolean(this.unsavedResult) || !page.hasNext;
     this.el('roster-selection').disabled = running || Boolean(state.pending) || Boolean(this.unsavedResult);
     this.el('roster').innerHTML = page.fighters.map(f => {
       const unlocked = state.unlocked.includes(f.id), art = getXenoTrialsArtV96(f.id, f.id === 'arachnoid' ? this.form.elements.playerVariant.value : null), cost = getXenoTrialsUnlockCostV96(f.id);
-      const portrait = renderEnemyImportPreviewV103(art, f.label, 'clamp(70px, 9vw, 95px)') || `<img src="${art.path}" alt="${f.label}" loading="lazy">`;
-      return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}"><button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}>${portrait}<strong>${f.label}</strong><small>${roleLabel[f.role]} · ${f.hp} PV</small><small>${getXenoTrialsFighterSpecialLabelV147(f)}</small><small class="xt-motion-status-v189">${escapeHtml(getXenoTrialsRuntimeAnimationCoverage(f.id)?.playerLabel || '')}</small>${getXenoTrialsSuperV148(f) ? `<small>Super : ${getXenoTrialsSuperV148(f).label}</small>` : ''}</button>${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${this.unsavedResult || state.pending || state.credits < cost ? 'disabled' : ''}>DÉBLOQUER · ${cost}</button>`}</article>`;
+      const portrait = renderEnemyImportPreviewV103(art) || (art ? `<img src="${escapeHtml(art.path)}" alt="" loading="lazy">` : '');
+      return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}" data-owned="${unlocked}">
+        <button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}>
+          <span class="xt-fighter-thumbnail">${portrait}</span><strong>${escapeHtml(f.label)}</strong>
+          <small class="xt-motion-status-v189 xt-sr-only">${escapeHtml(getXenoTrialsRuntimeAnimationCoverage(f.id)?.playerLabel || '')}</small>
+        </button>
+        ${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${this.unsavedResult || state.pending || state.credits < cost ? 'disabled' : ''}><span class="xt-lock" aria-hidden="true"></span><span class="xt-sr-only">Débloquer</span>${cost} <abbr title="Crédits de simulation">CR</abbr></button>`}
+      </article>`;
     }).join('') || '<p class="xt-help">Aucun spécimen ne correspond à ces filtres. Votre sélection est conservée.</p>';
     const activity = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, state.modesV119);
     const horde = combatBriefingV188(activity);
@@ -1141,6 +1203,14 @@ export class XenoTrialsUiV96 {
     const unavailable = !this.active || running || Boolean(state.pending) || Boolean(this.unsavedResult) || !state.unlocked.includes(this.selected) || wrongCombatant;
     this.el('start').disabled = unavailable || this.selectionStep !== 'arena';
     this.el('confirm-fighters').disabled = unavailable;
+    this.el('fighter-config-title').textContent = this.selectionStep === 'target' ? 'Désignation de la cible' : 'Autorisation d’essai';
+    const selectionRules = this.el('selection-rules');
+    selectionRules.hidden = this.selectionStep !== 'fighters' || this.branchV119 !== 'on-demand';
+    selectionRules.textContent = selectionRules.hidden ? '' : getXenoTrialsRuleTextV119(activity?.rules);
+    const selectionHold = this.el('selection-hold');
+    selectionHold.textContent = wrongCombatant ? 'Ce spécimen ne répond pas aux critères de l’évaluation.'
+      : !state.unlocked.includes(this.selected) ? 'Débloquez le spécimen dans le registre pour l’affecter.' : '';
+    selectionHold.hidden = this.selectionStep !== 'fighters' || !selectionHold.textContent;
     this.el('back-fighters').disabled = running || Boolean(state.pending);
     this.el('stable').hidden = this.selectionStep !== 'fighters';
     this.el('fighter-config').hidden = !['fighters', 'target'].includes(this.selectionStep);
@@ -1154,7 +1224,8 @@ export class XenoTrialsUiV96 {
     this.root.setAttribute('data-xt-step', this.selectionStep);
     this.root.setAttribute('data-xt-unsaved', String(Boolean(this.unsavedResult)));
     this.root.setAttribute('data-xt-recovery',String(Boolean(state.pending && !running)));
-    this.el('steps').innerHTML = [['fighters','01 · COMBATTANTS'],['arena','02 · ARÈNE'],['combat',horde ? horde?.operation ? '03 · OPÉRATION' : '03 · HORDE' : '03 · DUEL']].map(([id,label]) => `<span ${id === this.selectionStep ? 'aria-current="step"' : ''}>${label}</span>`).join('');
+    const preparationStep = this.selectionStep === 'target' ? 'fighters' : this.selectionStep;
+    this.el('steps').innerHTML = [['fighters','01 · COMBATTANTS'],['arena','02 · ARÈNE'],['combat',horde ? horde?.operation ? '03 · OPÉRATION' : '03 · HORDE' : '03 · DUEL']].map(([id,label]) => `<span ${id === preparationStep ? 'aria-current="step"' : ''}>${label}</span>`).join('');
     this.el('new-duel').hidden = this.branchV119 === 'practice' || this.selectionStep !== 'combat' || running || Boolean(state.pending) || Boolean(this.unsavedResult);
     this.el('new-duel').textContent = state.modesV119.challengeRun ? 'POURSUIVRE LA SÉRIE' : this.activityV119 && this.branchV119 !== 'on-demand' ? 'RETOUR AUX ÉVALUATIONS' : 'PRÉPARER UN AUTRE DUEL';
     this.el('restart').hidden = !state.pending || running;
