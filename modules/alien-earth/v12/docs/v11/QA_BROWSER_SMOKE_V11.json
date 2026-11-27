@@ -1,0 +1,507 @@
+{
+  "suite": "browser-smoke-v11",
+  "bundleSha256": "024dec038dad391d54c76e2a6c0b2c3f70459f33d8b5e127a5cc48cafa604df3",
+  "checks": [
+    {
+      "name": "V11 title visible",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Campaign starts in R01",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Exactly 70 rooms are delivered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R01 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R02 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R03 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R04 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R05 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R06 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R07 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R08 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R09 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R10 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R11 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R12 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R13 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R14 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R15 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R16 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R17 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R18 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R19 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R20 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R21 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R22 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R23 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R24 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R25 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R26 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R27 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R28 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R29 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R30 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R31 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R32 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R33 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R34 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R35 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R36 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R37 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R38 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R39 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R40 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R41 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R42 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R43 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R44 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R45 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R46 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R47 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R48 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R49 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R50 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R51 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R52 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R53 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R54 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R55 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R56 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R57 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R58 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R59 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R60 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R61 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R62 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R63 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R64 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R65 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R66 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R67 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R68 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R69 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R70 renders without page error",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R01 map exposes complete local graph",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R05 map exposes complete local graph",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R09 map exposes complete local graph",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R13 map exposes complete local graph",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R17 map exposes complete local graph",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R21 map exposes complete local graph",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R25 map exposes complete local graph",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R29 map exposes complete local graph",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Reference registry opens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Registry lists 70 locations",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "25 cast silhouettes render",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Five weapon silhouettes render",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Six unresolved fidelity classes are disclosed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Reference tab exposes at least twenty cited production links",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Joe uses MCS-X by default",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Joe can select Maxim 9",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Joe can return to MCS-X",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R63 uses its sourced location identity",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R64 uses its sourced location identity",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R65 uses its sourced location identity",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R66 uses its sourced location identity",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R67 uses its sourced location identity",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R68 uses its sourced location identity",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R69 uses its sourced location identity",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R70 uses its sourced location identity",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "No page errors in consolidated smoke",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "pageErrors": [],
+  "captures": [],
+  "browser": "144.0.7559.96",
+  "passed": 99,
+  "total": 99,
+  "ok": true
+}

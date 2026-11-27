@@ -1,0 +1,574 @@
+{
+  "bundleSha256": "024dec038dad391d54c76e2a6c0b2c3f70459f33d8b5e127a5cc48cafa604df3",
+  "transport": "set_content of standalone HTML with QA attribute, no storage mock; URL blocked separately",
+  "checks": [
+    {
+      "name": "Title is actual V11 and clearly nonofficial",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Opaque origin storage limitation is visible",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Registry lists all 70 delivered locations",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Registry never enables travel before starting",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "All twenty-five distinct character canvases rendered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NPC reference mapping separates Curly from Wendy",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Five referenced weapons have separate silhouettes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Equipment distinguishes nonplayable, nonmaneuverable and inventions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Unfinished 1:1 scope and sources are visible",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "New campaign begins unarmed without optional unlocks",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Joe starts on sourced MCS-X",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Key6 selects distinct Maxim 9 sidearm",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Key6 returns to MCS-X",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R01 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R02 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R03 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R04 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R05 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R06 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R07 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R08 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R09 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R10 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R11 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R12 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R13 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R14 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R15 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R16 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R17 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R18 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R19 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R20 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R21 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R22 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R23 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R24 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R25 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R26 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R27 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R28 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R29 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R30 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R31 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R32 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R33 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R34 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R35 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R36 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R37 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R38 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R39 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R40 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R41 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R42 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R43 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R44 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R45 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R46 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R47 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R48 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R49 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R50 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R51 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R52 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R53 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R54 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R55 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R56 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R57 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R58 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R59 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R60 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R61 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R62 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R63 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R64 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R65 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R66 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R67 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R68 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R69 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R70 loads and renders its actual room label without exceptions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Maginot schematic contains all fourteen places",
+      "pass": true,
+      "detail": "USCSS MAGINOT · RETOUR EN ARRIÈRE\nLes chemins du secteur\n×\nC05 · RÉSEAU LOCAL\nTravail\n● Éclairage\n● "
+    },
+    {
+      "name": "Neverland first chapter contains twelve places",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Unextended sector still includes seven places",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Brief armory interaction does not grant the weapon",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Physical armory hold grants exactly six arc and three foam charges",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Key6 switches to actual acquired KSG-AL",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Real J arc spends only special charge",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Existing resident receives actual temporary stun",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Real7 applies foam to stunned resident without capture reward",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Downloaded save carries schema11 and finite gear reserves",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Actual file chooser reimports acquired gear without refill",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Actual V9 export imports without free optional gear",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Observing massicot does not arm prologue Wendy",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Registry pauses live simulation",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Cast registry fits390px without horizontal overflow",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Actual E crosses rear-wall threshold to dormitory",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Reciprocal door returns to source room without task completion",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "No browser page errors throughout all checks",
+      "pass": true,
+      "detail": "[]"
+    }
+  ],
+  "captures": [
+    {
+      "file": "docs/v11/captures/v11-01-titre.png",
+      "description": "Écran titre du HTML livré. Aucun état de partie préparé ; avertissement de stockage opaque conservé."
+    },
+    {
+      "file": "docs/v11/captures/v11-02-silhouettes.png",
+      "description": "Registre des silhouettes, ouvert depuis le titre. Les portraits sont les rendus de jeu ; pas des photos ni seize personnages jouables."
+    },
+    {
+      "file": "docs/v11/captures/v11-03-dotations.png",
+      "description": "Registre des armes : état d’intégration explicite. La lecture ne donne aucun objet au personnage."
+    },
+    {
+      "file": "docs/v11/captures/v11-04-medbay-one.png",
+      "description": "Inspection du lieu R63 : pièce et position sélectionnées pour cadrer le rendu réel. Aucun trajet complet ni plan officiel revendiqué."
+    },
+    {
+      "file": "docs/v11/captures/v11-05-engine-room.png",
+      "description": "Inspection du lieu R64 : pièce et position sélectionnées pour cadrer le rendu réel. Aucun trajet complet ni plan officiel revendiqué."
+    },
+    {
+      "file": "docs/v11/captures/v11-06-containment-room.png",
+      "description": "Inspection du lieu R65 : pièce et position sélectionnées pour cadrer le rendu réel. Aucun trajet complet ni plan officiel revendiqué."
+    },
+    {
+      "file": "docs/v11/captures/v11-07-lobby.png",
+      "description": "Inspection du lieu R66 : pièce et position sélectionnées pour cadrer le rendu réel. Aucun trajet complet ni plan officiel revendiqué."
+    },
+    {
+      "file": "docs/v11/captures/v11-08-atrium.png",
+      "description": "Inspection du lieu R67 : pièce et position sélectionnées pour cadrer le rendu réel. Aucun trajet complet ni plan officiel revendiqué."
+    },
+    {
+      "file": "docs/v11/captures/v11-09-talking-room.png",
+      "description": "Inspection du lieu R68 : pièce et position sélectionnées pour cadrer le rendu réel. Aucun trajet complet ni plan officiel revendiqué."
+    },
+    {
+      "file": "docs/v11/captures/v11-10-medical-bay.png",
+      "description": "Inspection du lieu R69 : pièce et position sélectionnées pour cadrer le rendu réel. Aucun trajet complet ni plan officiel revendiqué."
+    },
+    {
+      "file": "docs/v11/captures/v11-11-secure-lab.png",
+      "description": "Inspection du lieu R70 : pièce et position sélectionnées pour cadrer le rendu réel. Aucun trajet complet ni plan officiel revendiqué."
+    },
+    {
+      "file": "docs/v11/captures/v11-12-carte-maginot.png",
+      "description": "Carte réelle du chapitre Maginot à onze lieux ; plan de connectivité schématique, pas plan métrique de tournage."
+    },
+    {
+      "file": "docs/v11/captures/v11-13-mousse.png",
+      "description": "Dotation acquise avec E à l’armurerie. Pour l’essai, Morrow et un habitant existant sont replacés sur un axe libre dans R19 ; J puis 7 produisent l’étourdissement et la mousse. Ce n’est pas une capture en enceinte."
+    },
+    {
+      "file": "docs/v11/captures/v11-14-mobile.png",
+      "description": "Galerie de silhouettes à 390 × 844. Contrôle du navigateur, pas essai sur un appareil mobile physique."
+    }
+  ],
+  "pageErrors": [],
+  "browser": "144.0.7559.96",
+  "passed": 101,
+  "total": 101,
+  "ok": true
+}

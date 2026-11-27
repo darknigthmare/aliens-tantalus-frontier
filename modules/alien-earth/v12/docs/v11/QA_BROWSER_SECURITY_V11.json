@@ -1,0 +1,18 @@
+{
+  "bundleSha256": "024dec038dad391d54c76e2a6c0b2c3f70459f33d8b5e127a5cc48cafa604df3",
+  "transport": "set_content, exact local HTML after administrator-blocked navigation",
+  "checks": [
+    {
+      "name": "Actual title identifies V9",
+      "pass": false,
+      "detail": ""
+    }
+  ],
+  "captures": [],
+  "pageErrors": [],
+  "requests": [],
+  "browser": "144.0.7559.96",
+  "error": "Actual title identifies V9 ",
+  "total": 1,
+  "passed": 0
+}

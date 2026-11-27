@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-26",
+  "project": "Aliens Tantalus — Alien: Earth V12",
+  "ok": true,
+  "sourceBaseCommit": "6ac32413c6b0c00d3e4d9fe8a35561ac430804b0",
+  "sourceSnapshot": "The gameplay runtime and PNG bytes are unchanged from commit 6ac32413c6b0c00d3e4d9fe8a35561ac430804b0, whose exact tree passed the scoped gameplay/browser CI jobs. The final revision additionally registers the ninth exact verifier successor and updates its tests and reports. Post-registration local suites are reported separately below.",
+  "runtime": {
+    "node": "v24.22.3"
+  },
+  "suites": {
+    "earth": {
+      "command": "npm run test:dlc:earth",
+      "tests": 1266,
+      "passed": 1266,
+      "failed": 0,
+      "skipped": 0,
+      "inheritedModule": 1216,
+      "lifecycle": 4,
+      "raster": 30,
+      "hostIntegration": 16
+    },
+    "historicalSuccession": {
+      "command": "node --test scripts/verify-aliens1986-main-succession-v116.mjs scripts/verify-river-of-pain-succession.mjs",
+      "tests": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    "targetedCompatibility": {
+      "command": "node --test scripts/verify-alien-earth-integration-v12.mjs scripts/verify-audit-v143.mjs scripts/verify-harpoon-unload-v162.mjs scripts/verify-audio-lifecycle-v162.mjs",
+      "tests": 105,
+      "passed": 105,
+      "failed": 0,
+      "skipped": 0,
+      "overlap": "Includes the 16 Earth integration tests; do not add these suite counts as if all cases were distinct.",
+      "validatedBeforeFinalSuccessorRegistration": true
+    }
+  },
+  "build": {
+    "scope": "Alien Earth public module only; this is not a full native release build.",
+    "files": 40,
+    "javascript": 23,
+    "png": 15,
+    "html": 1,
+    "css": 1,
+    "exports": {
+      "JOUER_ALIEN_EARTH_V12.html": {
+        "bytes": 31115120,
+        "sha256": "a46e362d845e646c6defd9920f0cff800faf5abfd29729495bb82d1350950511"
+      },
+      "ALIEN_EARTH_V12_MODULE_PUBLIC.zip": {
+        "bytes": 21936371,
+        "sha256": "9bed561539cc1e7323e7c9c930fddba23216182922d0418e92a3b31c502a33fa"
+      }
+    },
+    "zipNote": "ZIP member bytes match the 40 admitted public files. ZIP timestamps may change the archive hash between equivalent builds."
+  },
+  "sourceSha256": {
+    "src/app.js": "8f859ac837d454311b5a2b5bfe9e18d7382f6b00a0a581df27eaaf4aa09b8eb4",
+    "src/title-screen-v61.js": "1f6d9c2e3851ae038acab2fbbaaba287d4734ebdeafa01b1068b402a572a2347",
+    "scripts/verify-alien-earth-integration-v12.mjs": "3bfce7e61687391abf80284eb002589ab8c8d695da6203dd85b684ef0012ec3d",
+    "scripts/build-alien-earth-dlc.mjs": "3363fa1b037711ed0d4f878dbac49aa6f6afbfb14d01f0b1637fd0f675dc2635",
+    "modules/alien-earth/v12/src/alien-earth-raster-v12.js": "713f9789077aae9082ec44dad502a1b7254ec141c3fd74be4e3c154a3d624d85",
+    "modules/alien-earth/RECOVERY_V11.json": "e19aa945cb860e57503e41e81c019bb91b40e33198042ebec5c3308d387d199d",
+    "modules/alien-earth/v12/src/alien-earth-ui.js": "5339547b2a992d71283dbf7707cf200635ed23cffad7140ba97d66091c5b72a5",
+    "scripts/qa-alien-earth-integration-v12.py": "32be52703a8482d33e7209a1cfbf08b8b4544e38e5ab71b3d4c90457de520e7e",
+    "scripts/test-release-v143.mjs": "eca3ce9d6bc61b061c9bb241f7d4398fc8946e6c9289173452aee7c4978cbb00",
+    "scripts/verify-audit-v143.mjs": "2de1172c3c821113eec7fdac46b4fa27206f03e4fbb735da7f7dccd197e5517f",
+    "scripts/verify-harpoon-unload-v162.mjs": "f108250fdc5a4bd3007e33785e9b8e432763a28dfca6174665f904a13ef54055",
+    "scripts/audit-native-qa-resources-v187.mjs": "fdb2d0f1e8c4963641b5dab92647dccaf2c8e01e17992f94a011c345ec9049a3"
+  },
+  "browserEvidence": "browser-report.json",
+  "limits": [
+    "Browser traversal is separately reported with its fixtures.",
+    "The automated suites do not prove a complete playthrough of all 70 rooms.",
+    "No image is certified screen-exact.",
+    "Local results are distinct from GitHub Actions results."
+  ],
+  "previousPublishedCI": {
+    "commit": "249e6abd9de72eecc6bf7033e8b36371a71d7a66",
+    "earthWorkflowRun": 45837123348,
+    "conclusion": "success",
+    "browserChecks": 12,
+    "scope": "DLC plus standalone; --skip-title excludes the native host. Precedes the final navigation/audio correction."
+  },
+  "currentCI": {
+    "validatedCodeCommit": "6ac32413c6b0c00d3e4d9fe8a35561ac430804b0",
+    "earthWorkflow": 45846386818,
+    "earthJob": {
+      "id": 140001046365,
+      "conclusion": "success",
+      "nodeTests": 1266,
+      "successionTests": 7,
+      "browserChecks": 12
+    },
+    "hostJob": {
+      "id": 140001046781,
+      "conclusion": "success",
+      "consecutiveCycles": 2,
+      "sameBrowserContext": true,
+      "backForwardCacheObserved": true,
+      "audioRunningAfterCachedReturn": true,
+      "favicon404ConsoleMessages": 3
+    },
+    "nativeGameplay": {
+      "run": 45846386754,
+      "conclusion": "success",
+      "nodeTests": 63,
+      "distributionFiles": 2200
+    },
+    "otherWorkflows": "Consult current PR checks. Scoped passes do not assert that every repository workflow is green.",
+    "fullReleaseFirstAttempt": {
+      "run": 45846387234,
+      "conclusion": "failure",
+      "tests": 5394,
+      "passed": 5391,
+      "failed": 2,
+      "skipped": 1,
+      "cause": "Missing exact succession registration for scripts/verify-audit-v143.mjs. Both failed V165 cases pass after the final registration, in the real 8-test suite."
+    }
+  },
+  "validatedCodeCommit": "6ac32413c6b0c00d3e4d9fe8a35561ac430804b0",
+  "validatedSourceTree": "d58e25af95c320811d91f4ae2bcad8bf7c264f51",
+  "runtimeUnchangedSinceValidatedCommit": true,
+  "sourceSha256AtGameplayCI": {
+    "src/app.js": "8f859ac837d454311b5a2b5bfe9e18d7382f6b00a0a581df27eaaf4aa09b8eb4",
+    "src/title-screen-v61.js": "1f6d9c2e3851ae038acab2fbbaaba287d4734ebdeafa01b1068b402a572a2347",
+    "scripts/verify-alien-earth-integration-v12.mjs": "a40d1b01687f2f397b8460eeb7dc0b49db037ae8b76d9f592712bc640a7d06b8",
+    "scripts/build-alien-earth-dlc.mjs": "3363fa1b037711ed0d4f878dbac49aa6f6afbfb14d01f0b1637fd0f675dc2635",
+    "modules/alien-earth/v12/src/alien-earth-raster-v12.js": "713f9789077aae9082ec44dad502a1b7254ec141c3fd74be4e3c154a3d624d85",
+    "modules/alien-earth/RECOVERY_V11.json": "e19aa945cb860e57503e41e81c019bb91b40e33198042ebec5c3308d387d199d",
+    "modules/alien-earth/v12/src/alien-earth-ui.js": "5339547b2a992d71283dbf7707cf200635ed23cffad7140ba97d66091c5b72a5",
+    "scripts/qa-alien-earth-integration-v12.py": "32be52703a8482d33e7209a1cfbf08b8b4544e38e5ab71b3d4c90457de520e7e",
+    "scripts/test-release-v143.mjs": "eca3ce9d6bc61b061c9bb241f7d4398fc8946e6c9289173452aee7c4978cbb00",
+    "scripts/verify-audit-v143.mjs": "2de1172c3c821113eec7fdac46b4fa27206f03e4fbb735da7f7dccd197e5517f",
+    "scripts/verify-harpoon-unload-v162.mjs": "f108250fdc5a4bd3007e33785e9b8e432763a28dfca6174665f904a13ef54055",
+    "scripts/audit-native-qa-resources-v187.mjs": "3afcde98f00f71298ac3240ae28bea4b4dce99ed585808d649881e38eac9e86c"
+  },
+  "sourceSha256Scope": "Current sources, including the final verifier-only succession correction; sourceSha256AtGameplayCI identifies the earlier scoped CI checkout.",
+  "postRegistrationVerification": {
+    "earth": {
+      "passed": 1266,
+      "failed": 0
+    },
+    "auditAndHistoricalSuccession": {
+      "passed": 79,
+      "failed": 0
+    },
+    "realV165Suite": {
+      "command": "node --test scripts/verify-parallel-completion-v165.mjs",
+      "passed": 8,
+      "failed": 0,
+      "fixtures": "62 tracked files restored byte-for-byte from HEAD; official test run has no restoration hook or substituted reader."
+    },
+    "negativeCases": {
+      "wrongPredecessorsRejected": 9,
+      "individuallyCorruptedFilesRejected": 9
+    },
+    "receiptBlob": "4c546a07298fb8ad911f749fc41f304d04a06080",
+    "overlap": "Suite counts overlap; they are not added as independent test cases."
+  }
+}

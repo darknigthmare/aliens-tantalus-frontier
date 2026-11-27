@@ -1,0 +1,7755 @@
+{
+  "id": "alien-earth-s1",
+  "version": "1.0.0",
+  "schema": 1,
+  "title": "ALIEN: EARTH",
+  "subtitle": "Les enfants de Neverland",
+  "description": "Adaptation jouable non officielle de la saison 1 — prototype local de campagne, avec plans originaux.",
+  "chapters": [
+    {
+      "id": "C01",
+      "title": "Une seconde naissance",
+      "subtitle": "Neverland · avant l’impact",
+      "pov": "wendy",
+      "context": "On vous a donné un nouveau corps. Il reste à apprendre où poser les mains, à qui faire confiance et ce que signifie obéir.",
+      "ending": "Un appel d’urgence interrompt l’entraînement. Un bâtiment spatial s’est écrasé à New Siam. Joe fait partie des secours envoyés sur place.",
+      "source": [
+        "FX_CHARACTERS",
+        "FX_OVERVIEW"
+      ],
+      "rooms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04"
+      ],
+      "goals": [
+        "AE-01",
+        "AE-02",
+        "AE-03",
+        "AE-04"
+      ],
+      "transfer": "Navette vers New Siam"
+    },
+    {
+      "id": "C02",
+      "title": "La ville sous la coque",
+      "subtitle": "New Siam · nuit de l’impact",
+      "pov": "joe",
+      "context": "Le périmètre est noyé sous la pluie. Joe entre dans la tour avec les secours. Derrière les cloisons, quelque chose se déplace à contre-sens des évacuations.",
+      "ending": "L’évacuation se referme sur Joe. Le signal envoyé depuis la tour est le dernier point de contact fiable. Le récit passe à Wendy.",
+      "source": [
+        "EP02",
+        "FX_CHARACTERS"
+      ],
+      "rooms": [
+        "R05",
+        "R06",
+        "R07",
+        "R08"
+      ],
+      "goals": [
+        "AE-05",
+        "AE-06",
+        "AE-07",
+        "AE-08"
+      ],
+      "transfer": "Relève · point de vue de Wendy"
+    },
+    {
+      "id": "C03",
+      "title": "Ne me laisse pas ici",
+      "subtitle": "Tour de New Siam · opération de secours",
+      "pov": "wendy",
+      "context": "Wendy suit le signal de Joe dans des étages déformés par le choc. Une sortie ne vaut rien sans quelqu’un pour l’atteindre.",
+      "ending": "Joe est retrouvé. Les survivants quittent le secteur ; les organismes récupérés prennent la direction de Neverland. Leur transfert ne les rend pas inoffensifs.",
+      "source": [
+        "EP03",
+        "FX_CHARACTERS"
+      ],
+      "rooms": [
+        "R09",
+        "R10",
+        "R11",
+        "R12"
+      ],
+      "goals": [
+        "AE-09",
+        "AE-10",
+        "AE-11",
+        "AE-12"
+      ],
+      "transfer": "Transfert des survivants vers Neverland"
+    },
+    {
+      "id": "C04",
+      "title": "Derrière le verre",
+      "subtitle": "Neverland · quarantaine",
+      "pov": "wendy",
+      "context": "La catastrophe est devenue un programme de recherche. Arthur travaille sur la perception de Wendy. Les cages ne sont pas toutes occupées de la même façon.",
+      "ending": "Wendy perçoit une présence que les instruments ne décrivent pas. Dans le vivarium, l’Œil observe ses observateurs. Pour comprendre la cargaison, il faut revenir en arrière.",
+      "source": [
+        "EP04",
+        "WETA_CREATURES"
+      ],
+      "rooms": [
+        "R13",
+        "R14",
+        "R15",
+        "R16"
+      ],
+      "goals": [
+        "AE-13",
+        "AE-14",
+        "AE-15",
+        "AE-16"
+      ],
+      "transfer": "Revoir les événements du Maginot"
+    },
+    {
+      "id": "C05",
+      "title": "Avant la chute",
+      "subtitle": "USCSS Maginot · retour en arrière",
+      "pov": "morrow",
+      "context": "Bien avant le transfert vers Neverland, Morrow tente de reprendre la maîtrise du Maginot. Les avaries, les intérêts de la compagnie et la cargaison convergent vers une même issue.",
+      "ending": "Le Maginot ne sera pas sauvé. Morrow rejoint sa chambre d’impact. Ce retour en arrière s’arrête avant l’écrasement et ne change pas les événements déjà vécus.",
+      "source": [
+        "EP05",
+        "WETA_PROJECT",
+        "FX_MORROW"
+      ],
+      "rooms": [
+        "R17",
+        "R18",
+        "R19",
+        "R20"
+      ],
+      "goals": [
+        "AE-17",
+        "AE-18",
+        "AE-19",
+        "AE-20"
+      ],
+      "transfer": "Retour à Neverland"
+    },
+    {
+      "id": "C06",
+      "title": "Les voix qu’on efface",
+      "subtitle": "Neverland · après l’observation",
+      "pov": "wendy",
+      "context": "L’obéissance peut être imposée de bien des manières. Wendy cherche les autres hybrides tandis que le fonctionnement ordinaire des laboratoires se désagrège.",
+      "ending": "Les relevés établissent la mort d’Isaac, victime de la mouche. Ce constat n’est pas une mission de résurrection. Arthur aide à préparer une fuite ; le danger se déplace vers les galeries de service.",
+      "source": [
+        "EP06",
+        "WETA_CREATURES"
+      ],
+      "rooms": [
+        "R21",
+        "R22",
+        "R23",
+        "R24"
+      ],
+      "goals": [
+        "AE-21",
+        "AE-22",
+        "AE-23",
+        "AE-24"
+      ],
+      "transfer": "Suivre Joe vers la côte"
+    },
+    {
+      "id": "C07",
+      "title": "Au bout des conduits",
+      "subtitle": "Neverland · nuit sur le littoral",
+      "pov": "joe",
+      "context": "Joe suit une route de service vers la côte. Les indices laissés derrière lui racontent une expérience qui a cessé d’être contenue.",
+      "ending": "Arthur n’a pas survécu. Ce chapitre établit les conséquences et prépare le regroupement ; il ne permet pas d’annuler sa mort. La maîtrise de Neverland est désormais en jeu.",
+      "source": [
+        "EP07",
+        "EP08"
+      ],
+      "rooms": [
+        "R25",
+        "R26",
+        "R27",
+        "R28"
+      ],
+      "goals": [
+        "AE-25",
+        "AE-26",
+        "AE-27",
+        "AE-28"
+      ],
+      "transfer": "Retrouver Wendy au complexe"
+    },
+    {
+      "id": "C08",
+      "title": "Ceux qui restent",
+      "subtitle": "Neverland · renversement",
+      "pov": "wendy",
+      "context": "Wendy doit rouvrir les accès, retrouver les siens et faire tomber l’autorité qui les maintient enfermés. La liberté n’est pas encore la sécurité.",
+      "ending": "Les hybrides reprennent le contrôle de leur situation et Boy Kavalier est captif. L’approche de Weyland-Yutani laisse l’avenir ouvert. FIN DE CETTE ADAPTATION DE LA SAISON 1 — aucune suite non diffusée n’est inventée.",
+      "source": [
+        "EP08",
+        "FX_CHARACTERS"
+      ],
+      "rooms": [
+        "R29",
+        "R30",
+        "R31",
+        "R32"
+      ],
+      "goals": [
+        "AE-29",
+        "AE-30",
+        "AE-31",
+        "AE-32"
+      ],
+      "transfer": "Rester avec les hybrides"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "R01",
+      "chapter": "C01",
+      "index": 0,
+      "title": "Salle de réveil",
+      "kit": "neverland",
+      "mode": "SIDE",
+      "width": 1880,
+      "level": "N0",
+      "source": [
+        "FX_CHARACTERS",
+        "FX_OVERVIEW"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Lit de transfert et verrière sur les arbres",
+      "task": {
+        "id": "AE-01",
+        "room": "R01",
+        "kind": "talk",
+        "label": "Retrouver ses repères",
+        "x": 1320,
+        "z": 125,
+        "speaker": "Dame Sylvia",
+        "dialogue": "Ne te lève pas trop vite. Ce corps suit tes mouvements avant que tu les comprennes. Regarde autour de toi, puis rejoins-moi près de la vitre.",
+        "pattern": [
+          1,
+          0,
+          1
+        ],
+        "sequence": [
+          0,
+          2,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-01",
+        "title": "Un corps, un nom",
+        "text": "La chambre conserve deux registres : une identité médicale et un nom choisi. Ils ne racontent pas la même histoire.",
+        "x": 490,
+        "z": 125
+      },
+      "props": [
+        {
+          "id": "R01-0",
+          "type": "bed",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R01-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R01-2",
+          "type": "planter",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R01-4",
+          "type": "bed",
+          "x": 1650,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R01-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R01-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R01-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R01-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R01>R02",
+          "to": "R02",
+          "x": 1800,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Galerie · Galerie des hybrides",
+          "reverse": "R02>R01",
+          "kind": "door"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1320,
+        1750
+      ],
+      "narrative": {
+        "enter": "Ne te lève pas trop vite. Ce corps suit tes mouvements avant que tu les comprennes. Regarde autour de toi, puis rejoins-moi près de la vitre.",
+        "canonBoundary": "Un appel d’urgence interrompt l’entraînement. Un bâtiment spatial s’est écrasé à New Siam. Joe fait partie des secours envoyés sur place."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R02",
+      "chapter": "C01",
+      "index": 1,
+      "title": "Galerie des hybrides",
+      "kit": "neverland",
+      "mode": "HYBRID",
+      "width": 2240,
+      "level": "N0",
+      "source": [
+        "FX_CHARACTERS",
+        "FX_OVERVIEW"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Passerelle de verre au-dessus du jardin",
+      "task": {
+        "id": "AE-02",
+        "room": "R02",
+        "kind": "circuit",
+        "label": "Rétablir l’accès au jardin",
+        "x": 1440,
+        "z": 50,
+        "speaker": "Kirsh",
+        "dialogue": "Le circuit du jardin partage son alimentation avec une porte de service. Rends le passage utilisable sans interrompre la clinique.",
+        "pattern": [
+          0,
+          1,
+          1
+        ],
+        "sequence": [
+          2,
+          0,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-02",
+        "title": "Les seuils",
+        "text": "La signalétique sépare les espaces autorisés aux hybrides des accès réservés au personnel. Le mobilier ne masque jamais un seuil utilisable.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R02-0",
+          "type": "bed",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R02-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R02-2",
+          "type": "planter",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R02-3",
+          "type": "cabinet",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R02-4",
+          "type": "bed",
+          "x": 2010,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R02-island",
+          "type": "console",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R02-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R02-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R02-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R02-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R02-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R02>R01",
+          "to": "R01",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 1725,
+          "arrivalZ": 125,
+          "label": "Retour · Salle de réveil",
+          "reverse": "R01>R02",
+          "kind": "door"
+        },
+        {
+          "id": "R02>R03",
+          "to": "R03",
+          "x": 2160,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Cour · Cour d’entraînement",
+          "reverse": "R03>R02",
+          "kind": "door",
+          "requires": [
+            "AE-02"
+          ],
+          "requireLabel": "Rétablir l’accès au jardin"
+        },
+        {
+          "id": "R02>R04",
+          "to": "R04",
+          "x": 960,
+          "z": 200,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Annexe · Annexe des souvenirs",
+          "reverse": "R04>R02",
+          "kind": "door",
+          "requires": [
+            "AE-02"
+          ],
+          "requireLabel": "Rétablir l’accès au jardin"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1440,
+        2110
+      ],
+      "narrative": {
+        "enter": "Le circuit du jardin partage son alimentation avec une porte de service. Rends le passage utilisable sans interrompre la clinique.",
+        "canonBoundary": "Un appel d’urgence interrompt l’entraînement. Un bâtiment spatial s’est écrasé à New Siam. Joe fait partie des secours envoyés sur place."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R03",
+      "chapter": "C01",
+      "index": 2,
+      "title": "Cour d’entraînement",
+      "kit": "courtyard",
+      "mode": "DEPTH",
+      "width": 2520,
+      "level": "N0",
+      "source": [
+        "FX_CHARACTERS",
+        "FX_OVERVIEW"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Bassin central et portique de mesure",
+      "task": {
+        "id": "AE-03",
+        "room": "R03",
+        "kind": "scan",
+        "label": "Calibrer la perception",
+        "x": 1560,
+        "z": 200,
+        "speaker": "Kirsh",
+        "dialogue": "Observe avant de réagir. La première chose qui bouge n’est pas nécessairement la menace.",
+        "pattern": [
+          1,
+          1,
+          0
+        ],
+        "sequence": [
+          1,
+          2,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-03",
+        "title": "Entraînement",
+        "text": "Le terrain privilégie les parcours et l’observation. Aucune guerre coloniale n’est simulée ici.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R03-0",
+          "type": "planter",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R03-1",
+          "type": "bench",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R03-2",
+          "type": "planter",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R03-3",
+          "type": "console",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R03-4",
+          "type": "planter",
+          "x": 2290,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R03-island",
+          "type": "bench",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R03-island2",
+          "type": "planter",
+          "x": 1750,
+          "z": 60,
+          "w": 150,
+          "d": 42,
+          "h": 108,
+          "solid": true
+        },
+        {
+          "id": "R03-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R03-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R03-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R03-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R03-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R03>R02",
+          "to": "R02",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2085,
+          "arrivalZ": 125,
+          "label": "Retour · Galerie des hybrides",
+          "reverse": "R02>R03",
+          "kind": "door",
+          "requires": [
+            "AE-02"
+          ],
+          "requireLabel": "Rétablir l’accès au jardin"
+        },
+        {
+          "id": "R03>R04",
+          "to": "R04",
+          "x": 2440,
+          "z": 125,
+          "arrivalX": 1725,
+          "arrivalZ": 125,
+          "label": "Passerelle du jardin · Annexe des souvenirs",
+          "reverse": "R04>R03",
+          "kind": "door"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1560,
+        2390
+      ],
+      "narrative": {
+        "enter": "Observe avant de réagir. La première chose qui bouge n’est pas nécessairement la menace.",
+        "canonBoundary": "Un appel d’urgence interrompt l’entraînement. Un bâtiment spatial s’est écrasé à New Siam. Joe fait partie des secours envoyés sur place."
+      },
+      "ambience": "birds"
+    },
+    {
+      "id": "R04",
+      "chapter": "C01",
+      "index": 3,
+      "title": "Annexe des souvenirs",
+      "kit": "neverland",
+      "mode": "SIDE",
+      "width": 1880,
+      "level": "N0",
+      "source": [
+        "FX_CHARACTERS",
+        "FX_OVERVIEW"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Console analogique et baie d’archives",
+      "task": {
+        "id": "AE-04",
+        "room": "R04",
+        "kind": "talk",
+        "label": "Consulter le signal de détresse",
+        "x": 1320,
+        "z": 125,
+        "speaker": "Arthur",
+        "dialogue": "Un nom apparaît dans le trafic des secours. Joe Hermit. Je peux isoler le canal, pas te dire ce que tu dois en faire.",
+        "pattern": [
+          1,
+          0,
+          0
+        ],
+        "sequence": [
+          2,
+          1,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-04",
+        "title": "Canal des secours",
+        "text": "Une transmission humaine traverse le réseau de Prodigy. Le lien familial de Wendy n’est pas une donnée technique.",
+        "x": 490,
+        "z": 125
+      },
+      "props": [
+        {
+          "id": "R04-0",
+          "type": "bed",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R04-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R04-2",
+          "type": "planter",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R04-4",
+          "type": "bed",
+          "x": 1650,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R04-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R04-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R04-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R04-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R04>R02",
+          "to": "R02",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 1025,
+          "arrivalZ": 200,
+          "label": "Retour · Galerie des hybrides",
+          "reverse": "R02>R04",
+          "kind": "door",
+          "requires": [
+            "AE-02"
+          ],
+          "requireLabel": "Rétablir l’accès au jardin"
+        },
+        {
+          "id": "R04>R03",
+          "to": "R03",
+          "x": 1800,
+          "z": 125,
+          "arrivalX": 2365,
+          "arrivalZ": 125,
+          "label": "Retour · Cour d’entraînement",
+          "reverse": "R03>R04",
+          "kind": "door"
+        },
+        {
+          "id": "C01-next",
+          "to": "R05",
+          "x": 1560,
+          "z": 125,
+          "label": "Navette vers New Siam",
+          "kind": "chapter",
+          "requires": [
+            "AE-01",
+            "AE-02",
+            "AE-03",
+            "AE-04"
+          ],
+          "nextChapter": "C02"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1320,
+        1750
+      ],
+      "narrative": {
+        "enter": "Un nom apparaît dans le trafic des secours. Joe Hermit. Je peux isoler le canal, pas te dire ce que tu dois en faire.",
+        "canonBoundary": "Un appel d’urgence interrompt l’entraînement. Un bâtiment spatial s’est écrasé à New Siam. Joe fait partie des secours envoyés sur place."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R05",
+      "chapter": "C02",
+      "index": 4,
+      "title": "Rue de l’impact",
+      "kit": "city",
+      "mode": "DEPTH",
+      "width": 2720,
+      "level": "N0",
+      "source": [
+        "EP02",
+        "FX_CHARACTERS"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Carrefour sous la coque éventrée",
+      "task": {
+        "id": "AE-05",
+        "room": "R05",
+        "kind": "rescue",
+        "label": "Dégager le passage des secours",
+        "x": 1440,
+        "z": 125,
+        "speaker": "Joe",
+        "dialogue": "Il y a encore quelqu’un derrière la barrière. Gardez le passage libre. Je m’occupe du verrou.",
+        "pattern": [
+          1,
+          0,
+          1
+        ],
+        "sequence": [
+          0,
+          2,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 2.5,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-05",
+        "title": "Plan d’évacuation",
+        "text": "Les secours utilisent un itinéraire de fortune. Les portes du chantier et les entrées de la tour sont des destinations distinctes.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R05-0",
+          "type": "wreck",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R05-1",
+          "type": "barrier",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R05-2",
+          "type": "cabinet",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R05-3",
+          "type": "planter",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R05-4",
+          "type": "wreck",
+          "x": 2490,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R05-island",
+          "type": "barrier",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R05-island2",
+          "type": "wreck",
+          "x": 1750,
+          "z": 60,
+          "w": 150,
+          "d": 42,
+          "h": 108,
+          "solid": true
+        },
+        {
+          "id": "R05-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R05-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R05-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R05-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R05-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-05",
+          "kind": "tick",
+          "x": 1870,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1870,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R05>R06",
+          "to": "R06",
+          "x": 2640,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Bâtiment adjacent · Brèche du Maginot",
+          "reverse": "R06>R05",
+          "kind": "door",
+          "requires": [
+            "AE-05"
+          ],
+          "requireLabel": "Dégager le passage des secours"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1440,
+        2590
+      ],
+      "narrative": {
+        "enter": "Il y a encore quelqu’un derrière la barrière. Gardez le passage libre. Je m’occupe du verrou.",
+        "canonBoundary": "L’évacuation se referme sur Joe. Le signal envoyé depuis la tour est le dernier point de contact fiable. Le récit passe à Wendy."
+      },
+      "ambience": "rain"
+    },
+    {
+      "id": "R06",
+      "chapter": "C02",
+      "index": 5,
+      "title": "Brèche du Maginot",
+      "kit": "wreck",
+      "mode": "HYBRID",
+      "width": 2360,
+      "level": "N0",
+      "source": [
+        "EP02",
+        "FX_CHARACTERS"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Nervures de coque encastrées dans le béton",
+      "task": {
+        "id": "AE-06",
+        "room": "R06",
+        "kind": "scan",
+        "label": "Identifier un accès praticable",
+        "x": 1560,
+        "z": 50,
+        "speaker": "Siberian",
+        "dialogue": "On ne traverse pas ce mur. On suit la brèche jusqu’au bâtiment voisin. Restez hors des flaques.",
+        "pattern": [
+          0,
+          1,
+          1
+        ],
+        "sequence": [
+          2,
+          0,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-06",
+        "title": "Une coque étrangère",
+        "text": "Les débris du Maginot n’ont pas la même architecture que le bâtiment terrestre dans lequel ils ont pénétré.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R06-0",
+          "type": "rib",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R06-1",
+          "type": "cargo",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R06-2",
+          "type": "console",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R06-3",
+          "type": "wreck",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R06-4",
+          "type": "rib",
+          "x": 2130,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R06-island",
+          "type": "cargo",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R06-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R06-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R06-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R06-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R06-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-06",
+          "kind": "tick",
+          "x": 1870,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1870,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R06>R05",
+          "to": "R05",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2565,
+          "arrivalZ": 125,
+          "label": "Retour · Rue de l’impact",
+          "reverse": "R05>R06",
+          "kind": "door",
+          "requires": [
+            "AE-05"
+          ],
+          "requireLabel": "Dégager le passage des secours"
+        },
+        {
+          "id": "R06>R07",
+          "to": "R07",
+          "x": 2280,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Monte-charge · Atrium de la tour",
+          "reverse": "R07>R06",
+          "kind": "door"
+        },
+        {
+          "id": "R06>R08",
+          "to": "R08",
+          "x": 960,
+          "z": 200,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Escalier de service · Cage d’ascenseur",
+          "reverse": "R08>R06",
+          "kind": "door"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1560,
+        2230
+      ],
+      "narrative": {
+        "enter": "On ne traverse pas ce mur. On suit la brèche jusqu’au bâtiment voisin. Restez hors des flaques.",
+        "canonBoundary": "L’évacuation se referme sur Joe. Le signal envoyé depuis la tour est le dernier point de contact fiable. Le récit passe à Wendy."
+      },
+      "ambience": "rain"
+    },
+    {
+      "id": "R07",
+      "chapter": "C02",
+      "index": 6,
+      "title": "Atrium de la tour",
+      "kit": "tower",
+      "mode": "DEPTH",
+      "width": 2480,
+      "level": "N2",
+      "source": [
+        "EP02",
+        "FX_CHARACTERS"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Ascenseur panoramique et escalier détruit",
+      "task": {
+        "id": "AE-07",
+        "room": "R07",
+        "kind": "circuit",
+        "label": "Remettre le monte-charge sous tension",
+        "x": 1320,
+        "z": 200,
+        "speaker": "Joe",
+        "dialogue": "Les portes répondent encore au secours local. Il faut couper la ligne abîmée avant de renvoyer le courant.",
+        "pattern": [
+          1,
+          1,
+          0
+        ],
+        "sequence": [
+          1,
+          2,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-07",
+        "title": "Atrium",
+        "text": "Les étages sont reliés par une circulation verticale identifiée. Les changements de pièce représentent cette liaison, pas un déplacement instantané en façade.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R07-0",
+          "type": "sofa",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R07-1",
+          "type": "planter",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R07-2",
+          "type": "console",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R07-3",
+          "type": "cabinet",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R07-4",
+          "type": "sofa",
+          "x": 2250,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R07-island",
+          "type": "planter",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R07-island2",
+          "type": "sofa",
+          "x": 1750,
+          "z": 60,
+          "w": 150,
+          "d": 42,
+          "h": 108,
+          "solid": true
+        },
+        {
+          "id": "R07-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R07-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R07-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R07-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R07-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-07",
+          "kind": "xeno_maginot",
+          "x": 1870,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1870,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R07>R06",
+          "to": "R06",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2205,
+          "arrivalZ": 125,
+          "label": "Retour · Brèche du Maginot",
+          "reverse": "R06>R07",
+          "kind": "door"
+        },
+        {
+          "id": "R07>R08",
+          "to": "R08",
+          "x": 2400,
+          "z": 125,
+          "arrivalX": 1885,
+          "arrivalZ": 125,
+          "label": "Passerelle intérieure · Cage d’ascenseur",
+          "reverse": "R08>R07",
+          "kind": "door",
+          "requires": [
+            "AE-07"
+          ],
+          "requireLabel": "Remettre le monte-charge sous tension"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1320,
+        2350
+      ],
+      "narrative": {
+        "enter": "Les portes répondent encore au secours local. Il faut couper la ligne abîmée avant de renvoyer le courant.",
+        "canonBoundary": "L’évacuation se referme sur Joe. Le signal envoyé depuis la tour est le dernier point de contact fiable. Le récit passe à Wendy."
+      },
+      "ambience": "storm"
+    },
+    {
+      "id": "R08",
+      "chapter": "C02",
+      "index": 7,
+      "title": "Cage d’ascenseur",
+      "kit": "tower",
+      "mode": "SIDE",
+      "width": 2040,
+      "level": "N0",
+      "source": [
+        "EP02",
+        "FX_CHARACTERS"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Contrepoids arrêté dans la gaine",
+      "task": {
+        "id": "AE-08",
+        "room": "R08",
+        "kind": "rescue",
+        "label": "Envoyer la position de Joe",
+        "x": 1440,
+        "z": 125,
+        "speaker": "Joe",
+        "dialogue": "La cabine ne remontera pas. Je marque cet étage. Que quelqu’un garde le canal ouvert.",
+        "pattern": [
+          1,
+          0,
+          0
+        ],
+        "sequence": [
+          2,
+          1,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 2.5,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-08",
+        "title": "Balise isolée",
+        "text": "La balise situe Joe. La récupération de ce signal ne le sauve pas encore.",
+        "x": 490,
+        "z": 125
+      },
+      "props": [
+        {
+          "id": "R08-0",
+          "type": "sofa",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R08-1",
+          "type": "planter",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R08-2",
+          "type": "console",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R08-3",
+          "type": "cabinet",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R08-4",
+          "type": "sofa",
+          "x": 1810,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R08-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R08-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R08-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R08-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-08",
+          "kind": "facehugger",
+          "x": 1570,
+          "z": 125,
+          "hp": 100,
+          "homeX": 1570,
+          "homeZ": 125,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R08>R06",
+          "to": "R06",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 1025,
+          "arrivalZ": 200,
+          "label": "Retour · Brèche du Maginot",
+          "reverse": "R06>R08",
+          "kind": "door"
+        },
+        {
+          "id": "R08>R07",
+          "to": "R07",
+          "x": 1960,
+          "z": 125,
+          "arrivalX": 2325,
+          "arrivalZ": 125,
+          "label": "Retour · Atrium de la tour",
+          "reverse": "R07>R08",
+          "kind": "door",
+          "requires": [
+            "AE-07"
+          ],
+          "requireLabel": "Remettre le monte-charge sous tension"
+        },
+        {
+          "id": "C02-next",
+          "to": "R09",
+          "x": 1720,
+          "z": 125,
+          "label": "Relève · point de vue de Wendy",
+          "kind": "chapter",
+          "requires": [
+            "AE-05",
+            "AE-06",
+            "AE-07",
+            "AE-08"
+          ],
+          "nextChapter": "C03"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1440,
+        1910
+      ],
+      "narrative": {
+        "enter": "La cabine ne remontera pas. Je marque cet étage. Que quelqu’un garde le canal ouvert.",
+        "canonBoundary": "L’évacuation se referme sur Joe. Le signal envoyé depuis la tour est le dernier point de contact fiable. Le récit passe à Wendy."
+      },
+      "ambience": "storm"
+    },
+    {
+      "id": "R09",
+      "chapter": "C03",
+      "index": 8,
+      "title": "Couloir des appartements",
+      "kit": "tower",
+      "mode": "SIDE",
+      "width": 2280,
+      "level": "N0",
+      "source": [
+        "EP03",
+        "FX_CHARACTERS"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Portes numérotées et plafond arraché",
+      "task": {
+        "id": "AE-09",
+        "room": "R09",
+        "kind": "scan",
+        "label": "Suivre la trace des secours",
+        "x": 1560,
+        "z": 125,
+        "speaker": "Wendy",
+        "dialogue": "Les traces s’arrêtent devant l’ascenseur. Pas les bruits. Joe est encore quelque part dans la tour.",
+        "pattern": [
+          1,
+          0,
+          1
+        ],
+        "sequence": [
+          0,
+          2,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-09",
+        "title": "Appartement témoin",
+        "text": "Un cadre, des bagages et une table renversée racontent une évacuation interrompue. Aucun coffre de munitions n’est posé dans le salon.",
+        "x": 490,
+        "z": 125
+      },
+      "props": [
+        {
+          "id": "R09-0",
+          "type": "sofa",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R09-1",
+          "type": "planter",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R09-2",
+          "type": "console",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R09-3",
+          "type": "cabinet",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R09-4",
+          "type": "sofa",
+          "x": 2050,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R09-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R09-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R09-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R09-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R09-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-09",
+          "kind": "facehugger",
+          "x": 1810,
+          "z": 125,
+          "hp": 100,
+          "homeX": 1810,
+          "homeZ": 125,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R09>R10",
+          "to": "R10",
+          "x": 2200,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Bâtiment adjacent · Appartement traversant",
+          "reverse": "R10>R09",
+          "kind": "door"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1560,
+        2150
+      ],
+      "narrative": {
+        "enter": "Les traces s’arrêtent devant l’ascenseur. Pas les bruits. Joe est encore quelque part dans la tour.",
+        "canonBoundary": "Joe est retrouvé. Les survivants quittent le secteur ; les organismes récupérés prennent la direction de Neverland. Leur transfert ne les rend pas inoffensifs."
+      },
+      "ambience": "storm"
+    },
+    {
+      "id": "R10",
+      "chapter": "C03",
+      "index": 9,
+      "title": "Appartement traversant",
+      "kit": "tower",
+      "mode": "DEPTH",
+      "width": 2520,
+      "level": "N1",
+      "source": [
+        "EP03",
+        "FX_CHARACTERS"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Salon éventré sur deux façades",
+      "task": {
+        "id": "AE-10",
+        "room": "R10",
+        "kind": "circuit",
+        "label": "Ouvrir la liaison de service",
+        "x": 1320,
+        "z": 50,
+        "speaker": "Wendy",
+        "dialogue": "La baie donne sur le mauvais côté. Le passage intérieur doit rejoindre le local de maintenance.",
+        "pattern": [
+          0,
+          1,
+          1
+        ],
+        "sequence": [
+          2,
+          0,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-10",
+        "title": "Vitre brisée",
+        "text": "Les ouvertures extérieures restent dangereuses. Les reflets ne représentent pas des plateformes invisibles.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R10-0",
+          "type": "sofa",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R10-1",
+          "type": "planter",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R10-2",
+          "type": "console",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R10-3",
+          "type": "cabinet",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R10-4",
+          "type": "sofa",
+          "x": 2290,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R10-island",
+          "type": "planter",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R10-island2",
+          "type": "sofa",
+          "x": 1750,
+          "z": 60,
+          "w": 150,
+          "d": 42,
+          "h": 108,
+          "solid": true
+        },
+        {
+          "id": "R10-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R10-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R10-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R10-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R10-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-10",
+          "kind": "xeno_maginot",
+          "x": 1870,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1870,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R10>R09",
+          "to": "R09",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2125,
+          "arrivalZ": 125,
+          "label": "Retour · Couloir des appartements",
+          "reverse": "R09>R10",
+          "kind": "door"
+        },
+        {
+          "id": "R10>R11",
+          "to": "R11",
+          "x": 2440,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Monte-charge · Local de maintenance",
+          "reverse": "R11>R10",
+          "kind": "door",
+          "requires": [
+            "AE-10"
+          ],
+          "requireLabel": "Ouvrir la liaison de service"
+        },
+        {
+          "id": "R10>R12",
+          "to": "R12",
+          "x": 960,
+          "z": 200,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Escalier de service · Toit d’extraction",
+          "reverse": "R12>R10",
+          "kind": "door",
+          "requires": [
+            "AE-10"
+          ],
+          "requireLabel": "Ouvrir la liaison de service"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1320,
+        2390
+      ],
+      "narrative": {
+        "enter": "La baie donne sur le mauvais côté. Le passage intérieur doit rejoindre le local de maintenance.",
+        "canonBoundary": "Joe est retrouvé. Les survivants quittent le secteur ; les organismes récupérés prennent la direction de Neverland. Leur transfert ne les rend pas inoffensifs."
+      },
+      "ambience": "storm"
+    },
+    {
+      "id": "R11",
+      "chapter": "C03",
+      "index": 10,
+      "title": "Local de maintenance",
+      "kit": "tower",
+      "mode": "SIDE",
+      "width": 1880,
+      "level": "N2",
+      "source": [
+        "EP03",
+        "FX_CHARACTERS"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Poutre effondrée et borne de secours",
+      "task": {
+        "id": "AE-11",
+        "room": "R11",
+        "kind": "rescue",
+        "label": "Libérer Joe",
+        "x": 1440,
+        "z": 125,
+        "speaker": "Joe",
+        "dialogue": "Je suis là. Ne tire pas sur cette conduite. Le panneau peut glisser si tu le soulèves de ce côté.",
+        "pattern": [
+          1,
+          1,
+          0
+        ],
+        "sequence": [
+          1,
+          2,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 2.5,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-11",
+        "title": "Premiers secours",
+        "text": "Le blessé attend derrière un obstacle structurel. Le dégagement est une action exposée, pas une récompense de combat.",
+        "x": 490,
+        "z": 125
+      },
+      "props": [
+        {
+          "id": "R11-0",
+          "type": "sofa",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R11-1",
+          "type": "planter",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R11-2",
+          "type": "console",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R11-4",
+          "type": "sofa",
+          "x": 1650,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R11-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R11-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R11-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R11-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R11>R10",
+          "to": "R10",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2365,
+          "arrivalZ": 125,
+          "label": "Retour · Appartement traversant",
+          "reverse": "R10>R11",
+          "kind": "door",
+          "requires": [
+            "AE-10"
+          ],
+          "requireLabel": "Ouvrir la liaison de service"
+        },
+        {
+          "id": "R11>R12",
+          "to": "R12",
+          "x": 1800,
+          "z": 125,
+          "arrivalX": 2325,
+          "arrivalZ": 125,
+          "label": "Passerelle intérieure · Toit d’extraction",
+          "reverse": "R12>R11",
+          "kind": "door"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1440,
+        1750
+      ],
+      "narrative": {
+        "enter": "Je suis là. Ne tire pas sur cette conduite. Le panneau peut glisser si tu le soulèves de ce côté.",
+        "canonBoundary": "Joe est retrouvé. Les survivants quittent le secteur ; les organismes récupérés prennent la direction de Neverland. Leur transfert ne les rend pas inoffensifs."
+      },
+      "ambience": "storm"
+    },
+    {
+      "id": "R12",
+      "chapter": "C03",
+      "index": 11,
+      "title": "Toit d’extraction",
+      "kit": "city",
+      "mode": "SETPIECE",
+      "width": 2480,
+      "level": "N0",
+      "source": [
+        "EP03",
+        "FX_CHARACTERS"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Hélisurface provisoire sous la pluie",
+      "task": {
+        "id": "AE-12",
+        "room": "R12",
+        "kind": "rescue",
+        "label": "Sécuriser le point d’embarquement",
+        "x": 1560,
+        "z": 125,
+        "speaker": "Wendy",
+        "dialogue": "Reste près de moi. On avance jusqu’aux balises, pas jusqu’au bord.",
+        "pattern": [
+          1,
+          0,
+          0
+        ],
+        "sequence": [
+          2,
+          1,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 2.5,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-12",
+        "title": "Extraction",
+        "text": "Le toit est un point de transfert de récit. La navette n’est pas un véhicule libre dans cette version.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R12-0",
+          "type": "wreck",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R12-1",
+          "type": "barrier",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R12-2",
+          "type": "cabinet",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R12-3",
+          "type": "planter",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R12-4",
+          "type": "wreck",
+          "x": 2250,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R12-island",
+          "type": "barrier",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R12-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R12-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R12-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R12-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R12-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-12",
+          "kind": "fly",
+          "x": 1870,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1870,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R12>R10",
+          "to": "R10",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 1025,
+          "arrivalZ": 200,
+          "label": "Retour · Appartement traversant",
+          "reverse": "R10>R12",
+          "kind": "door",
+          "requires": [
+            "AE-10"
+          ],
+          "requireLabel": "Ouvrir la liaison de service"
+        },
+        {
+          "id": "R12>R11",
+          "to": "R11",
+          "x": 2400,
+          "z": 125,
+          "arrivalX": 1725,
+          "arrivalZ": 125,
+          "label": "Retour · Local de maintenance",
+          "reverse": "R11>R12",
+          "kind": "door"
+        },
+        {
+          "id": "C03-next",
+          "to": "R13",
+          "x": 2160,
+          "z": 125,
+          "label": "Transfert des survivants vers Neverland",
+          "kind": "chapter",
+          "requires": [
+            "AE-09",
+            "AE-10",
+            "AE-11",
+            "AE-12"
+          ],
+          "nextChapter": "C04"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1560,
+        2350
+      ],
+      "narrative": {
+        "enter": "Reste près de moi. On avance jusqu’aux balises, pas jusqu’au bord.",
+        "canonBoundary": "Joe est retrouvé. Les survivants quittent le secteur ; les organismes récupérés prennent la direction de Neverland. Leur transfert ne les rend pas inoffensifs."
+      },
+      "ambience": "rain"
+    },
+    {
+      "id": "R13",
+      "chapter": "C04",
+      "index": 12,
+      "title": "Quai de quarantaine",
+      "kit": "dock",
+      "mode": "DEPTH",
+      "width": 2520,
+      "level": "N0",
+      "source": [
+        "EP04",
+        "WETA_CREATURES"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Caissons hermétiques et grues de manutention",
+      "task": {
+        "id": "AE-13",
+        "room": "R13",
+        "kind": "circuit",
+        "label": "Séparer les circuits du quai",
+        "x": 1320,
+        "z": 125,
+        "speaker": "Arthur",
+        "dialogue": "Le quai et les enceintes ne doivent jamais perdre leur alimentation en même temps. Commence par la ligne de secours.",
+        "pattern": [
+          1,
+          0,
+          1
+        ],
+        "sequence": [
+          0,
+          2,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-13",
+        "title": "Transport vivant",
+        "text": "Le prélèvement scientifique reste une menace après son arrivée au quai. Une icône verte n’est pas une garantie biologique.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R13-0",
+          "type": "cargo",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R13-1",
+          "type": "barrier",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R13-2",
+          "type": "console",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R13-3",
+          "type": "cargo",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R13-4",
+          "type": "cargo",
+          "x": 2290,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R13-island",
+          "type": "barrier",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R13-island2",
+          "type": "cargo",
+          "x": 1750,
+          "z": 60,
+          "w": 150,
+          "d": 42,
+          "h": 108,
+          "solid": true
+        },
+        {
+          "id": "R13-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R13-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R13-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R13-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R13-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-13",
+          "kind": "tick",
+          "x": 1870,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1870,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R13>R14",
+          "to": "R14",
+          "x": 2440,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Galerie principale · Anneau de confinement",
+          "reverse": "R14>R13",
+          "kind": "door",
+          "requires": [
+            "AE-13"
+          ],
+          "requireLabel": "Séparer les circuits du quai"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1320,
+        2390
+      ],
+      "narrative": {
+        "enter": "Le quai et les enceintes ne doivent jamais perdre leur alimentation en même temps. Commence par la ligne de secours.",
+        "canonBoundary": "Wendy perçoit une présence que les instruments ne décrivent pas. Dans le vivarium, l’Œil observe ses observateurs. Pour comprendre la cargaison, il faut revenir en arrière."
+      },
+      "ambience": "sea"
+    },
+    {
+      "id": "R14",
+      "chapter": "C04",
+      "index": 13,
+      "title": "Anneau de confinement",
+      "kit": "lab",
+      "mode": "DEPTH",
+      "width": 2400,
+      "level": "N0",
+      "source": [
+        "EP04",
+        "WETA_CREATURES"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Cylindre de verre et chemin de ronde",
+      "task": {
+        "id": "AE-14",
+        "room": "R14",
+        "kind": "contain",
+        "label": "Isoler l’enceinte endommagée",
+        "x": 1440,
+        "z": 50,
+        "speaker": "Kirsh",
+        "dialogue": "Personne n’entre. Vérifie les retours d’état sur les trois relais, puis ferme le circuit.",
+        "pattern": [
+          0,
+          1,
+          1
+        ],
+        "sequence": [
+          2,
+          0,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-14",
+        "title": "Interverrouillage",
+        "text": "Les commandes séparent fermeture, ventilation et secours. Leurs combinaisons relèvent de l’adaptation ludique.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R14-0",
+          "type": "tank",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R14-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R14-2",
+          "type": "cabinet",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R14-3",
+          "type": "tank",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R14-4",
+          "type": "tank",
+          "x": 2170,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R14-island",
+          "type": "console",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R14-island2",
+          "type": "tank",
+          "x": 1750,
+          "z": 60,
+          "w": 150,
+          "d": 42,
+          "h": 108,
+          "solid": true
+        },
+        {
+          "id": "R14-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R14-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R14-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R14-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R14-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-14",
+          "kind": "fly",
+          "x": 1870,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1870,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R14>R13",
+          "to": "R13",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2365,
+          "arrivalZ": 125,
+          "label": "Retour · Quai de quarantaine",
+          "reverse": "R13>R14",
+          "kind": "door",
+          "requires": [
+            "AE-13"
+          ],
+          "requireLabel": "Séparer les circuits du quai"
+        },
+        {
+          "id": "R14>R15",
+          "to": "R15",
+          "x": 2320,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Accès de service · Cabine acoustique",
+          "reverse": "R15>R14",
+          "kind": "door",
+          "requires": [
+            "AE-14"
+          ],
+          "requireLabel": "Isoler l’enceinte endommagée"
+        },
+        {
+          "id": "R14>R16",
+          "to": "R16",
+          "x": 960,
+          "z": 200,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Passerelle latérale · Vivarium",
+          "reverse": "R16>R14",
+          "kind": "door",
+          "requires": [
+            "AE-14"
+          ],
+          "requireLabel": "Isoler l’enceinte endommagée"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1440,
+        2270
+      ],
+      "narrative": {
+        "enter": "Personne n’entre. Vérifie les retours d’état sur les trois relais, puis ferme le circuit.",
+        "canonBoundary": "Wendy perçoit une présence que les instruments ne décrivent pas. Dans le vivarium, l’Œil observe ses observateurs. Pour comprendre la cargaison, il faut revenir en arrière."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R15",
+      "chapter": "C04",
+      "index": 14,
+      "title": "Cabine acoustique",
+      "kit": "lab",
+      "mode": "SIDE",
+      "width": 1920,
+      "level": "N0",
+      "source": [
+        "EP04",
+        "WETA_CREATURES"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Arceau acoustique et banc d’analyse",
+      "task": {
+        "id": "AE-15",
+        "room": "R15",
+        "kind": "scan",
+        "label": "Accorder les capteurs auditifs",
+        "x": 1560,
+        "z": 125,
+        "speaker": "Arthur",
+        "dialogue": "N’essaie pas encore de répondre. Distingue le signal, puis laisse-le revenir. Ce que tu entends mérite mieux qu’une étiquette.",
+        "pattern": [
+          1,
+          1,
+          0
+        ],
+        "sequence": [
+          1,
+          2,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": "resonance"
+      },
+      "archive": {
+        "id": "AR-15",
+        "title": "Une autre fréquence",
+        "text": "L’accord des capteurs déverrouille une action de résonance pour Wendy. Sa portée et sa temporisation sont des règles de jeu, pas des chiffres de la série.",
+        "x": 490,
+        "z": 125
+      },
+      "props": [
+        {
+          "id": "R15-0",
+          "type": "tank",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R15-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R15-2",
+          "type": "cabinet",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R15-4",
+          "type": "tank",
+          "x": 1690,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R15-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R15-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R15-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R15-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R15>R14",
+          "to": "R14",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2245,
+          "arrivalZ": 125,
+          "label": "Retour · Anneau de confinement",
+          "reverse": "R14>R15",
+          "kind": "door",
+          "requires": [
+            "AE-14"
+          ],
+          "requireLabel": "Isoler l’enceinte endommagée"
+        },
+        {
+          "id": "R15>R16",
+          "to": "R16",
+          "x": 1840,
+          "z": 125,
+          "arrivalX": 2245,
+          "arrivalZ": 125,
+          "label": "Liaison intérieure · Vivarium",
+          "reverse": "R16>R15",
+          "kind": "door"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1560,
+        1790
+      ],
+      "narrative": {
+        "enter": "N’essaie pas encore de répondre. Distingue le signal, puis laisse-le revenir. Ce que tu entends mérite mieux qu’une étiquette.",
+        "canonBoundary": "Wendy perçoit une présence que les instruments ne décrivent pas. Dans le vivarium, l’Œil observe ses observateurs. Pour comprendre la cargaison, il faut revenir en arrière."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R16",
+      "chapter": "C04",
+      "index": 15,
+      "title": "Vivarium",
+      "kit": "lab",
+      "mode": "HYBRID",
+      "width": 2400,
+      "level": "N0",
+      "source": [
+        "EP04",
+        "WETA_CREATURES"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Mouton observé derrière la double vitre",
+      "task": {
+        "id": "AE-16",
+        "room": "R16",
+        "kind": "scan",
+        "label": "Observer sans ouvrir la cage",
+        "x": 1320,
+        "z": 125,
+        "speaker": "Wendy",
+        "dialogue": "Il ne suit pas la lumière. Il nous suit, nous. Gardons la vitre entre lui et nous.",
+        "pattern": [
+          1,
+          0,
+          0
+        ],
+        "sequence": [
+          2,
+          1,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-16",
+        "title": "L’observateur",
+        "text": "L’Œil et son hôte sont deux éléments distincts. Une vitre close empêche ici son attaque ; il ne traverse pas le verre par commodité.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R16-0",
+          "type": "tank",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R16-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R16-2",
+          "type": "cabinet",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R16-3",
+          "type": "tank",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R16-4",
+          "type": "tank",
+          "x": 2170,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R16-island",
+          "type": "console",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R16-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R16-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R16-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R16-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R16-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-16",
+          "kind": "eye_caged",
+          "x": 1800,
+          "z": 55,
+          "hp": 100,
+          "homeX": 1800,
+          "homeZ": 55,
+          "stationary": true
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R16>R14",
+          "to": "R14",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 1025,
+          "arrivalZ": 200,
+          "label": "Retour · Anneau de confinement",
+          "reverse": "R14>R16",
+          "kind": "door",
+          "requires": [
+            "AE-14"
+          ],
+          "requireLabel": "Isoler l’enceinte endommagée"
+        },
+        {
+          "id": "R16>R15",
+          "to": "R15",
+          "x": 2320,
+          "z": 125,
+          "arrivalX": 1765,
+          "arrivalZ": 125,
+          "label": "Retour · Cabine acoustique",
+          "reverse": "R15>R16",
+          "kind": "door"
+        },
+        {
+          "id": "C04-next",
+          "to": "R17",
+          "x": 2080,
+          "z": 125,
+          "label": "Revoir les événements du Maginot",
+          "kind": "chapter",
+          "requires": [
+            "AE-13",
+            "AE-14",
+            "AE-15",
+            "AE-16"
+          ],
+          "nextChapter": "C05"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1320,
+        2270
+      ],
+      "narrative": {
+        "enter": "Il ne suit pas la lumière. Il nous suit, nous. Gardons la vitre entre lui et nous.",
+        "canonBoundary": "Wendy perçoit une présence que les instruments ne décrivent pas. Dans le vivarium, l’Œil observe ses observateurs. Pour comprendre la cargaison, il faut revenir en arrière."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R17",
+      "chapter": "C05",
+      "index": 16,
+      "title": "Quartier de cryostase",
+      "kit": "maginot",
+      "mode": "SIDE",
+      "width": 2120,
+      "level": "P2",
+      "source": [
+        "EP05",
+        "WETA_PROJECT",
+        "FX_MORROW"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Capsules de sommeil et voûte nervurée",
+      "task": {
+        "id": "AE-17",
+        "room": "R17",
+        "kind": "circuit",
+        "label": "Réveiller les systèmes de secours",
+        "x": 1440,
+        "z": 125,
+        "speaker": "Morrow",
+        "dialogue": "L’alimentation de veille est intacte. Gardez les sas fermés jusqu’à ce que la passerelle réponde.",
+        "pattern": [
+          1,
+          0,
+          1
+        ],
+        "sequence": [
+          0,
+          2,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-17",
+        "title": "Avant l’impact",
+        "text": "Ce chapitre est un retour en arrière. Il conserve son propre état de mission et n’ajoute pas une seconde cargaison à Neverland.",
+        "x": 490,
+        "z": 125
+      },
+      "props": [
+        {
+          "id": "R17-0",
+          "type": "cryo",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R17-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R17-2",
+          "type": "rib",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R17-3",
+          "type": "cargo",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R17-4",
+          "type": "cryo",
+          "x": 1890,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R17-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R17-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R17-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R17-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R17>R18",
+          "to": "R18",
+          "x": 2040,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Sas P2 · Salle des échantillons",
+          "reverse": "R18>R17",
+          "kind": "door",
+          "requires": [
+            "AE-17"
+          ],
+          "requireLabel": "Réveiller les systèmes de secours"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1440,
+        1990
+      ],
+      "narrative": {
+        "enter": "L’alimentation de veille est intacte. Gardez les sas fermés jusqu’à ce que la passerelle réponde.",
+        "canonBoundary": "Le Maginot ne sera pas sauvé. Morrow rejoint sa chambre d’impact. Ce retour en arrière s’arrête avant l’écrasement et ne change pas les événements déjà vécus."
+      },
+      "ambience": "engine"
+    },
+    {
+      "id": "R18",
+      "chapter": "C05",
+      "index": 17,
+      "title": "Salle des échantillons",
+      "kit": "maginot",
+      "mode": "DEPTH",
+      "width": 2600,
+      "level": "P2",
+      "source": [
+        "EP05",
+        "WETA_PROJECT",
+        "FX_MORROW"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Rack de cinq enceintes et bras articulé",
+      "task": {
+        "id": "AE-18",
+        "room": "R18",
+        "kind": "scan",
+        "label": "Récupérer le manifeste de cargaison",
+        "x": 1560,
+        "z": 50,
+        "speaker": "Morrow",
+        "dialogue": "Les caissons ne correspondent plus aux indicateurs. Je veux une lecture locale, pas le dernier état connu.",
+        "pattern": [
+          0,
+          1,
+          1
+        ],
+        "sequence": [
+          2,
+          0,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-18",
+        "title": "Cinq menaces",
+        "text": "Le Xénomorphe, l’Œil, la Tique, la Mouche et l’Orchidée ne constituent pas cinq castes d’une même espèce.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R18-0",
+          "type": "cryo",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R18-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R18-2",
+          "type": "rib",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R18-3",
+          "type": "cargo",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R18-4",
+          "type": "cryo",
+          "x": 2370,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R18-island",
+          "type": "console",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R18-island2",
+          "type": "cryo",
+          "x": 1750,
+          "z": 60,
+          "w": 150,
+          "d": 42,
+          "h": 108,
+          "solid": true
+        },
+        {
+          "id": "R18-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R18-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R18-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R18-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R18-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-18",
+          "kind": "xeno_maginot",
+          "x": 1870,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1870,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R18>R17",
+          "to": "R17",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 1965,
+          "arrivalZ": 125,
+          "label": "Retour · Quartier de cryostase",
+          "reverse": "R17>R18",
+          "kind": "door",
+          "requires": [
+            "AE-17"
+          ],
+          "requireLabel": "Réveiller les systèmes de secours"
+        },
+        {
+          "id": "R18>R19",
+          "to": "R19",
+          "x": 2520,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Galerie technique · Galerie d’ingénierie",
+          "reverse": "R19>R18",
+          "kind": "door"
+        },
+        {
+          "id": "R18>R20",
+          "to": "R20",
+          "x": 960,
+          "z": 200,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Coursive arrière · Chambre d’impact",
+          "reverse": "R20>R18",
+          "kind": "door"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1560,
+        2470
+      ],
+      "narrative": {
+        "enter": "Les caissons ne correspondent plus aux indicateurs. Je veux une lecture locale, pas le dernier état connu.",
+        "canonBoundary": "Le Maginot ne sera pas sauvé. Morrow rejoint sa chambre d’impact. Ce retour en arrière s’arrête avant l’écrasement et ne change pas les événements déjà vécus."
+      },
+      "ambience": "engine"
+    },
+    {
+      "id": "R19",
+      "chapter": "C05",
+      "index": 18,
+      "title": "Galerie d’ingénierie",
+      "kit": "maginot",
+      "mode": "SIDE",
+      "width": 2400,
+      "level": "P2",
+      "source": [
+        "EP05",
+        "WETA_PROJECT",
+        "FX_MORROW"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Turbines, câbles arrachés et vannes",
+      "task": {
+        "id": "AE-19",
+        "room": "R19",
+        "kind": "circuit",
+        "label": "Dériver les commandes de secours",
+        "x": 1320,
+        "z": 125,
+        "speaker": "Morrow",
+        "dialogue": "La commande centrale est perdue. La chambre d’impact peut encore être atteinte depuis cette dérivation.",
+        "pattern": [
+          1,
+          1,
+          0
+        ],
+        "sequence": [
+          1,
+          2,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-19",
+        "title": "Avaries",
+        "text": "Les câbles et les vannes suivent des supports. Les conduites cassées indiquent une avarie localisée, jamais un mur à traverser.",
+        "x": 490,
+        "z": 125
+      },
+      "props": [
+        {
+          "id": "R19-0",
+          "type": "cryo",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R19-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R19-2",
+          "type": "rib",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R19-3",
+          "type": "cargo",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R19-4",
+          "type": "cryo",
+          "x": 2170,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R19-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R19-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R19-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R19-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R19-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-19",
+          "kind": "fly",
+          "x": 1870,
+          "z": 125,
+          "hp": 100,
+          "homeX": 1870,
+          "homeZ": 125,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R19>R18",
+          "to": "R18",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2445,
+          "arrivalZ": 125,
+          "label": "Retour · Salle des échantillons",
+          "reverse": "R18>R19",
+          "kind": "door"
+        },
+        {
+          "id": "R19>R20",
+          "to": "R20",
+          "x": 2320,
+          "z": 125,
+          "arrivalX": 1845,
+          "arrivalZ": 125,
+          "label": "Chambre blindée · Chambre d’impact",
+          "reverse": "R20>R19",
+          "kind": "door",
+          "requires": [
+            "AE-19"
+          ],
+          "requireLabel": "Dériver les commandes de secours"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1320,
+        2270
+      ],
+      "narrative": {
+        "enter": "La commande centrale est perdue. La chambre d’impact peut encore être atteinte depuis cette dérivation.",
+        "canonBoundary": "Le Maginot ne sera pas sauvé. Morrow rejoint sa chambre d’impact. Ce retour en arrière s’arrête avant l’écrasement et ne change pas les événements déjà vécus."
+      },
+      "ambience": "engine"
+    },
+    {
+      "id": "R20",
+      "chapter": "C05",
+      "index": 19,
+      "title": "Chambre d’impact",
+      "kit": "maginot",
+      "mode": "SETPIECE",
+      "width": 2000,
+      "level": "P2",
+      "source": [
+        "EP05",
+        "WETA_PROJECT",
+        "FX_MORROW"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Siège de survie dans un anneau blindé",
+      "task": {
+        "id": "AE-20",
+        "room": "R20",
+        "kind": "contain",
+        "label": "Verrouiller la chambre d’impact",
+        "x": 1440,
+        "z": 125,
+        "speaker": "Morrow",
+        "dialogue": "La coque n’attendra pas une deuxième vérification. Confirme les trois verrous.",
+        "pattern": [
+          1,
+          0,
+          0
+        ],
+        "sequence": [
+          2,
+          1,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-20",
+        "title": "Chambre de survie",
+        "text": "La fermeture de cette chambre protège Morrow, pas l’ensemble de l’équipage. Aucune issue alternative officielle n’est promise.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R20-0",
+          "type": "cryo",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R20-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R20-2",
+          "type": "rib",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R20-3",
+          "type": "cargo",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R20-4",
+          "type": "cryo",
+          "x": 1770,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R20-island",
+          "type": "console",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R20-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R20-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R20-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R20-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-20",
+          "kind": "xeno_maginot",
+          "x": 1530,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1530,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R20>R18",
+          "to": "R18",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 1025,
+          "arrivalZ": 200,
+          "label": "Retour · Salle des échantillons",
+          "reverse": "R18>R20",
+          "kind": "door"
+        },
+        {
+          "id": "R20>R19",
+          "to": "R19",
+          "x": 1920,
+          "z": 125,
+          "arrivalX": 2245,
+          "arrivalZ": 125,
+          "label": "Retour · Galerie d’ingénierie",
+          "reverse": "R19>R20",
+          "kind": "door",
+          "requires": [
+            "AE-19"
+          ],
+          "requireLabel": "Dériver les commandes de secours"
+        },
+        {
+          "id": "C05-next",
+          "to": "R21",
+          "x": 1680,
+          "z": 125,
+          "label": "Retour à Neverland",
+          "kind": "chapter",
+          "requires": [
+            "AE-17",
+            "AE-18",
+            "AE-19",
+            "AE-20"
+          ],
+          "nextChapter": "C06"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1440,
+        1870
+      ],
+      "narrative": {
+        "enter": "La coque n’attendra pas une deuxième vérification. Confirme les trois verrous.",
+        "canonBoundary": "Le Maginot ne sera pas sauvé. Morrow rejoint sa chambre d’impact. Ce retour en arrière s’arrête avant l’écrasement et ne change pas les événements déjà vécus."
+      },
+      "ambience": "engine"
+    },
+    {
+      "id": "R21",
+      "chapter": "C06",
+      "index": 20,
+      "title": "Allée des pavillons",
+      "kit": "courtyard",
+      "mode": "DEPTH",
+      "width": 2560,
+      "level": "N0",
+      "source": [
+        "EP06",
+        "WETA_CREATURES"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Pavillons blancs et sentier noyé de végétation",
+      "task": {
+        "id": "AE-21",
+        "room": "R21",
+        "kind": "talk",
+        "label": "Retrouver le dernier passage de Nibs",
+        "x": 1560,
+        "z": 125,
+        "speaker": "Curly",
+        "dialogue": "Elle est passée par la clinique. Ils disent que tout ira mieux après. Ils le disent toujours avant de fermer la porte.",
+        "pattern": [
+          1,
+          0,
+          1
+        ],
+        "sequence": [
+          0,
+          2,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-21",
+        "title": "Les noms",
+        "text": "Nibs, Curly et les autres ne sont pas des classes de soldats. Leurs relations sont conservées dans le récit.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R21-0",
+          "type": "planter",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R21-1",
+          "type": "bench",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R21-2",
+          "type": "planter",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R21-3",
+          "type": "console",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R21-4",
+          "type": "planter",
+          "x": 2330,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R21-island",
+          "type": "bench",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R21-island2",
+          "type": "planter",
+          "x": 1750,
+          "z": 60,
+          "w": 150,
+          "d": 42,
+          "h": 108,
+          "solid": true
+        },
+        {
+          "id": "R21-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R21-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R21-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R21-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R21-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R21>R22",
+          "to": "R22",
+          "x": 2480,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Galerie principale · Clinique de transfert",
+          "reverse": "R22>R21",
+          "kind": "door"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1560,
+        2430
+      ],
+      "narrative": {
+        "enter": "Elle est passée par la clinique. Ils disent que tout ira mieux après. Ils le disent toujours avant de fermer la porte.",
+        "canonBoundary": "Les relevés établissent la mort d’Isaac, victime de la mouche. Ce constat n’est pas une mission de résurrection. Arthur aide à préparer une fuite ; le danger se déplace vers les galeries de service."
+      },
+      "ambience": "birds"
+    },
+    {
+      "id": "R22",
+      "chapter": "C06",
+      "index": 21,
+      "title": "Clinique de transfert",
+      "kit": "neverland",
+      "mode": "SIDE",
+      "width": 2160,
+      "level": "N0",
+      "source": [
+        "EP06",
+        "WETA_CREATURES"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Fauteuil de transfert et baie médicale",
+      "task": {
+        "id": "AE-22",
+        "room": "R22",
+        "kind": "circuit",
+        "label": "Préserver les données du transfert",
+        "x": 1320,
+        "z": 125,
+        "speaker": "Wendy",
+        "dialogue": "Ces fichiers parlent de nous comme de versions. Je garde une copie avant que la prochaine remplace la précédente.",
+        "pattern": [
+          0,
+          1,
+          1
+        ],
+        "sequence": [
+          2,
+          0,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-22",
+        "title": "Mémoire réinscriptible",
+        "text": "La sauvegarde de données est une marge de manœuvre ajoutée pour le jeu. Elle n’annule pas une reprogrammation montrée dans la série.",
+        "x": 490,
+        "z": 125
+      },
+      "props": [
+        {
+          "id": "R22-0",
+          "type": "bed",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R22-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R22-2",
+          "type": "planter",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R22-3",
+          "type": "cabinet",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R22-4",
+          "type": "bed",
+          "x": 1930,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R22-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R22-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R22-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R22-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R22-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R22>R21",
+          "to": "R21",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2405,
+          "arrivalZ": 125,
+          "label": "Retour · Allée des pavillons",
+          "reverse": "R21>R22",
+          "kind": "door"
+        },
+        {
+          "id": "R22>R23",
+          "to": "R23",
+          "x": 2080,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Accès de service · Laboratoire déserté",
+          "reverse": "R23>R22",
+          "kind": "door",
+          "requires": [
+            "AE-22"
+          ],
+          "requireLabel": "Préserver les données du transfert"
+        },
+        {
+          "id": "R22>R24",
+          "to": "R24",
+          "x": 960,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Passerelle latérale · Galerie de maintenance",
+          "reverse": "R24>R22",
+          "kind": "door",
+          "requires": [
+            "AE-22"
+          ],
+          "requireLabel": "Préserver les données du transfert"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1320,
+        2030
+      ],
+      "narrative": {
+        "enter": "Ces fichiers parlent de nous comme de versions. Je garde une copie avant que la prochaine remplace la précédente.",
+        "canonBoundary": "Les relevés établissent la mort d’Isaac, victime de la mouche. Ce constat n’est pas une mission de résurrection. Arthur aide à préparer une fuite ; le danger se déplace vers les galeries de service."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R23",
+      "chapter": "C06",
+      "index": 22,
+      "title": "Laboratoire déserté",
+      "kit": "lab",
+      "mode": "DEPTH",
+      "width": 2600,
+      "level": "N0",
+      "source": [
+        "EP06",
+        "WETA_CREATURES"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Paillasse corrodée et enceinte ouverte",
+      "task": {
+        "id": "AE-23",
+        "room": "R23",
+        "kind": "scan",
+        "label": "Établir ce qui est arrivé à Isaac",
+        "x": 1440,
+        "z": 200,
+        "speaker": "Wendy",
+        "dialogue": "Ne touche pas cette trace. Elle a traversé le revêtement. Quelque chose s’est nourri ici.",
+        "pattern": [
+          1,
+          1,
+          0
+        ],
+        "sequence": [
+          1,
+          2,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-23",
+        "title": "Corrosion",
+        "text": "La Mouche menace aussi les corps synthétiques. Son danger n’est pas réduit au parasitisme des seuls humains.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R23-0",
+          "type": "tank",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R23-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R23-2",
+          "type": "cabinet",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R23-3",
+          "type": "tank",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R23-4",
+          "type": "tank",
+          "x": 2370,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R23-island",
+          "type": "console",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R23-island2",
+          "type": "tank",
+          "x": 1750,
+          "z": 60,
+          "w": 150,
+          "d": 42,
+          "h": 108,
+          "solid": true
+        },
+        {
+          "id": "R23-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R23-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R23-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R23-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R23-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-23",
+          "kind": "fly",
+          "x": 1870,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1870,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R23>R22",
+          "to": "R22",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2005,
+          "arrivalZ": 125,
+          "label": "Retour · Clinique de transfert",
+          "reverse": "R22>R23",
+          "kind": "door",
+          "requires": [
+            "AE-22"
+          ],
+          "requireLabel": "Préserver les données du transfert"
+        },
+        {
+          "id": "R23>R24",
+          "to": "R24",
+          "x": 2520,
+          "z": 125,
+          "arrivalX": 2085,
+          "arrivalZ": 125,
+          "label": "Liaison intérieure · Galerie de maintenance",
+          "reverse": "R24>R23",
+          "kind": "door"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1440,
+        2470
+      ],
+      "narrative": {
+        "enter": "Ne touche pas cette trace. Elle a traversé le revêtement. Quelque chose s’est nourri ici.",
+        "canonBoundary": "Les relevés établissent la mort d’Isaac, victime de la mouche. Ce constat n’est pas une mission de résurrection. Arthur aide à préparer une fuite ; le danger se déplace vers les galeries de service."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R24",
+      "chapter": "C06",
+      "index": 23,
+      "title": "Galerie de maintenance",
+      "kit": "lab",
+      "mode": "SIDE",
+      "width": 2240,
+      "level": "N0",
+      "source": [
+        "EP06",
+        "WETA_CREATURES"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Treuil d’accès et panneaux déposés",
+      "task": {
+        "id": "AE-24",
+        "room": "R24",
+        "kind": "rescue",
+        "label": "Libérer un accès vers les conduits",
+        "x": 1560,
+        "z": 125,
+        "speaker": "Arthur",
+        "dialogue": "Le canal n’est pas surveillé depuis la salle de contrôle. Suis les marques de maintenance, puis redescends vers la côte.",
+        "pattern": [
+          1,
+          0,
+          0
+        ],
+        "sequence": [
+          2,
+          1,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 2.5,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-24",
+        "title": "Passage de service",
+        "text": "Le local permet de rejoindre les conduits. Le jeu ne transforme pas la fuite préparée par Arthur en sortie sûre.",
+        "x": 490,
+        "z": 125
+      },
+      "props": [
+        {
+          "id": "R24-0",
+          "type": "tank",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R24-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R24-2",
+          "type": "cabinet",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R24-3",
+          "type": "tank",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R24-4",
+          "type": "tank",
+          "x": 2010,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R24-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R24-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R24-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R24-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R24-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-24",
+          "kind": "facehugger",
+          "x": 1770,
+          "z": 125,
+          "hp": 100,
+          "homeX": 1770,
+          "homeZ": 125,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R24>R22",
+          "to": "R22",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 1025,
+          "arrivalZ": 125,
+          "label": "Retour · Clinique de transfert",
+          "reverse": "R22>R24",
+          "kind": "door",
+          "requires": [
+            "AE-22"
+          ],
+          "requireLabel": "Préserver les données du transfert"
+        },
+        {
+          "id": "R24>R23",
+          "to": "R23",
+          "x": 2160,
+          "z": 125,
+          "arrivalX": 2445,
+          "arrivalZ": 125,
+          "label": "Retour · Laboratoire déserté",
+          "reverse": "R23>R24",
+          "kind": "door"
+        },
+        {
+          "id": "C06-next",
+          "to": "R25",
+          "x": 1920,
+          "z": 125,
+          "label": "Suivre Joe vers la côte",
+          "kind": "chapter",
+          "requires": [
+            "AE-21",
+            "AE-22",
+            "AE-23",
+            "AE-24"
+          ],
+          "nextChapter": "C07"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1560,
+        2110
+      ],
+      "narrative": {
+        "enter": "Le canal n’est pas surveillé depuis la salle de contrôle. Suis les marques de maintenance, puis redescends vers la côte.",
+        "canonBoundary": "Les relevés établissent la mort d’Isaac, victime de la mouche. Ce constat n’est pas une mission de résurrection. Arthur aide à préparer une fuite ; le danger se déplace vers les galeries de service."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R25",
+      "chapter": "C07",
+      "index": 24,
+      "title": "Conduits de service",
+      "kit": "tunnel",
+      "mode": "SIDE",
+      "width": 2160,
+      "level": "N0",
+      "source": [
+        "EP07",
+        "EP08"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Conduit ovale, câbles et trappe basse",
+      "task": {
+        "id": "AE-25",
+        "room": "R25",
+        "kind": "scan",
+        "label": "Suivre les indices laissés par Arthur",
+        "x": 1320,
+        "z": 125,
+        "speaker": "Joe",
+        "dialogue": "Il y a des empreintes dans la poussière. Elles vont vers le collecteur, pas vers la clinique.",
+        "pattern": [
+          1,
+          0,
+          1
+        ],
+        "sequence": [
+          0,
+          2,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-25",
+        "title": "Après Arthur",
+        "text": "Les traces attestent une issue, pas un objectif de soin. Les morts établies par la série ne deviennent pas des figurants récupérables.",
+        "x": 490,
+        "z": 125
+      },
+      "props": [
+        {
+          "id": "R25-0",
+          "type": "pipe",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R25-1",
+          "type": "cabinet",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R25-2",
+          "type": "pipe",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R25-3",
+          "type": "console",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R25-4",
+          "type": "pipe",
+          "x": 1930,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R25-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R25-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R25-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R25-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R25-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-25",
+          "kind": "facehugger",
+          "x": 1690,
+          "z": 125,
+          "hp": 100,
+          "homeX": 1690,
+          "homeZ": 125,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R25>R26",
+          "to": "R26",
+          "x": 2080,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Sortie du collecteur · Sentier de la réserve",
+          "reverse": "R26>R25",
+          "kind": "door"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1320,
+        2030
+      ],
+      "narrative": {
+        "enter": "Il y a des empreintes dans la poussière. Elles vont vers le collecteur, pas vers la clinique.",
+        "canonBoundary": "Arthur n’a pas survécu. Ce chapitre établit les conséquences et prépare le regroupement ; il ne permet pas d’annuler sa mort. La maîtrise de Neverland est désormais en jeu."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R26",
+      "chapter": "C07",
+      "index": 25,
+      "title": "Sentier de la réserve",
+      "kit": "jungle",
+      "mode": "DEPTH",
+      "width": 2800,
+      "level": "N0",
+      "source": [
+        "EP07",
+        "EP08"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Arbre incliné, orchidée suspendue et clôture",
+      "task": {
+        "id": "AE-26",
+        "room": "R26",
+        "kind": "circuit",
+        "label": "Rétablir les balises du littoral",
+        "x": 1440,
+        "z": 50,
+        "speaker": "Joe",
+        "dialogue": "Sans balise, on manquera l’embranchement dans le noir. Il faut une ligne jusqu’aux marches.",
+        "pattern": [
+          0,
+          1,
+          1
+        ],
+        "sequence": [
+          2,
+          0,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-26",
+        "title": "Sous les fleurs",
+        "text": "L’Orchidée occupe une hauteur. La zone projetée au sol indique où sa frappe peut atteindre un acteur.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R26-0",
+          "type": "tree",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R26-1",
+          "type": "rock",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R26-2",
+          "type": "planter",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R26-3",
+          "type": "tree",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R26-4",
+          "type": "tree",
+          "x": 2570,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R26-island",
+          "type": "rock",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R26-island2",
+          "type": "tree",
+          "x": 1750,
+          "z": 60,
+          "w": 150,
+          "d": 42,
+          "h": 108,
+          "solid": true
+        },
+        {
+          "id": "R26-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R26-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R26-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R26-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R26-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-26",
+          "kind": "orchid",
+          "x": 1890,
+          "z": 125,
+          "hp": 100,
+          "homeX": 1890,
+          "homeZ": 125,
+          "stationary": true
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R26>R25",
+          "to": "R25",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2005,
+          "arrivalZ": 125,
+          "label": "Retour · Conduits de service",
+          "reverse": "R25>R26",
+          "kind": "door"
+        },
+        {
+          "id": "R26>R27",
+          "to": "R27",
+          "x": 2720,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Sentier côtier · Accès à la plage",
+          "reverse": "R27>R26",
+          "kind": "door",
+          "requires": [
+            "AE-26"
+          ],
+          "requireLabel": "Rétablir les balises du littoral"
+        },
+        {
+          "id": "R26>R28",
+          "to": "R28",
+          "x": 960,
+          "z": 200,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Escalier de pierre · Embarcadère",
+          "reverse": "R28>R26",
+          "kind": "door",
+          "requires": [
+            "AE-26"
+          ],
+          "requireLabel": "Rétablir les balises du littoral"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1440,
+        2670
+      ],
+      "narrative": {
+        "enter": "Sans balise, on manquera l’embranchement dans le noir. Il faut une ligne jusqu’aux marches.",
+        "canonBoundary": "Arthur n’a pas survécu. Ce chapitre établit les conséquences et prépare le regroupement ; il ne permet pas d’annuler sa mort. La maîtrise de Neverland est désormais en jeu."
+      },
+      "ambience": "insects"
+    },
+    {
+      "id": "R27",
+      "chapter": "C07",
+      "index": 26,
+      "title": "Accès à la plage",
+      "kit": "jungle",
+      "mode": "HYBRID",
+      "width": 2600,
+      "level": "N0",
+      "source": [
+        "EP07",
+        "EP08"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Escalier de pierre et cordon de quarantaine",
+      "task": {
+        "id": "AE-27",
+        "room": "R27",
+        "kind": "scan",
+        "label": "Identifier les traces près de la côte",
+        "x": 1560,
+        "z": 200,
+        "speaker": "Joe",
+        "dialogue": "Ce n’est plus une extraction. On rassemble les preuves, puis on rejoint les autres.",
+        "pattern": [
+          1,
+          1,
+          0
+        ],
+        "sequence": [
+          1,
+          2,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-27",
+        "title": "Un hôte emprunté",
+        "text": "La présence de l’Œil est distinguée de l’identité de son hôte. Le jeu n’attribue pas les décisions du parasite à la personne disparue.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R27-0",
+          "type": "tree",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R27-1",
+          "type": "rock",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R27-2",
+          "type": "planter",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R27-3",
+          "type": "tree",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R27-4",
+          "type": "tree",
+          "x": 2370,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R27-island",
+          "type": "rock",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R27-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R27-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R27-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R27-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R27-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-27",
+          "kind": "eye_host",
+          "x": 1870,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1870,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R27>R26",
+          "to": "R26",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2645,
+          "arrivalZ": 125,
+          "label": "Retour · Sentier de la réserve",
+          "reverse": "R26>R27",
+          "kind": "door",
+          "requires": [
+            "AE-26"
+          ],
+          "requireLabel": "Rétablir les balises du littoral"
+        },
+        {
+          "id": "R27>R28",
+          "to": "R28",
+          "x": 2520,
+          "z": 125,
+          "arrivalX": 2165,
+          "arrivalZ": 125,
+          "label": "Ponton latéral · Embarcadère",
+          "reverse": "R28>R27",
+          "kind": "door"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1560,
+        2470
+      ],
+      "narrative": {
+        "enter": "Ce n’est plus une extraction. On rassemble les preuves, puis on rejoint les autres.",
+        "canonBoundary": "Arthur n’a pas survécu. Ce chapitre établit les conséquences et prépare le regroupement ; il ne permet pas d’annuler sa mort. La maîtrise de Neverland est désormais en jeu."
+      },
+      "ambience": "insects"
+    },
+    {
+      "id": "R28",
+      "chapter": "C07",
+      "index": 27,
+      "title": "Embarcadère",
+      "kit": "dock",
+      "mode": "SETPIECE",
+      "width": 2320,
+      "level": "N0",
+      "source": [
+        "EP07",
+        "EP08"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Ponton, vedette amarrée et radio côtière",
+      "task": {
+        "id": "AE-28",
+        "room": "R28",
+        "kind": "circuit",
+        "label": "Préparer la liaison du regroupement",
+        "x": 1320,
+        "z": 125,
+        "speaker": "Joe",
+        "dialogue": "Le bateau ne résout pas le problème. Mais la radio doit porter jusqu’au complexe.",
+        "pattern": [
+          1,
+          0,
+          0
+        ],
+        "sequence": [
+          2,
+          1,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-28",
+        "title": "Littoral",
+        "text": "La jungle, l’escalier et l’embarcadère partagent une même logique de côte. Une porte ne mène jamais directement du Maginot à la plage.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R28-0",
+          "type": "cargo",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R28-1",
+          "type": "barrier",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R28-2",
+          "type": "console",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R28-3",
+          "type": "cargo",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R28-4",
+          "type": "cargo",
+          "x": 2090,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R28-island",
+          "type": "barrier",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R28-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R28-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R28-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R28-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R28-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-28",
+          "kind": "tick",
+          "x": 1850,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1850,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R28>R26",
+          "to": "R26",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 1025,
+          "arrivalZ": 200,
+          "label": "Retour · Sentier de la réserve",
+          "reverse": "R26>R28",
+          "kind": "door",
+          "requires": [
+            "AE-26"
+          ],
+          "requireLabel": "Rétablir les balises du littoral"
+        },
+        {
+          "id": "R28>R27",
+          "to": "R27",
+          "x": 2240,
+          "z": 125,
+          "arrivalX": 2445,
+          "arrivalZ": 125,
+          "label": "Retour · Accès à la plage",
+          "reverse": "R27>R28",
+          "kind": "door"
+        },
+        {
+          "id": "C07-next",
+          "to": "R29",
+          "x": 2000,
+          "z": 125,
+          "label": "Retrouver Wendy au complexe",
+          "kind": "chapter",
+          "requires": [
+            "AE-25",
+            "AE-26",
+            "AE-27",
+            "AE-28"
+          ],
+          "nextChapter": "C08"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1320,
+        2190
+      ],
+      "narrative": {
+        "enter": "Le bateau ne résout pas le problème. Mais la radio doit porter jusqu’au complexe.",
+        "canonBoundary": "Arthur n’a pas survécu. Ce chapitre établit les conséquences et prépare le regroupement ; il ne permet pas d’annuler sa mort. La maîtrise de Neverland est désormais en jeu."
+      },
+      "ambience": "sea"
+    },
+    {
+      "id": "R29",
+      "chapter": "C08",
+      "index": 28,
+      "title": "Bloc de détention",
+      "kit": "lab",
+      "mode": "SIDE",
+      "width": 2040,
+      "level": "N0",
+      "source": [
+        "EP08",
+        "FX_CHARACTERS"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Trois cellules vitrées et console de garde",
+      "task": {
+        "id": "AE-29",
+        "room": "R29",
+        "kind": "circuit",
+        "label": "Déverrouiller les cellules",
+        "x": 1440,
+        "z": 125,
+        "speaker": "Wendy",
+        "dialogue": "Reculez des portes. Attendez qu’elles soient toutes ouvertes avant de sortir.",
+        "pattern": [
+          1,
+          0,
+          1
+        ],
+        "sequence": [
+          0,
+          2,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-29",
+        "title": "Les enfermés",
+        "text": "Ouvrir une cellule est une action sur le monde. Les personnages libérés ne produisent pas des points de butin.",
+        "x": 490,
+        "z": 125
+      },
+      "props": [
+        {
+          "id": "R29-0",
+          "type": "tank",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R29-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R29-2",
+          "type": "cabinet",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R29-3",
+          "type": "tank",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R29-4",
+          "type": "tank",
+          "x": 1810,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R29-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R29-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R29-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R29-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-29",
+          "kind": "fly",
+          "x": 1570,
+          "z": 125,
+          "hp": 100,
+          "homeX": 1570,
+          "homeZ": 125,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R29>R30",
+          "to": "R30",
+          "x": 1960,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Galerie principale · Laboratoire central",
+          "reverse": "R30>R29",
+          "kind": "door",
+          "requires": [
+            "AE-29"
+          ],
+          "requireLabel": "Déverrouiller les cellules"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1440,
+        1910
+      ],
+      "narrative": {
+        "enter": "Reculez des portes. Attendez qu’elles soient toutes ouvertes avant de sortir.",
+        "canonBoundary": "Les hybrides reprennent le contrôle de leur situation et Boy Kavalier est captif. L’approche de Weyland-Yutani laisse l’avenir ouvert. FIN DE CETTE ADAPTATION DE LA SAISON 1 — aucune suite non diffusée n’est inventée."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R30",
+      "chapter": "C08",
+      "index": 29,
+      "title": "Laboratoire central",
+      "kit": "lab",
+      "mode": "DEPTH",
+      "width": 2800,
+      "level": "N0",
+      "source": [
+        "EP08",
+        "FX_CHARACTERS"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Cuve de développement et passerelles concentriques",
+      "task": {
+        "id": "AE-30",
+        "room": "R30",
+        "kind": "contain",
+        "label": "Séparer le contrôle des enceintes",
+        "x": 1560,
+        "z": 50,
+        "speaker": "Wendy",
+        "dialogue": "Il n’y aura plus une seule commande pour toutes les cages. Cette fois, c’est nous qui décidons ce qui reste fermé.",
+        "pattern": [
+          0,
+          1,
+          1
+        ],
+        "sequence": [
+          2,
+          0,
+          1
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-30",
+        "title": "Un autre Xénomorphe",
+        "text": "Le Xénomorphe de Neverland est distinct de celui du Maginot. La résonance lui est destinée ; elle n’est pas un contrôle universel des organismes.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R30-0",
+          "type": "tank",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R30-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R30-2",
+          "type": "cabinet",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R30-3",
+          "type": "tank",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R30-4",
+          "type": "tank",
+          "x": 2570,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R30-island",
+          "type": "console",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R30-island2",
+          "type": "tank",
+          "x": 1750,
+          "z": 60,
+          "w": 150,
+          "d": 42,
+          "h": 108,
+          "solid": true
+        },
+        {
+          "id": "R30-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R30-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R30-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R30-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R30-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "EN-30",
+          "kind": "xeno_neverland",
+          "x": 1870,
+          "z": 175,
+          "hp": 100,
+          "homeX": 1870,
+          "homeZ": 175,
+          "stationary": false
+        }
+      ],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R30>R29",
+          "to": "R29",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 1885,
+          "arrivalZ": 125,
+          "label": "Retour · Bloc de détention",
+          "reverse": "R29>R30",
+          "kind": "door",
+          "requires": [
+            "AE-29"
+          ],
+          "requireLabel": "Déverrouiller les cellules"
+        },
+        {
+          "id": "R30>R31",
+          "to": "R31",
+          "x": 2720,
+          "z": 125,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Accès de service · Résidence de Kavalier",
+          "reverse": "R31>R30",
+          "kind": "door",
+          "requires": [
+            "AE-30"
+          ],
+          "requireLabel": "Séparer le contrôle des enceintes"
+        },
+        {
+          "id": "R30>R32",
+          "to": "R32",
+          "x": 960,
+          "z": 200,
+          "arrivalX": 145,
+          "arrivalZ": 125,
+          "label": "Passerelle latérale · Terrasse de Neverland",
+          "reverse": "R32>R30",
+          "kind": "door",
+          "requires": [
+            "AE-30"
+          ],
+          "requireLabel": "Séparer le contrôle des enceintes"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1560,
+        2670
+      ],
+      "narrative": {
+        "enter": "Il n’y aura plus une seule commande pour toutes les cages. Cette fois, c’est nous qui décidons ce qui reste fermé.",
+        "canonBoundary": "Les hybrides reprennent le contrôle de leur situation et Boy Kavalier est captif. L’approche de Weyland-Yutani laisse l’avenir ouvert. FIN DE CETTE ADAPTATION DE LA SAISON 1 — aucune suite non diffusée n’est inventée."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R31",
+      "chapter": "C08",
+      "index": 30,
+      "title": "Résidence de Kavalier",
+      "kit": "neverland",
+      "mode": "HYBRID",
+      "width": 2520,
+      "level": "N0",
+      "source": [
+        "EP08",
+        "FX_CHARACTERS"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Salon ouvert sur la mer et table de commande",
+      "task": {
+        "id": "AE-31",
+        "room": "R31",
+        "kind": "talk",
+        "label": "Faire tomber les derniers verrous",
+        "x": 1320,
+        "z": 200,
+        "speaker": "Boy Kavalier",
+        "dialogue": "Vous ne savez pas ce qui arrivera quand ils comprendront que je ne réponds plus.",
+        "pattern": [
+          1,
+          1,
+          0
+        ],
+        "sequence": [
+          1,
+          2,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-31",
+        "title": "Captivité inversée",
+        "text": "Le renversement d’autorité n’équivaut pas à la disparition des corporations. Les conséquences à venir restent ouvertes.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R31-0",
+          "type": "bed",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R31-1",
+          "type": "console",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R31-2",
+          "type": "planter",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R31-3",
+          "type": "cabinet",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R31-4",
+          "type": "bed",
+          "x": 2290,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R31-island",
+          "type": "console",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R31-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R31-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R31-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R31-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R31-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R31>R30",
+          "to": "R30",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 2645,
+          "arrivalZ": 125,
+          "label": "Retour · Laboratoire central",
+          "reverse": "R30>R31",
+          "kind": "door",
+          "requires": [
+            "AE-30"
+          ],
+          "requireLabel": "Séparer le contrôle des enceintes"
+        },
+        {
+          "id": "R31>R32",
+          "to": "R32",
+          "x": 2440,
+          "z": 125,
+          "arrivalX": 2605,
+          "arrivalZ": 125,
+          "label": "Liaison intérieure · Terrasse de Neverland",
+          "reverse": "R32>R31",
+          "kind": "door"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1320,
+        2390
+      ],
+      "narrative": {
+        "enter": "Vous ne savez pas ce qui arrivera quand ils comprendront que je ne réponds plus.",
+        "canonBoundary": "Les hybrides reprennent le contrôle de leur situation et Boy Kavalier est captif. L’approche de Weyland-Yutani laisse l’avenir ouvert. FIN DE CETTE ADAPTATION DE LA SAISON 1 — aucune suite non diffusée n’est inventée."
+      },
+      "ambience": "ventilation"
+    },
+    {
+      "id": "R32",
+      "chapter": "C08",
+      "index": 31,
+      "title": "Terrasse de Neverland",
+      "kit": "courtyard",
+      "mode": "DEPTH",
+      "width": 2760,
+      "level": "N0",
+      "source": [
+        "EP08",
+        "FX_CHARACTERS"
+      ],
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "landmark": "Verrière côtière et lumières au large",
+      "task": {
+        "id": "AE-32",
+        "room": "R32",
+        "kind": "talk",
+        "label": "Rejoindre les hybrides",
+        "x": 1440,
+        "z": 125,
+        "speaker": "Wendy",
+        "dialogue": "On reste ensemble. Les portes sont à nous. Pour le reste, nous regarderons ce qui arrive.",
+        "pattern": [
+          1,
+          0,
+          0
+        ],
+        "sequence": [
+          2,
+          1,
+          0
+        ],
+        "circuits": [
+          "Secours",
+          "Confinement",
+          "Liaison"
+        ],
+        "duration": 1.0,
+        "reward": null
+      },
+      "archive": {
+        "id": "AR-32",
+        "title": "La ligne au large",
+        "text": "Le final s’arrête au seuil d’une nouvelle menace. Cette campagne ne décrit ni une saison 2 imaginaire ni une victoire définitive sur Weyland-Yutani.",
+        "x": 490,
+        "z": 50
+      },
+      "props": [
+        {
+          "id": "R32-0",
+          "type": "planter",
+          "x": 300,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R32-1",
+          "type": "bench",
+          "x": 780,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R32-2",
+          "type": "planter",
+          "x": 1160,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 158,
+          "solid": true
+        },
+        {
+          "id": "R32-3",
+          "type": "console",
+          "x": 1800,
+          "z": 207,
+          "w": 150,
+          "d": 28,
+          "h": 110,
+          "solid": true
+        },
+        {
+          "id": "R32-4",
+          "type": "planter",
+          "x": 2530,
+          "z": 22,
+          "w": 120,
+          "d": 28,
+          "h": 134,
+          "solid": true
+        },
+        {
+          "id": "R32-island",
+          "type": "bench",
+          "x": 640,
+          "z": 92,
+          "w": 195,
+          "d": 52,
+          "h": 75,
+          "solid": true
+        },
+        {
+          "id": "R32-island2",
+          "type": "planter",
+          "x": 1750,
+          "z": 60,
+          "w": 150,
+          "d": 42,
+          "h": 108,
+          "solid": true
+        },
+        {
+          "id": "R32-wall0",
+          "type": "wall-light",
+          "x": 145,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R32-wall1",
+          "type": "wall-panel",
+          "x": 530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R32-wall2",
+          "type": "wall-light",
+          "x": 1020,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R32-wall3",
+          "type": "wall-panel",
+          "x": 1530,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        },
+        {
+          "id": "R32-wall4",
+          "type": "wall-light",
+          "x": 2040,
+          "z": 0,
+          "w": 55,
+          "d": 0,
+          "h": 85,
+          "solid": false
+        }
+      ],
+      "enemies": [],
+      "spawn": {
+        "x": 120,
+        "z": 125
+      },
+      "portals": [
+        {
+          "id": "R32>R30",
+          "to": "R30",
+          "x": 80,
+          "z": 125,
+          "arrivalX": 1025,
+          "arrivalZ": 200,
+          "label": "Retour · Laboratoire central",
+          "reverse": "R30>R32",
+          "kind": "door",
+          "requires": [
+            "AE-30"
+          ],
+          "requireLabel": "Séparer le contrôle des enceintes"
+        },
+        {
+          "id": "R32>R31",
+          "to": "R31",
+          "x": 2680,
+          "z": 125,
+          "arrivalX": 2365,
+          "arrivalZ": 125,
+          "label": "Retour · Résidence de Kavalier",
+          "reverse": "R31>R32",
+          "kind": "door"
+        },
+        {
+          "id": "C08-next",
+          "to": "END",
+          "x": 2440,
+          "z": 125,
+          "label": "Rester avec les hybrides",
+          "kind": "chapter",
+          "requires": [
+            "AE-29",
+            "AE-30",
+            "AE-31",
+            "AE-32"
+          ],
+          "nextChapter": "END"
+        }
+      ],
+      "passages": [
+        120,
+        490,
+        900,
+        1440,
+        2630
+      ],
+      "narrative": {
+        "enter": "On reste ensemble. Les portes sont à nous. Pour le reste, nous regarderons ce qui arrive.",
+        "canonBoundary": "Les hybrides reprennent le contrôle de leur situation et Boy Kavalier est captif. L’approche de Weyland-Yutani laisse l’avenir ouvert. FIN DE CETTE ADAPTATION DE LA SAISON 1 — aucune suite non diffusée n’est inventée."
+      },
+      "ambience": "birds"
+    }
+  ],
+  "links": [
+    {
+      "a": "R01",
+      "b": "R02",
+      "kind": "Galerie"
+    },
+    {
+      "a": "R02",
+      "b": "R03",
+      "kind": "Cour"
+    },
+    {
+      "a": "R02",
+      "b": "R04",
+      "kind": "Annexe"
+    },
+    {
+      "a": "R03",
+      "b": "R04",
+      "kind": "Passerelle du jardin"
+    },
+    {
+      "a": "R05",
+      "b": "R06",
+      "kind": "Bâtiment adjacent"
+    },
+    {
+      "a": "R06",
+      "b": "R07",
+      "kind": "Monte-charge"
+    },
+    {
+      "a": "R06",
+      "b": "R08",
+      "kind": "Escalier de service"
+    },
+    {
+      "a": "R07",
+      "b": "R08",
+      "kind": "Passerelle intérieure"
+    },
+    {
+      "a": "R09",
+      "b": "R10",
+      "kind": "Bâtiment adjacent"
+    },
+    {
+      "a": "R10",
+      "b": "R11",
+      "kind": "Monte-charge"
+    },
+    {
+      "a": "R10",
+      "b": "R12",
+      "kind": "Escalier de service"
+    },
+    {
+      "a": "R11",
+      "b": "R12",
+      "kind": "Passerelle intérieure"
+    },
+    {
+      "a": "R13",
+      "b": "R14",
+      "kind": "Galerie principale"
+    },
+    {
+      "a": "R14",
+      "b": "R15",
+      "kind": "Accès de service"
+    },
+    {
+      "a": "R14",
+      "b": "R16",
+      "kind": "Passerelle latérale"
+    },
+    {
+      "a": "R15",
+      "b": "R16",
+      "kind": "Liaison intérieure"
+    },
+    {
+      "a": "R17",
+      "b": "R18",
+      "kind": "Sas P2"
+    },
+    {
+      "a": "R18",
+      "b": "R19",
+      "kind": "Galerie technique"
+    },
+    {
+      "a": "R18",
+      "b": "R20",
+      "kind": "Coursive arrière"
+    },
+    {
+      "a": "R19",
+      "b": "R20",
+      "kind": "Chambre blindée"
+    },
+    {
+      "a": "R21",
+      "b": "R22",
+      "kind": "Galerie principale"
+    },
+    {
+      "a": "R22",
+      "b": "R23",
+      "kind": "Accès de service"
+    },
+    {
+      "a": "R22",
+      "b": "R24",
+      "kind": "Passerelle latérale"
+    },
+    {
+      "a": "R23",
+      "b": "R24",
+      "kind": "Liaison intérieure"
+    },
+    {
+      "a": "R25",
+      "b": "R26",
+      "kind": "Sortie du collecteur"
+    },
+    {
+      "a": "R26",
+      "b": "R27",
+      "kind": "Sentier côtier"
+    },
+    {
+      "a": "R26",
+      "b": "R28",
+      "kind": "Escalier de pierre"
+    },
+    {
+      "a": "R27",
+      "b": "R28",
+      "kind": "Ponton latéral"
+    },
+    {
+      "a": "R29",
+      "b": "R30",
+      "kind": "Galerie principale"
+    },
+    {
+      "a": "R30",
+      "b": "R31",
+      "kind": "Accès de service"
+    },
+    {
+      "a": "R30",
+      "b": "R32",
+      "kind": "Passerelle latérale"
+    },
+    {
+      "a": "R31",
+      "b": "R32",
+      "kind": "Liaison intérieure"
+    }
+  ],
+  "characters": [
+    {
+      "id": "wendy",
+      "name": "Wendy",
+      "type": "Hybride",
+      "role": "Corps synthétique, conscience humaine. Déplacement rapide, poussée de dégagement et résonance après l’accord acoustique.",
+      "canon": "Première hybride réussie de Prodigy ; sœur de Joe.",
+      "weapon": "none",
+      "speed": 225,
+      "health": 120,
+      "source": "FX_CHARACTERS"
+    },
+    {
+      "id": "joe",
+      "name": "Joe Hermit",
+      "type": "Humain",
+      "role": "Secours et reconnaissance. Arme de sécurité à ressources limitées ; vulnérable aux organismes qui ciblent les humains.",
+      "canon": "Frère de Wendy, engagé dans les secours à New Siam.",
+      "weapon": "security",
+      "speed": 198,
+      "health": 100,
+      "source": "FX_CHARACTERS"
+    },
+    {
+      "id": "morrow",
+      "name": "Morrow",
+      "type": "Cyborg",
+      "role": "Sécurité du Maginot. Arme de sécurité et résistance accrue, uniquement dans le retour en arrière.",
+      "canon": "Chef de la sécurité du Maginot, lié à Weyland-Yutani.",
+      "weapon": "security",
+      "speed": 190,
+      "health": 135,
+      "source": "FX_MORROW"
+    }
+  ],
+  "creatures": [
+    {
+      "id": "xeno_maginot",
+      "name": "Xénomorphe du Maginot",
+      "canon": "Individu du vaisseau, distinct de celui développé à Neverland.",
+      "behavior": "Patrouille, enquête sur le bruit, mémorise une dernière position, s’aligne en profondeur, prépare une charge. Un tir le repousse ; il ne devient pas du butin.",
+      "counter": "Rompre la ligne de vue, rester discret, profiter de son engagement annoncé. La résonance de Wendy ne le commande pas.",
+      "source": "WETA_INTERVIEW",
+      "status": "CANON + COMPORTEMENT LUDIQUE ADAPTÉ"
+    },
+    {
+      "id": "xeno_neverland",
+      "name": "Xénomorphe de Neverland",
+      "canon": "Individu développé en cuve, lié à la communication de Wendy.",
+      "behavior": "L’approche reste dangereuse. Une résonance obtenue au chapitre 4 interrompt temporairement son comportement ; ce n’est pas une laisse permanente.",
+      "counter": "Résonance de Wendy, interposition architecturale, déplacement prudent.",
+      "source": "WETA_INTERVIEW",
+      "status": "CANON + COMPORTEMENT LUDIQUE ADAPTÉ"
+    },
+    {
+      "id": "facehugger",
+      "name": "Facehugger",
+      "canon": "Stade parasitaire du cycle xénomorphe ; à distinguer des autres espèces du Maginot.",
+      "behavior": "Recherche prioritairement les personnages humains, rampe puis bondit. Dans ce module, l’atteinte est abstraite en dégâts et recul, pas en gestation jouable.",
+      "counter": "Repérer sa faible silhouette et sortir de sa bande de saut. Wendy ne constitue pas une cible d’implantation humaine.",
+      "source": "EP06",
+      "status": "CANON + RISQUE ABSTRAIT POUR LE JEU"
+    },
+    {
+      "id": "tick",
+      "name": "Tique · espèce 19",
+      "canon": "Une des quatre nouvelles créatures conçues pour Alien: Earth ; elle n’est pas une caste xénomorphe.",
+      "behavior": "Patrouille au sol, s’approche en courtes accélérations, provoque une zone temporaire de danger après son attaque.",
+      "counter": "Observer le sol ; ne pas traverser la zone signalée. Un outil repousse la Tique sans en faire une récompense.",
+      "source": "WETA_CREATURES",
+      "status": "CANON + ZONE DE DANGER ADAPTÉE"
+    },
+    {
+      "id": "fly",
+      "name": "Mouche",
+      "canon": "Organisme distinct dont la digestion corrosive menace aussi un corps synthétique.",
+      "behavior": "Vole autour de sa position, annonce sa visée puis projette un jet. Le sol conserve une trace corrosive temporaire.",
+      "counter": "Changer de profondeur pendant l’annonce, se placer derrière un obstacle, ne pas rester sur la flaque.",
+      "source": "WETA_INTERVIEW",
+      "status": "CANON + BALISTIQUE ADAPTÉE"
+    },
+    {
+      "id": "eye_caged",
+      "name": "T. Ocellus · l’Œil en observation",
+      "canon": "Parasite capable d’occuper un hôte par l’orbite. Le vivarium montre un hôte ovin.",
+      "behavior": "Observe derrière le verre. Cette rencontre ne déclenche ni poursuite ni tir à travers la cage.",
+      "counter": "Observer et scanner sans ouvrir l’enceinte.",
+      "source": "WETA_CREATURES",
+      "status": "RENCONTRE D’OBSERVATION"
+    },
+    {
+      "id": "eye_host",
+      "name": "L’Œil · hôte mobile",
+      "canon": "Le parasite et l’identité de l’hôte restent distincts.",
+      "behavior": "Épie, change de trajectoire vers une position perçue et attend près des accès. Le changement d’hôte lui-même est un événement narratif, pas une simulation complète.",
+      "counter": "Maintenir la distance et couper les lignes de vue. Ne pas interpréter sa présence comme celle d’un allié.",
+      "source": "EP08",
+      "status": "CANON + HÔTE SIMPLIFIÉ"
+    },
+    {
+      "id": "orchid",
+      "name": "Orchidée · D. Plumbicare",
+      "canon": "Créature carnivore suspendue, conçue parmi les organismes du Maginot.",
+      "behavior": "Reste fixée au plafond ou à une branche. Une ombre se resserre avant l’abattement ; l’attaque ne traverse pas toute la pièce.",
+      "counter": "Lire la zone au sol, attendre la fin de l’attaque ou contourner en profondeur.",
+      "source": "WETA_CREATURES",
+      "status": "CANON + EMBUSCADE ADAPTÉE"
+    }
+  ],
+  "sources": [
+    {
+      "id": "FX_OVERVIEW",
+      "title": "FX — Alien: Earth",
+      "url": "https://www.fxnetworks.com/shows/alien-earth",
+      "scope": "Cadre officiel et présentation de la série.",
+      "type": "primaire",
+      "checked": "2026-09-29"
+    },
+    {
+      "id": "FX_CHARACTERS",
+      "title": "FX — personnages",
+      "url": "https://www.fxnetworks.com/shows/alien-earth/characters",
+      "scope": "Rôles des personnages ; Wendy, Joe, Kirsh, Boy Kavalier, les hybrides.",
+      "type": "primaire",
+      "checked": "2026-09-29"
+    },
+    {
+      "id": "FX_MORROW",
+      "title": "FX — Morrow",
+      "url": "https://www.fxnetworks.com/shows/alien-earth/characters/babou-ceesay-morrow",
+      "scope": "Rôle de Morrow et rattachement au Maginot.",
+      "type": "primaire",
+      "checked": "2026-09-29"
+    },
+    {
+      "id": "WETA_PROJECT",
+      "title": "Wētā Workshop — Alien: Earth",
+      "url": "https://www.wetaworkshop.com/projects/alien-earth",
+      "scope": "Production, année 2120, Maginot, direction artistique des créatures.",
+      "type": "primaire",
+      "checked": "2026-09-29"
+    },
+    {
+      "id": "WETA_CREATURES",
+      "title": "Wētā Workshop Design Studio — Maginot Creatures",
+      "url": "https://wetaworkshopdesignstudio.artstation.com/projects/5WQqmz",
+      "scope": "Quatre nouveaux organismes : Eye, Tick, Fly, Orchid.",
+      "type": "primaire",
+      "checked": "2026-09-29"
+    },
+    {
+      "id": "WETA_INTERVIEW",
+      "title": "Entretien avec les créateurs de Wētā",
+      "url": "https://winteriscoming.net/how-weta-workshop-reimagined-xenomorph-alien-earth-creatures",
+      "scope": "Xénomorphes distincts et fonctions biologiques des organismes. 26 septembre 2025.",
+      "type": "entretien primaire",
+      "checked": "2026-09-29"
+    },
+    {
+      "id": "EP02",
+      "title": "Repères narratifs — Mr. October",
+      "url": "https://en.wikipedia.org/wiki/Alien:_Earth#Episodes",
+      "scope": "Tour de New Siam et situation de Joe. Vérification secondaire, pas transcription.",
+      "type": "secondaire",
+      "checked": "2026-09-29"
+    },
+    {
+      "id": "EP03",
+      "title": "Repères narratifs — Metamorphosis",
+      "url": "https://en.wikipedia.org/wiki/Alien:_Earth#Episodes",
+      "scope": "Récupération de Joe et transfert.",
+      "type": "secondaire",
+      "checked": "2026-09-29"
+    },
+    {
+      "id": "EP04",
+      "title": "Repères narratifs — Observation",
+      "url": "https://en.wikipedia.org/wiki/Alien:_Earth#Episodes",
+      "scope": "Acoustique de Wendy et vivarium.",
+      "type": "secondaire",
+      "checked": "2026-09-29"
+    },
+    {
+      "id": "EP05",
+      "title": "Repères narratifs — In Space, No One…",
+      "url": "https://en.wikipedia.org/wiki/Alien:_Earth#Episodes",
+      "scope": "Retour en arrière à bord du Maginot.",
+      "type": "secondaire",
+      "checked": "2026-09-29"
+    },
+    {
+      "id": "EP06",
+      "title": "Repères narratifs — The Fly",
+      "url": "https://en.wikipedia.org/wiki/Alien:_Earth#Episodes",
+      "scope": "Nibs, Isaac et Arthur.",
+      "type": "secondaire",
+      "checked": "2026-09-29"
+    },
+    {
+      "id": "EP07",
+      "title": "Repères narratifs — Emergence",
+      "url": "https://en.wikipedia.org/wiki/Alien:_Earth#Episodes",
+      "scope": "Conséquences de l’infection d’Arthur.",
+      "type": "secondaire",
+      "checked": "2026-09-29"
+    },
+    {
+      "id": "EP08",
+      "title": "Repères narratifs — The Real Monsters",
+      "url": "https://en.wikipedia.org/wiki/Alien:_Earth#Episodes",
+      "scope": "Final ouvert, renversement de la captivité.",
+      "type": "secondaire",
+      "checked": "2026-09-29"
+    }
+  ],
+  "rules": [
+    {
+      "id": "LD-001",
+      "category": "Continuité",
+      "text": "L’année de référence est 2120. Ne pas importer l’arsenal ou une campagne de Marines de 2179 comme équipement standard."
+    },
+    {
+      "id": "LD-002",
+      "category": "Continuité",
+      "text": "Le Maginot, New Siam et Neverland sont des lieux distincts. Les transferts entre eux sont explicitement annoncés."
+    },
+    {
+      "id": "LD-003",
+      "category": "Continuité",
+      "text": "Le chapitre Maginot est un retour en arrière, sans duplication de cargaison dans le présent."
+    },
+    {
+      "id": "LD-004",
+      "category": "Continuité",
+      "text": "Les morts établies dans le récit restent des conséquences, pas des objectifs de réanimation."
+    },
+    {
+      "id": "LD-005",
+      "category": "Continuité",
+      "text": "Les plans exacts de la série ne sont pas revendiqués : chaque plan de ce module est une adaptation jouable."
+    },
+    {
+      "id": "LD-006",
+      "category": "Continuité",
+      "text": "Les dialogues sont originaux. Aucune réplique étendue ni bande sonore de la série n’est distribuée."
+    },
+    {
+      "id": "LD-007",
+      "category": "Continuité",
+      "text": "Le Xénomorphe du Maginot et celui de Neverland ont des identifiants différents."
+    },
+    {
+      "id": "LD-008",
+      "category": "Continuité",
+      "text": "L’Œil, la Tique, la Mouche et l’Orchidée ne sont pas rangés dans les castes xénomorphes."
+    },
+    {
+      "id": "LD-009",
+      "category": "Continuité",
+      "text": "La résonance n’est accessible à Wendy qu’après l’accord des capteurs, et n’affecte pas tous les organismes."
+    },
+    {
+      "id": "LD-010",
+      "category": "Continuité",
+      "text": "La campagne s’arrête à la fin de la saison 1. Aucun contenu inédit de saison 2 n’est présenté comme officiel."
+    },
+    {
+      "id": "LD-011",
+      "category": "Espace",
+      "text": "SIDE conserve une bande praticable. Les obstacles n’obligent pas à traverser un mur pour avancer."
+    },
+    {
+      "id": "LD-012",
+      "category": "Espace",
+      "text": "DEPTH autorise un contournement physique réel, pas seulement une variation de taille des sprites."
+    },
+    {
+      "id": "LD-013",
+      "category": "Espace",
+      "text": "HYBRID conserve une circulation compacte autour de portes et d’îlots lisibles."
+    },
+    {
+      "id": "LD-014",
+      "category": "Espace",
+      "text": "SETPIECE contraint l’espace aux besoins du transfert ou du verrouillage, sans véhicule libre fictif."
+    },
+    {
+      "id": "LD-015",
+      "category": "Espace",
+      "text": "Une porte intérieure possède un retour identifié et un point d’arrivée hors de son seuil."
+    },
+    {
+      "id": "LD-016",
+      "category": "Espace",
+      "text": "Les liaisons entre étages portent une désignation de monte-charge, d’escalier ou de passerelle."
+    },
+    {
+      "id": "LD-017",
+      "category": "Espace",
+      "text": "Une mission se débloque par des actions sur place, pas en ouvrant son entrée dans le codex."
+    },
+    {
+      "id": "LD-018",
+      "category": "Espace",
+      "text": "Les meubles de premier plan ont un pied et un volume ; leur collision n’occupe pas toute leur image."
+    },
+    {
+      "id": "LD-019",
+      "category": "Espace",
+      "text": "Un objectif, une archive ou un point d’arrivée ne peut pas se trouver dans un volume solide."
+    },
+    {
+      "id": "LD-020",
+      "category": "Espace",
+      "text": "Le chemin vers chaque interaction doit être vérifié par une recherche de trajet sur la géométrie livrée."
+    },
+    {
+      "id": "LD-021",
+      "category": "Espace",
+      "text": "Les passerelles et seuils sont lisibles ; aucun changement de profondeur n’est dissimulé derrière un faux mur."
+    },
+    {
+      "id": "LD-022",
+      "category": "Espace",
+      "text": "Le mode classique utilise des plans et des passages identifiés ; il ne modifie pas la progression."
+    },
+    {
+      "id": "LD-023",
+      "category": "Espace",
+      "text": "Le retour par une porte n’achève ni objectif ni chapitre automatiquement."
+    },
+    {
+      "id": "LD-024",
+      "category": "Espace",
+      "text": "Les accès de chapitre vérifient les quatre actions du chapitre avant transfert."
+    },
+    {
+      "id": "LD-025",
+      "category": "Rendu",
+      "text": "Le décor couvre l’ensemble du champ de jeu depuis son bord haut. Aucun fond limité à une bande inférieure."
+    },
+    {
+      "id": "LD-026",
+      "category": "Rendu",
+      "text": "La parallaxe sépare ciel ou baie lointaine, architecture, plan jouable et avant-plan."
+    },
+    {
+      "id": "LD-027",
+      "category": "Rendu",
+      "text": "Les humains, organismes et objets de volume sont triés par leur profondeur au sol."
+    },
+    {
+      "id": "LD-028",
+      "category": "Rendu",
+      "text": "Un premier plan qui masque le personnage devient translucide, sans changer sa collision."
+    },
+    {
+      "id": "LD-029",
+      "category": "Rendu",
+      "text": "Le HUD est placé hors du champ de déplacement ; le codex et la carte interrompent le temps."
+    },
+    {
+      "id": "LD-030",
+      "category": "Rendu",
+      "text": "Les accessoires des laboratoires, du Maginot, de la tour et de la jungle suivent des familles distinctes."
+    },
+    {
+      "id": "LD-031",
+      "category": "Rendu",
+      "text": "La signalétique sert les portes et objectifs. Pas de commentaires de programmation dans le monde."
+    },
+    {
+      "id": "LD-032",
+      "category": "Rendu",
+      "text": "Les sprites de cette version sont des dessins vectoriels procéduraux. Ne pas les qualifier de photoréalistes ou 1:1."
+    },
+    {
+      "id": "LD-033",
+      "category": "IA",
+      "text": "Les dégâts au contact exigent une proximité en X et en profondeur."
+    },
+    {
+      "id": "LD-034",
+      "category": "IA",
+      "text": "La perception n’utilise pas la position du joueur à travers une collision opaque."
+    },
+    {
+      "id": "LD-035",
+      "category": "IA",
+      "text": "Un bruit peut être entendu sans ligne de vue ; l’enquête suit alors une dernière position connue."
+    },
+    {
+      "id": "LD-036",
+      "category": "IA",
+      "text": "Les acteurs mobiles utilisent les mêmes empreintes d’obstacles que le joueur."
+    },
+    {
+      "id": "LD-037",
+      "category": "IA",
+      "text": "Une attaque dangereuse est annoncée avant de devenir active."
+    },
+    {
+      "id": "LD-038",
+      "category": "IA",
+      "text": "La corrosion possède une durée finie et ne devient pas un obstacle invisible permanent."
+    },
+    {
+      "id": "LD-039",
+      "category": "IA",
+      "text": "Les tirs prennent en compte l’alignement de profondeur et l’occlusion par des objets solides."
+    },
+    {
+      "id": "LD-040",
+      "category": "IA",
+      "text": "Les outils repoussent les créatures principales sans distribuer de butin ni contredire leur survie canonique."
+    },
+    {
+      "id": "LD-041",
+      "category": "IA",
+      "text": "Le Facehugger n’implante pas Wendy dans cette adaptation ; les dégâts d’implantation sont abstraits pour les humains."
+    },
+    {
+      "id": "LD-042",
+      "category": "IA",
+      "text": "L’Œil enfermé ne traverse pas le verre et n’inflige pas de dégâts au joueur."
+    },
+    {
+      "id": "LD-043",
+      "category": "Sauvegarde",
+      "text": "La sauvegarde du DLC reste dans un espace de stockage distinct de la campagne stratégique Tantalus."
+    },
+    {
+      "id": "LD-044",
+      "category": "Sauvegarde",
+      "text": "Une reprise ne restaure jamais une touche enfoncée, un verrou de transition ou un mélange de caméra."
+    },
+    {
+      "id": "LD-045",
+      "category": "Sauvegarde",
+      "text": "Une sauvegarde invalide est signalée sans écraser silencieusement les données originales."
+    },
+    {
+      "id": "LD-046",
+      "category": "Sauvegarde",
+      "text": "Une mort propose la reprise au point d’entrée de la pièce ; elle n’efface pas les archives déjà enregistrées."
+    },
+    {
+      "id": "LD-047",
+      "category": "Sauvegarde",
+      "text": "La perte de focus met le jeu en pause et vide les entrées de déplacement."
+    },
+    {
+      "id": "LD-048",
+      "category": "Sauvegarde",
+      "text": "Une importation vérifie l’identité du DLC, la version, la pièce et les valeurs numériques."
+    },
+    {
+      "id": "LD-049",
+      "category": "Intégration",
+      "text": "L’installateur ajoute un dossier et un lanceur identifiables ; il ne remplace pas les autres DLC."
+    },
+    {
+      "id": "LD-050",
+      "category": "Intégration",
+      "text": "Le lanceur est distinct d’une intégration native au GameEngine et au SaveSystem du jeu hôte."
+    },
+    {
+      "id": "LD-051",
+      "category": "Intégration",
+      "text": "Une installation répétée n’ajoute pas un second lanceur."
+    },
+    {
+      "id": "LD-052",
+      "category": "Intégration",
+      "text": "La désinstallation vérifie les modifications locales avant d’enlever des fichiers."
+    },
+    {
+      "id": "LD-053",
+      "category": "Vérification",
+      "text": "Une capture du rapport provient du HTML livré exécuté dans Chromium, pas d’une image de présentation."
+    },
+    {
+      "id": "LD-054",
+      "category": "Vérification",
+      "text": "Le chargement direct des 32 pièces ne remplace pas un parcours complet par les interactions."
+    },
+    {
+      "id": "LD-055",
+      "category": "Vérification",
+      "text": "Les tests de logique et les tests navigateur sont rapportés séparément."
+    },
+    {
+      "id": "LD-056",
+      "category": "Vérification",
+      "text": "L’absence de copie complète du jeu hôte interdit d’annoncer sa non-régression globale comme validée."
+    }
+  ],
+  "status": {
+    "nativeHostIntegration": false,
+    "launcherIntegration": true,
+    "productionArt": false,
+    "coop": false,
+    "season2": false,
+    "story": "Saison 1 adaptée ; dialogues et plans originaux ; scènes intermédiaires condensées."
+  }
+}

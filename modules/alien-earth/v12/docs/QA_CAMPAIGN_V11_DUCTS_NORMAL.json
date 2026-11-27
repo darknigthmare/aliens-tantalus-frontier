@@ -1,0 +1,1619 @@
+{
+  "bundleSha256": "024dec038dad391d54c76e2a6c0b2c3f70459f33d8b5e127a5cc48cafa604df3",
+  "mode": "Engine bot, AI active, normal, full exploration",
+  "noInvulnerability": true,
+  "noObjectiveInjection": true,
+  "noRoomTeleport": true,
+  "rooms": [
+    {
+      "id": "R01",
+      "task": "AE-01",
+      "optional": false,
+      "hp": 120,
+      "time": 3.9160839160839362
+    },
+    {
+      "id": "R34",
+      "task": "AE-34",
+      "optional": true,
+      "hp": 120,
+      "time": 9.701890701890717
+    },
+    {
+      "id": "R02",
+      "task": "AE-02",
+      "optional": false,
+      "hp": 120,
+      "time": 25.595182595182294
+    },
+    {
+      "id": "R33",
+      "task": "AE-33",
+      "optional": true,
+      "hp": 120,
+      "time": 34.86609686609635
+    },
+    {
+      "id": "R03",
+      "task": "AE-03",
+      "optional": false,
+      "hp": 120,
+      "time": 43.486143486142794
+    },
+    {
+      "id": "R04",
+      "task": "AE-04",
+      "optional": false,
+      "hp": 120,
+      "time": 53.31131831131739
+    },
+    {
+      "id": "R49",
+      "task": "AE-49",
+      "optional": true,
+      "hp": 120,
+      "time": 69.16857923151242
+    },
+    {
+      "id": "R05",
+      "task": "AE-05",
+      "optional": false,
+      "hp": 100,
+      "time": 91.05095071419534
+    },
+    {
+      "id": "R35",
+      "task": "AE-35",
+      "optional": true,
+      "hp": 100,
+      "time": 98.93916196422583
+    },
+    {
+      "id": "R06",
+      "task": "AE-06",
+      "optional": false,
+      "hp": 90,
+      "time": 141.3438058624167
+    },
+    {
+      "id": "R36",
+      "task": "AE-36",
+      "optional": true,
+      "hp": 90,
+      "time": 152.60673915807516
+    },
+    {
+      "id": "R07",
+      "task": "AE-07",
+      "optional": false,
+      "hp": 90,
+      "time": 173.85768549641486
+    },
+    {
+      "id": "R08",
+      "task": "AE-08",
+      "optional": false,
+      "hp": 90,
+      "time": 189.25193131120335
+    },
+    {
+      "id": "R50",
+      "task": "AE-50",
+      "optional": true,
+      "hp": 90,
+      "time": 209.08149708686108
+    },
+    {
+      "id": "R09",
+      "task": "AE-09",
+      "optional": false,
+      "hp": 120,
+      "time": 230.51010437090383
+    },
+    {
+      "id": "R37",
+      "task": "AE-37",
+      "optional": true,
+      "hp": 120,
+      "time": 236.53134239214043
+    },
+    {
+      "id": "R10",
+      "task": "AE-10",
+      "optional": false,
+      "hp": 120,
+      "time": 251.64478450557894
+    },
+    {
+      "id": "R38",
+      "task": "AE-38",
+      "optional": true,
+      "hp": 120,
+      "time": 258.4009409417356
+    },
+    {
+      "id": "R11",
+      "task": "AE-11",
+      "optional": false,
+      "hp": 120,
+      "time": 286.1514718922825
+    },
+    {
+      "id": "R12",
+      "task": "AE-12",
+      "optional": false,
+      "hp": 99,
+      "time": 309.496833197657
+    },
+    {
+      "id": "R51",
+      "task": "AE-51",
+      "optional": true,
+      "hp": 86,
+      "time": 332.6185650378904
+    },
+    {
+      "id": "R13",
+      "task": "AE-13",
+      "optional": false,
+      "hp": 120,
+      "time": 359.47680952150876
+    },
+    {
+      "id": "R39",
+      "task": "AE-39",
+      "optional": true,
+      "hp": 120,
+      "time": 369.096856141561
+    },
+    {
+      "id": "R14",
+      "task": "AE-14",
+      "optional": false,
+      "hp": 120,
+      "time": 387.59154663626265
+    },
+    {
+      "id": "R40",
+      "task": "AE-40",
+      "optional": true,
+      "hp": 120,
+      "time": 396.7839838287052
+    },
+    {
+      "id": "R15",
+      "task": "AE-15",
+      "optional": false,
+      "hp": 120,
+      "time": 410.4291534738836
+    },
+    {
+      "id": "R16",
+      "task": "AE-16",
+      "optional": false,
+      "hp": 120,
+      "time": 420.4913135360499
+    },
+    {
+      "id": "R52",
+      "task": "AE-52",
+      "optional": true,
+      "hp": 120,
+      "time": 438.6283509226016
+    },
+    {
+      "id": "R17",
+      "task": "AE-17",
+      "optional": false,
+      "hp": 135,
+      "time": 459.6765406533911
+    },
+    {
+      "id": "R41",
+      "task": "AE-41",
+      "optional": true,
+      "hp": 135,
+      "time": 466.84099900206223
+    },
+    {
+      "id": "R18",
+      "task": "AE-18",
+      "optional": false,
+      "hp": 135,
+      "time": 485.4319694351435
+    },
+    {
+      "id": "R42",
+      "task": "AE-42",
+      "optional": true,
+      "hp": 135,
+      "time": 498.34026289607306
+    },
+    {
+      "id": "R19",
+      "task": "AE-19",
+      "optional": false,
+      "hp": 135,
+      "time": 519.8345580745763
+    },
+    {
+      "id": "R20",
+      "task": "AE-20",
+      "optional": false,
+      "hp": 135,
+      "time": 533.3697071360302
+    },
+    {
+      "id": "R53",
+      "task": "AE-53",
+      "optional": true,
+      "hp": 135,
+      "time": 555.5388038390079
+    },
+    {
+      "id": "R21",
+      "task": "AE-21",
+      "optional": false,
+      "hp": 120,
+      "time": 580.0390260870081
+    },
+    {
+      "id": "R43",
+      "task": "AE-43",
+      "optional": true,
+      "hp": 120,
+      "time": 589.0796891276622
+    },
+    {
+      "id": "R22",
+      "task": "AE-22",
+      "optional": false,
+      "hp": 120,
+      "time": 605.9439729919275
+    },
+    {
+      "id": "R44",
+      "task": "AE-44",
+      "optional": true,
+      "hp": 120,
+      "time": 618.8475005754416
+    },
+    {
+      "id": "R23",
+      "task": "AE-23",
+      "optional": false,
+      "hp": 73,
+      "time": 668.1183837662751
+    },
+    {
+      "id": "R24",
+      "task": "AE-24",
+      "optional": false,
+      "hp": 73,
+      "time": 693.8299610778263
+    },
+    {
+      "id": "R54",
+      "task": "AE-54",
+      "optional": true,
+      "hp": 73,
+      "time": 715.0964824782761
+    },
+    {
+      "id": "R25",
+      "task": "AE-25",
+      "optional": false,
+      "hp": 100,
+      "time": 737.5273255585985
+    },
+    {
+      "id": "R45",
+      "task": "AE-45",
+      "optional": true,
+      "hp": 100,
+      "time": 745.9806282828023
+    },
+    {
+      "id": "R26",
+      "task": "AE-26",
+      "optional": false,
+      "hp": 100,
+      "time": 777.1162560523097
+    },
+    {
+      "id": "R46",
+      "task": "AE-46",
+      "optional": true,
+      "hp": 100,
+      "time": 787.7448572154464
+    },
+    {
+      "id": "R27",
+      "task": "AE-27",
+      "optional": false,
+      "hp": 100,
+      "time": 827.5615813565876
+    },
+    {
+      "id": "R28",
+      "task": "AE-28",
+      "optional": false,
+      "hp": 100,
+      "time": 853.7544936261114
+    },
+    {
+      "id": "R55",
+      "task": "AE-55",
+      "optional": true,
+      "hp": 100,
+      "time": 881.2270723857719
+    },
+    {
+      "id": "R29",
+      "task": "AE-29",
+      "optional": false,
+      "hp": 120,
+      "time": 904.3553367429914
+    },
+    {
+      "id": "R47",
+      "task": "AE-47",
+      "optional": true,
+      "hp": 96,
+      "time": 910.768183155831
+    },
+    {
+      "id": "R30",
+      "task": "AE-30",
+      "optional": false,
+      "hp": 96,
+      "time": 927.0813144689442
+    },
+    {
+      "id": "R48",
+      "task": "AE-48",
+      "optional": true,
+      "hp": 96,
+      "time": 935.4778438654653
+    },
+    {
+      "id": "R31",
+      "task": "AE-31",
+      "optional": false,
+      "hp": 96,
+      "time": 953.4617858493873
+    },
+    {
+      "id": "R32",
+      "task": "AE-32",
+      "optional": false,
+      "hp": 96,
+      "time": 968.1121354997206
+    },
+    {
+      "id": "R56",
+      "task": "AE-56",
+      "optional": true,
+      "hp": 96,
+      "time": 987.7810143780846
+    }
+  ],
+  "restores": 16,
+  "steps": 30325,
+  "deaths": 0,
+  "minimumHp": 59,
+  "portalsUsed": [
+    {
+      "from": "R01",
+      "to": "R34",
+      "id": "R01>R34",
+      "shortcut": false
+    },
+    {
+      "from": "R34",
+      "to": "R04",
+      "id": "R34>R04",
+      "shortcut": true
+    },
+    {
+      "from": "R04",
+      "to": "R34",
+      "id": "R04>R34",
+      "shortcut": true
+    },
+    {
+      "from": "R34",
+      "to": "R01",
+      "id": "R34>R01",
+      "shortcut": false
+    },
+    {
+      "from": "R01",
+      "to": "R02",
+      "id": "R01>R02",
+      "shortcut": false
+    },
+    {
+      "from": "R02",
+      "to": "R33",
+      "id": "R02>R33",
+      "shortcut": false
+    },
+    {
+      "from": "R33",
+      "to": "R03",
+      "id": "R33>R03",
+      "shortcut": true
+    },
+    {
+      "from": "R03",
+      "to": "R04",
+      "id": "R03>R04",
+      "shortcut": false
+    },
+    {
+      "from": "R04",
+      "to": "R02",
+      "id": "R04>R02",
+      "shortcut": false
+    },
+    {
+      "from": "R02",
+      "to": "R49",
+      "id": "R02>R49",
+      "shortcut": false
+    },
+    {
+      "from": "R49",
+      "to": "R34",
+      "id": "R49>R34",
+      "shortcut": false
+    },
+    {
+      "from": "R34",
+      "to": "R04",
+      "id": "R34>R04",
+      "shortcut": true
+    },
+    {
+      "from": "R05",
+      "to": "R35",
+      "id": "R05>R35",
+      "shortcut": false
+    },
+    {
+      "from": "R35",
+      "to": "R07",
+      "id": "R35>R07",
+      "shortcut": true
+    },
+    {
+      "from": "R07",
+      "to": "R06",
+      "id": "R07>R06",
+      "shortcut": false
+    },
+    {
+      "from": "R06",
+      "to": "R36",
+      "id": "R06>R36",
+      "shortcut": false
+    },
+    {
+      "from": "R36",
+      "to": "R08",
+      "id": "R36>R08",
+      "shortcut": true
+    },
+    {
+      "from": "R08",
+      "to": "R06",
+      "id": "R08>R06",
+      "shortcut": false
+    },
+    {
+      "from": "R06",
+      "to": "R07",
+      "id": "R06>R07",
+      "shortcut": false
+    },
+    {
+      "from": "R07",
+      "to": "R08",
+      "id": "R07>R08",
+      "shortcut": false
+    },
+    {
+      "from": "R08",
+      "to": "R06",
+      "id": "R08>R06",
+      "shortcut": false
+    },
+    {
+      "from": "R06",
+      "to": "R50",
+      "id": "R06>R50",
+      "shortcut": false
+    },
+    {
+      "from": "R50",
+      "to": "R36",
+      "id": "R50>R36",
+      "shortcut": false
+    },
+    {
+      "from": "R36",
+      "to": "R08",
+      "id": "R36>R08",
+      "shortcut": true
+    },
+    {
+      "from": "R09",
+      "to": "R37",
+      "id": "R09>R37",
+      "shortcut": false
+    },
+    {
+      "from": "R37",
+      "to": "R11",
+      "id": "R37>R11",
+      "shortcut": true
+    },
+    {
+      "from": "R11",
+      "to": "R37",
+      "id": "R11>R37",
+      "shortcut": true
+    },
+    {
+      "from": "R37",
+      "to": "R09",
+      "id": "R37>R09",
+      "shortcut": false
+    },
+    {
+      "from": "R09",
+      "to": "R10",
+      "id": "R09>R10",
+      "shortcut": false
+    },
+    {
+      "from": "R10",
+      "to": "R38",
+      "id": "R10>R38",
+      "shortcut": false
+    },
+    {
+      "from": "R38",
+      "to": "R12",
+      "id": "R38>R12",
+      "shortcut": true
+    },
+    {
+      "from": "R12",
+      "to": "R11",
+      "id": "R12>R11",
+      "shortcut": false
+    },
+    {
+      "from": "R11",
+      "to": "R12",
+      "id": "R11>R12",
+      "shortcut": false
+    },
+    {
+      "from": "R12",
+      "to": "R10",
+      "id": "R12>R10",
+      "shortcut": false
+    },
+    {
+      "from": "R10",
+      "to": "R51",
+      "id": "R10>R51",
+      "shortcut": false
+    },
+    {
+      "from": "R51",
+      "to": "R38",
+      "id": "R51>R38",
+      "shortcut": false
+    },
+    {
+      "from": "R38",
+      "to": "R12",
+      "id": "R38>R12",
+      "shortcut": true
+    },
+    {
+      "from": "R13",
+      "to": "R39",
+      "id": "R13>R39",
+      "shortcut": false
+    },
+    {
+      "from": "R39",
+      "to": "R15",
+      "id": "R39>R15",
+      "shortcut": true
+    },
+    {
+      "from": "R15",
+      "to": "R39",
+      "id": "R15>R39",
+      "shortcut": true
+    },
+    {
+      "from": "R39",
+      "to": "R13",
+      "id": "R39>R13",
+      "shortcut": false
+    },
+    {
+      "from": "R13",
+      "to": "R14",
+      "id": "R13>R14",
+      "shortcut": false
+    },
+    {
+      "from": "R14",
+      "to": "R40",
+      "id": "R14>R40",
+      "shortcut": false
+    },
+    {
+      "from": "R40",
+      "to": "R16",
+      "id": "R40>R16",
+      "shortcut": true
+    },
+    {
+      "from": "R16",
+      "to": "R15",
+      "id": "R16>R15",
+      "shortcut": false
+    },
+    {
+      "from": "R15",
+      "to": "R16",
+      "id": "R15>R16",
+      "shortcut": false
+    },
+    {
+      "from": "R16",
+      "to": "R14",
+      "id": "R16>R14",
+      "shortcut": false
+    },
+    {
+      "from": "R14",
+      "to": "R52",
+      "id": "R14>R52",
+      "shortcut": false
+    },
+    {
+      "from": "R52",
+      "to": "R40",
+      "id": "R52>R40",
+      "shortcut": false
+    },
+    {
+      "from": "R40",
+      "to": "R16",
+      "id": "R40>R16",
+      "shortcut": true
+    },
+    {
+      "from": "R17",
+      "to": "R41",
+      "id": "R17>R41",
+      "shortcut": false
+    },
+    {
+      "from": "R41",
+      "to": "R19",
+      "id": "R41>R19",
+      "shortcut": true
+    },
+    {
+      "from": "R19",
+      "to": "R18",
+      "id": "R19>R18",
+      "shortcut": false
+    },
+    {
+      "from": "R18",
+      "to": "R42",
+      "id": "R18>R42",
+      "shortcut": false
+    },
+    {
+      "from": "R42",
+      "to": "R20",
+      "id": "R42>R20",
+      "shortcut": true
+    },
+    {
+      "from": "R20",
+      "to": "R18",
+      "id": "R20>R18",
+      "shortcut": false
+    },
+    {
+      "from": "R18",
+      "to": "R19",
+      "id": "R18>R19",
+      "shortcut": false
+    },
+    {
+      "from": "R19",
+      "to": "R20",
+      "id": "R19>R20",
+      "shortcut": false
+    },
+    {
+      "from": "R20",
+      "to": "R18",
+      "id": "R20>R18",
+      "shortcut": false
+    },
+    {
+      "from": "R18",
+      "to": "R53",
+      "id": "R18>R53",
+      "shortcut": false
+    },
+    {
+      "from": "R53",
+      "to": "R42",
+      "id": "R53>R42",
+      "shortcut": false
+    },
+    {
+      "from": "R42",
+      "to": "R20",
+      "id": "R42>R20",
+      "shortcut": true
+    },
+    {
+      "from": "R21",
+      "to": "R43",
+      "id": "R21>R43",
+      "shortcut": false
+    },
+    {
+      "from": "R43",
+      "to": "R23",
+      "id": "R43>R23",
+      "shortcut": true
+    },
+    {
+      "from": "R23",
+      "to": "R43",
+      "id": "R23>R43",
+      "shortcut": true
+    },
+    {
+      "from": "R43",
+      "to": "R21",
+      "id": "R43>R21",
+      "shortcut": false
+    },
+    {
+      "from": "R21",
+      "to": "R22",
+      "id": "R21>R22",
+      "shortcut": false
+    },
+    {
+      "from": "R22",
+      "to": "R44",
+      "id": "R22>R44",
+      "shortcut": false
+    },
+    {
+      "from": "R44",
+      "to": "R24",
+      "id": "R44>R24",
+      "shortcut": true
+    },
+    {
+      "from": "R24",
+      "to": "R23",
+      "id": "R24>R23",
+      "shortcut": false
+    },
+    {
+      "from": "R23",
+      "to": "R24",
+      "id": "R23>R24",
+      "shortcut": false
+    },
+    {
+      "from": "R24",
+      "to": "R22",
+      "id": "R24>R22",
+      "shortcut": false
+    },
+    {
+      "from": "R22",
+      "to": "R54",
+      "id": "R22>R54",
+      "shortcut": false
+    },
+    {
+      "from": "R54",
+      "to": "R44",
+      "id": "R54>R44",
+      "shortcut": false
+    },
+    {
+      "from": "R44",
+      "to": "R24",
+      "id": "R44>R24",
+      "shortcut": true
+    },
+    {
+      "from": "R25",
+      "to": "R45",
+      "id": "R25>R45",
+      "shortcut": false
+    },
+    {
+      "from": "R45",
+      "to": "R27",
+      "id": "R45>R27",
+      "shortcut": true
+    },
+    {
+      "from": "R27",
+      "to": "R45",
+      "id": "R27>R45",
+      "shortcut": true
+    },
+    {
+      "from": "R45",
+      "to": "R25",
+      "id": "R45>R25",
+      "shortcut": false
+    },
+    {
+      "from": "R25",
+      "to": "R26",
+      "id": "R25>R26",
+      "shortcut": false
+    },
+    {
+      "from": "R26",
+      "to": "R46",
+      "id": "R26>R46",
+      "shortcut": false
+    },
+    {
+      "from": "R46",
+      "to": "R28",
+      "id": "R46>R28",
+      "shortcut": true
+    },
+    {
+      "from": "R28",
+      "to": "R27",
+      "id": "R28>R27",
+      "shortcut": false
+    },
+    {
+      "from": "R27",
+      "to": "R28",
+      "id": "R27>R28",
+      "shortcut": false
+    },
+    {
+      "from": "R28",
+      "to": "R26",
+      "id": "R28>R26",
+      "shortcut": false
+    },
+    {
+      "from": "R26",
+      "to": "R55",
+      "id": "R26>R55",
+      "shortcut": false
+    },
+    {
+      "from": "R55",
+      "to": "R46",
+      "id": "R55>R46",
+      "shortcut": false
+    },
+    {
+      "from": "R46",
+      "to": "R28",
+      "id": "R46>R28",
+      "shortcut": true
+    },
+    {
+      "from": "R29",
+      "to": "R47",
+      "id": "R29>R47",
+      "shortcut": false
+    },
+    {
+      "from": "R47",
+      "to": "R31",
+      "id": "R47>R31",
+      "shortcut": true
+    },
+    {
+      "from": "R31",
+      "to": "R47",
+      "id": "R31>R47",
+      "shortcut": true
+    },
+    {
+      "from": "R47",
+      "to": "R29",
+      "id": "R47>R29",
+      "shortcut": false
+    },
+    {
+      "from": "R29",
+      "to": "R30",
+      "id": "R29>R30",
+      "shortcut": false
+    },
+    {
+      "from": "R30",
+      "to": "R48",
+      "id": "R30>R48",
+      "shortcut": false
+    },
+    {
+      "from": "R48",
+      "to": "R32",
+      "id": "R48>R32",
+      "shortcut": true
+    },
+    {
+      "from": "R32",
+      "to": "R31",
+      "id": "R32>R31",
+      "shortcut": false
+    },
+    {
+      "from": "R31",
+      "to": "R32",
+      "id": "R31>R32",
+      "shortcut": false
+    },
+    {
+      "from": "R32",
+      "to": "R30",
+      "id": "R32>R30",
+      "shortcut": false
+    },
+    {
+      "from": "R30",
+      "to": "R56",
+      "id": "R30>R56",
+      "shortcut": false
+    },
+    {
+      "from": "R56",
+      "to": "R48",
+      "id": "R56>R48",
+      "shortcut": false
+    },
+    {
+      "from": "R48",
+      "to": "R32",
+      "id": "R48>R32",
+      "shortcut": true
+    }
+  ],
+  "gatesOpened": [],
+  "errors": [],
+  "security": {
+    "units": {
+      "SEC-01": {
+        "integrity": 100,
+        "isolated": false,
+        "isolatedAt": null,
+        "firstSeen": 8.58571354571357,
+        "lastSeen": 79.71469962521527,
+        "lastMode": "off",
+        "alarmUntil": 0,
+        "cooldownUntil": 0,
+        "stunnedUntil": 0,
+        "alarms": 0
+      },
+      "SEC-02": {
+        "integrity": 100,
+        "isolated": false,
+        "isolatedAt": null,
+        "firstSeen": 149.93544721769283,
+        "lastSeen": 222.319823473352,
+        "lastMode": "off",
+        "alarmUntil": 0,
+        "cooldownUntil": 0,
+        "stunnedUntil": 0,
+        "alarms": 0
+      },
+      "SEC-03": {
+        "integrity": 100,
+        "isolated": false,
+        "isolatedAt": null,
+        "firstSeen": 252.89676067755482,
+        "lastSeen": 343.8047038493934,
+        "lastMode": "off",
+        "alarmUntil": 0,
+        "cooldownUntil": 0,
+        "stunnedUntil": 0,
+        "alarms": 0
+      },
+      "SEC-04": {
+        "integrity": 100,
+        "isolated": false,
+        "isolatedAt": null,
+        "firstSeen": 390.1103241550416,
+        "lastSeen": 449.8349991928978,
+        "lastMode": "off",
+        "alarmUntil": 0,
+        "cooldownUntil": 0,
+        "stunnedUntil": 0,
+        "alarms": 0
+      },
+      "SEC-05": {
+        "integrity": 100,
+        "isolated": false,
+        "isolatedAt": null,
+        "firstSeen": 462.1915694842102,
+        "lastSeen": 465.86788159315506,
+        "lastMode": "off",
+        "alarmUntil": 0,
+        "cooldownUntil": 0,
+        "stunnedUntil": 0,
+        "alarms": 0
+      },
+      "SEC-06": {
+        "integrity": 100,
+        "isolated": false,
+        "isolatedAt": null,
+        "firstSeen": 583.0198289878081,
+        "lastSeen": 595.1851022330687,
+        "lastMode": "off",
+        "alarmUntil": 0,
+        "cooldownUntil": 0,
+        "stunnedUntil": 0,
+        "alarms": 0
+      },
+      "SEC-07": {
+        "integrity": 100,
+        "isolated": false,
+        "isolatedAt": null,
+        "firstSeen": 785.3053516704886,
+        "lastSeen": 895.9618447131444,
+        "lastMode": "off",
+        "alarmUntil": 0,
+        "cooldownUntil": 0,
+        "stunnedUntil": 901.4499975703886,
+        "alarms": 0
+      },
+      "SEC-08": {
+        "integrity": 100,
+        "isolated": false,
+        "isolatedAt": null,
+        "firstSeen": 906.6034589911114,
+        "lastSeen": 918.3853807730201,
+        "lastMode": "off",
+        "alarmUntil": 0,
+        "cooldownUntil": 0,
+        "stunnedUntil": 0,
+        "alarms": 0
+      }
+    },
+    "events": [
+      {
+        "id": "SEC-07",
+        "room": "R46",
+        "time": 895.4499975703886,
+        "kind": "stunned"
+      }
+    ]
+  },
+  "securityRoute": false,
+  "fieldReport": {
+    "type": "alien-earth-field-report",
+    "schema": 1,
+    "gameVersion": "11.0.0",
+    "simulationSeconds": 1004.5820682427644,
+    "finished": true,
+    "notice": "Rapport dérivé de la sauvegarde locale. Ni une sauvegarde importable, ni une preuve d’envoi réel, ni une intégration MIRE. Textes et enquêtes originaux.",
+    "totals": {
+      "main": 32,
+      "optional": 24,
+      "archives": 56,
+      "visited": 56,
+      "evacuated": 4,
+      "dossiers": 0
+    },
+    "chapters": [
+      {
+        "chapter": "C01",
+        "title": "Une seconde naissance",
+        "viewpoint": "wendy",
+        "status": "closed",
+        "departure": {
+          "time": 82.55334246385867,
+          "provenance": "recorded"
+        },
+        "main": {
+          "done": 4,
+          "total": 4
+        },
+        "optional": {
+          "done": 3,
+          "total": 8
+        },
+        "archives": {
+          "done": 7,
+          "total": 12
+        },
+        "places": {
+          "done": 7,
+          "total": 12
+        },
+        "dossier": {
+          "id": "DOS-01",
+          "title": "Un nom n’est pas un badge",
+          "proofs": [
+            "AR-01",
+            "AR-02",
+            "AR-34"
+          ],
+          "decision": null
+        },
+        "people": [],
+        "studies": [],
+        "probesLeft": [],
+        "turbineStopped": 1
+      },
+      {
+        "chapter": "C02",
+        "title": "La ville sous la coque",
+        "viewpoint": "joe",
+        "status": "closed",
+        "departure": {
+          "time": 225.84809970890035,
+          "provenance": "recorded"
+        },
+        "main": {
+          "done": 4,
+          "total": 4
+        },
+        "optional": {
+          "done": 3,
+          "total": 3
+        },
+        "archives": {
+          "done": 7,
+          "total": 7
+        },
+        "places": {
+          "done": 7,
+          "total": 7
+        },
+        "dossier": {
+          "id": "DOS-02",
+          "title": "Un signal n’est pas un sauvetage",
+          "proofs": [
+            "AR-05",
+            "AR-08",
+            "AR-35"
+          ],
+          "decision": null
+        },
+        "people": [
+          {
+            "id": "leila",
+            "name": "Leïla",
+            "status": "rescued",
+            "room": "R08",
+            "hp": 65,
+            "medical": false
+          }
+        ],
+        "studies": [],
+        "probesLeft": [],
+        "turbineStopped": 1
+      },
+      {
+        "chapter": "C03",
+        "title": "Ne me laisse pas ici",
+        "viewpoint": "wendy",
+        "status": "closed",
+        "departure": {
+          "time": 347.76222780691984,
+          "provenance": "recorded"
+        },
+        "main": {
+          "done": 4,
+          "total": 4
+        },
+        "optional": {
+          "done": 3,
+          "total": 3
+        },
+        "archives": {
+          "done": 7,
+          "total": 7
+        },
+        "places": {
+          "done": 7,
+          "total": 7
+        },
+        "dossier": {
+          "id": "DOS-03",
+          "title": "Personne derrière la grille",
+          "proofs": [
+            "AR-11",
+            "AR-38",
+            "AR-51"
+          ],
+          "decision": null
+        },
+        "people": [
+          {
+            "id": "tao",
+            "name": "Tao",
+            "status": "rescued",
+            "room": "R12",
+            "hp": 16,
+            "medical": false
+          }
+        ],
+        "studies": [],
+        "probesLeft": [],
+        "turbineStopped": 1
+      },
+      {
+        "chapter": "C04",
+        "title": "Derrière le verre",
+        "viewpoint": "wendy",
+        "status": "closed",
+        "departure": {
+          "time": 454.56060395850557,
+          "provenance": "recorded"
+        },
+        "main": {
+          "done": 4,
+          "total": 4
+        },
+        "optional": {
+          "done": 3,
+          "total": 5
+        },
+        "archives": {
+          "done": 7,
+          "total": 9
+        },
+        "places": {
+          "done": 7,
+          "total": 9
+        },
+        "dossier": {
+          "id": "DOS-04",
+          "title": "Les limites du verre",
+          "proofs": [
+            "AR-39",
+            "AR-40",
+            "AR-52"
+          ],
+          "decision": null
+        },
+        "people": [],
+        "studies": [],
+        "probesLeft": [],
+        "turbineStopped": 1
+      },
+      {
+        "chapter": "C05",
+        "title": "Avant la chute",
+        "viewpoint": "morrow",
+        "status": "closed",
+        "departure": {
+          "time": 574.4057704537586,
+          "provenance": "recorded"
+        },
+        "main": {
+          "done": 4,
+          "total": 4
+        },
+        "optional": {
+          "done": 3,
+          "total": 10
+        },
+        "archives": {
+          "done": 7,
+          "total": 14
+        },
+        "places": {
+          "done": 7,
+          "total": 14
+        },
+        "dossier": {
+          "id": "DOS-05",
+          "title": "Une chambre, pas tout le navire",
+          "proofs": [
+            "AR-18",
+            "AR-20",
+            "AR-42"
+          ],
+          "decision": null
+        },
+        "people": [],
+        "studies": [],
+        "probesLeft": [],
+        "turbineStopped": 1
+      },
+      {
+        "chapter": "C06",
+        "title": "Les voix qu’on efface",
+        "viewpoint": "wendy",
+        "status": "closed",
+        "departure": {
+          "time": 730.4636821313256,
+          "provenance": "recorded"
+        },
+        "main": {
+          "done": 4,
+          "total": 4
+        },
+        "optional": {
+          "done": 3,
+          "total": 3
+        },
+        "archives": {
+          "done": 7,
+          "total": 7
+        },
+        "places": {
+          "done": 7,
+          "total": 7
+        },
+        "dossier": {
+          "id": "DOS-06",
+          "title": "La copie et la personne",
+          "proofs": [
+            "AR-22",
+            "AR-43",
+            "AR-44"
+          ],
+          "decision": null
+        },
+        "people": [
+          {
+            "id": "mara",
+            "name": "Mara",
+            "status": "rescued",
+            "room": "R24",
+            "hp": 16,
+            "medical": false
+          }
+        ],
+        "studies": [],
+        "probesLeft": [],
+        "turbineStopped": 1
+      },
+      {
+        "chapter": "C07",
+        "title": "Au bout des conduits",
+        "viewpoint": "joe",
+        "status": "closed",
+        "departure": {
+          "time": 900.0352124228718,
+          "provenance": "recorded"
+        },
+        "main": {
+          "done": 4,
+          "total": 4
+        },
+        "optional": {
+          "done": 3,
+          "total": 3
+        },
+        "archives": {
+          "done": 7,
+          "total": 7
+        },
+        "places": {
+          "done": 7,
+          "total": 7
+        },
+        "dossier": {
+          "id": "DOS-07",
+          "title": "Le quai sans vedette",
+          "proofs": [
+            "AR-28",
+            "AR-45",
+            "AR-46"
+          ],
+          "decision": null
+        },
+        "people": [
+          {
+            "id": "ivo",
+            "name": "Ivo",
+            "status": "rescued",
+            "room": "R28",
+            "hp": 65,
+            "medical": false
+          }
+        ],
+        "studies": [],
+        "probesLeft": [],
+        "turbineStopped": 1
+      },
+      {
+        "chapter": "C08",
+        "title": "Ceux qui restent",
+        "viewpoint": "wendy",
+        "status": "closed",
+        "departure": {
+          "time": 1004.5820682427644,
+          "provenance": "recorded"
+        },
+        "main": {
+          "done": 4,
+          "total": 4
+        },
+        "optional": {
+          "done": 3,
+          "total": 3
+        },
+        "archives": {
+          "done": 7,
+          "total": 7
+        },
+        "places": {
+          "done": 7,
+          "total": 7
+        },
+        "dossier": {
+          "id": "DOS-08",
+          "title": "Le calme n’est pas la sécurité",
+          "proofs": [
+            "AR-30",
+            "AR-47",
+            "AR-56"
+          ],
+          "decision": null
+        },
+        "people": [],
+        "studies": [],
+        "probesLeft": [],
+        "turbineStopped": 1
+      }
+    ]
+  },
+  "investigationRoute": false,
+  "success": true,
+  "ducts": {
+    "opened": [
+      "R02|R49",
+      "R34|R49",
+      "R06|R50",
+      "R36|R50",
+      "R10|R51",
+      "R38|R51",
+      "R14|R52",
+      "R40|R52",
+      "R18|R53",
+      "R42|R53",
+      "R22|R54",
+      "R44|R54",
+      "R26|R55",
+      "R46|R55",
+      "R30|R56",
+      "R48|R56"
+    ],
+    "stats": {
+      "opened": 16,
+      "crossings": 16,
+      "rotorContacts": 0
+    }
+  },
+  "ductRoute": true,
+  "sensors": {
+    "units": {
+      "S-01": {
+        "id": "S-01",
+        "status": "carried",
+        "room": null,
+        "x": 0,
+        "z": 125,
+        "battery": 180,
+        "pulseUntil": 0,
+        "cooldownUntil": 0,
+        "lastFrame": null,
+        "received": null
+      },
+      "S-02": {
+        "id": "S-02",
+        "status": "carried",
+        "room": null,
+        "x": 0,
+        "z": 125,
+        "battery": 180,
+        "pulseUntil": 0,
+        "cooldownUntil": 0,
+        "lastFrame": null,
+        "received": null
+      }
+    },
+    "history": [],
+    "stats": {
+      "deployed": 0,
+      "recovered": 0,
+      "recharged": 0,
+      "pulses": 0,
+      "alerts": 0
+    }
+  },
+  "sensorRoute": false,
+  "containment": {
+    "pads": {},
+    "records": {},
+    "calibrated": [],
+    "stats": {
+      "armed": 0,
+      "captures": 0,
+      "studies": 0,
+      "released": 0,
+      "broken": 0,
+      "recovered": 0
+    }
+  },
+  "objectives": 56,
+  "archives": 56,
+  "visited": 56,
+  "rescues": 4,
+  "finalHp": 96,
+  "inventory": {
+    "care": 9,
+    "decoys": 9,
+    "capsules": 2
+  },
+  "serviceStats": {
+    "switches": 0,
+    "crafts": 0,
+    "repairs": 0,
+    "captures": 0,
+    "lifts": 0,
+    "medicalEvacs": 0
+  },
+  "parts": 0,
+  "salvaged": [],
+  "circuits": {
+    "C01": "work",
+    "C02": "work",
+    "C03": "work",
+    "C04": "work",
+    "C05": "work",
+    "C06": "work",
+    "C07": "work",
+    "C08": "work"
+  },
+  "cameraFrames": [],
+  "stats": {
+    "decoysUsed": 0,
+    "kitsUsed": 3,
+    "rescues": 4,
+    "pursuits": 10,
+    "crossings": 9,
+    "breaches": 0,
+    "listens": 0,
+    "reassurances": 2
+  },
+  "simulatedSeconds": 1005,
+  "finalRoom": "R32"
+}

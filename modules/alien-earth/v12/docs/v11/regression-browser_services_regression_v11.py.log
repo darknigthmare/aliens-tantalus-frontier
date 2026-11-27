@@ -1,0 +1,48 @@
+CAPTURE v8-regression-services-01-titre.png
+PASS Title identifies V8 and its subtitle
+PASS E opens local power cabinet with three distributions
+PASS Default work mode has no surveillance
+PASS Planning panel pauses simulation
+CAPTURE v8-regression-services-02-repartiteur.png
+PASS Cabinet at 390px has no horizontal overflow
+PASS Cabinet at 390px retains an internally scrollable panel
+CAPTURE v8-regression-services-13-mobile-repartiteur.png
+PASS Selection alone does not switch power
+PASS Queued switch returns to the playable field
+PASS Prepared job waits for first E without spending or progressing
+PASS Early release cancels the switch
+PASS Real held E switches lighting and surveillance
+CAPTURE v8-regression-services-03-galerie-coupee.png
+PASS Bag displays actual local network
+PASS Real held E restores previous distribution
+PASS E collects the genuine four-part case
+CAPTURE v8-regression-services-04-atelier.png
+PASS Workbench exposes three recipes
+PASS Kit recipe shows real costs and reserve
+CAPTURE v8-regression-services-05-fabrication.png
+PASS Interrupted assembly consumes no ingredient
+PASS Completed kit consumes three parts exactly once
+PASS Insufficient stock disables three recipes
+PASS Emptied salvage case cannot pay a second time
+PASS Held M repairs a broken shared bar
+PASS Repair does not secretly close the door
+CAPTURE v8-regression-services-06-verrou-repare.png
+PASS Repair survives normal door transition
+PASS Console exposes exactly its two local cameras
+CAPTURE v8-regression-services-07-surveillance.png
+PASS Held E acquires a frame then opens delivered readout
+PASS Camera marks a bounded visible organism
+PASS Readout explicitly disclaims continuous video
+CAPTURE v8-regression-services-08-releve.png
+PASS Journal can reopen an old frame with surveillance offline
+PASS Old camera frame does not update with enemy position
+PASS Camera map pin does not teleport
+PASS P held lifts the patient without healing
+PASS Actual carried motion moves both identities together
+CAPTURE v8-regression-services-09-portage.png
+PASS Bag labels the carried patient
+CAPTURE v8-regression-services-10-sac-secours.png
+PASS Care command refused while both hands are occupied
+PASS Normal E door entry carries the same patient to extraction room
+PASS Extraction marker credits one medical evacuation
+CAPTURE v8-regression-services-11-evacuation.png

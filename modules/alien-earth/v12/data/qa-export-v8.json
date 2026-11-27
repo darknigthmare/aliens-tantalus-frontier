@@ -1,0 +1,233 @@
+{
+  "parts": 0,
+  "salvaged": [],
+  "circuits": {
+    "C01": "work",
+    "C02": "work",
+    "C03": "work",
+    "C04": "work",
+    "C05": "work",
+    "C06": "work",
+    "C07": "work",
+    "C08": "work"
+  },
+  "repairedDoors": [],
+  "cameraFrames": {},
+  "carryId": null,
+  "serviceStats": {
+    "switches": 0,
+    "crafts": 0,
+    "repairs": 0,
+    "captures": 0,
+    "lifts": 0,
+    "medicalEvacs": 0
+  },
+  "dlc": "alien-earth-s1",
+  "schema": 8,
+  "investigations": {
+    "decisions": {
+      "DOS-01": {
+        "channel": "local",
+        "room": "R04",
+        "time": 3.582899999999809,
+        "proofs": [
+          "AR-01",
+          "AR-02",
+          "AR-34"
+        ]
+      }
+    },
+    "departures": {}
+  },
+  "ducts": {
+    "opened": [],
+    "stats": {
+      "opened": 0,
+      "crossings": 0,
+      "rotorContacts": 0
+    }
+  },
+  "sensors": {
+    "units": {
+      "S-01": {
+        "id": "S-01",
+        "status": "carried",
+        "room": null,
+        "x": 0,
+        "z": 125,
+        "battery": 180,
+        "pulseUntil": 0,
+        "cooldownUntil": 0,
+        "lastFrame": null,
+        "received": null
+      },
+      "S-02": {
+        "id": "S-02",
+        "status": "carried",
+        "room": null,
+        "x": 0,
+        "z": 125,
+        "battery": 180,
+        "pulseUntil": 0,
+        "cooldownUntil": 0,
+        "lastFrame": null,
+        "received": null
+      }
+    },
+    "history": [],
+    "stats": {
+      "deployed": 0,
+      "recovered": 0,
+      "recharged": 0,
+      "pulses": 0,
+      "alerts": 0
+    }
+  },
+  "containment": {
+    "pads": {},
+    "records": {},
+    "calibrated": [],
+    "stats": {
+      "armed": 0,
+      "captures": 0,
+      "studies": 0,
+      "released": 0,
+      "broken": 0,
+      "recovered": 0
+    }
+  },
+  "version": "8.0.0",
+  "chapter": 0,
+  "room": "R04",
+  "completed": [],
+  "archives": [
+    "AR-01",
+    "AR-02",
+    "AR-34"
+  ],
+  "visited": [
+    "R01",
+    "R02",
+    "R34",
+    "R04"
+  ],
+  "player": {
+    "x": 340,
+    "z": 125,
+    "hp": 120,
+    "energy": 100,
+    "ammo": 12,
+    "reserve": 24,
+    "facing": 1
+  },
+  "world": {
+    "R01": {
+      "enemies": [],
+      "hazards": [],
+      "lures": []
+    },
+    "R02": {
+      "enemies": [],
+      "hazards": [],
+      "lures": []
+    },
+    "R34": {
+      "enemies": [],
+      "hazards": [],
+      "lures": []
+    },
+    "R04": {
+      "enemies": [],
+      "hazards": [],
+      "lures": []
+    }
+  },
+  "choices": {},
+  "inventory": {
+    "care": 1,
+    "decoys": 2,
+    "capsules": 2
+  },
+  "looted": [],
+  "gates": {},
+  "valves": [],
+  "research": [],
+  "survivors": {},
+  "lightOn": false,
+  "fieldWork": {},
+  "enemyRooms": {
+    "EN-05": "R05",
+    "EN-06": "R06",
+    "EN-07": "R07",
+    "EN-08": "R08",
+    "EN-09": "R09",
+    "EN-10": "R10",
+    "EN-12": "R12",
+    "EN-13": "R13",
+    "EN-14": "R14",
+    "EN-16": "R16",
+    "EN-18": "R18",
+    "EN-19": "R19",
+    "EN-20": "R20",
+    "EN-23": "R23",
+    "EN-24": "R24",
+    "EN-25": "R25",
+    "EN-26": "R26",
+    "EN-27": "R27",
+    "EN-28": "R28",
+    "EN-29": "R29",
+    "EN-30": "R30",
+    "EN-35": "R35",
+    "EN-36": "R36",
+    "EN-38": "R38",
+    "EN-39": "R39",
+    "EN-42": "R42",
+    "EN-44": "R44",
+    "EN-45": "R45",
+    "EN-46": "R46",
+    "R50-tick-v7": "R50",
+    "R51-tick-v7": "R51",
+    "R52-facehugger-v7": "R52",
+    "R53-facehugger-v7": "R53",
+    "R54-tick-v7": "R54",
+    "R55-tick-v7": "R55",
+    "R56-facehugger-v7": "R56"
+  },
+  "pursuits": [],
+  "seals": {},
+  "intel": {},
+  "journal": [
+    {
+      "text": "Un nom n’est pas un badge : copie locale scellée.",
+      "room": "R04",
+      "time": 3.582899999999809,
+      "type": "investigation"
+    }
+  ],
+  "trackedRoom": null,
+  "runtime": {
+    "iframe": 0,
+    "toolCooldown": 0,
+    "resonanceCooldown": 0,
+    "fireCooldown": 0,
+    "reloadTime": 0,
+    "projectiles": [],
+    "noise": null
+  },
+  "stats": {
+    "decoysUsed": 0,
+    "kitsUsed": 0,
+    "rescues": 0,
+    "pursuits": 0,
+    "crossings": 0,
+    "breaches": 0,
+    "listens": 0,
+    "reassurances": 0
+  },
+  "presentation": "HYBRID",
+  "difficulty": "normal",
+  "resonance": false,
+  "escort": false,
+  "finished": false,
+  "playSeconds": 4.184899999999717
+}

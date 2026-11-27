@@ -1,0 +1,100 @@
+PASS V11 title visible
+PASS Campaign starts in R01
+PASS Exactly 70 rooms are delivered
+PASS R01 renders without page error
+PASS R02 renders without page error
+PASS R03 renders without page error
+PASS R04 renders without page error
+PASS R05 renders without page error
+PASS R06 renders without page error
+PASS R07 renders without page error
+PASS R08 renders without page error
+PASS R09 renders without page error
+PASS R10 renders without page error
+PASS R11 renders without page error
+PASS R12 renders without page error
+PASS R13 renders without page error
+PASS R14 renders without page error
+PASS R15 renders without page error
+PASS R16 renders without page error
+PASS R17 renders without page error
+PASS R18 renders without page error
+PASS R19 renders without page error
+PASS R20 renders without page error
+PASS R21 renders without page error
+PASS R22 renders without page error
+PASS R23 renders without page error
+PASS R24 renders without page error
+PASS R25 renders without page error
+PASS R26 renders without page error
+PASS R27 renders without page error
+PASS R28 renders without page error
+PASS R29 renders without page error
+PASS R30 renders without page error
+PASS R31 renders without page error
+PASS R32 renders without page error
+PASS R33 renders without page error
+PASS R34 renders without page error
+PASS R35 renders without page error
+PASS R36 renders without page error
+PASS R37 renders without page error
+PASS R38 renders without page error
+PASS R39 renders without page error
+PASS R40 renders without page error
+PASS R41 renders without page error
+PASS R42 renders without page error
+PASS R43 renders without page error
+PASS R44 renders without page error
+PASS R45 renders without page error
+PASS R46 renders without page error
+PASS R47 renders without page error
+PASS R48 renders without page error
+PASS R49 renders without page error
+PASS R50 renders without page error
+PASS R51 renders without page error
+PASS R52 renders without page error
+PASS R53 renders without page error
+PASS R54 renders without page error
+PASS R55 renders without page error
+PASS R56 renders without page error
+PASS R57 renders without page error
+PASS R58 renders without page error
+PASS R59 renders without page error
+PASS R60 renders without page error
+PASS R61 renders without page error
+PASS R62 renders without page error
+PASS R63 renders without page error
+PASS R64 renders without page error
+PASS R65 renders without page error
+PASS R66 renders without page error
+PASS R67 renders without page error
+PASS R68 renders without page error
+PASS R69 renders without page error
+PASS R70 renders without page error
+PASS R01 map exposes complete local graph
+PASS R05 map exposes complete local graph
+PASS R09 map exposes complete local graph
+PASS R13 map exposes complete local graph
+PASS R17 map exposes complete local graph
+PASS R21 map exposes complete local graph
+PASS R25 map exposes complete local graph
+PASS R29 map exposes complete local graph
+PASS Reference registry opens
+PASS Registry lists 70 locations
+PASS 25 cast silhouettes render
+PASS Five weapon silhouettes render
+PASS Six unresolved fidelity classes are disclosed
+PASS Reference tab exposes at least twenty cited production links
+PASS Joe uses MCS-X by default
+PASS Joe can select Maxim 9
+PASS Joe can return to MCS-X
+PASS R63 uses its sourced location identity
+PASS R64 uses its sourced location identity
+PASS R65 uses its sourced location identity
+PASS R66 uses its sourced location identity
+PASS R67 uses its sourced location identity
+PASS R68 uses its sourced location identity
+PASS R69 uses its sourced location identity
+PASS R70 uses its sourced location identity
+PASS No page errors in consolidated smoke
+SUCCESS 99/99

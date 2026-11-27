@@ -1,7 +1,7 @@
 import { withPlayerWeaponRigV125 } from '../src/player-weapon-runtime-v125.js';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import vm from 'node:vm';
 import { CAMPAIGNS, WORLDS, validateContent, RELEASE } from '../src/content.js';
 import { CAMPAIGNS as BEFORE } from '../src/content-core-v50.js';
@@ -225,6 +225,24 @@ test('release runner deduplicates aliases and refuses an empty or executable she
     'test:alias': 'node --test scripts/one.mjs', 'test:all': 'node scripts/test-release-v143.mjs' }), ['scripts/one.mjs', 'scripts/two.mjs']);
   assert.throws(() => collectReleaseTestsV143({}));
   assert.throws(() => collectReleaseTestsV143({ 'test:bad': 'node --test scripts/ok.mjs;evil' }));
+});
+test('release runner includes the complete Earth suite once and keeps other globs closed', async () => {
+  const directory = 'modules/alien-earth/v12/tests/';
+  const expected = (await readdir(new URL('../' + directory, import.meta.url)))
+    .filter(name => name.endsWith('.test.mjs')).map(name => directory + name);
+  assert.ok(expected.includes(directory + 'core.test.mjs'));
+  assert.ok(expected.includes(directory + 'lifecycle-v12.test.mjs'));
+  assert.ok(expected.includes(directory + 'raster-v12.test.mjs'));
+  const integration = 'scripts/verify-alien-earth-integration-v12.mjs';
+  const actual = collectReleaseTestsV143({
+    'test:dlc:earth': `node --test ${directory}*.test.mjs ${integration}`,
+    'test:earth-alias': `node --test ${directory}*.test.mjs`,
+    'test:integration-alias': `node --test ${integration}`
+  });
+  assert.deepEqual(actual, [...expected, integration].sort());
+  for (const file of [directory + '*.mjs', directory + '../*.test.mjs',
+    'modules/unreviewed/tests/*.test.mjs', directory + '*.test.mjs;echo'])
+    assert.throws(() => collectReleaseTestsV143({ 'test:bad': 'node --test ' + file }));
 });
 test('release and save format are distinct; package and runtime agree', async () => {
   const pkg = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));

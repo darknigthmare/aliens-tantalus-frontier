@@ -1,0 +1,58 @@
+PASS Title identifies delivered V8
+CAPTURE v8-regression-01-titre.png
+PASS Bag exposes actual finite cartridge reserve
+PASS Empty registry contains no fabricated specimen
+PASS E at physical plate opens both presets
+PASS Tutorial exposes resource-free calibration
+PASS Panel labels device as original
+CAPTURE v8-regression-02-plateau.png
+PASS Containment panel freezes simulation time
+PASS 390px panel has no document horizontal overflow
+PASS 390px panel remains scrollable
+CAPTURE v8-regression-03-mobile.png
+PASS Calibration held through real keyboard costs nothing
+PASS Choosing a preset is not an instant transaction
+PASS Releasing E cancels arming without charge
+PASS Completed arming consumes one cartridge, once
+CAPTURE v8-regression-04-appat.png
+PASS Dismantling refunds one unused cartridge
+PASS Workbench presents three recipes including cartridge
+CAPTURE v8-regression-05-atelier.png
+PASS Crafting pays four actual parts and grants one cartridge
+PASS Active authored Facehugger follows bait into the plate
+PASS Captured identity is not in active AI anymore
+CAPTURE v8-regression-06-facehugger.png
+PASS Early study release does not grant the observation
+PASS Three-second field study records one unique identity
+PASS Registry shows same ID, room and original observation
+CAPTURE v8-regression-07-registre.png
+PASS Registry map tracking is not teleportation
+PASS Map counts the occupied authored plate
+CAPTURE v8-regression-08-carte.png
+PASS Completed unique study cannot be claimed twice
+PASS Release requires an explicit confirmation panel
+CAPTURE v8-regression-09-liberation.png
+PASS Canceling release keeps the identity confined
+PASS Real browser export serializes schema7 and captive
+PASS Real import restores one captive and no active service
+PASS Actual held release restores same enemy once with grace
+PASS Release grants no cartridge refund
+PASS R05 compatible prepared specimen captured by update
+CAPTURE v8-regression-10-tique.png
+PASS R38 compatible prepared specimen captured by update
+CAPTURE v8-regression-11-mouche.png
+PASS Nearby xenomorph damages rather than entering occupied plate
+CAPTURE v8-regression-12-pression.png
+PASS Break releases exactly the captured ID and permanently breaks chassis
+CAPTURE v8-regression-13-rupture.png
+PASS Provided genuine V4 export fixture exists
+PASS V4 browser export migrates without old capsule state
+PASS V4 medical evacuation and finite parts survive import
+PASS Browser does not claim unavailable local storage saved
+PASS No unhandled JavaScript error
+PASS No network request required
+{
+  "passed": 40,
+  "total": 40,
+  "pageErrors": []
+}

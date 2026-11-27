@@ -1,0 +1,23 @@
+FAIL V8 title and subtitle are visible
+Traceback (most recent call last):
+  File "/mnt/data/ALIEN_EARTH_DLC_V11/tests/browser_sensors_regression_v11.py", line 35, in <module>
+    check('V8 title and subtitle are visible','10.0.0' in page.inner_text('#panel') and 'Retrouver les lieux' in page.inner_text('#panel'))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/ALIEN_EARTH_DLC_V11/tests/browser_sensors_regression_v11.py", line 14, in check
+    if not ok:raise AssertionError(name+' '+str(detail))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: V8 title and subtitle are visible 
+
+{
+  "passed": 0,
+  "total": 1,
+  "error": "V8 title and subtitle are visible "
+}
+Traceback (most recent call last):
+  File "/mnt/data/ALIEN_EARTH_DLC_V11/tests/browser_sensors_regression_v11.py", line 35, in <module>
+    check('V8 title and subtitle are visible','10.0.0' in page.inner_text('#panel') and 'Retrouver les lieux' in page.inner_text('#panel'))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/ALIEN_EARTH_DLC_V11/tests/browser_sensors_regression_v11.py", line 14, in check
+    if not ok:raise AssertionError(name+' '+str(detail))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: V8 title and subtitle are visible 

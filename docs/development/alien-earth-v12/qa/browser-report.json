@@ -1,0 +1,1549 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-26",
+  "project": "Aliens Tantalus — Alien: Earth V12",
+  "artifactType": "scoped-evidence-report",
+  "isRawBrowserReport": false,
+  "explanation": "This report embeds sanitized browser result objects and distinguishes historical observations, current local runs and CI. Raw file blob IDs identify the original bytes; path sanitization changes this published representation.",
+  "currentProduct": {
+    "baseCommit": "249e6abd9de72eecc6bf7033e8b36371a71d7a66",
+    "appSha256": "8f859ac837d454311b5a2b5bfe9e18d7382f6b00a0a581df27eaaf4aa09b8eb4",
+    "earthUiSha256": "5339547b2a992d71283dbf7707cf200635ed23cffad7140ba97d66091c5b72a5",
+    "officialQaSha256": "32be52703a8482d33e7209a1cfbf08b8b4544e38e5ab71b3d4c90457de520e7e",
+    "rasterCount": 15,
+    "validatedCodeCommit": "6ac32413c6b0c00d3e4d9fe8a35561ac430804b0",
+    "validatedSourceTree": "d58e25af95c320811d91f4ae2bcad8bf7c264f51",
+    "runtimeUnchangedByFinalVerifierRegistration": true
+  },
+  "result": {
+    "dlc": "passed 12 combined DLC/portable browser checks on the current code in GitHub Actions",
+    "portable": "passed on current product",
+    "localHost": "failed during stabilization after the second history return",
+    "hostCI": "passed two consecutive menu round trips on the complete native distribution",
+    "fullCampaignPlaythrough": false,
+    "screenExactCertification": false,
+    "backForwardCacheObservedInCI": true
+  },
+  "latestLocal": {
+    "host": {
+      "rawFileBlob": "c6ff10aeb7e468669f88752d8a723ea2fa29e252",
+      "logBlob": "6d81f479bd59e32977067998bd7528e55390cf08",
+      "traceBlob": "8961d7226da466da4872fea811d2b08f338667a4",
+      "diagnostic": {
+        "gpuProcessExitCode": 9,
+        "rendererCrashObserved": true,
+        "cause": "not established",
+        "oomProven": false,
+        "lastUrlAttestedByTrace": "native host /",
+        "firstReturn": {
+          "sameNativeHistoryEntry": true,
+          "sameDocument": false,
+          "audioDisposed": false
+        },
+        "secondReturn": "navigation reached native /, then Page.wait_for_timeout: Page crashed; no completed cycle-2 assertion",
+        "backForwardCacheUseProven": false
+      },
+      "report": {
+        "ok": false,
+        "browser": "151.0.7922.34",
+        "browserArguments": [
+          "--no-sandbox"
+        ],
+        "functionalIgnoredDefaultArguments": [
+          "--disable-dev-shm-usage"
+        ],
+        "ordinaryRoundtripIgnoredDefaultArguments": [
+          "--disable-dev-shm-usage",
+          "--disable-back-forward-cache"
+        ],
+        "sharedMemory": "/dev/shm",
+        "functionalBackForwardCache": "Playwright default disabled; the separate ordinary roundtrip scenario removes that automation flag",
+        "scenario": "host-roundtrips",
+        "traceMode": "light",
+        "freshBrowserBetweenScenarios": true,
+        "expectedRasterCount": 15,
+        "root": "<task-workspace>/earth-host-public",
+        "sourceRoot": "<task-workspace>/aliens-tantalus-frontier",
+        "skipHost": false,
+        "fixtureDeclaration": "Fresh valid native profiles 1–3; selected profile 2; fresh Earth R01 fixture with 12.5 elapsed seconds and no completed objective. A separate R18 visual fixture starts chapter 5 with AE-01..AE-16 marked complete solely to inspect the Zoo; it is not evidence of a campaign playthrough.",
+        "checks": [],
+        "walk": [],
+        "routes": [],
+        "pageErrors": [],
+        "resourceErrors": [],
+        "consoleErrors": [],
+        "urls": {
+          "host": "http://127.0.0.1:32973/",
+          "earth": "http://127.0.0.1:32973/dlc/alien-earth/v12/index.html"
+        },
+        "hostDocumentObservations": [
+          {
+            "cycle": 1,
+            "stage": "native-before-earth",
+            "url": "http://127.0.0.1:32973/",
+            "referrer": "",
+            "timeOrigin": 1795705271591.6,
+            "navigationType": "navigate",
+            "historyLength": 2,
+            "navigationEntry": {
+              "key": "navigation-identifier-1",
+              "id": "navigation-identifier-2",
+              "index": 0,
+              "url": "http://127.0.0.1:32973/"
+            },
+            "navigationEntryCount": 1,
+            "pageShowEvents": [],
+            "audio": {
+              "disposed": false,
+              "unlockStatus": "running",
+              "scene": "menu",
+              "contextState": "running",
+              "musicStatus": "playing"
+            }
+          },
+          {
+            "cycle": 1,
+            "stage": "earth-title",
+            "url": "http://127.0.0.1:32973/dlc/alien-earth/v12/index.html",
+            "referrer": "http://127.0.0.1:32973/",
+            "timeOrigin": 1795705275290.8,
+            "navigationType": "navigate",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "navigation-identifier-3",
+              "id": "navigation-identifier-4",
+              "index": 1,
+              "url": "http://127.0.0.1:32973/dlc/alien-earth/v12/index.html"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [
+              {
+                "persisted": false,
+                "url": "http://127.0.0.1:32973/dlc/alien-earth/v12/index.html",
+                "timeOrigin": 1795705275290.8
+              }
+            ],
+            "audio": null
+          },
+          {
+            "cycle": 1,
+            "stage": "native-after-return",
+            "url": "http://127.0.0.1:32973/",
+            "referrer": "",
+            "timeOrigin": 1795705277562.7,
+            "navigationType": "back_forward",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "navigation-identifier-1",
+              "id": "navigation-identifier-2",
+              "index": 0,
+              "url": "http://127.0.0.1:32973/"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [],
+            "audio": {
+              "disposed": false,
+              "unlockStatus": "locked",
+              "scene": "menu",
+              "contextState": null,
+              "musicStatus": "silent"
+            }
+          },
+          {
+            "cycle": 2,
+            "stage": "native-before-earth",
+            "url": "http://127.0.0.1:32973/",
+            "referrer": "",
+            "timeOrigin": 1795705277562.7,
+            "navigationType": "back_forward",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "navigation-identifier-1",
+              "id": "navigation-identifier-2",
+              "index": 0,
+              "url": "http://127.0.0.1:32973/"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [
+              {
+                "persisted": false,
+                "url": "http://127.0.0.1:32973/",
+                "timeOrigin": 1795705277562.7
+              }
+            ],
+            "audio": {
+              "disposed": false,
+              "unlockStatus": "running",
+              "scene": "menu",
+              "contextState": "running",
+              "musicStatus": "playing"
+            }
+          },
+          {
+            "cycle": 2,
+            "stage": "earth-title",
+            "url": "http://127.0.0.1:32973/dlc/alien-earth/v12/index.html",
+            "referrer": "http://127.0.0.1:32973/",
+            "timeOrigin": 1795705280294.7,
+            "navigationType": "navigate",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "navigation-identifier-5",
+              "id": "navigation-identifier-6",
+              "index": 1,
+              "url": "http://127.0.0.1:32973/dlc/alien-earth/v12/index.html"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [
+              {
+                "persisted": false,
+                "url": "http://127.0.0.1:32973/dlc/alien-earth/v12/index.html",
+                "timeOrigin": 1795705280294.7
+              }
+            ],
+            "audio": null
+          }
+        ],
+        "sameBrowserRoundTrips": {
+          "cycles": [
+            {
+              "cycle": 1,
+              "url": "http://127.0.0.1:32973/",
+              "returnMethod": "UI host button",
+              "pageShowEvents": [],
+              "earthBytesPreserved": true,
+              "nativeBytesPreserved": true,
+              "nativeTimeOriginBefore": 1795705271591.6,
+              "nativeTimeOriginAfter": 1795705277562.7,
+              "sameNativeDocumentAfterReturn": false,
+              "nativeEntryKeyBefore": "navigation-identifier-1",
+              "nativeEntryKeyAfter": "navigation-identifier-1",
+              "sameNativeHistoryEntryAfterReturn": true
+            }
+          ],
+          "browserResetBetweenCycles": false,
+          "backForwardCacheDisableFlagRemoved": true,
+          "status": "running"
+        },
+        "hostCheckpointVariant": {
+          "baselineBlob": "e6699cade632ef14f20e31f9acb05ce965f9beda",
+          "assertionsChanged": false,
+          "changes": "Per-stage JSON and explicit screenshots; visible-entry wait; read-only document/history/audio observations."
+        },
+        "hostStages": [
+          {
+            "stage": "before-bootstrap",
+            "url": "about:blank",
+            "elapsedSeconds": 0
+          },
+          {
+            "stage": "bootstrap-complete",
+            "url": "http://127.0.0.1:32973/",
+            "elapsedSeconds": 1.309
+          },
+          {
+            "stage": "cycle-1-host-menu",
+            "url": "http://127.0.0.1:32973/",
+            "elapsedSeconds": 2.972,
+            "screenshot": "<task-workspace>/earth-browser-host15-navfix-final/host-cycle-1-host-menu.png"
+          },
+          {
+            "stage": "cycle-1-earth-title",
+            "url": "http://127.0.0.1:32973/dlc/alien-earth/v12/index.html",
+            "elapsedSeconds": 5.518,
+            "screenshot": "<task-workspace>/earth-browser-host15-navfix-final/host-cycle-1-earth-title.png"
+          },
+          {
+            "stage": "cycle-1-return-complete",
+            "url": "http://127.0.0.1:32973/",
+            "elapsedSeconds": 7.687
+          },
+          {
+            "stage": "cycle-2-host-menu",
+            "url": "http://127.0.0.1:32973/",
+            "elapsedSeconds": 8.637
+          },
+          {
+            "stage": "cycle-2-earth-title",
+            "url": "http://127.0.0.1:32973/dlc/alien-earth/v12/index.html",
+            "elapsedSeconds": 9.565
+          }
+        ],
+        "error": "Page.wait_for_timeout: Page crashed",
+        "traceback": "Traceback (most recent call last):\n  File \"<task-workspace>/browser-runtime/qa-host-two-cycles.py\", line 522, in main\n    page.wait_for_timeout(300)\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/sync_api/_generated.py\", line 12696, in wait_for_timeout\n    self._sync(\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_sync_base.py\", line 115, in _sync\n    return task.result()\n           ^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_page.py\", line 1142, in wait_for_timeout\n    await self._main_frame.wait_for_timeout(timeout)\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_frame.py\", line 924, in wait_for_timeout\n    await self._channel.send(\"waitForTimeout\", None, {\"waitTimeout\": timeout})\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_connection.py\", line 76, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_connection.py\", line 632, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TargetClosedError: Page.wait_for_timeout: Page crashed\n",
+        "infrastructureCrash": true,
+        "fixtureHashes": {
+          "atf-v47-profile-1": "3c919e859763a5423c58b804f78a806cf917f93d37ef2e3f48467fbb3debd507",
+          "atf-v47-profile-2": "c33c4c50f8b3ae02a254d6f17bb41cf8557db42a15b9d3ca5304a6e597628354",
+          "atf-v47-profile-3": "6dfd4d7e2414e17d4a484dd27ce46cc5e1b57dead79e6b17faa9c70fcafc267d",
+          "atf-v78-selected-profile": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"
+        }
+      }
+    },
+    "portable": {
+      "rawFileBlob": "18f0686d426c85922c06395d1993e73677847ee6",
+      "logBlob": "5f1415ca29ca465fdb56cf0c7c6b9f6c12103429",
+      "report": {
+        "ok": true,
+        "browser": "151.0.7922.34",
+        "browserArguments": [
+          "--no-sandbox"
+        ],
+        "functionalIgnoredDefaultArguments": [
+          "--disable-dev-shm-usage"
+        ],
+        "ordinaryRoundtripIgnoredDefaultArguments": [
+          "--disable-dev-shm-usage",
+          "--disable-back-forward-cache"
+        ],
+        "sharedMemory": "/dev/shm",
+        "functionalBackForwardCache": "Playwright default disabled; the separate ordinary roundtrip scenario removes that automation flag",
+        "scenario": "portable",
+        "traceMode": "light",
+        "freshBrowserBetweenScenarios": true,
+        "expectedRasterCount": 15,
+        "root": "<task-workspace>/earth-public",
+        "sourceRoot": "<task-workspace>/aliens-tantalus-frontier",
+        "skipHost": false,
+        "fixtureDeclaration": "Fresh valid native profiles 1–3; selected profile 2; fresh Earth R01 fixture with 12.5 elapsed seconds and no completed objective. A separate R18 visual fixture starts chapter 5 with AE-01..AE-16 marked complete solely to inspect the Zoo; it is not evidence of a campaign playthrough.",
+        "checks": [
+          {
+            "name": "portable file:// UI and save/reload work; all inline PNGs decode and requested catalogue portraits load without HTTP",
+            "ok": true,
+            "assets": 15
+          }
+        ],
+        "walk": [],
+        "routes": [],
+        "pageErrors": [],
+        "resourceErrors": [],
+        "consoleErrors": [],
+        "urls": {
+          "host": "http://127.0.0.1:39829/",
+          "earth": "http://127.0.0.1:39829/dlc/alien-earth/v12/index.html"
+        },
+        "standalone": {
+          "path": "<task-workspace>/earth-export/JOUER_ALIEN_EARTH_V12.html",
+          "sha256": "a46e362d845e646c6defd9920f0cff800faf5abfd29729495bb82d1350950511",
+          "remoteRequests": [],
+          "inlineDecodeScope": "All admitted embedded PNG data URLs independently decoded using real Image.decode; this does not preload the application cache.",
+          "decoded": [
+            {
+              "id": "mcsx",
+              "path": "assets/raster-v12/mcsx.png",
+              "expected": [
+                1774,
+                887
+              ],
+              "actual": [
+                1774,
+                887
+              ]
+            },
+            {
+              "id": "species19-adult",
+              "path": "assets/raster-v12/species19-adult.png",
+              "expected": [
+                2172,
+                724
+              ],
+              "actual": [
+                2172,
+                724
+              ]
+            },
+            {
+              "id": "joe-mcsx-idle",
+              "path": "assets/raster-v12/joe-mcsx-idle.png",
+              "expected": [
+                1024,
+                1536
+              ],
+              "actual": [
+                1024,
+                1536
+              ]
+            },
+            {
+              "id": "arthur-idle",
+              "path": "assets/raster-v12/arthur-idle.png",
+              "expected": [
+                1024,
+                1536
+              ],
+              "actual": [
+                1024,
+                1536
+              ]
+            },
+            {
+              "id": "wendy-idle",
+              "path": "assets/raster-v12/wendy-idle.png",
+              "expected": [
+                1024,
+                1536
+              ],
+              "actual": [
+                1024,
+                1536
+              ]
+            },
+            {
+              "id": "kirsh-idle",
+              "path": "assets/raster-v12/kirsh-idle.png",
+              "expected": [
+                1024,
+                1536
+              ],
+              "actual": [
+                1024,
+                1536
+              ]
+            },
+            {
+              "id": "curly-idle",
+              "path": "assets/raster-v12/curly-idle.png",
+              "expected": [
+                1024,
+                1536
+              ],
+              "actual": [
+                1024,
+                1536
+              ]
+            },
+            {
+              "id": "nibs-idle",
+              "path": "assets/raster-v12/nibs-idle.png",
+              "expected": [
+                1024,
+                1536
+              ],
+              "actual": [
+                1024,
+                1536
+              ]
+            },
+            {
+              "id": "zoo-cylinder",
+              "path": "assets/raster-v12/zoo-cylinder.png",
+              "expected": [
+                887,
+                1774
+              ],
+              "actual": [
+                887,
+                1774
+              ]
+            },
+            {
+              "id": "zoo-console",
+              "path": "assets/raster-v12/zoo-console.png",
+              "expected": [
+                1536,
+                1024
+              ],
+              "actual": [
+                1536,
+                1024
+              ]
+            },
+            {
+              "id": "zoo-lab-table",
+              "path": "assets/raster-v12/zoo-lab-table.png",
+              "expected": [
+                1774,
+                887
+              ],
+              "actual": [
+                1774,
+                887
+              ]
+            },
+            {
+              "id": "zoo-cabinet",
+              "path": "assets/raster-v12/zoo-cabinet.png",
+              "expected": [
+                1086,
+                1448
+              ],
+              "actual": [
+                1086,
+                1448
+              ]
+            },
+            {
+              "id": "zoo-wall-light",
+              "path": "assets/raster-v12/zoo-wall-light.png",
+              "expected": [
+                1774,
+                887
+              ],
+              "actual": [
+                1774,
+                887
+              ]
+            },
+            {
+              "id": "zoo-wall-light-off",
+              "path": "assets/raster-v12/zoo-wall-light-off.png",
+              "expected": [
+                1774,
+                887
+              ],
+              "actual": [
+                1774,
+                887
+              ]
+            },
+            {
+              "id": "zoo-pipette",
+              "path": "assets/raster-v12/zoo-pipette.png",
+              "expected": [
+                1024,
+                1536
+              ],
+              "actual": [
+                1024,
+                1536
+              ]
+            }
+          ],
+          "actualUiLoaderScope": "Five admitted portraits requested by real catalogue buttons and acknowledged by production loader events.",
+          "requestedUiAssets": [
+            "wendy-idle",
+            "kirsh-idle",
+            "arthur-idle",
+            "curly-idle",
+            "nibs-idle"
+          ],
+          "saveReloadPreserved": true,
+          "savedPlayerX": 206.24250000000018,
+          "paths": [
+            "assets/raster-v12/mcsx.png",
+            "assets/raster-v12/species19-adult.png",
+            "assets/raster-v12/joe-mcsx-idle.png",
+            "assets/raster-v12/arthur-idle.png",
+            "assets/raster-v12/wendy-idle.png",
+            "assets/raster-v12/kirsh-idle.png",
+            "assets/raster-v12/curly-idle.png",
+            "assets/raster-v12/nibs-idle.png",
+            "assets/raster-v12/zoo-cylinder.png",
+            "assets/raster-v12/zoo-console.png",
+            "assets/raster-v12/zoo-lab-table.png",
+            "assets/raster-v12/zoo-cabinet.png",
+            "assets/raster-v12/zoo-wall-light.png",
+            "assets/raster-v12/zoo-wall-light-off.png",
+            "assets/raster-v12/zoo-pipette.png"
+          ],
+          "events": [
+            {
+              "id": "wendy-idle",
+              "status": "ready",
+              "error": null
+            },
+            {
+              "id": "kirsh-idle",
+              "status": "ready",
+              "error": null
+            },
+            {
+              "id": "arthur-idle",
+              "status": "ready",
+              "error": null
+            },
+            {
+              "id": "curly-idle",
+              "status": "ready",
+              "error": null
+            },
+            {
+              "id": "nibs-idle",
+              "status": "ready",
+              "error": null
+            }
+          ],
+          "state": {
+            "parts": 0,
+            "salvaged": [],
+            "circuits": {
+              "C01": "work",
+              "C02": "work",
+              "C03": "work",
+              "C04": "work",
+              "C05": "work",
+              "C06": "work",
+              "C07": "work",
+              "C08": "work"
+            },
+            "repairedDoors": [],
+            "cameraFrames": {},
+            "carryId": null,
+            "serviceStats": {
+              "switches": 0,
+              "crafts": 0,
+              "repairs": 0,
+              "captures": 0,
+              "lifts": 0,
+              "medicalEvacs": 0
+            },
+            "dlc": "alien-earth-s1",
+            "schema": 11,
+            "fidelityV11": {
+              "joeWeapon": "mcsx",
+              "maximShots": 0
+            },
+            "fidelityGear": {
+              "observedCutter": false,
+              "cutterIntact": true,
+              "ksgOwned": false,
+              "arc": 0,
+              "foam": 0,
+              "selected": "default",
+              "foamUntil": {},
+              "shots": 0
+            },
+            "security": {
+              "units": {
+                "SEC-01": {
+                  "integrity": 100,
+                  "isolated": false,
+                  "isolatedAt": null,
+                  "firstSeen": null,
+                  "lastSeen": null,
+                  "lastMode": null,
+                  "alarmUntil": 0,
+                  "cooldownUntil": 0,
+                  "stunnedUntil": 0,
+                  "alarms": 0
+                },
+                "SEC-02": {
+                  "integrity": 100,
+                  "isolated": false,
+                  "isolatedAt": null,
+                  "firstSeen": null,
+                  "lastSeen": null,
+                  "lastMode": null,
+                  "alarmUntil": 0,
+                  "cooldownUntil": 0,
+                  "stunnedUntil": 0,
+                  "alarms": 0
+                },
+                "SEC-03": {
+                  "integrity": 100,
+                  "isolated": false,
+                  "isolatedAt": null,
+                  "firstSeen": null,
+                  "lastSeen": null,
+                  "lastMode": null,
+                  "alarmUntil": 0,
+                  "cooldownUntil": 0,
+                  "stunnedUntil": 0,
+                  "alarms": 0
+                },
+                "SEC-04": {
+                  "integrity": 100,
+                  "isolated": false,
+                  "isolatedAt": null,
+                  "firstSeen": null,
+                  "lastSeen": null,
+                  "lastMode": null,
+                  "alarmUntil": 0,
+                  "cooldownUntil": 0,
+                  "stunnedUntil": 0,
+                  "alarms": 0
+                },
+                "SEC-05": {
+                  "integrity": 100,
+                  "isolated": false,
+                  "isolatedAt": null,
+                  "firstSeen": null,
+                  "lastSeen": null,
+                  "lastMode": null,
+                  "alarmUntil": 0,
+                  "cooldownUntil": 0,
+                  "stunnedUntil": 0,
+                  "alarms": 0
+                },
+                "SEC-06": {
+                  "integrity": 100,
+                  "isolated": false,
+                  "isolatedAt": null,
+                  "firstSeen": null,
+                  "lastSeen": null,
+                  "lastMode": null,
+                  "alarmUntil": 0,
+                  "cooldownUntil": 0,
+                  "stunnedUntil": 0,
+                  "alarms": 0
+                },
+                "SEC-07": {
+                  "integrity": 100,
+                  "isolated": false,
+                  "isolatedAt": null,
+                  "firstSeen": null,
+                  "lastSeen": null,
+                  "lastMode": null,
+                  "alarmUntil": 0,
+                  "cooldownUntil": 0,
+                  "stunnedUntil": 0,
+                  "alarms": 0
+                },
+                "SEC-08": {
+                  "integrity": 100,
+                  "isolated": false,
+                  "isolatedAt": null,
+                  "firstSeen": null,
+                  "lastSeen": null,
+                  "lastMode": null,
+                  "alarmUntil": 0,
+                  "cooldownUntil": 0,
+                  "stunnedUntil": 0,
+                  "alarms": 0
+                }
+              },
+              "events": []
+            },
+            "investigations": {
+              "decisions": {},
+              "departures": {}
+            },
+            "ducts": {
+              "opened": [],
+              "stats": {
+                "opened": 0,
+                "crossings": 0,
+                "rotorContacts": 0
+              }
+            },
+            "sensors": {
+              "units": {
+                "S-01": {
+                  "id": "S-01",
+                  "status": "carried",
+                  "room": null,
+                  "x": 0,
+                  "z": 125,
+                  "battery": 180,
+                  "pulseUntil": 0,
+                  "cooldownUntil": 0,
+                  "lastFrame": null,
+                  "received": null
+                },
+                "S-02": {
+                  "id": "S-02",
+                  "status": "carried",
+                  "room": null,
+                  "x": 0,
+                  "z": 125,
+                  "battery": 180,
+                  "pulseUntil": 0,
+                  "cooldownUntil": 0,
+                  "lastFrame": null,
+                  "received": null
+                }
+              },
+              "history": [],
+              "stats": {
+                "deployed": 0,
+                "recovered": 0,
+                "recharged": 0,
+                "pulses": 0,
+                "alerts": 0
+              }
+            },
+            "containment": {
+              "pads": {},
+              "records": {},
+              "calibrated": [],
+              "stats": {
+                "armed": 0,
+                "captures": 0,
+                "studies": 0,
+                "released": 0,
+                "broken": 0,
+                "recovered": 0
+              }
+            },
+            "version": "11.0.0",
+            "chapter": 0,
+            "room": "R01",
+            "completed": [],
+            "archives": [],
+            "visited": [
+              "R01"
+            ],
+            "player": {
+              "x": 206.24250000000018,
+              "z": 125,
+              "hp": 120,
+              "energy": 100,
+              "ammo": 12,
+              "reserve": 24,
+              "facing": 1
+            },
+            "world": {
+              "R01": {
+                "enemies": [],
+                "hazards": [],
+                "lures": []
+              }
+            },
+            "choices": {},
+            "inventory": {
+              "care": 1,
+              "decoys": 2,
+              "capsules": 2
+            },
+            "looted": [],
+            "gates": {},
+            "valves": [],
+            "research": [],
+            "survivors": {},
+            "lightOn": false,
+            "fieldWork": {},
+            "enemyRooms": {
+              "EN-05": "R05",
+              "EN-06": "R06",
+              "EN-07": "R07",
+              "EN-08": "R08",
+              "EN-09": "R09",
+              "EN-10": "R10",
+              "EN-12": "R12",
+              "EN-13": "R13",
+              "EN-14": "R14",
+              "EN-16": "R16",
+              "EN-18": "R18",
+              "EN-19": "R19",
+              "EN-20": "R20",
+              "EN-23": "R23",
+              "EN-24": "R24",
+              "EN-25": "R25",
+              "EN-26": "R26",
+              "EN-27": "R27",
+              "EN-28": "R28",
+              "EN-29": "R29",
+              "EN-30": "R30",
+              "EN-35": "R35",
+              "EN-36": "R36",
+              "EN-38": "R38",
+              "EN-39": "R39",
+              "EN-42": "R42",
+              "EN-44": "R44",
+              "EN-45": "R45",
+              "EN-46": "R46",
+              "R50-tick-v7": "R50",
+              "R51-tick-v7": "R51",
+              "R52-facehugger-v7": "R52",
+              "R53-facehugger-v7": "R53",
+              "R54-tick-v7": "R54",
+              "R55-tick-v7": "R55",
+              "R56-facehugger-v7": "R56"
+            },
+            "pursuits": [],
+            "seals": {},
+            "intel": {},
+            "journal": [],
+            "trackedRoom": null,
+            "runtime": {
+              "iframe": 0.1500999999999998,
+              "toolCooldown": 0,
+              "resonanceCooldown": 0,
+              "fireCooldown": 0,
+              "reloadTime": 0,
+              "projectiles": [],
+              "noise": {
+                "x": 206.24250000000018,
+                "z": 125,
+                "ttl": 0.2665999999999999,
+                "radius": 220
+              }
+            },
+            "stats": {
+              "decoysUsed": 0,
+              "kitsUsed": 0,
+              "rescues": 0,
+              "pursuits": 0,
+              "crossings": 0,
+              "breaches": 0,
+              "listens": 0,
+              "reassurances": 0
+            },
+            "presentation": "HYBRID",
+            "difficulty": "normal",
+            "resonance": false,
+            "escort": false,
+            "finished": false,
+            "playSeconds": 0.5498999999999999
+          }
+        },
+        "fixtureHashes": {
+          "atf-v47-profile-1": "3c919e859763a5423c58b804f78a806cf917f93d37ef2e3f48467fbb3debd507",
+          "atf-v47-profile-2": "c33c4c50f8b3ae02a254d6f17bb41cf8557db42a15b9d3ca5304a6e597628354",
+          "atf-v47-profile-3": "6dfd4d7e2414e17d4a484dd27ce46cc5e1b57dead79e6b17faa9c70fcafc267d",
+          "atf-v78-selected-profile": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"
+        }
+      }
+    }
+  },
+  "priorEvidence": {
+    "observationsBeforeExecutorLoss": {
+      "artifact_type": "session_observation_summary",
+      "is_raw_browser_report": false,
+      "provenance": "Compiled from exact tool outputs observed in this agent session before the executor became unavailable. Full raw JSON reports were on the executor filesystem and were not saved in this agent's store. This document must not be presented as a recovered raw report.",
+      "session_date": "2026-11-26",
+      "browser": {
+        "name": "Chrome Headless Shell / Chromium",
+        "version": "151.0.7922.34",
+        "playwright": "1.62.0",
+        "headless": true
+      },
+      "final_runtime": {
+        "raster_count": 15,
+        "portable_sha256": "c89e06fd2529bb19a29b829763d6acfdcf8ffe7db26f4d107c735a232d52f4f3",
+        "portable_bytes": 31114156,
+        "host_app_sha256_reported_by_earth_sources": "d7a7f26cd7688198dcbf44da488a339c4fba724b617bf38bcc4b1ba7504f7d85"
+      },
+      "dlc_scope": {
+        "status": "passed_scoped_checks",
+        "original_run_path": "<task-workspace>/earth-browser-dlc15-final/earth-v12-browser.json",
+        "original_whole_run_ok": false,
+        "whole_run_failure_reason": "The following portable phase used an invalid expectation that all lazy application raster loaders should emit ready in R01. That harness expectation was corrected, and the portable phase passed separately.",
+        "passed_check_count": 11,
+        "observed_printed_pass_checks": [
+          "normal title preserves existing Earth/native bytes and omits QA observer",
+          "fresh title does not create a save",
+          "new game and movement use actual UI/keyboard",
+          "physical R01 to R02 and back; no remote objective completion",
+          "pause freezes simulation and UI export preserves current position",
+          "save/reload/continue preserves room and exact position",
+          "real file chooser import restores exported state; native profiles remain untouched",
+          "all raster PNGs decode at declared dimensions; real Canvas draws and fallback selectors are correct",
+          "390px mobile pause menu stays within viewport",
+          "no JavaScript exceptions or failed application resources",
+          "declared R18 checkpoint renders actual Zoo props without QA mutators"
+        ],
+        "actual_raster_count": 15,
+        "page_errors_observed": [],
+        "failed_resources_observed": [],
+        "fixture_scope": "Fresh native profiles 1, 2, 3 and selected marker 2; fresh Earth R01. Native byte preservation concerns these declared test fixtures, not the user's actual browser profiles.",
+        "movement_scope": "Actual keyboard travel R01 to R02 and back, with completed objectives remaining empty.",
+        "zoo_visual_fixture": {
+          "declaration": "Separate initial chapter-5/R18 checkpoint with AE-01..AE-16 marked complete solely for visual inspection; not evidence of a campaign playthrough.",
+          "powered": false,
+          "observed_draw_counts": {
+            "zoo-lab-table": 22,
+            "zoo-pipette": 20,
+            "zoo-wall-light-off": 44,
+            "zoo-wall-light": 0
+          },
+          "inspection": "Root reported reviewing the final atlas and R18 capture: table/pipette, unlit lamp and room sign were legible."
+        },
+        "screenshots_before_executor_loss": {
+          "raster": "<task-workspace>/earth-browser-dlc15-final/earth-raster-browser-atlas.png",
+          "zoo": "<task-workspace>/earth-browser-dlc15-final/earth-zoo-fixture.png",
+          "title": "<task-workspace>/earth-browser-dlc15-final/earth-title.png",
+          "title_scope": "Alien: Earth DLC title, not the native Tantalus menu",
+          "remote_preservation": "Root confirmed these three captures were preserved as remote Git blobs."
+        }
+      },
+      "portable_scope": {
+        "status": "passed",
+        "actual_raw_report_ok_observed": true,
+        "original_run_path": "<task-workspace>/earth-browser-portable15-final/earth-v12-browser.json",
+        "scenario": "portable",
+        "trace_mode": "light; automatic screenshots and DOM snapshots disabled, explicit screenshots retained",
+        "observed_pass_check": "portable file:// UI and save/reload work; all inline PNGs decode and requested catalogue portraits load without HTTP",
+        "decoded_png_count": 15,
+        "dimensions": "All independently decoded Image.decode results matched the source registry dimensions.",
+        "decode_scope": "All embedded data URLs were independently decoded using real browser Image objects; this did not force preload of the production application image cache.",
+        "actual_ui_loader_scope": "The real pause/reference/cast buttons requested five portraits; ready events from the production loader were observed.",
+        "requested_ui_assets": [
+          "wendy-idle",
+          "kirsh-idle",
+          "arthur-idle",
+          "curly-idle",
+          "nibs-idle"
+        ],
+        "save_reload_preserved": true,
+        "saved_player_x": 202.5075000000002,
+        "room": "R01",
+        "completed_objectives": [],
+        "http_requests": [],
+        "page_errors": [],
+        "failed_resources": [],
+        "sha256": "c89e06fd2529bb19a29b829763d6acfdcf8ffe7db26f4d107c735a232d52f4f3",
+        "evidence_tool_output_chunk": "b42db3"
+      },
+      "final_host_scope": {
+        "status": "not_validated",
+        "isolated_two_roundtrips_executed": false,
+        "historical_go_back_executed": false,
+        "pageshow_persisted_observed": null,
+        "reason": "The isolated final host check was deliberately held until a remote code checkpoint was published. The executor became unavailable before that check could run.",
+        "implementation_ready": "The saved harness has an explicit host-roundtrips scenario, one context for two cycles, UI return then real history back, a pageshow.persisted observer, and an explicit optional --disable-gpu flag. These planned checks must not be reported as executed.",
+        "earlier_baseline": "A separate base8 run passed 13 checks including native menu launch/return. It does not validate repeated/history navigation on final15.",
+        "back_forward_cache_caveat": "Playwright's default launch includes --disable-back-forward-cache. This was discovered in the actual launch logs. Earlier runs without an explicitly added cache flag therefore did not prove BFCache activation. The planned ordinary history scenario removes that automation default.",
+        "final15_observed_failures": [
+          {
+            "run": "earth-browser-final15",
+            "passed_checks": 10,
+            "point": "return to native host",
+            "observed": "GPU process exit_code=9, then Playwright driver assertion and page crash; driver became unresponsive and was interrupted."
+          },
+          {
+            "run": "earth-browser-final15-shm",
+            "passed_checks": 10,
+            "point": "return to native host",
+            "observed": "Page crash with /dev/shm enabled; pageErrors, resourceErrors and consoleErrors were empty in the saved report. Cause not proven."
+          },
+          {
+            "run": "earth-browser-final15-validated",
+            "passed_checks": 0,
+            "point": "native menu bootstrap",
+            "observed": "Target crashed even with light tracing."
+          }
+        ]
+      },
+      "harness_corrections": {
+        "async_readiness": "The installed Playwright source showed waitForFunction treats a returned Promise as truthy. The async readiness predicate was replaced with polling of resolved production diagnostics. Assertions were retained.",
+        "lazy_portable_loading": "The invalid wait for all production loader events at R01 was replaced with independent decoding of all embedded PNGs and observation of only actual UI-requested loader events.",
+        "product_changes_for_harness": "No application progress was injected, no page resources were stubbed, and no product code was changed to conceal browser failures."
+      },
+      "host_fix_separate_evidence": {
+        "provenance": "Reported by earth_sources and acknowledged by root; not a browser-history validation by this agent.",
+        "fix": "Reset the native leavingForEarthV12 guard on pageshow.persisted.",
+        "tests_reported": {
+          "node": 1262,
+          "succession": 7
+        }
+      },
+      "limits": [
+        "This is a session-derived evidence summary, not a reconstructed raw JSON report or trace.",
+        "Final DLC and portable scopes passed as described; the final isolated native-host/history scope remains unvalidated.",
+        "Browser GPU/target failures occurred. Memory or instrumentation pressure was plausible but not proven; no causal claim is made.",
+        "Generated art remains exact:false. An admitted PNG count is not a claim of certified screen-accurate 1:1 reproduction."
+      ]
+    },
+    "earlierHostAttemptIndex": {
+      "artifact_type": "host_mini_validation_index",
+      "sourceCommit": "249e6abd9de72eecc6bf7033e8b36371a71d7a66",
+      "status": "full_two_cycle_host_validation_not_passed",
+      "interpretation": "Do not combine the successful two-cycle navigation with missing assets and the later zero-404 run that crashed into a claim of a successful two-cycle zero-error pass.",
+      "runtime": {
+        "browser": "151.0.7922.34",
+        "playwright": "1.62.0",
+        "traceMode": "light",
+        "softwareGpuFlag": false,
+        "ordinaryIgnoredDefaultArgs": [
+          "--disable-dev-shm-usage",
+          "--disable-back-forward-cache"
+        ],
+        "nativeAppSha256": "d7a7f26cd7688198dcbf44da488a339c4fba724b617bf38bcc4b1ba7504f7d85"
+      },
+      "officialQaCorrection": {
+        "blob": "8b507a365197fddda9afe9f1f0b33604bdf47b02",
+        "baselineBlob": "e6699cade632ef14f20e31f9acb05ce965f9beda",
+        "diff": "diff --git a/scripts/qa-alien-earth-integration-v12.py b/scripts/qa-alien-earth-integration-v12.py\nindex e6699ca..8b507a3 100644\n--- a/scripts/qa-alien-earth-integration-v12.py\n+++ b/scripts/qa-alien-earth-integration-v12.py\n@@ -457,6 +457,7 @@ def main():\n             page.goto(host_url, wait_until=\"networkidle\")\n             cycles = []\n             for cycle in (1, 2):\n+                page.locator('#title-start:visible, #title-alien-earth:visible').first.wait_for()\n                 if page.locator('#title-start').is_visible():\n                     page.locator('#title-start').click()\n                 page.locator('#title-alien-earth').wait_for()\n",
+        "assertionsUnchanged": true,
+        "productChanged": false
+      },
+      "observationHarnessBlob": "3a8a19ede9bb299cca9d747566ca630f607bd7ba",
+      "attempts": [
+        {
+          "name": "fresh_initial_bootstrap",
+          "rawEmittedReportBlob": "e94eb64b304997b3f53cc5e3daa442a52ebb08cd",
+          "logBlob": "5dfe7819e509d82d3f821b6911c3c1ec065931ac",
+          "traceZipBlob": "577719b49a6ed35fe7f70ea34167531f0f04d678",
+          "completedCycles": 0,
+          "resource404Count": 49,
+          "pageErrorCount": 0,
+          "crash": false,
+          "diagnosis": "Trace confirms initial isVisible(#title-start) returned false before the button became visible; the conditional skipped the click. Final screenshot shows the press-to-start screen.",
+          "traceExcerptBlob": "851d1a51f7cb06b7fb1eb450aab06da52cf295bc",
+          "screenshotBlob": "3e87819f6228b1160430ab14b3c7eb4b399290c2"
+        },
+        {
+          "name": "visible_start_wait_and_49_assets_restored",
+          "rawFileReportBlob": "146e35cef659994255dc377478f4814d98a1a3d8",
+          "receivedStdoutBlob": "272871596cb6e977dccc07abc022b52d291520ff",
+          "stdoutToolTruncated": true,
+          "traceZipBlob": "9681ebcfd3c4acc06a5aa09afb4095d382b167df",
+          "completedCycles": 2,
+          "resource404Count": 111,
+          "pageErrorCount": 0,
+          "crash": false,
+          "allSaveBytesPreserved": true,
+          "sameContextThroughout": true,
+          "returnMethods": [
+            "UI host button",
+            "real browser history back"
+          ],
+          "pageshowPersistedObserved": false,
+          "rawFileComplete": true,
+          "screenshots": {
+            "nativeMenu": "eaf71b878600bd5eb446ee01b4f6a28ef75bbe1d",
+            "earthTitle": "b4e986d97c1285431ac7990611c8f4f3bbc5fc07",
+            "finalNativeReturn": "5d399845a9ea1326022e322da342d77e50b9e633"
+          }
+        },
+        {
+          "name": "all_111_observed_assets_restored",
+          "rawFileReportBlob": "fb8a85600a1f68505ba4d39ee75ea5a6fb45c1fb",
+          "rawFileBytes": 5527,
+          "rawEmittedReportBlob": "3c1f6e7d204d72d2706fc312be594c3fc9bd7bd0",
+          "logBlob": "57f28a2e3e9dac0eabbf87ad6425ece782c34938",
+          "completedCycles": 1,
+          "secondEarthTitleReached": true,
+          "secondHistoricalReturn": "page crashed",
+          "resource404Count": 0,
+          "consoleErrorCount": 0,
+          "pageErrorCount": 0,
+          "crash": true,
+          "error": "Navigation failed because page crashed!\n=========================== logs ===========================\n\"domcontentloaded\" event fired\n============================================================",
+          "cause": "Not established; no GPU exit_code=9 line was observed in this specific run.",
+          "pageshowPersistedObservedAtFinalReturn": null,
+          "firstCycleSaveBytesPreserved": true,
+          "screenshots": {
+            "nativeMenu": "89f8b3f357b750e65a801a62b7e2c2f7bfd9ff03",
+            "earthTitle": "dfeb69fd4db939e3b4bdb548322c311dd737e26d",
+            "finalNativeReturn": null
+          },
+          "assetRestorationReceiptBlob": "94ad8d160640136eac4acdc40df86208c7931a16"
+        }
+      ],
+      "fixtureEquality": {
+        "nativeAndSelectedProfileHashesIdentical": true,
+        "nativeAndSelectionHashes": {
+          "atf-v47-profile-1": "3c919e859763a5423c58b804f78a806cf917f93d37ef2e3f48467fbb3debd507",
+          "atf-v47-profile-2": "c33c4c50f8b3ae02a254d6f17bb41cf8557db42a15b9d3ca5304a6e597628354",
+          "atf-v47-profile-3": "6dfd4d7e2414e17d4a484dd27ce46cc5e1b57dead79e6b17faa9c70fcafc267d",
+          "atf-v78-selected-profile": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"
+        },
+        "earthAndAuxiliaryFixturesIdentical": true,
+        "earthSha256": "ee5b85fe008a49821ee5f006ed3265b9f6db65ccba985ad0e220105d752223f8",
+        "initialFixture": "Fresh valid native profiles 1–3 from createDefaultSave(i), fixed createdAt/updatedAt; selected profile 2. Fresh Earth R01 with 12.5 elapsed seconds and no completed objective. Fixtures applied only at initial context creation; no game progression mutators used."
+      },
+      "currentLocalRawReport": "<task-workspace>/earth-browser-host15-assets-final/earth-v12-browser.json",
+      "previousDlcAndPortableEvidenceSummaryBlob": "1cb3be8e48f993da890e29aaa8f19bbda8fcf428",
+      "additionalBrowserAttemptStarted": false
+    },
+    "interpretation": "The earlier two-cycle run with missing assets and the separate zero-resource-error run that crashed are not combined into a successful run."
+  },
+  "previousPublishedCI": {
+    "commit": "249e6abd9de72eecc6bf7033e8b36371a71d7a66",
+    "runId": 45837123348,
+    "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45837123348",
+    "conclusion": "success",
+    "checks": 12,
+    "hostSkipped": true,
+    "precedesCurrentNavigationAudioCorrection": true
+  },
+  "screenshots": {
+    "raster": {
+      "path": "raster-review.png",
+      "scope": "Actual browser raster inspection; not a delivered sprite sheet"
+    },
+    "zoo": {
+      "path": "zoo-room.png",
+      "scope": "Declared R18 visual checkpoint; not evidence of reaching R18 through campaign play"
+    },
+    "title": {
+      "path": "title-menu.png",
+      "scope": "Alien: Earth DLC title, not native Tantalus title"
+    }
+  },
+  "limits": [
+    "Native save preservation uses declared synthetic profiles 1–3 plus selected profile 2; no user's real browser save was inspected.",
+    "R01→R02→R01 uses keyboard/UI. R18 is an explicitly declared visual fixture.",
+    "All 15 embedded PNGs are independently decoded, while only portraits requested by actual catalogue UI are required to appear in the lazy application loader.",
+    "A reused history entry is distinct from a reused Document; timeOrigin and pageshow observations are kept separately.",
+    "A GPU process exit does not establish its cause. Local host failure is retained even if a later CI run succeeds.",
+    "No full playthrough of all 70 rooms, complete character animation set or screen-exact art certification is claimed."
+  ],
+  "sanitizationNotes": [
+    "Local workspace paths are replaced by descriptive placeholders.",
+    "Navigation API UUID values are replaced by stable symbolic identifiers: equal original values retain the same symbol. The original raw file blob IDs remain recorded.",
+    "CI Navigation identifiers use their own stable prefix; the local and CI runs are not equated by identifier labels."
+  ],
+  "currentCI": {
+    "validatedCodeCommit": "6ac32413c6b0c00d3e4d9fe8a35561ac430804b0",
+    "workflowRun": 45846386818,
+    "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45846386818",
+    "earth": {
+      "jobId": 140001046365,
+      "conclusion": "success",
+      "nodeTests": 1266,
+      "successionTests": 7,
+      "browserChecks": 12,
+      "evidenceArtifactId": 15132890172,
+      "playableArtifactId": 15131744185
+    },
+    "host": {
+      "jobId": 140001046781,
+      "conclusion": "success",
+      "rawFileBlob": "8454cd5c20a9bc68891d6a0830ee3c7d1fc76a23",
+      "artifactId": 15132248064,
+      "artifactUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45846386818/artifacts/15132248064",
+      "runner": "ubuntu-24.04",
+      "playwright": "1.62.0",
+      "browser": "151.0.7922.34",
+      "scope": "One browser context, two native-title/Earth-title/native-title cycles, UI return then real browser history back; fixtures installed only at context creation.",
+      "fixtureHashesMatchLocal": true,
+      "javascriptExceptions": 0,
+      "failedApplicationResources": 0,
+      "consoleMessages": 3,
+      "consoleMessageScope": "Three 404 console messages are attributed by the preserved trace to /favicon.ico, excluded from the pre-existing resource-error filter. This is not a zero-console-error claim.",
+      "backForwardCacheObserved": true,
+      "audioAfterCachedReturn": {
+        "disposed": false,
+        "unlockStatus": "running",
+        "contextState": "running",
+        "scene": "menu",
+        "musicStatus": "playing"
+      },
+      "report": {
+        "ok": true,
+        "browser": "151.0.7922.34",
+        "browserArguments": [
+          "--no-sandbox"
+        ],
+        "functionalIgnoredDefaultArguments": [
+          "--disable-dev-shm-usage"
+        ],
+        "ordinaryRoundtripIgnoredDefaultArguments": [
+          "--disable-dev-shm-usage",
+          "--disable-back-forward-cache"
+        ],
+        "sharedMemory": "/dev/shm",
+        "functionalBackForwardCache": "Playwright default disabled; the separate ordinary roundtrip scenario removes that automation flag",
+        "scenario": "host-roundtrips",
+        "traceMode": "light",
+        "freshBrowserBetweenScenarios": true,
+        "expectedRasterCount": 15,
+        "root": "<ci-checkout>/dist",
+        "sourceRoot": "<ci-checkout>",
+        "skipHost": false,
+        "fixtureDeclaration": "Fresh valid native profiles 1–3; selected profile 2; fresh Earth R01 fixture with 12.5 elapsed seconds and no completed objective. A separate R18 visual fixture starts chapter 5 with AE-01..AE-16 marked complete solely to inspect the Zoo; it is not evidence of a campaign playthrough.",
+        "checks": [
+          {
+            "name": "two consecutive host/Earth/host round trips in one ordinary browser preserve all save bytes",
+            "ok": true,
+            "cycles": 2
+          }
+        ],
+        "walk": [],
+        "routes": [],
+        "pageErrors": [],
+        "resourceErrors": [],
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "Failed to load resource: the server responded with a status of 404 (File not found)"
+        ],
+        "urls": {
+          "host": "http://127.0.0.1:34003/",
+          "earth": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html"
+        },
+        "hostDocumentObservations": [
+          {
+            "cycle": 1,
+            "stage": "native-before-earth",
+            "url": "http://127.0.0.1:34003/",
+            "referrer": "",
+            "timeOrigin": 1795707168299.4,
+            "navigationType": "navigate",
+            "historyLength": 2,
+            "navigationEntry": {
+              "key": "ci-navigation-identifier-1",
+              "id": "ci-navigation-identifier-2",
+              "index": 0,
+              "url": "http://127.0.0.1:34003/"
+            },
+            "navigationEntryCount": 1,
+            "pageShowEvents": [],
+            "audio": {
+              "disposed": false,
+              "unlockStatus": "running",
+              "scene": "menu",
+              "contextState": "running",
+              "musicStatus": "playing"
+            }
+          },
+          {
+            "cycle": 1,
+            "stage": "earth-title",
+            "url": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html",
+            "referrer": "http://127.0.0.1:34003/",
+            "timeOrigin": 1795707171738.5,
+            "navigationType": "navigate",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "ci-navigation-identifier-3",
+              "id": "ci-navigation-identifier-4",
+              "index": 1,
+              "url": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [
+              {
+                "persisted": false,
+                "url": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html",
+                "timeOrigin": 1795707171738.5
+              }
+            ],
+            "audio": null
+          },
+          {
+            "cycle": 1,
+            "stage": "native-after-return",
+            "url": "http://127.0.0.1:34003/",
+            "referrer": "",
+            "timeOrigin": 1795707173196.7,
+            "navigationType": "back_forward",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "ci-navigation-identifier-1",
+              "id": "ci-navigation-identifier-2",
+              "index": 0,
+              "url": "http://127.0.0.1:34003/"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [],
+            "audio": {
+              "disposed": false,
+              "unlockStatus": "locked",
+              "scene": null,
+              "contextState": null,
+              "musicStatus": "silent"
+            }
+          },
+          {
+            "cycle": 2,
+            "stage": "native-before-earth",
+            "url": "http://127.0.0.1:34003/",
+            "referrer": "",
+            "timeOrigin": 1795707173196.7,
+            "navigationType": "back_forward",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "ci-navigation-identifier-1",
+              "id": "ci-navigation-identifier-2",
+              "index": 0,
+              "url": "http://127.0.0.1:34003/"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [],
+            "audio": {
+              "disposed": false,
+              "unlockStatus": "running",
+              "scene": "menu",
+              "contextState": "running",
+              "musicStatus": "playing"
+            }
+          },
+          {
+            "cycle": 2,
+            "stage": "earth-title",
+            "url": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html",
+            "referrer": "http://127.0.0.1:34003/",
+            "timeOrigin": 1795707177196.1,
+            "navigationType": "navigate",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "ci-navigation-identifier-5",
+              "id": "ci-navigation-identifier-6",
+              "index": 1,
+              "url": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [
+              {
+                "persisted": false,
+                "url": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html",
+                "timeOrigin": 1795707177196.1
+              }
+            ],
+            "audio": null
+          },
+          {
+            "cycle": 2,
+            "stage": "native-after-return",
+            "url": "http://127.0.0.1:34003/",
+            "referrer": "",
+            "timeOrigin": 1795707173196.7,
+            "navigationType": "back_forward",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "ci-navigation-identifier-1",
+              "id": "ci-navigation-identifier-2",
+              "index": 0,
+              "url": "http://127.0.0.1:34003/"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [
+              {
+                "persisted": false,
+                "url": "http://127.0.0.1:34003/",
+                "timeOrigin": 1795707173196.7
+              },
+              {
+                "persisted": true,
+                "url": "http://127.0.0.1:34003/",
+                "timeOrigin": 1795707173196.7
+              }
+            ],
+            "audio": {
+              "disposed": false,
+              "unlockStatus": "running",
+              "scene": "menu",
+              "contextState": "running",
+              "musicStatus": "playing"
+            }
+          }
+        ],
+        "sameBrowserRoundTrips": {
+          "cycles": [
+            {
+              "cycle": 1,
+              "url": "http://127.0.0.1:34003/",
+              "returnMethod": "UI host button",
+              "pageShowEvents": [],
+              "earthBytesPreserved": true,
+              "nativeBytesPreserved": true,
+              "nativeTimeOriginBefore": 1795707168299.4,
+              "nativeTimeOriginAfter": 1795707173196.7,
+              "sameNativeDocumentAfterReturn": false,
+              "nativeEntryKeyBefore": "ci-navigation-identifier-1",
+              "nativeEntryKeyAfter": "ci-navigation-identifier-1",
+              "sameNativeHistoryEntryAfterReturn": true
+            },
+            {
+              "cycle": 2,
+              "url": "http://127.0.0.1:34003/",
+              "returnMethod": "real browser history back",
+              "pageShowEvents": [
+                {
+                  "persisted": false,
+                  "url": "http://127.0.0.1:34003/",
+                  "timeOrigin": 1795707173196.7
+                },
+                {
+                  "persisted": true,
+                  "url": "http://127.0.0.1:34003/",
+                  "timeOrigin": 1795707173196.7
+                }
+              ],
+              "earthBytesPreserved": true,
+              "nativeBytesPreserved": true,
+              "nativeTimeOriginBefore": 1795707173196.7,
+              "nativeTimeOriginAfter": 1795707173196.7,
+              "sameNativeDocumentAfterReturn": true,
+              "nativeEntryKeyBefore": "ci-navigation-identifier-1",
+              "nativeEntryKeyAfter": "ci-navigation-identifier-1",
+              "sameNativeHistoryEntryAfterReturn": true
+            }
+          ],
+          "browserResetBetweenCycles": false,
+          "backForwardCacheDisableFlagRemoved": true,
+          "status": "complete",
+          "pageshowPersistedObserved": true
+        },
+        "fixtureHashes": {
+          "atf-v47-profile-1": "3c919e859763a5423c58b804f78a806cf917f93d37ef2e3f48467fbb3debd507",
+          "atf-v47-profile-2": "c33c4c50f8b3ae02a254d6f17bb41cf8557db42a15b9d3ca5304a6e597628354",
+          "atf-v47-profile-3": "6dfd4d7e2414e17d4a484dd27ce46cc5e1b57dead79e6b17faa9c70fcafc267d",
+          "atf-v78-selected-profile": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"
+        }
+      },
+      "artifactSha256": "145f2477ca004a61311849c43bb8fb91b1c01a6f6aa65a55e4ed3b6e7e4bd17c",
+      "artifactBytes": 462124,
+      "faviconTraceRows": [
+        {
+          "type": "console",
+          "messageType": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "args": [],
+          "location": {
+            "url": "http://127.0.0.1:34003/favicon.ico",
+            "lineNumber": 0,
+            "columnNumber": 0
+          },
+          "time": 4934.934,
+          "pageId": "ci-page-1"
+        },
+        {
+          "type": "console",
+          "messageType": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "args": [],
+          "location": {
+            "url": "http://127.0.0.1:34003/favicon.ico",
+            "lineNumber": 0,
+            "columnNumber": 0
+          },
+          "time": 9735.221,
+          "pageId": "ci-page-1"
+        },
+        {
+          "type": "console",
+          "messageType": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "args": [],
+          "location": {
+            "url": "http://127.0.0.1:34003/favicon.ico",
+            "lineNumber": 0,
+            "columnNumber": 0
+          },
+          "time": 10904.809,
+          "pageId": "ci-page-1"
+        }
+      ],
+      "receiptBlob": "2c0f7e8b0a3433ceb26c5f049919dd2a5bb4a898",
+      "environmentDifference": "CI launches Playwright's full Chromium executable in headless mode; the local runner used Chrome Headless Shell. Both reported version151.0.7922.34. The successful CI run does not by itself establish a cause for prior local GPU crashes."
+    },
+    "nativeGameplay": {
+      "workflowRun": 45846386754,
+      "conclusion": "success",
+      "nodeTests": 63,
+      "distributionFiles": 2200,
+      "browserScenarios": [
+        "Harpoon",
+        "audio",
+        "medical route",
+        "convoy history"
+      ]
+    },
+    "otherWorkflows": "See PR checks for the current status of the wider full-release suite; these scoped successes are not a claim that every repository workflow is green.",
+    "checkedOutMergeCommit": "abbe6ed8e3e1d5f73fa4493a1337f31fdc316a05",
+    "checkedOutTree": "d58e25af95c320811d91f4ae2bcad8bf7c264f51",
+    "checkoutTreeMatchesValidatedHead": true,
+    "fullReleaseFirstAttempt": {
+      "runId": 45846387234,
+      "codeCommit": "6ac32413c6b0c00d3e4d9fe8a35561ac430804b0",
+      "conclusion": "failure",
+      "tests": 5394,
+      "passed": 5391,
+      "failed": 2,
+      "skipped": 1,
+      "failedTests": [
+        4185,
+        4191
+      ],
+      "testFile": "scripts/verify-parallel-completion-v165.mjs",
+      "cause": "The reviewed successor of scripts/verify-audit-v143.mjs was missing from the terminal Earth succession registry.",
+      "artifactId": 15132344392,
+      "disposition": "Corrected by registering one exact ninth verifier successor, preserving all eight earlier receipts and all resolver/guard code. The real V165 suite passes 8/8 after fixture restoration, without hooks; Earth passes 1266/1266 and compatibility/succession 79/79. No gameplay runtime or export changed."
+    },
+    "finalVerifierRegistration": {
+      "path": "scripts/verify-audit-v143.mjs",
+      "predecessorSha256": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
+      "currentSha256": "2de1172c3c821113eec7fdac46b4fa27206f03e4fbb735da7f7dccd197e5517f",
+      "realV165TestsPassed": 8,
+      "falsePredecessorsRejected": 9,
+      "isolatedCorruptionsRejected": 9,
+      "runtimeChanged": false,
+      "receiptBlob": "4c546a07298fb8ad911f749fc41f304d04a06080"
+    }
+  }
+}

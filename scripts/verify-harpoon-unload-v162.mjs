@@ -17,7 +17,7 @@ assert.ok(captureStart >= 0 && captureEnd > captureStart && callback, 'Actual ap
 function unload(engine, saveSystem, overrides = {}) {
   const dependencies = { engine, saveSystem, recordOperationResumeState,
     missionOwnerV78: { epoch: 7, profile: saveSystem.profile, operationId: saveSystem.data.strategy.currentOperation.id },
-    profileEpochV78: 7, creatorOwnerV84: null, standaloneContext: null, sessionStart: Date.now(),
+    profileEpochV78: 7, creatorOwnerV84: null, standaloneContext: null, leavingForEarthV12: false, sessionStart: Date.now(),
     disposePlayerAppearancePreviewV126() {}, hubDialogueUiV76: { destroy() {} },
     audio: { dispose() {} }, hubEngine: { stop() {} }, bioforgeRuntimeV80: { stop() {} }, xenoTrialsUiV96: null,
     ...overrides };

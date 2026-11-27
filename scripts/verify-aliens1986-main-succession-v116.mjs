@@ -6,7 +6,7 @@ import {
   ALIENS1986_MAIN_BASELINE_V116, ALIENS1986_MAIN_SUCCESSORS_V116,
   reviewedAliens1986MainDigestV116, verifyAliens1986MainSuccessionV116,
   RIVER_OF_PAIN_SUCCESSORS_20261125, reviewedRiverOfPainDigest20261125,
-  verifyRiverOfPainSuccession20261125,
+  verifyRiverOfPainSuccession20261125, reviewedEarthMainDigestV12,
 } from './audit-native-qa-resources-v187.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -30,7 +30,7 @@ test('Aliens continues exactly seven main files while preserving all five Fleuve
   });
   // The native keyboard QA is a reviewed tooling change; the seven host receipts stay unchanged.
   assert.equal(sha(read('scripts/qa-title-compositions-v163.py')),
-    '83a2cea01f17149d8a512c265604b572dac653c704001903989e66b8c94ecdba', 'Unreviewed native title keyboard QA bytes');
+    reviewedEarthMainDigestV12('scripts/qa-title-compositions-v163.py', '83a2cea01f17149d8a512c265604b572dac653c704001903989e66b8c94ecdba'), 'Unreviewed native title keyboard QA bytes');
 });
 
 test('the new succession rejects fabricated predecessors and changed source bytes', () => {

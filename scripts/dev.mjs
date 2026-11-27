@@ -1,3 +1,4 @@
+import { EARTH_RUNTIME_ROOT_V12, EARTH_RUNTIME_FILES_V12, EARTH_MODULE_ROOT_V12 } from './public-alien-earth-dlc-admissions.mjs';
 import { RIVER_OF_PAIN_RUNTIME, RIVER_OF_PAIN_ROOT } from './river-of-pain-distribution.mjs';
 import { ALIENS1986_RUNTIME_ROOT, ALIENS1986_RUNTIME_FILES } from './public-aliens1986-dlc-admissions.mjs';
 import { renderAliens1986RasterV116 } from './derive-aliens1986-raster-v116.mjs';
@@ -25,6 +26,12 @@ function safePath(url) {
   catch { return null; }
   const relative = normalize(requested === '/' ? 'index.html' : requested.replace(/^\/+/, ''));
   if (relative.startsWith('..')) return null;
+  if (relative === EARTH_RUNTIME_ROOT_V12 || relative === EARTH_RUNTIME_ROOT_V12 + '/')
+    return join(root, EARTH_MODULE_ROOT_V12, 'index.html');
+  if (relative.startsWith(EARTH_RUNTIME_ROOT_V12 + '/')) {
+    const file = relative.slice(EARTH_RUNTIME_ROOT_V12.length + 1);
+    return EARTH_RUNTIME_FILES_V12.includes(file) ? join(root, EARTH_MODULE_ROOT_V12, file) : null;
+  }
   if (relative === 'archives' || relative.startsWith('archives/')) return null;
   if (relative.startsWith('dlc/') && relative !== RIVER_OF_PAIN_ROOT && relative !== RIVER_OF_PAIN_ROOT + '/'
     && relative !== ALIENS1986_RUNTIME_ROOT && relative !== ALIENS1986_RUNTIME_ROOT + '/'
@@ -36,6 +43,10 @@ function safePath(url) {
 await writeAudioManifestV77(root);
 const aliens1986Development = await renderAliens1986RasterV116({ root });
 createServer(async (request, response) => {
+  const earthRequest = (request.url || '/').split('?');
+  if (earthRequest[0] === '/' + EARTH_RUNTIME_ROOT_V12) {
+    response.writeHead(308, { location: earthRequest[0] + '/' + (earthRequest[1] ? '?' + earthRequest[1] : '') }).end(); return;
+  }
   let file = safePath(request.url);
   if (!file) { response.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }).end('Not found'); return; }
   try {

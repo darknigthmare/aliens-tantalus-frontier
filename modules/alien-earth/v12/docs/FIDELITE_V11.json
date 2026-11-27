@@ -1,0 +1,5934 @@
+{
+  "version": "11.0.0",
+  "bundleSha256": "024dec038dad391d54c76e2a6c0b2c3f70459f33d8b5e127a5cc48cafa604df3",
+  "counts": {
+    "rooms": 70,
+    "mainTasks": 32,
+    "optionalTasks": 38,
+    "archives": 70,
+    "bidirectionalConnections": 102,
+    "doorFaces": 204,
+    "props": 958,
+    "propTypes": 49,
+    "rules": 331,
+    "referenceProfiles": 25,
+    "playableRoles": 3,
+    "equipmentDefinitions": 21,
+    "fidelityEquipment": 13,
+    "sources": 33,
+    "doorAuditFailures": 0
+  },
+  "scope": {
+    "sources": [
+      {
+        "id": "FX_CAST",
+        "url": "https://www.fxnetworks.com/shows/alien-earth/characters",
+        "title": "FX — personnages et photographies officielles",
+        "scope": "Noms, rôles, silhouette et tenues des photos de référence ; pas toutes les variantes de scène."
+      },
+      {
+        "id": "FX_PRODUCTION",
+        "url": "https://www.fxnetworks.com/shows/alien-earth/production-design",
+        "title": "FX — production design",
+        "scope": "Direction artistique et éléments de décor ; aucun plan intégral métrique obtenu."
+      },
+      {
+        "id": "FX_PLACES",
+        "url": "https://www.fxnetworks.com/shows/alien-earth/locations",
+        "title": "FX — lieux",
+        "scope": "Neverland et ses paysages ; raccords intérieurs non certifiés."
+      },
+      {
+        "id": "COSTUMES",
+        "url": "https://www.motionpictures.org/2025/09/costume-designer-suttirat-anne-larlarb-on-dressing-scorching-corporate-controlled-future-in-alien-earth/",
+        "title": "Entretien avec Suttirat Anne Larlarb, costumière",
+        "scope": "Wendy bras nus, silhouettes hybrides, Kirsh et palette des tenues."
+      },
+      {
+        "id": "FX_ARMORY",
+        "url": "https://www.fxnetworks.com/shows/alien-earth/armory",
+        "title": "FX — armurerie",
+        "scope": "Page de référence officielle. Son inventaire interactif complet n’a pas été extrait."
+      },
+      {
+        "id": "ARMORER",
+        "url": "https://www.avpgalaxy.net/2025/08/21/inside-alien-earth-new-fx-website-feature-includes-behind-the-scenes-weaponry-and-world-info/",
+        "title": "AVPGalaxy — présentation du dossier FX et de l’armurier",
+        "scope": "MCS-X, désignation et silhouette ; relais du dossier officiel."
+      },
+      {
+        "id": "MAGINOT_PD",
+        "url": "https://www.gamesradar.com/entertainment/horror-shows/alien-earth-production-designer-on-creating-the-nostromo-mirroring-maginot-there-was-definitely-a-certain-amount-of-geeking-out/",
+        "title": "Entretien Andy Nicholson — intérieur du Maginot",
+        "scope": "Réfectoire et salle de communication MU/TH/UR ; pas leur connectivité exacte."
+      },
+      {
+        "id": "ZOO_ART",
+        "url": "https://rubenalba.artstation.com/projects/bgqYoo",
+        "title": "Ruben Alba — The Zoo, concept de production",
+        "scope": "Laboratoire de transport des spécimens."
+      },
+      {
+        "id": "EP03_REF",
+        "url": "https://www.avpgalaxy.net/tv/alien-earth/episodes/season-1/metamorphosis/",
+        "title": "Résumé épisode 3 — Metamorphosis",
+        "scope": "Joe dans le conteneur du quai, lame de massicot et crochet ; source secondaire, pas relevé image par image."
+      },
+      {
+        "id": "EP05_REF",
+        "url": "https://www.avpgalaxy.net/tv/alien-earth/episodes/season-1/in-space-no-one/",
+        "title": "Résumé épisode 5 — In Space, No One…",
+        "scope": "Passerelle, réfectoire et espaces du Maginot."
+      },
+      {
+        "id": "DORM_REF",
+        "url": "https://www.avpgalaxy.net/tv/alien-earth/gallery/behind/",
+        "title": "Photographies de tournage — dortoir des hybrides",
+        "scope": "Existence du dortoir ; disposition adaptée."
+      },
+      {
+        "id": "KSG_REF",
+        "url": "https://alienanthology.fandom.com/wiki/KSG-AL",
+        "title": "KSG-AL — inventaire secondaire renvoyant au dossier FX",
+        "scope": "Arc et mousse ; appellation à recouper directement dans le dossier armurier avant certification."
+      },
+      {
+        "id": "LATIMES_SETS",
+        "title": "Los Angeles Times — production design Alien: Earth",
+        "url": "https://www.latimes.com/entertainment-arts/tv/story/2025-09-09/alien-earth-production-design",
+        "note": "Maginot : réfectoire presque identique, passerelle proche, MU/TH/UR agrandie, cryostase étendue ; Zoo, réfectoire et engineering construits avec corridors interconnectés. Ne fournit pas un plan métrique complet."
+      },
+      {
+        "id": "FX_IMMERSIVE",
+        "title": "FX — Alien: Earth immersive experience",
+        "url": "https://www.fxnetworks.com/shows/alien-earth/immersive",
+        "note": "Références spatiales/personnages et chambre de confinement du Maginot ; pas un blueprint exhaustif."
+      },
+      {
+        "id": "FX_INSIDE",
+        "title": "FX — Inside Alien: Earth",
+        "url": "https://www.fxnetworks.com/shows/alien-earth/inside-alien-earth",
+        "note": "Accès aux dossiers production design, costumes et armurerie ainsi qu’au set tour."
+      },
+      {
+        "id": "ASC_MAGINOT",
+        "title": "American Cinematographer — building the Maginot",
+        "url": "https://theasc.com/articles/alien-earth-the-uscss-maginot",
+        "note": "Structures familières : cryogénie en pétales, coursives d’ingénierie, réfectoire hexagonal."
+      },
+      {
+        "id": "EP05_SPACES",
+        "title": "AVPGalaxy — Episode 5 In Space, No One…",
+        "url": "https://www.avpgalaxy.net/tv/alien-earth/episodes/season-1/in-space-no-one/",
+        "note": "Medbay One, engineering bay, engine room, passerelle et équipage du Maginot ; source secondaire de continuité, pas plan exact."
+      },
+      {
+        "id": "FX_SETTOUR",
+        "title": "FX / set tour — Neverland interiors",
+        "url": "https://www.dailymotion.com/video/x9qzt7c",
+        "note": "Set tour : espaces domestiques, medical bay, lobby, atrium, talking room et secure lab/egg room. Disposition de jeu reconstituée."
+      },
+      {
+        "id": "IMFDB_WEAPONS",
+        "title": "IMFDB — Alien: Earth",
+        "url": "https://www.imfdb.org/wiki/Alien:_Earth",
+        "note": "Identification visuelle secondaire : MCS-X sur Steyr AUG, sidearm Prodigy sur Maxim 9 modifié, pistolets Glock/P80 modifiés sur le Maginot."
+      },
+      {
+        "id": "HOOKBARREL_WEAPONS",
+        "title": "Hook & Barrel — firearms of Alien: Earth",
+        "url": "https://www.hookandbarrel.com/entertainment/alien-earth-guns/",
+        "note": "Références secondaires : Maxim 9, KRISS Vector et plateformes de confinement. À recouper image par image avant certification totale."
+      }
+    ],
+    "locationScope": "Références saison 1 étendues. Les lieux explicitement attestés sont marqués séparément des annexes originales et des raccords reconstitués.",
+    "layout": "Aucun blueprint métrique exhaustif public obtenu : toute adjacency ajoutée en V11 est un raccord jouable cohérent, pas une certification du plan de plateau.",
+    "equipment": [
+      {
+        "id": "mcsx",
+        "name": "MCS-X · fusil Prodigy",
+        "status": "jouable · dotation principale de Joe",
+        "source": "IMFDB_WEAPONS",
+        "note": "Silhouette Steyr AUG modifiée ; mécanique de tir du module, pas reproduction balistique certifiée."
+      },
+      {
+        "id": "wy-pistol",
+        "name": "Pistolet de bord Maginot · Glock/P80 modifié",
+        "status": "jouable · dotation Morrow",
+        "source": "IMFDB_WEAPONS",
+        "note": "Silhouette rapprochée du pistolet observé ; accessoires exacts variant selon les plans."
+      },
+      {
+        "id": "ksg-al",
+        "name": "KSG-AL · arc / mousse",
+        "status": "jouable · armurerie R62",
+        "source": "KSG_REF",
+        "note": "Arc limité et mousse sur cible étourdie. Paramètres et prise facultative originaux ; ne reproduit pas toute la scène de capture."
+      },
+      {
+        "id": "cutter",
+        "name": "Lame de massicot de Wendy",
+        "status": "jouable · R58, puis chapitre de sauvetage",
+        "source": "EP03_REF",
+        "note": "Observation puis lame disponible pendant C03 ; corps-à-corps limité, lame perdue après impact acide. Pas de don rétroactif après une migration."
+      },
+      {
+        "id": "hook",
+        "name": "Crochet du quai",
+        "status": "représenté dans R11 · non maniable",
+        "source": "EP03_REF",
+        "note": "Le combat complet contre le Xénomorphe et la porte du conteneur ne sont pas encore reproduits."
+      },
+      {
+        "id": "radio",
+        "name": "Radio / liaison de secours",
+        "status": "interaction de récit et transferts",
+        "source": "FX_CAST",
+        "note": "Pas de simulation de fréquences ou voix officielles."
+      },
+      {
+        "id": "torch",
+        "name": "Torche",
+        "status": "jouable · L",
+        "source": "FX_CAST",
+        "note": "Modèle exact de l’accessoire non certifié."
+      },
+      {
+        "id": "tablet",
+        "name": "Terminal et tablette",
+        "status": "interactions existantes",
+        "source": "FX_PRODUCTION",
+        "note": "Interfaces de jeu originales, non reproduites plan par plan."
+      },
+      {
+        "id": "wy-smg",
+        "name": "Arme compacte des agents Weyland-Yutani",
+        "status": "référence · non jouable",
+        "source": "ARMORER",
+        "note": "Modèle et dotations de tous les épisodes à relever."
+      },
+      {
+        "id": "other-firearms",
+        "name": "Autres armes visibles de la saison",
+        "status": "inventaire exhaustif non établi",
+        "source": "FX_ARMORY",
+        "note": "Ne pas conclure à une présence ou absence de M41A / M56 sans vérification plan par plan."
+      },
+      {
+        "id": "game-tools",
+        "name": "Sondes, sentinelles, pièges, circuits, kits, balises",
+        "status": "jouables · inventions de l’adaptation",
+        "source": null,
+        "note": "Ne pas les présenter comme équipement officiel de la série."
+      },
+      {
+        "id": "maxim9",
+        "name": "Maxim 9 modifié · sidearm Prodigy",
+        "status": "jouable · secondaire de Joe",
+        "source": "IMFDB_WEAPONS",
+        "note": "Secondaire sélectionnable ; partage encore la réserve abstraite du système d’armes, capacité exacte à raffiner."
+      },
+      {
+        "id": "kriss",
+        "name": "KRISS Vector · sécurité Prodigy",
+        "status": "représenté / registre · non jouable",
+        "source": "HOOKBARREL_WEAPONS",
+        "note": "Présence visuelle référencée ; pas encore distribué au joueur."
+      }
+    ],
+    "missing": [
+      "Plans métriques complets et positions exactes de toutes les portes/corridors des décors de tournage.",
+      "Inventaire image par image de toutes les pièces secondaires des huit épisodes, y compris sanitaires, zones de service et variantes de corridors.",
+      "Toutes les armes et accessoires de fond rendus jouables : plusieurs dotations sécurité restent représentées seulement.",
+      "Visages photoréalistes, animations faciales et toutes les variantes de coiffure/tenue/blessure par scène.",
+      "Chorégraphies 1:1 des combats, déplacements caméra, cinématiques, dialogues et durées exactes.",
+      "Architecture extérieure complète de New Siam/Neverland à l’échelle réelle et continuité 3D entre tous les intérieurs."
+    ]
+  },
+  "rooms": [
+    {
+      "id": "R01",
+      "chapter": "C01",
+      "title": "Salle de réveil",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "FX_CHARACTERS",
+        "FX_OVERVIEW"
+      ],
+      "connections": [
+        {
+          "to": "R02",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            1800,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R34",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            870,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "chapter": "C01",
+      "title": "Galerie des hybrides",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "FX_CHARACTERS",
+        "FX_OVERVIEW"
+      ],
+      "connections": [
+        {
+          "to": "R01",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1735,
+            125
+          ]
+        },
+        {
+          "to": "R03",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            2160,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R04",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            950,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R33",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            770,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R49",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            1570,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R57",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            1550,
+            25
+          ],
+          "arrival": [
+            990,
+            95
+          ]
+        },
+        {
+          "to": "R66",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            1730,
+            25
+          ],
+          "arrival": [
+            1090,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "chapter": "C01",
+      "title": "Cour d’entraînement",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "FX_CHARACTERS",
+        "FX_OVERVIEW"
+      ],
+      "connections": [
+        {
+          "to": "R02",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2095,
+            125
+          ]
+        },
+        {
+          "to": "R04",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "stair-lift",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2440,
+            125
+          ],
+          "arrival": [
+            1735,
+            125
+          ]
+        },
+        {
+          "to": "R33",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-33"
+          ],
+          "threshold": [
+            1010,
+            25
+          ],
+          "arrival": [
+            1595,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R04",
+      "chapter": "C01",
+      "title": "Annexe des souvenirs",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "FX_CHARACTERS",
+        "FX_OVERVIEW"
+      ],
+      "connections": [
+        {
+          "to": "R02",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            950,
+            95
+          ]
+        },
+        {
+          "to": "R03",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            1800,
+            125
+          ],
+          "arrival": [
+            2375,
+            125
+          ]
+        },
+        {
+          "to": "R05",
+          "kind": "chapter",
+          "anchor": {
+            "kind": "transfer",
+            "reason": "Ellipse annoncée, pas porte physique",
+            "structure": "beacon"
+          },
+          "requires": [
+            "AE-01",
+            "AE-02",
+            "AE-03",
+            "AE-04"
+          ],
+          "threshold": [
+            1560,
+            125
+          ],
+          "arrival": [
+            null,
+            null
+          ]
+        },
+        {
+          "to": "R34",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-34"
+          ],
+          "threshold": [
+            750,
+            25
+          ],
+          "arrival": [
+            1415,
+            125
+          ]
+        },
+        {
+          "to": "R58",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            970,
+            25
+          ],
+          "arrival": [
+            650,
+            95
+          ]
+        },
+        {
+          "to": "R68",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            1370,
+            25
+          ],
+          "arrival": [
+            630,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R05",
+      "chapter": "C02",
+      "title": "Rue de l’impact",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP02",
+        "FX_CHARACTERS"
+      ],
+      "connections": [
+        {
+          "to": "R06",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-05"
+          ],
+          "threshold": [
+            2640,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R35",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            1370,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "chapter": "C02",
+      "title": "Brèche du Maginot",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP02",
+        "FX_CHARACTERS"
+      ],
+      "connections": [
+        {
+          "to": "R05",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-05"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2575,
+            125
+          ]
+        },
+        {
+          "to": "R07",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "stair-lift",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2280,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R08",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "stair-lift",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            950,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R36",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            1370,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R50",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-06"
+          ],
+          "threshold": [
+            1650,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R07",
+      "chapter": "C02",
+      "title": "Atrium de la tour",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP02",
+        "FX_CHARACTERS"
+      ],
+      "connections": [
+        {
+          "to": "R06",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2215,
+            125
+          ]
+        },
+        {
+          "to": "R08",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "stair-lift",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-07"
+          ],
+          "threshold": [
+            2400,
+            125
+          ],
+          "arrival": [
+            1895,
+            125
+          ]
+        },
+        {
+          "to": "R35",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-35"
+          ],
+          "threshold": [
+            990,
+            25
+          ],
+          "arrival": [
+            1735,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R08",
+      "chapter": "C02",
+      "title": "Cage d’ascenseur",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP02",
+        "FX_CHARACTERS"
+      ],
+      "connections": [
+        {
+          "to": "R06",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1015,
+            25
+          ]
+        },
+        {
+          "to": "R07",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-07"
+          ],
+          "threshold": [
+            1960,
+            125
+          ],
+          "arrival": [
+            2335,
+            125
+          ]
+        },
+        {
+          "to": "R09",
+          "kind": "chapter",
+          "anchor": {
+            "kind": "transfer",
+            "reason": "Ellipse annoncée, pas porte physique",
+            "structure": "beacon"
+          },
+          "requires": [
+            "AE-05",
+            "AE-06",
+            "AE-07",
+            "AE-08"
+          ],
+          "threshold": [
+            1720,
+            125
+          ],
+          "arrival": [
+            null,
+            null
+          ]
+        },
+        {
+          "to": "R36",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-36"
+          ],
+          "threshold": [
+            810,
+            25
+          ],
+          "arrival": [
+            1835,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R09",
+      "chapter": "C03",
+      "title": "Couloir des appartements",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP03",
+        "FX_CHARACTERS"
+      ],
+      "connections": [
+        {
+          "to": "R10",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2200,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R37",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            1050,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R10",
+      "chapter": "C03",
+      "title": "Appartement traversant",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP03",
+        "FX_CHARACTERS"
+      ],
+      "connections": [
+        {
+          "to": "R09",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2135,
+            125
+          ]
+        },
+        {
+          "to": "R11",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "stair-lift",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-10"
+          ],
+          "threshold": [
+            2440,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R12",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "stair-lift",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-10"
+          ],
+          "threshold": [
+            950,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R38",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            1430,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R51",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-10"
+          ],
+          "threshold": [
+            1770,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R11",
+      "chapter": "C03",
+      "title": "Quai de chargement · conteneur",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "EP03_REF",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP03",
+        "FX_CHARACTERS"
+      ],
+      "connections": [
+        {
+          "to": "R10",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-10"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2375,
+            125
+          ]
+        },
+        {
+          "to": "R12",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "stair-lift",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            1800,
+            125
+          ],
+          "arrival": [
+            2335,
+            125
+          ]
+        },
+        {
+          "to": "R37",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-37"
+          ],
+          "threshold": [
+            750,
+            25
+          ],
+          "arrival": [
+            1455,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R12",
+      "chapter": "C03",
+      "title": "Quai · zone de récupération",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "EP03_REF",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP03",
+        "FX_CHARACTERS"
+      ],
+      "connections": [
+        {
+          "to": "R10",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-10"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            950,
+            95
+          ]
+        },
+        {
+          "to": "R11",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2400,
+            125
+          ],
+          "arrival": [
+            1735,
+            125
+          ]
+        },
+        {
+          "to": "R13",
+          "kind": "chapter",
+          "anchor": {
+            "kind": "transfer",
+            "reason": "Ellipse annoncée, pas porte physique",
+            "structure": "beacon"
+          },
+          "requires": [
+            "AE-09",
+            "AE-10",
+            "AE-11",
+            "AE-12"
+          ],
+          "threshold": [
+            2160,
+            125
+          ],
+          "arrival": [
+            null,
+            null
+          ]
+        },
+        {
+          "to": "R38",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-38"
+          ],
+          "threshold": [
+            990,
+            25
+          ],
+          "arrival": [
+            1635,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "chapter": "C04",
+      "title": "Quai de quarantaine",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP04",
+        "WETA_CREATURES"
+      ],
+      "connections": [
+        {
+          "to": "R14",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-13"
+          ],
+          "threshold": [
+            2440,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R39",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            1070,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R69",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-13"
+          ],
+          "threshold": [
+            1370,
+            25
+          ],
+          "arrival": [
+            1090,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R14",
+      "chapter": "C04",
+      "title": "Anneau de confinement",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP04",
+        "WETA_CREATURES"
+      ],
+      "connections": [
+        {
+          "to": "R13",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-13"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2375,
+            125
+          ]
+        },
+        {
+          "to": "R15",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-14"
+          ],
+          "threshold": [
+            2320,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R16",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "stair-lift",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-14"
+          ],
+          "threshold": [
+            950,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R40",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            770,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R52",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-14"
+          ],
+          "threshold": [
+            1510,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R69",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-13"
+          ],
+          "threshold": [
+            1570,
+            25
+          ],
+          "arrival": [
+            1430,
+            95
+          ]
+        },
+        {
+          "to": "R70",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-14"
+          ],
+          "threshold": [
+            2030,
+            25
+          ],
+          "arrival": [
+            1430,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R15",
+      "chapter": "C04",
+      "title": "Cabine acoustique",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP04",
+        "WETA_CREATURES"
+      ],
+      "connections": [
+        {
+          "to": "R14",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-14"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2255,
+            125
+          ]
+        },
+        {
+          "to": "R16",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            1840,
+            125
+          ],
+          "arrival": [
+            2255,
+            125
+          ]
+        },
+        {
+          "to": "R39",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-39"
+          ],
+          "threshold": [
+            770,
+            25
+          ],
+          "arrival": [
+            1755,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R16",
+      "chapter": "C04",
+      "title": "Vivarium",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP04",
+        "WETA_CREATURES"
+      ],
+      "connections": [
+        {
+          "to": "R14",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-14"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            950,
+            95
+          ]
+        },
+        {
+          "to": "R15",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2320,
+            125
+          ],
+          "arrival": [
+            1775,
+            125
+          ]
+        },
+        {
+          "to": "R17",
+          "kind": "chapter",
+          "anchor": {
+            "kind": "transfer",
+            "reason": "Ellipse annoncée, pas porte physique",
+            "structure": "beacon"
+          },
+          "requires": [
+            "AE-13",
+            "AE-14",
+            "AE-15",
+            "AE-16"
+          ],
+          "threshold": [
+            2080,
+            125
+          ],
+          "arrival": [
+            null,
+            null
+          ]
+        },
+        {
+          "to": "R40",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-40"
+          ],
+          "threshold": [
+            950,
+            25
+          ],
+          "arrival": [
+            1415,
+            125
+          ]
+        },
+        {
+          "to": "R70",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-14"
+          ],
+          "threshold": [
+            1370,
+            25
+          ],
+          "arrival": [
+            1090,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R17",
+      "chapter": "C05",
+      "title": "Chambre cryogénique étendue",
+      "geometryStatus": "Lieu attesté ; dimensions et connexions de jeu reconstituées",
+      "fidelity": {
+        "status": "lieu attesté · géométrie adaptée",
+        "source": "LATIMES_SETS",
+        "geometry": "reconstitution non métrique"
+      },
+      "source": [
+        "EP05",
+        "WETA_PROJECT",
+        "FX_MORROW"
+      ],
+      "connections": [
+        {
+          "to": "R18",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-17"
+          ],
+          "threshold": [
+            2040,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R41",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            970,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R63",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-17"
+          ],
+          "threshold": [
+            1370,
+            25
+          ],
+          "arrival": [
+            1090,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R18",
+      "chapter": "C05",
+      "title": "Le Zoo · échantillons du Maginot",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "MAGINOT_PD",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP05",
+        "WETA_PROJECT",
+        "FX_MORROW"
+      ],
+      "connections": [
+        {
+          "to": "R17",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-17"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1975,
+            125
+          ]
+        },
+        {
+          "to": "R19",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2520,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R20",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            950,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R42",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            1370,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R53",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-18"
+          ],
+          "threshold": [
+            1690,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R65",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-18"
+          ],
+          "threshold": [
+            770,
+            25
+          ],
+          "arrival": [
+            1090,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R19",
+      "chapter": "C05",
+      "title": "Coursive d’ingénierie du Maginot",
+      "geometryStatus": "Coursive/engineering attestée ; géométrie de jeu adaptée",
+      "fidelity": {
+        "status": "lieu attesté · géométrie adaptée",
+        "source": "ASC_MAGINOT",
+        "geometry": "reconstitution non métrique"
+      },
+      "source": [
+        "EP05",
+        "WETA_PROJECT",
+        "FX_MORROW"
+      ],
+      "connections": [
+        {
+          "to": "R18",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2455,
+            125
+          ]
+        },
+        {
+          "to": "R20",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-19"
+          ],
+          "threshold": [
+            2320,
+            125
+          ],
+          "arrival": [
+            1855,
+            125
+          ]
+        },
+        {
+          "to": "R41",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-41"
+          ],
+          "threshold": [
+            950,
+            25
+          ],
+          "arrival": [
+            1555,
+            125
+          ]
+        },
+        {
+          "to": "R59",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "stair-lift",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-17",
+            "AE-18"
+          ],
+          "threshold": [
+            1370,
+            25
+          ],
+          "arrival": [
+            990,
+            95
+          ]
+        },
+        {
+          "to": "R64",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-18"
+          ],
+          "threshold": [
+            1550,
+            25
+          ],
+          "arrival": [
+            1430,
+            95
+          ]
+        },
+        {
+          "to": "R65",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-18"
+          ],
+          "threshold": [
+            770,
+            25
+          ],
+          "arrival": [
+            1430,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R20",
+      "chapter": "C05",
+      "title": "Chambre d’impact",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "MAGINOT_PD",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP05",
+        "WETA_PROJECT",
+        "FX_MORROW"
+      ],
+      "connections": [
+        {
+          "to": "R18",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            950,
+            95
+          ]
+        },
+        {
+          "to": "R19",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-19"
+          ],
+          "threshold": [
+            1920,
+            125
+          ],
+          "arrival": [
+            2255,
+            125
+          ]
+        },
+        {
+          "to": "R21",
+          "kind": "chapter",
+          "anchor": {
+            "kind": "transfer",
+            "reason": "Ellipse annoncée, pas porte physique",
+            "structure": "beacon"
+          },
+          "requires": [
+            "AE-17",
+            "AE-18",
+            "AE-19",
+            "AE-20"
+          ],
+          "threshold": [
+            1680,
+            125
+          ],
+          "arrival": [
+            null,
+            null
+          ]
+        },
+        {
+          "to": "R42",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-42"
+          ],
+          "threshold": [
+            870,
+            25
+          ],
+          "arrival": [
+            1995,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R21",
+      "chapter": "C06",
+      "title": "Allée des pavillons",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP06",
+        "WETA_CREATURES"
+      ],
+      "connections": [
+        {
+          "to": "R22",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2480,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R43",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            1070,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R22",
+      "chapter": "C06",
+      "title": "Clinique de transfert",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP06",
+        "WETA_CREATURES"
+      ],
+      "connections": [
+        {
+          "to": "R21",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2415,
+            125
+          ]
+        },
+        {
+          "to": "R23",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-22"
+          ],
+          "threshold": [
+            2080,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R24",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "stair-lift",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-22"
+          ],
+          "threshold": [
+            950,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R44",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            770,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R54",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-22"
+          ],
+          "threshold": [
+            1510,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R23",
+      "chapter": "C06",
+      "title": "Laboratoire déserté",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP06",
+        "WETA_CREATURES"
+      ],
+      "connections": [
+        {
+          "to": "R22",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-22"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2015,
+            125
+          ]
+        },
+        {
+          "to": "R24",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2520,
+            125
+          ],
+          "arrival": [
+            2095,
+            125
+          ]
+        },
+        {
+          "to": "R43",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-43"
+          ],
+          "threshold": [
+            1030,
+            25
+          ],
+          "arrival": [
+            1615,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R24",
+      "chapter": "C06",
+      "title": "Galerie de maintenance",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP06",
+        "WETA_CREATURES"
+      ],
+      "connections": [
+        {
+          "to": "R22",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-22"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            950,
+            95
+          ]
+        },
+        {
+          "to": "R23",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2160,
+            125
+          ],
+          "arrival": [
+            2455,
+            125
+          ]
+        },
+        {
+          "to": "R25",
+          "kind": "chapter",
+          "anchor": {
+            "kind": "transfer",
+            "reason": "Ellipse annoncée, pas porte physique",
+            "structure": "beacon"
+          },
+          "requires": [
+            "AE-21",
+            "AE-22",
+            "AE-23",
+            "AE-24"
+          ],
+          "threshold": [
+            1920,
+            125
+          ],
+          "arrival": [
+            null,
+            null
+          ]
+        },
+        {
+          "to": "R44",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-44"
+          ],
+          "threshold": [
+            890,
+            25
+          ],
+          "arrival": [
+            1775,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R25",
+      "chapter": "C07",
+      "title": "Conduits de service",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP07",
+        "EP08"
+      ],
+      "connections": [
+        {
+          "to": "R26",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2080,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R45",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            990,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R26",
+      "chapter": "C07",
+      "title": "Sentier de la réserve",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP07",
+        "EP08"
+      ],
+      "connections": [
+        {
+          "to": "R25",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2015,
+            125
+          ]
+        },
+        {
+          "to": "R27",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-26"
+          ],
+          "threshold": [
+            2720,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R28",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "stair-lift",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-26"
+          ],
+          "threshold": [
+            950,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R46",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            1550,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R55",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-26"
+          ],
+          "threshold": [
+            1950,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R27",
+      "chapter": "C07",
+      "title": "Accès à la plage",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP07",
+        "EP08"
+      ],
+      "connections": [
+        {
+          "to": "R26",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-26"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2655,
+            125
+          ]
+        },
+        {
+          "to": "R28",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2520,
+            125
+          ],
+          "arrival": [
+            2175,
+            125
+          ]
+        },
+        {
+          "to": "R45",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-45"
+          ],
+          "threshold": [
+            1030,
+            25
+          ],
+          "arrival": [
+            1515,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R28",
+      "chapter": "C07",
+      "title": "Embarcadère",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP07",
+        "EP08"
+      ],
+      "connections": [
+        {
+          "to": "R26",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-26"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            950,
+            95
+          ]
+        },
+        {
+          "to": "R27",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2240,
+            125
+          ],
+          "arrival": [
+            2455,
+            125
+          ]
+        },
+        {
+          "to": "R29",
+          "kind": "chapter",
+          "anchor": {
+            "kind": "transfer",
+            "reason": "Ellipse annoncée, pas porte physique",
+            "structure": "beacon"
+          },
+          "requires": [
+            "AE-25",
+            "AE-26",
+            "AE-27",
+            "AE-28"
+          ],
+          "threshold": [
+            2000,
+            125
+          ],
+          "arrival": [
+            null,
+            null
+          ]
+        },
+        {
+          "to": "R46",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-46"
+          ],
+          "threshold": [
+            930,
+            25
+          ],
+          "arrival": [
+            1795,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R29",
+      "chapter": "C08",
+      "title": "Bloc de détention",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP08",
+        "FX_CHARACTERS"
+      ],
+      "connections": [
+        {
+          "to": "R30",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-29"
+          ],
+          "threshold": [
+            1960,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R47",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            930,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R30",
+      "chapter": "C08",
+      "title": "Laboratoire central",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP08",
+        "FX_CHARACTERS"
+      ],
+      "connections": [
+        {
+          "to": "R29",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-29"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1895,
+            125
+          ]
+        },
+        {
+          "to": "R31",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-30"
+          ],
+          "threshold": [
+            2720,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R32",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "stair-lift",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-30"
+          ],
+          "threshold": [
+            950,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R48",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [],
+          "threshold": [
+            1370,
+            25
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        },
+        {
+          "to": "R56",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-30"
+          ],
+          "threshold": [
+            1850,
+            125
+          ],
+          "arrival": [
+            145,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R31",
+      "chapter": "C08",
+      "title": "Résidence de Kavalier",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP08",
+        "FX_CHARACTERS"
+      ],
+      "connections": [
+        {
+          "to": "R30",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-30"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            2655,
+            125
+          ]
+        },
+        {
+          "to": "R32",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2440,
+            125
+          ],
+          "arrival": [
+            2615,
+            125
+          ]
+        },
+        {
+          "to": "R47",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-47"
+          ],
+          "threshold": [
+            1010,
+            25
+          ],
+          "arrival": [
+            1675,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R32",
+      "chapter": "C08",
+      "title": "Terrasse de Neverland",
+      "geometryStatus": "ADAPTATION — plan jouable original, pas un relevé 1:1 du décor",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [
+        "EP08",
+        "FX_CHARACTERS"
+      ],
+      "connections": [
+        {
+          "to": "R30",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-30"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            950,
+            95
+          ]
+        },
+        {
+          "to": "R31",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            2680,
+            125
+          ],
+          "arrival": [
+            2375,
+            125
+          ]
+        },
+        {
+          "to": "END",
+          "kind": "chapter",
+          "anchor": {
+            "kind": "transfer",
+            "reason": "Ellipse annoncée, pas porte physique",
+            "structure": "beacon"
+          },
+          "requires": [
+            "AE-29",
+            "AE-30",
+            "AE-31",
+            "AE-32"
+          ],
+          "threshold": [
+            2440,
+            125
+          ],
+          "arrival": [
+            null,
+            null
+          ]
+        },
+        {
+          "to": "R48",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-48"
+          ],
+          "threshold": [
+            1070,
+            25
+          ],
+          "arrival": [
+            1915,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R33",
+      "chapter": "C01",
+      "title": "Serre d’acclimatation",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R02",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            835,
+            25
+          ]
+        },
+        {
+          "to": "R03",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-33"
+          ],
+          "threshold": [
+            1660,
+            125
+          ],
+          "arrival": [
+            1010,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R34",
+      "chapter": "C01",
+      "title": "Atelier des prothèses",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R01",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            870,
+            95
+          ]
+        },
+        {
+          "to": "R04",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-34"
+          ],
+          "threshold": [
+            1480,
+            125
+          ],
+          "arrival": [
+            750,
+            95
+          ]
+        },
+        {
+          "to": "R49",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            1150,
+            125
+          ],
+          "arrival": [
+            1515,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R35",
+      "chapter": "C02",
+      "title": "Poste de triage",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R05",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1370,
+            95
+          ]
+        },
+        {
+          "to": "R07",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-35"
+          ],
+          "threshold": [
+            1800,
+            125
+          ],
+          "arrival": [
+            990,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R36",
+      "chapter": "C02",
+      "title": "Galerie commerciale",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R06",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1370,
+            95
+          ]
+        },
+        {
+          "to": "R08",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "stair-lift",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-36"
+          ],
+          "threshold": [
+            1900,
+            125
+          ],
+          "arrival": [
+            810,
+            95
+          ]
+        },
+        {
+          "to": "R50",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-06"
+          ],
+          "threshold": [
+            1390,
+            125
+          ],
+          "arrival": [
+            1755,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R37",
+      "chapter": "C03",
+      "title": "Buanderie technique",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R09",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1050,
+            95
+          ]
+        },
+        {
+          "to": "R11",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-37"
+          ],
+          "threshold": [
+            1520,
+            125
+          ],
+          "arrival": [
+            750,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R38",
+      "chapter": "C03",
+      "title": "Palier des secours",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R10",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1430,
+            95
+          ]
+        },
+        {
+          "to": "R12",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-38"
+          ],
+          "threshold": [
+            1700,
+            125
+          ],
+          "arrival": [
+            990,
+            95
+          ]
+        },
+        {
+          "to": "R51",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-10"
+          ],
+          "threshold": [
+            1250,
+            125
+          ],
+          "arrival": [
+            1635,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R39",
+      "chapter": "C04",
+      "title": "Station de filtration",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R13",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1070,
+            95
+          ]
+        },
+        {
+          "to": "R15",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-39"
+          ],
+          "threshold": [
+            1820,
+            125
+          ],
+          "arrival": [
+            770,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R40",
+      "chapter": "C04",
+      "title": "Poste d’observation",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R14",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            835,
+            25
+          ]
+        },
+        {
+          "to": "R16",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-40"
+          ],
+          "threshold": [
+            1480,
+            125
+          ],
+          "arrival": [
+            950,
+            95
+          ]
+        },
+        {
+          "to": "R52",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-14"
+          ],
+          "threshold": [
+            810,
+            125
+          ],
+          "arrival": [
+            1875,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R41",
+      "chapter": "C05",
+      "title": "Vestiaire de sécurité",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "MAGINOT_PD",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R17",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            970,
+            95
+          ]
+        },
+        {
+          "to": "R19",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-41"
+          ],
+          "threshold": [
+            1620,
+            125
+          ],
+          "arrival": [
+            950,
+            95
+          ]
+        },
+        {
+          "to": "R62",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-17",
+            "AE-18"
+          ],
+          "threshold": [
+            890,
+            25
+          ],
+          "arrival": [
+            650,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R42",
+      "chapter": "C05",
+      "title": "Coursive de refroidissement",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "MAGINOT_PD",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R18",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1370,
+            95
+          ]
+        },
+        {
+          "to": "R20",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-42"
+          ],
+          "threshold": [
+            2060,
+            125
+          ],
+          "arrival": [
+            870,
+            95
+          ]
+        },
+        {
+          "to": "R53",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-18"
+          ],
+          "threshold": [
+            1170,
+            125
+          ],
+          "arrival": [
+            1995,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R43",
+      "chapter": "C06",
+      "title": "Archives cliniques",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R21",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1070,
+            95
+          ]
+        },
+        {
+          "to": "R23",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-43"
+          ],
+          "threshold": [
+            1680,
+            125
+          ],
+          "arrival": [
+            1030,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R44",
+      "chapter": "C06",
+      "title": "Salle des pompes",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R22",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            770,
+            95
+          ]
+        },
+        {
+          "to": "R24",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-44"
+          ],
+          "threshold": [
+            1840,
+            125
+          ],
+          "arrival": [
+            890,
+            95
+          ]
+        },
+        {
+          "to": "R54",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-22"
+          ],
+          "threshold": [
+            1230,
+            200
+          ],
+          "arrival": [
+            1755,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R45",
+      "chapter": "C07",
+      "title": "Abri des balises",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R25",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            990,
+            95
+          ]
+        },
+        {
+          "to": "R27",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-45"
+          ],
+          "threshold": [
+            1580,
+            125
+          ],
+          "arrival": [
+            1030,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R46",
+      "chapter": "C07",
+      "title": "Local de la vedette",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R26",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1550,
+            95
+          ]
+        },
+        {
+          "to": "R28",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-46"
+          ],
+          "threshold": [
+            1860,
+            125
+          ],
+          "arrival": [
+            930,
+            95
+          ]
+        },
+        {
+          "to": "R55",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-26"
+          ],
+          "threshold": [
+            1350,
+            125
+          ],
+          "arrival": [
+            2115,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R47",
+      "chapter": "C08",
+      "title": "Galerie de surveillance",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R29",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            930,
+            95
+          ]
+        },
+        {
+          "to": "R31",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-47"
+          ],
+          "threshold": [
+            1740,
+            125
+          ],
+          "arrival": [
+            1010,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R48",
+      "chapter": "C08",
+      "title": "Jardin suspendu",
+      "geometryStatus": "ANNEXE ORIGINALE — extension interstitielle de jeu, non attestée à l’écran",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R30",
+          "kind": "door",
+          "anchor": {
+            "kind": "left-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1370,
+            95
+          ]
+        },
+        {
+          "to": "R32",
+          "kind": "door",
+          "anchor": {
+            "kind": "right-wall",
+            "structure": "wall",
+            "reason": "Extrémité du volume"
+          },
+          "requires": [
+            "AE-48"
+          ],
+          "threshold": [
+            1980,
+            125
+          ],
+          "arrival": [
+            1070,
+            95
+          ]
+        },
+        {
+          "to": "R56",
+          "kind": "door",
+          "anchor": {
+            "kind": "floor-hatch",
+            "structure": "floor-opening",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-30"
+          ],
+          "threshold": [
+            1450,
+            125
+          ],
+          "arrival": [
+            1875,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R49",
+      "chapter": "C01",
+      "title": "Collecteur des jardins",
+      "geometryStatus": "ORIGINAL — passage technique conçu pour ce jeu, non un plan officiel",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R02",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1570,
+            195
+          ]
+        },
+        {
+          "to": "R34",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            1580,
+            125
+          ],
+          "arrival": [
+            1150,
+            195
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R50",
+      "chapter": "C02",
+      "title": "Gaine du monte-charge",
+      "geometryStatus": "ORIGINAL — passage technique conçu pour ce jeu, non un plan officiel",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R06",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-06"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1650,
+            195
+          ]
+        },
+        {
+          "to": "R36",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-06"
+          ],
+          "threshold": [
+            1820,
+            125
+          ],
+          "arrival": [
+            1390,
+            195
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R51",
+      "chapter": "C03",
+      "title": "Vide des canalisations",
+      "geometryStatus": "ORIGINAL — passage technique conçu pour ce jeu, non un plan officiel",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R10",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-10"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1770,
+            195
+          ]
+        },
+        {
+          "to": "R38",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-10"
+          ],
+          "threshold": [
+            1700,
+            125
+          ],
+          "arrival": [
+            1250,
+            195
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R52",
+      "chapter": "C04",
+      "title": "Retour du vivarium",
+      "geometryStatus": "ORIGINAL — passage technique conçu pour ce jeu, non un plan officiel",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R14",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-14"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1510,
+            195
+          ]
+        },
+        {
+          "to": "R40",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-14"
+          ],
+          "threshold": [
+            1940,
+            125
+          ],
+          "arrival": [
+            810,
+            195
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R53",
+      "chapter": "C05",
+      "title": "Double fond du Maginot",
+      "geometryStatus": "ORIGINAL — passage technique conçu pour ce jeu, non un plan officiel",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "MAGINOT_PD",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R18",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-18"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1690,
+            195
+          ]
+        },
+        {
+          "to": "R42",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-18"
+          ],
+          "threshold": [
+            2060,
+            125
+          ],
+          "arrival": [
+            1170,
+            195
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R54",
+      "chapter": "C06",
+      "title": "Dérivation de la clinique",
+      "geometryStatus": "ORIGINAL — passage technique conçu pour ce jeu, non un plan officiel",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R22",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-22"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1510,
+            195
+          ]
+        },
+        {
+          "to": "R44",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-22"
+          ],
+          "threshold": [
+            1820,
+            125
+          ],
+          "arrival": [
+            1295,
+            200
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R55",
+      "chapter": "C07",
+      "title": "Drain du littoral",
+      "geometryStatus": "ORIGINAL — passage technique conçu pour ce jeu, non un plan officiel",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R26",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-26"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1950,
+            195
+          ]
+        },
+        {
+          "to": "R46",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-26"
+          ],
+          "threshold": [
+            2180,
+            125
+          ],
+          "arrival": [
+            1350,
+            195
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R56",
+      "chapter": "C08",
+      "title": "Boucle des enceintes",
+      "geometryStatus": "ORIGINAL — passage technique conçu pour ce jeu, non un plan officiel",
+      "fidelity": {
+        "status": "annexe originale de jeu",
+        "source": "FX_PLACES",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R30",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-30"
+          ],
+          "threshold": [
+            80,
+            125
+          ],
+          "arrival": [
+            1850,
+            195
+          ]
+        },
+        {
+          "to": "R48",
+          "kind": "door",
+          "anchor": {
+            "kind": "duct-end",
+            "structure": "conduit",
+            "reason": "Passage technique étroit"
+          },
+          "requires": [
+            "AE-30"
+          ],
+          "threshold": [
+            1940,
+            125
+          ],
+          "arrival": [
+            1450,
+            195
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R57",
+      "chapter": "C01",
+      "title": "Dortoir des hybrides",
+      "geometryStatus": "Lieu de référence ; plan et raccords originaux non certifiés",
+      "fidelity": {
+        "status": "secteur de référence ; salle exacte non certifiée",
+        "source": "DORM_REF",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R02",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            990,
+            25
+          ],
+          "arrival": [
+            1550,
+            95
+          ]
+        },
+        {
+          "to": "R58",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            650,
+            25
+          ],
+          "arrival": [
+            990,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R58",
+      "chapter": "C01",
+      "title": "Salle commune des hybrides",
+      "geometryStatus": "Reconstitution de pavillon ; salle et raccords originaux",
+      "fidelity": {
+        "status": "reconstitution de pavillon ; salle commune non authentifiée",
+        "source": "FX_PRODUCTION",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R57",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            990,
+            25
+          ],
+          "arrival": [
+            650,
+            95
+          ]
+        },
+        {
+          "to": "R04",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            650,
+            25
+          ],
+          "arrival": [
+            970,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R59",
+      "chapter": "C05",
+      "title": "Passerelle du Maginot",
+      "geometryStatus": "Lieu de référence ; plan et raccords originaux non certifiés",
+      "fidelity": {
+        "status": "lieu attesté · raccords reconstitués",
+        "source": "LATIMES_SETS",
+        "geometry": "aucun blueprint métrique public obtenu"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R19",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-17",
+            "AE-18"
+          ],
+          "threshold": [
+            990,
+            25
+          ],
+          "arrival": [
+            1370,
+            95
+          ]
+        },
+        {
+          "to": "R60",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-17",
+            "AE-18"
+          ],
+          "threshold": [
+            650,
+            25
+          ],
+          "arrival": [
+            1110,
+            95
+          ]
+        },
+        {
+          "to": "R63",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-17"
+          ],
+          "threshold": [
+            1430,
+            25
+          ],
+          "arrival": [
+            1430,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R60",
+      "chapter": "C05",
+      "title": "Réfectoire du Maginot",
+      "geometryStatus": "Lieu de référence ; plan et raccords originaux non certifiés",
+      "fidelity": {
+        "status": "lieu attesté · raccords reconstitués",
+        "source": "LATIMES_SETS",
+        "geometry": "aucun blueprint métrique public obtenu"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R59",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "stair-lift",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-17",
+            "AE-18"
+          ],
+          "threshold": [
+            1110,
+            25
+          ],
+          "arrival": [
+            650,
+            95
+          ]
+        },
+        {
+          "to": "R61",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-17",
+            "AE-18"
+          ],
+          "threshold": [
+            1430,
+            25
+          ],
+          "arrival": [
+            990,
+            95
+          ]
+        },
+        {
+          "to": "R64",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-18"
+          ],
+          "threshold": [
+            1610,
+            25
+          ],
+          "arrival": [
+            1090,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R61",
+      "chapter": "C05",
+      "title": "Interface MU/TH/UR",
+      "geometryStatus": "Lieu de référence ; plan et raccords originaux non certifiés",
+      "fidelity": {
+        "status": "lieu attesté · raccords reconstitués",
+        "source": "LATIMES_SETS",
+        "geometry": "aucun blueprint métrique public obtenu"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R60",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-17",
+            "AE-18"
+          ],
+          "threshold": [
+            990,
+            25
+          ],
+          "arrival": [
+            1430,
+            95
+          ]
+        },
+        {
+          "to": "R62",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-17",
+            "AE-18"
+          ],
+          "threshold": [
+            650,
+            25
+          ],
+          "arrival": [
+            990,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R62",
+      "chapter": "C05",
+      "title": "Armurerie du Maginot",
+      "geometryStatus": "Armurerie de jeu, emplacement et plan non authentifiés",
+      "fidelity": {
+        "status": "armurerie reconstituée ; salle exacte non authentifiée",
+        "source": "FX_ARMORY",
+        "geometry": "originale non certifiée 1:1"
+      },
+      "source": [],
+      "connections": [
+        {
+          "to": "R61",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-17",
+            "AE-18"
+          ],
+          "threshold": [
+            990,
+            25
+          ],
+          "arrival": [
+            650,
+            95
+          ]
+        },
+        {
+          "to": "R41",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure reliée au mur arrière"
+          },
+          "requires": [
+            "AE-17",
+            "AE-18"
+          ],
+          "threshold": [
+            650,
+            25
+          ],
+          "arrival": [
+            955,
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R63",
+      "chapter": "C05",
+      "title": "Medbay One",
+      "geometryStatus": "Lieu attesté ; plan et raccords adaptés",
+      "fidelity": {
+        "status": "lieu attesté · plan/raccord adapté",
+        "source": "EP05_SPACES",
+        "geometry": "reconstitution non métrique"
+      },
+      "source": [
+        "EP05_SPACES"
+      ],
+      "connections": [
+        {
+          "to": "R17",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-17"
+          ],
+          "threshold": [
+            1090,
+            25
+          ],
+          "arrival": [
+            1370,
+            95
+          ]
+        },
+        {
+          "to": "R59",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-17"
+          ],
+          "threshold": [
+            1430,
+            25
+          ],
+          "arrival": [
+            1430,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R64",
+      "chapter": "C05",
+      "title": "Salle des machines · Engineering Room",
+      "geometryStatus": "Lieu attesté ; plan et raccords adaptés",
+      "fidelity": {
+        "status": "lieu attesté · plan/raccord adapté",
+        "source": "LATIMES_SETS",
+        "geometry": "reconstitution non métrique"
+      },
+      "source": [
+        "LATIMES_SETS"
+      ],
+      "connections": [
+        {
+          "to": "R19",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-18"
+          ],
+          "threshold": [
+            1430,
+            25
+          ],
+          "arrival": [
+            1550,
+            95
+          ]
+        },
+        {
+          "to": "R60",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-18"
+          ],
+          "threshold": [
+            1090,
+            25
+          ],
+          "arrival": [
+            1610,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R65",
+      "chapter": "C05",
+      "title": "Chambre de confinement du Maginot",
+      "geometryStatus": "Lieu attesté ; plan et raccords adaptés",
+      "fidelity": {
+        "status": "lieu attesté · plan/raccord adapté",
+        "source": "FX_IMMERSIVE",
+        "geometry": "reconstitution non métrique"
+      },
+      "source": [
+        "FX_IMMERSIVE"
+      ],
+      "connections": [
+        {
+          "to": "R18",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-18"
+          ],
+          "threshold": [
+            1090,
+            25
+          ],
+          "arrival": [
+            835,
+            25
+          ]
+        },
+        {
+          "to": "R19",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-18"
+          ],
+          "threshold": [
+            1430,
+            25
+          ],
+          "arrival": [
+            770,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R66",
+      "chapter": "C01",
+      "title": "Lobby de Neverland",
+      "geometryStatus": "Lieu attesté ; plan et raccords adaptés",
+      "fidelity": {
+        "status": "lieu attesté · plan/raccord adapté",
+        "source": "FX_SETTOUR",
+        "geometry": "reconstitution non métrique"
+      },
+      "source": [
+        "FX_SETTOUR"
+      ],
+      "connections": [
+        {
+          "to": "R02",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            1090,
+            25
+          ],
+          "arrival": [
+            1730,
+            95
+          ]
+        },
+        {
+          "to": "R67",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            1430,
+            25
+          ],
+          "arrival": [
+            1430,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R67",
+      "chapter": "C01",
+      "title": "Atrium de Neverland",
+      "geometryStatus": "Lieu attesté ; plan et raccords adaptés",
+      "fidelity": {
+        "status": "lieu attesté · plan/raccord adapté",
+        "source": "FX_SETTOUR",
+        "geometry": "reconstitution non métrique"
+      },
+      "source": [
+        "FX_SETTOUR"
+      ],
+      "connections": [
+        {
+          "to": "R66",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            1430,
+            25
+          ],
+          "arrival": [
+            1430,
+            95
+          ]
+        },
+        {
+          "to": "R68",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            1090,
+            25
+          ],
+          "arrival": [
+            990,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R68",
+      "chapter": "C01",
+      "title": "Salle d’entretien (« Talking Room »)",
+      "geometryStatus": "Lieu attesté ; plan et raccords adaptés",
+      "fidelity": {
+        "status": "lieu attesté · plan/raccord adapté",
+        "source": "FX_SETTOUR",
+        "geometry": "reconstitution non métrique"
+      },
+      "source": [
+        "FX_SETTOUR"
+      ],
+      "connections": [
+        {
+          "to": "R67",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            990,
+            25
+          ],
+          "arrival": [
+            1090,
+            95
+          ]
+        },
+        {
+          "to": "R04",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-02"
+          ],
+          "threshold": [
+            630,
+            25
+          ],
+          "arrival": [
+            1370,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R69",
+      "chapter": "C04",
+      "title": "Baie médicale de Neverland",
+      "geometryStatus": "Lieu attesté ; plan et raccords adaptés",
+      "fidelity": {
+        "status": "lieu attesté · plan/raccord adapté",
+        "source": "FX_SETTOUR",
+        "geometry": "reconstitution non métrique"
+      },
+      "source": [
+        "FX_SETTOUR"
+      ],
+      "connections": [
+        {
+          "to": "R13",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-13"
+          ],
+          "threshold": [
+            1090,
+            25
+          ],
+          "arrival": [
+            1370,
+            95
+          ]
+        },
+        {
+          "to": "R14",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-13"
+          ],
+          "threshold": [
+            1430,
+            25
+          ],
+          "arrival": [
+            1570,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R70",
+      "chapter": "C04",
+      "title": "Laboratoire sécurisé · salle des œufs",
+      "geometryStatus": "Lieu attesté ; plan et raccords adaptés",
+      "fidelity": {
+        "status": "lieu attesté · plan/raccord adapté",
+        "source": "FX_SETTOUR",
+        "geometry": "reconstitution non métrique"
+      },
+      "source": [
+        "FX_SETTOUR"
+      ],
+      "connections": [
+        {
+          "to": "R14",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-14"
+          ],
+          "threshold": [
+            1430,
+            25
+          ],
+          "arrival": [
+            2030,
+            95
+          ]
+        },
+        {
+          "to": "R16",
+          "kind": "door",
+          "anchor": {
+            "kind": "rear-wall",
+            "structure": "wall-recess",
+            "reason": "Embrasure adossée au mur arrière"
+          },
+          "requires": [
+            "AE-14"
+          ],
+          "threshold": [
+            1090,
+            25
+          ],
+          "arrival": [
+            1370,
+            95
+          ]
+        }
+      ]
+    }
+  ],
+  "cast": [
+    {
+      "id": "wendy",
+      "name": "Wendy",
+      "skin": "#ead0b6",
+      "hair": "#13191e",
+      "coat": "#243546",
+      "pants": "#3c5366",
+      "style": "bob",
+      "beard": false,
+      "note": "Bras nus, carré sombre à frange ; combinaison grise pendant le sauvetage.",
+      "source": "FX_CAST",
+      "status": "silhouette corrigée, visage non photoréaliste"
+    },
+    {
+      "id": "joe",
+      "name": "Joe Hermit",
+      "skin": "#cba88e",
+      "hair": "#48382f",
+      "coat": "#737b79",
+      "pants": "#59615b",
+      "style": "tousled",
+      "beard": false,
+      "note": "Cheveux bruns ébouriffés, pas de casque permanent ; gilet clair de secours.",
+      "source": "FX_CAST",
+      "status": "silhouette corrigée, visage non photoréaliste"
+    },
+    {
+      "id": "morrow",
+      "name": "Morrow",
+      "skin": "#79513b",
+      "hair": "#171c1d",
+      "coat": "#c6bfa9",
+      "pants": "#4b504a",
+      "style": "short",
+      "beard": true,
+      "note": "Peau brune, cheveux courts texturés, barbe ; veste de bord crème WY.",
+      "source": "FX_CAST",
+      "status": "silhouette corrigée, visage non photoréaliste"
+    },
+    {
+      "id": "kirsh",
+      "name": "Kirsh",
+      "skin": "#e0c9b5",
+      "hair": "#e6e1cd",
+      "coat": "#7c817e",
+      "pants": "#535b59",
+      "style": "spikes",
+      "beard": false,
+      "note": "Cheveux platine courts, col roulé noir, tenue grise.",
+      "source": "FX_CAST",
+      "status": "silhouette corrigée, visage non photoréaliste"
+    },
+    {
+      "id": "sylvia",
+      "name": "Dame Sylvia",
+      "skin": "#d4b49b",
+      "hair": "#302728",
+      "coat": "#e1d8c2",
+      "pants": "#796d60",
+      "style": "asymmetric",
+      "beard": false,
+      "note": "Chevelure courte bouclée asymétrique, veste ivoire et col imprimé.",
+      "source": "FX_CAST",
+      "status": "silhouette corrigée, visage non photoréaliste"
+    },
+    {
+      "id": "arthur",
+      "name": "Arthur Sylvia",
+      "skin": "#c6a58f",
+      "hair": "#684c35",
+      "coat": "#779bba",
+      "pants": "#5b6472",
+      "style": "sidepart",
+      "beard": true,
+      "note": "Lunettes fines, barbe, veste bleue à liseré orangé.",
+      "source": "FX_CAST",
+      "status": "silhouette corrigée, visage non photoréaliste"
+    },
+    {
+      "id": "curly",
+      "name": "Curly",
+      "skin": "#b98e76",
+      "hair": "#262122",
+      "coat": "#7b8280",
+      "pants": "#585f5b",
+      "style": "braids",
+      "beard": false,
+      "note": "Tresses sombres, frange séparée ; ne réutilise plus le modèle de Wendy.",
+      "source": "FX_CAST",
+      "status": "silhouette corrigée, visage non photoréaliste"
+    },
+    {
+      "id": "boy",
+      "name": "Boy Kavalier",
+      "skin": "#d4bda6",
+      "hair": "#292424",
+      "coat": "#dbd1ab",
+      "pants": "#c9c2a1",
+      "style": "curls",
+      "beard": false,
+      "note": "Cheveux bouclés, robe de chambre crème à motifs verts ; pieds nus.",
+      "source": "FX_CAST",
+      "status": "silhouette corrigée, visage non photoréaliste"
+    },
+    {
+      "id": "nibs",
+      "name": "Nibs",
+      "skin": "#e4c7b0",
+      "hair": "#a35135",
+      "coat": "#795947",
+      "pants": "#664b40",
+      "style": "curls",
+      "beard": false,
+      "note": "Cheveux roux et palette brune distincte.",
+      "source": "FX_CAST",
+      "status": "silhouette corrigée, visage non photoréaliste"
+    },
+    {
+      "id": "smee",
+      "name": "Smee",
+      "skin": "#72523f",
+      "hair": "#22201d",
+      "coat": "#79817c",
+      "pants": "#60675e",
+      "style": "short",
+      "beard": false,
+      "note": "Silhouette dédiée ; détails fins de la tenue encore à vérifier.",
+      "source": "FX_CAST",
+      "status": "silhouette provisoire à affiner"
+    },
+    {
+      "id": "slightly",
+      "name": "Slightly",
+      "skin": "#a17c61",
+      "hair": "#272522",
+      "coat": "#687a77",
+      "pants": "#4a615f",
+      "style": "tousled",
+      "beard": false,
+      "note": "Cheveux noirs, manches longues ; vêtements distincts.",
+      "source": "FX_CAST",
+      "status": "silhouette corrigée, visage non photoréaliste"
+    },
+    {
+      "id": "tootles",
+      "name": "Tootles",
+      "skin": "#bb9275",
+      "hair": "#453126",
+      "coat": "#717570",
+      "pants": "#525c54",
+      "style": "sidepart",
+      "beard": false,
+      "note": "Silhouette dédiée ; variantes de scène à compléter.",
+      "source": "FX_CAST",
+      "status": "silhouette provisoire à affiner"
+    },
+    {
+      "id": "siberian",
+      "name": "Siberian",
+      "skin": "#bca78b",
+      "hair": "#24221f",
+      "coat": "#9a9c8e",
+      "pants": "#5d655b",
+      "style": "tied",
+      "beard": false,
+      "note": "Tenue tactique Prodigy ; coiffure et insignes à affiner sur davantage de plans.",
+      "source": "FX_CAST",
+      "status": "silhouette provisoire à affiner"
+    },
+    {
+      "id": "rashidi",
+      "name": "Rashidi",
+      "skin": "#aa8164",
+      "hair": "#232020",
+      "coat": "#777e75",
+      "pants": "#5b5d54",
+      "style": "short",
+      "beard": true,
+      "note": "Tenue de secours ; armes et équipement exacts par scène à compléter.",
+      "source": "FX_CAST",
+      "status": "silhouette provisoire à affiner"
+    },
+    {
+      "id": "atom",
+      "name": "Atom Eins",
+      "skin": "#c4ab91",
+      "hair": "#a8a895",
+      "coat": "#8e927e",
+      "pants": "#6b705e",
+      "style": "receding",
+      "beard": true,
+      "note": "Conseiller de Boy Kavalier ; tenue et variantes de scène non certifiées.",
+      "source": "FX_CAST",
+      "status": "silhouette provisoire à affiner"
+    },
+    {
+      "id": "yutani",
+      "name": "Yutani",
+      "skin": "#d4b598",
+      "hair": "#242026",
+      "coat": "#353a42",
+      "pants": "#30343a",
+      "style": "tied",
+      "beard": false,
+      "note": "Tenue sombre et coiffure attachée ; portrait de registre, pas présence physique ajoutée à Neverland.",
+      "source": "FX_CAST",
+      "status": "silhouette provisoire à affiner"
+    },
+    {
+      "id": "zaveri",
+      "name": "Dr. Zaveri",
+      "skin": "#a77b60",
+      "hair": "#201d1b",
+      "coat": "#c5c0a5",
+      "pants": "#4b514d",
+      "style": "tied",
+      "beard": false,
+      "note": "Médecin/scientifique du Maginot ; silhouette de registre dédiée, uniforme de bord stylisé.",
+      "source": "FX_IMMERSIVE",
+      "status": "silhouette sourcée mais stylisée ; variantes de scène incomplètes"
+    },
+    {
+      "id": "rahim",
+      "name": "Rahim",
+      "skin": "#6d4a36",
+      "hair": "#181717",
+      "coat": "#989a8b",
+      "pants": "#4b514f",
+      "style": "short",
+      "beard": true,
+      "note": "Équipage du Maginot ; silhouette dédiée, détails de scène encore à affiner.",
+      "source": "FX_IMMERSIVE",
+      "status": "silhouette sourcée mais stylisée ; variantes de scène incomplètes"
+    },
+    {
+      "id": "chibuzo",
+      "name": "Chibuzo",
+      "skin": "#6f4c37",
+      "hair": "#171615",
+      "coat": "#9c9b89",
+      "pants": "#51544c",
+      "style": "short",
+      "beard": true,
+      "note": "Membre d’équipage du Maginot ; tenue de bord stylisée.",
+      "source": "EP05_SPACES",
+      "status": "silhouette sourcée mais stylisée ; variantes de scène incomplètes"
+    },
+    {
+      "id": "shmuel",
+      "name": "Shmuel",
+      "skin": "#d1ad93",
+      "hair": "#3d3129",
+      "coat": "#ada993",
+      "pants": "#555950",
+      "style": "sidepart",
+      "beard": true,
+      "note": "Ingénierie du Maginot ; tenue de travail stylisée, pas de visage photoréaliste.",
+      "source": "EP05_SPACES",
+      "status": "silhouette sourcée mais stylisée ; variantes de scène incomplètes"
+    },
+    {
+      "id": "malachite",
+      "name": "Malachite",
+      "skin": "#a97b5c",
+      "hair": "#211e1b",
+      "coat": "#858d83",
+      "pants": "#464c47",
+      "style": "tousled",
+      "beard": false,
+      "note": "Technicien de l’engineering bay ; silhouette dédiée.",
+      "source": "EP05_SPACES",
+      "status": "silhouette sourcée mais stylisée ; variantes de scène incomplètes"
+    },
+    {
+      "id": "clem",
+      "name": "Clem",
+      "skin": "#c39a7e",
+      "hair": "#725849",
+      "coat": "#9c9a88",
+      "pants": "#50554e",
+      "style": "short",
+      "beard": false,
+      "note": "Équipage du Maginot ; profil visuel provisoire, variantes à compléter.",
+      "source": "EP05_SPACES",
+      "status": "silhouette sourcée mais stylisée ; variantes de scène incomplètes"
+    },
+    {
+      "id": "petrovich",
+      "name": "Petrovich",
+      "skin": "#c1a086",
+      "hair": "#342c28",
+      "coat": "#8e958b",
+      "pants": "#4d514e",
+      "style": "receding",
+      "beard": true,
+      "note": "Équipage du Maginot ; profil visuel provisoire.",
+      "source": "EP05_SPACES",
+      "status": "silhouette sourcée mais stylisée ; variantes de scène incomplètes"
+    },
+    {
+      "id": "teng",
+      "name": "Teng",
+      "skin": "#c79e7b",
+      "hair": "#22201d",
+      "coat": "#9da092",
+      "pants": "#525751",
+      "style": "short",
+      "beard": false,
+      "note": "Équipage du Maginot ; profil visuel provisoire.",
+      "source": "EP05_SPACES",
+      "status": "silhouette sourcée mais stylisée ; variantes de scène incomplètes"
+    },
+    {
+      "id": "sullivan",
+      "name": "Sullivan",
+      "skin": "#b8876a",
+      "hair": "#30241f",
+      "coat": "#8c9288",
+      "pants": "#4b504b",
+      "style": "sidepart",
+      "beard": false,
+      "note": "Équipage du Maginot ; profil visuel provisoire.",
+      "source": "EP05_SPACES",
+      "status": "silhouette sourcée mais stylisée ; variantes de scène incomplètes"
+    }
+  ],
+  "equipment": [
+    {
+      "id": "mcsx",
+      "name": "MCS-X · fusil Prodigy",
+      "status": "jouable · dotation principale de Joe",
+      "source": "IMFDB_WEAPONS",
+      "note": "Silhouette Steyr AUG modifiée ; mécanique de tir du module, pas reproduction balistique certifiée."
+    },
+    {
+      "id": "wy-pistol",
+      "name": "Pistolet de bord Maginot · Glock/P80 modifié",
+      "status": "jouable · dotation Morrow",
+      "source": "IMFDB_WEAPONS",
+      "note": "Silhouette rapprochée du pistolet observé ; accessoires exacts variant selon les plans."
+    },
+    {
+      "id": "ksg-al",
+      "name": "KSG-AL · arc / mousse",
+      "status": "jouable · armurerie R62",
+      "source": "KSG_REF",
+      "note": "Arc limité et mousse sur cible étourdie. Paramètres et prise facultative originaux ; ne reproduit pas toute la scène de capture."
+    },
+    {
+      "id": "cutter",
+      "name": "Lame de massicot de Wendy",
+      "status": "jouable · R58, puis chapitre de sauvetage",
+      "source": "EP03_REF",
+      "note": "Observation puis lame disponible pendant C03 ; corps-à-corps limité, lame perdue après impact acide. Pas de don rétroactif après une migration."
+    },
+    {
+      "id": "hook",
+      "name": "Crochet du quai",
+      "status": "représenté dans R11 · non maniable",
+      "source": "EP03_REF",
+      "note": "Le combat complet contre le Xénomorphe et la porte du conteneur ne sont pas encore reproduits."
+    },
+    {
+      "id": "radio",
+      "name": "Radio / liaison de secours",
+      "status": "interaction de récit et transferts",
+      "source": "FX_CAST",
+      "note": "Pas de simulation de fréquences ou voix officielles."
+    },
+    {
+      "id": "torch",
+      "name": "Torche",
+      "status": "jouable · L",
+      "source": "FX_CAST",
+      "note": "Modèle exact de l’accessoire non certifié."
+    },
+    {
+      "id": "tablet",
+      "name": "Terminal et tablette",
+      "status": "interactions existantes",
+      "source": "FX_PRODUCTION",
+      "note": "Interfaces de jeu originales, non reproduites plan par plan."
+    },
+    {
+      "id": "wy-smg",
+      "name": "Arme compacte des agents Weyland-Yutani",
+      "status": "référence · non jouable",
+      "source": "ARMORER",
+      "note": "Modèle et dotations de tous les épisodes à relever."
+    },
+    {
+      "id": "other-firearms",
+      "name": "Autres armes visibles de la saison",
+      "status": "inventaire exhaustif non établi",
+      "source": "FX_ARMORY",
+      "note": "Ne pas conclure à une présence ou absence de M41A / M56 sans vérification plan par plan."
+    },
+    {
+      "id": "game-tools",
+      "name": "Sondes, sentinelles, pièges, circuits, kits, balises",
+      "status": "jouables · inventions de l’adaptation",
+      "source": null,
+      "note": "Ne pas les présenter comme équipement officiel de la série."
+    },
+    {
+      "id": "maxim9",
+      "name": "Maxim 9 modifié · sidearm Prodigy",
+      "status": "jouable · secondaire de Joe",
+      "source": "IMFDB_WEAPONS",
+      "note": "Secondaire sélectionnable ; partage encore la réserve abstraite du système d’armes, capacité exacte à raffiner."
+    },
+    {
+      "id": "kriss",
+      "name": "KRISS Vector · sécurité Prodigy",
+      "status": "représenté / registre · non jouable",
+      "source": "HOOKBARREL_WEAPONS",
+      "note": "Présence visuelle référencée ; pas encore distribué au joueur."
+    }
+  ],
+  "doorAudit": {
+    "failures": [],
+    "newRooms": [
+      "R63",
+      "R64",
+      "R65",
+      "R66",
+      "R67",
+      "R68",
+      "R69",
+      "R70"
+    ],
+    "newLinkFaces": 28
+  }
+}

@@ -243,7 +243,7 @@ with sync_playwright() as pw:
                     page.keyboard.press('Home')
                     page.wait_for_function('()=>document.activeElement?.id==="title-continue"')
                     expected_focus_order = ['title-continue', 'title-new', 'title-river-of-pain',
-                                            'title-aliens1986', 'title-forge', 'title-options']
+                                            'title-aliens1986', 'title-alien-earth', 'title-forge', 'title-options']
                     focus_order = []
                     for _ in expected_focus_order:
                         focus_order.append(observed(page)['focus'])
