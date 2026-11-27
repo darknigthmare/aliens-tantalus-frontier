@@ -149,6 +149,9 @@ def main():
                       page.locator('link[rel="stylesheet"]').evaluate("(el)=>el.href")==base+ROUTE+"integration.css")
                 check("Slashless wrapper resolves its integration script",
                       page.locator('script[type="module"]').evaluate("(el)=>el.src")==base+ROUTE+"integration.js")
+                # ROP_APP becomes available before the iframe's load event.
+                # Wait for the real shell handler while its PNG requests finish.
+                page.locator("#river-loading").wait_for(state="hidden",timeout=30000)
                 check("Wrapper load handler has completed",page.locator("#river-loading").is_hidden())
                 frame.locator("#difficulty").select_option("story")
                 frame.locator("#start").click()

@@ -124,7 +124,7 @@ test('source-only policies never admit arbitrary files, traversal, secrets, or d
   assert.equal(isPublicDistributionPathV86('docs/development/RIVER_OF_PAIN_INTEGRATION.md'), true);
   assert.equal(isPublicDistributionPathV86('docs/development/RIVER_OF_PAIN_INTEGRATION.md', { built: true }), false);
 });
-test('visual tooling and standalone metadata files stay out of the public distribution', () => {
+test('visual tooling and standalone metadata stay source-only and satisfy the shared text privacy guard', async () => {
   for (const path of [...manifest.visualSourceFiles,
     'docs/development/RIVER_OF_PAIN_SPRITE_INVENTORY.md',
     'docs/development/RIVER_OF_PAIN_SPRITE_REFERENCES.md',
@@ -134,6 +134,11 @@ test('visual tooling and standalone metadata files stay out of the public distri
     'scripts/verify-river-of-pain-sprites.mjs', 'scripts/verify-river-of-pain-sprites-browser.py']) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
+    // Source-only admission does not exempt generation provenance or embedded
+    // bible JSON from the same privacy scan used by npm run check.
+    if (/\.(?:js|mjs|py|json|css|html|md|webmanifest)$/i.test(path))
+      assert.equal(isPublicDistributionTextV86(await readFile(join(root, path), 'utf8')), true,
+        'Private metadata in visual source file: ' + path);
   }
   for (const row of visualAssets) {
     assert.equal(riverOfPainPathAdmission(row.path), true, row.path);

@@ -4,7 +4,7 @@
 
 Cet inventaire décrit les données du DLC `river-of-pain`, version récupérée
 `0.9.0-candidate.1`, intégrée dans `dlc/fleuve-de-la-douleur/`. Il sert de base
-au lot visuel `visual-v1`. Il ne décrit ni les autres DLC ni tout l'arsenal de
+à la présentation `visual-v1` et à ses lots successifs. Il ne décrit ni les autres DLC ni tout l'arsenal de
 la franchise Alien.
 
 Les 29 fichiers runtime de cette base ont été comparés aux empreintes Git du
@@ -284,9 +284,9 @@ des entrées documentaires, hors du plan colonial jouable. Leur absence ne
 doit pas être masquée en plaçant les personnages ou appareils concernés dans
 une pièce sans rapport, ni en reliant une station orbitale par une porte.
 
-## Livraison visuelle sélectionnée
+## Livraison historique — lot 1 intégré par la PR 62
 
-Le manifeste de `visual-v1` sélectionne **42 PNG individuels**. Ils remplacent
+Le premier lot de `visual-v1`, intégré par la PR 62, a retenu **42 PNG individuels**. Ils remplacent
 des représentations déjà présentes pour les états explicitement couverts ;
 ce nombre ne désigne ni 42 animations, ni la totalité des décors du DLC.
 
@@ -317,13 +317,104 @@ Les quatre consignes exactes d'Arden, Becker, Ferris et Corban n'ont pas été
 récupérées après l'interruption de session ; leurs descriptions reconstituées
 sont identifiées comme telles. Leurs PNG réels ont été récupérés et contrôlés.
 
+## Lot 2 — 28 types de décor admis
+
+Le lot défini le 25 novembre 2026 comprend **28 PNG supplémentaires admis**, un
+fichier `prop-<kind>.png` pour chacun des types ci-dessous. Avec les 42 images
+du premier lot, le [manifeste de production](../../dlc/fleuve-de-la-douleur/visual-v1/sprite-manifest.json)
+contient **70 PNG individuels**. Le builder a validé ce manifeste et reconstruit
+le standalone dérivé.
+
+Ces types existent déjà dans `rooms[].props` : ils totalisent **130 instances**,
+dont **122 décors admissibles** sans collision ni empreinte physique et
+**huit exemplaires physiques conservés en rendu natif**. Le tableau distingue
+les emplacements admissibles aux PNG et les obstacles gardant leur dessin natif.
+
+| Type exact | Instances dans la base | Décor admissible au PNG | Instance physique en rendu natif |
+| --- | ---: | ---: | ---: |
+| `natal-unit` | 1 | 1 | 0 |
+| `white-monitor` | 1 | 1 | 0 |
+| `microscope` | 1 | 1 | 0 |
+| `fire-cabinet` | 9 | 9 | 0 |
+| `oxygen` | 7 | 7 | 0 |
+| `privacy-screen` | 4 | 4 | 0 |
+| `gurney` | 4 | 4 | 0 |
+| `glass-cabinet` | 2 | 2 | 0 |
+| `medical-cross` | 4 | 4 | 0 |
+| `sink` | 7 | 7 | 0 |
+| `hose-reel` | 5 | 5 | 0 |
+| `tool-board` | 5 | 5 | 0 |
+| `hand-truck` | 2 | 2 | 0 |
+| `cable-spool` | 6 | 6 | 0 |
+| `tape-reel` | 2 | 2 | 0 |
+| `radio` | 3 | 3 | 0 |
+| `monitor` | 3 | 3 | 0 |
+| `locker` | 4 | 4 | 0 |
+| `chair` | 4 | 4 | 0 |
+| `wall-clock` | 12 | 12 | 0 |
+| `warning-board` | 12 | 12 | 0 |
+| `noticeboard` | 7 | 7 | 0 |
+| `plant` | 1 | 1 | 0 |
+| `hanging-coat` | 5 | 5 | 0 |
+| `lab-bench` | 3 | 1 | 2 |
+| `pump-motor` | 7 | 5 | 2 |
+| `bench` | 6 | 3 | 3 |
+| `vending` | 3 | 2 | 1 |
+| **Total : 28 types** | **130** | **122** | **8** |
+
+### Raccordement au décor existant
+
+L’adaptateur vérifie l’identifiant et le type dans la liste des props de la
+salle. Un appareil créé temporairement pour représenter un objectif ne devient
+pas un décor PNG parce qu’il utilise le même nom de type. Les conteneurs
+interactifs de `life` et leurs états ouverts, fermés ou vidés conservent leur
+chemin de rendu. Les huit instances physiques du tableau gardent leur dessin
+et leur empreinte d’obstacle.
+
+Chaque PNG entier est redimensionné avec un facteur uniforme pour tenir dans
+l’enveloppe visible du corps natif. Sa hauteur de référence vient de cette
+enveloppe ; sa largeur est plafonnée en conservant ses proportions. L’ancre
+est le centre du bord inférieur de sa boîte alpha. Le décalage horizontal du
+modèle et son point bas restent appliqués : une plaque murale garde sa hauteur,
+et les roues restent sous leur point d’appui prévu. La boîte alpha calibre le
+dessin ; elle ne découpe pas un morceau de l’image.
+
+Les quatre inscriptions `UNITÉ OBSTÉTRICALE`, `FIRE`, `STOCK` et `!` restent
+des textes natifs à leurs coordonnées, taille et couleur d’origine. Les
+consignes de génération réservent leur place sans les peindre dans le PNG.
+Le contrôle final doit vérifier l’unicité et l’alignement de ces légendes dans
+la composition réelle. Les états animés et les éléments dont l’apparence
+dépend de l’alimentation, du temps ou de la mission gardent leur rendu natif.
+
+### Provenance du dessin
+
+Dans l’extrait autorisé R1 / S18, les moniteurs sont blancs et lisses, avec
+des témoins verts et bleus ; la grande unité de chirurgie natale possède un
+capot principalement transparent. Ces traits étayent `white-monitor` et
+`natal-unit`. Le châssis, le contrôleur latéral, le pied et le tracé ECG restent
+des adaptations du jeu.
+
+Pour les 26 autres types, les formes, montages et couleurs sont ceux du DLC ou
+des précisions graphiques de leur fonction. Le `microscope` natif partage un
+pupitre à écran générique : lui donner une optique reconnaissable est une
+interprétation déclarée. Les concepts de production et l’accessoire utilitaire
+répertoriés dans le [registre des références](RIVER_OF_PAIN_SPRITE_REFERENCES.md)
+donnent un contexte de décor ; ils ne certifient pas la ressemblance 1:1 de
+chacun de ces objets.
+
 ## Contrôle des PNG générés
 
 Le lot visuel se trouve dans
 `dlc/fleuve-de-la-douleur/visual-v1/assets/`, un fichier par image.
-L'inventaire ci-dessus reste le constat de départ ; il n'affirme pas que
-toutes ces images sont générées, validées ou raccordées. Le manifeste du lot
-et ses rapports doivent décrire la livraison effective.
+Les sections sur la base v0.9 décrivent l’état de départ ; le bilan du lot 1
+décrit ses 42 images, et le lot 2 ajoute 28 images admises pour un total de
+70 PNG. Le tableau du lot 2 détaille les types couverts et l’admissibilité de
+leurs emplacements. Le manifeste reste la liste exacte de la sélection.
+
+Les versions retenues de `natal-unit` et `glass-cabinet` corrigent la
+transparence des vitrages au moyen de leur véritable canal alpha. Tous les
+PNG admis sont les images complètes issues du générateur ; leurs pixels
+restent inchangés par les scripts de contrôle et d’intégration.
 
 Le [manifeste de production](../../dlc/fleuve-de-la-douleur/visual-v1/sprite-manifest.json)
 déclare les seuls fichiers sélectionnés, leurs cibles, poses, empreintes,
@@ -345,8 +436,9 @@ pas le métier ni l'inventaire du résident. Les ancrages sont repérés dans le
 des pieds ou du centre de l'objet. Pour les dix derniers résidents, le centre
 horizontal est mesuré sur la bande inférieure de 10 % de la silhouette à
 alpha >= 200, et la ligne de sol suit le dernier pixel des bornes alpha >= 16.
-La recette Chromium doit encore confirmer ces raccordements dans les scènes
-réelles. La boîte alpha sert à l'échelle et ne découpe pas l'image.
+La recette Chromium du lot 1 a été réalisée et validée dans le cadre de la
+PR 62. La recette du lot 2 doit confirmer les nouveaux décors admis dans leurs
+scènes réelles. La boîte alpha sert à l'échelle et ne découpe pas l'image.
 
 Le script [inspect-river-of-pain-sprites.py](../../scripts/inspect-river-of-pain-sprites.py)
 est un inspecteur en lecture seule. Il mesure chaque PNG avec Pillow,
@@ -510,3 +602,35 @@ ni le tracteur pilotable. Les IDs de type sont conservés tels quels.
 | `wreck` | 1 |
 
 Total : **113 types / 547 instances**.
+
+
+## Reprise du 26 novembre 2026 — lot 3 et bible
+
+La [bible détaillée courante](../../dlc/fleuve-de-la-douleur/visual-v1/bible/README.md)
+complète cet inventaire sans réécrire les documents historiques v0.9.
+Elle couvre les huit domaines demandés, les connexions, les emprises et les
+manquants attestés par les références.
+
+Le manifeste actif compte 78 PNG. Les huit nouveaux meubles sont
+`rack`, `shelf`, `medicine`, `cupboard`, `fridge`, `table`, `stove` et
+`linen`. Les 113 types de props de la carte comprennent désormais 41 types
+ciblés par au moins un PNG de prop ; 72 n’ont pas encore de PNG de prop dédié.
+Ce comptage ne transforme pas une pose fixe en cycle d’animation et ne signifie
+pas que toutes les instances physiques sont remplacées.
+
+| Type ajouté | Instances décoratives | Instances physiques conservées |
+| --- | ---: | ---: |
+| rack | 5 | 0 |
+| shelf | 4 | 0 |
+| medicine | 4 | 0 |
+| cupboard | 2 | 1 |
+| fridge | 2 | 1 |
+| table | 6 | 6 |
+| stove | 2 | 0 |
+| linen | 1 | 1 |
+| Total | 26 | 9 |
+
+Les étagères occupent l’enveloppe native y=-170 à y=+1. Les tables et le
+mobilier bas utilisent leurs propres dimensions. Chaque PNG reste entier,
+avec un redimensionnement uniforme, et seules les instances décoratives
+réellement définies dans la salle utilisent cette présentation.

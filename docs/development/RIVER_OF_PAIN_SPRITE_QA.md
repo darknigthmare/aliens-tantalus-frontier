@@ -1,6 +1,285 @@
 # Fleuve de la Douleur — qualification du rendu PNG
 
-## État vérifié le 25 novembre 2026
+## Lot 4 — huit illustrations dans la bible, 26 novembre 2026
+
+### Livraison et périmètre
+
+Huit images de production complètent les fiches de Jonesy, du Medlab, du
+Daihotai, de l’épave, du sol rocheux, de la surface de LV-426, de la serre
+et de la tour Uplink. Elles totalisent **19 582 657 octets**. Le registre
+[`PRODUCTION_ASSETS.json`](../../dlc/fleuve-de-la-douleur/visual-v1/bible/PRODUCTION_ASSETS.json)
+conserve leurs prompts exacts, leurs sources, les détails interprétés,
+leurs dimensions, poids, SHA-256 et historique de génération applicable.
+
+Ces images ont l’usage `bible_only`. Le manifeste des **78 PNG runtime**,
+les raccordements du rendu, le chargeur et le gameplay sont identiques au
+commit de départ `6fa117ae714a25ab070789bcabf9a7c9075a31bc`.
+La nouvelle fiche Uplink est documentaire ; son lien de contexte vers
+`rop:lieux:aerial` ne crée pas une tour ou un accès dans le niveau.
+
+### Inspection des images
+
+- **8/8 PNG décodables**, tailles et SHA-256 recalculés ; les empreintes Git
+  correspondent aux blobs préparés pour la publication.
+- Cinq images opaques : Jonesy, Medlab, terrain, panorama et serre.
+  Trois images possèdent un canal alpha : Daihotai, épave et Uplink.
+- Aucun des trois sujets détourés ne touche un bord à alpha ≥16. Des
+  pixels périphériques d’alpha 1–15 subsistent ; aucune qualité de
+  détourage runtime ni animation n’est certifiée.
+- Les huit images complètes ont été relues visuellement. Les deux essais
+  précédents de Jonesy, affectés par une frange colorée, restent hors
+  des assets admis ; seule la version finale sur fond gris opaque est livrée.
+- Les PNG sont conservés sans découpe, recoloration ou réencodage par script.
+
+| Image | Dimensions en pixels | Poids en octets |
+| --- | ---: | ---: |
+| Jonesy | 1 585 × 992 | 2 125 979 |
+| Medlab | 1 672 × 941 | 2 857 582 |
+| Daihotai | 1 774 × 887 | 2 094 219 |
+| Épave extraterrestre | 1 379 × 1 141 | 2 013 646 |
+| Sol rocheux | 1 254 × 1 254 | 3 557 016 |
+| Tour Uplink | 1 254 × 1 254 | 1 511 242 |
+| Surface de LV-426 | 1 774 × 887 | 2 614 374 |
+| Serre | 1 774 × 887 | 2 808 599 |
+
+### Couverture et consultation
+
+La bible reconstruite comprend **279 fiches** : 83 reliées à au moins un
+PNG runtime, huit autres dont le sujet est illustré en production et une
+avec seulement une image de contexte. Il reste **188 fiches sans image du
+sujet**, dont **187 sans aucune image**. Les compteurs et filtres distinguent
+ces cas ; une image de contexte n’efface pas le manque du sujet principal.
+Les statuts d’intégration des 278 fiches antérieures sont conservés.
+
+La recette locale de la bible a passé **29/29 contrôles** sous
+**Chromium 143.0.7499.4 / Playwright 1.62.0** : recherche, catégories,
+pagination, six filtres d’images, affichage des tentatives sans résultat,
+décodage et dimensions des huit images, métadonnées sur mobile, ainsi que
+quatre vérifications distinguant le contexte de la fiche `aerial` de son
+sujet. Aucune erreur JavaScript ni débordement horizontal mobile constaté.
+Les captures desktop 1 280 × 900, Medlab et Jonesy mobile à 390 pixels de
+large ont été relues. Cette recette porte sur la bible ; elle ne constitue
+pas une nouvelle recette de gameplay.
+
+Le générateur vérifie l’identité des fiches et des sources, les rôles
+`subject`/`context`, l’usage documentaire, les chemins confinés au dossier
+de production, l’absence de lien symbolique, ainsi que les tailles,
+dimensions et empreintes des fichiers. Les huit PNG et le registre sont
+admis individuellement comme sources et exclus de la distribution publique.
+La revue indépendante confirme **2/2 tests d’admission réussis**, le rejet
+des chemins arbitraires et la conservation des **85 fichiers publics** et
+des **222 sources historiques** par rapport au commit de départ.
+Le résultat du workflow complet du DLC est attaché au commit de la
+[PR 66](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/66).
+
+### Sources, limites et tentatives sans résultat
+
+Le Medlab et le Daihotai dérivent de concepts de Ron Cobb. L’épave utilise
+une réplique sous licence, distinguée des photographies de production de
+1979. Jonesy reprend une photographie de studio republiée, avec une pose
+entière reconstruite. La miniature Uplink est documentée comme élément
+de Hadley’s Hope. Le texte autorisé du roman atteste les grands caractères
+de la serre et du terrain ; leurs détails et implantations restent interprétés.
+Les références exactes figurent dans chaque fiche et dans le registre.
+
+Le service de génération a refusé le lot d’essais M41A/M240 et l’essai de
+Xénomorphe adulte. Aucun résultat exploitable n’a été récupéré pour ces
+entrées. Aucun asset ni raccordement runtime supplémentaire n’est compté
+pour ces tentatives, qui restent consignées dans les fiches concernées.
+
+La fidélité 1:1 générale et l’exhaustivité du canon restent non certifiées.
+Les études ne définissent ni plans officiels, ni mesures réelles, ni cycles
+d’animation, ni texture de terrain sans couture validée.
+
+## Lot 3 — 78 PNG et bible de production, 26 novembre 2026
+
+### Fichiers et rendu
+
+Huit images ont été produites séparément avec un fond transparent :
+`prop-rack`, `prop-shelf`, `prop-medicine`, `prop-cupboard`,
+`prop-fridge`, `prop-table`, `prop-stove` et `prop-linen`.
+Elles représentent 18 171 047 octets. Les huit empreintes SHA-256 et Git
+calculées sur les octets récupérés correspondent aux blobs GitHub créés.
+Les 70 PNG antérieurs restent inchangés.
+
+Les contrats couvrent 36 familles de décor supplémentaires :
+148 instances admissibles dessinent un PNG et 17 instances physiques gardent
+leur dessin natif. Les huit nouveaux types ajoutent respectivement 26 et neuf
+instances à ces ensembles. Les collisions, sauvegardes, portes et objectifs
+synthétiques conservent le comportement du modèle d’origine.
+
+### Vérifications obtenues avant l’interruption locale
+
+- 29/29 tests de `verify-river-of-pain-sprites.mjs` ont réussi sur l’état
+  file de quatre chargements, avant le dernier ajout de textures ImageBitmap.
+- 78/78 PNG inspectés, sans erreur de décodage, avec canal alpha et pixels
+  transparents. Aucun nouveau PNG ne touche le bord à alpha ≥16 ou ≥200.
+  L’unique avertissement du corpus concerne l’image historique de Bronagh,
+  à alpha ≥16 ; aucune image ne touche un bord à alpha ≥200.
+- Les 222 fichiers historiques v0.9 ont été comparés en taille et SHA-256,
+  sans différence. Cette passe n’a pas relu les neuf ZIP historiques.
+- Les enveloppes natives, légendes, profondeurs et cas de repli ont été testés.
+- Le nouveau journal de génération conserve chaque prompt et les originaux
+  complets, sans recadrage ni modification des pixels.
+- La construction initiale de la bible a vérifié l’unicité des fiches,
+  les références, les 547 placements, les 118 détails de phase et les liens
+  vers les 78 sprites. Trois corrections éditoriales issues d’une seconde
+  revue distinguent Moore au pont, pistolet-grappin/bras de capture et Terre.
+
+### Échec navigateur reproduit et reprise
+
+Le workflow antérieur de PR66 échoue sur « All declared PNGs decode in Chromium ».
+Le rapport a été corrigé pour conserver le détail des entrées avant l’assertion.
+Une fixture locale avec Chromium143 et les 70 vrais PNG plante avec le chargement
+historique et charge 70/70 images avec une file de quatre. Le parcours entier
+reste insuffisamment validé : la file seule ne supprimait pas tous les crashes
+dans l’environnement alors proche de la saturation.
+
+Le complément ImageBitmap prépare une texture de rendu bornée à 1 024 pixels
+sur son côté le plus long, puis libère la référence HTMLImage utilisée au
+décodage. Le PNG source et ses dimensions logiques sont conservés.
+Les tests de proportions, de rejet et de repli ont été préparés ; le dernier
+test de notifications asynchrones a été corrigé pour comparer les identités
+sans imposer l’ordre d’achèvement.
+
+L’environnement est devenu indisponible avant la première recette finale. Les
+sources, images et documents ont été reconstruits, vérifiés par leurs empreintes
+Git et publiés au commit `18a95887aa0a9d0cc839879f4719abb3368767a3`.
+Après rétablissement de l’exécuteur, une copie temporaire vérifiée a permis
+d’achever les contrôles ci-dessous malgré le disque de travail saturé.
+
+### Recette finale locale du lot 3
+
+- **31/31 tests de sprites réussis**, y compris les textures ImageBitmap,
+  les 148 décors admissibles, les 17 objets physiques et les légendes natives.
+- La reconstruction canonique conserve exactement le HTML publié :
+  **946 358 octets**, SHA-256
+  `81052e40e01f91df501be7d8c353c6d4c2f21303c20122559df2dafb62ea85d3`.
+  La galerie reconstruite reste elle aussi identique.
+- **183/183 contrôles navigateur en HTTP, mode DLC**, avec chargement des
+  **78/78 PNG**, puis **78/78 après rechargement réel**, déplacement natif,
+  export, reprise, inventaire, passage à la version d’origine et échappement F6.
+- **175/175 contrôles en ouverture directe file://**, avec le même corpus,
+  reprise de sauvegarde et résolution des chemins relatifs.
+- Navigateur : **Chromium 143.0.7499.4**, piloté par **Playwright 1.62.0**.
+  Aucune erreur JavaScript, requête de jeu échouée ou réponse HTTP en erreur
+  n’a été enregistrée dans ces deux parcours.
+- La composition des 78 états admissibles utilise les véritables méthodes
+  Canvas et a été examinée visuellement. Les huit nouveaux meubles sont
+  entièrement visibles et ajustés à leurs enveloppes. Cette fixture reste
+  distincte d’un parcours complet des missions.
+- La bible a été reconstruite à partir des **78 PNG réels**, tous vérifiés
+  par signature et SHA-256 : dimensions et tailles connues, total
+  **137 932 789 octets**. Elle contient **278 fiches**,
+  **83 avec au moins un PNG** et **195 sans PNG individuel**.
+- **9/9 contrôles HTML de la bible réussis** : recherche, catégories,
+  pagination, détails, images et absence de débordement. Captures desktop
+  1 280 × 900 et mobile 390 × 844 relues ; aucune erreur JavaScript.
+
+Les deux parcours locaux de sprites ne valident pas le titre hôte complet,
+une sauvegarde Frontier préexistante ni le build de production. Ces points
+appartiennent au workflow distant. La passe locale des tests d’intégration
+a atteint 23/25, avec deux blocages de copie sparse (archives et
+`vercel.json` absents) ; le contrôle complet du modèle récupéré était
+également bloqué par l’absence locale des archives. Ces blocages ne sont pas
+présentés comme des réussites.
+
+Le workflow distant [45815754453](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45815754453)
+sur le commit `18a9588` a ensuite validé les **31 tests sprites**,
+les **21 tests de lancement/intégration**, les **4 tests de succession**,
+les **246 contrôles du modèle récupéré**, les **222 fichiers et neuf ZIP**,
+l’admission des sources, le build de production et **26 contrôles du parcours
+hôte complet**. Son second parcours, sans barre finale, a échoué sur une
+assertion immédiate de fin de chargement du wrapper, avant les recettes PNG.
+
+La recette attend désormais que le véritable indicateur `#river-loading`
+soit masqué (timeout 30 s), puis conserve la même assertion. Le runtime n’est
+pas modifié par cette correction de synchronisation. Une navigation ciblée
+sur l’alias HTTP sans slash a confirmé la fin réelle du chargement, la
+conservation de l’URL et l’absence d’erreur JS/HTTP ; la suite complète est
+réexécutée par la CI du commit de consolidation.
+
+La trace Canvas réelle a aussi confirmé une seule légende STOCK par rendu
+de fridge, cupboard et locker, dans la version native comme dans la version
+PNG. Le contraste sur le réfrigérateur clair reste celui de la légende native.
+
+### Portée artistique
+
+Les huit meubles sont des adaptations documentées du projet. Le texte du roman
+et l’art de production servent de références générales ; aucun modèle individuel
+de ce lot n’est présenté comme une reproduction authentifiée 1:1.
+Les fiches sans PNG, les états animés, les personnages supplémentaires et les
+véhicules/vaisseaux non raccordés restent explicitement à produire.
+
+## Lot 2 — 70 PNG admis
+
+Le deuxième lot ajoute **28 PNG individuels** au lot de 42 intégré par la PR 62.
+Le manifeste de production et son index de distribution contiennent désormais
+**70 entrées**. Les 28 nouvelles images occupent **48 930 500 octets** ; les 70
+fichiers totalisent **119 761 742 octets**. Les images complètes sont conservées
+sans découpe, redimensionnement ni réencodage par script.
+
+### Qualification locale du 25 novembre 2026
+
+- **49 tests Node réussis sur 49** : 28 tests de sprites et 21 tests d'intégration
+  et de lancement.
+- **70 PNG décodés sur 70**, tous RGBA avec une seule image et un vrai canal
+  transparent ; aucune erreur d'inspection.
+- Aucun bord touché à alpha >= 200. La seule alerte à alpha >= 16 reste celle
+  du PNG historique de Bronagh, déjà documentée dans le bilan du lot 1.
+- **222 fichiers récupérés, neuf archives historiques et 42 PNG du lot 1**
+  identiques à leur base ; les cinq points d'entrée hôte contrôlés sont inchangés.
+
+Les sept nouveaux contrôles Node comparent les enveloppes aux appels Canvas
+du moteur natif. Ils couvrent **122 instances décoratives** admissibles et
+**huit instances physiques** dont le dessin natif complet est conservé.
+L'identité et le type doivent correspondre à une vraie entrée de la pièce ;
+les consoles ou radios synthétiques des interactions ne deviennent pas des décors PNG.
+
+L'image entière est ajustée uniformément dans l'enveloppe native, sans étirement.
+Le centre et le bas de ses bornes alpha >= 16 conservent la hauteur des montages
+muraux, des pieds ou des roues. Les quatre inscriptions `UNITÉ OBSTÉTRICALE`,
+`FIRE`, `STOCK` et `!` restent natives. Le test de légende capture le style
+au moment de `fillText` et vérifie sa restauration au moyen d'une vraie pile
+de styles simulée. Retirer la paire `save/restore` est détecté par ce contrôle.
+
+Les vitrages du capot obstétrical et de la vitrine ont été régénérés après
+détection d'un fond peint presque opaque. Les fichiers retenus contiennent un
+véritable alpha partiel ; les cadres et le mobilier intérieur restent visibles.
+Leurs brouillons exclus et leurs prompts exacts sont consignés dans
+`GENERATION_LOG.json`. Les reflets ont été examinés sur fonds contrastés.
+
+### Revue indépendante des compositions
+
+Les 28 types ont été composés avec les véritables méthodes Canvas, dans une
+fixture isolée : 130 instances examinées, 122 dessins PNG et huit exclusions
+physiques comparées pixel à pixel au rendu natif. Les enveloppes et ancrages
+sont respectés, sans modification de la simulation. Les inscriptions STOCK
+et ! sont lisibles sans doublon ; les vitrages corrigés ont été revus sur
+fonds contrastés.
+
+La revue a demandé un cartouche plus haut pour FIRE. Le PNG a été régénéré,
+puis les neuf armoires incendie ont été contrôlées de nouveau avec la version
+finale : aucune erreur, aucun avertissement et légende entièrement contenue
+dans le cartouche. La position native du texte est conservée. Les 27 autres
+PNG ont des empreintes inchangées ; ce contrôle ciblé ne prétend pas être un
+second rendu complet des 28 types.
+
+### Empreintes du résultat construit
+
+| Fichier | SHA-256 |
+| --- | --- |
+| Manifeste des 70 images | `21d9717d8f3956bb0131e1e9809fec67deaa50307314054169d5c2d11f71194d` |
+| HTML dérivé, 936 928 octets | `1975c08689f91fa347e0f3ff5310b8f159880df75b1d07130d805d5e951fa175` |
+| Standalone original conservé | `91ae538879b939018cea5dc3ba2eb9e45faea7693fdd952efbe8531b33cdfced` |
+
+Le workflow DLC exécute séparément les parcours Chromium HTTP et `file://`
+sur le commit proposé. Les contrôles locaux ci-dessus ne sont pas un résultat
+navigateur. La composition de tous les PNG utilise une fixture identifiée ;
+elle ne constitue pas un parcours complet de toutes les missions.
+
+
+## Historique du lot 1 — état vérifié le 25 novembre 2026
 
 Les adaptateurs et le builder dérivé sont implémentés. La recette Node ciblée a réussi **21 tests sur 21** et couvre les images individuelles, les poses, les identités, les alertes et les interfaces existantes. Le contrôle indépendant du snapshot a confirmé **222 fichiers sur 222**, avec les tailles et SHA-256 du manifeste de récupération.
 

@@ -4,7 +4,7 @@
   "sourceCommit": "cd5a58a6fea3084dfbbbb5516be9d0f6972d2320",
   "originalStandaloneSha256": "91ae538879b939018cea5dc3ba2eb9e45faea7693fdd952efbe8531b33cdfced",
   "referenceRegister": "../../../docs/development/RIVER_OF_PAIN_SPRITE_REFERENCES.md",
-  "coverage": "42 PNG de présentation. Les visages interprétés et les poses fixes ne certifient pas une reproduction 1:1 ni un jeu entièrement animé avec ces images.",
+  "coverage": "78 PNG individuels : 42 images du lot 1, 28 décors du lot 2 et 8 décors du lot 3. Les 36 types de décors supplémentaires couvrent 148 instances décoratives ; 17 instances physiques des mêmes types conservent leur dessin natif. Poses fixes et interprétations ne certifient pas une reproduction 1:1 ni toutes les animations.",
   "assets": [
     {
       "id": "newt-idle-right",
@@ -601,6 +601,1071 @@
         "status": "interpretation",
         "note": "Anton Voss est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
       }
+    },
+    {
+      "id": "prop-natal-unit",
+      "file": "assets/prop-natal-unit.png",
+      "sha256": "2891e27bae950d8cfe5a36992a1fe2b698dda3a9f54923ebaf032a951ac8c37b",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "edit",
+      "prompt": "Use case: background-removal and precise-object-edit. The provided medical obstetric unit sprite has a FALSE opaque background painted inside its glass hood. Correct ONLY transparency of the clear canopy. Preserve the entire object, geometry, cream metal frame, base, feet, right-side controller, mattress and lighting. Remove the blue-grey opaque fill of the upper and side glass windows: those empty areas must reveal the actual alpha background THROUGH THE HOOD. No opaque back wall inside. Make the broad upper central window essentially clear with only faint 15–25% opacity tinted reflection strokes; alpha near zero across most empty glass, alpha below 80/255 in lightly tinted portions. Keep solid framing, cushions and base fully opaque. Do not paint a checkerboard, grey studio field, room or replacement background in the window. This is an empty see-through glass chamber, not a solid glass-coloured panel. Clean silhouette, no halo or loose flecks below the feet. Output ONE whole transparent PNG with margins, no text or extra object.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Unité obstétricale et capot principalement transparent décrits dans l’extrait autorisé Titan Books / Daily Dead (S18). Enveloppe, socle et commande à droite repris du DLC ; géométrie détaillée et matériaux interprétés. Vitrage à véritable alpha partiel ; aucun patient représenté."
+      },
+      "nativeEnvelope": {
+        "left": -93,
+        "right": 111,
+        "top": -109,
+        "bottom": 3,
+        "width": 204,
+        "height": 112,
+        "centerX": 9,
+        "mountHeight": -3
+      },
+      "nativeSource": "src/river-of-pain/fidelity-visuals.js",
+      "eligibleDecorativeInstances": 1,
+      "protectedPhysicalInstances": 0,
+      "generationHistory": [
+        {
+          "sha256": "232ee13d8a73e9552e6254fd79a34e9f2fc0cd38e9602b2580cf5773ee1f4db9",
+          "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE empty colonial obstetric surgery unit. A wide low cream trapezoidal base with low feet supports a large mostly transparent enclosed angular canopy: long horizontal top, sloping ends, clear green-blue acrylic panels, thin sage metal edges. The dark padded interior is empty. A small dark teal rectangular controller is structurally attached at the RIGHT side on a narrow connected upright; include it within the total silhouette. No freestanding separate screen. The body is wider near its bottom. Overall equipment is 1.82 times as wide as tall. The canopy and broad wedge base dominate. No cradle bars, no large wheels, no human or infant. Keep upper label area free of text.\nNative palette guide: #aab8ab, #d3d9c3, #6e8580, #275863, #143b48.",
+          "promptStatus": "exact",
+          "selection": "superseded",
+          "reason": "Initial draft superseded after silhouette or transparency review"
+        }
+      ],
+      "referenceType": "previous generated draft of the same object; no research photograph embedded"
+    },
+    {
+      "id": "prop-white-monitor",
+      "file": "assets/prop-white-monitor.png",
+      "sha256": "7e557b6ea267d8969408d1db9f4b602f36da48032e36a887aef6ef508e33ca64",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "edit",
+      "prompt": "Use case: precise-object-edit. Edit target: the provided medical-monitor sprite. Correct only its proportions and preserve the realistic materials, colours, retro CRT screen, lighting and connected pedestal. The CRT casing must be a clearly WIDE horizontal rectangle, width approximately 1.5 times its height; widen the monitor head and its screen by about 50% while keeping its height and the slender stand. The complete top-to-foot silhouette should have a width/height ratio approximately 0.52, not a very thin 0.34. Keep everything centered and complete with a transparent margin on all four sides. Preserve one connected monitor on one vertical stand with a small foot, the pale cream casing, sage-grey post, dark teal glass and subtle mint ECG trace. No separate items or words. Remove any stray isolated fleck above or outside the connected object. Genuine transparent alpha background, no floor, wall, shadow, sheet, crop or painted checkerboard. Render the whole corrected sprite, not a comparison.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Moniteurs blancs à indicateurs verts et bleus décrits dans l’extrait autorisé Titan Books / Daily Dead (S18). Silhouette sur pied et palette du DLC ; forme CRT et tracé ECG sont une adaptation, sans modèle exact authentifié."
+      },
+      "nativeEnvelope": {
+        "left": -26,
+        "right": 27,
+        "top": -103,
+        "bottom": 0,
+        "width": 53,
+        "height": 103,
+        "centerX": 0.5,
+        "mountHeight": 0
+      },
+      "nativeSource": "src/river-of-pain/fidelity-visuals.js",
+      "eligibleDecorativeInstances": 1,
+      "protectedPhysicalInstances": 0,
+      "generationHistory": [
+        {
+          "sha256": "32c11849874f140a46d8d324e3d2bd7b3a20ead419cacf873c1eaf96a328ae55",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual transparent 2D game sprite, production prop for Aliens: Tantalus Frontier / Fleuve de la Douleur.\nPrimary request: faithfully realize the existing colony medical monitor prop as a highly detailed realistic pre-rendered sprite, within the restrained used industrial retro-futurist visual language of Aliens (1986). It is an original game adaptation, not a claim of an exact screen-used prop.\nSubject: ONE complete freestanding medical CRT monitor on a narrow tall metal pedestal. Off-white slightly yellowed rectangular casing, dark blue-green recessed glass screen with one thin muted mint electrocardiogram trace, thick bezel and a small row of tactile controls. A narrow pale sage-grey vertical post connects the monitor to a discreet small stable foot at floor level. This is one connected piece of equipment.\nComposition: almost straight-on orthographic front view, very slight view of the right casing edge and top only, no dramatic perspective. Entire assembly from monitor top to pedestal foot visible. The silhouette is tall and slim, approximately 0.52 wide for 1 high. Centered, 10% clear transparent margin on all sides.\nMaterials and light: realistic brushed and painted metal, modest edge wear, small screws, gentle neutral overhead-left light, subdued cream #ced5c0 and sage #aabdaf, dark teal #12343e, fine mint screen line. Legible at a native game height of about 103 pixels; prioritize the CRT silhouette and slender post. Detailed but restrained, consistent with realistic 2D cutout game props.\nBackground: genuine transparent alpha, isolated object. No room, floor, wall, pedestal display platform, cast background shadow or painted checkerboard.\nConstraints: one asset, one monitor, one stand; no humans, no labels or readable words, no logo, no watermark, no detached pieces, no multiple views, no sprite sheet, no cropped extremities. Keep screen glow subtle and confined to the glass.",
+          "promptStatus": "exact",
+          "selection": "superseded",
+          "reason": "Initial draft superseded after silhouette or transparency review"
+        }
+      ],
+      "referenceType": "previous generated draft of the same object; no research photograph embedded"
+    },
+    {
+      "id": "prop-microscope",
+      "file": "assets/prop-microscope.png",
+      "sha256": "68da9a25b5d4d801fd6ceba6378ef00c9f5bbac09ff75842078c74c9663802ee",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE compact colonial laboratory optical microscope with an integrated wide low rectangular base. Dusty grey-green industrial body, dark teal optical fittings, a short angled binocular eyepiece, curved support arm, small specimen stage, objective turret and tactile focus knobs. The body and its base are one connected instrument. Broad squat silhouette, width/height approximately 1.15, rather than a tall modern white microscope. A tiny inset teal meter can be on the base. Restrained worn late-20th-century industrial optics; no futuristic holograms, laser effects, specimen or surrounding laboratory. No words.\nNative palette guide: #394b49, #718075, #65756b, #97a18c, #164345.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "semantic-interpretation",
+        "note": "Le type microscope existait avec un pupitre générique. La forme optique individualise ce sens dans la même enveloppe de rendu ; dessin interprété, sans modèle filmique ou description détaillée authentifiée."
+      },
+      "nativeEnvelope": {
+        "left": -40,
+        "right": 50,
+        "top": -78,
+        "bottom": 0,
+        "width": 90,
+        "height": 78,
+        "centerX": 5,
+        "mountHeight": 0
+      },
+      "nativeSource": "src/river-of-pain/render.js",
+      "eligibleDecorativeInstances": 1,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-fire-cabinet",
+      "file": "assets/prop-fire-cabinet.png",
+      "sha256": "90846c127d08147e7b1e2edbcd03b2caf81a270bd0c0b6cbd3a56080d62aabf7",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "edit",
+      "prompt": "Use case: precise-object-edit. Edit ONLY the top blank label panel of the supplied fire-extinguisher cabinet sprite so it can contain a live game label at its original fixed position. Preserve the whole cabinet outer silhouette, overall height and width, colours, extinguisher, hose, glass and all hardware. The small empty dark teal nameplate at the top is too shallow. Make its DARK INTERIOR taller downward: it must occupy approximately 6% to 20% of the complete cabinet height measured from the top of the visible cabinet, with its centre around 13%. Move the nameplate's lower pale border downward accordingly. The main glazed extinguisher opening may begin a little lower, around 24% of full height, and be slightly shorter so the two frames do not overlap. Keep the dark nameplate completely blank: NO FIRE letters or any text, numbers or logos. The game's separate lettering will sit around 10–16% of full cabinet height. One complete coherent cabinet, no collage or comparison. Preserve true transparent alpha outside the cabinet, clear margins, no backdrop, no cast shadow, no cropping.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Armoire incendie verticale rouge-brun patiné, cadre rectangulaire et niche sombre montrant un extincteur ocre avec poignée, inscription FIRE. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -31,
+        "right": 31,
+        "top": -128,
+        "bottom": -26,
+        "width": 62,
+        "height": 102,
+        "centerX": 0,
+        "mountHeight": 26
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 9,
+      "protectedPhysicalInstances": 0,
+      "referenceType": "previous generated draft of the same object; native FIRE text position preserved",
+      "generationHistory": [
+        {
+          "sha256": "00e3c75082e4195497b0da43fbb8555e448ff1ffca48989862ba5158faf686aa",
+          "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE wall-mounted rectangular fire-extinguisher cabinet in a weathered muted reddish-brown metal housing. Tall rectangular dark glazed niche reveals one ochre painted fire extinguisher with its black handle and connected hose secured inside. Pale worn metal edge trim and small hinges, cabinet closed with transparent front glazing. Overall width/height 0.61. Front-on view. Leave a plain dark horizontal strip at the top for the game's live FIRE label; do not draw letters yourself. No wall section, no feet, no wheels, no surrounding equipment.\nNative palette guide: #64483e, #b2a184, #182d32, #b48d68, #c0cbaa.",
+          "promptStatus": "exact",
+          "selection": "superseded",
+          "reason": "Lower edge of empty label panel crossed the native FIRE caption; panel enlarged downward"
+        }
+      ]
+    },
+    {
+      "id": "prop-oxygen",
+      "file": "assets/prop-oxygen.png",
+      "sha256": "b9439594714eaa28e0d16a19eda11407df8b1e1f86543c4028d3eebc3004c6c1",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "edit",
+      "prompt": "Use case: precise-object-edit. Edit the supplied medical oxygen cylinder sprite. Preserve its single tank, right attached gauge, upper valve, palette, foot, detailed realistic metal materials, connected construction and front view. Correct the proportions: SHORTEN THE LONG MAIN CYLINDER BODY by about 40 percent, keeping its width, gauge and valve size almost unchanged. The complete valve-top-to-foot silhouette should have width/height approximately 0.36. It is a compact broad medical cylinder, not a stretched very tall tank. Keep the top and bottom shapes intact and the whole object within clear transparent margins. No extra pieces, trolley or wheels. Remove coloured edge contamination and isolated flecks. Genuine transparent alpha, no background, floor, wall or shadow, no words or sheet.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Bouteille d’oxygène verticale gris-vert, col étroit avec robinet et petit manomètre rond à droite, pied rectangulaire sombre. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -18,
+        "right": 18,
+        "top": -99,
+        "bottom": 1,
+        "width": 36,
+        "height": 100,
+        "centerX": 0,
+        "mountHeight": -1
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 7,
+      "protectedPhysicalInstances": 0,
+      "generationHistory": [
+        {
+          "sha256": "fff4219e584763feb76861e87daa660f9e208988cf3ecb0b722a5376e474d292",
+          "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE complete upright medical oxygen cylinder with narrow neck valve and a small round pressure gauge attached on the upper RIGHT. Tall muted sage-grey tank, softly rounded shoulder, paler green cap, dark teal rectangular stable foot. Small connected regulator plumbing, no free-floating accessories. Overall silhouette is very narrow: width/height 0.36. The cylinder itself occupies most of the height and has straight sides. Gauge face simple tick marks, no readable numbers or words. No hand trolley, no wheels.\nNative palette guide: #7e9690, #adc0a0, #a0b6a1, #193139, #c4c1a0.",
+          "promptStatus": "exact",
+          "selection": "superseded",
+          "reason": "Initial draft superseded after silhouette or transparency review"
+        }
+      ],
+      "referenceType": "previous generated draft of the same object; no research photograph embedded"
+    },
+    {
+      "id": "prop-privacy-screen",
+      "file": "assets/prop-privacy-screen.png",
+      "sha256": "c9547990269df19322086cbae30164166fcc638c4b0b4336e8766150449ac146",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE mobile single-panel medical privacy screen. Tall rectangular translucent pale sage green panel, two slim upright metal posts extending a little above the panel, each post on a short T foot with tiny dark casters; all connected. Slight vertical divisions or folds in the translucent green insert, but not a folding three-panel screen. Overall width/height 0.73 including the feet; panel width about three quarters of total width. Mostly straight-on front view so both posts and low casters are visible. No cloth draped over a person. No text.\nNative palette guide: #889e84, #7f9890, #cfdfb1, #193139.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Paravent médical mobile à panneau rectangulaire translucide vert pâle, deux montants métalliques, pieds en T et petites roulettes. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -57,
+        "right": 57,
+        "top": -154,
+        "bottom": 3,
+        "width": 114,
+        "height": 157,
+        "centerX": 0,
+        "mountHeight": -3
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 4,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-gurney",
+      "file": "assets/prop-gurney.png",
+      "sha256": "0e91dc3343d068f0dae8b269ebd64464ff00a15b020c2d2ede255a9cd75b4cd3",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "edit",
+      "prompt": "Use case: precise-object-edit. Edit the provided EMPTY medical gurney game sprite. Preserve the existing mattress, colours, material detail, full-width rectangular tabletop, two connected leg supports, crossbar and small wheels. Correct the proportions: the current legs are far too short. Increase the height of the two vertical metal leg supports by about 100 percent, so the OVERALL visible object from mattress top to wheel bottom has width/height approximately 1.77, not 2.95. The bed should stand at normal clinical working height. Keep the tabletop thickness and the wheel size nearly unchanged, move the crossbar sensibly between the longer legs. Almost orthographic front long-side view. One complete connected object, all parts fully within transparent margins on all four sides. Remove any green or coloured edge contamination outside the object. Genuine transparent alpha background, no floor, no wall, no cast shadow, no text, no patient, no comparison or sheet.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Brancard médical vide large et bas, matelas vert désaturé, plateau clair sur deux pieds métalliques à petites roulettes. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -77,
+        "right": 77,
+        "top": -82,
+        "bottom": 5,
+        "width": 154,
+        "height": 87,
+        "centerX": 0,
+        "mountHeight": -5
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 4,
+      "protectedPhysicalInstances": 0,
+      "generationHistory": [
+        {
+          "sha256": "cd1fdc8020f8ad87c1a63849f696d9bc0a6e1fe34c3cc1652aee63f71519c82a",
+          "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE empty medical gurney seen almost straight-on from its long side. A wide low horizontal light sage metal table, flat thin desaturated dark green mattress, two visible slender supports and small dark wheels at the bottom, a modest connected crossbar for structure. No raised headrest, no rail towering above the mattress, no patient, no pillows or sheets or detached equipment. Wide-low silhouette: width/height 1.77. Entire table and all wheels visible; simple readable native geometry with detailed metal materials.\nNative palette guide: #9ea991, #adc0a0, #647e69, #7f9890, #193139.",
+          "promptStatus": "exact",
+          "selection": "superseded",
+          "reason": "Initial draft superseded after silhouette or transparency review"
+        }
+      ],
+      "referenceType": "previous generated draft of the same object; no research photograph embedded"
+    },
+    {
+      "id": "prop-glass-cabinet",
+      "file": "assets/prop-glass-cabinet.png",
+      "sha256": "8222c75ac12971c6683305a804d2fe23d18f4072e154d5d2418b805ddd70d711",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "edit",
+      "prompt": "Use case: background-removal and precise-object-edit. Fix the supplied glass cabinet sprite: its large glass interior is incorrectly an opaque green panel. Preserve EXACTLY the broad frame proportions, metal posts, hinges, handle, two glass shelf EDGES, T-feet and casters. Remove the opaque backing throughout all three large empty interior window sections, including the green back wall. The user must see any actual underlying game background THROUGH the glass. Use true alpha transparency across those windows, mostly clear with only a few faint pale green reflection strokes at 15–25% opacity; alpha zero in most clear glass and below 80/255 in the faint reflections. Keep all metal framing and hardware opaque. No contents and no painted room, checkerboard, grey or green background inside the cabinet. It is a see-through display case, not a cupboard with solid back panel. Keep one connected object complete with transparent margin and no shadow or letters.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "semantic-interpretation",
+        "note": "Le type glass-cabinet partageait un panneau vitré mobile. La vitrine à deux étagères individualise ce type dans son enveloppe native, avec vrai vitrage transparent ; aménagement interprété, sans accessoire filmique exact authentifié."
+      },
+      "nativeEnvelope": {
+        "left": -57,
+        "right": 57,
+        "top": -154,
+        "bottom": 3,
+        "width": 114,
+        "height": 157,
+        "centerX": 0,
+        "mountHeight": -3
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 2,
+      "protectedPhysicalInstances": 0,
+      "generationHistory": [
+        {
+          "sha256": "8f587ba5b0dd5de76918fa00713f08d8922c8adc705d55d164a27e1a6cb05ab5",
+          "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE tall slim mobile medical glass cabinet, framed in restrained sage-grey steel. A large pale green transparent glazed front door, very shallow depth, two empty glass shelves inside, slim metal vertical uprights extending to T-shaped feet with four very small dark casters. Single connected object, no specimen jars or detached items. Overall silhouette width/height 0.73, including feet. Almost frontal view with a small right edge, frame and panel like a clinical privacy screen converted to a shallow vitrine. No opaque heavy cupboard base, no labels or branding.\nNative palette guide: #638c87, #7f9890, #cfdfb1, #193139.",
+          "promptStatus": "exact",
+          "selection": "superseded",
+          "reason": "Initial draft superseded after silhouette or transparency review"
+        },
+        {
+          "sha256": "47549edf7db678a78f3d472e064ea9d2f415874710c0d214caa72448ede5aede",
+          "prompt": "Use case: precise-object-edit. Edit the provided mobile glass cabinet sprite. Preserve the realistic sage metal material, green transparent glass door, two empty glass shelves, hinges and handle, two upright supporting posts and T-feet with small casters. Correct its proportions: WIDEN the entire cabinet frame and its door by about 65 percent without increasing height. Move both posts, feet and casters outward with the frame. The finished whole silhouette must be a BROAD upright cabinet with width/height about 0.73, nearly three quarters as wide as tall, not a very narrow 0.44. Keep the door glazing mostly transparent and do not add contents. Keep the whole cabinet and wheels within clear transparent margins. Remove isolated coloured flecks. One connected object, almost frontal view, genuine transparent alpha, no wall, floor, shadow, lettering or comparison.",
+          "promptStatus": "exact",
+          "selection": "superseded",
+          "reason": "Opaque glass corrected to true partial alpha"
+        }
+      ],
+      "referenceType": "previous generated draft of the same object; no research photograph embedded"
+    },
+    {
+      "id": "prop-medical-cross",
+      "file": "assets/prop-medical-cross.png",
+      "sha256": "15cd29060aeec25840190b33cb5d6acda0f3b46bef189c82ad2453452883b186",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE small square medical wall plaque, nearly square width/height 0.96. Slightly aged pale ivory painted metal plate with a thin fine sage metal border, one centered simple solid desaturated TEAL-GREEN plus-shaped medical cross. Four small flush mounting screws. Front-on orthographic view, completely flat sign. Restrained edge wear, no damage to symbol. No RED cross, no words, no glow, no wall, no lighting fixture or mounting post. This is one complete plaque.\nNative palette guide: #c0cab0, #c6d5c2, #4c8a7d.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Plaque carrée médicale ivoire, simple croix vert désaturé centrée, cadre fin. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -25,
+        "right": 25,
+        "top": -142,
+        "bottom": -90,
+        "width": 50,
+        "height": 52,
+        "centerX": 0,
+        "mountHeight": 90
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 4,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-sink",
+      "file": "assets/prop-sink.png",
+      "sha256": "7ddd42d9fee3e3fecd4b7e7dd0f6a20192b998ede900f7abd82a9c7fe4ea0b57",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE compact freestanding industrial washbasin cabinet, almost square overall silhouette width/height 1.03. A dark muted grey-green rectangular metal cabinet with a lighter sage rim on its flat top, one large deep oval dark metal basin inset into the top and a simple bent-neck dull metal faucet rising from the RIGHT rear edge. Narrow right side visible. Plain flat front doors, modest handle and seams, no open drawers. No additional tap on the left, no tubes outside the silhouette, no mirror, no backsplash or wall, no running water, no text.\nNative palette guide: #394b49, #718075, #53605b, #1b2e31, #9fae9c, #abb5a4.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Meuble évier industriel compact gris-vert, grand bac ovale sombre intégré au plan supérieur, robinet coudé métallique simple à droite. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -50,
+        "right": 60,
+        "top": -107,
+        "bottom": 0,
+        "width": 110,
+        "height": 107,
+        "centerX": 5,
+        "mountHeight": 0
+      },
+      "nativeSource": "src/river-of-pain/render.js",
+      "eligibleDecorativeInstances": 7,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-hose-reel",
+      "file": "assets/prop-hose-reel.png",
+      "sha256": "ef6812960513eed33c70593231402cf8cce37bcd714d306e1fe8bab0f4e74bac",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE wall-mounted industrial hose reel with a connected hanging hose end. Large circular sage-grey metal reel with dark olive rubber hose in multiple concentric coils and a simple central hub. A short length of the same hose descends on the RIGHT almost to the bottom, ending in a small plain nozzle. Overall width/height 0.72; circular reel takes about 72% of total height. Frontal view, entire attached hose and reel visible. Not a fire hose cabinet, no wall square or unrelated fittings, no words.\nNative palette guide: #7f9890, #273d36, #758460.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Enrouleur de flexible, grande bobine circulaire métallique avec tuyau sombre en spires concentriques et extrémité pendante à droite presque jusqu’au sol. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -37,
+        "right": 37,
+        "top": -107,
+        "bottom": -4,
+        "width": 74,
+        "height": 103,
+        "centerX": 0,
+        "mountHeight": 4
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 5,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-tool-board",
+      "file": "assets/prop-tool-board.png",
+      "sha256": "123ba2ef11ccbc9b693612ce492bee473f0378435ab9184c7fa8a2170ea9c248",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE horizontal workshop tool board with SIX distinct long manual tools hanging vertically, secured to the same panel. Dark teal sheet-steel backing, thin sage-grey rectangular border, worn muted metallic spanners, screwdriver, pliers and hand tools in a regular readable row. Each tool belongs to the board; no loose objects below. Overall width/height 1.74, front-on view. Only six tools, comfortable clear margins around them. No power tool, no weapon, no hazard words or labels, no wall beyond the panel.\nNative palette guide: #193139, #7f9890, #a4b19c.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Panneau mural horizontal métallique sombre, six outils manuels longs bien distincts suspendus verticalement, cadre gris-vert. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -53,
+        "right": 53,
+        "top": -139,
+        "bottom": -78,
+        "width": 106,
+        "height": 61,
+        "centerX": 0,
+        "mountHeight": 78
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 5,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-hand-truck",
+      "file": "assets/prop-hand-truck.png",
+      "sha256": "5072cb70f287e6d4109a1aa86acfc4fcd9da084cf95b2425b41921f0468da3f5",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE empty colonial hand truck. A simple tall squared tubular sage-grey frame, two parallel vertical uprights joined by a horizontal upper grip, a small dull olive loading toe plate at the bottom and TWO dark thick rubber wheels at the lower sides. Entire frame and wheels visible. Overall width/height 0.68. Almost frontal orthographic view with barely visible depth, so both wheels read clearly. Detailed worn painted metal, no load, no boxes or straps, no text.\nNative palette guide: #7f9890, #8a9c7a, #193139.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Diable de manutention vide, cadre tubulaire gris-vert à deux montants et barre de poignée, petite bavette basse, deux roues sombres. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -37,
+        "right": 38,
+        "top": -100,
+        "bottom": 11,
+        "width": 75,
+        "height": 111,
+        "centerX": 0.5,
+        "mountHeight": -11
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 2,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-cable-spool",
+      "file": "assets/prop-cable-spool.png",
+      "sha256": "818cc15439fe43275c979de972b6878444061334d380396665ba0107047288a3",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE compact paired-reel cable storage assembly with TWO round grey-green perforated reel faces sitting side by side, connected by a low unobtrusive bridge and dark coiled cable. Both circular faces face the viewer; each has THREE round openings around a dark central hub. The right reel slightly overlaps the left, like the native two-circle silhouette. Overall width/height 1.76. Bottom cable loop and bridge kept inside the two circular silhouettes as much as possible. Do not depict two unrelated detached objects or a single drum seen end-on. No labels, no words, no background.\nNative palette guide: #7f9890, #193139, #96a28c.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Touret de câble horizontal à deux flasques métalliques circulaires, moyeu sombre et trois perforations dans chaque flasque, câble entre les flasques. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -51,
+        "right": 51,
+        "top": -67,
+        "bottom": -9,
+        "width": 102,
+        "height": 58,
+        "centerX": 0,
+        "mountHeight": 9
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 6,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-tape-reel",
+      "file": "assets/prop-tape-reel.png",
+      "sha256": "31ec1bd9669f970046c3c9d93d09e3a356a8036bebaabdd971deb7caca763c8d",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE compact wall-mounted industrial open-reel recorder mechanism. TWO large circular sage-grey reels side by side with three round cutouts in each reel, dark centres and a visible taut magnetic tape connecting the lower portions. A very shallow dark teal mounting bridge joins them, mostly concealed behind the two round reels. Overall silhouette width/height 1.76, frontal orthographic view. Reels dominate, no huge rectangular console beneath, no stand, no legs, no text or numbers. All components physically connected as one prop.\nNative palette guide: #7f9890, #193139, #96a28c.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Petit enregistreur industriel à deux bobines métalliques circulaires côte à côte, moyeux et trois perforations dans chaque bobine, bande sombre entre les deux. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -51,
+        "right": 51,
+        "top": -142,
+        "bottom": -84,
+        "width": 102,
+        "height": 58,
+        "centerX": 0,
+        "mountHeight": 84
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 2,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-radio",
+      "file": "assets/prop-radio.png",
+      "sha256": "db27211f3eb5e30daaac3b65860a230cbfa4beeb2412d15426de0dcd1cd6fd3b",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE fixed colonial radio console with a narrow vertical antenna at the RIGHT. A compact muted grey-green floor-standing rectangular cabinet base, a slanted physical control ledge across the top with small subdued amber and sage buttons, a small dark teal inset readout above it, narrow right side visible. The thin antenna is connected to the right top edge and rises substantially above the small screen. Total width/height 0.67 including antenna. Base height about 40% of total; antenna supplies upper slender silhouette. Retro 1980s utilitarian analog electronics, no handheld unit or separate microphone, no readable text.\nNative palette guide: #394b49, #718075, #164345, #65756b, #d2b882, #98a698.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Poste de radio colonial fixe sur pupitre compact gris-vert, petit écran sombre, commandes physiques sur plan incliné, antenne verticale mince à droite. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -40,
+        "right": 50,
+        "top": -135,
+        "bottom": 0,
+        "width": 90,
+        "height": 135,
+        "centerX": 5,
+        "mountHeight": 0
+      },
+      "nativeSource": "src/river-of-pain/render.js",
+      "eligibleDecorativeInstances": 3,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-monitor",
+      "file": "assets/prop-monitor.png",
+      "sha256": "055f58b00a3c5fee1c353c11c865ff3fdef1ee52b15dcbad97c36979466fa798",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE compact colonial CRT terminal on an INTEGRATED short floor cabinet. Large dark teal rectangular glass screen with faint mint diagnostic lines, thick muted grey-green metal bezel. A shallow sloping control ledge directly below has a row of tactile rectangular buttons, on a solid short rectangular dark metal base with seams and one central access panel. Width/height 1.15. Front view with a small visible right side and top, sturdy low broad native silhouette. No narrow pedestal, no modern thin LCD, no detached keyboard, no readable words or numbers.\nNative palette guide: #394b49, #718075, #164345, #99cba7, #65756b.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Terminal médical rétro compact, écran cyan sombre au-dessus d’un socle pupitre gris-vert, commandes physiques sur une surface inclinée. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -40,
+        "right": 50,
+        "top": -78,
+        "bottom": 0,
+        "width": 90,
+        "height": 78,
+        "centerX": 5,
+        "mountHeight": 0
+      },
+      "nativeSource": "src/river-of-pain/render.js",
+      "eligibleDecorativeInstances": 3,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-locker",
+      "file": "assets/prop-locker.png",
+      "sha256": "0b0dd126dda170b90d5e3af22c0cc22f8a4361f6f4ca4638ad7e849b8be5414f",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "edit",
+      "prompt": "Use case: precise-object-edit. Edit the supplied tall metal locker sprite. Preserve its colours, vents, single handle, blank upper-middle label area, panel seams, weathering, full floor base and front view. Correct its very narrow proportions: approximately DOUBLE the WIDTH of the cabinet body while keeping its height unchanged. The whole visible silhouette must have width/height about 0.57, a normal broad storage locker, not the current extremely slender 0.29. Spread the vents and blank label area across the wider front naturally, keep the same modest right side depth. Entire one connected object inside clear transparent margins. No new text, no open door, no contents, no wall, floor, shadow or comparison. Genuine transparent alpha background.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Casier de stockage colonial haut à deux portes étroites, acier vert-bleu sombre, fentes d’aération supérieures, poignée claire et marquage STOCK. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -45,
+        "right": 45,
+        "top": -158,
+        "bottom": 0,
+        "width": 90,
+        "height": 158,
+        "centerX": 0,
+        "mountHeight": 0
+      },
+      "nativeSource": "src/river-of-pain/render.js",
+      "eligibleDecorativeInstances": 4,
+      "protectedPhysicalInstances": 0,
+      "generationHistory": [
+        {
+          "sha256": "83ee228d898d4a804b2122359ca54f9236c9cfa56a6ca78d090efc2de3348cf0",
+          "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE tall narrow colonial storage locker, dark blue-green painted sheet steel. Slim rectangular body with thin sage frame, upper horizontal ventilation slots, two subtly divided narrow door sections and one understated pale vertical handle. Whole front-on silhouette width/height 0.57, tiny visible right side. Reserve a plain blank horizontal area across upper-middle front for the game's native STOCK label; no text generated. Full floor base visible, no legs sticking out, no open doors or contents. Modest worn edge highlights and screws.\nNative palette guide: #33494a, #687b6e, #2a4043, #a2b5a0, #c3c4a2.",
+          "promptStatus": "exact",
+          "selection": "superseded",
+          "reason": "Initial draft superseded after silhouette or transparency review"
+        }
+      ],
+      "referenceType": "previous generated draft of the same object; no research photograph embedded"
+    },
+    {
+      "id": "prop-chair",
+      "file": "assets/prop-chair.png",
+      "sha256": "350ca4972bcecaeb20144fd0fb1ee57c1dfef06bef8f5d65cebacc880b1d2e57",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE simple colonial utility chair without arms. Rectangular dark muted teal backrest, thin pale sage green padded seat, slim grey-green tubular supporting legs. Straightforward late-20th-century metal furniture, no wheels or swivel base, no headrest. Almost frontal orthographic view with a little top of seat showing, both rear structure and front legs believable. Overall width/height 0.56. Entire object visible including the tips of all legs. Modest edge wear, no fabric pattern, no logos or labels.\nNative palette guide: #85987f, #adc0a0, #2d5250, #7f9890.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Chaise coloniale simple sans accoudoirs, assise vert pâle, dossier rectangulaire vert sombre et pieds tubulaires gris-vert. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -24,
+        "right": 24,
+        "top": -86,
+        "bottom": 0,
+        "width": 48,
+        "height": 86,
+        "centerX": 0,
+        "mountHeight": 0
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 4,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-wall-clock",
+      "file": "assets/prop-wall-clock.png",
+      "sha256": "0453465572e8af35a53e8fcdee16c3718e4671cec5a341bfd8aef0849405790f",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE round wall clock, exactly circular front-on silhouette. Thin sage-grey metal rim, subtly aged pale ivory-olive face, TWELVE simple small dark tick marks without Arabic or Roman numerals. Exactly TWO dark hands from the centre: one points up-right around 2 o'clock, the other points down-left around 6:30, echoing the fixed native game clock. No third hand, no seconds dial. Gentle physical rim shading, no glass flare covering the face. No lettering, no logo, no wall or mounting post.\nNative palette guide: #7f9890, #c1c6aa, #233e36, #293b36.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Horloge murale ronde, bord métal gris-vert, cadran crème jauni à douze graduations, deux aiguilles sombres orientées haut-droite et bas-gauche. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -25,
+        "right": 25,
+        "top": -159,
+        "bottom": -109,
+        "width": 50,
+        "height": 50,
+        "centerX": 0,
+        "mountHeight": 109
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 12,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-warning-board",
+      "file": "assets/prop-warning-board.png",
+      "sha256": "62ccde2ae0f3562f3e2d824c6c883bcb2bc3380974a68e79f69a5473deb0b7b4",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "edit",
+      "prompt": "Use case: precise-object-edit. In this warning plaque sprite, change ONLY the triangular symbol: fill the ENTIRE interior of the large outlined triangle with the same solid very dark charcoal-teal paint as its border. The result must be one SOLID FILLED dark triangle, with no ochre interior and no exclamation mark, letters or other symbol. This empty dark triangle is where the game draws its pale exclamation mark. Preserve the worn ochre plate, frame, screws, exact proportions, front-on angle, subtle metal texture and true alpha background. Do not add any text, backdrop, glow, border crop or second image. One complete sign with clear margins.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Plaque d’avertissement murale horizontale, cadre gris-vert, fond ocre clair, triangle noir centré avec point d’exclamation. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -36,
+        "right": 36,
+        "top": -148,
+        "bottom": -99,
+        "width": 72,
+        "height": 49,
+        "centerX": 0,
+        "mountHeight": 99
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 12,
+      "protectedPhysicalInstances": 0,
+      "generationHistory": [
+        {
+          "sha256": "b377c81348bdaefe94098c69db76196803b097941d11dcf4b298601a22c227b4",
+          "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE horizontal industrial warning plaque, width/height 1.47. Dark teal outer backing with thin sage-grey metal frame, a worn muted pale ochre inset rectangle, one large solid dark charcoal triangular warning symbol centered. Leave the INTERIOR of the triangle blank for the game's live exclamation mark overlay. No printed exclamation mark, letters, numbers or extra icons. Four small mounting screws. Flat front orthographic view, complete panel on transparent alpha, no wall.\nNative palette guide: #314c4a, #7f9890, #b6a777, #28383b, #daca8c.",
+          "promptStatus": "exact",
+          "selection": "superseded",
+          "reason": "Initial draft superseded after silhouette or transparency review"
+        }
+      ],
+      "referenceType": "previous generated draft of the same object; no research photograph embedded"
+    },
+    {
+      "id": "prop-noticeboard",
+      "file": "assets/prop-noticeboard.png",
+      "sha256": "2bc8dde3c2015d30cb2474085da419414eea0502ac2951730aa747e63c59f193",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE horizontal colonial noticeboard, width/height 1.47, thin sage-grey metal rectangle frame and dull desaturated green backing. Three or four small pale ivory-green attached instruction cards or notice slips, simple understated pale line markings ONLY, no legible letters, sentences, numbers or logos. Keep the cards physically pinned within the frame, no loose paper beyond the board. Front orthographic view, worn practical utilitarian materials, no wall.\nNative palette guide: #314c4a, #7f9890, #919e80, #c4d3b0.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Tableau mural colonial horizontal, cadre métal gris-vert, surface vert pâle et petites fiches ou lignes de consigne claires. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -36,
+        "right": 36,
+        "top": -148,
+        "bottom": -99,
+        "width": 72,
+        "height": 49,
+        "centerX": 0,
+        "mountHeight": 99
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 7,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-plant",
+      "file": "assets/prop-plant.png",
+      "sha256": "1a81a3951801fe0ea332df3bfdc9af1ca4f0cb6964b765f0b90380de003a6ea2",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "edit",
+      "prompt": "Use case: precise-object-edit. Edit the supplied potted plant sprite to match its native tall narrow silhouette. Preserve the ONE cuboid grey-green metal pot and exactly FIVE olive-green strap leaves, their texture and common stem origin. Rotate the two OUTERMOST leaves upward and inward so they point diagonally up, not almost sideways; also make the inner two leaves somewhat more upright. Keep the central leaf tallest. The complete pot-plus-plant silhouette should have width/height about 0.65, instead of almost 1.0; do not flatten the pot or squash textures. All leaf tips and the pot base visible with transparent margins. One connected plant only. No floor, shadow, backdrop, flower, text or extra leaf; genuine transparent alpha.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Petite plante de logement en pot cubique gris-vert, cinq feuilles ou tiges longues vert olive en éventail, silhouette entière isolée. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -33,
+        "right": 33,
+        "top": -101.8414519259386,
+        "bottom": 0,
+        "width": 66,
+        "height": 101.8414519259386,
+        "centerX": 0,
+        "mountHeight": 0
+      },
+      "nativeSource": "src/river-of-pain/render.js",
+      "eligibleDecorativeInstances": 1,
+      "protectedPhysicalInstances": 0,
+      "generationHistory": [
+        {
+          "sha256": "4283e9b2840c452aaa536ff11061523e70feac862a9dc0f9252c5f3117b8ccb6",
+          "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE small potted colonial houseplant, width/height 0.65. A squat cuboid dark grey-green metal planter with a narrow lip, containing FIVE long broad olive-green upright strap-like leaves in a simple fan, each emerging from the same centre. Left leaf angles left, middle leaves nearly vertical, right leaf angles right. No flowers, no ornate pot, no floor or loose soil. Full pot and all leaf tips visible. Realistic botanical surfaces in a restrained industrial game style, no text.\nNative palette guide: #394b49, #718075, #53605b, #6d8662.",
+          "promptStatus": "exact",
+          "selection": "superseded",
+          "reason": "Initial draft superseded after silhouette or transparency review"
+        }
+      ],
+      "referenceType": "previous generated draft of the same object; no research photograph embedded"
+    },
+    {
+      "id": "prop-hanging-coat",
+      "file": "assets/prop-hanging-coat.png",
+      "sha256": "23936ef2c1dc80b4f65022d948888abddd5453444a052c8f8a7c4093f2b42465",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE empty long colonial work coat suspended from an included simple hanger and short horizontal sage-grey wall rail. Desaturated olive-green durable cloth, long sleeves hanging downward, modest lapels, central straight seam or closed zip, hem below the wrists. No person or mannequin inside. Overall width/height 0.64 including the rail; two sleeves read distinctly. Whole hanger and rail physically connect to the coat. Neutral front view, no dramatic wind, no lettering, badges or brands, no visible wall.\nNative palette guide: #546b5b, #98a08a, #7f9890, #bcc0a1.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Manteau de travail colonial vert désaturé suspendu à une petite barre et un cintre, deux manches baissées et fermeture verticale centrale. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -36,
+        "right": 36,
+        "top": -145,
+        "bottom": -33,
+        "width": 72,
+        "height": 112,
+        "centerX": 0,
+        "mountHeight": 33
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 5,
+      "protectedPhysicalInstances": 0
+    },
+    {
+      "id": "prop-lab-bench",
+      "file": "assets/prop-lab-bench.png",
+      "sha256": "0573234c16ddd1add8f612b3817ecdc716b4a264c802457572295a0430cc5dca",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE low broad laboratory workbench with two small translucent glass containers FIXED ON its tabletop. Light grey-green industrial metal top, darker desaturated green inset mat, two slender sturdy metal supports with small feet and subtle rear crossbar. One taller rectangular glass vessel at the LEFT, one smaller rectangular vessel near the RIGHT, both empty and resting on the surface. Overall complete silhouette width/height 1.39. Almost frontal long-side view, modest top depth. No faucet, no wheels, no extra cabinets, no text or loose objects.\nNative palette guide: #9ea991, #adc0a0, #647e69, #7f9890, #83b09c, #a9c3a8.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Établi de laboratoire bas et large, plateau gris-vert clair sur deux pieds métalliques, petit tapis ou support vert et deux récipients translucides sur le plateau. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -77,
+        "right": 77,
+        "top": -114,
+        "bottom": -3,
+        "width": 154,
+        "height": 111,
+        "centerX": 0,
+        "mountHeight": 3
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 1,
+      "protectedPhysicalInstances": 2
+    },
+    {
+      "id": "prop-pump-motor",
+      "file": "assets/prop-pump-motor.png",
+      "sha256": "8a213defb00e371233a0c1e6d4dbe21439aaf0a5d77a1c8afcde70f06a401f59",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE low horizontal industrial pump motor. A long dark teal rectangular-cylindrical housing densely ribbed by many upright sage-grey cooling fins, an upright rounded oval metal end casing at the RIGHT, and a short dark circular shaft projecting slightly right, all mounted on one low broad rectangular steel base plate. Overall width/height 1.80. Side view with a slight angle to see right end cap, native silhouette broad and squat. Entire motor and base visible. Worn practical metal, no cables trailing outside, no pipes or surrounding installation, no text.\nNative palette guide: #193139, #7f9890, #6f897a, #92a38a.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Groupe moteur de pompe bas horizontal, corps sombre à nombreuses ailettes verticales vert-gris, carter circulaire à droite et semelle métallique rectangulaire. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -70,
+        "right": 79,
+        "top": -83,
+        "bottom": 0,
+        "width": 149,
+        "height": 83,
+        "centerX": 4.5,
+        "mountHeight": 0
+      },
+      "nativeSource": "src/river-of-pain/architecture.js",
+      "eligibleDecorativeInstances": 5,
+      "protectedPhysicalInstances": 2
+    },
+    {
+      "id": "prop-bench",
+      "file": "assets/prop-bench.png",
+      "sha256": "7aa627d57e49b7fd94ee2131284c3985e40a43a5b0f4f813fee906da4ce66ce2",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE low wide colonial waiting-room bench. Pale sage-grey flat seat, rectangular dark teal backrest with FIVE subtle vertical dividers, two stout simple grey-green metal supports below and a discreet connecting rail. Width/height 1.81. Front long-side orthographic view with a small amount of seat top visible. No armrests, no upholstery buttons, no people, no surrounding room, no words or logos. Entire bench legs and back visible.\nNative palette guide: #65756c, #a1ac8d, #2a4a4d, #607b75, #385359.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Banc collectif bas et large, assise gris-vert, dossier rectangulaire vert sombre à cinq séparations verticales, deux pieds épais. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -64,
+        "right": 61,
+        "top": -69,
+        "bottom": 0,
+        "width": 125,
+        "height": 69,
+        "centerX": -1.5,
+        "mountHeight": 0
+      },
+      "nativeSource": "src/river-of-pain/render.js",
+      "eligibleDecorativeInstances": 3,
+      "protectedPhysicalInstances": 3
+    },
+    {
+      "id": "prop-vending",
+      "file": "assets/prop-vending.png",
+      "sha256": "26ac63de868e4ab6abcf96906db5af03a649ee3f51c852583cb914798f5dacfa",
+      "batch": "visual-lot-2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "generationMode": "generate",
+      "prompt": "Use case: stylized-concept. Create ONE individual transparent production PNG sprite for the existing 2D game Aliens: Tantalus Frontier / Fleuve de la Douleur. Follow the attached textual native game geometry as a game adaptation; do not imply this is an exact screen-used movie prop. Style: highly detailed realistic pre-rendered game cutout, restrained worn 1980s colonial industrial retro-futurism. Painted cream/sage/grey-green metal and dark teal recesses, modest wear and screws, soft neutral overhead-left light, no bright coloured rim light. Almost front-on orthographic view with at most a slight right edge or top visible; silhouette and proportions are more important than dramatic perspective. The complete ONE connected object is isolated, with clear transparent margins on ALL sides. Genuine transparent alpha, no painted checkerboard, solid background, wall, floor, scenery, environmental cast shadow, frame or watermark. No humans. No multiple views, alternate variants, sprite sheet or collage. Keep details legible at roughly 50–175 game pixels high.\nSUBJECT: ONE tall narrow colonial vending machine, grey-green metal rectangular cabinet, slightly visible right side, overall width/height 0.52. Large dark teal glass display centered on front shows EXACTLY THREE rows of FOUR small plain product cartons, muted ochre top row, sage middle row, grey-blue bottom row. Simple dark delivery slot low on the front, one small pale square control button at the lower RIGHT of display. No brands, letters, words, numbers or separate icons. Solid straight cabinet down to the floor, no projecting objects, no wall.\nNative palette guide: #394b49, #718075, #53605b, #102d35, #ae9b67, #637d6f, #748d91.",
+      "promptStatus": "exact",
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Distributeur automatique colonial haut et étroit gris-vert, grande vitre sombre montrant trois rangées de quatre produits, fente de livraison basse et petite commande à droite. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      },
+      "nativeEnvelope": {
+        "left": -41,
+        "right": 51,
+        "top": -176,
+        "bottom": 0,
+        "width": 92,
+        "height": 176,
+        "centerX": 5,
+        "mountHeight": 0
+      },
+      "nativeSource": "src/river-of-pain/render.js",
+      "eligibleDecorativeInstances": 2,
+      "protectedPhysicalInstances": 1
+    },
+    {
+      "id": "prop-rack",
+      "file": "assets/prop-rack.png",
+      "sha256": "a14774048d4ec0fddb76bf130042c2a55054a528d92d97932ddf1a8c269e36ab",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create one single isolated highly detailed 2D game prop sprite for Alien: River of Pain / Hadley's Hope (2179), consistent with Aliens (1986) industrial colony production design and the project's existing muted teal-gray and olive retrofuturistic furniture. Subject: one tall freestanding industrial supply RACK, open steel shelving, rectangular height-to-width ratio 170:124, four distinct horizontal shelf levels carrying tightly arranged squat olive storage bins, dull aluminum edging and steel corner uprights. Front view with only a very slight view of the right side and top, almost orthographic, no dramatic perspective. Functional rectangular construction, worn painted steel with restrained scratches, excellent readable silhouette. Every shelf, every container and both feet form ONE coherent furniture unit, nothing scattered outside it. This is an adaptation for the game, not a branded specific movie prop. Realistic cinematic painted texture matching detailed existing sprites, neutral soft top-left illumination. Complete furniture from top to feet inside frame with 5 percent transparent margin. True transparent background including empty openings between shelves, no background, no floor, no ground shadow, no glow, no caption, no labels, no text or logos. ONE object, one image, not a sprite sheet.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « rack » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-shelf",
+      "file": "assets/prop-shelf.png",
+      "sha256": "b53368c55c0f2fcc9f6613f9a6679df15baefa34425bc316233b886ce641e80d",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE isolated highly detailed 2D game sprite: a tall open domestic STORAGE SHELF belonging to a 2179 Hadley's Hope colonist apartment in the Aliens / River of Pain retro-industrial universe. Rectangular silhouette ratio 170 tall to 124 wide, four horizontal shelves, dull off-white and muted gray-green metal frame, orderly compact food cartons and reused sealed containers in worn olive, tan and gray colors. Clearly distinct from a military weapons rack. All contents are part of this one shelf, no loose objects outside it. Nearly straight-on orthographic camera with a slight view of right edge and upper surfaces, feet level. Realistic hand-painted cinematic detail, not flat vector art, no cartoon outline, softened industrial scuffs, simple readable shape at game scale, neutral light from upper left. Whole object uncropped with transparent margins, true alpha transparency outside silhouette and in open gaps, no wall, no scene, no floor, no cast shadow, no writing, no modern brand logos, no display board, no multiple versions. This is a documented game adaptation matching muted teal-gray Hadley's Hope furniture. Exactly one prop per image.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « shelf » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-medicine",
+      "file": "assets/prop-medicine.png",
+      "sha256": "377e80dd44db13efee4c73ea33c60f4c67679e2371242f1d3b0b9bb7902a12ab",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create one isolated full-height 2D game prop sprite of a MEDICAL SUPPLY SHELVING UNIT for Hadley's Hope infirmary, Aliens (1986) / Alien: River of Pain 2179. A tall rectangular utilitarian open steel cabinet, height-to-width 170:124, four horizontal shelves neatly stocked with small opaque pharmaceutical boxes, amber and pale green sealed bottles, rolled bandages, all firmly on the shelves. Dull pale gray-green metal edging, muted teal backing, subtle worn hospital surfaces, tiny authentic mechanical latches, no touchscreen. No glass panes, no doors, no readable writing, no big cross icon, no syringes outside the unit. One complete coherent furniture object only. Nearly orthographic frontal game camera, slight right edge/top depth, no strong perspective. Realistic painted cinematic texture and natural neutral overhead lighting matching industrial Aliens game sprites; not 3D toy or vector. Complete outer silhouette inside image with generous transparent margin, true transparent alpha background and any visible gaps. No room, no floor, no shadow, no frame, no typography, no spritesheet. This is a game adaptation of a medical storage unit, not a claim of an exact screen prop.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « medicine » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-cupboard",
+      "file": "assets/prop-cupboard.png",
+      "sha256": "27356311a6ea52f623d65d7b1d4f5c2618cf648574324ed1b609745fa5944ef5",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE isolated 2D realistic game sprite of a tall closed two-door STORAGE CUPBOARD from the 2179 Hadley's Hope colony in the Alien: River of Pain / Aliens (1986) industrial world. Match established muted teal-gray metal furniture: tall rectangular body ratio 158 high to 90 wide, dark desaturated green-gray steel body, narrow olive-gray rim, TWO vertical closed front doors separated by a clear central seam, small paired dull metal handles around mid-height, discreet horizontal ventilation slots near upper quarter, rivets at corners and restrained surface wear. Blank quiet horizontal label strip around the upper-middle area for a game-rendered caption, absolutely NO drawn letters. Keep normal usable rectangular cabinet, not spaceship doorway. Almost frontal orthographic view with subtle right side and top thickness. Realistic painted metal microtexture, soft neutral top-left light, sharp functional silhouette at small scale. Whole cupboard and bottom plinth inside canvas with 5 percent clear margin on all sides. One object only, true transparent PNG background, no ground or wall, no cast shadow or glow, no labels, no logos, no multiple views, not a sheet.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « cupboard » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-fridge",
+      "file": "assets/prop-fridge.png",
+      "sha256": "8e04cc73a7fa6bad3149eeae8d9391be3b0aaeb397d202ecde04afa36e3dff91",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE isolated detailed 2D game sprite of a closed industrial REFRIGERATOR for a 2179 Hadley's Hope colony canteen, in the Aliens (1986) / River of Pain retrofuturistic world. Tall narrow rectangular cabinet ratio 158 tall to 90 wide. Practical two vertical closed insulated doors separated by a central seam, robust narrow stainless steel handles, pale desaturated sage/off-white enamel with dark muted teal-gray frame, recessed ventilation slots near top, bottom compressor grille, subtle scratches and scuffed edges. Keep distinctive utilitarian refrigerated-cabinet appearance without modern branding. Reserve a blank narrow upper-middle panel for an overlay label, NO text painted on it. Front orthographic-like camera with just a slight right-edge/top view, feet level, no dramatic angle. Detailed realistic cinematic painted style, neutral overhead light and restrained highlights, readable small-size game prop. Complete entire unit including base, generous transparent margin. True alpha-transparent background, no room, floor, cast shadow, glow, logos, letters, border or second object. One individual sprite, not a spritesheet.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « fridge » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-table",
+      "file": "assets/prop-table.png",
+      "sha256": "259f7e5286402339b59fa0a6799116b7fc57a66e33d0566456255e05e490253a",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create one isolated realistic painted 2D game prop sprite of a simple utilitarian CANTEEN TABLE in the Hadley's Hope colony, Alien: River of Pain / Aliens (1986), 2179. Low broad rectangular metal tabletop, overall visible width 177 to height 57, with four functional square legs and one simple lower support bar. Muted gray-green steel and dull olive tabletop, thin pale rim, subtly scratched corners. On the top only one small squat dull gray-green mug near the left and one thin tan closed booklet near the right, part of the single table set. Side/front game elevation with only a modest view down on tabletop and slight right-side depth, not top-down and not dramatic perspective. Table feet all on same invisible horizontal ground line, no floating legs. Realistic cinematic painted metal material, finely detailed but readable at small game size, neutral soft top-left light. Entire table, mug and all legs clearly contained with transparent border. True transparent background, open space between legs fully transparent. No floor, no cast shadow, no room, no person, no logos or readable text. ONE table prop image only, no variants or sheet.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « table » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-stove",
+      "file": "assets/prop-stove.png",
+      "sha256": "0ce9dc90a9946e9560b7cf58230976f165b1b5e93f84602013075d1c538e51eb",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE isolated high-detail 2D game sprite: a compact freestanding industrial electric COOKING STOVE from the canteen of Hadley's Hope, 2179, Aliens (1986) / Alien River of Pain. Low sturdy rectangular body ratio width 110 to height 87, three black circular hotplates clearly visible on a dull stainless top, three simple physical knobs on a narrow front control band, single rectangular closed oven door with a small dark viewing window and horizontal handle, bottom air grille, four short feet. Muted gray-green painted steel, weathered olive frame, no orange heat glow, stove switched off. Nearly frontal game elevation with a small visible top plane and right face, restrained orthographic projection. Detailed cinematic hand-painted realistic materials, soft neutral overhead lighting, matching utilitarian retro-industrial Aliens sprites. Exactly one complete stove, full body and feet uncropped with 5 percent transparent padding. True transparent alpha outside silhouette and under feet, no background, no floor, no cast shadow, no room, no pan, no food, no smoke, no text, no logo, no multiple views or spritesheet.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « stove » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-linen",
+      "file": "assets/prop-linen.png",
+      "sha256": "9a86cd2a3c66a192532850688fdeab2a3ab81f4728aa4c8da75cb44765b798aa",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE isolated highly detailed 2D prop sprite of a LINEN STORAGE CHEST for the infirmary of Hadley's Hope, Alien: River of Pain / Aliens 1986, 2179. A low broad utilitarian gray-green metal storage box with rectangular width-to-height ratio 93:98 including contents, square reinforced corners and simple inset front panel, holding a tidy visible stack of exactly four folded thick off-white/sage hospital blankets on top. Cloth layers have natural folds and clean hem edges, not pillows and not paper. Blank box label area, no letters. A single coherent linen chest and its stack, no loose items outside. Almost orthographic frontal view, slight right face and top planes, neutral soft top-left lighting, realistic painted cinematic steel and cotton texture, restrained wear, no cartoon or glossy toy appearance. Whole unit and all cloth inside frame with transparent padding. True transparent PNG background, no wall, room, floor, cast shadow, writing, logo or frame. One single prop per image, not a spritesheet.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « linen » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
     }
   ],
   "notSelected": [
@@ -619,6 +1684,74 @@
     {
       "target": "adult",
       "result": "La demande de Warrior adulte a été refusée par le générateur. Le rendu natif est conservé."
+    },
+    {
+      "target": "natal-unit",
+      "sha256": "232ee13d8a73e9552e6254fd79a34e9f2fc0cd38e9602b2580cf5773ee1f4db9",
+      "result": "Initial draft superseded after silhouette or transparency review. Superseded pixels are not included in the runtime asset set."
+    },
+    {
+      "target": "white-monitor",
+      "sha256": "32c11849874f140a46d8d324e3d2bd7b3a20ead419cacf873c1eaf96a328ae55",
+      "result": "Initial draft superseded after silhouette or transparency review. Superseded pixels are not included in the runtime asset set."
+    },
+    {
+      "target": "oxygen",
+      "sha256": "fff4219e584763feb76861e87daa660f9e208988cf3ecb0b722a5376e474d292",
+      "result": "Initial draft superseded after silhouette or transparency review. Superseded pixels are not included in the runtime asset set."
+    },
+    {
+      "target": "gurney",
+      "sha256": "cd1fdc8020f8ad87c1a63849f696d9bc0a6e1fe34c3cc1652aee63f71519c82a",
+      "result": "Initial draft superseded after silhouette or transparency review. Superseded pixels are not included in the runtime asset set."
+    },
+    {
+      "target": "glass-cabinet",
+      "sha256": "8f587ba5b0dd5de76918fa00713f08d8922c8adc705d55d164a27e1a6cb05ab5",
+      "result": "Initial draft superseded after silhouette or transparency review. Superseded pixels are not included in the runtime asset set."
+    },
+    {
+      "target": "glass-cabinet",
+      "sha256": "47549edf7db678a78f3d472e064ea9d2f415874710c0d214caa72448ede5aede",
+      "result": "Opaque glass corrected to true partial alpha. Superseded pixels are not included in the runtime asset set."
+    },
+    {
+      "target": "locker",
+      "sha256": "83ee228d898d4a804b2122359ca54f9236c9cfa56a6ca78d090efc2de3348cf0",
+      "result": "Initial draft superseded after silhouette or transparency review. Superseded pixels are not included in the runtime asset set."
+    },
+    {
+      "target": "warning-board",
+      "sha256": "b377c81348bdaefe94098c69db76196803b097941d11dcf4b298601a22c227b4",
+      "result": "Initial draft superseded after silhouette or transparency review. Superseded pixels are not included in the runtime asset set."
+    },
+    {
+      "target": "plant",
+      "sha256": "4283e9b2840c452aaa536ff11061523e70feac862a9dc0f9252c5f3117b8ccb6",
+      "result": "Initial draft superseded after silhouette or transparency review. Superseded pixels are not included in the runtime asset set."
+    },
+    {
+      "target": "fire-cabinet",
+      "sha256": "00e3c75082e4195497b0da43fbb8555e448ff1ffca48989862ba5158faf686aa",
+      "result": "Lower edge of empty label panel crossed the native FIRE caption; panel enlarged downward. Superseded pixels are not included in the final runtime asset set."
+    }
+  ],
+  "batches": [
+    {
+      "id": "visual-lot-1",
+      "sourceCommit": "cd5a58a6fea3084dfbbbb5516be9d0f6972d2320",
+      "assets": 42,
+      "integratedByPullRequest": 62
+    },
+    {
+      "id": "visual-lot-2",
+      "sourceCommit": "334fe15ba0b7e01de277a13bfc025b208163882d",
+      "assets": 28,
+      "eligibleDecorativeInstances": 122,
+      "protectedPhysicalInstances": 8,
+      "referenceRegister": "../../../docs/development/RIVER_OF_PAIN_SPRITE_REFERENCES.md",
+      "alphaBoundsThreshold": 16,
+      "generatedPngBytes": 48930500
     }
   ]
 }
