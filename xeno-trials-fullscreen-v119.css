@@ -592,6 +592,34 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active:is([data-xt-step="fighters"],[da
   filter: saturate(.48);
 }
 
+#xeno-trials-v96 .xt-local-preview-v222 {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  container-type: size;
+}
+
+#xeno-trials-v96 .xt-local-preview-v222 > b {
+  display: block;
+  width: min(100cqw, calc(100cqh * var(--xt-menu-ratio)));
+  aspect-ratio: var(--xt-menu-ratio);
+  background-repeat: no-repeat;
+}
+
+#xeno-trials-v96 :is(.xt-stage-scene, .xt-activity-image) > .xt-local-preview-v222 {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+#xeno-trials-v96 [data-owned="false"] .xt-local-preview-v222 {
+  filter: saturate(.48);
+}
+
 #xeno-trials-v96 .xt-fighter > [data-xt-fighter]:hover .xt-fighter-thumbnail {
   box-shadow: inset 0 0 0 1px var(--xt-amber);
 }

@@ -167,3 +167,76 @@ test('Panther pounce plays all three grounded phases at one scale through a real
   assert.equal(drawXenoTrialsPoseV209(context, active, art, new Map(), options), null);
   assert.equal(drawXenoTrialsPoseV209(context, active, art, images, { ...options, reducedMotion: true }), null);
 });
+
+const addedActions = [
+  { id: 'grid', action: 'heavy', dimensions: [1774, 887], reachCases: [[70, true], [90, false]],
+    frames: [null, ['grid-heavy-impact.png', 205, [17, 51, 1748, 809]], ['grid-heavy-recovery.png', 206, [157, 39, 1305, 808]]],
+    forbidden: 'grid-special-windup.png', animation: 'painted-grid-heavy-poses' },
+  { id: 'gorilla', action: 'special', dimensions: [1254, 1254], reachCases: [[155, true], [195, false]],
+    frames: [['gorilla-special-windup.png', 206, [69, 166, 1119, 923]], null, ['gorilla-special-recovery.png', 206, [44, 116, 1150, 917]]],
+    forbidden: 'gorilla-heavy-impact.png', animation: 'painted-gorilla-ram-poses' }
+];
+const phases = ['windup', 'contact', 'recovery'];
+const publicDirectory = '/assets/openai/xeno-trials-v209/characters/';
+for (const { id, action, dimensions, reachCases, frames, forbidden, animation } of addedActions) {
+  test(`${id} advertises only its two verified painted phases and plays them through native hit and miss`, () => {
+    const definition = getXenoTrialsFighterV96(id), art = getXenoTrialsArtV96(id);
+    const paths = getXenoTrialsPoseAssetsV209(definition, art);
+    const phasesDrawn = phases.filter((_, index) => frames[index]);
+    assert.deepEqual(paths, frames.filter(Boolean).map(([name]) => publicDirectory + name));
+    assert.ok(getXenoTrialsPoseAssetsV209(definition, { ...art, sha256: 'other' }).length === 0);
+    assert.ok(getXenoTrialsPoseAssetsV209({ ...definition, variant: 'altered' }, art).length === 0);
+    assert.equal(publicXenoPosePathAdmissionV209((publicDirectory + forbidden).slice(1)), false);
+    const historical = getXenoTrialsAnimationCoverageV199(id), live = getXenoTrialsRuntimeAnimationCoverage(id);
+    assert.equal(historical.states[action].renderKind, 'static');
+    assert.equal(live.states[action].renderKind, 'drawn');
+    assert.deepEqual(live.states[action].frameIds, phasesDrawn);
+    assert.deepEqual(live.states[action].sources[0].paths, paths);
+    assert.deepEqual(live.drawnStates.filter(key => key !== 'idle'), [action]);
+    assert.equal(live.canonExact, false);
+    assert.equal(live.fullAnimation, false);
+
+    const images = new Map();
+    for (const [name, source] of frames.filter(Boolean)) {
+      const path = publicDirectory + name;
+      const bytes = readFileSync(new URL('..' + path, import.meta.url));
+      assert.deepEqual(bytes, readFileSync(new URL('..' + path.replace('v209', `v${source}`), import.meta.url)));
+      const [naturalWidth, naturalHeight] = [bytes.readUInt32BE(16), bytes.readUInt32BE(20)];
+      assert.deepEqual([naturalWidth, naturalHeight, bytes[25]], [...dimensions, 6]);
+      images.set(path, { naturalWidth, naturalHeight, complete: true });
+    }
+    const spec = getXenoTrialsAttackV147(definition, action, XENO_TRIALS_ATTACKS_V96[action]);
+    if (id === 'gorilla') assert.equal(getXenoTrialsSpecialStyleV147(definition), 'ram');
+    const context = { save() {}, translate() {}, scale() {},
+      drawImage(_image, _sx, _sy, w, h, _x, y, dw, dh) { assert.deepEqual([y + dh, dw, dh], [0, w, h]); }, restore() {} };
+    for (const [gap, shouldHit] of reachCases) {
+      const match = createXenoTrialsMatchV96({ playerId: id, opponentId: 'warrior', introSeconds: 0 });
+      const [actor, rival] = match.fighters;
+      const hp = rival.hp, initialX = actor.x;
+      rival.x += getXenoTrialsBodyBoundsV105(actor).right + gap - getXenoTrialsBodyBoundsV105(rival).left;
+      const noDraw = structuredClone(match), seen = new Set();
+      for (let tick = 1; tick <= 120; tick++) {
+        const controls = { [action]: tick === 1 };
+        stepXenoTrialsMatchV96(match, XENO_TRIALS_STEP_V96, controls, {});
+        stepXenoTrialsMatchV96(noDraw, XENO_TRIALS_STEP_V96, controls, {});
+        const age = actor.attack?.age;
+        const phase = age < spec.startup ? 0 : age < spec.startup + spec.active ? 1 : 2;
+        const frame = actor.attack && frames[phase];
+        const pose = drawXenoTrialsPoseV209(context, actor, art, images,
+          { spec, groundedHeight: art.sourceHeight, ground: 450, x: actor.x });
+        assert.equal(Boolean(pose), Boolean(frame));
+        if (!pose) continue;
+        assert.equal(actor.y, 0);
+        assert.equal(pose.animation, animation);
+        assert.equal(pose.poseV209.phase, phases[phase]);
+        assert.equal(pose.poseV209.path, publicDirectory + frame[0]);
+        assert.deepEqual(pose.poseV209.sourceRect, frame[2]);
+        seen.add(pose.poseV209.phase);
+      }
+      assert.deepEqual([...seen], phasesDrawn);
+      assert.equal(rival.hp < hp, shouldHit);
+      assert.equal(actor.x > initialX, id === 'gorilla');
+      assert.deepEqual(match, noDraw);
+    }
+  });
+}

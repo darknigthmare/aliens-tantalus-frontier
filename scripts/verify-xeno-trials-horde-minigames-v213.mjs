@@ -17,7 +17,8 @@ const authoredEntrances = {
   'xth213-reactor-switchback': ['RRRR', 'LRLRLR', 'LLLLL', 'LRLRLR'],
   'xth218-bridge-retake': ['LLLL', 'RRRRR', 'LRLRL'],
   'xth220-evac-relief': ['LLLL', 'RRRR', 'LRLRL', 'RRRRRR'],
-  'xth221-hangar-watch': ['LLLL', 'RRRR', 'LRLRL']
+  'xth221-hangar-watch': ['LLLL', 'RRRR', 'LRLRL'],
+  'xth222-logistics-watch': ['LLLL', 'RRRR', 'LRLRL']
 };
 const firstForecasts = {
   'xth213-airlock-relay': [{ left: 0, right: 3 }, { left: 2, right: 2 }],
@@ -25,11 +26,13 @@ const firstForecasts = {
   'xth213-reactor-switchback': [{ left: 2, right: 2 }, { left: 3, right: 0 }, { left: 2, right: 2 }],
   'xth218-bridge-retake': [{ left: 0, right: 3 }, { left: 2, right: 2 }],
   'xth220-evac-relief': [{ left: 0, right: 3 }, { left: 2, right: 2 }, { left: 0, right: 4 }],
-  'xth221-hangar-watch': [{ left: 0, right: 3 }, { left: 2, right: 1 }]
+  'xth221-hangar-watch': [{ left: 0, right: 3 }, { left: 2, right: 1 }],
+  'xth222-logistics-watch': [{ left: 0, right: 3 }, { left: 2, right: 2 }]
 };
 const expectedGates = (counts, status, opening) => Object.fromEntries(['left', 'right'].map(side =>
   [side, counts[side] ? { status, opening } : { status: 'locked', opening: 0 }]));
-const attackCadences = { 'xth213-reactor-switchback': 105, 'xth218-bridge-retake': 65, 'xth220-evac-relief': 54, 'xth221-hangar-watch': 65 };
+const attackCadences = { 'xth213-reactor-switchback': 105, 'xth218-bridge-retake': 65, 'xth220-evac-relief': 54,
+  'xth221-hangar-watch': 65, 'xth222-logistics-watch': 65 };
 
 function moveAndAttack(match, cadence) {
   const [player, ...contacts] = match.fighters;
@@ -38,7 +41,7 @@ function moveAndAttack(match, cadence) {
     heavy: match.tick % cadence === 0, light: match.tick % cadence === Math.floor(cadence / 2) });
 }
 
-test('the horde board includes all six authored programs and every historical protocol still resolves by its own ID', () => {
+test('the horde board includes all seven authored programs and every historical protocol still resolves by its own ID', () => {
   assert.deepEqual(protocols.map(protocol => protocol.id), Object.keys(authoredEntrances));
   assert.deepEqual(XENO_TRIALS_HORDE_BOARD_V213.slice(0, protocols.length), protocols);
   assert.deepEqual(XENO_TRIALS_HORDE_BOARD_V213.slice(protocols.length), XENO_TRIALS_HORDE_PROTOCOLS_V186);

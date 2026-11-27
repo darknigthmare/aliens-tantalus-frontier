@@ -129,6 +129,20 @@ const trials = new XenoTrialsUiV96({
   getReducedMotion: () => store.settings().reducedMotion,
 });
 
+const menuFocusAttributes = ['data-xt-fighter', 'data-xt-unlock', 'data-xt-arena', 'data-xt-activity', 'data-xt-family-tab'];
+function refreshMenuMedia() {
+  if (!playing || trials.selectionStep === 'combat' || trials.isRunning()) return;
+  const focused = document.activeElement;
+  const attribute = menuFocusAttributes.find(name => focused?.hasAttribute(name));
+  const key = attribute && focused.getAttribute(attribute);
+  trials.render();
+  if (!attribute || focused.isConnected || root.contains(document.activeElement)) return;
+  [...root.querySelectorAll(`[${attribute}]`)].find(element => element.getAttribute(attribute) === key)
+    ?.focus({ preventScroll: true });
+}
+window.addEventListener('offline', refreshMenuMedia);
+window.addEventListener('online', refreshMenuMedia);
+
 function verifyOwnership() {
   if (store.issue !== 'storage-unavailable' && store.isCurrent()) return true;
   notification = null;

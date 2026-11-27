@@ -6,7 +6,7 @@ import { createXenoTrialsMatchV96 as create, stepXenoTrialsMatchV96 as step, nex
   setXenoTrialsPausedV96 as pause, getXenoTrialsSnapshotV96 as snapshot, XENO_TRIALS_ATTACKS_V96 as base } from '../src/xeno-trials-engine-v96.js';
 import { getXenoTrialsBodyBoundsV105 as bounds, getXenoTrialsBodyGapV105 as gap } from '../src/xeno-trials-geometry-v105.js';
 import { getXenoTrialsAttackV147 as spec, getXenoTrialsSignatureV147, XENO_TRIALS_SIGNATURE_SOURCES_V147 } from '../src/xeno-trials-signatures-v147.js';
-import { XENO_TRIALS_PARRY_V208 } from '../src/xeno-trials-defense-v208.js';
+import { XENO_TRIALS_PARRY_V208, getXenoTrialsParryViewV208 } from '../src/xeno-trials-defense-v208.js';
 import { getSynthTrialAttackV110 } from '../src/synth-combat-v110.js';
 import { XENO_TRIALS_SUPERS_V148 as supers, getXenoTrialsSuperV148 as profile,
   getXenoTrialsSuperReadinessV148 as ready, getXenoTrialsSuperMeterV148 as meter,
@@ -14,6 +14,7 @@ import { XENO_TRIALS_SUPERS_V148 as supers, getXenoTrialsSuperV148 as profile,
   getXenoTrialsSuperStatusV148 as label } from '../src/xeno-trials-supers-v148.js';
 import { createXenoTrialsRuntimeV96 } from '../src/xeno-trials-runtime-v96.js';
 import { createXenoTrialsPracticeV207, getXenoTrialsPracticeConfigV207 } from '../src/xeno-trials-practice-v207.js';
+import { getXenoTrialsRiposteReadinessV208 } from '../src/xeno-trials-ripostes-v208.js';
 import { XenoTrialsUiV96 } from '../src/xeno-trials-ui-v96.js';
 import { createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
 import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210, XENO_TRIALS_SUPER_KITS_V211 } from '../src/xeno-trials-super-kits-v209.js';
@@ -304,6 +305,60 @@ test('the runtime publishes both edges of a brief parry to the charged Super I H
     for (let i = 0; i < 10 && h.runtime.getState().fighters[0].parryV208?.started; i++) h.frame();
     assert.equal(updates.at(-1).supersV148[0].ready, true);
     assert.equal(updates.at(-1).tick, inParry.fighters[0].parryV208.started + XENO_TRIALS_PARRY_V208.activeTicks);
+  } finally { h.runtime.stop(); }
+});
+test('the HUD receives the entire native parry window even without charged Super I', async () => {
+  const settings = { playerId: WARDEN, opponentId: 'warrior', behavior: 'idle' };
+  const updates = [];
+  const h = host(WARDEN, { config: getXenoTrialsPracticeConfigV207('sandbox', settings),
+    practiceV207: 'sandbox', practiceSandboxV208: settings, onState: state => updates.push(state) });
+  try {
+    await h.start();
+    const initialUpdates = updates.length;
+    for (let i = 0; i < 18 && updates.length === initialUpdates; i++) h.frame();
+    assert.ok(updates.length > initialUpdates);
+    assert.equal(updates.at(-1).supersV148[0].meter, 0);
+    const parry = state => getXenoTrialsParryViewV208(state, state.fighters[0]);
+    assert.equal(parry(updates.at(-1)).active, false);
+    h.win.emit('keydown', { target: h.canvas, code: 'KeyV' });
+    for (let i = 0; i < 3 && !parry(h.runtime.getState()).active; i++) h.frame();
+    const started = h.runtime.getState().fighters[0].parryV208?.started;
+    assert.ok(started);
+    assert.equal(parry(updates.at(-1)).active, true);
+    assert.equal(updates.at(-1).tick, started);
+    assert.equal(updates.at(-1).supersV148[0].ready, false);
+    h.win.emit('keyup', { target: h.canvas, code: 'KeyV' });
+    for (let i = 0; i < 10 && parry(h.runtime.getState()).active; i++) h.frame();
+    assert.equal(parry(updates.at(-1)).active, false);
+    assert.equal(updates.at(-1).tick, started + XENO_TRIALS_PARRY_V208.activeTicks);
+  } finally { h.runtime.stop(); }
+});
+for (const drill of ['parry', 'riposte']) test(`the HUD publishes the exact counter window in the ${drill} drill`, async () => {
+  const config = getXenoTrialsPracticeConfigV207(drill), updates = [];
+  const h = host(config.playerId, { config, practiceV207: drill, onState: state => updates.push(state) });
+  try {
+    await h.start();
+    const attack = state => state.fighters[1].attack;
+    const parry = state => getXenoTrialsParryViewV208(state, state.fighters[0]);
+    const riposte = state => getXenoTrialsRiposteReadinessV208(state, state.fighters[0], definition(config.playerId));
+    for (let i = 0; i < 1200 && !attack(h.runtime.getState()); i++) h.frame();
+    const windup = h.runtime.getState(), incoming = attack(windup);
+    assert.ok(incoming);
+    const { startup } = spec(definition(config.opponentId), incoming.kind, base[incoming.kind]);
+    for (let i = 0; i < 120 && attack(h.runtime.getState())?.age + .025 < startup; i++) h.frame();
+    h.win.emit('keydown', { target: h.canvas, code: 'KeyV' });
+    for (let i = 0; i < 9 && !parry(h.runtime.getState()).openingTicks; i++) h.frame();
+    const opened = h.runtime.getState();
+    const receipt = opened.events.find(event => event.type === 'parry-v208' && event.side === 'player');
+    assert.equal(receipt?.tick, opened.tick);
+    assert.equal(updates.at(-1).tick, opened.tick);
+    assert.equal(parry(updates.at(-1)).openingTicks, XENO_TRIALS_PARRY_V208.openingTicks);
+    assert.equal(riposte(updates.at(-1)).ready, drill === 'riposte');
+    h.win.emit('keyup', { target: h.canvas, code: 'KeyV' });
+    for (let i = 0; i < 46 && parry(h.runtime.getState()).openingTicks; i++) h.frame();
+    assert.equal(updates.at(-1).tick, receipt.tick + XENO_TRIALS_PARRY_V208.openingTicks);
+    assert.equal(parry(updates.at(-1)).openingTicks, 0);
+    assert.equal(riposte(updates.at(-1)).ready, false);
   } finally { h.runtime.stop(); }
 });
 test('HTML meter and control are pilot-specific and rendering performs no resource transaction',()=>{

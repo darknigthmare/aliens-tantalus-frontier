@@ -82,12 +82,20 @@ test('V204 adds specific attacks while retaining Smasher ground animation and Ki
   assert.equal(getXenoTrialsRuntimeActionAtlases(rogue, rogueArt)[0].revision, 204);
   assert.deepEqual(getXenoTrialsRuntimeActionAtlases(rogue, { ...rogueArt, sha256: '0'.repeat(64) }), []);
   const coverage = XENO_TRIALS_FIGHTERS_V96.map(getXenoTrialsRuntimeAnimationCoverage);
-  const panther = getXenoTrialsRuntimeAnimationCoverage('panther');
-  const pantherPounce = panther.states.special.sources.find(source => source.id === 'panther-pounce');
-  assert.equal(pantherPounce?.revision, 221);
-  assert.deepEqual(pantherPounce.frameIds, ['windup', 'contact', 'recovery']);
-  assert.equal(panther.hasDrawnGestures, true);
-  assert.equal(coverage.filter(entry => entry !== panther && entry.hasDrawnGestures).length, 37);
+  const previouslyDrawn = coverage.filter(entry => Object.entries(entry.states).some(([action, state]) =>
+    action !== 'idle' && state.sources.some(source => source.renderKind === 'drawn' && source.revision <= 220)));
+  assert.equal(previouslyDrawn.length, 37);
+  for (const [fighterId, action, id, revision, frameIds] of [
+    ['panther', 'special', 'panther-pounce', 221, ['windup', 'contact', 'recovery']],
+    ['grid', 'heavy', 'grid-heavy', 222, ['contact', 'recovery']],
+    ['gorilla', 'special', 'gorilla-ram', 222, ['windup', 'recovery']]
+  ]) {
+    const entry = getXenoTrialsRuntimeAnimationCoverage(fighterId);
+    const source = entry.states[action].sources.find(candidate => candidate.id === id);
+    assert.equal(source?.revision, revision, fighterId);
+    assert.deepEqual(source.frameIds, frameIds, fighterId);
+    assert.equal(entry.hasDrawnGestures, true, fighterId);
+  }
   assert.equal(coverage.filter(entry => entry.states.guard.sources.some(source => source.revision === 204)).length, 20);
   const rogueCoverage = getXenoTrialsRuntimeAnimationCoverage(rogue);
   assert.equal(rogueCoverage.states.guard.renderKind, 'mesh');

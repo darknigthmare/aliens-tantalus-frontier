@@ -30,6 +30,8 @@ export function getXenoTrialsOperationHudV188(match) {
   }
   const bypass = view.status === 'active' ? view.bypassV221 : null;
   if (bypass) phase = bypassPhases[bypass.phase];
+  const gantry = view.status === 'active' ? view.gantryV222 : null;
+  if (gantry) phase = gantry.stationIndex === null ? 'CONVOI EN TRANSIT' : 'CONTRÔLE DU PORTIQUE';
   const player = match.fighters?.[0], target = view.status === 'active' ? view.target : null;
   const body = player ? getXenoTrialsBodyBoundsV105(player) : null;
   let instruction = view.status === 'completed' ? 'Objectifs validés.' : view.status === 'failed' ? 'Évaluation interrompue.' : view.instruction;
@@ -61,6 +63,7 @@ export function getXenoTrialsOperationHudV188(match) {
         else if (bypass.phase === 'opening') instruction = `${label} · VOLET EN OUVERTURE · ${Math.floor(bypass.opening * 100)} %`;
         else if (contact) instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
       }
+      if (gantry && contact && target.kind === 'terminal') instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
       if (view.kind === 'extraction' || purgeV204) {
         const work = { id: target.id, kind: target.kind, contact, progress: target.progress,
           requiredTicks: target.requiredTicks, percent: Math.floor(target.progress * 100 / target.requiredTicks) };

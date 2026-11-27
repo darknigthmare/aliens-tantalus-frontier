@@ -85,10 +85,30 @@ export const XENO_TRIALS_BYPASS_OPERATION_V221=freeze({
   {id:'hangar-exit',kind:'terminal',label:'Borne de sortie',x:1125,y:0,radius:98,requiredTicks:90}
  ],canonExact:false,canonStatus:'original-tantalus-simulation',revision:221
 });
+const gantryOrders='Escortez le chariot. Aux deux arrêts, rejoignez la borne indiquée et maintenez Interagir pour autoriser le passage. Revenez au chariot après chaque contrôle. Les contacts proches continuent à l’endommager.';
+const gantryRoute=[
+ {startTick:0,endTick:216,fromX:175,toX:455},
+ {startTick:216,endTick:312,fromX:455,toX:455,stationIndex:1},
+ {startTick:312,endTick:540,fromX:455,toX:875},
+ {startTick:540,endTick:648,fromX:875,toX:875,stationIndex:2},
+ {startTick:648,endTick:888,fromX:875,toX:1340}
+];
+export const XENO_TRIALS_GANTRY_OPERATION_V222=freeze({
+ id:'xto222-gantry-convoy',kind:'escort',title:'CONVOI AUX PORTIQUES',label:'CONVOI AUX PORTIQUES',stageId:'xt179-logistics',
+ hordeProtocolId:'xth222-logistics-watch',difficulty:'easy',factionId:'containment',roundSeconds:165,reward:555,
+ instruction:gantryOrders,description:gantryOrders,startX:gantryRoute[0].fromX,
+ cargoStartX:gantryRoute[0].fromX,cargoEndX:gantryRoute.at(-1).toX,gantryRouteV222:gantryRoute,
+ objectives:[
+  {id:'logistics-haul',kind:'cargo',label:'Chariot logistique',x:gantryRoute.at(-1).toX,y:0,radius:96,requiredTicks:gantryRoute.at(-1).endTick},
+  {id:'gantry-west',kind:'terminal',label:'Borne ouest',x:145,y:0,radius:58,requiredTicks:gantryRoute[1].endTick-gantryRoute[1].startTick},
+  {id:'gantry-east',kind:'terminal',label:'Borne est',x:1175,y:0,radius:58,requiredTicks:gantryRoute[3].endTick-gantryRoute[3].startTick}
+ ],canonExact:false,canonStatus:'original-tantalus-simulation',revision:222
+});
 export const XENO_TRIALS_OPERATION_BOARD_V212=Object.freeze([...XENO_TRIALS_ISOLATION_OPERATIONS_V212,...XENO_TRIALS_OPERATIONS_V188]);
 export const XENO_TRIALS_OPERATION_BOARD_V213=Object.freeze([XENO_TRIALS_RELAY_OPERATION_V218,XENO_TRIALS_BEACON_OPERATION_V219,XENO_TRIALS_RELIEF_OPERATION_V220,XENO_TRIALS_BYPASS_OPERATION_V221,
- XENO_TRIALS_CARGO_OPERATION_V213,...XENO_TRIALS_OPERATION_BOARD_V212]);
-export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_BYPASS_OPERATION_V221.id ? XENO_TRIALS_BYPASS_OPERATION_V221
+ XENO_TRIALS_GANTRY_OPERATION_V222,XENO_TRIALS_CARGO_OPERATION_V213,...XENO_TRIALS_OPERATION_BOARD_V212]);
+export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_GANTRY_OPERATION_V222.id ? XENO_TRIALS_GANTRY_OPERATION_V222
+ :id===XENO_TRIALS_BYPASS_OPERATION_V221.id ? XENO_TRIALS_BYPASS_OPERATION_V221
  :id===XENO_TRIALS_RELIEF_OPERATION_V220.id ? XENO_TRIALS_RELIEF_OPERATION_V220
  :id===XENO_TRIALS_BEACON_OPERATION_V219.id ? XENO_TRIALS_BEACON_OPERATION_V219
  :id===XENO_TRIALS_RELAY_OPERATION_V218.id ? XENO_TRIALS_RELAY_OPERATION_V218
@@ -155,6 +175,25 @@ export function getXenoTrialsHangarBypassV221(match){
  const state=match?.operationV188,entry=XENO_TRIALS_BYPASS_OPERATION_V221;
  return state?.operationId===entry.id?hangarBypassStatus(state,match,entry):null;
 }
+const gantryLeg=(entry,ticks)=>entry.gantryRouteV222?.find(leg=>ticks<leg.endTick);
+function escortPosition(entry,ticks){
+ if(!entry.gantryRouteV222)return entry.cargoStartX+(entry.cargoEndX-entry.cargoStartX)*ticks/entry.objectives[0].requiredTicks;
+ const leg=gantryLeg(entry,ticks);
+ return leg?leg.fromX+(leg.toX-leg.fromX)*(ticks-leg.startTick)/(leg.endTick-leg.startTick):entry.cargoEndX;
+}
+export function getXenoTrialsGantryConvoyV222(match){
+ const state=match?.operationV188,entry=XENO_TRIALS_GANTRY_OPERATION_V222;
+ if(state?.operationId!==entry.id)return null;
+ const ticks=state.cargoTravelTicks,stationIndex=gantryLeg(entry,ticks)?.stationIndex??null;
+ // The portcullis is driven by the departure rail after its terminal has
+ // authorized it. Both ends of the motion derive from the saved work cursor.
+ const gantries=entry.gantryRouteV222.filter(leg=>leg.stationIndex).map(leg=>({
+  id:entry.objectives[leg.stationIndex].id,
+  phase:ticks>=leg.endTick?'authorized':ticks>=leg.startTick?'inspection':'locked',
+  opening:clamp((ticks-leg.endTick)/64,0,1)
+ }));
+ return{stationIndex,gantries};
+}
 function windowOpen(objective,ticks){
  const phase=ticks%objective.periodTicks;
  return windowPhaseOpen(objective,phase);
@@ -216,8 +255,16 @@ export function stepXenoTrialsOperationV188(state,match,dt,input={},emit=null){
   emit?.('operation-objective-v188',{operationId:entry.id,objectiveId:entry.objectives[index].id,index});};
  if(entry.kind==='escort'){
   const cargo={x:state.cargoX,radius:entry.objectives[0].radius};
-  if(interact&&nearby(player,cargo)){state.cargoTravelTicks=Math.min(entry.objectives[0].requiredTicks,state.cargoTravelTicks+1);state.progress[0]=state.cargoTravelTicks;}
-  state.cargoX=entry.cargoStartX+(entry.cargoEndX-entry.cargoStartX)*state.cargoTravelTicks/entry.objectives[0].requiredTicks;
+  const leg=gantryLeg(entry,state.cargoTravelTicks),station=leg?.stationIndex;
+  if(interact&&nearby(player,station?entry.objectives[station]:cargo)){
+   state.cargoTravelTicks=Math.min(entry.objectives[0].requiredTicks,state.cargoTravelTicks+1);
+   state.progress[0]=state.cargoTravelTicks;
+   if(station){
+    state.progress[station]=state.cargoTravelTicks-leg.startTick;
+    if(state.cargoTravelTicks===leg.endTick)complete(station);
+   }
+  }
+  state.cargoX=escortPosition(entry,state.cargoTravelTicks);
   if(state.elapsedTicks%120===0){const pressure=(match.fighters||[]).slice(1).filter(enemy=>enemy.hp>0&&enemy.y===0&&nearby(enemy,{x:state.cargoX,radius:65})).length;
    state.integrity=Math.max(0,state.integrity-Math.min(3,pressure)*3);}
   if(state.cargoTravelTicks===entry.objectives[0].requiredTicks)complete(0);
@@ -279,9 +326,11 @@ export function validateXenoTrialsOperationSnapshotV188(state,config,match=null)
   ||typeof state.completed[index]!=='boolean'||typeof state.delivered[index]!=='boolean'
   ||state.completed[index]!== (state.progress[index]===entry.objectives[index].requiredTicks)
   ||state.progress[index]>state.elapsedTicks)return false;
- if(!Number.isFinite(state.cargoX)||Math.abs(state.cargoX-(entry.cargoStartX+(entry.cargoEndX-entry.cargoStartX)*state.cargoTravelTicks/entry.objectives[0].requiredTicks))>1e-7)return false;
+ if(!Number.isFinite(state.cargoX)||Math.abs(state.cargoX-escortPosition(entry,state.cargoTravelTicks))>1e-7)return false;
  if(entry.kind!=='escort'&&(state.cargoTravelTicks!==0||state.cargoX!==entry.cargoStartX))return false;
  if(entry.kind==='escort'&&state.progress[0]!==state.cargoTravelTicks)return false;
+ if(entry.gantryRouteV222?.some(leg=>leg.stationIndex&&state.progress[leg.stationIndex]!==
+  clamp(state.cargoTravelTicks-leg.startTick,0,leg.endTick-leg.startTick)))return false;
  if(entry.kind!=='extraction'&&(state.carrying!==-1||state.delivered.some(Boolean)||state.depotTicks!==0||state.exitTicks!==0))return false;
  if(entry.batteryTicksV219){if(!validBatteryState(state,entry))return false;}
  else if(!['escort','purge'].includes(entry.kind)&&state.integrity!==100)return false;
@@ -348,6 +397,7 @@ export function isXenoTrialsOperationForwardV188(previous,next){
   ||next.lastTick<previous.lastTick||next.elapsedTicks<previous.elapsedTicks||next.integrity>previous.integrity
   ||next.cargoTravelTicks<previous.cargoTravelTicks||previous.status!=='active'&&next.status!==previous.status)return false;
  const entry=getXenoTrialsOperationV188(previous.operationId);
+ if(entry?.gantryRouteV222&&next.cargoTravelTicks-previous.cargoTravelTicks>next.elapsedTicks-previous.elapsedTicks)return false;
  const timingKey=entry?.bypassOpeningTicksV221?'bypassStartedTickV221':entry?.batteryTicksV219?'batteryStartedTickV219':null;
  if(timingKey){
   const start=previous[timingKey],nextStart=next[timingKey];
@@ -364,6 +414,7 @@ export function getXenoTrialsOperationViewV188(match){
  const nextRelay=entry.kind==='relay'?state.completed.findIndex(done=>!done):-1;
  const relief=entry.reliefV220?reliefWindow(match):null;
  const bypass=entry.bypassOpeningTicksV221?getXenoTrialsHangarBypassV221(match):null;
+ const gantry=entry.gantryRouteV222?getXenoTrialsGantryConvoyV222(match):null;
  let entities=entry.objectives.map((objective,index)=>{
   const active=!state.completed[index]&&(entry.kind!=='relay'||index===nextRelay);
   return {...objective,active,completed:state.completed[index],progress:state.progress[index],
@@ -380,7 +431,14 @@ export function getXenoTrialsOperationViewV188(match){
    Math.abs(entity.x-player.x)<Math.abs(nearest.x-player.x)?entity:nearest,target);
   target=touching.find(entity=>entity.windowOpen)||touching[0]||target;
  }
- if(entry.kind==='escort'){entities=[{...entities[0],x:state.cargoX,destinationX:entry.cargoEndX,integrity:state.integrity}];target=entities[0];}
+ if(entry.kind==='escort'){
+  entities[0]={...entities[0],x:state.cargoX,destinationX:entry.cargoEndX,integrity:state.integrity};
+  if(gantry){
+   const targetIndex=gantry.stationIndex??0;
+   entities=entities.map((entity,index)=>({...entity,active:!entity.completed&&index===targetIndex}));
+   target=entities[targetIndex];
+  }else{entities=[entities[0]];target=entities[0];}
+ }
  if(entry.kind==='extraction'){
   entities=entities.map((entity,index)=>({...entity,active:state.carrying<0&&!state.completed[index],delivered:state.delivered[index],carried:state.carrying===index}));
   entities.push({...entry.depot,active:state.carrying>=0,completed:state.delivered.every(Boolean),progress:state.depotTicks},
@@ -398,6 +456,7 @@ export function getXenoTrialsOperationViewV188(match){
   ...(entry.relayPressureV218?{relayPressureV218:true}:{}),
   ...(relief?{reliefV220:relief}:{}),
   ...(bypass?{bypassV221:bypass}:{}),
+  ...(gantry?{gantryV222:gantry}:{}),
   ...(entry.batteryTicksV219?{batteryV219:{...batteryStatus(state,entry),depleted:state.failureReason==='structure-destroyed'}}:{}),
   instruction:entry.instruction,hint:state.status==='failed'?`Évaluation interrompue : ${failureLabel}.`:state.status==='completed'?'Objectifs validés.':
    target?.contested?'Écartez ou neutralisez les contacts dans le périmètre balisé.':
@@ -410,5 +469,5 @@ export function getXenoTrialsOperationViewV188(match){
   target:target?{x:target.x,radius:target.radius,label:target.label,
    ...(entry.kind==='beacon'?{id:target.id,windowOpen:target.windowOpen,windowRemainingTicks:target.windowRemainingTicks}:{}),
    ...(entry.relayPressureV218?{contested:target.contested}:{}),
-   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212||entry.relayPressureV218||relief||bypass?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
+   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212||entry.relayPressureV218||relief||bypass||gantry?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
 }

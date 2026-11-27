@@ -11,6 +11,7 @@ import { XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_STAGES_
   getXenoTrialsArtV96, getXenoTrialsFighterV96 } from '../src/xeno-trials-data-v96.js';
 import { XENO_TRIALS_STARTERS_V96 } from '../src/xeno-trials-progress-v96.js';
 import { getXenoTrialsOpponentCandidatesV119 } from '../src/xeno-trials-selection-v97.js';
+import { XENO_TRIALS_MENU_ATLASES_V222 } from '../src/xeno-trials-menu-atlases-v222.js';
 
 export async function verifyXenoTrialsArtifactV207(root) {
   const base = resolveSafeBuildOutput(root, process.env.ATF_BUILD_OUTPUT || 'dist');
@@ -49,6 +50,10 @@ export async function verifyXenoTrialsArtifactV207(root) {
   assert.deepEqual(Array.from(context.checked.SHELL), plan.shell);
   const paths = new Set(shipped.map(row => '/' + row.path));
   const offlinePaths = new Set(context.checked.SHELL);
+  for (const atlas of Object.values(XENO_TRIALS_MENU_ATLASES_V222)) {
+    assert.ok(offlinePaths.has(atlas.path), `Missing offline menu atlas: ${atlas.path}`);
+    assert.equal(shipped.find(file => '/' + file.path === atlas.path)?.sha256, atlas.sha256, atlas.path);
+  }
   // This checks the base images needed by an untouched terminal before any
   // roster portrait or match asset has been warmed by a live request.
   const [defaultOpponent] = getXenoTrialsOpponentCandidatesV119(XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_FACTIONS_V96[0]);

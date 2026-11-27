@@ -67,6 +67,17 @@ const layouts = [
       ['right', 'PATROUILLE DU QUAI', ['runner', 'armored-runner', 'prowler'], 4, 3, 17, .18],
       ['split', 'VIGILE ET ESCORTE', ['runner', 'prowler', 'panther'], 5, 3, 19, .20]
     ]
+  },
+  {
+    id: 'xth222-logistics-watch', title: 'RONDE LOGISTIQUE', stageId: 'xt179-logistics',
+    description: 'Trois vagues faibles se déploient autour de la voie logistique. La première arrive à l’ouest, la deuxième à l’est et la dernière prend les deux accès.',
+    orders: 'Dégagez la voie entre les arrivées. À la dernière vague, laissez-vous de la place pour changer de côté.',
+    roundSeconds: 165, reward: 370,
+    waves: [
+      ['left', 'RONDE OUEST', ['runner', 'prowler'], 4, 3, 15, .17],
+      ['right', 'RONDE EST', ['runner', 'panther', 'synth-trooper'], 4, 3, 17, .18],
+      ['split', 'PRISE DE LA VOIE', ['runner', 'prowler', 'synth-guard'], 5, 4, 20, .20]
+    ]
   }
 ];
 

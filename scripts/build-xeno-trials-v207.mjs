@@ -26,13 +26,14 @@ import { getXenoTrialsPoseAssetsV209 } from '../src/xeno-trials-poses-v209.js';
 import { getXenoTrialsResearchLabAssetsV209 } from '../src/xeno-trials-research-lab-v209.js';
 import { XENO_TRIALS_RESEARCH_FIGHTERS_V210, getXenoTrialsResearchAssetsV210 } from '../src/xeno-trials-research-v210.js';
 import { XENO_TRIALS_RESEARCH_MEDIA_V210 } from '../src/xeno-trials-research-media-v210.js';
+import { XENO_TRIALS_MENU_ASSETS_V222 } from '../src/xeno-trials-menu-media-v222.js';
 
 const manifestPath = 'xeno-trials.webmanifest';
 const entryModule = 'src/xeno-trials-standalone.js';
 const launchPage = 'xeno-trials.html';
 const digest = value => createHash('sha256').update(value).digest('hex');
 
-export const XENO_TRIALS_BUILD_REVISION = 221;
+export const XENO_TRIALS_BUILD_REVISION = 222;
 export const xenoTrialsCacheName = fingerprint => `atf-trials-v${XENO_TRIALS_BUILD_REVISION}-${fingerprint.slice(0, 24)}`;
 
 function fighterAssets(id, variant) {
@@ -91,7 +92,8 @@ export async function planXenoTrialsBuildV207(base, info) {
   const researchMedia = XENO_TRIALS_RESEARCH_MEDIA_V210.map(row => required(row.path.slice(1)));
   const researchAssets = [...getXenoTrialsResearchAssetsV210(), ...getXenoTrialsResearchLabAssetsV209()]
     .map(path => required(path.slice(1)));
-  const assets = new Set([...bootstrapArt, ...audioAssets, ...poseAssets, ...researchAssets, ...researchMedia]);
+  const menuMedia = XENO_TRIALS_MENU_ASSETS_V222.map(path => required(path.slice(1)));
+  const assets = new Set([...bootstrapArt, ...audioAssets, ...poseAssets, ...researchAssets, ...researchMedia, ...menuMedia]);
   for (const path of modules) {
     assert.notEqual(path, 'src/app.js', 'The Trials package cannot boot the campaign application.');
     const code = await readFile(join(base, path), 'utf8');
@@ -129,7 +131,7 @@ export async function planXenoTrialsBuildV207(base, info) {
     ...[...entranceStages].flatMap(stageAssets)
   ].map(path => required(path.slice(1)));
   const copyPaths = [...new Set([...modules, ...css, ...assets, required('LICENSE_NOTICE.md')])].sort();
-  const shellPaths = [manifestPath, audioManifest, ...modules, ...css, ...bootstrapArt, ...starterArt, ...poseAssets, ...researchMedia]
+  const shellPaths = [manifestPath, audioManifest, ...modules, ...css, ...bootstrapArt, ...starterArt, ...poseAssets, ...researchMedia, ...menuMedia]
     .map(path => '/' + path);
   // AudioAssetBankV77 uses the stamped sound hash in the request URL.
   const audioUrls = audioSources.map(({ path, sha256 }) => `${path}?v=${sha256.slice(0, 16)}`);

@@ -56,7 +56,7 @@ import { getXenoTrialsParryViewV208 } from './xeno-trials-defense-v208.js';
 import { drawXenoTrialsPoseV209, getXenoTrialsPoseAssetsV209 } from './xeno-trials-poses-v209.js';
 import { getXenoTrialsResearchPoseV210 } from './xeno-trials-research-v210.js';
 import { getXenoTrialsAlternateSignatureV208 } from './xeno-trials-signature-kit-v208.js';
-import { XENO_TRIALS_RIPOSTE_KIND_V208, getXenoTrialsRiposteV208 } from './xeno-trials-ripostes-v208.js';
+import { XENO_TRIALS_RIPOSTE_KIND_V208, getXenoTrialsRiposteV208, getXenoTrialsRiposteReadinessV208 } from './xeno-trials-ripostes-v208.js';
 import { currentLanguageV185 } from './i18n-v185.js';
 import { createXenoTrialsHordeCheckpointV186 } from './xeno-trials-horde-checkpoint-v186.js';
 import { createXenoTrialsDuelCheckpointV197 } from './xeno-trials-duel-checkpoint-v197.js';
@@ -238,6 +238,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     && match.phase === 'active' && windowAvailable() && !presentationView().blocksSimulation;
   let emittedResult = false, notifyElapsed = 0, lastStatus = '', assetFailure = false;
   let lastGroundBreakState = null, lastGroundRecoveryHint = '', lastPlayerSuperReady = false;
+  let lastPlayerParryCue = '';
   const originalSize = { width: canvas.width, height: canvas.height };
   const stage = XENO_TRIALS_STAGES_V96.find(s => s.id === match.config.stageId);
   const observeStageV211 = createXenoTrialsStageEventsV211(stage.id, match, XENO_TRIALS_ARENA_V96);
@@ -349,12 +350,18 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     sound.observeState(match, { active: loaded && running && !stopped && !isPaused() && !presentationBlocks, focused: windowAvailable() });
     const groundBreakState = getXenoTrialsGroundBreakViewV213(match)?.state ?? null;
     const groundRecoveryHint = getXenoTrialsGroundRecoveryHintV218(match, player);
-    const playerSuperReady = !presentationBlocks && getXenoTrialsSuperReadinessV148(match, player, getXenoTrialsFighterV96(player.id)).ready;
+    const definition = getXenoTrialsFighterV96(player.id);
+    const playerSuperReady = !presentationBlocks && getXenoTrialsSuperReadinessV148(match, player, definition).ready;
+    const parry = getXenoTrialsParryViewV208(match, player);
+    const playerParryCue = parry.openingTicks > 0
+      ? (getXenoTrialsRiposteReadinessV208(match, player, definition).ready ? 'riposte' : 'opening')
+      : parry.active ? 'parry' : '';
     if (stopped || !force && groundBreakState === lastGroundBreakState && groundRecoveryHint === lastGroundRecoveryHint
-      && playerSuperReady === lastPlayerSuperReady && notifyElapsed < .12) return;
+      && playerSuperReady === lastPlayerSuperReady && playerParryCue === lastPlayerParryCue && notifyElapsed < .12) return;
     lastGroundBreakState = groundBreakState;
     lastGroundRecoveryHint = groundRecoveryHint;
     lastPlayerSuperReady = playerSuperReady;
+    lastPlayerParryCue = playerParryCue;
     notifyElapsed = 0;
     const status = statusText();
     if (options.statusElement && status !== lastStatus) options.statusElement.textContent = status;

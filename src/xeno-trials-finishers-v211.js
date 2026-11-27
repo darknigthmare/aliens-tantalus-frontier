@@ -2,6 +2,7 @@ import { getXenoTrialsArtV96, getXenoTrialsFighterV96, XENO_TRIALS_FIGHTERS_V96,
 import { getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V105 } from './xeno-trials-geometry-v105.js';
 import { getXenoTrialsGroundSupportLockV210 } from './xeno-trials-capture-v163.js';
 import { getXenoTrialsRuntimeArticulatedRig, getXenoTrialsRuntimeDefenseRig, getXenoTrialsRigV154 } from './xeno-trials-rig-v154.js';
+import { drawXenoTrialsCrossScanV222 } from './xeno-trials-finishers-v222.js';
 
 const roster = new Set(XENO_TRIALS_FIGHTERS_V96.map(fighter => fighter.id));
 const stages = new Set(XENO_TRIALS_STAGES_V96.map(stage => stage.id));
@@ -105,7 +106,7 @@ export function drawXenoTrialsNeutralFinisherV211(ctx, stageId, view, reducedMot
   const active = lock && !lock.withdrawalV221 && !reducedMotion && view.gain > 0 && (!lock.approachV212 || view.contact) ? lock : null;
   const fixtures = getXenoTrialsIsolationFixturesV211(stageId);
   for (const fixture of fixtures) {
-    const engaged = active?.fixture === fixture;
+    const engaged = active?.fixture === fixture || active?.crossScanV222?.fixtures.includes(fixture);
     ctx.save();
     ctx.fillStyle = '#193038';
     ctx.fillRect(fixture.left, floor - 4, 9, 6);
@@ -116,6 +117,8 @@ export function drawXenoTrialsNeutralFinisherV211(ctx, stageId, view, reducedMot
     ctx.restore();
   }
   if (!active) return null;
+  if (active.crossScanV222) return active.crossScanV222.fixtures.every(fixture => fixtures.includes(fixture))
+    ? drawXenoTrialsCrossScanV222(ctx, view) : null;
 
   const { fixture, target } = active;
   const left = fixture?.left ?? active.left;

@@ -4,11 +4,12 @@ import { hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153 } from './xeno-
 import { getXenoTrialsExtendedFinisherV208 } from './xeno-trials-finishers-v208.js';
 import { getXenoTrialsExtendedFinisherV209 } from './xeno-trials-finishers-v209.js';
 import { getXenoTrialsExtendedFinisherV210 } from './xeno-trials-finishers-v210.js';
-import { getXenoTrialsContactFinisherV211, getXenoTrialsNeutralFinishersV211 } from './xeno-trials-finishers-v211.js';
+import { getXenoTrialsContactFinisherV211, getXenoTrialsIsolationFixturesV211, getXenoTrialsNeutralFinishersV211 } from './xeno-trials-finishers-v211.js';
 import { getXenoTrialsContactFinisherV212, getXenoTrialsIsolationApproachV212 } from './xeno-trials-finishers-v212.js';
 import { getXenoTrialsContactApproachV213, getXenoTrialsContactApproachViewV213 } from './xeno-trials-finishers-v213.js';
 import { getXenoTrialsPlantedContactFinisherV219 } from './xeno-trials-finishers-v219.js';
 import { getXenoTrialsFixtureWithdrawalV221 } from './xeno-trials-finishers-v221.js';
+import { getXenoTrialsCrossScanV222 } from './xeno-trials-finishers-v222.js';
 
 const offerMs = 3600;
 const clawTiming = Object.freeze({ approachMs: 240, holdMs: 420, retreatMs: 360 });
@@ -42,6 +43,10 @@ export function createXenoTrialsFinisherV207(match, images, reducedMotion = fals
       getXenoTrialsFixtureWithdrawalV221(match, attacker, target, images)].filter(Boolean);
     for (const fallback of additions) {
       if (!candidates.some(candidate => candidate.id === fallback.id)) candidates.push(fallback);
+    }
+    if (candidates.length === 1 && candidates[0].kind === 'seal') {
+      const crossScan = getXenoTrialsCrossScanV222(match, attacker, target, getXenoTrialsIsolationFixturesV211(match.config.stageId));
+      if (crossScan) candidates.push(crossScan);
     }
   }
   const [candidate, ...alternatives] = candidates;
@@ -92,5 +97,6 @@ export function getXenoTrialsFinisherStateV207(sequence) {
   return { id, kind, phase, elapsedMs, durationMs, paused, skipped, targetId: lock.target.id,
     ...(phase === 'offered' && sequence.alternatives.length ? { alternatives: sequence.alternatives.map(({ id, kind }) => ({ id, kind })) } : {}),
     ...(lock.fixture ? { fixtureId: lock.fixture.id } : {}),
-    ...(lock.withdrawalV221 ? { withdrawalV221: { ...lock.withdrawalV221 } } : {}) };
+    ...(lock.withdrawalV221 ? { withdrawalV221: { ...lock.withdrawalV221 } } : {}),
+    ...(lock.crossScanV222 ? { crossScanV222: lock.crossScanV222.fixtures.map(fixture => fixture.id) } : {}) };
 }
