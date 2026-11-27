@@ -1,7 +1,7 @@
 import { XENO_TRIALS_RESEARCH_LABS_V209 } from './xeno-trials-research-lab-v209.js';
 import { createXenoTrialsResearchLabRuntimeV209 } from './xeno-trials-research-lab-ui-v209.js';
 import { normalizeXenoTrialsSandboxV208, XENO_TRIALS_SANDBOX_BEHAVIORS_V208, XENO_TRIALS_SANDBOX_ID_V208 } from './xeno-trials-practice-v208.js';
-import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V220 } from './xeno-trials-practice-v207.js';
+import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V221 } from './xeno-trials-practice-v207.js';
 import { usesXenoTrialsIndependentProps } from './xeno-trials-franchise-stage-scenes-v192.js';
 import { renderArbiterTerminalDossierV190 } from './xeno-arbiter-ui-v190.js';
 import { ARBITER_PROGRAMS_V191, ARBITER_HORDE_PROTOCOLS_V191, getArbiterProgramV191 } from './xeno-arbiter-protocols-v191.js';
@@ -391,7 +391,12 @@ export class XenoTrialsUiV96 {
     fullscreen.hidden = !doc?.fullscreenEnabled || typeof root.requestFullscreen !== 'function';
     root.addEventListener('fullscreenchange', () => {
       fullscreen.setAttribute('aria-pressed', String(doc.fullscreenElement === root));
-      if (doc.activeElement === fullscreen && this.active && this.selectionStep === 'combat') {
+      if (!this.active || this.selectionStep !== 'combat') return;
+      const overlay = this.el('pause-overlay');
+      if (!overlay.hidden) {
+        if (!overlay.contains(doc.activeElement))
+          this.el(this.el('controls').hidden ? 'resume-overlay' : 'commands-back').focus({ preventScroll: true });
+      } else if (doc.activeElement === fullscreen) {
         this.el('canvas').focus({ preventScroll: true });
       }
     });
@@ -461,8 +466,10 @@ export class XenoTrialsUiV96 {
       if (transaction.unchanged || this.commit(transaction, { pauseOnFailure: false })) void this.startPracticeV207(XENO_TRIALS_SANDBOX_ID_V208, event);
       else this.el('practice-sandbox-status').textContent = 'Réglages du banc libre non sauvegardés.';
     });
-    this.el('pause-overlay').addEventListener('keydown', event => {
-      if (this.el('pause-overlay').hidden) return;
+    doc?.addEventListener?.('keydown', event => {
+      if (!this.active || this.selectionStep !== 'combat' || !['Escape', 'Tab'].includes(event.code)) return;
+      const overlay = this.el('pause-overlay');
+      if (overlay.hidden) return;
       const commands = !this.el('controls').hidden;
       if (commands && event.code === 'Escape') {
         event.preventDefault();
@@ -476,10 +483,10 @@ export class XenoTrialsUiV96 {
       if (!actions.length) return;
       const first = actions[0], last = actions.at(-1);
       const focused = this.root.ownerDocument?.activeElement || event.target;
-      if (event.shiftKey && focused === first || !event.shiftKey && focused === last) {
+      if (!overlay.contains(focused) || event.shiftKey && focused === first || !event.shiftKey && focused === last) {
         event.preventDefault(); (event.shiftKey ? last : first).focus({ preventScroll: true });
       }
-    });
+    }, true);
     for (const key of ['family', 'role', 'ownership', 'sort', 'faction-filter', 'animation']) this.el(key).addEventListener('change', () => { this.rosterPageV179 = 0; this.render(); });
     for (const [key, delta] of [['roster-previous', -1], ['roster-next', 1]]) this.el(key).onclick = () => {
       if (!this.active || this.isRunning() || this.state().pending || this.unsavedResult || this.el(key).disabled) return;
@@ -648,8 +655,8 @@ export class XenoTrialsUiV96 {
       this.el('practice-lab-list').innerHTML = XENO_TRIALS_RESEARCH_LABS_V209.map(lab => `<article class="xt-activity-v119${state.practiceLabsClearedV209?.includes(lab.id) ? ' validated' : ''}">
         <h3>${escapeHtml(lab.title)}</h3><p>${escapeHtml(lab.instruction)}</p><button type="button" class="button primary" data-xt-lab="${lab.id}">
         ${state.practiceLabsClearedV209?.includes(lab.id) ? 'VALIDÉ · REJOUER' : 'OUVRIR LE LABORATOIRE'}</button></article>`).join('');
-      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V220.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
-      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V220.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
+      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V221.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
+      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V221.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
         <h3>${escapeHtml(entry.title)}</h3><strong>${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.playerId).label)}</strong>
         <p>${escapeHtml(entry.briefing)}</p><button type="button" class="button primary" data-xt-practice="${entry.id}">${cleared.includes(entry.id) ? 'VALIDÉ · REJOUER' : 'LANCER L’ATELIER'}</button></article>`).join('');
       return;

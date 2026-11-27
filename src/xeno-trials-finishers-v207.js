@@ -8,6 +8,7 @@ import { getXenoTrialsContactFinisherV211, getXenoTrialsNeutralFinishersV211 } f
 import { getXenoTrialsContactFinisherV212, getXenoTrialsIsolationApproachV212 } from './xeno-trials-finishers-v212.js';
 import { getXenoTrialsContactApproachV213, getXenoTrialsContactApproachViewV213 } from './xeno-trials-finishers-v213.js';
 import { getXenoTrialsPlantedContactFinisherV219 } from './xeno-trials-finishers-v219.js';
+import { getXenoTrialsFixtureWithdrawalV221 } from './xeno-trials-finishers-v221.js';
 
 const offerMs = 3600;
 const clawTiming = Object.freeze({ approachMs: 240, holdMs: 420, retreatMs: 360 });
@@ -37,7 +38,8 @@ export function createXenoTrialsFinisherV207(match, images, reducedMotion = fals
       getXenoTrialsContactApproachV213(attacker, target, images),
       getXenoTrialsPlantedContactFinisherV219(attacker, target, images),
       ...getXenoTrialsNeutralFinishersV211(match, attacker, target),
-      getXenoTrialsIsolationApproachV212(match, attacker, target, images)].filter(Boolean);
+      getXenoTrialsIsolationApproachV212(match, attacker, target, images),
+      getXenoTrialsFixtureWithdrawalV221(match, attacker, target, images)].filter(Boolean);
     for (const fallback of additions) {
       if (!candidates.some(candidate => candidate.id === fallback.id)) candidates.push(fallback);
     }
@@ -80,7 +82,8 @@ export function getXenoTrialsFinisherViewV207(sequence) {
   const elapsed = sequence.elapsedMs;
   const mix = smooth(Math.min(1, elapsed / approachMs));
   const gain = elapsed < approachMs ? elapsed / approachMs : 1 - Math.max(0, (elapsed - approachMs - holdMs) / retreatMs);
-  return { lock: sequence.lock, mix, gain, contact: sequence.phase === 'playing' && gain === 1 };
+  return { lock: sequence.lock, mix, gain, contact: sequence.phase === 'playing' && gain === 1,
+    ...(sequence.lock.withdrawalV221 ? { withdrawingV221: elapsed < approachMs } : {}) };
 }
 
 export function getXenoTrialsFinisherStateV207(sequence) {
@@ -88,5 +91,6 @@ export function getXenoTrialsFinisherStateV207(sequence) {
   const { id, kind, phase, elapsedMs, durationMs, paused, skipped, lock } = sequence;
   return { id, kind, phase, elapsedMs, durationMs, paused, skipped, targetId: lock.target.id,
     ...(phase === 'offered' && sequence.alternatives.length ? { alternatives: sequence.alternatives.map(({ id, kind }) => ({ id, kind })) } : {}),
-    ...(lock.fixture ? { fixtureId: lock.fixture.id } : {}) };
+    ...(lock.fixture ? { fixtureId: lock.fixture.id } : {}),
+    ...(lock.withdrawalV221 ? { withdrawalV221: { ...lock.withdrawalV221 } } : {}) };
 }

@@ -97,12 +97,22 @@ export function drawXenoTrialsIsolationApproachV212(ctx, fighter, view, metrics,
   const { gait, offset } = lock.approachV212;
   const amount = view.gain * view.gain * (3 - 2 * view.gain);
   const position = fighter.x + offset * amount;
-  const drawn = drawXenoTrialsFinisherStepV212(ctx, fighter, position, gait, metrics, images);
+  const withdrawal = lock.withdrawalV221;
+  const holding = Boolean(withdrawal && view.contact);
+  // Motion-only atlases hold their last supported stride without changing roots.
+  const holdStride = holding && !gait.atlas.frames.some(frame => frame.id === 'idle');
+  const reverse = view.withdrawingV221 || holdStride;
+  const distance = withdrawal && !reverse ? Math.abs(position - withdrawal.destination) : Math.abs(position - fighter.x);
+  const drawn = drawXenoTrialsFinisherStepV212(ctx, fighter, position, gait, metrics, images,
+    { distance, reverse, moving: !holding || holdStride });
+  if (withdrawal) return drawn && { ...drawn, withdrawalV221: { ...withdrawal, x: position, origin: fighter.x,
+    floor, stationary: view.contact, reversing: view.withdrawingV221, fixtureId: lock.fixture.id } };
   return drawn && { ...drawn, isolationApproachV212: { x: position, origin: fighter.x, destination: fighter.x + offset,
     floor, stationary: view.contact, fixtureId: lock.fixture.id } };
 }
 
-export function drawXenoTrialsFinisherStepV212(ctx, fighter, position, gait, metrics, images) {
+export function drawXenoTrialsFinisherStepV212(ctx, fighter, position, gait, metrics, images,
+  { distance = Math.abs(position - fighter.x), reverse = false, moving = true } = {}) {
   const walking = { ...fighter, attack: null, guard: false, stun: 0, hitFlash: 0 };
   const body = getXenoTrialsBodyBoundsV105(fighter);
   ctx.fillStyle = '#0008';
@@ -110,7 +120,8 @@ export function drawXenoTrialsFinisherStepV212(ctx, fighter, position, gait, met
   ctx.ellipse(body.center + position - fighter.x, floor + 4, body.width * .68, 11, 0, 0, Math.PI * 2);
   ctx.fill();
   return gait.draw(ctx, walking, gait.art, images, {
-    metrics, x: position, y: floor, facing: fighter.facing, moving: true, distance: Math.abs(position - fighter.x),
+    metrics, x: position, y: floor, facing: fighter.facing, moving,
+    distance: reverse && gait.draw === drawXenoTrialsSpriteAtlasV188 ? -distance : distance, reverseStep: reverse,
     includeV197: gait.includeV197
   });
 }

@@ -41,9 +41,11 @@ async function nativeExitHost({ exit = true, fullscreen = false, touch = false }
     }, requestAnimationFrame: fn => { queue.set(++serial, fn); return serial; }, cancelAnimationFrame: id => queue.delete(id),
     onState: s => ui?.updateMatch(s), onResult: r => { results.push(structuredClone(r)); assert.equal(ui.finish(r), true); } });
   const elements = new Map([['canvas', canvas]]), attributes = new Map();
+  const modalControls = new Set(['resume-overlay', 'pause-commands', 'audio-toggle', 'retry-checkpoint-overlay',
+    'practice-restart', 'abandon-overlay', 'commands-back']);
   const element = key => {
     if (!elements.has(key)) elements.set(key, target({ tagName: 'BUTTON', hidden: false, disabled: false, dataset: { xt: key },
-      setAttribute() {}, contains(node) { return node === this; },
+      setAttribute() {}, contains(node) { return node === this || key === 'pause-overlay' && modalControls.has(node?.dataset?.xt); },
       closest(selector) { return selector.split(',').some(s => s.trim() === `[data-xt="${key}"]`) ? this : null; },
       click() { this.onclick?.({ target: this }); },
       focus() { document.activeElement = this; document.emit('focusin', { target: this }); } }));
@@ -68,7 +70,7 @@ async function nativeExitHost({ exit = true, fullscreen = false, touch = false }
   class MinimalUi extends XenoTrialsUiV96 { updateOpponents() {} restorePendingSelection() {} render() {} }
   ui = new MinimalUi({ root, getProgress: () => progress, canCommit: () => true,
     onCommit(next) { progress = next; }, onReturn() { returned++; } });
-  ui.active = true; ui.runtime = runtime;
+  ui.active = true; ui.selectionStep = 'combat'; ui.runtime = runtime;
   assert.equal(await runtime.start(), true); canvas.focus();
   const frames = (count = 1) => { for (let n = 0; n < count; n++) {
     time += 100; const callbacks = [...queue.values()]; queue.clear(); callbacks.forEach(fn => fn(time));
@@ -155,14 +157,13 @@ test('the combat tablet enters and exits its own fullscreen without pausing the 
 test('a paused unfinished ticket keeps its real abandonment action and both modal focus boundaries', async () => {
   const h = await nativeExitHost({ exit: false }), initial = h.progress();
   h.runtime.pause();
-  const overlay = h.element('pause-overlay'), resume = h.element('resume-overlay'), abandon = h.element('abandon-overlay');
+  const resume = h.element('resume-overlay'), abandon = h.element('abandon-overlay');
   assert.equal(abandon.hidden, false); assert.equal(abandon.disabled, false);
   assert.equal(h.document.activeElement, resume);
-  let prevented = 0;
-  overlay.emit('keydown', { code: 'Tab', shiftKey: true, preventDefault() { prevented++; } });
+  assert.equal(h.document.emit('keydown', { code: 'Tab', shiftKey: true, target: resume }).defaultPrevented, true);
   assert.equal(h.document.activeElement, abandon);
-  overlay.emit('keydown', { code: 'Tab', shiftKey: false, preventDefault() { prevented++; } });
-  assert.equal(h.document.activeElement, resume); assert.equal(prevented, 2);
+  assert.equal(h.document.emit('keydown', { code: 'Tab', target: abandon }).defaultPrevented, true);
+  assert.equal(h.document.activeElement, resume);
   abandon.onclick();
   assert.equal(h.ui.runtime, null); assert.equal(h.progress().pending, null);
   assert.equal(h.progress().credits, initial.credits); assert.equal(h.progress().xp, initial.xp);
@@ -179,9 +180,9 @@ test('a paused completed outro offers only applicable actions and keeps Tab insi
   assert.equal(overlay.hidden, false); assert.equal(abandon.hidden, true); assert.equal(abandon.disabled, true);
   const frozen = h.runtime.getState();
   assert.equal(h.document.activeElement, resume);
-  assert.equal(overlay.emit('keydown', { code: 'Tab', shiftKey: true }).defaultPrevented, true);
+  assert.equal(h.document.emit('keydown', { code: 'Tab', shiftKey: true, target: resume }).defaultPrevented, true);
   assert.equal(h.document.activeElement, h.element('pause-commands'));
-  assert.equal(overlay.emit('keydown', { code: 'Tab' }).defaultPrevented, true);
+  assert.equal(h.document.emit('keydown', { code: 'Tab', target: h.element('pause-commands') }).defaultPrevented, true);
   assert.equal(h.document.activeElement, resume);
   // A previously queued handler cannot overwrite the completed result either.
   abandon.onclick();
@@ -208,10 +209,15 @@ test('the pause commands keep the fight frozen, trap Tab, and give Escape to the
   assert.equal(attributes.get('aria-labelledby'), 'xeno-trials-commands-title-v217');
   assert.equal(h.document.activeElement, back);
   for (const shiftKey of [false, true]) {
-    assert.equal(overlay.emit('keydown', { code: 'Tab', shiftKey, target: back }).defaultPrevented, true);
+    assert.equal(h.document.emit('keydown', { code: 'Tab', shiftKey, target: back }).defaultPrevented, true);
     assert.equal(h.document.activeElement, back);
   }
-  const escape = overlay.emit('keydown', { code: 'Escape', target: back });
+  h.canvas.focus();
+  assert.equal(h.document.activeElement, h.canvas);
+  assert.equal(h.document.emit('keydown', { code: 'Tab', target: h.canvas }).defaultPrevented, true);
+  assert.equal(h.document.activeElement, back);
+  h.canvas.focus();
+  const escape = h.document.emit('keydown', { code: 'Escape', target: h.canvas });
   assert.equal(escape.defaultPrevented, true);
   h.window.emit('keydown', escape);
   assert.equal(page.hidden, true);
@@ -223,7 +229,9 @@ test('the pause commands keep the fight frozen, trap Tab, and give Escape to the
   commands.click();
   back.click();
   assert.equal(h.document.activeElement, commands);
-  h.element('resume-overlay').click();
+  const resumeEscape = h.document.emit('keydown', { code: 'Escape', target: commands });
+  assert.equal(resumeEscape.defaultPrevented, false);
+  h.window.emit('keydown', resumeEscape);
   assert.equal(h.runtime.getState().paused, false);
   assert.equal(h.document.activeElement, h.canvas);
   h.ui.close();

@@ -34,7 +34,10 @@ test('exact identity and three explicitly reviewed targets; no family/name inher
   for(const t of config.targets){assert.equal(def(t.id).profileId,t.profileId);assert.equal(target(def(t.id)),true);assert.equal(target({...def(t.id),profileId:'wrong'}),false);}
   for(const f of roster)if(!config.targets.some(t=>t.id===f.id))assert.equal(target(f),false,f.id);
   assert.equal(target(def('import-wy-apesuit')),false);
-  assert.equal(roster.filter(f=>signature(f)).length,9);
+  const loader = def('synth-automated-powerloader');
+  assert.equal(signature(loader)?.style, 'physical');
+  assert.equal(has(loader), false);
+  assert.equal(target(loader), false);
   assert.equal(roster.filter(f=>superProfile(f)).length,
     5 + XENO_TRIALS_SUPER_KITS_V209.length + XENO_TRIALS_SUPER_KITS_V210.length + XENO_TRIALS_SUPER_KITS_V211.length);
 });

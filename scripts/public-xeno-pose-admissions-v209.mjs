@@ -7,8 +7,10 @@ import { getXenoTrialsPoseAssetsV209 } from '../src/xeno-trials-poses-v209.js';
 
 const rootDirectory = 'assets/openai/xeno-trials-v209';
 export const PUBLIC_XENO_POSE_DIRECTORIES_V209 = Object.freeze([rootDirectory, rootDirectory + '/characters']);
-const approved = new Map(['heavy-windup', 'heavy-impact', 'heavy-recovery', 'special-active-grounded'].map(phase => {
-  const name = `arachnoid-${phase}.png`;
+const approved = new Map([
+  'arachnoid-heavy-windup.png', 'arachnoid-heavy-impact.png', 'arachnoid-heavy-recovery.png', 'arachnoid-special-active-grounded.png',
+  'panther-special-windup.png', 'panther-special-active.png', 'panther-special-recovery.png'
+].map(name => {
   const origin = XENO_PRODUCTION_ASSETS_NEW_INPUTS_V206[`assets/openai/xeno-trials-v206/characters/${name}`];
   assert.equal(origin?.kind, 'production-asset', 'V209 pose must have a production receipt: ' + name);
   return [`${rootDirectory}/characters/${name}`, origin.sha256];

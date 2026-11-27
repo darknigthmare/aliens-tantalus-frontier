@@ -6,7 +6,7 @@ import { XENO_TRIALS_FIGHTERS_V96 as fighters, XENO_TRIALS_STAGES_V96 as stages,
 import { createXenoTrialsMatchV96 as create, stepXenoTrialsMatchV96 as step, nextXenoTrialsRoundV96 as next,
   setXenoTrialsPausedV96 as pause, XENO_TRIALS_ATTACKS_V96 as base, getXenoTrialsSnapshotV96 as snapshot } from '../src/xeno-trials-engine-v96.js';
 import { getSynthTrialAttackV110 } from '../src/synth-combat-v110.js';
-import { getXenoTrialsBodyBoundsV105 as bounds } from '../src/xeno-trials-geometry-v105.js';
+import { getXenoTrialsBodyBoundsV105 as bounds, getXenoTrialsBodyGapV105 as gap } from '../src/xeno-trials-geometry-v105.js';
 import { createXenoTrialsRuntimeV96 } from '../src/xeno-trials-runtime-v96.js';
 import { XENO_TRIALS_SIGNATURES_V147 as profiles, XENO_TRIALS_SIGNATURE_SOURCES_V147 as sources,
   getXenoTrialsSignatureV147 as signature, getXenoTrialsAttackV147 as spec,
@@ -50,8 +50,8 @@ test('five exact admitted identities have sourced, immutable and explicitly non-
     assert.equal(label(definition(p.fighterId)), p.label);
   }
 });
-test('all 180 unextended fighters retain their original contracts; namesakes inherit nothing', () => {
-  const other = fighters.filter(f => !signature(f)); assert.equal(other.length, 180);
+test('all 179 unextended fighters retain their original contracts; namesakes inherit nothing', () => {
+  const other = fighters.filter(f => !signature(f)); assert.equal(other.length, 179);
   for (const f of other) for (const kind of ['light','heavy','special'])
     assert.equal(spec(f, kind, base[kind]), getSynthTrialAttackV110(f, kind, base[kind]), `${f.id}/${kind}`);
   for (const p of profiles) {
@@ -60,6 +60,31 @@ test('all 180 unextended fighters retain their original contracts; namesakes inh
   }
   assert.equal(signature(definition('import-game-afe-synth-warden')), null);
   assert.equal(signature(definition('queen')), null);
+});
+
+test('V221 Power Loader clamps at short range with planted supports and retains its old attack timing', () => {
+  const id = 'synth-automated-powerloader';
+  const entry = signature(definition(id));
+  assert.equal(entry.label, 'Fermeture de pince');
+  assert.equal(signature({ id, profileId: 'other-vehicle' }), null);
+  for (const key of ['cost', 'startup', 'active', 'recovery']) assert.equal(entry.spec[key], base.special[key]);
+  for (const scenario of ['near', 'guard', 'jump', 'far']) {
+    const m = create({ playerId: id, opponentId: 'warrior', introSeconds: 0 });
+    const [a, b] = m.fighters;
+    while (scenario !== 'far' && gap(a, b) > 38) step(m, 1 / 120, { right: true }, {});
+    const initialX = a.x, hp = b.hp;
+    for (let i = 0; i < 55; i++) {
+      step(m, 1 / 120, { special: i === 0 },
+        { guard: scenario === 'guard', jump: scenario === 'jump' && i === 22 });
+    }
+    assert.ok(m.events.some(event => event.type === 'attack' && event.signatureIdV147 === entry.id));
+    assert.equal(a.x, initialX, scenario);
+    assert.equal(a.y, 0, scenario);
+    assert.equal(a.stats.specials, 1, scenario);
+    assert.equal(m.events.filter(event => event.type === 'hit' && event.attacker === 'player').length, scenario === 'near' ? 1 : 0, scenario);
+    assert.equal(m.events.filter(event => event.type === 'block' && event.attacker === 'player').length, scenario === 'guard' ? 1 : 0, scenario);
+    if (scenario === 'jump' || scenario === 'far') assert.equal(b.hp, hp, scenario);
+  }
 });
 for (const p of profiles) {
   test(`${p.id}: cost, signature identity and one press are authoritative`, () => {

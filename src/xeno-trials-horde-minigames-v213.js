@@ -55,14 +55,33 @@ const layouts = [
       ['split', 'ASSAUT AUX DEUX SAS', ['warrior', 'runner', 'prowler', 'panther'], 5, 4, 19, .20],
       ['right', 'DERNIER DÉTACHEMENT', ['runner', 'albino-runner', 'armored-runner'], 6, 4, 21, .21]
     ]
+  },
+  {
+    id: 'xth221-hangar-watch', title: 'VIGILE DU HANGAR', stageId: 'xt179-hangar',
+    description: 'Deux vagues faibles traversent le hangar. Un vigile synthétique mène la dernière escorte.',
+    orders: 'Repérez les sas d’arrivée. Écartez les éclaireurs et lisez la charge de bouclier du vigile avant d’avancer.',
+    roundSeconds: 170, reward: 480,
+    boss: { fighterId: 'synth-guard', hp: 86, damageScale: .43, label: 'VIGILE DE VERROUILLAGE' },
+    waves: [
+      ['left', 'ÉCLAIREURS DU HANGAR', ['runner', 'prowler'], 4, 3, 15, .16],
+      ['right', 'PATROUILLE DU QUAI', ['runner', 'armored-runner', 'prowler'], 4, 3, 17, .18],
+      ['split', 'VIGILE ET ESCORTE', ['runner', 'prowler', 'panther'], 5, 3, 19, .20]
+    ]
   }
 ];
 
-export const XENO_TRIALS_HORDE_MINIGAMES_V213 = Object.freeze(layouts.map(layout => {
-  const waves = Object.freeze(layout.waves.map(([ingress, label, opponentIds, total, concurrent, hp, damageScale], index) =>
-    Object.freeze({ index, label, opponentIds: Object.freeze(opponentIds), total, concurrent, hp, damageScale, ingressV213: ingress })));
-  return Object.freeze({ ...layout, label: layout.title, difficulty: 'easy', factionId: 'containment',
-    rules: Object.freeze({}), waves, opponentIds: Object.freeze([...new Set(waves.flatMap(wave => wave.opponentIds))]),
+export const XENO_TRIALS_HORDE_MINIGAMES_V213 = Object.freeze(layouts.map(({ waves: authored, boss, ...layout }) => {
+  const waves = Object.freeze(authored.map(([ingress, label, opponents, total, concurrent, hp, damageScale], index) => {
+    const finale = boss && index === authored.length - 1;
+    const slots = finale ? [Object.freeze({ fighterId: boss.fighterId, rank: 'boss', hp: boss.hp, damageScale: boss.damageScale }),
+      ...Array.from({ length: total - 1 }, (_, slot) => Object.freeze({ fighterId: opponents[slot % opponents.length], rank: 'troop', hp, damageScale }))] : null;
+    const opponentIds = Object.freeze(finale ? [boss.fighterId, ...opponents] : opponents);
+    return Object.freeze({ index, label, opponentIds, total, concurrent, hp, damageScale, ingressV213: ingress,
+      ...(slots ? { enemySlotsV186: Object.freeze(slots) } : {}) });
+  }));
+  return Object.freeze({ ...layout, waves, label: layout.title, difficulty: 'easy', factionId: 'containment',
+    rules: Object.freeze({}), opponentIds: Object.freeze([...new Set(waves.flatMap(wave => wave.opponentIds))]),
+    ...(boss ? { bossFinaleV186: Object.freeze({ ...boss, wave: waves.length }) } : {}),
     totalEnemies: waves.reduce((sum, wave) => sum + wave.total, 0),
     canonExact: false, canonStatus: 'original-tantalus-simulation' });
 }));

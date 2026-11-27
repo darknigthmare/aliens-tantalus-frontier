@@ -7,8 +7,9 @@ import { createXenoTrialsCameraV119, getXenoTrialsRenderMetricsV110 } from '../s
 import { getXenoTrialsSpriteAtlasV188 } from '../src/xeno-trials-sprite-atlas-v188.js';
 import { getXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteLayoutV189 } from '../src/xeno-trials-sprite-atlas-v189.js';
 import { advanceXenoTrialsOutroV155, createXenoTrialsExitV157, createXenoTrialsOutroV155,
-  createXenoTrialsTerminalV156, getXenoTrialsExitViewV157, skipXenoTrialsOutroV155 } from '../src/xeno-trials-sequences-v155.js';
-import { drawXenoTrialsSpatialOutroV220 } from '../src/xeno-trials-spatial-outro-v220.js';
+  createXenoTrialsTerminalV156, getXenoTrialsExitViewV157, skipXenoTrialsIntroV155, skipXenoTrialsOutroV155 } from '../src/xeno-trials-sequences-v155.js';
+import { createXenoPresentationV97, advanceXenoPresentationV97, getXenoPresentationViewV97 } from '../src/xeno-trials-presentation-v97.js';
+import { drawXenoTrialsArrivalV221, drawXenoTrialsSpatialOutroV220, getXenoTrialsArrivalViewV221 } from '../src/xeno-trials-spatial-outro-v220.js';
 
 function duel(playerId, opponentId, play = true) {
   const match = createXenoTrialsMatchV96({ playerId, opponentId, stageId: 'containment-deck', difficulty: 'easy', seed: 96001,
@@ -34,7 +35,7 @@ function finish(clock, frameMs = 100) {
 
 function texture(width, height) { return { complete: true, naturalWidth: width, naturalHeight: height }; }
 
-function prepare(match) {
+function textures(match) {
   const images = new Map();
   for (const fighter of match.fighters) {
     const art = getXenoTrialsArtV96(fighter.id, fighter.variant);
@@ -43,6 +44,11 @@ function prepare(match) {
       if (atlas) images.set(atlas.texture.path, texture(atlas.texture.width, atlas.texture.height));
     }
   }
+  return images;
+}
+
+function prepare(match) {
+  const images = textures(match);
   const winner = match.fighters.find(f => f.side === match.result.winner);
   const outro = finish(createXenoTrialsOutroV155(match, false, images));
   const terminal = createXenoTrialsTerminalV156(match, 'outro', false, outro, images);
@@ -113,4 +119,56 @@ test('V220 honors the loaded atlas, signed render participants, pause, skip, and
   images.set(participant.atlasPathV220, texture(1, 1));
   assert.equal(create(), null);
   assert.deepEqual(match, snapshot);
+});
+
+for (const [playerId, opponentId] of [['warrior', 'runner'], ['spitter', 'warrior']]) {
+  test(`V221 stages both ${playerId}/${opponentId} entrances without advancing the duel`, () => {
+    const match = createXenoTrialsMatchV96({ playerId, opponentId, introSeconds: 0 });
+    const baseline = structuredClone(match), images = textures(match);
+    const [player, opponent] = match.fighters;
+    let presentation = createXenoPresentationV97();
+    const view = (fighter, reduced = false) => getXenoTrialsArrivalViewV221(match, fighter,
+      getXenoPresentationViewV97(presentation), images, reduced);
+    const context = { save() {}, restore() {}, translate() {}, scale() {}, drawImage() {} };
+    const activeFrames = new Set();
+    const waiting = view(opponent);
+    assert.ok(waiting.waiting && waiting.x > opponent.x);
+    assert.ok(view(player).x < player.x);
+    assert.equal(view(player, true), null);
+    let previous = view(player).x;
+    while (presentation.phase === 'intro-player') {
+      const arrival = view(player);
+      assert.ok(arrival.x >= previous && arrival.x <= player.x);
+      assert.deepEqual(view(opponent), waiting);
+      const drawn = drawXenoTrialsArrivalV221(context, player, getXenoTrialsArtV96(player.id), images, arrival,
+        getXenoTrialsRenderMetricsV110(player.id));
+      assert.ok(drawn.supports.some(([, y]) => Math.abs(y - 450) < 5));
+      if (drawn.spriteAtlasV189) activeFrames.add(drawn.spriteAtlasV189.frameId);
+      previous = arrival.x;
+      const paused = advanceXenoPresentationV97(presentation, 100, true);
+      assert.equal(paused, presentation);
+      presentation = advanceXenoPresentationV97(presentation, 20);
+    }
+    assert.ok(activeFrames.size >= 3);
+    assert.equal(previous, player.x);
+    assert.equal(view(opponent).x, waiting.x);
+    assert.equal(view(opponent).waiting, false);
+    assert.equal(view(player), null);
+    while (presentation.elapsedMs < 400) presentation = advanceXenoPresentationV97(presentation, 100);
+    assert.ok(view(opponent).x < waiting.x && view(opponent).x > opponent.x);
+    presentation = skipXenoTrialsIntroV155(presentation);
+    assert.equal(presentation.phase, 'countdown');
+    assert.equal(view(opponent), null);
+    assert.deepEqual(match, baseline);
+  });
+}
+
+test('V221 leaves the previous render available when the admitted walking texture is missing', () => {
+  const match = createXenoTrialsMatchV96({ playerId: 'warrior', opponentId: 'runner', introSeconds: 0 });
+  const images = textures(match);
+  const phase = getXenoPresentationViewV97(createXenoPresentationV97());
+  const player = match.fighters[0];
+  const arrival = getXenoTrialsArrivalViewV221(match, player, phase, images);
+  images.delete(arrival.atlasPath);
+  assert.equal(getXenoTrialsArrivalViewV221(match, player, phase, images), null);
 });

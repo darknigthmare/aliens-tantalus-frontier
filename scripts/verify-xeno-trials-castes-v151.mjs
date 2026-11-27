@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { XENO_TRIALS_FIGHTERS_V96 as fighters, getXenoTrialsFighterV96 as definition } from '../src/xeno-trials-data-v96.js';
 import { XENO_TRIALS_CASTES_V151 as castes, XENO_TRIALS_CASTE_SOURCES_V151 as sources, getXenoTrialsCasteV151 as caste } from '../src/xeno-trials-castes-v151.js';
-import { getXenoTrialsSignatureV147 as signature, getXenoTrialsAttackV147 as spec, getXenoTrialsSpecialStyleV147 as style } from '../src/xeno-trials-signatures-v147.js';
+import { XENO_TRIALS_SIGNATURES_V147 as legacySignatures, getXenoTrialsSignatureV147 as signature, getXenoTrialsAttackV147 as spec, getXenoTrialsSpecialStyleV147 as style } from '../src/xeno-trials-signatures-v147.js';
 import { createXenoTrialsMatchV96 as create, stepXenoTrialsMatchV96 as step, nextXenoTrialsRoundV96 as next, setXenoTrialsPausedV96 as pause, XENO_TRIALS_ATTACKS_V96 as base } from '../src/xeno-trials-engine-v96.js';
 import { getXenoTrialsSuperV148 as superProfile } from '../src/xeno-trials-supers-v148.js';
 import { getXenoTrialsBodyBoundsV105 as bounds, resolveXenoTrialsBodiesV105 as resolve } from '../src/xeno-trials-geometry-v105.js';
@@ -33,7 +33,12 @@ test('four explicit Fireteam identities are separate from film, ACM and invented
   }
   for(const id of ['runner','spitter','drive-v123-afe-prowler','drive-v123-afe-burster','albino-burster','cryo-burster','acid-burster'])
     assert.equal(caste(definition(id)),null,id);
-  assert.equal(fighters.filter(f=>signature(f)).length,9);
+  const loader = definition('synth-automated-powerloader');
+  assert.equal(signature(loader)?.id, 'automated-powerloader-clamp-v221');
+  assert.equal(signature({ ...loader, profileId: 'wrong' }), null);
+  assert.equal(caste(loader), null);
+  assert.deepEqual(fighters.filter(f => signature(f)).map(f => f.id).sort(),
+    [...legacySignatures, ...castes].map(entry => entry.fighterId).concat(loader.id).sort());
 });
 for(const c of castes) {
   test(`${c.id}: exact action, cost, cooldown and held trigger`,()=>{

@@ -9,9 +9,12 @@ import { drawXenoTrialsPoseV209, getXenoTrialsPoseAssetsV209 } from '../src/xeno
 import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147 } from '../src/xeno-trials-signatures-v147.js';
 import { publicXenoPosePathAdmissionV209, verifyXenoPoseAdmissionsV209 } from './public-xeno-pose-admissions-v209.mjs';
 import { fileURLToPath } from 'node:url';
+import { getXenoTrialsAnimationCoverageV199, getXenoTrialsRuntimeAnimationCoverage } from '../src/xeno-trials-animation-coverage-v199.js';
 
 test('Arachnoid grey draws three reviewed source poses on the same grounded anchor and native heavy clock', () => {
-  const paths = getXenoTrialsPoseAssetsV209();
+  const fighter = { id: 'arachnoid', variant: 'grey', y: 0, stun: 0, attack: { id: 4, kind: 'heavy', age: .1, facing: -1 } };
+  const art = getXenoTrialsArtV96('arachnoid', 'grey');
+  const paths = getXenoTrialsPoseAssetsV209(fighter, art);
   const images = new Map(paths.map(path => [path, { naturalWidth: 1774, naturalHeight: 887, complete: true }]));
   for (const path of paths) {
     const current = readFileSync(new URL('..' + path, import.meta.url));
@@ -19,8 +22,6 @@ test('Arachnoid grey draws three reviewed source poses on the same grounded anch
   }
   const calls = [];
   const context = { save(){}, translate(){}, scale(...args){ calls.push(args); }, drawImage(...args){ calls.push(args); }, restore(){} };
-  const fighter = { id: 'arachnoid', variant: 'grey', y: 0, stun: 0, attack: { id: 4, kind: 'heavy', age: .1, facing: -1 } };
-  const art = getXenoTrialsArtV96('arachnoid', 'grey');
   const options = { spec: { startup: .23, active: .1, recovery: .39 }, groundedHeight: 136, ground: 450, x: 430 };
   for (const [age, phase] of [[.08, 'windup'], [.25, 'contact'], [.44, 'recovery']]) {
     fighter.attack.age = age;
@@ -86,5 +87,83 @@ test('only the grounded active pounce selects the Arachnoid grey plate in native
     assert.equal(drawXenoTrialsPoseV209(context, { ...active, ...change }, art, images, options), null);
   assert.equal(drawXenoTrialsPoseV209(context, active, { ...art, profileId: 'alternate' }, images, options), null);
   assert.equal(drawXenoTrialsPoseV209(context, active, art, new Map([[path, { ...image, naturalHeight: 888 }]]), options), null);
+  assert.equal(drawXenoTrialsPoseV209(context, active, art, images, { ...options, reducedMotion: true }), null);
+});
+
+test('Panther special admits exactly three reviewed V206 plates and advertises this grounded action only', () => {
+  const fighter = getXenoTrialsFighterV96('panther'), art = getXenoTrialsArtV96('panther');
+  const paths = getXenoTrialsPoseAssetsV209(fighter, art);
+  assert.deepEqual(paths.map(path => path.split('/').at(-1)),
+    ['panther-special-windup.png', 'panther-special-active.png', 'panther-special-recovery.png']);
+  for (const path of paths) {
+    const bytes = readFileSync(new URL('..' + path, import.meta.url));
+    assert.deepEqual(bytes, readFileSync(new URL('..' + path.replace('v209', 'v206'), import.meta.url)));
+    assert.deepEqual([bytes.readUInt32BE(16), bytes.readUInt32BE(20), bytes[25]], [1536, 1024, 6]);
+    assert.equal(publicXenoPosePathAdmissionV209(path.slice(1)), true);
+  }
+  const tribute = getXenoTrialsFighterV96('drive-v123-neca-panther-kenner-tribute-v14');
+  assert.deepEqual(getXenoTrialsPoseAssetsV209(tribute, getXenoTrialsArtV96(tribute.id)), []);
+  assert.deepEqual(getXenoTrialsPoseAssetsV209(fighter, { ...art, sha256: 'other' }), []);
+  assert.equal(publicXenoPosePathAdmissionV209(paths[0].slice(1).replace('special', 'light')), false);
+  const historical = getXenoTrialsAnimationCoverageV199(fighter);
+  const live = getXenoTrialsRuntimeAnimationCoverage(fighter);
+  assert.equal(historical.states.special.renderKind, 'static');
+  assert.equal(live.states.special.renderKind, 'drawn');
+  assert.deepEqual(live.states.special.sources[0].paths, paths);
+  assert.deepEqual(live.states.special.frameIds, ['windup', 'contact', 'recovery']);
+  assert.equal(live.fullAnimation, false);
+  assert.equal(live.canonExact, false);
+  assert.equal(getXenoTrialsRuntimeAnimationCoverage(tribute).states.special.renderKind, 'static');
+});
+
+test('Panther pounce plays all three grounded phases at one scale through a real hit and a miss', () => {
+  const definition = getXenoTrialsFighterV96('panther'), art = getXenoTrialsArtV96('panther');
+  const paths = getXenoTrialsPoseAssetsV209(definition, art);
+  const spec = getXenoTrialsAttackV147(definition, 'special', XENO_TRIALS_ATTACKS_V96.special);
+  assert.equal(getXenoTrialsSpecialStyleV147(definition), 'pounce');
+  const image = { naturalWidth: 1536, naturalHeight: 1024, complete: true };
+  const images = new Map(paths.map(path => [path, image]));
+  const rects = [[82, 58, 1396, 894], [50, 56, 1454, 900], [89, 51, 1356, 929]];
+  const calls = [];
+  const context = { save() {}, translate() {}, scale(...args) { calls.push(args); }, drawImage(...args) { calls.push(args); }, restore() {} };
+  for (const [gap, shouldHit] of [[150, true], [180, false]]) {
+    const match = createXenoTrialsMatchV96({ playerId: 'panther', opponentId: 'warrior', introSeconds: 0 });
+    const [actor, rival] = match.fighters;
+    rival.x += getXenoTrialsBodyBoundsV105(actor).right + gap - getXenoTrialsBodyBoundsV105(rival).left;
+    const initialX = actor.x, hp = rival.hp;
+    const noDraw = structuredClone(match);
+    const seen = new Set();
+    const options = { spec, groundedHeight: art.sourceHeight, ground: 450, x: actor.x };
+    for (let tick = 1; tick <= 120; tick++) {
+      const controls = { special: tick === 1 };
+      stepXenoTrialsMatchV96(match, XENO_TRIALS_STEP_V96, controls, {});
+      stepXenoTrialsMatchV96(noDraw, XENO_TRIALS_STEP_V96, controls, {});
+      const receipt = drawXenoTrialsPoseV209(context, actor, art, images, { ...options, x: actor.x });
+      assert.equal(Boolean(receipt), Boolean(actor.attack));
+      if (!receipt) continue;
+      assert.equal(actor.y, 0);
+      assert.equal(receipt.animation, 'three-painted-panther-pounce-poses');
+      const age = actor.attack.age, phase = age < spec.startup ? 0 : age < spec.startup + spec.active ? 1 : 2;
+      seen.add(receipt.poseV209.phase);
+      assert.equal(receipt.poseV209.path, paths[phase]);
+      assert.equal(receipt.poseV209.attackId, actor.attack.id);
+      assert.deepEqual(receipt.poseV209.sourceRect, rects[phase]);
+      const draw = calls.at(-1);
+      assert.equal(draw[6] + draw[8], 0);
+      assert.equal(draw[7], rects[phase][2] * .77);
+    }
+    assert.deepEqual([...seen], ['windup', 'contact', 'recovery']);
+    assert.ok(actor.x > initialX);
+    assert.equal(rival.hp < hp, shouldHit);
+    assert.deepEqual(match, noDraw);
+  }
+
+  const active = { id: definition.id, variant: null, y: 0, stun: 0, attack: { kind: 'special', id: 1, age: spec.startup, facing: -1 } };
+  const options = { spec, groundedHeight: art.sourceHeight, ground: 450, x: 430 };
+  assert.ok(drawXenoTrialsPoseV209(context, active, art, images, options));
+  assert.deepEqual(calls.at(-2), [-1, 1]);
+  assert.equal(drawXenoTrialsPoseV209(context, { ...active, y: 1 }, art, images, options), null);
+  assert.equal(drawXenoTrialsPoseV209(context, { ...active, attack: { ...active.attack, kind: 'signature-2' } }, art, images, options), null);
+  assert.equal(drawXenoTrialsPoseV209(context, active, art, new Map(), options), null);
   assert.equal(drawXenoTrialsPoseV209(context, active, art, images, { ...options, reducedMotion: true }), null);
 });

@@ -4,14 +4,16 @@ import { readFileSync } from 'node:fs';
 import { XENO_TRIALS_FIGHTERS_V96 as fighters, getXenoTrialsFighterV96 as definition } from '../src/xeno-trials-data-v96.js';
 import { createXenoTrialsMatchV96 as create, stepXenoTrialsMatchV96 as step, nextXenoTrialsRoundV96 as next,
   setXenoTrialsPausedV96 as pause, getXenoTrialsSnapshotV96 as snapshot, XENO_TRIALS_ATTACKS_V96 as base } from '../src/xeno-trials-engine-v96.js';
-import { getXenoTrialsBodyBoundsV105 as bounds } from '../src/xeno-trials-geometry-v105.js';
+import { getXenoTrialsBodyBoundsV105 as bounds, getXenoTrialsBodyGapV105 as gap } from '../src/xeno-trials-geometry-v105.js';
 import { getXenoTrialsAttackV147 as spec, getXenoTrialsSignatureV147, XENO_TRIALS_SIGNATURE_SOURCES_V147 } from '../src/xeno-trials-signatures-v147.js';
+import { XENO_TRIALS_PARRY_V208 } from '../src/xeno-trials-defense-v208.js';
 import { getSynthTrialAttackV110 } from '../src/synth-combat-v110.js';
 import { XENO_TRIALS_SUPERS_V148 as supers, getXenoTrialsSuperV148 as profile,
   getXenoTrialsSuperReadinessV148 as ready, getXenoTrialsSuperMeterV148 as meter,
   addXenoTrialsSuperMeterV148 as addMeter, awardXenoTrialsContactMeterV148 as award,
   getXenoTrialsSuperStatusV148 as label } from '../src/xeno-trials-supers-v148.js';
 import { createXenoTrialsRuntimeV96 } from '../src/xeno-trials-runtime-v96.js';
+import { createXenoTrialsPracticeV207, getXenoTrialsPracticeConfigV207 } from '../src/xeno-trials-practice-v207.js';
 import { XenoTrialsUiV96 } from '../src/xeno-trials-ui-v96.js';
 import { createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
 import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210, XENO_TRIALS_SUPER_KITS_V211 } from '../src/xeno-trials-super-kits-v209.js';
@@ -28,6 +30,14 @@ function close(m, gap = 4) {
 function full(m, side = 0) { m.fighters[side].superMeterV148=100; return m; }
 const count = (m, kind = 'super', side = 'player') => m.events.filter(e=>e.type==='attack'&&e.side===side&&e.kind===kind).length;
 const projectiles = m => m.projectiles.filter(p=>p.superIdV148);
+
+function chargedSandbox(playerId = 'warrior', opponentId = 'runner') {
+  const settings = { playerId, opponentId, behavior: 'idle', readySupers: true };
+  const match = create({ ...getXenoTrialsPracticeConfigV207('sandbox', settings), introSeconds: 0 });
+  assert.ok(createXenoTrialsPracticeV207('sandbox', match, settings));
+  assert.ok(match.fighters.every(fighter => meter(fighter) === 100));
+  return match;
+}
 
 test('five immutable supers are original simulation extensions on exact fighter/profile pairs only', () => {
   assert.equal(supers.length,5); assert.equal(new Set(supers.map(s=>s.id)).size,5);
@@ -110,6 +120,49 @@ test('both fighters must release a held super after the opening twenty-second re
   const m=make(WARDEN,{opponentId:WARDEN,rulesV119:{specialLockSeconds:20}});full(m);full(m,1);
   tick(m,20.2,{super:true},{super:true});assert.equal(count(m),0);assert.equal(count(m,'super','opponent'),0);
   tick(m,.02);tick(m,.02,{super:true},{super:true});assert.equal(count(m),1);assert.equal(count(m,'super','opponent'),1);
+});
+for (const action of ['evade', 'parry']) test(`the charged Super I reports busy during a native ${action} and waits for a fresh input`, () => {
+  const m = chargedSandbox(), [actor] = m.fighters, d = definition(actor.id);
+  assert.equal(ready(m, actor, d).ready, true);
+  step(m, 1 / 120, { [action]: true }, {});
+  assert.ok(action === 'evade' ? actor.movesetV207?.evade : actor.parryV208?.started);
+  assert.equal(ready(m, actor, d).reason, 'busy');
+  tick(m, .8, { super: true });
+  assert.equal(count(m), 0);
+  assert.equal(meter(actor), 100);
+  assert.equal(ready(m, actor, d).ready, true);
+  step(m, 1 / 120, {}, {});
+  step(m, 1 / 120, { super: true }, {});
+  assert.equal(count(m), 1);
+  assert.equal(meter(actor), 0);
+});
+test('a captive with a full meter remains busy even after their hit stun expires', () => {
+  const m = chargedSandbox('warrior', 'import-game-dd-wy-commando'), [actor, captive] = m.fighters;
+  for (let i = 0; i < 600 && gap(actor, captive) > 4; i++) step(m, 1 / 120, { right: true }, {});
+  assert.ok(gap(actor, captive) <= 4);
+  step(m, 1 / 120, { guard: true, heavy: true }, {});
+  for (let i = 0; i < 120 && !m.grappleV153; i++) step(m, 1 / 120, {}, {});
+  assert.equal(m.grappleV153?.target, 'opponent');
+  for (let i = 0; i < 80 && captive.stun > 0; i++) step(m, 1 / 120, {}, {});
+  assert.equal(captive.stun, 0);
+  assert.equal(m.grappleV153?.target, 'opponent');
+  assert.equal(ready(m, captive, definition(captive.id)).reason, 'busy');
+  step(m, 1 / 120, {}, { super: true });
+  assert.equal(count(m, 'super', 'opponent'), 0);
+  assert.equal(meter(captive), 100);
+});
+test('a committed ground pivot marks Super I busy only for its native turn', () => {
+  const m = chargedSandbox('queen'), [actor, target] = m.fighters, d = definition(actor.id);
+  target.x = actor.x - 130; // Deterministic target placement before the native pivot.
+  step(m, 1 / 120, {}, {});
+  assert.equal(actor.movementV210?.kind, 'ground-turn');
+  assert.equal(ready(m, actor, d).reason, 'busy');
+  tick(m, .1, { super: true });
+  assert.equal(count(m), 0);
+  assert.equal(ready(m, actor, d).ready, true);
+  step(m, 1 / 120, {}, {});
+  step(m, 1 / 120, { super: true }, {});
+  assert.equal(count(m), 1);
 });
 test('jump and guard take precedence over a grounded-only super pressed in the same frame', () => {
   for(const control of ['jump','guard']) {
@@ -207,12 +260,12 @@ test('full-meter CPU still respects the no-special restriction and never uses a 
 
 function target(extra={}){const events=new Map();return Object.assign({addEventListener(t,f){if(!events.has(t))events.set(t,new Set());events.get(t).add(f);},
  removeEventListener(t,f){events.get(t)?.delete(f);},emit(t,e={}){for(const f of [...(events.get(t)||[])])f({preventDefault(){},stopPropagation(){},...e});}},extra);}
-function host(id=WARDEN){const text=[],queue=new Map();let serial=0,time=0;
+function host(id=WARDEN, options={}){const text=[],queue=new Map();let serial=0,time=0;
  const ctx=new Proxy({fillText:t=>text.push(t),measureText:t=>({width:String(t).length*6}),createLinearGradient:()=>({addColorStop(){}})}, {get:(o,k)=>o[k]??(()=>{})});
  const win=target(),doc=target({hidden:false,hasFocus:()=>true}),root=target({contains:b=>b?.control===true});
  const canvas=target({tagName:'CANVAS',width:1000,height:560,getContext:()=>ctx,setAttribute(){},focus(){doc.activeElement=this;},closest:()=>null});doc.activeElement=canvas;
  const runtime=createXenoTrialsRuntimeV96({canvas,window:win,document:doc,controlsRoot:root,config:{playerId:id,opponentId:'warrior',seed:148,roundSeconds:99},
- loadImage:async()=>({naturalWidth:1024,naturalHeight:1024}),requestAnimationFrame:f=>{queue.set(++serial,f);return serial;},cancelAnimationFrame:n=>queue.delete(n)});
+ loadImage:async()=>({naturalWidth:1024,naturalHeight:1024}),requestAnimationFrame:f=>{queue.set(++serial,f);return serial;},cancelAnimationFrame:n=>queue.delete(n),...options});
  const frame=()=>{time+=1000/120;const pending=[...queue.values()];queue.clear();pending.forEach(f=>f(time));};
  return {runtime,win,doc,root,canvas,frame,text,queue,async start(){await runtime.start();for(let i=0;i<1200&&runtime.getState().presentation.blocksSimulation;i++)frame();frame();}};
 }
@@ -231,6 +284,27 @@ test('snapshots and native canvas expose the correct meter without changing its 
  const h=host();await h.start();const state=h.runtime.getState();assert.equal(state.supersV148[0].id,profile(definition(WARDEN)).id);
  assert.equal(state.supersV148[0].meter,0);assert.equal(state.supersV148[1].id,'warrior::super1');assert.equal(state.supersV148[1].meter,0);
  assert.ok(h.text.some(t=>t.startsWith('SUPER 0 / 100')));const before=h.runtime.getState();h.runtime.getState();assert.deepEqual(h.runtime.getState(),before);h.runtime.stop();
+});
+test('the runtime publishes both edges of a brief parry to the charged Super I HUD', async () => {
+  const settings = { playerId: WARDEN, opponentId: 'warrior', behavior: 'idle', readySupers: true };
+  const updates = [];
+  const h = host(WARDEN, { config: getXenoTrialsPracticeConfigV207('sandbox', settings),
+    practiceV207: 'sandbox', practiceSandboxV208: settings, onState: state => updates.push(state) });
+  try {
+    await h.start();
+    assert.equal(updates.at(-1).supersV148[0].ready, true);
+    h.win.emit('keydown', { target: h.canvas, code: 'KeyV' });
+    for (let i = 0; i < 3 && !h.runtime.getState().fighters[0].parryV208?.started; i++) h.frame();
+    const inParry = h.runtime.getState();
+    assert.ok(inParry.fighters[0].parryV208?.started);
+    assert.equal(updates.at(-1).tick, inParry.tick);
+    assert.equal(updates.at(-1).supersV148[0].reason, 'busy');
+    assert.equal(updates.at(-1).supersV148[0].meter, 100);
+    h.win.emit('keyup', { target: h.canvas, code: 'KeyV' });
+    for (let i = 0; i < 10 && h.runtime.getState().fighters[0].parryV208?.started; i++) h.frame();
+    assert.equal(updates.at(-1).supersV148[0].ready, true);
+    assert.equal(updates.at(-1).tick, inParry.fighters[0].parryV208.started + XENO_TRIALS_PARRY_V208.activeTicks);
+  } finally { h.runtime.stop(); }
 });
 test('HTML meter and control are pilot-specific and rendering performs no resource transaction',()=>{
  const els=new Map(),makeEl=()=>({hidden:false,value:0,max:0,textContent:'',attrs:{},setAttribute(k,v){this.attrs[k]=v;},focus(){}});

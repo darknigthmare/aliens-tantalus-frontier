@@ -102,7 +102,7 @@ export function getXenoTrialsNeutralFinishersV211(match, attacker, target) {
 
 export function drawXenoTrialsNeutralFinisherV211(ctx, stageId, view, reducedMotion) {
   const lock = view?.lock.neutral ? view.lock : null;
-  const active = lock && !reducedMotion && view.gain > 0 && (!lock.approachV212 || view.contact) ? lock : null;
+  const active = lock && !lock.withdrawalV221 && !reducedMotion && view.gain > 0 && (!lock.approachV212 || view.contact) ? lock : null;
   const fixtures = getXenoTrialsIsolationFixturesV211(stageId);
   for (const fixture of fixtures) {
     const engaged = active?.fixture === fixture;

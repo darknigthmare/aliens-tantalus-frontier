@@ -3,7 +3,8 @@ import {getXenoTrialsBodyBoundsV105} from './xeno-trials-geometry-v105.js';
 import {getArbiterOperationV191} from './xeno-arbiter-protocols-v191.js';
 import {getXenoTrialsIsolationOperationV212,XENO_TRIALS_ISOLATION_OPERATIONS_V212} from './xeno-trials-stage-isolation-v212.js';
 import {XENO_TRIALS_CARGO_OPERATION_V213} from './xeno-trials-cargo-interlock-v213.js';
-import {XENO_TRIALS_HORDE_LIMITS_V180} from './xeno-trials-horde-v180.js';
+import {getXenoTrialsHordeProtocolV180,XENO_TRIALS_HORDE_LIMITS_V180} from './xeno-trials-horde-v180.js';
+import {getXenoTrialsHordeBossViewV186} from './xeno-trials-horde-bosses-v186.js';
 
 // Original Tantalus objective simulations. The existing horde supplies pressure;
 // physical objectives decide the outcome independently of the remaining kills.
@@ -74,10 +75,21 @@ export const XENO_TRIALS_RELIEF_OPERATION_V220=freeze({
   {id:'relief-east',kind:'terminal',label:'Poste est',x:1150,y:0,radius:90,requiredTicks:78}
  ],canonExact:false,canonStatus:'original-tantalus-simulation',revision:220
 });
+const bypassOrders='Neutralisez le vigile, puis alimentez le volet du hangar depuis le poste de dérivation. Rejoignez la borne de sortie après son ouverture.';
+export const XENO_TRIALS_BYPASS_OPERATION_V221=freeze({
+ id:'xto221-hangar-bypass',kind:'relay',title:'DÉRIVATION DU HANGAR',label:'DÉRIVATION DU HANGAR',stageId:'xt179-hangar',
+ hordeProtocolId:'xth221-hangar-watch',difficulty:'easy',factionId:'containment',roundSeconds:170,reward:540,
+ instruction:bypassOrders,description:bypassOrders,startX:390,cargoStartX:390,cargoEndX:390,bypassOpeningTicksV221:72,
+ objectives:[
+  {id:'hangar-bypass',kind:'terminal',label:'Poste de dérivation',x:390,y:0,radius:96,requiredTicks:96},
+  {id:'hangar-exit',kind:'terminal',label:'Borne de sortie',x:1125,y:0,radius:98,requiredTicks:90}
+ ],canonExact:false,canonStatus:'original-tantalus-simulation',revision:221
+});
 export const XENO_TRIALS_OPERATION_BOARD_V212=Object.freeze([...XENO_TRIALS_ISOLATION_OPERATIONS_V212,...XENO_TRIALS_OPERATIONS_V188]);
-export const XENO_TRIALS_OPERATION_BOARD_V213=Object.freeze([XENO_TRIALS_RELAY_OPERATION_V218,XENO_TRIALS_BEACON_OPERATION_V219,XENO_TRIALS_RELIEF_OPERATION_V220,
+export const XENO_TRIALS_OPERATION_BOARD_V213=Object.freeze([XENO_TRIALS_RELAY_OPERATION_V218,XENO_TRIALS_BEACON_OPERATION_V219,XENO_TRIALS_RELIEF_OPERATION_V220,XENO_TRIALS_BYPASS_OPERATION_V221,
  XENO_TRIALS_CARGO_OPERATION_V213,...XENO_TRIALS_OPERATION_BOARD_V212]);
-export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_RELIEF_OPERATION_V220.id ? XENO_TRIALS_RELIEF_OPERATION_V220
+export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_BYPASS_OPERATION_V221.id ? XENO_TRIALS_BYPASS_OPERATION_V221
+ :id===XENO_TRIALS_RELIEF_OPERATION_V220.id ? XENO_TRIALS_RELIEF_OPERATION_V220
  :id===XENO_TRIALS_BEACON_OPERATION_V219.id ? XENO_TRIALS_BEACON_OPERATION_V219
  :id===XENO_TRIALS_RELAY_OPERATION_V218.id ? XENO_TRIALS_RELAY_OPERATION_V218
  :id===XENO_TRIALS_CARGO_OPERATION_V213.id ? XENO_TRIALS_CARGO_OPERATION_V213
@@ -85,7 +97,8 @@ export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_RELIEF_OPERATION_V2
 export const XENO_TRIALS_OPERATION_LIMITS_V188=freeze({schema:188,maxObjectives:3,ticksPerSecond:120,maxIntegrity:100,cargoPressureTicks:120,purgePressureTicks:240,purgeRegrowTicks:18});
 const stateKeys=['schema','operationId','matchId','seed','status','failureReason','elapsedTicks','startedTick','lastTick','completedTick','progress','completed','integrity','cargoTravelTicks','cargoX','carrying','delivered','depotTicks','exitTicks'];
 const batteryStateKeys=[...stateKeys,'batteryStartedTickV219'];
-const stateKeysFor=entry=>entry?.batteryTicksV219?batteryStateKeys:stateKeys;
+const bypassStateKeys=[...stateKeys,'bypassStartedTickV221'];
+const stateKeysFor=entry=>entry?.bypassOpeningTicksV221?bypassStateKeys:entry?.batteryTicksV219?batteryStateKeys:stateKeys;
 const integer=(value,min,max)=>Number.isSafeInteger(value)&&value>=min&&value<=max;
 const record=value=>value&&typeof value==='object'&&!Array.isArray(value);
 function configEntry(config){
@@ -99,7 +112,7 @@ export function createXenoTrialsOperationStateV188(id,config){
  return{schema:188,operationId:id,matchId:config.matchId,seed:config.seed,status:'active',failureReason:null,
   elapsedTicks:0,startedTick:0,lastTick:0,completedTick:null,progress:entry.objectives.map(()=>0),completed:entry.objectives.map(()=>false),
   integrity:100,cargoTravelTicks:0,cargoX:entry.cargoStartX,carrying:-1,delivered:entry.objectives.map(()=>false),depotTicks:0,exitTicks:0,
-  ...(entry.batteryTicksV219?{batteryStartedTickV219:null}:{})};
+  ...(entry.batteryTicksV219?{batteryStartedTickV219:null}:{}),...(entry.bypassOpeningTicksV221?{bypassStartedTickV221:null}:{})};
 }
 function nearby(player,target){
  if(!player||player.hp<=0||player.y!==0||!Number.isFinite(player.x))return false;
@@ -118,6 +131,29 @@ function reliefWindow(match){
  if(horde?.phase==='intermission'&&horde.nextWaveTick>match.tick)
   return {phase:'relief',open:true,remainingTicks:horde.nextWaveTick-match.tick};
  return {phase:'combat',open:false,remainingTicks:null};
+}
+function isHangarWatchDefeated(match,entry){
+ const horde=match.hordeV180;
+ if(horde?.protocolId!==entry.hordeProtocolId)return false;
+ const protocol=getXenoTrialsHordeProtocolV180(horde.protocolId);
+ if(Array.isArray(match.fighters))return getXenoTrialsHordeBossViewV186(protocol,horde,match.fighters)?.defeated===true;
+ // Progression validates a result summary, while checkpoints carry the actual
+ // native slots. Require the authored boss identity on the terminal receipt.
+ const boss=protocol.bossFinaleV186,receipt=horde.bossFinaleV186;
+ const preceding=protocol.waves.slice(0,boss.wave-1).reduce((count,wave)=>count+wave.total,0);
+ return receipt?.defeated===true&&receipt.phase==='defeated'&&receipt.hp===0&&receipt.instanceId===null
+  &&receipt.fighterId===boss.fighterId&&receipt.maxHp===boss.hp&&receipt.wave===boss.wave
+  &&horde.wavesCleared>=boss.wave-1&&horde.kills>preceding;
+}
+function hangarBypassStatus(state,match,entry){
+ const startedTick=state.bypassStartedTickV221;
+ if(startedTick===null)return {phase:isHangarWatchDefeated(match,entry)?'ready':'locked',opening:0};
+ const opening=clamp((match.tick-startedTick)/entry.bypassOpeningTicksV221,0,1);
+ return {phase:opening===1?'open':'opening',opening};
+}
+export function getXenoTrialsHangarBypassV221(match){
+ const state=match?.operationV188,entry=XENO_TRIALS_BYPASS_OPERATION_V221;
+ return state?.operationId===entry.id?hangarBypassStatus(state,match,entry):null;
 }
 function windowOpen(objective,ticks){
  const phase=ticks%objective.periodTicks;
@@ -176,6 +212,7 @@ export function stepXenoTrialsOperationV188(state,match,dt,input={},emit=null){
  const charging=index=>interact&&nearby(player,entry.objectives[index]);
  const complete=index=>{state.completed[index]=true;state.progress[index]=entry.objectives[index].requiredTicks;
   if(entry.batteryTicksV219&&state.batteryStartedTickV219===null)state.batteryStartedTickV219=state.lastTick;
+  if(entry.bypassOpeningTicksV221&&index===0)state.bypassStartedTickV221=state.lastTick;
   emit?.('operation-objective-v188',{operationId:entry.id,objectiveId:entry.objectives[index].id,index});};
  if(entry.kind==='escort'){
   const cargo={x:state.cargoX,radius:entry.objectives[0].radius};
@@ -188,7 +225,9 @@ export function stepXenoTrialsOperationV188(state,match,dt,input={},emit=null){
   const index=state.completed.findIndex(value=>!value);
   if(index>=0){
    const objective=entry.objectives[index];
-   const canCharge=charging(index)&&(!entry.relayPressureV218||!relayContested(match,objective));
+   const bypass=entry.bypassOpeningTicksV221?hangarBypassStatus(state,match,entry):null;
+   const canCharge=charging(index)&&(!entry.relayPressureV218||!relayContested(match,objective))
+    &&(!bypass||bypass.phase===(index===0?'ready':'open'));
    if(entry.reliefV220&&!reliefWindow(match).open)state.progress[index]=0;
    else state.progress[index]=canCharge?state.progress[index]+1:Math.max(0,state.progress[index]-2);
    if(state.progress[index]>=objective.requiredTicks)complete(index);
@@ -255,6 +294,15 @@ export function validateXenoTrialsOperationSnapshotV188(state,config,match=null)
   const next=state.completed.findIndex(value=>!value);
   if(next>=0&&state.progress.slice(next+1).some(value=>value!==0))return false;
   if(state.progress.reduce((sum,value)=>sum+value,0)>state.elapsedTicks)return false;
+  if(entry.bypassOpeningTicksV221){
+   const started=state.bypassStartedTickV221;
+   const mayHold=match===null||isHangarWatchDefeated(match,entry);
+   if(!mayHold&&state.progress[0]>0)return false;
+   const timingMatches=state.completed[0]?integer(started,state.startedTick+entry.objectives[0].requiredTicks,state.lastTick):started===null;
+   if(!timingMatches)return false;
+   // Charge is possible on the first fully open tick, including that tick.
+   if(state.progress[1]>0&&state.progress[1]>state.lastTick-started-entry.bypassOpeningTicksV221+1)return false;
+  }
   if(entry.reliefV220&&match){
    const cleared=match.hordeV180?.wavesCleared,secured=doneCount(state);
    if(!Number.isSafeInteger(cleared)||secured>cleared)return false;
@@ -300,8 +348,9 @@ export function isXenoTrialsOperationForwardV188(previous,next){
   ||next.lastTick<previous.lastTick||next.elapsedTicks<previous.elapsedTicks||next.integrity>previous.integrity
   ||next.cargoTravelTicks<previous.cargoTravelTicks||previous.status!=='active'&&next.status!==previous.status)return false;
  const entry=getXenoTrialsOperationV188(previous.operationId);
- if(entry?.batteryTicksV219){
-  const start=previous.batteryStartedTickV219,nextStart=next.batteryStartedTickV219;
+ const timingKey=entry?.bypassOpeningTicksV221?'bypassStartedTickV221':entry?.batteryTicksV219?'batteryStartedTickV219':null;
+ if(timingKey){
+  const start=previous[timingKey],nextStart=next[timingKey];
   if(start!==null?nextStart!==start:nextStart!==null&&!(nextStart>previous.lastTick))return false;
  }
  if(next.lastTick===previous.lastTick)return stateKeysFor(entry).every(key=>JSON.stringify(previous[key])===JSON.stringify(next[key]));
@@ -314,6 +363,7 @@ export function getXenoTrialsOperationViewV188(match){
  const state=match?.operationV188,entry=getXenoTrialsOperationV188(state?.operationId);if(!entry)return null;
  const nextRelay=entry.kind==='relay'?state.completed.findIndex(done=>!done):-1;
  const relief=entry.reliefV220?reliefWindow(match):null;
+ const bypass=entry.bypassOpeningTicksV221?getXenoTrialsHangarBypassV221(match):null;
  let entities=entry.objectives.map((objective,index)=>{
   const active=!state.completed[index]&&(entry.kind!=='relay'||index===nextRelay);
   return {...objective,active,completed:state.completed[index],progress:state.progress[index],
@@ -347,15 +397,18 @@ export function getXenoTrialsOperationViewV188(match){
   ...(entry.isolationV212?{isolationV212:true}:{}),
   ...(entry.relayPressureV218?{relayPressureV218:true}:{}),
   ...(relief?{reliefV220:relief}:{}),
+  ...(bypass?{bypassV221:bypass}:{}),
   ...(entry.batteryTicksV219?{batteryV219:{...batteryStatus(state,entry),depleted:state.failureReason==='structure-destroyed'}}:{}),
   instruction:entry.instruction,hint:state.status==='failed'?`Évaluation interrompue : ${failureLabel}.`:state.status==='completed'?'Objectifs validés.':
    target?.contested?'Écartez ou neutralisez les contacts dans le périmètre balisé.':
    relief&&!relief.open?'Placez-vous près du poste avant de neutraliser le dernier contact.':
+   bypass?.phase==='locked'?'Neutralisez le vigile pour déverrouiller le poste.':
+   bypass?.phase==='opening'?'Attendez la fin de l’ouverture du volet.':
    target?`${target.label} · maintenez E à proximité${target.windowOpen===false?' pendant la fenêtre verte':''}.`:'Rejoignez le sas.',
   progress:{done,total:entry.objectives.length,label:entry.kind==='extraction'?`${done}/${entry.objectives.length} caissons livrés`:`${done}/${entry.objectives.length} objectifs validés`},
   timeRemaining:Math.max(0,entry.roundSeconds-state.elapsedTicks/120),integrity:state.integrity,carrying:state.carrying,entities,
   target:target?{x:target.x,radius:target.radius,label:target.label,
    ...(entry.kind==='beacon'?{id:target.id,windowOpen:target.windowOpen,windowRemainingTicks:target.windowRemainingTicks}:{}),
    ...(entry.relayPressureV218?{contested:target.contested}:{}),
-   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212||entry.relayPressureV218||relief?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
+   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212||entry.relayPressureV218||relief||bypass?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
 }

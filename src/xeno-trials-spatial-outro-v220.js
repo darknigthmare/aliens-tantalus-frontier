@@ -4,14 +4,10 @@ import { getXenoTrialsRenderMetricsV110 } from './xeno-trials-scale-v110.js';
 import { drawXenoTrialsSpriteAtlasV188, getXenoTrialsSpriteAtlasV188 } from './xeno-trials-sprite-atlas-v188.js';
 import { drawXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteLayoutV189 } from './xeno-trials-sprite-atlas-v189.js';
 
-const eligible = new Set(['warrior', 'runner', 'spitter']);
+const walkDistancesV221 = Object.freeze({ warrior: 58, runner: 62, spitter: 48 });
 
-function winnerPlates(match, fighter) {
-  if (!eligible.has(fighter.id) || match.phase !== 'match-over' || match.result?.completed !== true
-    || match.result.reason === 'double-ko' || fighter.side !== match.result.winner
-    || match.result.matchId !== match.config.matchId || match.result.durationTicks !== match.tick
-    || match.result[`${fighter.side}Id`] !== fighter.id || match.fighters.length !== 2
-    || match.hordeV180 || match.operationV188 || fighter.y !== 0 || !(fighter.hp > 0)
+function walkPlates(fighter) {
+  if (!Object.hasOwn(walkDistancesV221, fighter.id) || fighter.y !== 0 || !(fighter.hp > 0)
     || !Number.isFinite(fighter.x) || ![-1, 1].includes(fighter.facing)) return null;
   const art = getXenoTrialsArtV96(fighter.id, fighter.variant);
   const motion = getXenoTrialsSpriteAtlasV189(fighter, art);
@@ -20,10 +16,43 @@ function winnerPlates(match, fighter) {
   return { art, motion, idle };
 }
 
+function winnerPlates(match, fighter) {
+  if (match.phase !== 'match-over' || match.result?.completed !== true
+    || match.result.reason === 'double-ko' || fighter.side !== match.result.winner
+    || match.result.matchId !== match.config.matchId || match.result.durationTicks !== match.tick
+    || match.result[`${fighter.side}Id`] !== fighter.id || match.fighters.length !== 2
+    || match.hordeV180 || match.operationV188) return null;
+  return walkPlates(fighter);
+}
+
 function loaded(images, atlas) {
   const image = images?.get(atlas.texture.path);
   return image && image.complete !== false && image.naturalWidth === atlas.texture.width
     && image.naturalHeight === atlas.texture.height;
+}
+
+/** The two entries share the frozen presentation clock. Waiting at the outer
+ * mark from the first frame keeps the second competitor's entry continuous. */
+export function getXenoTrialsArrivalViewV221(match, fighter, presentation, images, reducedMotion = false) {
+  const slot = match.fighters.indexOf(fighter), current = presentation.fighterSlot;
+  if (reducedMotion || match.hordeV180 || match.operationV188 || match.phase !== 'active' || match.round !== 1
+    || match.tick !== 0 || !presentation.blocksSimulation || ![0, 1].includes(current) || slot < current
+    || !Number.isFinite(presentation.elapsedMs) || !(presentation.durationMs > 0)) return null;
+  const plates = walkPlates(fighter);
+  if (!plates || !loaded(images, plates.motion) || !loaded(images, plates.idle)) return null;
+  const total = walkDistancesV221[fighter.id], mark = fighter.x - fighter.facing * total;
+  const progress = slot === current ? Math.min(1, Math.max(0, (presentation.elapsedMs / presentation.durationMs - .08) / .82)) : 0;
+  const eased = progress * progress * (3 - 2 * progress);
+  const distance = total * eased;
+  return { mark, x: progress === 1 ? fighter.x : mark + fighter.facing * distance, distance,
+    waiting: slot !== current, moving: progress > 0 && progress < 1, fighterSlot: slot, atlasPath: plates.motion.texture.path };
+}
+
+export function drawXenoTrialsArrivalV221(context, fighter, art, images, view, metrics) {
+  const options = { metrics, x: view.x, y: 450, facing: fighter.facing };
+  const drawn = view.moving ? drawXenoTrialsSpriteAtlasV189(context, fighter, art, images,
+    { ...options, moving: true, distance: view.distance }) : drawXenoTrialsSpriteAtlasV188(context, fighter, art, images, options);
+  return drawn && { ...drawn, arrivalV221: view };
 }
 
 export function createXenoTrialsDrawnExitV220(match, fighter, terminal, camera, images, direction, maxTravelMs) {

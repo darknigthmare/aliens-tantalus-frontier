@@ -82,7 +82,12 @@ test('V204 adds specific attacks while retaining Smasher ground animation and Ki
   assert.equal(getXenoTrialsRuntimeActionAtlases(rogue, rogueArt)[0].revision, 204);
   assert.deepEqual(getXenoTrialsRuntimeActionAtlases(rogue, { ...rogueArt, sha256: '0'.repeat(64) }), []);
   const coverage = XENO_TRIALS_FIGHTERS_V96.map(getXenoTrialsRuntimeAnimationCoverage);
-  assert.equal(coverage.filter(entry => entry.hasDrawnGestures).length, 37);
+  const panther = getXenoTrialsRuntimeAnimationCoverage('panther');
+  const pantherPounce = panther.states.special.sources.find(source => source.id === 'panther-pounce');
+  assert.equal(pantherPounce?.revision, 221);
+  assert.deepEqual(pantherPounce.frameIds, ['windup', 'contact', 'recovery']);
+  assert.equal(panther.hasDrawnGestures, true);
+  assert.equal(coverage.filter(entry => entry !== panther && entry.hasDrawnGestures).length, 37);
   assert.equal(coverage.filter(entry => entry.states.guard.sources.some(source => source.revision === 204)).length, 20);
   const rogueCoverage = getXenoTrialsRuntimeAnimationCoverage(rogue);
   assert.equal(rogueCoverage.states.guard.renderKind, 'mesh');

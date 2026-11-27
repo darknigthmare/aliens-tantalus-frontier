@@ -1,6 +1,7 @@
 import { getXenoTrialsHordeGateCueV213, getXenoTrialsHordeMinigameV213 } from './xeno-trials-horde-minigames-v213.js';
 import { getXenoTrialsReinforcementV201 } from './xeno-trials-reinforcements-v201.js';
 import { getXenoTrialsBossStageV179 } from './xeno-trials-boss-stages-v179.js';
+import { getXenoTrialsHangarBypassV221 } from './xeno-trials-operations-v188.js';
 
 // The V146 proposed rows map to the stage that now represents each room.
 // These are scene fixtures drawn behind the fight, not colliders or hazards.
@@ -136,11 +137,13 @@ export function createXenoTrialsStageEventsV211(stageId, match, arena) {
       ? { ...recentImpact, progress: impactAge / impactLifetime } : null;
     const moving = phase === 'combat' && !reducedMotion;
     const gates = directedGates ? getDirectedGates(minigame, match, phase, opening, reducedMotion) : null;
+    const bypass = getXenoTrialsHangarBypassV221(match);
     if (gates) opening = Math.max(gates.left.opening, gates.right.opening);
     if (reducedMotion && phase === 'introduction') opening = 0;
     return {
       ...profile, round, tick: observedTick, phase, opening, moving, impact,
       ...(gates ? { gates } : {}),
+      ...(bypass ? { hangarBypassV221: bypass } : {}),
       reducedMotion, affectsCombat: false,
       time: moving ? observedTick / 120 + (match.config.seed % 41) * .07 : 0,
       degraded: [...degraded]
@@ -241,6 +244,28 @@ function drawFixture(ctx, view, stage, x, y, side) {
   }
 }
 
+function drawHangarBulkhead(ctx, view, stage, x, y) {
+  const state = view.hangarBypassV221;
+  const opening = view.reducedMotion && state.phase === 'opening' ? 0 : state.opening;
+  const lamp = state.phase === 'locked' ? '#cf8c79' : state.phase === 'open' ? '#9ec7a3' : '#ebba74';
+  const width = 144, height = 88;
+  const left = x - width / 2, top = y - height;
+  ctx.globalAlpha = .8;
+  ctx.fillStyle = '#121e23';
+  ctx.fillRect(left, top, width, height);
+  ctx.globalAlpha = .45;
+  ctx.strokeStyle = stage.accent;
+  ctx.strokeRect(left, top, width, height);
+  ctx.fillStyle = '#4c5d60';
+  const panel = (height - 10) * (1 - opening);
+  ctx.fillRect(left + 7, top + 5, width - 14, panel);
+  ctx.fillStyle = lamp;
+  ctx.globalAlpha = .7;
+  if (panel > 0) ctx.fillRect(left + 7, top + 4 + panel, width - 14, 3);
+  const lamps = state.phase === 'locked' ? 1 : state.phase === 'open' ? 3 : 2;
+  for (let index = 0; index < lamps; index++) ctx.fillRect(x - 12 + index * 10, top - 8, 6, 3);
+}
+
 export function drawXenoTrialsStageEventsV211(ctx, stage, camera, view) {
   if (!view || view.stageId !== stage.id) return;
   const floor = clamp(camera.floor, 180, 530);
@@ -250,6 +275,7 @@ export function drawXenoTrialsStageEventsV211(ctx, stage, camera, view) {
   ctx.rect(0, 0, 1000, floor);
   ctx.clip();
   ctx.lineWidth = 1;
+  if (view.hangarBypassV221) drawHangarBulkhead(ctx, view, stage, 737 - (camera.center - 500) * .26, floor - 52);
   drawFixture(ctx, view, stage, 105 - offset, floor - 30, 'left');
   drawFixture(ctx, view, stage, 895 - offset, floor - 30, 'right');
   ctx.restore();

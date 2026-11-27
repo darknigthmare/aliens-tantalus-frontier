@@ -1,4 +1,6 @@
 import { getXenoTrialsPhysicalSuper } from './xeno-trials-super-kits-v209.js';
+import { isXenoTrialsParryingV208 } from './xeno-trials-defense-v208.js';
+import { isXenoTrialsGrappledV153 } from './xeno-trials-grapple-v153.js';
 
 /** Original versus extensions of referenced V147 capabilities, NOT canonical
  * supers, captured choreography or new character art. Exact identities only.
@@ -72,7 +74,9 @@ export function getXenoTrialsSuperReadinessV148(match, fighter, definition) {
   if (!match || !fighter || match.paused || match.phase !== 'active' || match.presentation?.blocksSimulation || fighter.hp <= 0) return answer('inactive');
   if (match.config.rulesV119?.noSpecial) return answer('rules');
   if (match.config.roundSeconds - match.timeRemaining < (match.config.rulesV119?.specialLockSeconds || 0)) return answer('locked');
-  if (fighter.attack || fighter.guard || fighter.stun > 0 || fighter.y > 0) return answer('busy');
+  if (fighter.attack || fighter.guard || fighter.stun > 0 || fighter.y > 0 || fighter.movesetV207?.evade
+    || fighter.movementV210?.kind === 'ground-turn' || isXenoTrialsParryingV208(match, fighter)
+    || isXenoTrialsGrappledV153(match, fighter)) return answer('busy');
   if (fighter.specialCooldown > 0) return answer('cooldown');
   if (meter < value.meterCost) return answer('meter');
   if (fighter.stamina < value.spec.cost) return answer('stamina');

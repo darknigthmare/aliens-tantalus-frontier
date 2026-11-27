@@ -64,7 +64,17 @@ export const XENO_TRIALS_SIGNATURES_V147 = freeze([
     spec: { cost: 38, damage: 35, reach: 78, startup: .32, active: .42, recovery: .6, stun: .42, push: 42,
       groundedOnly: true, leapSpeed: 390, leapImpulse: 280, cooldown: 1.9 } }
 ]);
-const byId = new Map(XENO_TRIALS_SIGNATURES_V147.map(entry => [entry.fighterId, entry]));
+// The automaton's clamp belongs to the project conversion. Keep the generic
+// ram's clock and resource cost so an already saved windup can still resume.
+const powerLoaderClampV221 = freeze({
+  id: 'automated-powerloader-clamp-v221', fighterId: 'synth-automated-powerloader', profileId: 'pose-v116-automated-powerloader',
+  label: 'Fermeture de pince', labelEn: 'Clamp closure', style: 'physical', canonExact: false,
+  evidence: 'original-tantalus-conversion', animation: 'existing-static-pose',
+  description: 'Les pinces portent une frappe courte sur une cible au sol. Gardez, sautez ou reculez pendant la préparation.',
+  spec: { cost: 38, damage: 35, reach: 58, startup: .29, active: .12, recovery: .55, stun: .36, push: 48,
+    groundedOnly: true, groundedTargetV208: true, contactHeightRatioV151: .61, cooldown: 1.6 },
+});
+const byId = new Map([...XENO_TRIALS_SIGNATURES_V147, powerLoaderClampV221].map(entry => [entry.fighterId, entry]));
 export function getXenoTrialsSignatureV147(definition) {
   const entry = byId.get(definition?.id);
   return entry && entry.profileId === definition.profileId ? entry : getXenoTrialsCasteV151(definition);
