@@ -428,6 +428,18 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       }
     }
     const { width, height, pivotX, bottom, sourceFacing } = getXenoTrialsRenderMetricsV110(fighter.id, fighter.variant, displayScale);
+    if (landingView?.atlasPathV219) {
+      const visual = { ...fighter, y: 0 };
+      const options = { cue: { state: 'ko', progress: landingView.settled ? 1 : 0 },
+        x: drawX, y: ground, facing: drawFacing, reducedMotion: reduceMotion(),
+        metrics: { width, height, pivotX, bottom, sourceFacing } };
+      const drawn = drawXenoTrialsSpriteAtlasV188(context, visual, art, images, options)
+        || drawXenoTrialsSpriteAtlasV189(context, visual, art, images, options);
+      if (drawn) {
+        rigDrawsV154.set(fighter.side, { ...drawn, landingV219: landingView });
+        return;
+      }
+    }
     const timeSeconds = match.tick * XENO_TRIALS_STEP_V96;
     const swarmView = swarmMotion(fighter, timeSeconds);
     const displaced = observedMovement(fighter, timeSeconds);
@@ -1086,7 +1098,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
         const reducedMotion = reduceMotion();
         outroV155 = createXenoTrialsPilotOutroV197(match, createXenoTrialsOutroV155(match, reducedMotion, images), reducedMotion);
         terminalV156 = createXenoTrialsTerminalV156(match, 'draw', reducedMotion, null, images);
-        landingV157 = createXenoTrialsLandingV157(match, reducedMotion);
+        landingV157 = createXenoTrialsLandingV157(match, reducedMotion, images);
         if (!practiceV207) finisherV207 = createXenoTrialsFinisherV207(match, images, reducedMotion, true);
         tauntV156 = null; frameDelta = 0; clearInputs();
       }

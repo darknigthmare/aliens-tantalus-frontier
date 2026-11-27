@@ -1,6 +1,8 @@
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsBodyBoundsV105, getXenoTrialsBodyGapV105 } from './xeno-trials-geometry-v105.js';
-import { getXenoTrialsHurtBoundsV207, getXenoTrialsStrikeBandV207, XENO_TRIALS_MOVE_CONTROLS_V207 } from './xeno-trials-moveset-v207.js';
+import { getXenoTrialsHurtBoundsV207, getXenoTrialsLowScaleV207, getXenoTrialsStrikeBandV207,
+  XENO_TRIALS_MOVE_CONTROLS_V207 } from './xeno-trials-moveset-v207.js';
+import { getXenoTrialsProjectileThreatV149 } from './xeno-trials-ai-v119.js';
 import { getXenoTrialsParryViewV208, isXenoTrialsParryingV208 } from './xeno-trials-defense-v208.js';
 import { getXenoTrialsRiposteReadinessV208, getXenoTrialsRiposteV208 } from './xeno-trials-ripostes-v208.js';
 import { getXenoTrialsAttackStyleV147, getXenoTrialsAttackV147 } from './xeno-trials-signatures-v147.js';
@@ -18,6 +20,7 @@ const antiAirControl = 1 << XENO_TRIALS_MOVE_CONTROLS_V207.indexOf('antiAir');
 const antiAirStates = new Set(['APPROACH', 'PRESSURE', 'PROBE', 'REPOSITION']);
 const runnerProfile = 'castes-film_runner_alien3_1992';
 const synthGuardProfile = 'pose-v94-afe-synth-guard';
+const synthTrooperProfile = 'pose-v94-afe-synth-trooper';
 // Admit the close-range Runner and grounded Synth Guard by their combat profiles.
 const antiAirProfiles = new Map([
   ['runner', runnerProfile], ['synth-guard', synthGuardProfile]
@@ -55,6 +58,23 @@ function parryInput(match, cpu, target, controls, brain, specs, dt) {
     || !getXenoTrialsParryViewV208(match, cpu).ready
     || !inRange(target, cpu, spec, spec.reach * definition.reach, attack.facing)) return null;
   return { guard: true, parry: true, ...(spec.contactBandV207 === 'low' ? { crouch: true } : {}) };
+}
+
+function duckPulseInput(match, cpu, definition, brain) {
+  if (match.hordeV180 || definition.id !== 'synth-trooper' || definition.profileId !== synthTrooperProfile
+    || !brain.observation?.projectileThreat || (cpu.movesetV207?.rearm & crouchControl)
+    || !cpu.movesetV207?.low && match.tick - brain.observation.tick < 2
+    || cpu.movementV210?.kind === 'ground-turn' || isXenoTrialsParryingV208(match, cpu)) return null;
+  const standing = getXenoTrialsBodyBoundsV105(cpu);
+  const lowTop = standing.bottom + standing.height * getXenoTrialsLowScaleV207(standing);
+  let highPulse = false;
+  for (const projectile of match.projectiles) {
+    if (!getXenoTrialsProjectileThreatV149(projectile, cpu, .2)) continue;
+    if (projectile.style !== 'pulse' || projectile.signatureIdV147 || projectile.vy
+      || projectile.direction !== -cpu.facing || projectile.y <= lowTop || projectile.y > standing.top) return null;
+    highPulse = true;
+  }
+  return highPulse ? { crouch: true } : null;
 }
 
 function riposteInput(match, cpu, target, definition) {
@@ -144,13 +164,29 @@ function hasRepeatedBlocks(match, cpu, target, definition, specs, dt) {
   return false;
 }
 
-function lockedLowInput(match, cpu, target, definition, specs, dt) {
-  if (match.hordeV180 || definition.id !== 'runner' || definition.profileId !== runnerProfile
-    || cpu.previousInput.light || cpu.rearmControls.light || (cpu.movesetV207?.rearm & crouchControl)) return null;
+function readyLowStrike(cpu, target, definition, specs) {
+  if (cpu.previousInput.light || cpu.rearmControls.light || (cpu.movesetV207?.rearm & crouchControl)) return null;
   const spec = getXenoTrialsAttackV147(definition, 'low', specs.low);
-  if (!spec || cpu.stamina < spec.cost || !inRange(cpu, target, spec, spec.reach * definition.reach, cpu.facing)
-    || !hasRepeatedBlocks(match, cpu, target, definition, specs, dt)) return null;
-  return { crouch: true, light: true };
+  return spec && cpu.stamina >= spec.cost && inRange(cpu, target, spec, spec.reach * definition.reach, cpu.facing) ? spec : null;
+}
+
+function blockedShieldInput(match, cpu, target, definition, brain, prior, specs, dt) {
+  const attack = target.attack;
+  if (match.hordeV180 || definition.id !== 'synth-trooper' || definition.profileId !== synthTrooperProfile
+    || target.id !== 'synth-containment' || attack?.kind !== 'special' || !attack.hit || target.y > 0
+    || !brain.observation.targetRecovering || brain.observation.projectileThreat || prior?.attack?.id !== attack.id
+    || cpu.facing !== -attack.facing || isXenoTrialsParryingV208(match, cpu)) return null;
+  const low = readyLowStrike(cpu, target, definition, specs);
+  if (!low) return null;
+  const shield = getXenoTrialsAttackV147(getXenoTrialsFighterV96(target.id), 'special', specs.special);
+  const activeEnd = shield.startup + shield.active;
+  if (attack.age + low.startup + dt >= activeEnd + shield.recovery) return null;
+  const blocked = match.events.some(event => {
+    if (event.type !== 'block' || event.side !== cpu.side || event.attacker !== target.side || event.id <= attack.id + 1) return false;
+    const contactAge = attack.age - (match.tick - event.tick) * dt;
+    return contactAge + 1e-9 >= shield.startup && contactAge < activeEnd + 1e-9;
+  });
+  return blocked ? { crouch: true, light: true } : null;
 }
 
 function counterObservedPattern(match, cpu, target, definition, controls, brain, prior, specs, dt) {
@@ -161,7 +197,9 @@ function counterObservedPattern(match, cpu, target, definition, controls, brain,
     || isXenoTrialsParryingV208(match, cpu)) return null;
   const standingGuard = target.guard && target.facing === -facing && !target.movesetV207?.low && target.y === 0;
   const specialLocked = rules?.noSpecial || match.config.roundSeconds - match.timeRemaining < (rules?.specialLockSeconds || 0);
-  if (specialLocked) return standingGuard ? lockedLowInput(match, cpu, target, definition, specs, dt) : null;
+  if (specialLocked) return standingGuard && !match.hordeV180 && definition.id === 'runner' && definition.profileId === runnerProfile
+    && readyLowStrike(cpu, target, definition, specs)
+    && hasRepeatedBlocks(match, cpu, target, definition, specs, dt) ? { crouch: true, light: true } : null;
   if (cpu.specialCooldown > 0) return null;
   if (!brain.observation.targetRecovering && !standingGuard) return null;
   const signatures = XENO_TRIALS_SIGNATURE_KINDS_V208.map(kind => getXenoTrialsAlternateSignatureV208(definition, kind))
@@ -214,13 +252,16 @@ export function chooseXenoTrialsHardTacticsV209(match, cpu, target, brain, specs
   if (match.config.difficulty !== 'hard' || match.hordeV180 && cpu.enemyRankV186 !== 'boss'
     || cpu.hp <= 0 || target.hp <= 0 || cpu.y !== 0 || cpu.attack || cpu.movesetV207?.evade
     || match.grappleV153) return controls;
-  if (cpu.stun > 0) return groundRecoveryInput(match, cpu, getXenoTrialsFighterV96(cpu.id)) || controls;
+  const definition = getXenoTrialsFighterV96(cpu.id);
+  if (cpu.stun > 0) return groundRecoveryInput(match, cpu, definition) || controls;
   const defense = parryInput(match, cpu, target, controls, brain, specs, dt);
   if (defense) return defense;
+  const duck = duckPulseInput(match, cpu, definition, brain);
+  if (duck) return duck;
   if (!cpu.parryV208?.openingId && !decided) return controls;
-  const definition = getXenoTrialsFighterV96(cpu.id);
   return riposteInput(match, cpu, target, definition)
     || (decided && antiAirInput(match, cpu, target, definition, brain, prior, controls, specs, dt))
+    || (decided && blockedShieldInput(match, cpu, target, definition, brain, prior, specs, dt))
     || (decided && counterObservedPattern(match, cpu, target, definition, controls, brain, prior, specs, dt))
     || (decided && signatureInput(match, cpu, target, definition, controls, brain))
     || controls;

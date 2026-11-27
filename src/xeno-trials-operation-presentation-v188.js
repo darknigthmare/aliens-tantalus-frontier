@@ -9,8 +9,16 @@ const kinds = Object.freeze({ escort: 'ESCORTE', relay: 'RELAIS', purge: 'PURGE'
 export function getXenoTrialsOperationHudV188(match) {
   const view = getXenoTrialsOperationViewV188(match);
   if (!view) return null;
-  const phase = view.status === 'completed' ? 'OBJECTIF ATTEINT' : view.status === 'failed' ? 'OBJECTIF PERDU'
+  let phase = view.status === 'completed' ? 'OBJECTIF ATTEINT' : view.status === 'failed' ? 'OBJECTIF PERDU'
     : view.carrying >= 0 ? 'CAISSON EN TRANSIT' : 'OPÉRATION ACTIVE';
+  const battery = view.batteryV219;
+  if (battery) {
+    if (battery.depleted) phase = 'BATTERIE ÉPUISÉE';
+    else if (view.status === 'active') {
+      const seconds = Math.ceil(battery.remainingTicks / XENO_TRIALS_OPERATION_LIMITS_V188.ticksPerSecond);
+      phase = battery.armed ? `BATTERIE · ${seconds} s` : 'BATTERIE EN VEILLE';
+    }
+  }
   const player = match.fighters?.[0], target = view.status === 'active' ? view.target : null;
   const body = player ? getXenoTrialsBodyBoundsV105(player) : null;
   let instruction = view.status === 'completed' ? 'Objectifs validés.' : view.status === 'failed' ? 'Évaluation interrompue.' : view.instruction;
@@ -65,6 +73,7 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
   const view = getXenoTrialsOperationViewV188(match);
   if (!view) return null;
   const floor = arena.floor, beacons = [];
+  const battery = view.status === 'active' ? view.batteryV219 : null;
   const extraction = view.kind === 'extraction';
   if (extraction && plane === 'rear') {
     return { id: view.id, plane, entities: view.entities.length,
@@ -115,6 +124,15 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
       const fraction = clamp(entity.progress / entity.requiredTicks, 0, 1);
       ctx.fillStyle = '#071015'; ctx.fillRect(x - 28, floor - height - 10, 56, 5);
       ctx.fillStyle = color; ctx.fillRect(x - 28, floor - height - 10, 56 * fraction, 5);
+    }
+    if (battery) {
+      const { armed, remainingTicks, durationTicks } = battery;
+      const cells = Math.ceil(5 * remainingTicks / durationTicks);
+      const chargeColor = armed ? cells < 3 ? '#e5aa73' : '#99dcab' : '#6b8588';
+      for (let index = 0; index < 5; index++) {
+        ctx.fillStyle = index < cells ? chargeColor : '#27383c';
+        ctx.fillRect(x - 16 + index * 7, floor - 12, 5, 4);
+      }
     }
   }
   ctx.restore();

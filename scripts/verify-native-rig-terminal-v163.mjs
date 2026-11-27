@@ -26,6 +26,8 @@ import { createXenoTrialsMatchV96 as create, stepXenoTrialsMatchV96 as step,
 import { getXenoTrialsBodyGapV105 as gap } from '../src/xeno-trials-geometry-v105.js';
 import { getXenoTrialsFighterV96 as fighter, getXenoTrialsArtV96 as art } from '../src/xeno-trials-data-v96.js';
 import { getXenoTrialsRenderMetricsV110 as metrics } from '../src/xeno-trials-scale-v110.js';
+import { getXenoTrialsPresentationRigV211 as presentationRig } from '../src/xeno-trials-presentation-v211.js';
+import { createXenoTrialsPilotOutroV197, createXenoTrialsPilotReturnV212 } from '../src/xeno-trials-pilot-sequences-v197.js';
 import { createXenoTrialsRuntimeV96 as runtime } from '../src/xeno-trials-runtime-v96.js';
 import { createXenoTrialsProgressV96 as initialProgress, normalizeXenoTrialsProgressV96 as normalizeProgress,
  beginXenoTrialsV96 as begin, settleXenoTrialsV96 as settle } from '../src/xeno-trials-progress-v96.js';
@@ -104,12 +106,63 @@ const receipt = (match,kind) => ({
   kind:kind==='outro'?f.side===match.result.winner?'outro-win':'outro-loss':kind }))
 });
 
-function assertNewTerminalGates(match) {
+function assertArticulatedReceipt(participant, actor, kind) {
+ const rig=presentationRig(fighter(actor.id),art(actor.id,actor.variant));
+ assert.ok(rig);
+ assert.ok(participant);
+ assert.equal(participant.revision,211);
+ assert.equal(participant.side,actor.side);
+ assert.equal(participant.rigId,rig.id);
+ assert.equal(participant.fighterId,actor.id);
+ assert.equal(participant.presentationKindV211,kind);
+ assert.equal(participant.sequenceId,`${actor.id}::${kind}`);
+}
+
+function assertNativeTerminalGates(match) {
  const before=copy(match);
- assert.equal(outro(match),null);
- assert.equal(terminal(match,'draw'),null);
+ const grounded=match.fighters.every(actor=>actor.y===0),draw=match.result.winner==='draw';
+ const verdict=outro(match),drawView=terminal(match,'draw');
+ if (!grounded) {
+  assert.equal(verdict,null);
+  assert.equal(drawView,null);
+ } else if (!draw && match.fighters[0].id==='drive-v123-fte-pathogen-brute-profile-v13') {
+  assert.equal(verdict,null);
+  assert.equal(drawView,null);
+  const pilot=createXenoTrialsPilotOutroV197(match, verdict);
+  assert.equal(pilot?.participants.length,2);
+  for(const actor of match.fighters) {
+   const entry=pilot.participants.find(p=>p.side===actor.side);
+   assert.equal(entry?.kind,actor.side===match.result.winner?'outro-win':'outro-ko');
+   assert.equal(entry?.revision,197);
+   assert.equal(entry?.rigId,resolveRig(fighter(actor.id),art(actor.id,actor.variant)).id);
+  }
+  const signedReturn=createXenoTrialsPilotReturnV212(match,null,completed(pilot));
+  assert.equal(signedReturn?.participants.length,1);
+  assert.equal(signedReturn.participants[0].revision,212);
+  assert.equal(signedReturn.participants[0].side,match.result.winner);
+ } else {
+  const view=draw?drawView:verdict;
+  assert.ok(view);
+  assert.equal(view.matchId,match.config.matchId);
+  assert.equal(view.terminalTick,match.tick);
+  assert.equal(view.participants.length,2);
+  for(const actor of match.fighters) assertArticulatedReceipt(view.participants.find(p=>p.side===actor.side),actor,
+   draw?'draw':actor.side===match.result.winner?'win-final':'lose-final');
+  if(draw) assert.equal(verdict,null);
+  else {
+   assert.equal(drawView,null);
+   const winner=match.fighters.find(actor=>actor.side===match.result.winner);
+   const returnView=terminal(match,'outro',false,completed(verdict));
+   assert.equal(returnView?.participants.length,1);
+   assertArticulatedReceipt(returnView.participants[0],winner,'outro');
+  }
+ }
  assert.equal(terminal(match,'outro',false,receipt(match,'outro')),null);
- assert.equal(landing(match),null);
+ if(grounded) assert.equal(landing(match),null);
+ else for(const participant of landing(match)?.participants ?? []) {
+  assert.ok(participant.atlasPathV219);
+  assert.equal(match.fighters.find(actor=>actor.side===participant.side).hp,0);
+ }
  const owner=receipt(match,match.result.winner==='draw'?'draw':'outro');
  assert.equal(exit(match,owner,camera),null);
  assert.deepEqual(match,before,'presentation admission must not mutate a terminal match');
@@ -123,13 +176,16 @@ test('V163 native admission leaves four historical rigs and their 20/20/40 seque
 });
 
 for(const rig of nativeRigs) {
- test(`${rig.fighterId}: native presentation remains available while specialized sequence/exit APIs refuse it`,()=>{
+ test(`${rig.fighterId}: native presentation and the articulated taunt preserve historical sequence/exit boundaries`,()=>{
   const match=create(config(rig.fighterId,rig.fighterId,`${rig.fighterId}-active`)),before=copy(match);
   assert.equal(resolveRig(fighter(rig.fighterId),art(rig.fighterId)),rig);
   const intro=nativeCue(rig,match,match.fighters[0],{ fighterSlot:0, blocksSimulation:true, elapsedMs:600 });
   assert.equal(intro.clip,'intro'); assert.ok(nativeSample(rig,intro)?.active);
   assert.equal(nativeSample(rig,intro,true)?.active,false);
-  assert.equal(taunt(match,activePresentation,{}),null);
+  const signal=taunt(match,activePresentation,{});
+  assert.equal(signal?.rigId,presentationRig(fighter(rig.fighterId),art(rig.fighterId))?.id);
+  assert.equal(signal?.fighterId,rig.fighterId);
+  assert.equal(taunt(match,activePresentation,{guard:true}),null);
   assert.equal(sequence(rig,'intro'),null); assert.equal(sampleSequence(rig,clip),null);
   assert.equal(sequenceCue155(rig,match,match.fighters[0],activePresentation,null),null);
   assert.equal(sequenceCue156(rig,match,match.fighters[0],activePresentation,null,null),null);
@@ -137,13 +193,13 @@ for(const rig of nativeRigs) {
   assert.equal(exitPose(rig,exitView(rig),metrics(rig.fighterId)),null);
   assert.deepEqual(match,before);
  });
- for(const winner of ['player','opponent','draw']) test(`${rig.fighterId}: genuine engine ${winner} outcome cannot acquire historical terminal clips`,()=>{
+ for(const winner of ['player','opponent','draw']) test(`${rig.fighterId}: genuine engine ${winner} outcome signs its articulated terminal clips`,()=>{
   const match=finish(config(rig.fighterId,rig.fighterId,`${rig.fighterId}-${winner}`),winner);
-  assertNewTerminalGates(match);
+  assertNativeTerminalGates(match);
  });
- test(`${rig.fighterId}: genuine airborne KO cannot acquire historical landing or exit`,()=>{
+ test(`${rig.fighterId}: genuine airborne KO preserves its physical verdict and historical exit boundary`,()=>{
   const match=finish(config(rig.fighterId,rig.fighterId,`${rig.fighterId}-airborne`),'player',true);
-  assertNewTerminalGates(match);
+  assertNativeTerminalGates(match);
  });
 }
 
@@ -174,16 +230,19 @@ for(const rig of historicalRigs) {
   assert.deepEqual(air,airBefore);
  });
  for(const nativeSide of ['player','opponent']) for(const winner of ['player','opponent','draw']) {
-  test(`${rig.fighterId}: mixed ${nativeSide} V163 / ${winner} outcome remains bounded to the historical participant`,()=>{
+  test(`${rig.fighterId}: mixed ${nativeSide} V163 / ${winner} outcome keeps each participant tied to its source`,()=>{
    const fresh=nativeRigs[0].fighterId;
    const ids=nativeSide==='player'?[fresh,rig.fighterId]:[rig.fighterId,fresh];
    const match=finish(config(...ids,`${rig.fighterId}-mixed-${nativeSide}-${winner}`),winner),before=copy(match);
    const o=outro(match),t=winner==='draw'?terminal(match,'draw'):terminal(match,'outro',false,completed(o));
-   if(winner==='draw') assert.equal(o,null); else assert.equal(o?.participants.length,1);
-   assert.equal(t?.participants.length,1);
-   assert.equal(t.participants[0].rigId,rig.id);
-   assert.equal(t.participants[0].side,nativeSide==='player'?'opponent':'player');
-   assert.ok(sequence(rig,t.participants[0].kind));
+   if(winner==='draw') assert.equal(o,null); else assert.equal(o?.participants.length,2);
+   const nativeActor=match.fighters.find(actor=>actor.side===nativeSide);
+   const nativeReturns=winner==='draw'||winner===nativeSide;
+   assert.equal(t?.participants.length,nativeReturns?2:1);
+   const historical=t.participants.find(p=>p.side!==nativeSide);
+   assert.equal(historical?.rigId,rig.id);
+   assert.ok(sequence(rig,historical.kind));
+   if(nativeReturns) assertArticulatedReceipt(t.participants.find(p=>p.side===nativeSide),nativeActor,winner==='draw'?'draw':'outro');
    const x=exit(match,completed(t),camera);
    if(x) assert.ok(x.participants.every(p => p.rigId===rig.id));
    assert.deepEqual(match,before);
@@ -245,12 +304,21 @@ for(const [hz,opponentId] of [[30,'synth-trooper'],[60,'synth-good-boy'],[120,'d
    for(let i=0;i<hz*240 && h.controller.getState().phase!=='match-over';i++) {
     assert.equal(h.queue.size,1,'active runtime keeps exactly one RAF'); h.frames(1,hz);
    }
+   const verdict=h.controller.getState();
+   assert.equal(verdict.phase,'match-over'); assert.equal(verdict.result.winner,'opponent');
+   assert.equal(calls,1); assert.deepEqual(acceptedResult,verdict.result);
+   assert.equal(verdict.outroV155?.phase,'playing');
+   for(const actor of verdict.fighters) assertArticulatedReceipt(verdict.outroV155.participants.find(p=>p.side===actor.side),actor,
+     actor.side==='opponent'?'win-final':'lose-final');
+   assert.equal(verdict.landingV157,null); assert.equal(verdict.exitV157,null);
+   h.frames(hz*5,hz);
    const final=h.controller.getState();
-   assert.equal(final.phase,'match-over'); assert.equal(final.result.winner,'opponent');
-   assert.equal(calls,1); assert.deepEqual(acceptedResult,final.result);
-   assert.equal(final.outroV155,null); assert.equal(final.terminalV156,null);
-   assert.equal(final.landingV157,null); assert.equal(final.exitV157,null);
-   assert.equal(h.queue.size,0,'unsupported historical finale adds no RAF tail');
+   assert.equal(final.outroV155?.phase,'complete');
+   assert.equal(final.terminalV156?.phase,'complete');
+   assert.deepEqual(final.result,acceptedResult);
+   assert.deepEqual(final.fighters,verdict.fighters);
+   assert.equal(final.tick,verdict.tick);
+   assert.equal(h.queue.size,0,'the finite articulated finale releases its RAF owner');
    assert.equal(progress.pending,null); assert.equal(progress.ledger.length,1); assert.equal(progress.losses,1);
    const saved=copy(progress),reloaded=normalizeProgress(copy(progress));
    assert.deepEqual(normalizeProgress(copy(reloaded)),reloaded,'save normalization is stable after reload');

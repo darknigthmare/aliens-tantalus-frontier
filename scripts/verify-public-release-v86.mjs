@@ -945,13 +945,22 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
   'scripts/verify-xeno-original-arenas-v193.mjs'
 ]);
 
-export const XENO_AUDIT_TERMINAL_PATH = 'scripts/audit-xeno-trials-v218.mjs';
+export const XENO_AUDIT_TERMINAL_PATH = 'scripts/audit-xeno-trials-v219.mjs';
+const XENO_GAMEPLAY_SOURCE_ONLY_V219 = new Set([
+  'docs/forge/xeno-trials/V219-GAMEPLAY.md',
+  'scripts/verify-xeno-trials-beacon-battery-v219.mjs',
+  'scripts/verify-xeno-trials-finishers-v219.mjs',
+  'scripts/verify-xeno-trials-landing-v219.mjs',
+  'scripts/verify-xeno-trials-practice-v219.mjs'
+]);
 
 // Pure checks are exported so adversarial cases can be verified without placing
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
   if (path === XENO_AUDIT_TERMINAL_PATH) return !built && !directory;
+  if (XENO_GAMEPLAY_SOURCE_ONLY_V219.has(path)) return !built && !directory;
+  if (path === 'scripts/audit-xeno-trials-v218.mjs') return !built && !directory;
   if (path === 'docs/forge/xeno-trials/V218-GAMEPLAY.md') return !built && !directory;
   if (path === 'scripts/verify-xeno-trials-contact-v218.mjs') return !built && !directory;
   if (path === 'scripts/verify-xeno-trials-practice-v218.mjs') return !built && !directory;

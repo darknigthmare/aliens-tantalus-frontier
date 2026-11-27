@@ -3,6 +3,8 @@ import { getXenoTrialsFighterV96, getXenoTrialsArtV96 } from './xeno-trials-data
 import { XENO_PRESENTATION_V97 } from './xeno-trials-presentation-v97.js';
 import { getXenoTrialsRenderMetricsV110 } from './xeno-trials-scale-v110.js';
 import { getXenoTrialsPresentationParticipantsV211, getXenoTrialsTauntRigV211 } from './xeno-trials-presentation-v211.js';
+import { getXenoTrialsSpriteAtlasV188 } from './xeno-trials-sprite-atlas-v188.js';
+import { getXenoTrialsSpriteAtlasV189 } from './xeno-trials-sprite-atlas-v189.js';
 
 // Original presentation choreography on the four admitted source plates. No
 // canonical animation, voiced line, relation or combat ability is asserted.
@@ -219,17 +221,32 @@ export function getXenoTrialsSequenceCueV156(rig, match, fighter, presentation, 
 export const XENO_TRIALS_EXIT_V157 = freeze({id:'native-spatial-exit-v157',turnMs:240,speed:48,maxTravelMs:12000,
  stride:40,footLift:3.2,canonExact:false,fullLocomotion:false});
 export const XENO_TRIALS_LANDING_V157 = freeze({id:'terminal-render-landing-v157',minMs:180,maxMs:600,canonExact:false});
+const drawnLandingsV219 = new Set(['warrior', 'runner', 'spitter', 'queen', 'ravager', 'burster']);
+
+function drawnLandingAtlasV219(match, fighter) {
+ if (fighter.hp !== 0 || match.result.winner === fighter.side || !drawnLandingsV219.has(fighter.id)
+  || match.result.matchId !== match.config.matchId || match.result.durationTicks !== match.tick) return null;
+ const art = getXenoTrialsArtV96(fighter.id, fighter.variant);
+ const atlas = getXenoTrialsSpriteAtlasV188(fighter, art) || getXenoTrialsSpriteAtlasV189(fighter, art);
+ return atlas?.frames.some(frame => frame.id === 'ko-fall') && atlas.frames.some(frame => frame.id === 'ko-ground') ? atlas : null;
+}
 /** A verdict may freeze the engine in the middle of a jump. Settle only its
- * native render plate; historical grounded-only sequences and engine y/vy keep
- * their exact values. No simulated landing, collision or event is invented. */
-export function createXenoTrialsLandingV157(match,reducedMotion=false) {
+ * admitted render plate after the engine has fixed the verdict. */
+export function createXenoTrialsLandingV157(match,reducedMotion=false,images) {
  if(match?.phase!=='match-over'||!match.result?.completed||!['player','opponent','draw'].includes(match.result.winner)
   ||!Array.isArray(match.fighters))return null;
  const participants=match.fighters.flatMap(f=>{
-  const rig=historicalRigForV155(f);
-  if(!rig||![f.x,f.y,f.vy].every(Number.isFinite)||f.y<=0||f.y>1000)return [];
+  if(![f.x,f.y,f.vy].every(Number.isFinite)||f.y<=0||f.y>1000)return [];
+  const rig=historicalRigForV155(f), atlas=rig ? null : drawnLandingAtlasV219(match,f);
+  if(!rig && !atlas)return [];
+  if (atlas && images) {
+   const texture = images.get(atlas.texture.path);
+   if (!texture || texture.complete === false || texture.naturalWidth !== atlas.texture.width
+    || texture.naturalHeight !== atlas.texture.height) return [];
+  }
   const landingMs=Math.min(XENO_TRIALS_LANDING_V157.maxMs,Math.max(XENO_TRIALS_LANDING_V157.minMs,200+Math.sqrt(f.y)*12));
-  return[{side:f.side,fighterId:f.id,rigId:rig.id,startX:f.x,startY:f.y,startVy:f.vy,landingMs}];
+  const artwork=rig ? {rigId:rig.id} : {atlasPathV219:atlas.texture.path};
+  return[{side:f.side,fighterId:f.id,...artwork,startX:f.x,startY:f.y,startVy:f.vy,landingMs}];
  });
  if(!participants.length)return null;
  const durationMs=Math.max(...participants.map(p=>p.landingMs));
@@ -242,9 +259,10 @@ export function getXenoTrialsLandingViewV157(match,fighter,state,reducedMotion=f
   ||state.terminalTick!==match.tick||!['playing','complete'].includes(state.phase)||!match.fighters?.includes(fighter)
   ||!Number.isFinite(state.elapsedMs)||state.elapsedMs<0)return null;
  const rig=historicalRigForV155(fighter);
- if(!rig)return null;
- const p=state.participants?.find(p=>p.side===fighter.side&&p.fighterId===fighter.id&&p.rigId===rig.id);
+ const p=state.participants?.find(p=>p.side===fighter.side&&p.fighterId===fighter.id);
  if(!p||![p.startY,p.landingMs].every(Number.isFinite)||p.startY<=0||p.landingMs<=0)return null;
+ if (rig ? p.rigId !== rig.id : !p.atlasPathV219 || drawnLandingAtlasV219(match,fighter)?.texture.path !== p.atlasPathV219
+  || p.startX !== fighter.x || p.startY !== fighter.y || p.startVy !== fighter.vy) return null;
  const progress=reducedMotion||state.reducedMotion||state.skipped?1:clamp(state.elapsedMs/p.landingMs);
  const renderY=p.startY*(1-smooth(progress));
  return{...p,renderY,ground:450-renderY,progress,settled:progress>=1,canonExact:false,physicalLanding:false};

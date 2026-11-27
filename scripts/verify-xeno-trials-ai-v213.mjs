@@ -5,6 +5,7 @@ import { createXenoTrialsMatchV96, getXenoTrialsSnapshotV96, setXenoTrialsPaused
   stepXenoTrialsMatchV96, XENO_TRIALS_STEP_V96 as dt } from '../src/xeno-trials-engine-v96.js';
 import { XENO_TRIALS_GET_UP_V211 } from '../src/xeno-trials-defense-v211.js';
 import { getXenoTrialsBodyBoundsV105 as bounds } from '../src/xeno-trials-geometry-v105.js';
+import { getXenoTrialsHurtBoundsV207 as hurt, getXenoTrialsLowScaleV207 } from '../src/xeno-trials-moveset-v207.js';
 import { beginXenoTrialsV96, createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
 
 function fixture({ playerId = 'runner', opponentId = 'warrior', difficulty = 'hard', seed = 1, gap = 79, meter = 100, rules } = {}) {
@@ -268,4 +269,90 @@ test('hard Synth Guard releases guard after a genuine break and re-arms once dur
     assert.equal(guard.previousInput.guard, false);
   }
   assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
+});
+
+test('hard Synth Trooper stays below a native high pulse until it has cleared the full body', () => {
+  const { match, cpu, config } = fixture({ playerId: 'xenoborg', opponentId: 'synth-trooper', gap: 140, meter: 0 });
+  advance(match, 1, { special: true });
+  advance(match, 33);
+  assert.deepEqual(match.projectiles, []);
+  assert.ok(!cpu.movesetV207?.low, 'the attack windup alone does not trigger crouch');
+  advance(match, 4);
+  const pulse = match.projectiles.find(projectile => projectile.style === 'pulse');
+  assert.ok(pulse && pulse.x < bounds(cpu).left);
+  assert.ok(pulse.y <= bounds(cpu).top);
+  assert.ok(!cpu.movesetV207?.low);
+  const x = cpu.x, hp = cpu.hp;
+  advance(match, 1);
+  assert.ok(cpu.movesetV207?.low && pulse.y > hurt(cpu).top);
+  const checkpoint = createXenoTrialsDuelCheckpointV197(getXenoTrialsSnapshotV96(match), config);
+  assert.ok(checkpoint);
+  const resumed = structuredClone(checkpoint.snapshot);
+  setXenoTrialsPausedV96(resumed, false);
+  for (const state of [match, resumed]) {
+    const trooper = state.fighters[1];
+    advance(state, 35);
+    assert.ok(trooper.movesetV207?.low);
+    assert.equal(trooper.x, x);
+    assert.equal(trooper.hp, hp);
+    assert.ok(state.projectiles.find(projectile => projectile.id === pulse.id).x > bounds(trooper).right + 9);
+    advance(state, 1);
+    assert.equal(trooper.movesetV207.low, false);
+  }
+  assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
+});
+
+test('Synth Trooper keeps ordinary defense for a low pulse or on normal', () => {
+  for (const options of [{ playerId: 'synth-sniper' }, { playerId: 'xenoborg', difficulty: 'normal' }]) {
+    const { match, cpu } = fixture({ opponentId: 'synth-trooper', gap: 140, meter: 0, ...options });
+    advance(match, 1, { special: true });
+    advance(match, 34);
+    const pulse = match.projectiles.find(projectile => projectile.style === 'pulse');
+    assert.ok(pulse);
+    const standing = bounds(cpu);
+    assert.equal(pulse.y <= standing.height * getXenoTrialsLowScaleV207(standing), options.playerId === 'synth-sniper');
+    for (let tick = 35; tick < 76; tick++) {
+      advance(match, 1);
+      assert.ok(!cpu.movesetV207?.low);
+    }
+    assert.ok(match.events.some(event => event.type === 'block' && event.side === 'opponent'));
+  }
+});
+
+test('hard Synth Trooper releases guard and strikes below a blocked shield bash before its recovery ends', () => {
+  const { match, player, cpu, config } = fixture({ playerId: 'synth-containment', opponentId: 'synth-trooper',
+    gap: 20, meter: 0, seed: 2 });
+  advance(match, 1, { special: true });
+  advance(match, 35);
+  assert.equal(player.attack?.kind, 'special');
+  assert.deepEqual(match.events.filter(event => event.type === 'block').map(event => [event.side, event.tick]), [['opponent', 20]]);
+  assert.equal(cpu.attack, null);
+  assert.equal(cpu.guard, true);
+  const checkpoint = createXenoTrialsDuelCheckpointV197(getXenoTrialsSnapshotV96(match), config);
+  assert.ok(checkpoint);
+  const resumed = structuredClone(checkpoint.snapshot);
+  setXenoTrialsPausedV96(resumed, false);
+  for (const state of [match, resumed]) {
+    const [shield, trooper] = state.fighters;
+    advance(state, 1);
+    assert.equal(trooper.attack?.kind, 'low');
+    assert.equal(trooper.guard, false);
+    assert.equal(trooper.stats.specials, 0);
+    advance(state, 16);
+    assert.equal(shield.attack?.kind, 'special');
+    advance(state, 1);
+    assert.equal(shield.attack, null);
+    assert.deepEqual(state.events.filter(event => event.type === 'hit').map(event => [event.attacker, event.tick]), [['opponent', 54]]);
+  }
+  assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
+});
+
+test('the shield counter needs a native block and a target within the low strike range', () => {
+  for (const { seed, gap, blocked } of [{ seed: 1, gap: 20, blocked: false }, { seed: 2, gap: 53, blocked: true }]) {
+    const { match } = fixture({ playerId: 'synth-containment', opponentId: 'synth-trooper', gap, meter: 0, seed });
+    advance(match, 1, { special: true });
+    advance(match, 77);
+    assert.equal(match.events.some(event => event.type === 'block' && event.side === 'opponent'), blocked);
+    assert.ok(cpuAttacks(match).every(event => event.kind !== 'low'));
+  }
 });
