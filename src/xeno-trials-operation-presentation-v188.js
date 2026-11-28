@@ -41,6 +41,13 @@ export function getXenoTrialsOperationHudV188(match) {
   if (collector) phase = collector.phase === 'diverted'
     ? collector.openSide === 'left' ? 'PRESSION DÉVIÉE À L’OUEST' : 'PRESSION DÉVIÉE À L’EST'
     : collectorPhases[collector.phase];
+  const archive = view.archiveTransferV225;
+  if (archive && view.status === 'active') {
+    const tenths = Math.ceil(archive.remainingTicks * 10 / XENO_TRIALS_OPERATION_LIMITS_V188.ticksPerSecond);
+    phase = archive.route === null ? 'CHOISISSEZ UNE COPIE' : archive.route === 1 ? 'COPIE SCELLÉE'
+      : `CACHE TEMPORAIRE · ${(tenths / 10).toFixed(1).replace('.', ',')} s`;
+  }
+  if (archive?.remainingTicks === 0 && view.status === 'failed') phase = 'CACHE EXPIRÉ';
   const player = match.fighters?.[0], target = view.status === 'active' ? view.target : null;
   const body = player ? getXenoTrialsBodyBoundsV105(player) : null;
   let instruction = view.status === 'completed' ? 'Objectifs validés.' : view.status === 'failed' ? 'Évaluation interrompue.' : view.instruction;
@@ -76,6 +83,10 @@ export function getXenoTrialsOperationHudV188(match) {
       if (grounding) {
         if (grounding.phase === 'waiting') instruction = 'ATTIREZ UN CONTACT DANS LA BANDE';
         else if (grounding.phase === 'opening') instruction = `${label} · SAS EN OUVERTURE · ${Math.floor(grounding.opening * 100)} %`;
+        else if (contact) instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
+      }
+      if (archive) {
+        if (target.locked) instruction = `${label} · NEUTRALISEZ LA PREMIÈRE VAGUE`;
         else if (contact) instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
       }
       if (collector?.phase === 'opening') {
@@ -117,6 +128,7 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
   const bypass = view.status === 'active' ? view.bypassV221 : null;
   const grounding = view.status === 'active' ? view.groundingV223 : null;
   const collector = view.decompressionV224;
+  const archive = view.archiveTransferV225;
   const extraction = view.kind === 'extraction';
   if (extraction && plane === 'rear') {
     return { id: view.id, plane, entities: view.entities.length,
@@ -131,7 +143,7 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
     if (!Number.isFinite(entity.x) || !Number.isFinite(entity.radius)) continue;
     if (entity.kind === 'supply' && (entity.carried || entity.delivered)) continue;
     const access = collector && entity.kind === 'terminal' && !entity.completed ? collector.phase === 'open'
-      : !entity.active ? null : relief ? relief.open : bypass ? bypass.phase === 'ready' || bypass.phase === 'open'
+      : archive && !entity.completed ? !entity.locked : !entity.active ? null : relief ? relief.open : bypass ? bypass.phase === 'ready' || bypass.phase === 'open'
       : grounding ? grounding.phase === 'manual' || grounding.phase === 'open' : null;
     const color = entity.contested ? '#ed997c' : entity.kind === 'beacon' ? beaconColor(entity)
       : entity.completed || access ? '#91bd8c' : entity.active ? '#ecd08c' : '#8a9d98';

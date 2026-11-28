@@ -5,7 +5,7 @@ import { getXenoTrialsGroundRecoveryHintV218, getXenoTrialsGroundRecoveryV211 } 
 import { hasXenoTrialsGuardedWalkV218 } from './xeno-trials-movement-v210.js';
 import { createXenoTrialsOutroV155, advanceXenoTrialsOutroV155, skipXenoTrialsOutroV155,
  getXenoTrialsSequenceCueV155, sampleXenoTrialsSequenceV155, skipXenoTrialsIntroV155,
- createXenoTrialsTerminalV156, createXenoTrialsTauntV156, advanceXenoTrialsTauntV156, getXenoTrialsSequenceCueV156, createXenoTrialsExitV157, getXenoTrialsExitViewV157, createXenoTrialsLandingV157, getXenoTrialsLandingViewV157 } from './xeno-trials-sequences-v155.js';
+ createXenoTrialsTerminalV156, createXenoTrialsTauntV156, advanceXenoTrialsTauntV156, getXenoTrialsSequenceCueV156, createXenoTrialsExitV157, getXenoTrialsExitViewV157, createXenoTrialsLandingV157, getXenoTrialsLandingViewV157, createXenoTrialsSurvivalExitV225 } from './xeno-trials-sequences-v155.js';
 import { getXenoTrialsRigV154, getXenoTrialsRuntimeArticulatedRig, getXenoTrialsRuntimeDefenseRig,
   getXenoTrialsRigCueV154, sampleXenoTrialsRigV154, drawXenoTrialsRigV154, sampleXenoTrialsExitPoseV157 } from './xeno-trials-rig-v154.js';
 import { createXenoTrialsPilotOutroV197, createXenoTrialsPilotReturnV212, getXenoTrialsPilotSequenceV197 } from './xeno-trials-pilot-sequences-v197.js';
@@ -337,6 +337,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (finisherV207?.phase === 'playing') return getXenoTrialsFinisherCopyV208(finisherV207.kind).playing;
     if (canActivateFinisher()) return getXenoTrialsFinisherCopyV208(finisherV207.kind).offered;
     if (landingV157?.phase === 'playing') return 'Fin de simulation : retour des appuis au sol.';
+    if (exitV157?.phase === 'playing' && exitV157.survivalV225) return 'Temps de survie validé. Désengagement des spécimens.';
     if (exitV157?.phase === 'playing') return 'Fin de simulation : sortie des spécimens.';
     if (terminalV156?.phase === 'playing') return terminalV156.kind==='draw' ? 'Égalité : récupération des spécimens.' : 'Fin de présentation : retour à la vigilance.';
     if (presentationView().fighterSlot !== null) return `Présentation : ${getXenoTrialsFighterV96(match.fighters[presentationView().fighterSlot].id).label}`;
@@ -1140,11 +1141,14 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       if (roundStarted) prepareRoundPresentation();
       if (match.phase === 'match-over' && !hordeProtocol) {
         const reducedMotion = reduceMotion();
-        outroV155 = createXenoTrialsPilotOutroV197(match, createXenoTrialsOutroV155(match, reducedMotion, images), reducedMotion);
-        terminalV156 = createXenoTrialsTerminalV156(match, 'draw', reducedMotion, null, images);
-        landingV157 = createXenoTrialsLandingV157(match, reducedMotion, images, !practiceV207);
-        if (!practiceV207 || practiceV207.allowsFinisherV221())
-          finisherV207 = createXenoTrialsFinisherV207(match, images, reducedMotion, true, landingV157);
+        if (!practiceV207) exitV157 = createXenoTrialsSurvivalExitV225(match, cameraView, reducedMotion, images);
+        if (!exitV157) {
+          outroV155 = createXenoTrialsPilotOutroV197(match, createXenoTrialsOutroV155(match, reducedMotion, images), reducedMotion);
+          terminalV156 = createXenoTrialsTerminalV156(match, 'draw', reducedMotion, null, images);
+          landingV157 = createXenoTrialsLandingV157(match, reducedMotion, images, !practiceV207);
+          if (!practiceV207 || practiceV207.allowsFinisherV221())
+            finisherV207 = createXenoTrialsFinisherV207(match, images, reducedMotion, true, landingV157);
+        }
         tauntV156 = null; frameDelta = 0; clearInputs();
       }
       const roundEnded = beforePhase === 'active' && match.phase === 'round-over';

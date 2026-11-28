@@ -38,6 +38,12 @@ const gorillaFrames = Object.freeze([
   null,
   poseFrame(['recovery', '/assets/openai/xeno-trials-v209/characters/gorilla-special-recovery.png', [44, 116, 1194, 1033], 794])
 ]);
+const gorillaHeavyFrames = Object.freeze([
+  // The painted chest axis is at x = 715. Retain the neutral 35-pixel offset.
+  poseFrame(['windup', '/assets/openai/xeno-trials-v209/characters/gorilla-heavy-windup-four-spines.png', [147, 16, 983, 1229], 750]),
+  null,
+  null
+]);
 const arachnoidLightFrames = Object.freeze([
   ['windup', '/assets/openai/xeno-trials-v209/characters/arachnoid-light-windup.png', [148, 25, 1368, 1006], 865],
   ['contact', '/assets/openai/xeno-trials-v209/characters/arachnoid-light-impact.png', [83, 119, 1700, 829], 1101, 1774, 887],
@@ -54,6 +60,8 @@ const arachnoidSource = ['castes-game_avp_capcom_arachnoid', artPath,
   '84f47e12acfa88b5658a736863e4ad8b61a9b43bfa5cb61a34abe87649b2e3ee', 1536, 1024];
 const gridSource = ['castes-film_grid_avp_2004', '/assets/user/castes-v87/film_grid_avp_2004.png',
   '49d756a01928adb1c3fa787d47efbb158da988699fd9d0008bf9a723a7002a74', 1536, 1024];
+const gorillaSource = ['pose-v94-kenner-gorilla', '/assets/openai/sprites/static-enemy-v94/kenner-gorilla-neca.png',
+  'c91b539cebeb76fd69ac39ef5c9966166584a45f8a51a064c09a7306d54f4685', 1254, 1254];
 
 const groundedActions = Object.freeze([
   ['panther', {
@@ -69,8 +77,7 @@ const groundedActions = Object.freeze([
   }],
   ['gorilla', {
     id: 'gorilla-ram', action: 'special', revision: 222, animation: 'painted-gorilla-ram-poses',
-    source: ['pose-v94-kenner-gorilla', '/assets/openai/sprites/static-enemy-v94/kenner-gorilla-neca.png',
-      'c91b539cebeb76fd69ac39ef5c9966166584a45f8a51a064c09a7306d54f4685', 1254, 1254],
+    source: gorillaSource,
     textureWidth: 1254, textureHeight: 1254, density: 1, frames: gorillaFrames, limitations: ['windup-and-recovery-only']
   }],
   ['arachnoid', {
@@ -93,6 +100,11 @@ const groundedActions = Object.freeze([
     id: 'grid-tail', action: 'special', revision: 224, animation: 'painted-grid-tail-poses',
     source: gridSource, textureWidth: 1774, textureHeight: 887, density: 1,
     frames: gridTailFrames, limitations: ['windup-and-recovery-only']
+  }],
+  ['gorilla', {
+    id: 'gorilla-heavy', action: 'heavy', revision: 225, animation: 'painted-gorilla-heavy-windup',
+    source: gorillaSource, textureWidth: 1254, textureHeight: 1254, density: 1,
+    frames: gorillaHeavyFrames, limitations: ['windup-only']
   }]
 ].map(([fighterId, entry]) => Object.freeze({ ...entry, fighterId, source: Object.freeze(entry.source), limitations: Object.freeze(entry.limitations),
   paths: Object.freeze(entry.frames.filter(Boolean).map(frame => frame.path)) })));

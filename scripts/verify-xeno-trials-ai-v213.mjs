@@ -6,6 +6,8 @@ import { createXenoTrialsMatchV96, getXenoTrialsSnapshotV96, nextXenoTrialsRound
 import { getXenoTrialsFighterV96 } from '../src/xeno-trials-data-v96.js';
 import { getXenoTrialsProjectileThreatV149 } from '../src/xeno-trials-ai-v119.js';
 import { XENO_TRIALS_GET_UP_V211 } from '../src/xeno-trials-defense-v211.js';
+import { XENO_TRIALS_GROUND_RELEASE_V218 } from '../src/xeno-trials-grapple-v153.js';
+import { XENO_TRIALS_GROUND_BREAK_START_V213, XENO_TRIALS_GROUND_BREAK_V213 } from '../src/xeno-trials-grapple-v213.js';
 import { getXenoTrialsBodyBoundsV105 as bounds, getXenoTrialsBodyGapV105 as gapTo, XENO_TRIALS_ARENA_V105 }
   from '../src/xeno-trials-geometry-v105.js';
 import { getXenoTrialsHurtBoundsV207 as hurt, getXenoTrialsLowScaleV207, XENO_TRIALS_GUARD_RETREAT_V213,
@@ -317,6 +319,88 @@ test('hard Synth Guard releases guard after a genuine break and re-arms once dur
     assert.equal(guard.previousInput.guard, false);
   }
   assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
+});
+
+function nativeCommandoHold(difficulty = 'hard') {
+  const trial = fixture({ playerId: 'warrior', opponentId: 'import-game-dd-wy-commando', difficulty, gap: 4, meter: 0 });
+  const { match } = trial;
+  advance(match, 1, { guard: true, heavy: true });
+  for (let tick = 0; tick < 60 && !match.grappleV153; tick++) advance(match, 1);
+  assert.equal(match.grappleV153?.attacker, 'player');
+  assert.equal(match.grappleV153.target, 'opponent');
+  assert.ok(match.grappleV153.grabIdV212);
+  assert.equal(match.opponentInputSourceV163, 'cpu');
+  return trial;
+}
+
+test('hard WY Commando pays for a ground break and resumes before or during the effort', () => {
+  const { match, cpu, config } = nativeCommandoHold();
+  const { minHeld, effortTicks, cost, captiveRecovery, captorRecovery } = XENO_TRIALS_GROUND_BREAK_V213;
+  const { id, bornTick, nextDamageTick } = match.grappleV153;
+  const hp = cpu.hp, stamina = cpu.stamina, x = cpu.x;
+  for (let tick = 0; tick < 60 && match.grappleV153.escapeProgress < minHeld; tick++) advance(match, 1);
+  assert.equal(match.grappleV153.escapeProgress, minHeld);
+  assert.ok(match.tick - bornTick > minHeld);
+  assert.equal(match.grappleV153.breakV213, undefined);
+  const before = createXenoTrialsDuelCheckpointV197(getXenoTrialsSnapshotV96(match), config);
+  assert.ok(before);
+  const resumedBefore = structuredClone(before.snapshot);
+  setXenoTrialsPausedV96(resumedBefore, false);
+  advance(match, 1);
+  advance(resumedBefore, 1);
+  assert.deepEqual(getXenoTrialsSnapshotV96(resumedBefore), getXenoTrialsSnapshotV96(match));
+  const effort = match.events.at(-1);
+  assert.equal(effort.type, XENO_TRIALS_GROUND_BREAK_START_V213);
+  assert.equal(effort.grappleId, id);
+  assert.equal(effort.heldTicksV213, minHeld);
+  assert.equal(cpu.stamina, stamina - cost);
+  assert.equal(cpu.previousInput.guard, true);
+  assert.equal(cpu.previousInput.light, true);
+
+  const during = createXenoTrialsDuelCheckpointV197(getXenoTrialsSnapshotV96(match), config);
+  assert.ok(during);
+  const resumedDuring = structuredClone(during.snapshot);
+  setXenoTrialsPausedV96(resumedDuring, false);
+  for (const state of [match, resumedBefore, resumedDuring]) {
+    advance(state, effortTicks - 1);
+    assert.ok(state.grappleV153);
+    assert.equal(state.fighters[1].previousInput.guard, true);
+    assert.equal(state.fighters[1].previousInput.light, false);
+    advance(state, 1);
+    assert.equal(state.grappleV153, undefined);
+    const release = state.events.at(-1);
+    assert.equal(release.type, 'grapple-end-v153');
+    assert.equal(release.reason, 'countered');
+    assert.equal(release.breakStartV213, effort.id);
+    assert.equal(release.tick, nextDamageTick);
+    assert.equal(state.events.filter(event => event.type === XENO_TRIALS_GROUND_BREAK_START_V213).length, 1);
+    assert.equal(state.fighters[1].hp, hp);
+    assert.equal(state.fighters[1].x, x);
+    assert.equal(state.fighters[1].stamina, stamina - cost);
+    assert.equal(state.fighters[1].stun, captiveRecovery);
+    assert.equal(state.fighters[0].stun, captorRecovery);
+  }
+  assert.deepEqual(getXenoTrialsSnapshotV96(resumedBefore), getXenoTrialsSnapshotV96(match));
+  assert.deepEqual(getXenoTrialsSnapshotV96(resumedDuring), getXenoTrialsSnapshotV96(match));
+});
+
+test('early release, normal difficulty and low stamina leave the ground counter unspent', () => {
+  const { minimumHeldTicks } = XENO_TRIALS_GROUND_RELEASE_V218;
+  const early = nativeCommandoHold();
+  advance(early.match, minimumHeldTicks - 1);
+  advance(early.match, 1, { guard: true, heavy: true });
+  assert.equal(early.match.events.at(-1).reason, 'released');
+  assert.equal(early.match.grappleV153, undefined);
+
+  for (const difficulty of ['normal', 'hard']) {
+    const { match, cpu } = nativeCommandoHold(difficulty);
+    if (difficulty === 'hard') cpu.stamina = XENO_TRIALS_GROUND_BREAK_V213.cost - 1;
+    const stamina = cpu.stamina;
+    for (let tick = 0; tick < 140 && match.grappleV153; tick++) advance(match, 1);
+    assert.equal(match.events.at(-1).reason, 'escaped');
+    assert.ok(match.events.every(event => event.type !== XENO_TRIALS_GROUND_BREAK_START_V213));
+    assert.equal(cpu.stamina, stamina);
+  }
 });
 
 test('hard Synth Trooper stays below a native high pulse until it has cleared the full body', () => {

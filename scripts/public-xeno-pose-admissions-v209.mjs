@@ -14,7 +14,8 @@ const approvedV206 = [
   'arachnoid-heavy-windup.png', 'arachnoid-heavy-impact.png', 'arachnoid-heavy-recovery.png', 'arachnoid-special-active-grounded.png',
   'panther-special-windup.png', 'panther-special-active.png', 'panther-special-recovery.png',
   'grid-heavy-recovery.png', 'gorilla-special-windup.png', 'gorilla-special-recovery.png',
-  'panther-light-windup.png', 'panther-light-recovery.png', 'grid-special-windup.png', 'grid-special-recovery.png'
+  'panther-light-windup.png', 'panther-light-recovery.png', 'grid-special-windup.png', 'grid-special-recovery.png',
+  'gorilla-heavy-windup-four-spines.png'
 ];
 const approved = new Map([
   [205, approvedV205, XENO_VISUAL_ASSETS_NEW_INPUTS_V205], [206, approvedV206, XENO_PRODUCTION_ASSETS_NEW_INPUTS_V206]

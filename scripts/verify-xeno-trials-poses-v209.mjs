@@ -188,7 +188,10 @@ const addedActions = [
     forbidden: 'arachnoid-special-active.png', animation: 'painted-grounded-pounce' },
   { id: 'grid', action: 'special', style: 'tail', dimensions: [1774, 887], reachCases: [[112, true], [125, false]],
     frames: [['grid-special-windup.png', 206, [231, 21, 1426, 801]], null, ['grid-special-recovery.png', 206, [307, 48, 1188, 775]]],
-    forbidden: 'grid-special-active.png', animation: 'painted-grid-tail-poses' }
+    forbidden: 'grid-special-active.png', animation: 'painted-grid-tail-poses' },
+  { id: 'gorilla', action: 'heavy', dimensions: [1254, 1254], reachCases: [[80, true], [94, false]],
+    frames: [['gorilla-heavy-windup-four-spines.png', 206, [147, 16, 836, 1213]], null, null],
+    forbidden: 'gorilla-heavy-windup.png', animation: 'painted-gorilla-heavy-windup' }
 ];
 const phases = ['windup', 'contact', 'recovery'];
 const publicDirectory = '/assets/openai/xeno-trials-v209/characters/';
@@ -203,6 +206,14 @@ for (const { id, variant = null, action, style, travels = false, dimensions, den
     assert.ok(getXenoTrialsPoseAssetsV209({ id, variant: 'altered' }, art).every(path => !paths.includes(path)));
     if (variant === 'grey') {
       assert.deepEqual(getXenoTrialsPoseAssetsV209({ id, variant: 'purple' }, getXenoTrialsArtV96(id, 'purple')), []);
+    }
+    if (id === 'gorilla' && action === 'heavy') {
+      for (const related of ['drive-v123-kenner-gorilla', 'import-xeno-gorillaxeno']) {
+        assert.deepEqual(getXenoTrialsPoseAssetsV209({ id: related }, getXenoTrialsArtV96(related)), []);
+      }
+      for (const phase of ['impact', 'recovery']) {
+        assert.equal(publicXenoPosePathAdmissionV209(`${publicDirectory.slice(1)}gorilla-heavy-${phase}.png`), false);
+      }
     }
     assert.equal(publicXenoPosePathAdmissionV209((publicDirectory + forbidden).slice(1)), false);
     const historical = getXenoTrialsAnimationCoverageV199(id), live = getXenoTrialsRuntimeAnimationCoverage(id);

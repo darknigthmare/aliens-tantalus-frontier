@@ -6,6 +6,9 @@ import {XENO_TRIALS_CARGO_OPERATION_V213} from './xeno-trials-cargo-interlock-v2
 import {getXenoTrialsHordeProtocolV180,XENO_TRIALS_HORDE_LIMITS_V180} from './xeno-trials-horde-v180.js';
 import {getXenoTrialsHordeBossViewV186} from './xeno-trials-horde-bosses-v186.js';
 import {getXenoTrialsStageHazardViewV188,XENO_TRIALS_COLLECTOR_V224} from './xeno-trials-stage-hazards-v188.js';
+import {advanceXenoTrialsArchiveTransferV225,createXenoTrialsArchiveTransferV225,getXenoTrialsArchiveTargetsV225,
+ getXenoTrialsArchiveTransferV225,isXenoTrialsArchiveTransferForwardV225,validateXenoTrialsArchiveTransferV225,
+ XENO_TRIALS_ARCHIVE_OPERATION_V225} from './xeno-trials-archive-transfer-v225.js';
 
 // Original Tantalus objective simulations. The existing horde supplies pressure;
 // physical objectives decide the outcome independently of the remaining kills.
@@ -128,8 +131,10 @@ export const XENO_TRIALS_DECOMPRESSION_OPERATION_V224=freeze({
 });
 export const XENO_TRIALS_OPERATION_BOARD_V212=Object.freeze([...XENO_TRIALS_ISOLATION_OPERATIONS_V212,...XENO_TRIALS_OPERATIONS_V188]);
 export const XENO_TRIALS_OPERATION_BOARD_V213=Object.freeze([XENO_TRIALS_RELAY_OPERATION_V218,XENO_TRIALS_BEACON_OPERATION_V219,XENO_TRIALS_RELIEF_OPERATION_V220,XENO_TRIALS_BYPASS_OPERATION_V221,
- XENO_TRIALS_GANTRY_OPERATION_V222,XENO_TRIALS_GROUNDING_OPERATION_V223,XENO_TRIALS_DECOMPRESSION_OPERATION_V224,XENO_TRIALS_CARGO_OPERATION_V213,...XENO_TRIALS_OPERATION_BOARD_V212]);
-export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_DECOMPRESSION_OPERATION_V224.id ? XENO_TRIALS_DECOMPRESSION_OPERATION_V224
+ XENO_TRIALS_GANTRY_OPERATION_V222,XENO_TRIALS_GROUNDING_OPERATION_V223,XENO_TRIALS_DECOMPRESSION_OPERATION_V224,
+ XENO_TRIALS_ARCHIVE_OPERATION_V225,XENO_TRIALS_CARGO_OPERATION_V213,...XENO_TRIALS_OPERATION_BOARD_V212]);
+export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_ARCHIVE_OPERATION_V225.id ? XENO_TRIALS_ARCHIVE_OPERATION_V225
+ :id===XENO_TRIALS_DECOMPRESSION_OPERATION_V224.id ? XENO_TRIALS_DECOMPRESSION_OPERATION_V224
  :id===XENO_TRIALS_GROUNDING_OPERATION_V223.id ? XENO_TRIALS_GROUNDING_OPERATION_V223
  :id===XENO_TRIALS_GANTRY_OPERATION_V222.id ? XENO_TRIALS_GANTRY_OPERATION_V222
  :id===XENO_TRIALS_BYPASS_OPERATION_V221.id ? XENO_TRIALS_BYPASS_OPERATION_V221
@@ -144,7 +149,8 @@ const batteryStateKeys=[...stateKeys,'batteryStartedTickV219'];
 const bypassStateKeys=[...stateKeys,'bypassStartedTickV221'];
 const groundingStateKeys=[...stateKeys,'groundingActivationV223'];
 const decompressionStateKeys=[...stateKeys,'decompressionSealTicksV224'];
-const stateKeysFor=entry=>entry?.decompressionOpeningTicksV224?decompressionStateKeys:entry?.groundingOpeningTicksV223?groundingStateKeys:
+const archiveStateKeys=[...stateKeys,'archiveTransferV225'];
+const stateKeysFor=entry=>entry?.archiveTransferV225?archiveStateKeys:entry?.decompressionOpeningTicksV224?decompressionStateKeys:entry?.groundingOpeningTicksV223?groundingStateKeys:
  entry?.bypassOpeningTicksV221?bypassStateKeys:entry?.batteryTicksV219?batteryStateKeys:stateKeys;
 const integer=(value,min,max)=>Number.isSafeInteger(value)&&value>=min&&value<=max;
 const record=value=>value&&typeof value==='object'&&!Array.isArray(value);
@@ -161,7 +167,8 @@ export function createXenoTrialsOperationStateV188(id,config){
   integrity:100,cargoTravelTicks:0,cargoX:entry.cargoStartX,carrying:-1,delivered:entry.objectives.map(()=>false),depotTicks:0,exitTicks:0,
   ...(entry.batteryTicksV219?{batteryStartedTickV219:null}:{}),...(entry.bypassOpeningTicksV221?{bypassStartedTickV221:null}:{}),
   ...(entry.groundingOpeningTicksV223?{groundingActivationV223:null}:{}),
-  ...(entry.decompressionOpeningTicksV224?{decompressionSealTicksV224:[null,null]}:{})};
+  ...(entry.decompressionOpeningTicksV224?{decompressionSealTicksV224:[null,null]}:{}),
+  ...(entry.archiveTransferV225?{archiveTransferV225:createXenoTrialsArchiveTransferV225()}:{})};
 }
 function nearby(player,target){
  if(!player||player.hp<=0||player.y!==0||!Number.isFinite(player.x))return false;
@@ -352,7 +359,9 @@ export function stepXenoTrialsOperationV188(state,match,dt,input={},emit=null){
   if(entry.bypassOpeningTicksV221&&index===0)state.bypassStartedTickV221=state.lastTick;
   if(entry.decompressionOpeningTicksV224&&index<2)state.decompressionSealTicksV224[index]=state.lastTick;
   emit?.('operation-objective-v188',{operationId:entry.id,objectiveId:entry.objectives[index].id,index});};
- if(entry.kind==='escort'){
+ if(entry.archiveTransferV225){
+  advanceXenoTrialsArchiveTransferV225(state,match,target=>interact&&nearby(player,target),complete);
+ }else if(entry.kind==='escort'){
   const cargo={x:state.cargoX,radius:entry.objectives[0].radius};
   const leg=gantryLeg(entry,state.cargoTravelTicks),station=leg?.stationIndex;
   if(interact&&nearby(player,station?entry.objectives[station]:cargo)){
@@ -442,7 +451,8 @@ export function validateXenoTrialsOperationSnapshotV188(state,config,match=null)
  if(entry.gantryRouteV222?.some(leg=>leg.stationIndex&&state.progress[leg.stationIndex]!==
   clamp(state.cargoTravelTicks-leg.startTick,0,leg.endTick-leg.startTick)))return false;
  if(entry.kind!=='extraction'&&(state.carrying!==-1||state.delivered.some(Boolean)||state.depotTicks!==0||state.exitTicks!==0))return false;
- if(entry.batteryTicksV219){if(!validBatteryState(state,entry))return false;}
+ if(entry.archiveTransferV225){if(!validateXenoTrialsArchiveTransferV225(state,match))return false;}
+ else if(entry.batteryTicksV219){if(!validBatteryState(state,entry))return false;}
  else if(!['escort','purge'].includes(entry.kind)&&state.integrity!==100)return false;
  if(entry.decompressionOpeningTicksV224&&!validCollectorState(state,entry))return false;
  if(entry.kind==='extraction'){
@@ -509,6 +519,7 @@ export function isXenoTrialsOperationForwardV188(previous,next){
   ||next.lastTick<previous.lastTick||next.elapsedTicks<previous.elapsedTicks||next.integrity>previous.integrity
   ||next.cargoTravelTicks<previous.cargoTravelTicks||previous.status!=='active'&&next.status!==previous.status)return false;
  const entry=getXenoTrialsOperationV188(previous.operationId);
+ if(entry?.archiveTransferV225&&!isXenoTrialsArchiveTransferForwardV225(previous,next))return false;
  if(entry?.decompressionOpeningTicksV224&&previous.decompressionSealTicksV224.some((tick,index)=>{
   const accepted=next.decompressionSealTicksV224?.[index];
   return tick===null?accepted!==null&&!(accepted>previous.lastTick):accepted!==tick;
@@ -537,6 +548,7 @@ export function getXenoTrialsOperationViewV188(match){
  const gantry=entry.gantryRouteV222?getXenoTrialsGantryConvoyV222(match):null;
  const grounding=entry.groundingOpeningTicksV223?getXenoTrialsGroundingDoorV223(match):null;
  const collector=entry.decompressionOpeningTicksV224?getXenoTrialsCollectorViewV224(match):null;
+ const archive=getXenoTrialsArchiveTransferV225(match);
  let entities=entry.objectives.map((objective,index)=>{
   const active=!state.completed[index]&&(entry.kind!=='relay'||index===nextRelay)&&(!collector||index!==2||collector.phase==='open');
   return {...objective,active,completed:state.completed[index],progress:state.progress[index],
@@ -544,6 +556,7 @@ export function getXenoTrialsOperationViewV188(match){
    ...(entry.kind==='beacon'?beaconWindow(objective,state.elapsedTicks):{})};
  });
  let target=entities.find(entity=>!entity.completed)||null;
+ if(archive)({entities,target}=getXenoTrialsArchiveTargetsV225(match,archive));
  if(['beacon','purge'].includes(entry.kind)&&state.status==='active'){
   const player=match.fighters?.[0],remaining=entities.filter(entity=>!entity.completed);
   const touching=remaining.filter(entity=>entity.active&&nearby(player,entity));
@@ -571,7 +584,7 @@ export function getXenoTrialsOperationViewV188(match){
  }
  const done=entry.kind==='extraction'?state.delivered.filter(Boolean).length:doneCount(state);
  const failureLabel={'player-ko':'Spécimen neutralisé',time:'Temps écoulé',
-  'structure-destroyed':entry.batteryTicksV219?'Batterie épuisée':'Intégrité épuisée'}[state.failureReason]||'Évaluation interrompue';
+  'structure-destroyed':archive?'Copie temporaire expirée':entry.batteryTicksV219?'Batterie épuisée':'Intégrité épuisée'}[state.failureReason]||'Évaluation interrompue';
  return{id:entry.id,title:entry.title,kind:entry.kind,status:state.status,phase:state.status==='active'?(state.carrying>=0?'carrying':'objective'):state.status,
   ...(entry.isolationV212?{isolationV212:true}:{}),
   ...(entry.relayPressureV218?{relayPressureV218:true}:{}),
@@ -580,6 +593,7 @@ export function getXenoTrialsOperationViewV188(match){
   ...(gantry?{gantryV222:gantry}:{}),
   ...(grounding?{groundingV223:grounding}:{}),
   ...(collector?{decompressionV224:collector}:{}),
+  ...(archive?{archiveTransferV225:archive}:{}),
   ...(entry.batteryTicksV219?{batteryV219:{...batteryStatus(state,entry),depleted:state.failureReason==='structure-destroyed'}}:{}),
   instruction:entry.instruction,hint:state.status==='failed'?`Évaluation interrompue : ${failureLabel}.`:state.status==='completed'?'Objectifs validés.':
    target?.contested?'Écartez ou neutralisez les contacts dans le périmètre balisé.':
@@ -589,11 +603,13 @@ export function getXenoTrialsOperationViewV188(match){
    grounding?.phase==='waiting'?'Attirez un contact dans la bande balisée avant la décharge.':
    grounding?.phase==='opening'?'Attendez l’ouverture du sas.':
    collector?.phase==='opening'?'Attendez la décompression du sas.':
+   archive&&target?.locked?'Neutralisez la première vague pour déverrouiller la copie scellée.':
    target?`${target.label} · maintenez E à proximité${target.windowOpen===false?' pendant la fenêtre verte':''}.`:'Rejoignez le sas.',
   progress:{done,total:entry.objectives.length,label:entry.kind==='extraction'?`${done}/${entry.objectives.length} caissons livrés`:`${done}/${entry.objectives.length} objectifs validés`},
   timeRemaining:Math.max(0,entry.roundSeconds-state.elapsedTicks/120),integrity:state.integrity,carrying:state.carrying,entities,
   target:target?{x:target.x,radius:target.radius,label:target.label,
    ...(entry.kind==='beacon'?{id:target.id,windowOpen:target.windowOpen,windowRemainingTicks:target.windowRemainingTicks}:{}),
    ...(entry.relayPressureV218?{contested:target.contested}:{}),
-   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212||entry.relayPressureV218||relief||bypass||gantry||grounding?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
+   ...(archive?{locked:target.locked}:{}),
+   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212||entry.relayPressureV218||relief||bypass||gantry||grounding||archive?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
 }

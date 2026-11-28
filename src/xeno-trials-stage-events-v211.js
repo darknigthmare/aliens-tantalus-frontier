@@ -2,6 +2,7 @@ import { getXenoTrialsHordeGateCueV213, getXenoTrialsHordeMinigameV213 } from '.
 import { getXenoTrialsReinforcementV201 } from './xeno-trials-reinforcements-v201.js';
 import { getXenoTrialsBossStageV179 } from './xeno-trials-boss-stages-v179.js';
 import { getXenoTrialsCollectorViewV224, getXenoTrialsGantryConvoyV222, getXenoTrialsGroundingDoorV223, getXenoTrialsHangarBypassV221 } from './xeno-trials-operations-v188.js';
+import { getXenoTrialsArchiveTransferV225 } from './xeno-trials-archive-transfer-v225.js';
 
 // The V146 proposed rows map to the stage that now represents each room.
 // These are scene fixtures drawn behind the fight, not colliders or hazards.
@@ -141,6 +142,7 @@ export function createXenoTrialsStageEventsV211(stageId, match, arena) {
     const gantry = getXenoTrialsGantryConvoyV222(match);
     const grounding = getXenoTrialsGroundingDoorV223(match);
     const collector = getXenoTrialsCollectorViewV224(match);
+    const archive = getXenoTrialsArchiveTransferV225(match);
     if (gates) opening = Math.max(gates.left.opening, gates.right.opening);
     if (reducedMotion && phase === 'introduction') opening = 0;
     return {
@@ -150,6 +152,7 @@ export function createXenoTrialsStageEventsV211(stageId, match, arena) {
       ...(gantry ? { logisticsGantriesV222: gantry.gantries } : {}),
       ...(grounding ? { reactorGroundingV223: grounding } : {}),
       ...(collector ? { collectorV224: collector } : {}),
+      ...(archive ? { archiveTransferV225: archive } : {}),
       reducedMotion, affectsCombat: false,
       time: moving ? observedTick / 120 + (match.config.seed % 41) * .07 : 0,
       degraded: [...degraded]
@@ -350,6 +353,51 @@ function drawCollectorAirlock(ctx, state, reducedMotion, x, y) {
   });
 }
 
+function drawArchiveRack(ctx, x, y, phase, progress, reducedMotion) {
+  const accent = phase === 'locked' ? '#c48679' : phase === 'copied' ? '#abd9bd' : '#8ecbd0';
+  const travel = reducedMotion && phase !== 'copied' ? 0 : progress;
+  const left = x - 47, top = y - 107;
+  ctx.globalAlpha = .8;
+  ctx.fillStyle = '#182b33';
+  ctx.fillRect(left, top, 94, 107);
+  ctx.strokeStyle = '#596f76';
+  ctx.strokeRect(left, top, 94, 107);
+  ctx.fillStyle = '#0b171c';
+  ctx.fillRect(left + 7, top + 9, 80, 87);
+  for (let slot = 0; slot < 4; slot++) {
+    const shelf = top + 16 + slot * 18;
+    ctx.fillStyle = '#3f5259';
+    ctx.fillRect(left + 11, shelf, 72, 12);
+    ctx.fillStyle = accent;
+    ctx.fillRect(left + 16, shelf + 4, 8 + slot * 2, 3);
+  }
+  ctx.fillStyle = '#273b44';
+  ctx.fillRect(left + 9, top + 8, 76, 85 * (1 - travel));
+  ctx.fillStyle = accent;
+  ctx.fillRect(left + 63, top + 98, 19, 4);
+}
+
+function drawArchiveUplink(ctx, archive, reducedMotion, x, y) {
+  const left = x - 56, top = y - 101;
+  const power = archive.route !== null && archive.remainingTicks !== 0;
+  const transmit = reducedMotion && archive.transmission < 1 ? 0 : archive.transmission;
+  const color = archive.route === 0 ? '#e5b380' : '#9cd9be';
+  ctx.globalAlpha = .72;
+  ctx.fillStyle = '#1d2d34';
+  ctx.fillRect(left, top, 112, 101);
+  ctx.strokeStyle = '#526870';
+  ctx.strokeRect(left, top, 112, 101);
+  ctx.fillStyle = '#102027';
+  ctx.fillRect(left + 9, top + 12, 94, 57);
+  ctx.strokeStyle = color;
+  ctx.globalAlpha = power ? .86 : .22;
+  ctx.beginPath(); ctx.moveTo(x - 36, top + 52); ctx.lineTo(x - 24, top + 38);
+  ctx.lineTo(x + 24, top + 38); ctx.lineTo(x + 36, top + 52); ctx.stroke();
+  ctx.fillStyle = color;
+  ctx.fillRect(x - 4, top + 51 - transmit * 26, 8, 5);
+  ctx.fillRect(left + 12, top + 75, 88 * archive.transmission, 6);
+}
+
 export function drawXenoTrialsStageEventsV211(ctx, stage, camera, view) {
   if (!view || view.stageId !== stage.id) return;
   const floor = clamp(camera.floor, 180, 530);
@@ -370,6 +418,13 @@ export function drawXenoTrialsStageEventsV211(ctx, stage, camera, view) {
     view.collectorV224.sealed.forEach((sealed, index) => drawCollectorDuct(ctx,
       240 + index * 520 - shift * .29, floor - 46, sealed,
       view.collectorV224.openSide === (index === 0 ? 'left' : 'right'), view.time));
+  }
+  if (view.archiveTransferV225) {
+    const shift = camera.center - 500;
+    const archive = view.archiveTransferV225;
+    drawArchiveUplink(ctx, archive, view.reducedMotion, 500 - shift * .14, floor - 79);
+    archive.phases.forEach((phase, index) => drawArchiveRack(ctx, 234 + index * 532 - shift * .3,
+      floor - 47, phase, archive.progress[index], view.reducedMotion));
   }
   drawFixture(ctx, view, stage, 105 - offset, floor - 30, 'left');
   drawFixture(ctx, view, stage, 895 - offset, floor - 30, 'right');

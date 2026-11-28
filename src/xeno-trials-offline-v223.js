@@ -17,7 +17,10 @@ export const XENO_TRIALS_FIGHT_EFFECTS_V223 = Object.freeze([
   ...Object.values(XENO_TRIALS_PROJECTILE_IMAGES_V205), ...Object.values(XENO_TRIALS_EFFECT_IMAGES_V205),
 ]);
 
-export function getXenoTrialsFighterAssetsV223(id, variant) {
+const offlineVariantV225 = (id, variant) => getXenoTrialsFighterV96(id)?.variants.includes(variant) ? variant : null;
+
+export function getXenoTrialsFighterAssetsV223(id, requestedVariant) {
+  const variant = offlineVariantV225(id, requestedVariant);
   const art = getXenoTrialsArtV96(id, variant), fighter = { id, variant };
   return [art.path, getEnemyImportAnimationV107(art)?.path, getEnemyImportAttackV109(art)?.path,
     getXenoTrialsSpriteAtlasV188(fighter, art)?.texture.path, getXenoTrialsSpriteAtlasV189(fighter, art)?.texture.path,
@@ -32,8 +35,7 @@ export function getXenoTrialsArenaAssetsV223(stage) {
 }
 
 function offlineSelectionV224({ playerId, playerVariant, opponentId, opponentVariant, stageId }) {
-  const supported = (id, variant) => getXenoTrialsFighterV96(id)?.variants.includes(variant) ? variant : null;
-  return [playerId, supported(playerId, playerVariant), opponentId, supported(opponentId, opponentVariant), stageId];
+  return [playerId, offlineVariantV225(playerId, playerVariant), opponentId, offlineVariantV225(opponentId, opponentVariant), stageId];
 }
 
 export function getXenoTrialsOfflineDuelKeyV224(config) {

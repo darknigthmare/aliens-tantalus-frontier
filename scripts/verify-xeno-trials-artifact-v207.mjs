@@ -12,6 +12,7 @@ import { XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_STAGES_
 import { XENO_TRIALS_STARTERS_V96 } from '../src/xeno-trials-progress-v96.js';
 import { getXenoTrialsOpponentCandidatesV119 } from '../src/xeno-trials-selection-v97.js';
 import { XENO_TRIALS_MENU_ATLASES_V222 } from '../src/xeno-trials-menu-atlases-v222.js';
+import { getXenoTrialsOfflineDuelV223 } from '../src/xeno-trials-offline-v223.js';
 
 export async function verifyXenoTrialsArtifactV207(root) {
   const base = resolveSafeBuildOutput(root, process.env.ATF_BUILD_OUTPUT || 'dist');
@@ -42,15 +43,26 @@ export async function verifyXenoTrialsArtifactV207(root) {
   assert.deepEqual(shipped.filter(row => copied.has(row.path)), baseInfo.files.filter(row => copied.has(row.path)), 'Shared Trials files differ from the base release.');
 
   const worker = await readFile(join(output, 'sw.js'), 'utf8');
-  assert.equal(worker, xenoTrialsWorkerV207(await readFile(join(base, 'sw.js'), 'utf8'), info.cacheName, plan.shell, plan.duelMedia));
+  assert.equal(worker, xenoTrialsWorkerV207(await readFile(join(base, 'sw.js'), 'utf8'), info.cacheName, plan.shell, plan.duelMedia, plan.duelCatalog));
   const origin = 'https://xeno-trials.example';
   const context = vm.createContext({ self: { addEventListener() {}, location: { origin } }, URL });
-  vm.runInContext(worker + ';globalThis.checked={CACHE,SHELL,DUEL_MEDIA_V223,cacheableRequestV143};', context);
+  vm.runInContext(worker + ';globalThis.checked={CACHE,SHELL,DUEL_MEDIA_V223,offlineDuelRecipeV225,cacheableRequestV143};', context);
   assert.equal(context.checked.CACHE, info.cacheName);
   assert.deepEqual(Array.from(context.checked.SHELL), plan.shell);
   const paths = new Set(shipped.map(row => '/' + row.path));
   const fingerprints = new Map(shipped.map(row => ['/' + row.path, row.sha256]));
   for (const [path, hash] of context.checked.DUEL_MEDIA_V223) assert.equal(fingerprints.get(path), hash, path);
+  const verifyRecipe = config => {
+    const duel = getXenoTrialsOfflineDuelV223(config);
+    const declared = context.checked.offlineDuelRecipeV225(duel.selection);
+    assert.equal(declared?.key, duel.key);
+    assert.deepEqual(Array.from(declared.assets), duel.assets, duel.key);
+  };
+  for (const fighter of XENO_TRIALS_FIGHTERS_V96) for (const variant of [null, ...fighter.variants]) {
+    verifyRecipe({ playerId: fighter.id, playerVariant: variant });
+    verifyRecipe({ opponentId: fighter.id, opponentVariant: variant });
+  }
+  for (const stage of XENO_TRIALS_STAGES_V96) verifyRecipe({ stageId: stage.id });
   const offlinePaths = new Set(context.checked.SHELL);
   for (const atlas of Object.values(XENO_TRIALS_MENU_ATLASES_V222)) {
     assert.ok(offlinePaths.has(atlas.path), `Missing offline menu atlas: ${atlas.path}`);

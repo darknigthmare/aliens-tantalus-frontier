@@ -4,13 +4,97 @@ function offlineDuelIndexV224() {
   return new Request(new URL('/__atf-offline-duels-v224.json', self.location.origin));
 }
 
-async function loadOfflineDuelIndexV224() {
-  const response = await caches.match(offlineDuelIndexV224(), { cacheName: offlineDuelCacheNameV223() });
-  return response ? response.json() : [];
+async function readOfflineDuelIndexV225(cacheName) {
+  const response = await caches.match(offlineDuelIndexV224(), { cacheName });
+  if (!response) return null;
+  const records = await response.json();
+  if (!Array.isArray(records)) throw new Error('Invalid offline duel index');
+  return records;
 }
+
+async function loadOfflineDuelIndexV224() { return await readOfflineDuelIndexV225(offlineDuelCacheNameV223()) ?? []; }
 
 async function saveOfflineDuelIndexV224(cache, entries) {
   await cache.put(offlineDuelIndexV224(), new Response(JSON.stringify(entries), { headers: { 'Content-Type': 'application/json' } }));
+}
+
+function offlineDuelRecipeV225(selection) {
+  if (!Array.isArray(selection) || selection.length !== 5) return null;
+  const player = DUEL_FIGHTERS_V225.get(JSON.stringify(selection.slice(0, 2)));
+  const opponent = DUEL_FIGHTERS_V225.get(JSON.stringify(selection.slice(2, 4)));
+  const stage = DUEL_ARENAS_V225.get(selection[4]);
+  if (!player || !opponent || !stage) return null;
+  return { key: JSON.stringify(selection), selection, assets: [...new Set([...player, ...opponent, ...stage, ...DUEL_EFFECTS_V225])].sort() };
+}
+
+async function hasOfflineMediaFingerprintV225(request, response) {
+  const expected = DUEL_MEDIA_V223.get(new URL(request.url).pathname);
+  if (!expected || !cacheableResponseV143(request, response)) return false;
+  const checksum = await crypto.subtle.digest('SHA-256', await response.clone().arrayBuffer());
+  const hash = Array.from(new Uint8Array(checksum), byte => byte.toString(16).padStart(2, '0')).join('');
+  return hash === expected;
+}
+
+async function migrateOfflineDuelsV225(previous) {
+  const preserved = new Set();
+  if (!previous.length) return preserved;
+  const recipes = new Map();
+  const sources = [];
+  let latestIndex = null;
+  for (const name of previous.toReversed()) {
+    try {
+      const entries = await readOfflineDuelIndexV225(name);
+      if (!entries) continue;
+      // The latest catalog owns deletions. Older caches left after a storage
+      // failure can supply intact bytes but must never bring a removed row back.
+      latestIndex ??= entries;
+      sources.push(name);
+    } catch {
+      if (!latestIndex) return new Set(previous);
+      preserved.add(name);
+    }
+  }
+  if (!latestIndex) return preserved;
+  for (const row of latestIndex) {
+    const current = offlineDuelRecipeV225(row?.selection);
+    if (current && row.key === current.key) recipes.set(current.key, current);
+  }
+  if (!recipes.size) return preserved;
+  let output;
+  try {
+    const current = await loadOfflineDuelIndexV224();
+    for (const entry of current) recipes.set(entry.key, entry);
+    output = await caches.open(offlineDuelCacheNameV223());
+    await saveOfflineDuelIndexV224(output, [...recipes.values()]);
+  } catch { return new Set(previous); }
+  const needed = [...new Set([...recipes.values()].flatMap(entry => entry.assets))].filter(path => !SHELL_PATHS.has(path));
+  let cursor = 0;
+  // Bound memory while hashing large action atlases and move each shared path once.
+  await Promise.all(Array.from({ length: Math.min(4, needed.length) }, async () => {
+    while (cursor < needed.length) {
+      const request = new Request(new URL(needed[cursor++], self.location.origin), { credentials: 'omit' });
+      if (await output.match(request)) continue;
+      for (const name of sources) {
+        try {
+          const response = await caches.match(request, { cacheName: name });
+          if (!await hasOfflineMediaFingerprintV225(request, response)) continue;
+          await output.put(request, response);
+          break;
+        } catch { preserved.add(name); }
+      }
+    }
+  }));
+  return preserved;
+}
+
+async function activateOfflineDuelsV225() {
+  const names = await caches.keys();
+  const current = offlineDuelCacheNameV223();
+  const obsolete = names.filter(key => key.startsWith('atf-trials-') && key !== CACHE && key !== current);
+  const previous = obsolete.filter(name => /^atf-trials-v\d+-[a-f0-9]{24}-duels$/.test(name));
+  // A storage exception leaves the old download cache available to the next update.
+  const preserved = await migrateOfflineDuelsV225(previous).catch(() => new Set(previous));
+  await Promise.all(obsolete.filter(name => !preserved.has(name)).map(name => caches.delete(name)));
 }
 
 async function listOfflineDuelsV224(entries) {
@@ -63,19 +147,16 @@ async function handleOfflineDuelV223(data) {
   if (!['status', 'prepare'].includes(data.mode) || !Array.isArray(data.assets)
     || data.assets.length === 0 || data.assets.length > DUEL_MEDIA_V223.size
     || !data.assets.every(path => DUEL_MEDIA_V223.has(path))) return error;
-  const selection = data.selection;
-  if (!Array.isArray(selection) || selection.length !== 5 || !selection.every((value, index) =>
-    ((index === 1 || index === 3) && value === null) || (typeof value === 'string' && /^[a-z0-9][a-z0-9_-]{0,119}$/u.test(value)))) return error;
-  const key = JSON.stringify(selection);
-  const assets = [...new Set(data.assets)].sort();
+  const recipe = offlineDuelRecipeV225(data.selection);
+  if (!recipe || JSON.stringify(recipe.assets) !== JSON.stringify([...new Set(data.assets)].sort())) return error;
+  const { key, assets } = recipe;
   const entries = await loadOfflineDuelIndexV224();
   const existing = entries.find(entry => entry.key === key);
-  if (existing && JSON.stringify(existing.assets) !== JSON.stringify(assets)) return error;
   const missing = await missingOfflineDuelAssetsV223(assets);
   if (!missing.length && (existing || assets.every(path => SHELL_PATHS.has(path)))) return { state: 'ready' };
   if (data.mode === 'status') return { state: 'missing' };
   const output = await caches.open(offlineDuelCacheNameV223());
-  if (!existing) await saveOfflineDuelIndexV224(output, [...entries, { key, selection, assets }]);
+  if (!existing) await saveOfflineDuelIndexV224(output, [...entries, recipe]);
   // Keep work already completed on an interrupted connection. Readiness is
   // derived from the complete set each time, including after a reload.
   let cursor = 0, failed = false;
@@ -84,10 +165,7 @@ async function handleOfflineDuelV223(data) {
       const request = missing[cursor++];
       try {
         const response = await fetch(request, { cache: 'reload' });
-        if (!cacheableResponseV143(request, response)) throw new Error('Invalid duel asset');
-        const checksum = await crypto.subtle.digest('SHA-256', await response.clone().arrayBuffer());
-        const hash = Array.from(new Uint8Array(checksum), byte => byte.toString(16).padStart(2, '0')).join('');
-        if (hash !== DUEL_MEDIA_V223.get(new URL(request.url).pathname)) throw new Error('Unexpected duel asset');
+        if (!await hasOfflineMediaFingerprintV225(request, response)) throw new Error('Unexpected duel asset');
         await output.put(request, response);
       } catch { failed = true; }
     }
@@ -110,9 +188,11 @@ function registerOfflineDuelWorkerV223() {
   });
 }
 
-export function xenoTrialsOfflineWorkerV223(media) {
-  return `\nconst DUEL_MEDIA_V223 = new Map(${JSON.stringify(media)});\n${[
-    offlineDuelCacheNameV223, offlineDuelIndexV224, loadOfflineDuelIndexV224, saveOfflineDuelIndexV224,
+export function xenoTrialsOfflineWorkerV223(media, { effects, fighters, arenas }) {
+  return `\nconst DUEL_MEDIA_V223 = new Map(${JSON.stringify(media)});\nconst DUEL_EFFECTS_V225 = ${JSON.stringify(effects)};\n`
+    + `const DUEL_FIGHTERS_V225 = new Map(${JSON.stringify(fighters)});\nconst DUEL_ARENAS_V225 = new Map(${JSON.stringify(arenas)});\n${[
+    offlineDuelCacheNameV223, offlineDuelIndexV224, readOfflineDuelIndexV225, loadOfflineDuelIndexV224, saveOfflineDuelIndexV224,
+    offlineDuelRecipeV225, hasOfflineMediaFingerprintV225, migrateOfflineDuelsV225, activateOfflineDuelsV225,
     listOfflineDuelsV224, removeOfflineDuelV224, readOfflineDuelAssetV223, missingOfflineDuelAssetsV223,
     handleOfflineDuelV223, registerOfflineDuelWorkerV223,
   ].map(fn => fn.toString()).join('\n')}\nregisterOfflineDuelWorkerV223();\n`;

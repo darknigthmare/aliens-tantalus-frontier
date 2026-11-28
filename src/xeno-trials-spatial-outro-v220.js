@@ -1,4 +1,5 @@
 import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
+import { getXenoTrialsBodyGapV105 } from './xeno-trials-geometry-v105.js';
 import { getXenoTrialsPresentationRigV211 } from './xeno-trials-presentation-v211.js';
 import { getXenoTrialsRenderMetricsV110 } from './xeno-trials-scale-v110.js';
 import { drawXenoTrialsSpriteAtlasV188, getXenoTrialsSpriteAtlasV188 } from './xeno-trials-sprite-atlas-v188.js';
@@ -67,17 +68,34 @@ export function getXenoTrialsAirborneWinnerPlatesV224(match, fighter, images) {
   return plates;
 }
 
+export function isXenoTrialsSurvivalVerdictV225(match) {
+  const { result, config, fighters } = match || {};
+  return match?.phase === 'match-over' && !match.hordeV180 && !match.operationV188 && fighters?.length === 2
+    && result?.completed === true && result.reason === 'time' && result.winner === 'player'
+    && config?.rulesV119?.goal === 'survive' && result.rulesV119?.goal === 'survive' && match.timeRemaining === 0
+    && result.matchId === config.matchId && result.durationTicks === match.tick && result.stageId === config.stageId
+    && fighters[0].side === 'player' && fighters[1].side === 'opponent' && fighters[0].x !== fighters[1].x
+    && fighters.every(f => f.hp > 0 && [f.x, f.y, f.vy].every(Number.isFinite) && f.y >= 0 && f.y <= 1000
+      && [-1, 1].includes(f.facing) && getXenoTrialsFighterV96(f.id)
+      && result[`${f.side}Id`] === f.id && result[`${f.side}Variant`] === f.variant)
+    && getXenoTrialsBodyGapV105(...fighters) >= -1e-6;
+}
+
+function drawLiveLanding(context, fighter, images, plates, view, metrics) {
+  const visual = { ...fighter, attack: null, guard: false, hitFlash: 0, stun: 0,
+    y: view.renderY, vy: view.progress < .18 ? fighter.vy : -1 };
+  const options = { metrics, x: fighter.x, y: view.ground, facing: fighter.facing };
+  return view.settled ? drawXenoTrialsSpriteAtlasV188(context, visual, plates.art, images, options)
+    : drawXenoTrialsSpriteAtlasV189(context, visual, plates.art, images, options);
+}
+
 export function drawXenoTrialsWinnerLandingV224(context, match, fighter, images, view, metrics) {
   const plates = getXenoTrialsAirborneWinnerPlatesV224(match, fighter, images);
   if (!plates || !view || view.airAtlasPathV224 !== plates.motion.texture.path
     || view.idleAtlasPathV224 !== plates.idle.texture.path) return null;
   // The vertical displacement is presentation only. Use the actual ascent
   // pose on the initial cut, then show the admitted descent and planted idle.
-  const visual = { ...fighter, attack: null, guard: false, hitFlash: 0, stun: 0,
-    y: view.renderY, vy: view.progress < .18 ? fighter.vy : -1 };
-  const options = { metrics, x: fighter.x, y: view.ground, facing: fighter.facing };
-  const drawn = view.settled ? drawXenoTrialsSpriteAtlasV188(context, visual, plates.art, images, options)
-    : drawXenoTrialsSpriteAtlasV189(context, visual, plates.art, images, options);
+  const drawn = drawLiveLanding(context, fighter, images, plates, view, metrics);
   return drawn && { ...drawn, winnerLandingV224: view };
 }
 
@@ -95,7 +113,12 @@ export function createXenoTrialsDrawnExitV220(match, fighter, terminal, camera, 
   if (!fromLanding && (!rig || !terminal.participants?.some(p => p.side === fighter.side && p.fighterId === fighter.id
     && p.rigId === rig.id && p.revision === 211 && p.presentationKindV211 === 'outro'
     && p.previousKind === 'outro-win'))) return null;
+  const actor = { kind: 'winner', rigId: fromLanding ? plates.motion.profileId : rig.id,
+    ...(fromLanding ? { fromLandingV224: { y: fighter.y, vy: fighter.vy } } : {}) };
+  return planDrawnExit(fighter, plates, camera, direction, maxTravelMs, actor);
+}
 
+function planDrawnExit(fighter, plates, camera, direction, maxTravelMs, actor) {
   const metrics = getXenoTrialsRenderMetricsV110(fighter.id, fighter.variant);
   const walkBounds = plates.motion.frames.filter(frame => frame.id.startsWith('walk-')).map(frame =>
     getXenoTrialsSpriteLayoutV189(plates.motion, frame, metrics, { x: 0, y: 450, facing: direction }).bounds);
@@ -104,27 +127,47 @@ export function createXenoTrialsDrawnExitV220(match, fighter, terminal, camera, 
   const edge = direction === -1 ? -offscreenMargin : 1000 + offscreenMargin;
   const endX = (edge - camera.translateX) / camera.zoom;
   const distance = (endX - fighter.x) * direction;
-  const speed = definition.speed * .7;
+  const speed = getXenoTrialsFighterV96(fighter.id).speed * .7;
   if (distance <= 0 || (distance / speed) * 1000 > maxTravelMs) return null;
-  return { side: fighter.side, fighterId: fighter.id, rigId: fromLanding ? plates.motion.profileId : rig.id,
-    ...(fromLanding ? { fromLandingV224: { y: fighter.y, vy: fighter.vy } } : {}), startX: fighter.x, endX, direction,
+  return { ...actor, side: fighter.side, fighterId: fighter.id, startX: fighter.x, endX, direction,
     fromFacing: fighter.facing, travelMs: Math.max(600, distance / speed * 1000), ground: 450,
-    offscreenMargin, kind: 'winner', atlasPathV220: plates.motion.texture.path, idlePathV220: plates.idle.texture.path };
+    offscreenMargin, atlasPathV220: plates.motion.texture.path, idlePathV220: plates.idle.texture.path };
+}
+
+export function createXenoTrialsSurvivalParticipantV225(match, fighter, camera, images, maxTravelMs) {
+  if (!isXenoTrialsSurvivalVerdictV225(match) || !match.fighters.includes(fighter)) return null;
+  const plates = walkPlates(fighter);
+  if (!plates || !loaded(images, plates.motion) || !loaded(images, plates.idle)) return null;
+  const direction = fighter.x < match.fighters.find(other => other !== fighter).x ? -1 : 1;
+  return planDrawnExit(fighter, plates, camera, direction, maxTravelMs, {
+    kind: 'disengage', rigId: plates.motion.profileId,
+    survivalV225: { role: fighter.side === 'player' ? 'survivor' : 'opponent', y: fighter.y, vy: fighter.vy },
+  });
 }
 
 export function matchesXenoTrialsDrawnExitV220(match, fighter, participant) {
-  const fromLanding = participant.fromLandingV224;
-  const plates = fromLanding ? getXenoTrialsAirborneWinnerPlatesV224(match, fighter) : fighter.y === 0 && winnerPlates(match, fighter);
-  return Boolean(plates && participant.kind === 'winner' && participant.startX === fighter.x
-    && participant.fromFacing === fighter.facing && participant.atlasPathV220 === plates.motion.texture.path
-    && participant.idlePathV220 === plates.idle.texture.path
-    && (fromLanding ? fromLanding.y === fighter.y && fromLanding.vy === fighter.vy && participant.rigId === plates.motion.profileId
-      : participant.rigId === getXenoTrialsPresentationRigV211(getXenoTrialsFighterV96(fighter.id), plates.art)?.id)
-    && (participant.endX - participant.startX) * participant.direction > 0);
+  const { fromLandingV224: landed, survivalV225: survival } = participant;
+  const plates = survival ? isXenoTrialsSurvivalVerdictV225(match) && match.fighters.includes(fighter) && walkPlates(fighter)
+    : landed ? getXenoTrialsAirborneWinnerPlatesV224(match, fighter) : fighter.y === 0 && winnerPlates(match, fighter);
+  if (!plates || participant.startX !== fighter.x || participant.fromFacing !== fighter.facing
+    || participant.atlasPathV220 !== plates.motion.texture.path || participant.idlePathV220 !== plates.idle.texture.path
+    || !((participant.endX - participant.startX) * participant.direction > 0)) return false;
+  if (survival) {
+    const other = match.fighters.find(actor => actor !== fighter);
+    return participant.kind === 'disengage' && participant.direction === Math.sign(fighter.x - other.x)
+      && survival.role === (fighter.side === 'player' ? 'survivor' : 'opponent') && survival.y === fighter.y && survival.vy === fighter.vy
+      && participant.rigId === plates.motion.profileId;
+  }
+  return participant.kind === 'winner' && (landed ? landed.y === fighter.y && landed.vy === fighter.vy && participant.rigId === plates.motion.profileId
+    : participant.rigId === getXenoTrialsPresentationRigV211(getXenoTrialsFighterV96(fighter.id), plates.art)?.id);
 }
 
 export function drawXenoTrialsSpatialOutroV220(context, match, fighter, images, view, metrics) {
   if (!matchesXenoTrialsDrawnExitV220(match, fighter, view) || !view.visible) return null;
+  if (view.settlingV225) {
+    const landing = drawLiveLanding(context, fighter, images, walkPlates(fighter), view.settlingV225, metrics);
+    return landing && { ...landing, exitV157: { ...view, stepped: false, pose: null } };
+  }
   const art = getXenoTrialsArtV96(fighter.id, fighter.variant);
   // Clear terminal hit and attack flags in the render copy. The engine snapshot
   // stays frozen at the verdict, including physical position and remaining HP.

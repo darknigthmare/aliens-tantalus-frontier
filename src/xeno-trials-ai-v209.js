@@ -13,6 +13,7 @@ import { getXenoTrialsActiveStrikeV210 } from './xeno-trials-super-kits-v210.js'
 import { getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
 import { hasXenoTrialsDefensiveTravelV213, hasXenoTrialsGuardedWalkV218, XENO_TRIALS_GRAVITY_V210 } from './xeno-trials-movement-v210.js';
 import { getXenoTrialsGroundRecoveryV211, XENO_TRIALS_GET_UP_V211 } from './xeno-trials-defense-v211.js';
+import { canStartXenoTrialsGroundBreakV213, XENO_TRIALS_GROUND_BREAK_V213 } from './xeno-trials-grapple-v213.js';
 
 const nonMeleeStyles = new Set(['acid', 'pulse', 'flame', 'detonation', 'ground-wave', 'acid-cluster', 'aimed-acid']);
 const signatureControls = { 'signature-2': 'signature2', 'signature-3': 'signature3' };
@@ -316,13 +317,22 @@ function groundRecoveryInput(match, cpu, definition) {
   return { guard: recovery.ready && match.tick >= reactionTick && !cpu.previousInput.guard && !cpu.rearmControls.guard };
 }
 
+function counterGroundHoldInput(match, cpu, definition, controls) {
+  if (definition.id !== 'import-game-dd-wy-commando' || definition.profileId !== 'pose-v106-import-game-dd-wy-commando'
+    || !controls.guard || cpu.previousInput.light || cpu.rearmControls.light
+    || !canStartXenoTrialsGroundBreakV213(match, cpu)) return null;
+  // Give the captor a reaction window before attempting the same paid input as a player.
+  if (match.tick - match.grappleV153.bornTick < XENO_TRIALS_GROUND_BREAK_V213.minHeld + 8) return null;
+  return { guard: true, light: true };
+}
+
 /** Add techniques to an existing hard decision, without new saved brain state.
  * A horde caller also applies ordinary engagement and spawn grace first. */
 export function chooseXenoTrialsHardTacticsV209(match, cpu, target, brain, specs, controls, dt, decided, prior) {
   if (match.config.difficulty !== 'hard' || match.hordeV180 && cpu.enemyRankV186 !== 'boss'
-    || cpu.hp <= 0 || target.hp <= 0 || cpu.y !== 0 || cpu.attack || cpu.movesetV207?.evade
-    || match.grappleV153) return controls;
+    || cpu.hp <= 0 || target.hp <= 0 || cpu.y !== 0 || cpu.attack || cpu.movesetV207?.evade) return controls;
   const definition = getXenoTrialsFighterV96(cpu.id);
+  if (match.grappleV153) return counterGroundHoldInput(match, cpu, definition, controls) || controls;
   if (cpu.stun > 0) return groundRecoveryInput(match, cpu, definition) || controls;
   const defense = parryInput(match, cpu, target, controls, brain, specs, dt);
   if (defense) return defense;

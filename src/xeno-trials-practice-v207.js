@@ -1,3 +1,4 @@
+import { createXenoTrialsPracticeGoalsV225, XENO_TRIALS_NEW_DRILLS_V225 } from './xeno-trials-practice-v225.js';
 import { createXenoTrialsPracticeGoalsV224, XENO_TRIALS_NEW_DRILLS_V224 } from './xeno-trials-practice-v224.js';
 import { createXenoTrialsPracticeGoalsV223, XENO_TRIALS_NEW_DRILLS_V223 } from './xeno-trials-practice-v223.js';
 import { createXenoTrialsPracticeGoalsV222, XENO_TRIALS_NEW_DRILLS_V222 } from './xeno-trials-practice-v222.js';
@@ -73,9 +74,11 @@ export const XENO_TRIALS_PRACTICE_DRILLS_V223 = Object.freeze([...XENO_TRIALS_PR
   ...XENO_TRIALS_NEW_DRILLS_V223.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
 export const XENO_TRIALS_PRACTICE_DRILLS_V224 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V223,
   ...XENO_TRIALS_NEW_DRILLS_V224.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
-const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V224.map(entry => [entry.id, entry]));
+export const XENO_TRIALS_PRACTICE_DRILLS_V225 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V224,
+  ...XENO_TRIALS_NEW_DRILLS_V225.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
+const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V225.map(entry => [entry.id, entry]));
 export const getXenoTrialsPracticeV207 = id => LESSONS.get(id) || null;
-export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V224
+export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V225
   .filter(entry => Array.isArray(value) && value.includes(entry.id)).map(entry => entry.id);
 
 export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
@@ -109,14 +112,20 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   }
   if (id === 'rupture') opponent.stamina = 34;
 
-  let index = 0, state = 'active', lastEvent = match.serial, due = null;
+  let index = 0, state = 'active', lastEvent = match.serial, due = null, retryCue = '';
   let playerAttack = null, incomingAttack = null, targetWasGuarding = false;
   let armedBeforeStep = null, interruption = null, parryOpeningUntil = 0;
   let acidContact = null, standingGuardBeforeStep = false;
   const hasAttack = (action, side) => action.type === 'attack' && action.side === side;
   const hasImpact = (action, side) => ['hit', 'block', 'guard-break'].includes(action.type) && action.side === side;
   const advance = () => { if (++index === entry.targets.length) state = 'complete'; };
-  const progress = { index: () => index, advance, retry: () => { if (state === 'active') state = 'retry'; } };
+  function retry(cue = '') {
+    if (state !== 'active') return;
+    state = 'retry';
+    retryCue = cue;
+  }
+  const progress = { index: () => index, advance, retry };
+  const goalsV225 = createXenoTrialsPracticeGoalsV225(id, match, progress);
   const goalsV224 = createXenoTrialsPracticeGoalsV224(id, match, progress);
   const goalsV223 = createXenoTrialsPracticeGoalsV223(id, match, progress);
   const goalsV222 = createXenoTrialsPracticeGoalsV222(id, match, progress);
@@ -126,7 +135,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   const goalsV218 = createXenoTrialsPracticeGoalsV218(id, match, progress);
   const goalsV217 = createXenoTrialsPracticeGoalsV217(id, match, progress);
   const goalsV213 = createXenoTrialsPracticeGoalsV213(id, match, progress);
-  const liveGoals = goalsV224 || goalsV223 || goalsV222 || goalsV221 || goalsV220 || goalsV219 || goalsV218 || goalsV217 || goalsV213;
+  const liveGoals = goalsV225 || goalsV224 || goalsV223 || goalsV222 || goalsV221 || goalsV220 || goalsV219 || goalsV218 || goalsV217 || goalsV213;
   const goals = liveGoals || createXenoTrialsPracticeGoalsV212(id, match, progress) || createXenoTrialsPracticeGoalsV211(id, match, progress);
   let cueV213 = '';
 
@@ -287,6 +296,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
 
   function view() {
     return { id, title: entry.title, briefing: entry.briefing, objectives: entry.targets, index, state,
+      ...(retryCue ? { retryCue } : {}),
       ...(sandbox ? { sandbox: true, result: match.result?.winner || null, telemetryV209: observer.view() } : {}),
       ...(goals?.terminalReady?.() ? { awaitingOutroV211: true } : {}),
       cue: goals ? goals.cue() : id === 'low-defense' && opponent.attack?.kind === 'low' ? 'FRAPPE BASSE EN COURS'

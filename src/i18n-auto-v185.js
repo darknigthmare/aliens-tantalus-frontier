@@ -22,6 +22,50 @@ const arenaLabels = new Map([
   [label.toUpperCase(), labelEn.toUpperCase()]
 ]));
 const trialLabels = new Map([
+  ['Temps de survie validé. Désengagement des spécimens.', 'Survival time confirmed. Specimens disengaging.'],
+  ['RAFLE DES ARCHIVES', 'ARCHIVE SWEEP'],
+  ['Dix-huit contacts fragiles débouchent dans les Archives MIRE en trois vagues.', 'Eighteen low-health contacts pour into the MIRE Archives in three waves.'],
+  ['Surveillez le sas est au départ. La seconde vague ouvre les deux accès, puis le dernier détachement revient par l’ouest.', 'Watch the east airlock first. The second wave uses both entrances, then the last squad comes from the west.'],
+  ['GARDE DES ARCHIVES', 'ARCHIVE GUARD'],
+  ['ENCERCLEMENT DES RAYONS', 'STACKS ENCIRCLED'],
+  ['DERNIÈRE RAFLE', 'FINAL SWEEP'],
+  ['ARCHIVES SOUS VERROU', 'SEALED ARCHIVES'],
+  ['Choisissez une copie des archives. La copie temporaire à l’ouest expire six secondes après sa prise. Neutralisez la première vague pour accéder à la copie scellée à l’est. Transmettez la copie choisie depuis le terminal central.', 'Choose a copy of the archive. The temporary copy to the west expires six seconds after pickup. Clear the first wave to unlock the sealed copy to the east. Transmit your chosen copy at the central terminal.'],
+  ['Copie temporaire', 'Temporary copy'],
+  ['Copie scellée', 'Sealed copy'],
+  ['Terminal de transmission', 'Uplink terminal'],
+  ['CHOISISSEZ UNE COPIE', 'CHOOSE A COPY'],
+  ['COPIE SCELLÉE', 'SEALED COPY'],
+  ['CACHE EXPIRÉ', 'CACHE EXPIRED'],
+  ['NEUTRALISEZ LA PREMIÈRE VAGUE', 'CLEAR THE FIRST WAVE'],
+  ['Neutralisez la première vague pour déverrouiller la copie scellée.', 'Clear the first wave to unlock the sealed copy.'],
+  ['Évaluation interrompue : Copie temporaire expirée.', 'Evaluation interrupted: Temporary copy expired.'],
+  ['Sauter après le tir visé', 'Jump after the aimed shot'],
+  ['Restez au sol pendant que le Spitter vous vise. Sautez sur place dès le départ du projectile. Le tir conserve l’angle choisi à l’émission.', 'Stay grounded while the Spitter aims at you. Jump in place as soon as the projectile launches. The shot keeps the angle set at release.'],
+  ['Repérer la préparation du Spitter', 'Read the Spitter’s windup'],
+  ['Laisser le tir partir vers votre position au sol', 'Let the shot launch toward your grounded position'],
+  ['Sauter après le départ et laisser passer le tir en dessous', 'Jump after the shot launches and let it pass beneath you'],
+  ['RESTEZ AU SOL PENDANT LA VISÉE', 'STAY GROUNDED WHILE IT AIMS'],
+  ['TIR PARTI · SAUTEZ SUR PLACE', 'SHOT AWAY · JUMP IN PLACE'],
+  ['ATTENDEZ LE DÉPART DU TIR AVANT DE SAUTER', 'WAIT FOR THE SHOT TO LAUNCH BEFORE JUMPING'],
+  ['Balayer trois contacts avec un seul Super', 'Sweep three contacts with one Super'],
+  ['Le Chargeur industriel dispose d’une jauge pleine. Laissez les contacts de la horde se regrouper devant lui et lancez Super quand trois sont à portée.', 'The Automated Power Loader starts with a full meter. Let the horde gather in front of it and launch Super when three contacts are in range.'],
+  ['Laisser trois contacts entrer dans la portée du Super', 'Let three contacts enter Super range'],
+  ['Engager le Super dans leur direction', 'Launch Super toward them'],
+  ['Toucher les trois contacts avec le même Super', 'Hit all three contacts with the same Super'],
+  ['LAISSEZ TROIS CONTACTS SE REGROUPER DEVANT VOUS', 'LET THREE CONTACTS GROUP UP IN FRONT OF YOU'],
+  ['TROIS CONTACTS À PORTÉE · SUPER', 'THREE CONTACTS IN RANGE · SUPER'],
+  ['ATTENDEZ TROIS CONTACTS AVANT DE LANCER SUPER', 'WAIT FOR THREE CONTACTS BEFORE FIRING SUPER'],
+  ['Alimenter le sas avec un contact hostile', 'Bait a hostile to power the airlock'],
+  ['Restez près de la borne hors de la bande signalée. Attirez un contact jusque dans la décharge. Après l’ouverture, rejoignez le sas et maintenez Interaction pour valider la sortie.', 'Stay near the terminal outside the marked strip. Lure a hostile into the discharge. Once the airlock opens, reach it and hold Interact to confirm extraction.'],
+  ['Repérer la bande avant la décharge', 'Identify the strip before the discharge'],
+  ['Faire alimenter le sas par une décharge sur un contact', 'Power the airlock by catching a hostile in the discharge'],
+  ['Attendre l’ouverture puis valider le sas du réacteur', 'Wait for the airlock to open and confirm extraction'],
+  ['RESTEZ PRÈS DE LA BORNE', 'STAY NEAR THE TERMINAL'],
+  ['LAISSEZ UN CONTACT ENTRER DANS LA BANDE', 'LET A CONTACT ENTER THE STRIP'],
+  ['ATTENDEZ L’OUVERTURE DU SAS', 'WAIT FOR THE AIRLOCK TO OPEN'],
+  ['REJOIGNEZ LE SAS ET MAINTENEZ INTERACTION', 'REACH THE AIRLOCK AND HOLD INTERACT'],
+  ['RESTEZ HORS DE LA BANDE ET LAISSEZ PASSER UN CONTACT', 'STAY OUTSIDE THE STRIP AND LET A CONTACT ENTER'],
   ['Duels hors connexion', 'Offline duels'],
   ['Retirer le téléchargement', 'Remove download'],
   ['Duel en cours · téléchargement conservé', 'Duel in progress · download kept'],
@@ -738,6 +782,8 @@ function fromPatterns(text) {
 }
 
 function translateWhole(text) {
+  const archiveClock = /^CACHE TEMPORAIRE · (\d+),(\d) s$/u.exec(text);
+  if (archiveClock) return `TEMPORARY CACHE · ${archiveClock[1]}.${archiveClock[2]} s`;
   if (exact.has(text)) return exact.get(text);
   if (upper.has(text)) return upper.get(text);
   return arenaLabels.get(text) ?? trialLabels.get(text) ?? fromPatterns(text);

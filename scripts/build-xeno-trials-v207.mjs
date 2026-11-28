@@ -25,7 +25,7 @@ const entryModule = 'src/xeno-trials-standalone.js';
 const launchPage = 'xeno-trials.html';
 const digest = value => createHash('sha256').update(value).digest('hex');
 
-export const XENO_TRIALS_BUILD_REVISION = 224;
+export const XENO_TRIALS_BUILD_REVISION = 225;
 export const xenoTrialsCacheName = fingerprint => `atf-trials-v${XENO_TRIALS_BUILD_REVISION}-${fingerprint.slice(0, 24)}`;
 
 const icons = [192, 512].flatMap(size => ['any', 'maskable'].map(purpose => ({
@@ -84,15 +84,14 @@ export async function planXenoTrialsBuildV207(base, info) {
       if (paths.has(art.slice(1))) assets.add(required(art.slice(1)));
     }
   }
-  const duelPaths = new Set(XENO_TRIALS_FIGHT_EFFECTS_V223);
-  for (const fighter of XENO_TRIALS_FIGHTERS_V96) {
-    for (const variant of [null, ...fighter.variants]) {
-      for (const art of fighterAssets(fighter.id, variant)) duelPaths.add(art);
-    }
-  }
-  for (const stage of XENO_TRIALS_STAGES_V96) {
-    for (const art of stageAssets(stage)) duelPaths.add(art);
-  }
+  const duelCatalog = {
+    effects: XENO_TRIALS_FIGHT_EFFECTS_V223,
+    fighters: XENO_TRIALS_FIGHTERS_V96.flatMap(fighter => [null, ...fighter.variants].map(variant =>
+      [JSON.stringify([fighter.id, variant]), fighterAssets(fighter.id, variant)])),
+    arenas: XENO_TRIALS_STAGES_V96.map(stage => [stage.id, stageAssets(stage)]),
+  };
+  const duelPaths = new Set([...duelCatalog.effects, ...duelCatalog.fighters.flatMap(([, art]) => art),
+    ...duelCatalog.arenas.flatMap(([, art]) => art)]);
   const assetHashes = new Map(info.files.map(file => [file.path, file.sha256]));
   const duelMedia = [...duelPaths].sort().map(path => {
     assets.add(required(path.slice(1)));
@@ -119,20 +118,20 @@ export async function planXenoTrialsBuildV207(base, info) {
   const audioUrls = audioSources.map(({ path, sha256 }) => `${path}?v=${sha256.slice(0, 16)}`);
   const shell = ['/', ...[...new Set([...shellPaths, ...audioUrls])].sort()];
   const researchFighters = new Set(XENO_TRIALS_RESEARCH_FIGHTERS_V210.map(fighter => fighter.id)).size;
-  return { html: pageWithWorker(html), copyPaths, shell, duelMedia, fighters: XENO_TRIALS_FIGHTERS_V96.length,
+  return { html: pageWithWorker(html), copyPaths, shell, duelMedia, duelCatalog, fighters: XENO_TRIALS_FIGHTERS_V96.length,
     researchFighters, stages: XENO_TRIALS_STAGES_V96.length };
 }
 
-export function xenoTrialsWorkerV207(baseWorker, cacheName, shell, duelMedia = []) {
+export function xenoTrialsWorkerV207(baseWorker, cacheName, shell, duelMedia, duelCatalog) {
   const cacheAnchor = /^const CACHE = 'atf-v143-[a-z0-9-]+';$/m;
   const shellAnchor = /const SHELL = Object\.freeze\(\[[\s\S]*?\n\]\);/;
-  const cleanupAnchor = "key.startsWith('atf-')";
+  const cleanupAnchor = "caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith('atf-') && key !== CACHE).map(key => caches.delete(key))))";
   assert.match(baseWorker, cacheAnchor);
   assert.match(baseWorker, shellAnchor);
   assert.ok(baseWorker.includes(cleanupAnchor), 'Unrecognized worker cache cleanup.');
   let worker = baseWorker.replace(cacheAnchor, `const CACHE = '${cacheName}';`)
     .replace(shellAnchor, `const SHELL = Object.freeze(${JSON.stringify(shell, null, 2)});`)
-    .replace(cleanupAnchor, "key.startsWith('atf-trials-')");
+    .replace(cleanupAnchor, 'activateOfflineDuelsV225()');
   // Versioned URLs are available offline only when the exact query was stamped
   // into this Trials shell. Keep all other query-bearing requests network-only.
   const versionedAudio = [
@@ -146,7 +145,6 @@ function shellPathV207(request) {
     ['!SHELL_PATHS.has(new URL(key.url).pathname)', '!SHELL_PATHS.has(shellPathV207(key))'],
     ['    const path = new URL(request.url).pathname;\n', ''],
     ['if (SHELL_PATHS.has(path)) {', 'if (SHELL_PATHS.has(shellPathV207(request))) {'],
-    ['key !== CACHE', 'key !== CACHE && key !== offlineDuelCacheNameV223()'],
     ['  if (!response) return null;\n  if (cacheableResponseV143(request, response)) return response;\n  await cache.delete(request);\n  return null;',
       '  if (cacheableResponseV143(request, response)) return response;\n  if (response) await cache.delete(request);\n  return readOfflineDuelAssetV223(request);']
   ];
@@ -154,7 +152,7 @@ function shellPathV207(request) {
     assert.equal(worker.split(anchor).length, 2, `Unrecognized dedicated worker anchor: ${anchor}`);
     worker = worker.replace(anchor, replacement);
   }
-  return worker + xenoTrialsOfflineWorkerV223(duelMedia);
+  return worker + xenoTrialsOfflineWorkerV223(duelMedia, duelCatalog);
 }
 
 export async function buildXenoTrialsV207(root) {
@@ -168,7 +166,7 @@ export async function buildXenoTrialsV207(root) {
   const release = (await import(pathToFileURL(join(base, releasePath)).href)).APP_RELEASE_V143;
   const runtime = { ...release, cacheName };
   const baseWorker = await readFile(join(base, 'sw.js'), 'utf8');
-  const worker = xenoTrialsWorkerV207(baseWorker, cacheName, plan.shell, plan.duelMedia);
+  const worker = xenoTrialsWorkerV207(baseWorker, cacheName, plan.shell, plan.duelMedia, plan.duelCatalog);
   const html = stampXenoTrialsHtmlV207(plan.html, runtime);
   const manifest = { id: 'xeno-trials', name: 'Xeno Trials', short_name: 'Xeno Trials', start_url: '/', scope: '/',
     display: 'standalone', background_color: '#071019', theme_color: '#071019', icons };

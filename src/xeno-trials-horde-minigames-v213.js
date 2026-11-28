@@ -100,6 +100,17 @@ const layouts = [
       ['right', 'RENFORTS DE SERVICE', ['runner', 'warrior', 'panther'], 6, 4, 17, .15],
       ['split', 'PRISE DES CONDUITS', ['runner', 'prowler', 'armored-runner'], 7, 4, 20, .18]
     ]
+  },
+  {
+    id: 'xth225-archive-raid', title: 'RAFLE DES ARCHIVES', stageId: 'xt179-archives',
+    description: 'Dix-huit contacts fragiles débouchent dans les Archives MIRE en trois vagues.',
+    orders: 'Surveillez le sas est au départ. La seconde vague ouvre les deux accès, puis le dernier détachement revient par l’ouest.',
+    roundSeconds: 165, reward: 435,
+    waves: [
+      ['right', 'GARDE DES ARCHIVES', ['synth-trooper', 'runner', 'prowler'], 5, 3, 15, .14],
+      ['split', 'ENCERCLEMENT DES RAYONS', ['runner', 'prowler', 'panther'], 6, 4, 17, .16],
+      ['left', 'DERNIÈRE RAFLE', ['runner', 'prowler', 'synth-guard'], 7, 4, 20, .18]
+    ]
   }
 ];
 

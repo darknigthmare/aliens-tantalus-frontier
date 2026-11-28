@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedXenoTrialsDigestV225, xenoTrialsRuntimeSourcesV225, verifyXenoTrialsV225 } from './audit-xeno-trials-v225.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -202,25 +203,27 @@ export const XENO_TRIALS_NEW_INPUTS_V224 = freeze({
 });
 
 export function reviewedXenoTrialsDigestV224(path, endpoint) {
-  if (!Object.hasOwn(XENO_TRIALS_SUCCESSORS_V224, path)) return endpoint;
+  if (!Object.hasOwn(XENO_TRIALS_SUCCESSORS_V224, path)) return reviewedXenoTrialsDigestV225(path, endpoint);
   const receipt = XENO_TRIALS_SUCCESSORS_V224[path];
   assert.equal(endpoint, receipt.previousSha256, 'Incorrect V223 endpoint for V224: ' + path);
-  return receipt.sha256;
+  return reviewedXenoTrialsDigestV225(path, receipt.sha256);
 }
 
 export function xenoTrialsRuntimeSourcesV224(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(XENO_TRIALS_SUCCESSORS_V224)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined && result[path] !== receipt.sha256) reviewedXenoTrialsDigestV224(path, result[path]);
-    result[path] = receipt.sha256;
+    const current = reviewedXenoTrialsDigestV225(path, receipt.sha256);
+    if (result[path] !== undefined && result[path] !== current) reviewedXenoTrialsDigestV224(path, result[path]);
+    result[path] = current;
   }
   for (const [path, receipt] of Object.entries(XENO_TRIALS_NEW_INPUTS_V224)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined) assert.equal(result[path], receipt.sha256, 'Incorrect V224 runtime input: ' + path);
-    result[path] = receipt.sha256;
+    const current = reviewedXenoTrialsDigestV225(path, receipt.sha256);
+    if (result[path] !== undefined) assert.equal(result[path], current, 'Incorrect V224 runtime input: ' + path);
+    result[path] = current;
   }
-  return Object.freeze(result);
+  return xenoTrialsRuntimeSourcesV225(result);
 }
 
 export function verifyXenoTrialsV224(readSource = readRepository) {
@@ -235,7 +238,7 @@ export function verifyXenoTrialsV224(readSource = readRepository) {
     paths.add(path);
     assert.ok(['runtime', 'asset', 'tooling', 'documentation'].includes(receipt.kind) && isHash(receipt.sha256),
       'Invalid V224 receipt: ' + path);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V224 source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedXenoTrialsDigestV225(path, receipt.sha256), 'Unreviewed V224 source bytes: ' + path);
   }
   for (const [path, receipt] of successors) {
     assert.ok(isHash(receipt.previousSha256) && receipt.previousSha256 !== receipt.sha256, 'Invalid V224 predecessor: ' + path);
@@ -250,6 +253,7 @@ export function verifyXenoTrialsV224(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing V223 declaration boundaries: ' + path);
     assert.equal(sha(source.slice(start, end)), receipt.sha256, 'Historical V223 declarations changed: ' + path);
   }
+  verifyXenoTrialsV225(readSource);
   return Object.freeze({ baseline: XENO_TRIALS_BASELINE_V224, successors: successors.length,
     addedInputs: inputs.length, historicalResultsTransferred: false });
 }
