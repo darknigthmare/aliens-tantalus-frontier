@@ -1,0 +1,1235 @@
+{
+  "producerCommit": "762b9a775312c227af974cae5f49b8bf8ebd475a",
+  "routeId": "big-chap",
+  "provenance": "Synthetic source-only fixtures: four sequential native CPU wins produced by the exact V231 baseline. Each checkpoint was captured at tick 30 through checkpointXenoTrialsDuelV197; no actor, result, reward or save field was patched.",
+  "fixtures": [
+    {
+      "chapterId": "xt231-big-chap-1",
+      "sha256": "e624006b55d4ad7b878cf537209674973821c384b2f36d74878c34e6e5639b8a",
+      "state": {
+        "schema": 96,
+        "serial": 1,
+        "credits": 150,
+        "xp": 0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "unlocked": [
+          "warrior",
+          "runner",
+          "arachnoid"
+        ],
+        "factionWins": {
+          "containment": 0,
+          "pursuit": 0,
+          "rival-lab": 0,
+          "hive": 0
+        },
+        "ledger": [],
+        "pending": {
+          "matchId": "xt96-1",
+          "config": {
+            "playerId": "mire-v209-bigchap",
+            "opponentId": "import-joe-classic",
+            "playerVariant": "grey",
+            "opponentVariant": "grey",
+            "factionId": "containment",
+            "stageId": "xt198-nostromo-maintenance",
+            "difficulty": "easy",
+            "roundsToWin": 2,
+            "roundSeconds": 60,
+            "activityV119": {
+              "branch": "character-routes",
+              "id": "xt231-big-chap-1"
+            },
+            "rulesV119": {
+              "noSpecial": true,
+              "specialLockSeconds": 0,
+              "initialHp": null,
+              "goal": "eliminate",
+              "timeLimitSeconds": 60
+            },
+            "seed": 96001,
+            "matchId": "xt96-1"
+          },
+          "duelCheckpointV197": {
+            "schema": 197,
+            "matchId": "xt96-1",
+            "seed": 96001,
+            "tick": 30,
+            "snapshot": {
+              "version": 96,
+              "config": {
+                "playerId": "mire-v209-bigchap",
+                "opponentId": "import-joe-classic",
+                "playerVariant": null,
+                "opponentVariant": null,
+                "factionId": "containment",
+                "stageId": "xt198-nostromo-maintenance",
+                "difficulty": "easy",
+                "roundsToWin": 2,
+                "roundSeconds": 60,
+                "seed": 96001,
+                "rulesV119": {
+                  "noSpecial": true,
+                  "specialLockSeconds": 0,
+                  "initialHp": null,
+                  "goal": "eliminate",
+                  "timeLimitSeconds": 60
+                },
+                "activityV119": {
+                  "branch": "character-routes",
+                  "id": "xt231-big-chap-1"
+                },
+                "introSeconds": 0,
+                "holdRoundTransition": true,
+                "matchId": "xt96-1"
+              },
+              "rng": 3143858640,
+              "accumulator": 0,
+              "tick": 30,
+              "round": 1,
+              "opponentInputSourceV163": "cpu",
+              "phase": "active",
+              "phaseTime": 0,
+              "paused": true,
+              "timeRemaining": 59.750000000000014,
+              "wins": {
+                "player": 0,
+                "opponent": 0
+              },
+              "roundWinner": null,
+              "roundReason": null,
+              "result": null,
+              "fighters": [
+                {
+                  "side": "player",
+                  "id": "mire-v209-bigchap",
+                  "variant": null,
+                  "x": 366.9999999999993,
+                  "y": 0,
+                  "vy": 0,
+                  "facing": 1,
+                  "hp": 232,
+                  "stamina": 100,
+                  "guard": false,
+                  "stun": 0,
+                  "attack": null,
+                  "specialCooldown": 0,
+                  "superMeterV148": 0,
+                  "hitFlash": 0,
+                  "previousInput": {
+                    "left": false,
+                    "right": true,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "rearmControls": {
+                    "left": false,
+                    "right": false,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "stats": {
+                    "hits": 0,
+                    "damage": 0,
+                    "blocks": 0,
+                    "specials": 0
+                  },
+                  "guardBrokenV147": false
+                },
+                {
+                  "side": "opponent",
+                  "id": "import-joe-classic",
+                  "variant": null,
+                  "x": 646.2499999999989,
+                  "y": 0,
+                  "vy": 0,
+                  "facing": -1,
+                  "hp": 225,
+                  "stamina": 100,
+                  "guard": false,
+                  "stun": 0,
+                  "attack": null,
+                  "specialCooldown": 0,
+                  "superMeterV148": 0,
+                  "hitFlash": 0,
+                  "previousInput": {
+                    "left": true,
+                    "right": false,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "rearmControls": {
+                    "left": false,
+                    "right": false,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "stats": {
+                    "hits": 0,
+                    "damage": 0,
+                    "blocks": 0,
+                    "specials": 0
+                  },
+                  "guardBrokenV147": false
+                }
+              ],
+              "projectiles": [],
+              "events": [],
+              "serial": 0,
+              "ai": {
+                "schema": 119,
+                "state": "APPROACH",
+                "stateTime": 0.24166666666666664,
+                "decisionIn": 0.1743333333333329,
+                "input": {
+                  "left": true,
+                  "right": false,
+                  "jump": false,
+                  "guard": false,
+                  "light": false,
+                  "heavy": false,
+                  "special": false,
+                  "super": false
+                },
+                "observation": {
+                  "gap": 279.69919775459687,
+                  "direction": -1,
+                  "overlap": true,
+                  "lane": true,
+                  "attack": null,
+                  "projectileThreat": false,
+                  "targetAirborne": false,
+                  "frontOffset": 15.683168316831711,
+                  "detonationVerticalGap": 0,
+                  "heightRatio": 1.3035714285714286,
+                  "selfHeight": 144,
+                  "roomBehind": 1110,
+                  "own": {
+                    "id": "import-joe-classic",
+                    "profileId": "pose-v103-import-synth-workingjoe-classic",
+                    "label": "Working Joe — Classic — Altered",
+                    "role": "balanced",
+                    "hp": 225,
+                    "speed": 175,
+                    "power": 1,
+                    "reach": 0.9,
+                    "special": "ram",
+                    "stamina": 100,
+                    "jump": 550,
+                    "width": 66,
+                    "height": 118,
+                    "artStatus": "dedicated-static-pose",
+                    "canonExact": false,
+                    "family": "synthetic",
+                    "variants": [],
+                    "importRevision": 103,
+                    "referenceIdV100": "pack-v100-synth-workingjoe-classic",
+                    "alteredOf": "enemy-041-working-joe"
+                  },
+                  "targetHp": 232,
+                  "ownHp": 225,
+                  "ownStamina": 100,
+                  "grounded": true,
+                  "targetRecovering": false,
+                  "tick": 1
+                },
+                "guardRemaining": 0,
+                "lastAttackId": null,
+                "decisions": 1,
+                "stateVisits": {
+                  "OBSERVE": 1,
+                  "APPROACH": 1
+                }
+              }
+            }
+          }
+        },
+        "modesV119": {
+          "schema": 119,
+          "campaignCleared": [],
+          "challengesCleared": [],
+          "hordeCleared": [],
+          "operationsCleared": [],
+          "dossiers": [],
+          "contractCycle": 0,
+          "claimedContracts": [],
+          "challengeRun": null
+        }
+      },
+      "nativeAfter90Sha256": "db09821dbd5be451f2540773e25ade879e247894fb7664cfe6adaab37af72cf2"
+    },
+    {
+      "chapterId": "xt231-big-chap-2",
+      "sha256": "ce27979cfaea8e7798bdba36ea375b47870df717d7e343037502d37e090a76e5",
+      "state": {
+        "schema": 96,
+        "serial": 2,
+        "credits": 350,
+        "xp": 60,
+        "wins": 1,
+        "losses": 0,
+        "draws": 0,
+        "unlocked": [
+          "warrior",
+          "runner",
+          "arachnoid"
+        ],
+        "factionWins": {
+          "containment": 1,
+          "pursuit": 0,
+          "rival-lab": 0,
+          "hive": 0
+        },
+        "ledger": [
+          {
+            "matchId": "xt96-1",
+            "winner": "player",
+            "playerId": "mire-v209-bigchap",
+            "opponentId": "import-joe-classic",
+            "factionId": "containment",
+            "credits": 200,
+            "xp": 60,
+            "activityV119": {
+              "branch": "character-routes",
+              "id": "xt231-big-chap-1"
+            },
+            "modeReward": {
+              "bonus": 120,
+              "secondary": false,
+              "dossierId": "import-joe-classic",
+              "unlockId": null,
+              "continuing": false
+            }
+          }
+        ],
+        "pending": {
+          "matchId": "xt96-2",
+          "config": {
+            "playerId": "mire-v209-bigchap",
+            "opponentId": "mire-v209-six",
+            "playerVariant": "grey",
+            "opponentVariant": "grey",
+            "factionId": "pursuit",
+            "stageId": "xt192-nostromo-chain-room",
+            "difficulty": "normal",
+            "roundsToWin": 2,
+            "roundSeconds": 75,
+            "activityV119": {
+              "branch": "character-routes",
+              "id": "xt231-big-chap-2"
+            },
+            "rulesV119": {
+              "noSpecial": false,
+              "specialLockSeconds": 0,
+              "initialHp": null,
+              "goal": "eliminate",
+              "timeLimitSeconds": 75
+            },
+            "seed": 96002,
+            "matchId": "xt96-2"
+          },
+          "duelCheckpointV197": {
+            "schema": 197,
+            "matchId": "xt96-2",
+            "seed": 96002,
+            "tick": 30,
+            "snapshot": {
+              "version": 96,
+              "config": {
+                "playerId": "mire-v209-bigchap",
+                "opponentId": "mire-v209-six",
+                "playerVariant": null,
+                "opponentVariant": null,
+                "factionId": "pursuit",
+                "stageId": "xt192-nostromo-chain-room",
+                "difficulty": "normal",
+                "roundsToWin": 2,
+                "roundSeconds": 75,
+                "seed": 96002,
+                "rulesV119": {
+                  "noSpecial": false,
+                  "specialLockSeconds": 0,
+                  "initialHp": null,
+                  "goal": "eliminate",
+                  "timeLimitSeconds": 75
+                },
+                "activityV119": {
+                  "branch": "character-routes",
+                  "id": "xt231-big-chap-2"
+                },
+                "introSeconds": 0,
+                "holdRoundTransition": true,
+                "matchId": "xt96-2"
+              },
+              "rng": 3077305299,
+              "accumulator": 0,
+              "tick": 30,
+              "round": 1,
+              "opponentInputSourceV163": "cpu",
+              "phase": "active",
+              "phaseTime": 0,
+              "paused": true,
+              "timeRemaining": 74.7499999999998,
+              "wins": {
+                "player": 0,
+                "opponent": 0
+              },
+              "roundWinner": null,
+              "roundReason": null,
+              "result": null,
+              "fighters": [
+                {
+                  "side": "player",
+                  "id": "mire-v209-bigchap",
+                  "variant": null,
+                  "x": 366.9999999999993,
+                  "y": 0,
+                  "vy": 0,
+                  "facing": 1,
+                  "hp": 232,
+                  "stamina": 100,
+                  "guard": false,
+                  "stun": 0,
+                  "attack": null,
+                  "specialCooldown": 0,
+                  "superMeterV148": 0,
+                  "hitFlash": 0,
+                  "previousInput": {
+                    "left": false,
+                    "right": true,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "rearmControls": {
+                    "left": false,
+                    "right": false,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "stats": {
+                    "hits": 0,
+                    "damage": 0,
+                    "blocks": 0,
+                    "specials": 0
+                  },
+                  "guardBrokenV147": false
+                },
+                {
+                  "side": "opponent",
+                  "id": "mire-v209-six",
+                  "variant": null,
+                  "x": 627.2499999999991,
+                  "y": 0,
+                  "vy": 0,
+                  "facing": -1,
+                  "hp": 205,
+                  "stamina": 100,
+                  "guard": false,
+                  "stun": 0,
+                  "attack": null,
+                  "specialCooldown": 0,
+                  "superMeterV148": 0,
+                  "hitFlash": 0,
+                  "previousInput": {
+                    "left": true,
+                    "right": false,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "rearmControls": {
+                    "left": false,
+                    "right": false,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "stats": {
+                    "hits": 0,
+                    "damage": 0,
+                    "blocks": 0,
+                    "specials": 0
+                  },
+                  "guardBrokenV147": false
+                }
+              ],
+              "projectiles": [],
+              "events": [],
+              "serial": 0,
+              "ai": {
+                "schema": 119,
+                "state": "APPROACH",
+                "stateTime": 0.24166666666666664,
+                "decisionIn": 0.018333333333333368,
+                "input": {
+                  "left": true,
+                  "right": false,
+                  "jump": false,
+                  "guard": false,
+                  "light": false,
+                  "heavy": false,
+                  "special": false,
+                  "super": false
+                },
+                "observation": {
+                  "gap": 188.50736607142858,
+                  "direction": -1,
+                  "overlap": true,
+                  "lane": true,
+                  "attack": null,
+                  "projectileThreat": false,
+                  "targetAirborne": false,
+                  "frontOffset": 106.875,
+                  "detonationVerticalGap": 0,
+                  "heightRatio": 1.0579710144927537,
+                  "selfHeight": 177.42857142857144,
+                  "roomBehind": 1110,
+                  "own": {
+                    "id": "mire-v209-six",
+                    "profileId": "v209-six-line",
+                    "label": "Lignée Specimen Six",
+                    "role": "balanced",
+                    "hp": 205,
+                    "speed": 251,
+                    "stamina": 100,
+                    "jump": 550,
+                    "width": 51,
+                    "height": 138,
+                    "power": 1,
+                    "reach": 1,
+                    "special": "tail",
+                    "family": "xenomorph",
+                    "variants": [],
+                    "artStatus": "research-adaptation",
+                    "canonExact": false
+                  },
+                  "targetHp": 232,
+                  "ownHp": 205,
+                  "ownStamina": 100,
+                  "grounded": true,
+                  "targetRecovering": false,
+                  "tick": 1
+                },
+                "guardRemaining": 0,
+                "lastAttackId": null,
+                "decisions": 1,
+                "stateVisits": {
+                  "OBSERVE": 1,
+                  "APPROACH": 1
+                }
+              }
+            }
+          }
+        },
+        "modesV119": {
+          "schema": 119,
+          "campaignCleared": [],
+          "challengesCleared": [],
+          "hordeCleared": [],
+          "operationsCleared": [],
+          "dossiers": [
+            "import-joe-classic"
+          ],
+          "contractCycle": 0,
+          "claimedContracts": [],
+          "challengeRun": null,
+          "characterRoutesClearedV231": [
+            "xt231-big-chap-1"
+          ]
+        }
+      },
+      "nativeAfter90Sha256": "4c3f59b6cab12c85c7be736bec1ceef3a4253c922df4f4211dc037b4092b5b18"
+    },
+    {
+      "chapterId": "xt231-big-chap-3",
+      "sha256": "e577dbc75dcbb1fb5df14838eafd1c6ac2a6a269d5a7f255126675225c06640d",
+      "state": {
+        "schema": 96,
+        "serial": 3,
+        "credits": 610,
+        "xp": 140,
+        "wins": 2,
+        "losses": 0,
+        "draws": 0,
+        "unlocked": [
+          "warrior",
+          "runner",
+          "arachnoid"
+        ],
+        "factionWins": {
+          "containment": 1,
+          "pursuit": 1,
+          "rival-lab": 0,
+          "hive": 0
+        },
+        "ledger": [
+          {
+            "matchId": "xt96-1",
+            "winner": "player",
+            "playerId": "mire-v209-bigchap",
+            "opponentId": "import-joe-classic",
+            "factionId": "containment",
+            "credits": 200,
+            "xp": 60,
+            "activityV119": {
+              "branch": "character-routes",
+              "id": "xt231-big-chap-1"
+            },
+            "modeReward": {
+              "bonus": 120,
+              "secondary": false,
+              "dossierId": "import-joe-classic",
+              "unlockId": null,
+              "continuing": false
+            }
+          },
+          {
+            "matchId": "xt96-2",
+            "winner": "player",
+            "playerId": "mire-v209-bigchap",
+            "opponentId": "mire-v209-six",
+            "factionId": "pursuit",
+            "credits": 260,
+            "xp": 80,
+            "activityV119": {
+              "branch": "character-routes",
+              "id": "xt231-big-chap-2"
+            },
+            "modeReward": {
+              "bonus": 160,
+              "secondary": false,
+              "dossierId": "mire-v209-six",
+              "unlockId": null,
+              "continuing": false
+            }
+          }
+        ],
+        "pending": {
+          "matchId": "xt96-3",
+          "config": {
+            "playerId": "mire-v209-bigchap",
+            "opponentId": "synth-containment",
+            "playerVariant": "grey",
+            "opponentVariant": "grey",
+            "factionId": "containment",
+            "stageId": "xt196-nostromo-infirmary",
+            "difficulty": "normal",
+            "roundsToWin": 2,
+            "roundSeconds": 30,
+            "activityV119": {
+              "branch": "character-routes",
+              "id": "xt231-big-chap-3"
+            },
+            "rulesV119": {
+              "noSpecial": false,
+              "specialLockSeconds": 0,
+              "initialHp": null,
+              "goal": "survive",
+              "timeLimitSeconds": 30
+            },
+            "seed": 96003,
+            "matchId": "xt96-3"
+          },
+          "duelCheckpointV197": {
+            "schema": 197,
+            "matchId": "xt96-3",
+            "seed": 96003,
+            "tick": 30,
+            "snapshot": {
+              "version": 96,
+              "config": {
+                "playerId": "mire-v209-bigchap",
+                "opponentId": "synth-containment",
+                "playerVariant": null,
+                "opponentVariant": null,
+                "factionId": "containment",
+                "stageId": "xt196-nostromo-infirmary",
+                "difficulty": "normal",
+                "roundsToWin": 2,
+                "roundSeconds": 30,
+                "seed": 96003,
+                "rulesV119": {
+                  "noSpecial": false,
+                  "specialLockSeconds": 0,
+                  "initialHp": null,
+                  "goal": "survive",
+                  "timeLimitSeconds": 30
+                },
+                "activityV119": {
+                  "branch": "character-routes",
+                  "id": "xt231-big-chap-3"
+                },
+                "introSeconds": 0,
+                "holdRoundTransition": true,
+                "matchId": "xt96-3"
+              },
+              "rng": 3009672658,
+              "accumulator": 0,
+              "tick": 30,
+              "round": 1,
+              "opponentInputSourceV163": "cpu",
+              "phase": "active",
+              "phaseTime": 0,
+              "paused": true,
+              "timeRemaining": 29.750000000000014,
+              "wins": {
+                "player": 0,
+                "opponent": 0
+              },
+              "roundWinner": null,
+              "roundReason": null,
+              "result": null,
+              "fighters": [
+                {
+                  "side": "player",
+                  "id": "mire-v209-bigchap",
+                  "variant": null,
+                  "x": 366.9999999999993,
+                  "y": 0,
+                  "vy": 0,
+                  "facing": 1,
+                  "hp": 232,
+                  "stamina": 100,
+                  "guard": false,
+                  "stun": 0,
+                  "attack": null,
+                  "specialCooldown": 0,
+                  "superMeterV148": 0,
+                  "hitFlash": 0,
+                  "previousInput": {
+                    "left": false,
+                    "right": true,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "rearmControls": {
+                    "left": false,
+                    "right": false,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "stats": {
+                    "hits": 0,
+                    "damage": 0,
+                    "blocks": 0,
+                    "specials": 0
+                  },
+                  "guardBrokenV147": false
+                },
+                {
+                  "side": "opponent",
+                  "id": "synth-containment",
+                  "variant": null,
+                  "x": 646.2499999999989,
+                  "y": 0,
+                  "vy": 0,
+                  "facing": -1,
+                  "hp": 260,
+                  "stamina": 100,
+                  "guard": false,
+                  "stun": 0,
+                  "attack": null,
+                  "specialCooldown": 0,
+                  "superMeterV148": 0,
+                  "hitFlash": 0,
+                  "previousInput": {
+                    "left": true,
+                    "right": false,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "rearmControls": {
+                    "left": false,
+                    "right": false,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "stats": {
+                    "hits": 0,
+                    "damage": 0,
+                    "blocks": 0,
+                    "specials": 0
+                  },
+                  "guardBrokenV147": false
+                }
+              ],
+              "projectiles": [],
+              "events": [],
+              "serial": 0,
+              "ai": {
+                "schema": 119,
+                "state": "APPROACH",
+                "stateTime": 0.24166666666666664,
+                "decisionIn": 0.018333333333333368,
+                "input": {
+                  "left": true,
+                  "right": false,
+                  "jump": false,
+                  "guard": false,
+                  "light": false,
+                  "heavy": false,
+                  "special": false,
+                  "super": false
+                },
+                "observation": {
+                  "gap": 245.03020660299,
+                  "direction": -1,
+                  "overlap": true,
+                  "lane": true,
+                  "attack": null,
+                  "projectileThreat": false,
+                  "targetAirborne": false,
+                  "frontOffset": 50.35215946843857,
+                  "detonationVerticalGap": 0,
+                  "heightRatio": 1.2097537878787878,
+                  "selfHeight": 155.16734693877552,
+                  "roomBehind": 1110,
+                  "own": {
+                    "id": "synth-containment",
+                    "profileId": "pose-v110-afe-synth-containment",
+                    "label": "Synth Containment",
+                    "role": "tank",
+                    "hp": 260,
+                    "speed": 175,
+                    "power": 1,
+                    "reach": 0.95,
+                    "special": "shield",
+                    "stamina": 100,
+                    "jump": 550,
+                    "width": 88,
+                    "height": 118,
+                    "artStatus": "dedicated-static-pose",
+                    "canonExact": false,
+                    "family": "synthetic",
+                    "variants": [],
+                    "importRevision": 110
+                  },
+                  "targetHp": 232,
+                  "ownHp": 260,
+                  "ownStamina": 100,
+                  "grounded": true,
+                  "targetRecovering": false,
+                  "tick": 1
+                },
+                "guardRemaining": 0,
+                "lastAttackId": null,
+                "decisions": 1,
+                "stateVisits": {
+                  "OBSERVE": 1,
+                  "APPROACH": 1
+                }
+              }
+            }
+          }
+        },
+        "modesV119": {
+          "schema": 119,
+          "campaignCleared": [],
+          "challengesCleared": [],
+          "hordeCleared": [],
+          "operationsCleared": [],
+          "dossiers": [
+            "import-joe-classic",
+            "mire-v209-six"
+          ],
+          "contractCycle": 0,
+          "claimedContracts": [],
+          "challengeRun": null,
+          "characterRoutesClearedV231": [
+            "xt231-big-chap-1",
+            "xt231-big-chap-2"
+          ]
+        }
+      },
+      "nativeAfter90Sha256": "21fbf258951437aed9aadab519cd2fa4c2145ffb14799721d97ee998a41facce"
+    },
+    {
+      "chapterId": "xt231-big-chap-4",
+      "sha256": "f296d534d9099f4df829c4df94fcbe9840511dd0f15a7b520bdb6bc9bd836030",
+      "state": {
+        "schema": 96,
+        "serial": 4,
+        "credits": 910,
+        "xp": 220,
+        "wins": 3,
+        "losses": 0,
+        "draws": 0,
+        "unlocked": [
+          "warrior",
+          "runner",
+          "arachnoid"
+        ],
+        "factionWins": {
+          "containment": 2,
+          "pursuit": 1,
+          "rival-lab": 0,
+          "hive": 0
+        },
+        "ledger": [
+          {
+            "matchId": "xt96-1",
+            "winner": "player",
+            "playerId": "mire-v209-bigchap",
+            "opponentId": "import-joe-classic",
+            "factionId": "containment",
+            "credits": 200,
+            "xp": 60,
+            "activityV119": {
+              "branch": "character-routes",
+              "id": "xt231-big-chap-1"
+            },
+            "modeReward": {
+              "bonus": 120,
+              "secondary": false,
+              "dossierId": "import-joe-classic",
+              "unlockId": null,
+              "continuing": false
+            }
+          },
+          {
+            "matchId": "xt96-2",
+            "winner": "player",
+            "playerId": "mire-v209-bigchap",
+            "opponentId": "mire-v209-six",
+            "factionId": "pursuit",
+            "credits": 260,
+            "xp": 80,
+            "activityV119": {
+              "branch": "character-routes",
+              "id": "xt231-big-chap-2"
+            },
+            "modeReward": {
+              "bonus": 160,
+              "secondary": false,
+              "dossierId": "mire-v209-six",
+              "unlockId": null,
+              "continuing": false
+            }
+          },
+          {
+            "matchId": "xt96-3",
+            "winner": "player",
+            "playerId": "mire-v209-bigchap",
+            "opponentId": "synth-containment",
+            "factionId": "containment",
+            "credits": 300,
+            "xp": 80,
+            "activityV119": {
+              "branch": "character-routes",
+              "id": "xt231-big-chap-3"
+            },
+            "modeReward": {
+              "bonus": 200,
+              "secondary": false,
+              "dossierId": "synth-containment",
+              "unlockId": null,
+              "continuing": false
+            }
+          }
+        ],
+        "pending": {
+          "matchId": "xt96-4",
+          "config": {
+            "playerId": "mire-v209-bigchap",
+            "opponentId": "mire-v209-six",
+            "playerVariant": "grey",
+            "opponentVariant": "grey",
+            "factionId": "pursuit",
+            "stageId": "xt194-narcissus-cabin",
+            "difficulty": "hard",
+            "roundsToWin": 2,
+            "roundSeconds": 60,
+            "activityV119": {
+              "branch": "character-routes",
+              "id": "xt231-big-chap-4"
+            },
+            "rulesV119": {
+              "noSpecial": false,
+              "specialLockSeconds": 0,
+              "initialHp": null,
+              "goal": "eliminate",
+              "timeLimitSeconds": 60
+            },
+            "seed": 96004,
+            "matchId": "xt96-4"
+          },
+          "duelCheckpointV197": {
+            "schema": 197,
+            "matchId": "xt96-4",
+            "seed": 96004,
+            "tick": 30,
+            "snapshot": {
+              "version": 96,
+              "config": {
+                "playerId": "mire-v209-bigchap",
+                "opponentId": "mire-v209-six",
+                "playerVariant": null,
+                "opponentVariant": null,
+                "factionId": "pursuit",
+                "stageId": "xt194-narcissus-cabin",
+                "difficulty": "hard",
+                "roundsToWin": 2,
+                "roundSeconds": 60,
+                "seed": 96004,
+                "rulesV119": {
+                  "noSpecial": false,
+                  "specialLockSeconds": 0,
+                  "initialHp": null,
+                  "goal": "eliminate",
+                  "timeLimitSeconds": 60
+                },
+                "activityV119": {
+                  "branch": "character-routes",
+                  "id": "xt231-big-chap-4"
+                },
+                "introSeconds": 0,
+                "holdRoundTransition": true,
+                "matchId": "xt96-4"
+              },
+              "rng": 3104751237,
+              "accumulator": 0,
+              "tick": 30,
+              "round": 1,
+              "opponentInputSourceV163": "cpu",
+              "phase": "active",
+              "phaseTime": 0,
+              "paused": true,
+              "timeRemaining": 59.750000000000014,
+              "wins": {
+                "player": 0,
+                "opponent": 0
+              },
+              "roundWinner": null,
+              "roundReason": null,
+              "result": null,
+              "fighters": [
+                {
+                  "side": "player",
+                  "id": "mire-v209-bigchap",
+                  "variant": null,
+                  "x": 366.9999999999993,
+                  "y": 0,
+                  "vy": 0,
+                  "facing": 1,
+                  "hp": 232,
+                  "stamina": 100,
+                  "guard": false,
+                  "stun": 0,
+                  "attack": null,
+                  "specialCooldown": 0,
+                  "superMeterV148": 0,
+                  "hitFlash": 0,
+                  "previousInput": {
+                    "left": false,
+                    "right": true,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "rearmControls": {
+                    "left": false,
+                    "right": false,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "stats": {
+                    "hits": 0,
+                    "damage": 0,
+                    "blocks": 0,
+                    "specials": 0
+                  },
+                  "guardBrokenV147": false
+                },
+                {
+                  "side": "opponent",
+                  "id": "mire-v209-six",
+                  "variant": null,
+                  "x": 627.2499999999991,
+                  "y": 0,
+                  "vy": 0,
+                  "facing": -1,
+                  "hp": 205,
+                  "stamina": 100,
+                  "guard": false,
+                  "stun": 0,
+                  "attack": null,
+                  "specialCooldown": 0,
+                  "superMeterV148": 0,
+                  "hitFlash": 0,
+                  "previousInput": {
+                    "left": true,
+                    "right": false,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "rearmControls": {
+                    "left": false,
+                    "right": false,
+                    "jump": false,
+                    "guard": false,
+                    "light": false,
+                    "heavy": false,
+                    "special": false,
+                    "super": false
+                  },
+                  "stats": {
+                    "hits": 0,
+                    "damage": 0,
+                    "blocks": 0,
+                    "specials": 0
+                  },
+                  "guardBrokenV147": false
+                }
+              ],
+              "projectiles": [],
+              "events": [],
+              "serial": 0,
+              "ai": {
+                "schema": 119,
+                "state": "APPROACH",
+                "stateTime": 0.24166666666666664,
+                "decisionIn": 0.10233333333333336,
+                "input": {
+                  "left": true,
+                  "right": false,
+                  "jump": false,
+                  "guard": false,
+                  "light": false,
+                  "heavy": false,
+                  "special": false,
+                  "super": false
+                },
+                "observation": {
+                  "gap": 104.68236607142842,
+                  "direction": -1,
+                  "overlap": true,
+                  "lane": true,
+                  "attack": null,
+                  "projectileThreat": false,
+                  "targetAirborne": false,
+                  "frontOffset": 106.875,
+                  "detonationVerticalGap": 0,
+                  "heightRatio": 1.0579710144927537,
+                  "selfHeight": 177.42857142857144,
+                  "roomBehind": 1153.9250000000006,
+                  "own": {
+                    "id": "mire-v209-six",
+                    "profileId": "v209-six-line",
+                    "label": "Lignée Specimen Six",
+                    "role": "balanced",
+                    "hp": 205,
+                    "speed": 251,
+                    "stamina": 100,
+                    "jump": 550,
+                    "width": 51,
+                    "height": 138,
+                    "power": 1,
+                    "reach": 1,
+                    "special": "tail",
+                    "family": "xenomorph",
+                    "variants": [],
+                    "artStatus": "research-adaptation",
+                    "canonExact": false
+                  },
+                  "targetHp": 232,
+                  "ownHp": 205,
+                  "ownStamina": 100,
+                  "grounded": true,
+                  "targetRecovering": false,
+                  "tick": 22
+                },
+                "guardRemaining": 0,
+                "lastAttackId": null,
+                "decisions": 2,
+                "stateVisits": {
+                  "OBSERVE": 1,
+                  "APPROACH": 1
+                }
+              }
+            }
+          }
+        },
+        "modesV119": {
+          "schema": 119,
+          "campaignCleared": [],
+          "challengesCleared": [],
+          "hordeCleared": [],
+          "operationsCleared": [],
+          "dossiers": [
+            "import-joe-classic",
+            "mire-v209-six",
+            "synth-containment"
+          ],
+          "contractCycle": 0,
+          "claimedContracts": [],
+          "challengeRun": null,
+          "characterRoutesClearedV231": [
+            "xt231-big-chap-1",
+            "xt231-big-chap-2",
+            "xt231-big-chap-3"
+          ]
+        }
+      },
+      "nativeAfter90Sha256": "c7cc97a14ca27753e6638d13fa158ec421cb73f2675925a8230c19bd2b63f28b"
+    }
+  ]
+}

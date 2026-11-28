@@ -947,7 +947,23 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
   'scripts/verify-xeno-original-arenas-v193.mjs'
 ]);
 
-export const XENO_AUDIT_TERMINAL_PATH = 'scripts/audit-xeno-trials-v231.mjs';
+export const XENO_AUDIT_TERMINAL_PATH = 'scripts/audit-xeno-trials-v232.mjs';
+const XENO_EXHIBITIONS_SOURCE_ONLY_V232 = new Set([
+  "scripts/audit-xeno-trials-v231.mjs",
+  "scripts/verify-xeno-trials-replay-v232.mjs",
+  "scripts/verify-xeno-trials-tag-v232.mjs",
+  "scripts/verify-xeno-trials-assists-v232.mjs",
+  "scripts/verify-xeno-trials-character-routes-v232.mjs",
+  "scripts/verify-xeno-trials-exhibition-ui-v232.mjs",
+  "scripts/verify-xeno-trials-local-input-v232.mjs",
+  "scripts/verify-xeno-trials-runtime-v232.mjs",
+  "scripts/verify-xeno-trials-combat-art-v232.mjs",
+  "scripts/verify-xeno-trials-exhibition-integration-v232.mjs",
+  "scripts/fixtures/xeno-trials-character-route-v231.json",
+  "docs/forge/xeno-trials/V232-TEAMS-REPLAYS-AND-ROUTES.md",
+  "docs/forge/xeno-trials/combat-guide-coverage-v232.json",
+  "docs/forge/xeno-trials/combat-art-v232.json"
+]);
 const XENO_CHARACTERS_SOURCE_ONLY_V231 = new Set([
   "scripts/audit-xeno-trials-v230.mjs",
   "scripts/public-xeno-referenced-art-admissions-v231.mjs",
@@ -1058,6 +1074,7 @@ const XENO_GAMEPLAY_SOURCE_ONLY_V219 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_EXHIBITIONS_SOURCE_ONLY_V232.has(path)) return !built && !directory;
   if (XENO_CHARACTERS_SOURCE_ONLY_V231.has(path)) return !built && !directory;
   if (XENO_PRESENTATIONS_SOURCE_ONLY_V230.has(path)) return !built && !directory;
   if (path === XENO_AUDIT_TERMINAL_PATH) return !built && !directory;

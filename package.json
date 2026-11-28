@@ -131,7 +131,8 @@
     "check:dlc:aliens1986": "node scripts/public-aliens1986-dlc-admissions.mjs",
     "qa:dlc:aliens1986": "python3 -B scripts/qa-aliens1986-integration.py",
     "test:trials:v230": "node --test scripts/verify-xeno-trials-presentation-v230.mjs scripts/verify-xeno-trials-presentation-art-v230.mjs scripts/verify-xeno-trials-selection-motion-v230.mjs scripts/verify-xeno-trials-recruits-v230.mjs",
-    "test:trials:v231": "node --test scripts/verify-xeno-trials-recruit-kits-v231.mjs scripts/verify-xeno-trials-recruit-compatibility-v231.mjs scripts/verify-xeno-trials-character-routes-v231.mjs scripts/verify-xeno-trials-character-route-ui-v231.mjs scripts/verify-xeno-trials-research-art-v231.mjs"
+    "test:trials:v231": "node --test scripts/verify-xeno-trials-recruit-kits-v231.mjs scripts/verify-xeno-trials-recruit-compatibility-v231.mjs scripts/verify-xeno-trials-character-routes-v231.mjs scripts/verify-xeno-trials-character-route-ui-v231.mjs scripts/verify-xeno-trials-research-art-v231.mjs",
+    "test:trials:v232": "node --test scripts/verify-xeno-trials-local-input-v232.mjs scripts/verify-xeno-trials-exhibition-ui-v232.mjs scripts/verify-xeno-trials-tag-v232.mjs scripts/verify-xeno-trials-assists-v232.mjs scripts/verify-xeno-trials-replay-v232.mjs scripts/verify-xeno-trials-character-routes-v232.mjs scripts/verify-xeno-trials-runtime-v232.mjs scripts/verify-xeno-trials-exhibition-integration-v232.mjs scripts/verify-xeno-trials-combat-art-v232.mjs"
   },
   "engines": {
     "node": ">=22"

@@ -341,7 +341,7 @@ function validBrain(brain, tick, serial) {
 }
 
 export function isXenoTrialsDuelTicketV197(ticket) {
-  return record(ticket) && !ticket.hordeV180 && !ticket.operationV188
+  return record(ticket) && !ticket.exhibitionV232 && !ticket.replayV232 && !ticket.readOnly && ticket.rewardEligible !== false && !ticket.hordeV180 && !ticket.operationV188
     && (!ticket.activityV119 || persistedBranches.includes(ticket.activityV119.branch));
 }
 
@@ -372,10 +372,10 @@ export function createXenoTrialsDuelCheckpointV197(snapshot, ticket) {
   if (!isXenoTrialsDuelTicketV197(ticket) || !/^xt96-[1-9]\d*$/.test(ticket.matchId)
     || !integer(ticket.seed, 1, 0x7fffffff)) return null;
   const raw = boundedClone(snapshot), config = raw?.config;
-  if (!record(raw) || !record(config) || raw.version !== 96 || raw.result !== null || raw.opponentInputSourceV163 !== 'cpu'
+  if (!record(raw) || !record(config) || raw.rewardEligible === false || config.rewardEligible === false || raw.version !== 96 || raw.result !== null || raw.opponentInputSourceV163 !== 'cpu'
     || !['active', 'round-over'].includes(raw.phase) || !integer(raw.tick, 0, maxTicks) || !integer(raw.serial, 0, raw.tick * 32)
     || !integer(raw.rng, 1, 0xffffffff) || typeof raw.paused !== 'boolean' || !number(raw.accumulator, 0, 1 / 120)
-    || ['hordeV180', 'operationV188', 'stageHazardsV188'].some(key => raw[key] !== undefined || config[key] !== undefined)
+    || ['hordeV180', 'operationV188', 'stageHazardsV188', 'exhibitionV232', 'replayV232', 'readOnly'].some(key => raw[key] !== undefined || config[key] !== undefined)
     || !['matchId', 'seed', 'playerId', 'opponentId', 'factionId', 'stageId', 'difficulty', 'roundSeconds', 'roundsToWin']
       .every(key => config[key] === ticket[key]) || config.roundsToWin !== 2 || config.introSeconds !== 0 || config.holdRoundTransition !== true
     || !record(config.rulesV119) || !same(config.rulesV119, ticket.rulesV119 ?? defaultRules)

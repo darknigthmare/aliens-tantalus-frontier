@@ -1,3 +1,4 @@
+import { reviewedXenoTrialsDigestV232, xenoTrialsRuntimeSourcesV232, verifyXenoTrialsV232 } from './audit-xeno-trials-v232.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
@@ -221,25 +222,27 @@ export const XENO_TRIALS_NEW_INPUTS_V231 = freeze({
 });
 
 export function reviewedXenoTrialsDigestV231(path, endpoint) {
-  if (!Object.hasOwn(XENO_TRIALS_SUCCESSORS_V231, path)) return endpoint;
+  if (!Object.hasOwn(XENO_TRIALS_SUCCESSORS_V231, path)) return reviewedXenoTrialsDigestV232(path, endpoint);
   const receipt = XENO_TRIALS_SUCCESSORS_V231[path];
   assert.equal(endpoint, receipt.previousSha256, 'Incorrect V230 endpoint for V231: ' + path);
-  return receipt.sha256;
+  return reviewedXenoTrialsDigestV232(path, receipt.sha256);
 }
 
 export function xenoTrialsRuntimeSourcesV231(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(XENO_TRIALS_SUCCESSORS_V231)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined && result[path] !== receipt.sha256) reviewedXenoTrialsDigestV231(path, result[path]);
-    result[path] = receipt.sha256;
+    const current = reviewedXenoTrialsDigestV232(path, receipt.sha256);
+    if (result[path] !== undefined && result[path] !== current) reviewedXenoTrialsDigestV231(path, result[path]);
+    result[path] = current;
   }
   for (const [path, receipt] of Object.entries(XENO_TRIALS_NEW_INPUTS_V231)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined) assert.equal(result[path], receipt.sha256, 'Incorrect V231 runtime input: ' + path);
-    result[path] = receipt.sha256;
+    const current = reviewedXenoTrialsDigestV232(path, receipt.sha256);
+    if (result[path] !== undefined) assert.equal(result[path], current, 'Incorrect V231 runtime input: ' + path);
+    result[path] = current;
   }
-  return Object.freeze(result);
+  return xenoTrialsRuntimeSourcesV232(result);
 }
 
 export function verifyXenoTrialsV231(readSource = readRepository) {
@@ -254,7 +257,7 @@ export function verifyXenoTrialsV231(readSource = readRepository) {
     paths.add(path);
     assert.ok(['runtime', 'asset', 'tooling', 'documentation'].includes(receipt.kind) && isHash(receipt.sha256),
       'Invalid V231 receipt: ' + path);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V231 source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedXenoTrialsDigestV232(path, receipt.sha256), 'Unreviewed V231 source bytes: ' + path);
   }
   for (const [path, receipt] of successors) {
     assert.ok(isHash(receipt.previousSha256) && receipt.previousSha256 !== receipt.sha256, 'Invalid V231 predecessor: ' + path);
@@ -269,6 +272,7 @@ export function verifyXenoTrialsV231(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing V230 declaration boundaries: ' + path);
     assert.equal(sha(source.slice(start, end)), receipt.sha256, 'Historical V230 declarations changed: ' + path);
   }
+  verifyXenoTrialsV232(readSource);
   return Object.freeze({ baseline: XENO_TRIALS_BASELINE_V231, successors: successors.length,
     addedInputs: inputs.length, historicalResultsTransferred: false });
 }

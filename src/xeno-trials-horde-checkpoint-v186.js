@@ -271,6 +271,7 @@ function admitSnapshot(snapshot, ticket) {
 /** Validate against the current ticket, never a persisted claim about identity.
  * Terminal states cannot be manufactured by loading a checkpoint. */
 export function createXenoTrialsHordeCheckpointV186(snapshot, ticketConfig) {
+  if ([snapshot, snapshot?.config, ticketConfig].some(value => value?.exhibitionV232 || value?.replayV232 || value?.readOnly || value?.rewardEligible === false)) return null;
   const admitted = admitSnapshot(snapshot, ticketConfig);
   return admitted ? { schema: 186, matchId: ticketConfig.matchId, seed: ticketConfig.seed,
     protocolId: admitted.hordeV180.protocolId, tick: admitted.tick, snapshot: admitted } : null;

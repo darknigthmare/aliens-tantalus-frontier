@@ -1,3 +1,4 @@
+import { XENO_TRIALS_SUCCESSORS_V232, XENO_TRIALS_NEW_INPUTS_V232 } from './audit-xeno-trials-v232.mjs';
 import { XENO_TRIALS_SUCCESSORS_V231, XENO_TRIALS_NEW_INPUTS_V231 } from './audit-xeno-trials-v231.mjs';
 import { XENO_TRIALS_SUCCESSORS_V230, XENO_TRIALS_NEW_INPUTS_V230 } from './audit-xeno-trials-v230.mjs';
 import { XENO_VISUAL_ASSETS_SUCCESSORS_V205, XENO_VISUAL_ASSETS_NEW_INPUTS_V205 } from './audit-xeno-visual-assets-v205.mjs';
@@ -760,7 +761,8 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
     ...XENO_TRIALS_SUCCESSORS_V228, ...XENO_TRIALS_NEW_INPUTS_V228,
     ...XENO_TRIALS_SUCCESSORS_V229, ...XENO_TRIALS_NEW_INPUTS_V229,
     ...XENO_TRIALS_SUCCESSORS_V230, ...XENO_TRIALS_NEW_INPUTS_V230,
-    ...XENO_TRIALS_SUCCESSORS_V231, ...XENO_TRIALS_NEW_INPUTS_V231
+    ...XENO_TRIALS_SUCCESSORS_V231, ...XENO_TRIALS_NEW_INPUTS_V231,
+    ...XENO_TRIALS_SUCCESSORS_V232, ...XENO_TRIALS_NEW_INPUTS_V232
   };
   const introducedRuntimePaths = [
     'src/tactical-reload-v77.js', 'src/weapon-actions-v130.js',

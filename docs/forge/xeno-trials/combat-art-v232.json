@@ -1,0 +1,950 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "762b9a775312c227af974cae5f49b8bf8ebd475a",
+  "provider": "openai-imagegen",
+  "sourceFacing": 1,
+  "status": "integrated-native-crop-geometry-and-hit-miss-verified-provisional-fidelity",
+  "canonExact": false,
+  "boundsConvention": "global source pixel [left,top,right-exclusive,bottom-exclusive]",
+  "rootConvention": "global source pixel; rootX ground projection of pelvic axis, rootY substantive toe baseline (alpha>=32), not faint background alpha",
+  "densityConvention": "recommended common density per action = neutralStaturePx/authoredStaturePx, to be verified in native runtime; not per-frame bbox normalization",
+  "files": [
+    {
+      "fighterId": "mire-v209-bigchap",
+      "action": "light",
+      "path": "/assets/openai/xeno-trials-v232/characters/big-chap-light-atlas-v232.png",
+      "sha256": "5ea2e20218f27e65bba22de276df9405b74814af05952b30857baab30452112c",
+      "originalSha256": "5ea2e20218f27e65bba22de276df9405b74814af05952b30857baab30452112c",
+      "byteIdentical": true,
+      "width": 1536,
+      "height": 1024,
+      "sourceFacing": 1,
+      "authoredStaturePx": 419,
+      "neutralStaturePx": 131,
+      "density": 0.3126491646778043,
+      "frames": [
+        {
+          "id": "big-chap-light-windup-v232",
+          "phase": "windup",
+          "sourceRect": [
+            0,
+            0,
+            500,
+            1024
+          ],
+          "bounds": [
+            19,
+            102,
+            492,
+            932
+          ],
+          "bodyBoundsAlpha8": [
+            37,
+            287,
+            406,
+            706
+          ],
+          "bodyBoundsAlpha32": [
+            37,
+            287,
+            406,
+            706
+          ],
+          "rootX": 265,
+          "rootY": 706,
+          "density": 0.3126491646778043,
+          "sourceFacing": 1,
+          "alpha": {
+            "nonzeroPixels": 67378,
+            "maxAlpha": 254,
+            "borderPixels": 0,
+            "margins": [
+              19,
+              102,
+              8,
+              92
+            ],
+            "bodyMarginsAlpha8": [
+              37,
+              287,
+              94,
+              318
+            ]
+          },
+          "note": "near claw pulled behind ribcage"
+        },
+        {
+          "id": "big-chap-light-contact-v232",
+          "phase": "contact",
+          "sourceRect": [
+            500,
+            0,
+            548,
+            1024
+          ],
+          "bounds": [
+            512,
+            87,
+            1040,
+            918
+          ],
+          "bodyBoundsAlpha8": [
+            518,
+            296,
+            1022,
+            707
+          ],
+          "bodyBoundsAlpha32": [
+            519,
+            296,
+            1022,
+            706
+          ],
+          "rootX": 750,
+          "rootY": 706,
+          "density": 0.3126491646778043,
+          "sourceFacing": 1,
+          "alpha": {
+            "nonzeroPixels": 71277,
+            "maxAlpha": 254,
+            "borderPixels": 0,
+            "margins": [
+              12,
+              87,
+              8,
+              106
+            ],
+            "bodyMarginsAlpha8": [
+              18,
+              296,
+              26,
+              317
+            ]
+          },
+          "note": "near claw fully extended right"
+        },
+        {
+          "id": "big-chap-light-recovery-v232",
+          "phase": "recovery",
+          "sourceRect": [
+            1048,
+            0,
+            488,
+            1024
+          ],
+          "bounds": [
+            1057,
+            85,
+            1506,
+            825
+          ],
+          "bodyBoundsAlpha8": [
+            1063,
+            288,
+            1431,
+            707
+          ],
+          "bodyBoundsAlpha32": [
+            1063,
+            288,
+            1431,
+            707
+          ],
+          "rootX": 1290,
+          "rootY": 707,
+          "density": 0.3126491646778043,
+          "sourceFacing": 1,
+          "alpha": {
+            "nonzeroPixels": 65821,
+            "maxAlpha": 254,
+            "borderPixels": 0,
+            "margins": [
+              9,
+              85,
+              30,
+              199
+            ],
+            "bodyMarginsAlpha8": [
+              15,
+              288,
+              105,
+              317
+            ]
+          },
+          "note": "near elbow returns and claw drops"
+        }
+      ],
+      "source": {
+        "profileId": "v209-big-chap",
+        "path": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-004-drone-big-chap.webp",
+        "sha256": "fcbe7d2625a8878afc5d91fc34636d27f8ac6f4f40ed34bebf052a5883ccd9fb",
+        "width": 256,
+        "height": 256,
+        "atlasWidth": 1024,
+        "atlasHeight": 2048,
+        "sourceRect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "alphaBounds": [
+          42,
+          108,
+          180,
+          239
+        ],
+        "sourceWork": "Alien (1979)"
+      },
+      "profileId": "v209-big-chap",
+      "revision": 232,
+      "canonExact": false,
+      "visualStatus": "original-project-model-adaptation-provisional",
+      "limitations": [
+        "Three painted grounded phases for this one action only.",
+        "No claim of full animation or on-screen exactness.",
+        "Faint native alpha 1..7 outside the substantive contour is retained; rootY follows painted toe baseline at alpha>=32.",
+        "One density per action; no independent scaling to each phase bounding box."
+      ]
+    },
+    {
+      "fighterId": "mire-v209-bigchap",
+      "action": "heavy",
+      "path": "/assets/openai/xeno-trials-v232/characters/big-chap-heavy-atlas-v232.png",
+      "sha256": "cf5125360b9bff4f9f1a22ee07acc5515a369d88323943aa0cc0c7dc221f54cc",
+      "originalSha256": "cf5125360b9bff4f9f1a22ee07acc5515a369d88323943aa0cc0c7dc221f54cc",
+      "byteIdentical": true,
+      "width": 1536,
+      "height": 1024,
+      "sourceFacing": 1,
+      "authoredStaturePx": 440,
+      "neutralStaturePx": 131,
+      "density": 0.29772727272727273,
+      "frames": [
+        {
+          "id": "big-chap-heavy-windup-v232",
+          "phase": "windup",
+          "sourceRect": [
+            0,
+            0,
+            528,
+            1024
+          ],
+          "bounds": [
+            79,
+            63,
+            514,
+            1007
+          ],
+          "bodyBoundsAlpha8": [
+            88,
+            313,
+            415,
+            765
+          ],
+          "bodyBoundsAlpha32": [
+            88,
+            313,
+            415,
+            764
+          ],
+          "rootX": 283,
+          "rootY": 764,
+          "density": 0.29772727272727273,
+          "sourceFacing": 1,
+          "alpha": {
+            "nonzeroPixels": 82458,
+            "maxAlpha": 254,
+            "borderPixels": 0,
+            "margins": [
+              79,
+              63,
+              14,
+              17
+            ],
+            "bodyMarginsAlpha8": [
+              88,
+              313,
+              113,
+              259
+            ]
+          },
+          "note": "tail loads high behind torso"
+        },
+        {
+          "id": "big-chap-heavy-contact-v232",
+          "phase": "contact",
+          "sourceRect": [
+            528,
+            0,
+            572,
+            1024
+          ],
+          "bounds": [
+            545,
+            54,
+            1082,
+            976
+          ],
+          "bodyBoundsAlpha8": [
+            550,
+            343,
+            1032,
+            765
+          ],
+          "bodyBoundsAlpha32": [
+            550,
+            343,
+            1032,
+            764
+          ],
+          "rootX": 766,
+          "rootY": 764,
+          "density": 0.29772727272727273,
+          "sourceFacing": 1,
+          "alpha": {
+            "nonzeroPixels": 83129,
+            "maxAlpha": 254,
+            "borderPixels": 0,
+            "margins": [
+              17,
+              54,
+              18,
+              48
+            ],
+            "bodyMarginsAlpha8": [
+              22,
+              343,
+              68,
+              259
+            ]
+          },
+          "note": "tail visibly curves forward into rightward contact"
+        },
+        {
+          "id": "big-chap-heavy-recovery-v232",
+          "phase": "recovery",
+          "sourceRect": [
+            1100,
+            0,
+            436,
+            1024
+          ],
+          "bounds": [
+            1113,
+            23,
+            1482,
+            970
+          ],
+          "bodyBoundsAlpha8": [
+            1136,
+            321,
+            1461,
+            764
+          ],
+          "bodyBoundsAlpha32": [
+            1137,
+            321,
+            1461,
+            764
+          ],
+          "rootX": 1280,
+          "rootY": 764,
+          "density": 0.29772727272727273,
+          "sourceFacing": 1,
+          "alpha": {
+            "nonzeroPixels": 79744,
+            "maxAlpha": 254,
+            "borderPixels": 0,
+            "margins": [
+              13,
+              23,
+              54,
+              54
+            ],
+            "bodyMarginsAlpha8": [
+              36,
+              321,
+              75,
+              260
+            ]
+          },
+          "note": "tail lowers during recovery"
+        }
+      ],
+      "source": {
+        "profileId": "v209-big-chap",
+        "path": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-004-drone-big-chap.webp",
+        "sha256": "fcbe7d2625a8878afc5d91fc34636d27f8ac6f4f40ed34bebf052a5883ccd9fb",
+        "width": 256,
+        "height": 256,
+        "atlasWidth": 1024,
+        "atlasHeight": 2048,
+        "sourceRect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "alphaBounds": [
+          42,
+          108,
+          180,
+          239
+        ],
+        "sourceWork": "Alien (1979)"
+      },
+      "profileId": "v209-big-chap",
+      "revision": 232,
+      "canonExact": false,
+      "visualStatus": "original-project-model-adaptation-provisional",
+      "limitations": [
+        "Three painted grounded phases for this one action only.",
+        "No claim of full animation or on-screen exactness.",
+        "Faint native alpha 1..7 outside the substantive contour is retained; rootY follows painted toe baseline at alpha>=32.",
+        "One density per action; no independent scaling to each phase bounding box."
+      ]
+    },
+    {
+      "fighterId": "mire-v209-deacon",
+      "action": "light",
+      "path": "/assets/openai/xeno-trials-v232/characters/deacon-light-atlas-v232.png",
+      "sha256": "7747c023bb2884cf0c614c6807c8eda19268fdb65a663f355512ac7fbc502d8c",
+      "originalSha256": "7747c023bb2884cf0c614c6807c8eda19268fdb65a663f355512ac7fbc502d8c",
+      "byteIdentical": true,
+      "width": 1024,
+      "height": 1536,
+      "sourceFacing": 1,
+      "authoredStaturePx": 460,
+      "neutralStaturePx": 984,
+      "density": 2.139130434782609,
+      "frames": [
+        {
+          "id": "deacon-light-windup-v232",
+          "phase": "windup",
+          "sourceRect": [
+            0,
+            0,
+            1024,
+            512
+          ],
+          "bounds": [
+            41,
+            32,
+            978,
+            506
+          ],
+          "bodyBoundsAlpha8": [
+            339,
+            35,
+            644,
+            495
+          ],
+          "bodyBoundsAlpha32": [
+            340,
+            36,
+            643,
+            495
+          ],
+          "rootX": 500,
+          "rootY": 495,
+          "density": 2.139130434782609,
+          "sourceFacing": 1,
+          "alpha": {
+            "nonzeroPixels": 88048,
+            "maxAlpha": 254,
+            "borderPixels": 0,
+            "margins": [
+              41,
+              32,
+              46,
+              6
+            ],
+            "bodyMarginsAlpha8": [
+              339,
+              35,
+              380,
+              17
+            ]
+          },
+          "note": "near claw drawn behind torso"
+        },
+        {
+          "id": "deacon-light-contact-v232",
+          "phase": "contact",
+          "sourceRect": [
+            0,
+            512,
+            1024,
+            508
+          ],
+          "bounds": [
+            35,
+            514,
+            1012,
+            1006
+          ],
+          "bodyBoundsAlpha8": [
+            260,
+            545,
+            837,
+            998
+          ],
+          "bodyBoundsAlpha32": [
+            261,
+            545,
+            837,
+            998
+          ],
+          "rootX": 480,
+          "rootY": 998,
+          "density": 2.139130434782609,
+          "sourceFacing": 1,
+          "alpha": {
+            "nonzeroPixels": 86753,
+            "maxAlpha": 254,
+            "borderPixels": 0,
+            "margins": [
+              35,
+              2,
+              12,
+              14
+            ],
+            "bodyMarginsAlpha8": [
+              260,
+              33,
+              187,
+              22
+            ]
+          },
+          "note": "one claw extends while far claw guards chest"
+        },
+        {
+          "id": "deacon-light-recovery-v232",
+          "phase": "recovery",
+          "sourceRect": [
+            0,
+            1020,
+            1024,
+            516
+          ],
+          "bounds": [
+            21,
+            1043,
+            1004,
+            1522
+          ],
+          "bodyBoundsAlpha8": [
+            325,
+            1049,
+            644,
+            1514
+          ],
+          "bodyBoundsAlpha32": [
+            326,
+            1050,
+            644,
+            1513
+          ],
+          "rootX": 500,
+          "rootY": 1513,
+          "density": 2.139130434782609,
+          "sourceFacing": 1,
+          "alpha": {
+            "nonzeroPixels": 89586,
+            "maxAlpha": 254,
+            "borderPixels": 0,
+            "margins": [
+              21,
+              23,
+              20,
+              14
+            ],
+            "bodyMarginsAlpha8": [
+              325,
+              29,
+              380,
+              22
+            ]
+          },
+          "note": "near arm lowers after swipe"
+        }
+      ],
+      "source": {
+        "profileId": "castes-film_deacon_2012",
+        "path": "/assets/user/castes-v87/film_deacon_2012.png",
+        "sha256": "6788ba772edfcb4b7989b1fa55606670c610a9fec74230316b5e36c906048853",
+        "width": 1536,
+        "height": 1024,
+        "alphaBounds": [
+          503,
+          20,
+          1088,
+          1004
+        ],
+        "sourceWork": "Prometheus (2012)"
+      },
+      "profileId": "castes-film_deacon_2012",
+      "revision": 232,
+      "canonExact": false,
+      "visualStatus": "original-project-model-adaptation-provisional",
+      "limitations": [
+        "Three painted grounded phases for this one action only.",
+        "No claim of full animation or on-screen exactness.",
+        "Faint native alpha 1..7 outside the substantive contour is retained; rootY follows painted toe baseline at alpha>=32.",
+        "One density per action; no independent scaling to each phase bounding box."
+      ]
+    },
+    {
+      "fighterId": "mire-v209-deacon",
+      "action": "heavy",
+      "path": "/assets/openai/xeno-trials-v232/characters/deacon-heavy-atlas-v232.png",
+      "sha256": "c72d5c5150b5807cee358ac69f19f4f81ef0d690330afd8f54a4107c4979c049",
+      "originalSha256": "c72d5c5150b5807cee358ac69f19f4f81ef0d690330afd8f54a4107c4979c049",
+      "byteIdentical": true,
+      "width": 1024,
+      "height": 1536,
+      "sourceFacing": 1,
+      "authoredStaturePx": 434,
+      "neutralStaturePx": 984,
+      "density": 2.2672811059907834,
+      "frames": [
+        {
+          "id": "deacon-heavy-windup-v232",
+          "phase": "windup",
+          "sourceRect": [
+            0,
+            0,
+            1024,
+            516
+          ],
+          "bounds": [
+            65,
+            22,
+            986,
+            506
+          ],
+          "bodyBoundsAlpha8": [
+            346,
+            60,
+            641,
+            494
+          ],
+          "bodyBoundsAlpha32": [
+            347,
+            60,
+            641,
+            494
+          ],
+          "rootX": 500,
+          "rootY": 494,
+          "density": 2.2672811059907834,
+          "sourceFacing": 1,
+          "alpha": {
+            "nonzeroPixels": 79014,
+            "maxAlpha": 254,
+            "borderPixels": 0,
+            "margins": [
+              65,
+              22,
+              38,
+              10
+            ],
+            "bodyMarginsAlpha8": [
+              346,
+              60,
+              383,
+              22
+            ]
+          },
+          "note": "two claws guard chest while knees load"
+        },
+        {
+          "id": "deacon-heavy-contact-v232",
+          "phase": "contact",
+          "sourceRect": [
+            0,
+            516,
+            1024,
+            512
+          ],
+          "bounds": [
+            73,
+            557,
+            986,
+            1016
+          ],
+          "bodyBoundsAlpha8": [
+            201,
+            559,
+            859,
+            982
+          ],
+          "bodyBoundsAlpha32": [
+            202,
+            560,
+            859,
+            982
+          ],
+          "rootX": 470,
+          "rootY": 982,
+          "density": 2.2672811059907834,
+          "sourceFacing": 1,
+          "alpha": {
+            "nonzeroPixels": 94975,
+            "maxAlpha": 254,
+            "borderPixels": 0,
+            "margins": [
+              73,
+              41,
+              38,
+              12
+            ],
+            "bodyMarginsAlpha8": [
+              201,
+              43,
+              165,
+              46
+            ]
+          },
+          "note": "both claws drive forward in a deep committed lunge"
+        },
+        {
+          "id": "deacon-heavy-recovery-v232",
+          "phase": "recovery",
+          "sourceRect": [
+            0,
+            1028,
+            1024,
+            508
+          ],
+          "bounds": [
+            135,
+            1053,
+            922,
+            1482
+          ],
+          "bodyBoundsAlpha8": [
+            345,
+            1057,
+            665,
+            1477
+          ],
+          "bodyBoundsAlpha32": [
+            346,
+            1057,
+            664,
+            1477
+          ],
+          "rootX": 500,
+          "rootY": 1477,
+          "density": 2.2672811059907834,
+          "sourceFacing": 1,
+          "alpha": {
+            "nonzeroPixels": 78608,
+            "maxAlpha": 254,
+            "borderPixels": 0,
+            "margins": [
+              135,
+              25,
+              102,
+              54
+            ],
+            "bodyMarginsAlpha8": [
+              345,
+              29,
+              359,
+              59
+            ]
+          },
+          "note": "both arms lower and body recoils"
+        }
+      ],
+      "source": {
+        "profileId": "castes-film_deacon_2012",
+        "path": "/assets/user/castes-v87/film_deacon_2012.png",
+        "sha256": "6788ba772edfcb4b7989b1fa55606670c610a9fec74230316b5e36c906048853",
+        "width": 1536,
+        "height": 1024,
+        "alphaBounds": [
+          503,
+          20,
+          1088,
+          1004
+        ],
+        "sourceWork": "Prometheus (2012)"
+      },
+      "profileId": "castes-film_deacon_2012",
+      "revision": 232,
+      "canonExact": false,
+      "visualStatus": "original-project-model-adaptation-provisional",
+      "limitations": [
+        "Three painted grounded phases for this one action only.",
+        "No claim of full animation or on-screen exactness.",
+        "Faint native alpha 1..7 outside the substantive contour is retained; rootY follows painted toe baseline at alpha>=32.",
+        "One density per action; no independent scaling to each phase bounding box."
+      ]
+    }
+  ],
+  "review": {
+    "projectReferencesViewed": [
+      {
+        "path": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-004-drone-big-chap.webp",
+        "view": "Whole atlas viewed with view_image; first 256x256 cell additionally enlarged with native Canvas onto opaque background for analysis only.",
+        "identity": "Big Chap Alien 1979, smooth rounded dome, lean dark gunmetal biomechanical body and segmented tail."
+      },
+      {
+        "path": "/assets/user/castes-v87/film_deacon_2012.png",
+        "view": "Whole project neutral viewed with view_image.",
+        "identity": "Deacon Prometheus 2012, very long tapered pointed rear cranium, dark blue-grey organic skin, no tail."
+      }
+    ],
+    "webReferences": [
+      {
+        "url": "https://necaonline.com/2019/07/alien-7-scale-action-figure-ultimate-40th-anniversary-big-chap/",
+        "status": "Registered by project neutral; attempted web fetch returned 403. Not claimed visually verified during this session."
+      },
+      {
+        "url": "https://www.krop.com/ivanmanzella/",
+        "status": "Primary artist portfolio accessible and explicitly contains Prometheus creature design / Deacon. Two full image links returned 404 and decoded cache image URLs were unavailable through web tool. Not used as a replacement for approved project neutral."
+      },
+      {
+        "url": "https://conceptartworld.com/news/prometheus-creature-concept-art-by-ivan-manzella/",
+        "status": "Web image search displayed thumbnail of concept sculptures. Early concepts were treated as background design context, not final on-screen anatomy."
+      },
+      {
+        "url": "https://necaonline.com/37710/blog/behind-the-scenes/behind-the-scenes-wednesday-deacon-action-figure-from-prometheus-series-2/",
+        "status": "Attempted direct primary-product page access returned 403."
+      }
+    ],
+    "findings": [
+      "Big Chap has the smooth dome, ribbed body, dorsal tubing and connected tail of the project reference; its dome is approximately ten percent shorter proportionally after stature normalization.",
+      "Deacon retains the project neutral blue-grey organic surface, tapered rear cranium and absence of tail. Two initial overlong-head atlases were superseded by direct ImageGen corrections with a roughly twenty-two percent shorter cranium. Remaining skull/torso proportions and small skin details vary by phase; on-screen exactness is not certified.",
+      "Light and heavy silhouettes differ: Big Chap claw versus tail; Deacon one claw versus committed two-claw lunge.",
+      "No limb or tail is cropped at the twelve cell edges. Native alpha maximum is 254, and tiny exterior alpha is retained.",
+      "Native Canvas montage uses actual neutral art and native engine attack ages at unchanged physical metrics. All twelve substantive toe anchors remain on the same floor and each action retains one density. Deacon highlights and body musculature remain stronger than the neutral; these are open artistic differences, not a certified exact match."
+    ],
+    "canonExact": false,
+    "bodyStatsOrCollisionChanged": false
+  },
+  "generation": {
+    "provider": "openai-imagegen",
+    "assetBytes": "All admitted PNGs are exact original bytes from ImageGen outputs. No image raster editing, resizing, alpha masking or recompression applied to shipped images.",
+    "generations": [
+      {
+        "key": "bigchap-light",
+        "prompt": "Create a production 2D GAME SPRITE ATLAS of the same BIG CHAP film xenomorph from Alien (1979) represented in the attached project reference atlas. Use the first upright sprite of the reference as the locked character model. This is a new set of three original combat drawings, not copying any commercial videogame asset.\nOUTPUT: one wide 1536x1024 transparent PNG, exactly three separate full-body sprites in a single horizontal row, one per 512x1024 cell. All sprites face RIGHT (sourceFacing=+1), strict orthographic side view, no text. Completely transparent empty background. Each sprite wholly contained in its own cell with AT LEAST 40 pixels transparent gutters on all sides. No overlap across cells. Entire head, hands, every toe, full tail tip remain visible.\nSAME model and scale throughout: lean adult Big Chap with long limbs, narrow waist, skeletal biomechanical ribcage and tubes, four dorsal tubes, long segmented whip tail and small spear tip, long SMOOTH rounded metallic dark gunmetal dome above tiny toothy mouth. No corrugated Warrior head, no spikes/crown on skull. Match the project neutral's grey-black graphite palette, small controlled silver highlights, detailed crisp hand-painted videogame sprite edges, no glow, no black ground shadow. Do not make a new design or bulky warrior.\nCOMMON FRAME: foot contact line at y=900 in every cell, hip center horizontally near x=256 within each cell, standing-equivalent anatomical stature about 650 pixels. Same head length, torso volume, bone lengths, detail density, lighting and color in all three. Natural low fighting stance, knees slightly flexed, two anatomical arms and two anatomical legs.\nACTION = LIGHT claw swipe. LEFT CELL WINDUP: upper body turns subtly back, near claw pulled behind the ribcage at waist level, far claw held guarding near chest; knees load, tail trails to the left in a low backward curl. MIDDLE CELL CONTACT: genuinely different full-body drawing; near arm reaches straight to the right at shoulder height in a sharp slash, claw fingers open, torso leans forward, back leg braces, forward planted foot remains on the same y=900 baseline; tail counterbalances left. RIGHT CELL RECOVERY: near elbow bends and the slashing claw drops past waist on its way back, torso partially returns upright, weight comes back between both feet, far hand guards, tail settles behind. The near arm must clearly differ across all three phases. No duplicate poses and no merely shifted copies.\nKeep all three silhouettes at identical anatomical scale and completely separated by transparent gutters. No opponent, scenery, writing, panel borders, floor line, effects, blood, highlights outside the body or extra limbs.",
+        "retained": false
+      },
+      {
+        "key": "bigchap-light-repair",
+        "prompt": "Correct the supplied three-pose BIG CHAP light attack sprite atlas as a production transparent sprite sheet. Keep all three existing character designs, poses, fine details, colors, long smooth domes, lean proportions and side facing RIGHT. KEEP THE DRAWINGS FAITHFUL. The only corrections: produce true clean transparency with absolutely no mist, grey backdrop, ambient halo, vignette, ground shadow or glow around any sprite. Outside the solid character silhouettes every pixel must have alpha=0; fully opaque interior character pixels. No rectangular background or checkerboard. Draw just the characters. Clear alpha to the exact anti-aliased body edge. \nLayout correction: 1536x1024, three isolated sprites one in each 512-wide cell. Make each figure including its entire tail and stretched claw fit x=40..472 relative to its cell. 40px minimum completely transparent gutter at EVERY cell edge. If needed reduce ALL THREE figures by the same common factor to fit. Never clip or distort a body part or tail. Each sprite's feet rest on exactly y=800 and all maintain identical anatomical scale and model. Keep light attack phases left windup (claw pulled back), middle contact (claw fully forward), right recovery (claw lowered and elbow returning). Full tails visible and no overlap. This is videogame sprite art, no scene illumination in the empty canvas.",
+        "retained": true
+      },
+      {
+        "key": "bigchap-heavy",
+        "prompt": "Create a new HEAVY ATTACK sprite atlas for the exact same Big Chap model in reference 1 (the three-pose light-attack sheet), keeping its proportions, head, material and crisp sprite illustration style. Reference 2 is its original neutral project atlas. Use both as locked design reference. This is original game sprite drawing, never a commercial game asset copy.\nOutput one transparent 1536x1024 PNG containing exactly three full-body sprites in one row, no other content. Strict side view, ALL face RIGHT. Positions in cells [0..511], [512..1023], [1024..1535]. Make the ENTIRE silhouette including every tail tip fit each cell WITH 40 pixels completely transparent margin. Use a compact figure, about 360px head-to-ground; every pose shares EXACTLY THE SAME anatomical scale. Feet all on y=740. No drawing, effect or shadow outside actual character silhouette. Native transparent alpha; opaque body interiors, empty areas alpha=0. No scene or backdrop.\nCharacter locked: lean dark silver gunmetal Big Chap from Alien 1979, long smooth rounded cranial dome (NOT ridged Warrior), tiny toothy mouth, skeletal ribcage, tubing and dorsal tubes, long slender legs and arms, long segmented tail with small blade. Keep head length and torso volume identical across phases and to the light reference when scaled. No extra limbs.\nAction HEAVY = powerful TAIL THRUST to the RIGHT. Three genuinely distinct complete drawings:\nLEFT/WINDUP: low braced stance, upper body recoils slightly, both claws guard chest, tail arches UP BEHIND the left shoulder, spear tip points up as it loads a thrust. This upraised backward tail must fit the cell and not pass above the head.\nMIDDLE/CONTACT: deep low forward brace, arms guarding apart; long tail curves down from the pelvis, passes visibly around the outside of the near hip WITHOUT intersecting the body, then sweeps FORWARD TO THE RIGHT around waist height, spear tip farthest right. Clear forward tail contact. Both feet planted on y740. Keep complete tail visible inside middle cell.\nRIGHT/RECOVERY: torso returning toward fighting stance, guard hands lower, tail has passed through contact and curves low forward then returns beneath hips, tip now low near the right knee. Fully connected tail anatomy.\nAll three full-body poses share the same head-to-body proportions, anatomical stature, surface colors and lighting. Different coherent tail phases with no duplicated pose. Entire figure and every tail tip visible. No opponent, scenery, letters, labels, blood, smoke, glow, floor, ground line or drop shadow. Preserve Big Chap identity.",
+        "retained": false
+      },
+      {
+        "key": "bigchap-heavy-r2",
+        "prompt": "Clean the transparency of this exact Big Chap three-phase heavy tail-attack sprite atlas. Preserve all character drawings, colors, proportions and distinct tail poses exactly: windup tail high behind, contact tail forward, recovery tail low forward. Keep all heads and bodies facing right. Keep a three-column layout in 1536x1024.\nRemove all backdrop, mist, shadows, diffuse light patches and faint translucent pixels outside the three actual character silhouettes. Transparent area must truly have alpha=0, including a fully empty at least32px transparent frame at all four canvas edges. Body interiors remain solid. Make all THREE entire sprites uniformly 85% of current scale to create abundant clean margins, place them at x=256,768,1280 respectively with common feet baseline y=760. Every complete tail, toe, claw and skull fits its own column with at least30px completely transparent gutter, never overlaps another column. Preserve anatomical scale consistency and pose differences. No new background or design elements. No floor, text, glow or artificial border. Production isolated transparent game sprites only.",
+        "retained": true
+      },
+      {
+        "key": "deacon-light",
+        "prompt": "Create a production transparent game-sprite atlas with three original combat drawings of the exact DEACON creature in the attached project model. This is the Deacon from Prometheus (2012), adapted in our project, NOT a Neomorph, NOT a standard Xenomorph. Lock the attached model's colors, limb proportions, anatomy and extremely long tapered backward-pointing cranium.\nOUTPUT one wide 1536x1024 PNG with true native TRANSPARENT background. Exactly three separated full-body sprites in one horizontal row, strict orthographic SIDE VIEW, every face points RIGHT. One complete sprite in each 512px cell, minimum 45px clear transparent space at each cell boundary. Feet all rest at y=800. About 500px head-to-ground per sprite, exact same anatomical stature across phases, no perspective scaling. Leave the whole pointed rear head, all fingers and every toe visible. No tail. Transparent background only; body opaque; empty pixels alpha=0, no scene, no cast shadow, no lighting halo.\nDESIGN LOCK: metallic dark slate BLUE-GRAY creature skin with subtle cold silver wet highlights as reference; long lean skeletal torso with soft biological rib ridges, elongated forearms, thin claw fingers, lean humanlike legs, broad plantigrade feet. Long narrow angular Deacon cranium with a very long sharp tapering pointed rear extending LEFT behind the neck, rounded small muzzle pointing RIGHT with small teeth. Head must have the same profile and large head-to-torso ratio as reference. No back pipes, no segmented tail, no Warrior exoskeleton, no white pale Neomorph skin. Crisp detailed shaded 2D sprite illustration matching reference, clean contour, no photoreal scene.\nACTION LIGHT CLAW SWIPE. Three genuinely different drawings, in temporal order:\nLEFT WINDUP: knees lightly load and back straightens, near claw pulls back beside ribs with elbow behind body; far hand guards upper chest.\nMIDDLE CONTACT: near arm thrusts fully forward to the RIGHT in a quick claw swipe at shoulder height, elbow nearly straight, long claw fingers spread; torso leans forward, rear leg braced and front foot planted. This is the maximum extension silhouette, distinctly wider than windup. Both feet on baseline.\nRIGHT RECOVERY: arm has passed the contact and drops downward, near elbow partly bent with open claw near waist, torso draws back and knees rebound toward ready stance. Far hand still guards.\nKeep all three phases identical in head length, neck shape, ribcage size, limb lengths, palette and detail density. Full anatomy in each cell, no duplicates, no mirrored facing, no extra limbs, no bent-back wrong joints. No opponent, scenery, text, labels, panels, effects, floor line, wounds or blood. This is original sprite art derived from the project's approved neutral, not a copy of an existing videogame sprite.",
+        "retained": false
+      },
+      {
+        "key": "deacon-light-r2",
+        "prompt": "Production GAME SPRITE SHEET, portrait canvas 1024 WIDE x 1536 HIGH. TRANSPARENT PNG. Exactly THREE full-body DEACON combat drawings STACKED VERTICALLY: one sprite per horizontal ROW of height512px. Not side-by-side. TOP row windup, MIDDLE row contact, BOTTOM row recovery. Every character faces RIGHT in strict side view. Each full-body sprite is compact: head-to-foot height350px, horizontal body-width about350px except the extended strike can be500px. Fit the complete creature into its row with at least70px EMPTY transparent margin above and below; never draw across row boundaries at y512 or1024. Exact same scale in every row. Position torso near x500, allow all of long rear skull to the LEFT and all of reaching claw to the RIGHT. Feet at y440 / y952 / y1464. Entire skull tip, all fingers and toes must be inside each row, no clipping, no overlap. Generous empty transparent space around each complete silhouette. No floor or writing.\nSUBJECT: exact Deacon from Prometheus (2012) shown in the supplied project neutral. Match its very long narrow head with sharply tapered rear point extending LEFT, small muzzle RIGHT, no tail or dorsal pipes; metallic dark slate BLUE-GRAY organic skin with tiny cold silver wet highlights, skeletal chest with biological rib ridges, long slender forearms and fingers, lean legs with broad plantigrade feet. Same head-to-body ratio and body mass as reference. NOT a Neomorph and NOT a biomechanical Warrior. Crisp detailed shaded 2D sprite art matching project reference. Clean transparent alpha around body with no mist/halo/backdrop/ground shadows.\nTOP ROW WINDUP LIGHT ATTACK: knees lightly loaded, near claw pulled back beside ribs, elbow behind torso, far hand guards upper chest.\nMIDDLE ROW CONTACT LIGHT ATTACK: near arm fully reaches RIGHT at shoulder level with open striking claw, elbow almost straight, upper body leans forward, front foot braced and rear leg extended on that row's baseline.\nBOTTOM ROW RECOVERY LIGHT ATTACK: torso draws back, striking arm drops after swipe with elbow bent and open claw near waist; knees rebound toward ready stance, far hand guards.\nThree genuinely different complete body drawings in attack sequence; SAME anatomical stature, same skull length and limb lengths. Native transparent background, solid body. No other characters, text, panels, labels, drop shadows, effects, scenery, wounds or blood. Original game drawings derived from project's neutral, not videogame copies. The VERTICAL THREE ROW layout and the empty row gutters are mandatory.",
+        "retained": false
+      },
+      {
+        "key": "deacon-light-r3",
+        "prompt": "Edit this portrait transparent 3-row DEACON sprite atlas. KEEP the exact character model, scale, palette, pointed skull anatomy, row layout, empty transparent background and lighting of the supplied atlas. Make a LIGHT attack sequence by changing the arms and stance, rather than the double-arm heavy action:\nTOP sprite: near elbow pulls back behind ribs, one claw drawn back at waist for a quick swipe, far claw guards chest.\nMIDDLE sprite: only the near arm extends RIGHT at shoulder level with a single outstretched striking claw; far arm stays bent guarding chest. Forward lean is moderate, not the current deep double-claw lunge. Both feet planted.\nBOTTOM sprite: near arm returns down past waist after swipe, elbow bends, far hand guards upper chest; torso rises partway toward ready.\nDo NOT alter the creature design. All three remain full body, side view facing RIGHT, slate blue-grey rough skin, NO TAIL, same very long pointed backward skull, same skinny body proportions. The attack is visibly one claw; two arms and two legs remain anatomically correct.\nOUTPUT 1024x1536 transparent PNG, exactly three separate rows of 512px. Keep the complete head-to-foot drawings with a clear 30px FULLY TRANSPARENT blank stripe between every row, plus 30px transparent margin around canvas edges. Character silhouettes fully contained in rows. No part cropped. No background, glow, mist, drop shadow, light patch, floor or scene anywhere. Keep empty pixels completely transparent alpha=0 with only the sharp antialiased edge around the creature. Do not invent translucent illumination around the sprites. No lettering or guides.",
+        "retained": false
+      },
+      {
+        "key": "deacon-heavy",
+        "prompt": "Create a HEAVY ATTACK game sprite sheet for the SAME DEACON from Prometheus (2012), using reference1's three combat sprites for EXACT character design, style, scale relationships and colors, and reference2 for the approved neutral anatomy. No redesign. This is new original game art.\nTECHNICAL: portrait transparent PNG 1024x1536. Exactly THREE whole-body drawings STACKED VERTICALLY, one full creature in each 1024x512 row. NOT three columns. All strict side view facing RIGHT. Every body part fits inside its own row, with at least40px blank transparent margin above and below. Draw each complete sprite only400px high. Same anatomical scale/head size across all three poses, no perspective scaling. Center torso near x500. Foot baseline TOProw y460; MIDDLErow y972; BOTTOMrow y1484. Keep all feet on respective baseline and every skull tip and claw wholly visible inside canvas. Never let any drawing cross y512 or y1024. Native transparent alpha with no background, no floor/shadow/halo.\nDEACON IDENTITY: dark slate blue-grey subtly wet silver highlights, very long angular tapered rear skull pointing left, small muzzle right, biological chest ribs and lean sinewy organic body, slender arms and claw fingers, broad plantigrade feet, long legs. NO TAIL, no biomechanical dorsal pipes, no Warrior dome, no pale Neomorph skin. Match the project reference silhouette and head-to-body proportions. Crisp detailed 2D shaded sprite.\nACTION HEAVY = powerful TWO-CLAW driving strike, with a deeper body commitment and BOTH arms striking together. Distinct from the earlier one-arm light swipe:\nTOP/WINDUP: lean backward onto a loaded back leg, both long claw hands lifted guarding either side of upper chest, elbows deeply bent; torso slightly crouched, forward foot braced. Keep head normally rightward.\nMIDDLE/CONTACT: deep forward lunge with both feet planted, front knee bends strongly, back leg extends, torso leans forward. BOTH arms extend forward to RIGHT at chest height with two distinguishable open claw hands, one slightly above the other, delivering a double palm/claw impact. Entire fingers visible and anatomically clear. Very distinct from windup.\nBOTTOM/RECOVERY: recoil weight toward back leg; both arms now lower and spread apart from completed impact, near claw down beside thigh, far elbow bends back toward ribs, chest begins to rise. Head stays right.\nFull anatomically correct bodies, two arms and two legs only, exact same skull dimensions, body volume and colors across phases. Three genuinely different full-body drawings. No extra elements, lettering, panels, effects, opponents, scenery, blood, smoke, blurred trails or commercial videogame sprite copies. Show generous transparent row gutters.",
+        "retained": false
+      },
+      {
+        "key": "deacon-heavy-r2",
+        "prompt": "Clean the transparency of this exact Deacon three-phase heavy DOUBLE-CLAW attack sprite atlas. Preserve all character drawings, slate-blue colors, pointed skull proportions, organic skin, no-tail anatomy and distinct poses exactly: windup both claws guarding, contact both claws forward in lunge, recovery claws down. All three face right, one per row.\nKeep 1024x1536 portrait THREE-ROW atlas. Remove all backdrop, mist, shadows, diffuse illumination and faint translucent pixels outside the three character silhouettes. Empty area must actually be alpha=0, including a fully empty 32px transparent frame at all four canvas edges, and entirely transparent 32px gutters between rows. Body interiors remain solid. Make all THREE entire sprites uniformly 85% of current scale so every whole head, foot and finger stays inside its row with abundant transparent margins. Feet baselines y450/y962/y1474. Preserve anatomy, exact common scale, head dimensions and pose differences. No new scene or elements. No floor, text, glow or visible frame. Production isolated transparent game sprites only.",
+        "retained": false
+      },
+      {
+        "key": "deacon-light-r4",
+        "prompt": "Correct the anatomical proportion of the THREE DEACON sprite drawings in reference1 using the ORIGINAL approved project neutral in reference2. The combat sheet's skull has become too large compared with the lean body. REDUCE THE ENTIRE HEAD/CRANIUM by 22% IN BOTH DIMENSIONS relative to its body in all three poses, with the lower front jaw/neck junction as the anchor. This means a skull that was roughly360px long becomes roughly280px long. Preserve the long tapered pointed rear Deacon skull (not a rounded xenomorph dome), muzzle points RIGHT. Retain the reference2 original neutral's narrow elongated head shape, dark blue-grey biological skin and fine wet silver texture. Keep head size absolutely consistent across all 3 poses.\nEverything ELSE in reference1 is fixed: same exact torso and limb scale, musculature, body colors, side facing RIGHT, foot positions, baseline, three attack phase poses, composition and transparent background. Do not shorten or resize body, arms, legs or fingers. Keep all body and every extremity fully visible. Keep the original action clear: one-claw light attack, near arm back in top row, one near arm extended right while far hand guards in middle row, near claw low after swipe in bottom row.\nOutput 1024x1536 portrait transparent PNG with exactly THREE full-body sprites stacked VERTICALLY, one in each512px row. Ensure fully empty transparent gutters between rows and at every canvas edge, no alpha stray on edges. No mist, halo, vignette, shadows, floor, labels, panels or effects. This is a controlled correction of oversized heads to the approved neutral proportions, not a new creature design. No tail, no dorsal pipes, no white Neomorph skin.",
+        "retained": true
+      },
+      {
+        "key": "deacon-heavy-r3",
+        "prompt": "Correct the anatomical proportion of the THREE DEACON sprite drawings in reference1 using the ORIGINAL approved project neutral in reference2. The combat sheet's skull has become too large compared with the lean body. REDUCE THE ENTIRE HEAD/CRANIUM by 22% IN BOTH DIMENSIONS relative to its body in all three poses, with the lower front jaw/neck junction as the anchor. This means a skull that was roughly360px long becomes roughly280px long. Preserve the long tapered pointed rear Deacon skull (not a rounded xenomorph dome), muzzle points RIGHT. Retain the reference2 original neutral's narrow elongated head shape, dark blue-grey biological skin and fine wet silver texture. Keep head size absolutely consistent across all 3 poses.\nEverything ELSE in reference1 is fixed: same exact torso and limb scale, musculature, body colors, side facing RIGHT, foot positions, baseline, three attack phase poses, composition and transparent background. Do not shorten or resize body, arms, legs or fingers. Keep all body and every extremity fully visible. Keep the original action clear: two-claw heavy attack, both claws guard in top row, BOTH claws fully extended forward in deep lunge in middle row, both claws lowered after contact in bottom row.\nOutput 1024x1536 portrait transparent PNG with exactly THREE full-body sprites stacked VERTICALLY, one in each512px row. Ensure fully empty transparent gutters between rows and at every canvas edge, no alpha stray on edges. No mist, halo, vignette, shadows, floor, labels, panels or effects. This is a controlled correction of oversized heads to the approved neutral proportions, not a new creature design. No tail, no dorsal pipes, no white Neomorph skin.",
+        "retained": true
+      }
+    ],
+    "excludedCandidates": [
+      {
+        "key": "bigchap-light",
+        "reason": "Initial native alpha output superseded by a cleaner direct ImageGen correction."
+      },
+      {
+        "key": "bigchap-heavy",
+        "reason": "Two alpha=1 pixels reached bottom canvas edge; superseded by clean native ImageGen correction."
+      },
+      {
+        "key": "deacon-light",
+        "reason": "Contact claw and following head overlap rectangular x extent; no clean non-overlapping three-column crops possible."
+      },
+      {
+        "key": "deacon-light-r2",
+        "reason": "Faint native alpha extends between all rows; superseded by direct ImageGen edit based on heavy sheet."
+      },
+      {
+        "key": "deacon-heavy",
+        "reason": "Three alpha=1 pixels reached left canvas edge; superseded by clean native ImageGen correction."
+      },
+      {
+        "key": "deacon-light-r3",
+        "reason": "Superseded by native ImageGen head-proportion correction: initial vertical sheets oversized cranium relative to approved neutral."
+      },
+      {
+        "key": "deacon-heavy-r2",
+        "reason": "Superseded by native ImageGen head-proportion correction: initial vertical sheets oversized cranium relative to approved neutral."
+      }
+    ]
+  },
+  "nativeVerification": {
+    "commands": [
+      {
+        "command": "node scripts/verify-xeno-trials-combat-art-v232.mjs",
+        "tests": 6,
+        "passed": 6
+      },
+      {
+        "command": "node scripts/verify-xeno-trials-poses-v209.mjs",
+        "tests": 39,
+        "passed": 39
+      }
+    ],
+    "assertions": [
+      "Pinned original PNG bytes and four exact public files/directories.",
+      "Twelve alpha-complete nonoverlapping crops with no nonzero border alpha.",
+      "Planted measured toes and constant anatomical density through windup/contact/recovery in both facings.",
+      "Native attacks hit at twenty-unit body gap and miss at one hundred eighty, with identical complete engine state when drawings are omitted.",
+      "Wrong identity/source/profile/hash/source cell, wrong texture dimensions, airborne state, stun, reduced motion and missing optional PNG all reject the pose and preserve native fallback.",
+      "Per-identity offline inclusion and historical static/live drawn coverage distinction.",
+      "All eighty-six legacy pose asset paths retain their exact order and fingerprint."
+    ],
+    "runtimeStateChanged": false,
+    "newGeneratedPhaseKeys": 12,
+    "newUniquePngFiles": 4,
+    "historical189MainRosterMissingSlots": 7659,
+    "historicalMainRosterDelta": 0,
+    "countingNote": "Big Chap and Deacon belong to the supplementary Research identities in the V229 inventory. Their twelve real new action phases do not reduce the separate 189-fighter main-roster total."
+  }
+}

@@ -233,3 +233,26 @@
 .xt-lab-readings-v209 p{flex:1 1 100%;font-weight:700;color:#d9e6bc}
 .xt-lab-readings-v209 progress{accent-color:#b0c58f;width:min(100%,12rem)}
 [data-xt="practice-labs"] .xt-activity-board-v119{margin-top:.75rem}
+
+/* MIRE exhibition preparation and the reserve readout live inside the tablet. */
+.xt-exhibition-v232{max-width:1120px;margin:0 auto;padding:clamp(16px,3vw,32px);border:1px solid #7b7955;background:linear-gradient(140deg,#111c22,#071013);box-shadow:inset 0 3px #c4af6d}
+#xeno-trials-v96 .xt-exhibition-form-v232{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+.xt-exhibition-form-v232 header{border-bottom:1px solid #506064;padding-bottom:16px}
+.xt-exhibition-format-v232,.xt-exhibition-settings-v232{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.xt-exhibition-teams-v232{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.xt-exhibition-teams-v232 fieldset{display:grid;gap:16px;min-width:0;border:1px solid #596567;padding:20px;background:#ffffff04}
+.xt-exhibition-v232 label{display:grid;gap:8px;color:#c6d1ce;font-size:.85rem;letter-spacing:.04em}
+.xt-exhibition-v232 input,.xt-exhibition-v232 select{max-width:100%;min-width:0;min-height:44px;padding:10px;color:#e1e5da;background:#071013;border:1px solid #6a756e}
+.xt-exhibition-v232 input:focus-visible,.xt-exhibition-v232 select:focus-visible{outline:2px solid #e2c47d;outline-offset:3px}
+.xt-exhibition-v232 .xt-exhibition-check-v232{display:flex;align-items:center;gap:10px;letter-spacing:normal}
+.xt-exhibition-check-v232 input{min-height:24px;width:22px;accent-color:#dac382}
+.xt-replay-archive-v232{margin-top:32px;border-top:1px solid #65716a;padding-top:20px}
+.xt-replay-archive-v232 ul{list-style:none;padding:0;display:grid;gap:12px}
+.xt-replay-archive-v232 li{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px;background:#ffffff05;border:1px solid #52605d}
+.xt-replay-archive-v232 p{color:#a7b8b5}
+.xt-team-status-v232{font-size:clamp(8px,1.1vw,12px);line-height:1.25;color:#d4c186;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.xt-team-status-v232[hidden]{display:none}
+.xt-replay-controls-v232{display:grid;gap:12px;border:1px solid #566866;padding:16px}
+.xt-replay-controls-v232 input{width:100%}
+@media(max-width:650px){.xt-exhibition-teams-v232{grid-template-columns:1fr}.xt-replay-archive-v232 li{align-items:start;flex-direction:column}.xt-exhibition-v232{padding:16px}.xt-exhibition-teams-v232 fieldset{padding:12px}}
+#xeno-trials-v96 .xt-exhibition-form-v232 > .xt-actions{grid-area:auto}

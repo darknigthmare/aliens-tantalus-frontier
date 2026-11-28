@@ -1,5 +1,6 @@
-import { XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231 as branch,
-  resolveXenoTrialsCharacterRouteChapterV231 } from './xeno-trials-character-routes-v231.js';
+import { XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V232 as branch,
+  XENO_TRIALS_CHARACTER_ROUTES_V232,
+  resolveXenoTrialsCharacterRouteChapterV232 } from './xeno-trials-character-routes-v232.js';
 
 const escape = value => String(value ?? '').replace(/[&<>"']/g, character =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
@@ -34,7 +35,7 @@ export function routeRuleTextV231(french, language) {
 export function canUseXenoTrialsCharacterRouteFighterV231(state, id, activity) {
   if (state?.unlocked?.includes(id)) return true;
   if (activity?.branch !== branch) return false;
-  const chapter = resolveXenoTrialsCharacterRouteChapterV231(activity.id, state?.modesV119);
+  const chapter = resolveXenoTrialsCharacterRouteChapterV232(activity.id, state?.modesV119);
   return Boolean(chapter && chapter.forcedPlayerId === id && activity.forcedPlayerId === id);
 }
 
@@ -42,13 +43,15 @@ export function renderXenoTrialsCharacterRouteStoryV231(view, language = 'fr', i
   if (!view) return '';
   const english = language === 'en';
   const text = key => escape(routeTextV231(view, key, language));
+  const route = XENO_TRIALS_CHARACTER_ROUTES_V232.find(entry => entry.id === view.id);
+  const specimen = escape(route ? routeTextV231(route, 'label', language).split(' · ')[0] : english ? 'Specimen' : 'Spécimen');
   const logs = view.chapters.filter(chapter => chapter.cleared).map(chapter =>
     `<li><strong>${escape(routeTextV231(chapter, 'act', language))}</strong><p>${escape(routeTextV231(chapter, 'event', language))}</p></li>`).join('');
   return `<div class="xt-briefing-identity" data-xt-route-story="${view.id}">
     <p class="eyebrow">MIRE / ${english ? 'SPECIMEN ROUTE' : 'PARCOURS DU SPÉCIMEN'}</p>
     <h2>${text('label')}</h2>${image}
-    <p>${view.completed ? english ? 'Permanent MIRE authorization. Big Chap is available in the roster.' : 'Autorisation permanente MIRE. Big Chap est disponible dans le registre.'
-      : english ? 'Big Chap is assigned to these trials on loan. Complete the route to retain its authorization.' : 'Big Chap est prêté pour ces épreuves. Terminez le parcours pour conserver son autorisation.'}</p>
+    <p>${view.completed ? english ? `Permanent MIRE authorization. ${specimen} is available in the roster.` : `Autorisation permanente MIRE. ${specimen} est disponible dans le registre.`
+      : english ? `${specimen} is assigned to these trials on loan. Complete the route to retain its authorization.` : `${specimen} est prêt${view.id === 'specimen-six' ? 'ée' : 'é'} pour ces épreuves. Terminez le parcours pour conserver son autorisation.`}</p>
     <strong>${view.clearedCount} / ${view.chapters.length} ${english ? 'READINGS VALIDATED' : 'RELEVÉS VALIDÉS'}</strong>
   </div><div class="xt-briefing-orders">
     <h3>${view.completed ? english ? 'Epilogue' : 'Épilogue' : english ? 'Prologue' : 'Prologue'}</h3>

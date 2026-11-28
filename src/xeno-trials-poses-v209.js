@@ -195,6 +195,30 @@ const combatSynthHeavyFrames = Object.freeze([
   ['contact', '/assets/openai/xeno-trials-v209/characters/combat-synth-heavy-atlas-v229.png', [486, 238, 1031, 871], 770],
   ['recovery', '/assets/openai/xeno-trials-v209/characters/combat-synth-heavy-atlas-v229.png', [1064, 255, 1491, 871], 1256]
 ].map(poseFrame));
+// Preserve every faint alpha pixel, but ground the painted toes rather than the
+// translucent fringe. One measured density is shared by all phases of an action.
+const atlasFramesV232 = (name, entries) => Object.freeze(entries.map(([phase, bounds, rootX, rootY]) =>
+  Object.freeze({ ...poseFrame([phase, `/assets/openai/xeno-trials-v232/characters/${name}-atlas-v232.png`, bounds, rootX]), rootY })));
+const bigChapLightFramesV232 = atlasFramesV232('big-chap-light', [
+  ['windup', [19, 102, 492, 932], 265, 706],
+  ['contact', [512, 87, 1040, 918], 750, 706],
+  ['recovery', [1057, 85, 1506, 825], 1290, 707]
+]);
+const bigChapHeavyFramesV232 = atlasFramesV232('big-chap-heavy', [
+  ['windup', [79, 63, 514, 1007], 283, 764],
+  ['contact', [545, 54, 1082, 976], 766, 764],
+  ['recovery', [1113, 23, 1482, 970], 1280, 764]
+]);
+const deaconLightFramesV232 = atlasFramesV232('deacon-light', [
+  ['windup', [41, 32, 978, 506], 500, 495],
+  ['contact', [35, 514, 1012, 1006], 480, 998],
+  ['recovery', [21, 1043, 1004, 1522], 500, 1513]
+]);
+const deaconHeavyFramesV232 = atlasFramesV232('deacon-heavy', [
+  ['windup', [65, 22, 986, 506], 500, 494],
+  ['contact', [73, 557, 986, 1016], 470, 982],
+  ['recovery', [135, 1053, 922, 1482], 500, 1477]
+]);
 const pantherSource = ['pose-v94-kenner-panther', '/assets/openai/sprites/static-enemy-v94/kenner-panther-neca.png',
   '575f23d532b10eb34f2dd0df9e8a860e1511cdecf4e7ab20eb5fa7742acc549c', 1310, 1201];
 const arachnoidSource = ['castes-game_avp_capcom_arachnoid', artPath,
@@ -231,6 +255,10 @@ const xenoborgSource = ['castes-game_xenoborg_avp1999', '/assets/user/castes-v87
   'd6532326d96fbdd14e7feb8d19946b92edac55a0f8ae88ccc916cc692b192a09', 1536, 1024];
 const combatSynthSource = ['enemy-146-armored-combat-synthetic', '/assets/openai/sprites/static-enemy-v96/armored-combat-synthetic.png',
   'fb161cf728b2f8f4fa5f7ef7b894a7aed7a2f5cae79e122cbabc96ad2d4afd39', 1205, 1306];
+const bigChapSourceV232 = ['v209-big-chap', '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-004-drone-big-chap.webp',
+  'fcbe7d2625a8878afc5d91fc34636d27f8ac6f4f40ed34bebf052a5883ccd9fb', 256, 256];
+const deaconSourceV232 = ['castes-film_deacon_2012', '/assets/user/castes-v87/film_deacon_2012.png',
+  '6788ba772edfcb4b7989b1fa55606670c610a9fec74230316b5e36c906048853', 1536, 1024];
 
 const groundedActions = Object.freeze([
   ['panther', {
@@ -414,6 +442,28 @@ const groundedActions = Object.freeze([
     id: 'combat-synth-heavy', action: 'heavy', revision: 229, animation: 'painted-combat-synth-heavy-poses',
     source: combatSynthSource, textureWidth: 1536, textureHeight: 1024, density: 1.651,
     frames: combatSynthHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['mire-v209-bigchap', {
+    id: 'big-chap-light-v232', action: 'light', revision: 232, animation: 'painted-big-chap-light-poses-v232',
+    source: bigChapSourceV232, sourceRectV232: Object.freeze([0, 0, 256, 256]),
+    textureWidth: 1536, textureHeight: 1024, density: 131 / 419,
+    frames: bigChapLightFramesV232, limitations: ['three-painted-poses', 'measured-toe-anchor', 'project-adaptation']
+  }],
+  ['mire-v209-bigchap', {
+    id: 'big-chap-heavy-v232', action: 'heavy', revision: 232, animation: 'painted-big-chap-heavy-poses-v232',
+    source: bigChapSourceV232, sourceRectV232: Object.freeze([0, 0, 256, 256]),
+    textureWidth: 1536, textureHeight: 1024, density: 131 / 440,
+    frames: bigChapHeavyFramesV232, limitations: ['three-painted-poses', 'measured-toe-anchor', 'project-adaptation']
+  }],
+  ['mire-v209-deacon', {
+    id: 'deacon-light-v232', action: 'light', revision: 232, animation: 'painted-deacon-light-poses-v232',
+    source: deaconSourceV232, textureWidth: 1024, textureHeight: 1536, density: 984 / 460,
+    frames: deaconLightFramesV232, limitations: ['three-painted-poses', 'measured-toe-anchor', 'project-adaptation']
+  }],
+  ['mire-v209-deacon', {
+    id: 'deacon-heavy-v232', action: 'heavy', revision: 232, animation: 'painted-deacon-heavy-poses-v232',
+    source: deaconSourceV232, textureWidth: 1024, textureHeight: 1536, density: 984 / 434,
+    frames: deaconHeavyFramesV232, limitations: ['three-painted-poses', 'measured-toe-anchor', 'project-adaptation']
   }]
 ].map(([fighterId, entry]) => Object.freeze({ ...entry, fighterId, source: Object.freeze(entry.source), limitations: Object.freeze(entry.limitations),
   paths: Object.freeze([...new Set(entry.frames.filter(Boolean).map(frame => frame.path))]) })));
@@ -424,13 +474,18 @@ const supported = (fighter, art) => fighter?.id === 'arachnoid' && fighter.varia
 
 export function getXenoTrialsGroundedPaintedActionsV223(fighter, art) {
   if (!fighter || !art) return [];
-  const sourceHash = art.sha256 ?? ENEMY_DISPLAY_ALPHA_V110[art.path]?.sha256;
+  // The historical Big Chap frame has no alpha-registry digest. Its exact
+  // source path/profile/cell and production bytes are pinned independently.
+  const sourceHash = art.sha256 ?? ENEMY_DISPLAY_ALPHA_V110[art.path]?.sha256
+    ?? (art.profileId === bigChapSourceV232[0] && art.path === bigChapSourceV232[1] ? bigChapSourceV232[2] : undefined);
   return groundedActions.filter(entry => {
     if (entry.fighterId !== fighter.id || (entry.variant ?? null) !== (fighter.variant ?? null)
       || entry.variant && entry.variant !== art.visualStateV95) return false;
     const [profileId, path, sha256, width, height, sourceFacing = 1] = entry.source;
     return art.profileId === profileId && art.path === path && sourceHash === sha256 && art.sourceFacing === sourceFacing
-      && art.sourceWidth === width && art.sourceHeight === height;
+      && art.sourceWidth === width && art.sourceHeight === height
+      && (!entry.sourceRectV232 || Array.isArray(art.sourceRectV209) && art.sourceRectV209.length === 4
+        && entry.sourceRectV232.every((value, index) => value === art.sourceRectV209[index]));
   });
 }
 
@@ -472,7 +527,8 @@ export function drawXenoTrialsPoseV209(ctx, fighter, art, images, options) {
   try {
     ctx.translate(x, ground);
     ctx.scale(attack.facing, 1);
-    ctx.drawImage(image, left, top, w, h, (left - frame.rootX) * scale, -h * scale, w * scale, h * scale);
+    ctx.drawImage(image, left, top, w, h, (left - frame.rootX) * scale,
+      (top - (frame.rootY ?? bottom)) * scale, w * scale, h * scale);
   } finally { ctx.restore(); }
   const animation = authored?.animation ?? 'three-painted-heavy-poses';
   return { drawn: true, animation, poseV209: {

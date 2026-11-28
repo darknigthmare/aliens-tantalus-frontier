@@ -224,6 +224,8 @@ export function unlockXenoTrialsFighterV96(value, id) {
 
 export function beginXenoTrialsV96(value, configuration, { arbiterProgressV190, standaloneV207 } = {}) {
   const state = normalizeXenoTrialsProgressV96(value);
+  if (configuration?.exhibitionV232 || configuration?.replayV232 || configuration?.readOnly)
+    return { applied: false, state, reason: 'exhibition-no-progression' };
   if (state.pending) return { applied: false, state, reason: 'pending-duel' };
   const config = normalizeXenoTrialsConfigV96(configuration);
   const archive = getArbiterProgramV191(config.activityV119?.id);
@@ -349,7 +351,8 @@ export function settleXenoTrialsV96(value, result) {
     && result?.activityV119?.id === ticket.config.activityV119.id
     && record(result?.rulesV119) && JSON.stringify(normalizeXenoTrialsRulesV119(result.rulesV119)) === JSON.stringify(ticket.config.rulesV119)
     && record(result?.playerStats) && ['hits', 'damage', 'blocks', 'specials'].every(k => Number.isInteger(result.playerStats[k]) && result.playerStats[k] >= 0);
-  if (!ticket || result?.completed !== true || result.matchId !== ticket.matchId
+  if (result?.exhibitionV232 || result?.replayV232 || result?.rewardEligible === false || result?.readOnly
+    || !ticket || result?.completed !== true || result.matchId !== ticket.matchId
     || !modeMatches || !checkpointMatches || !isXenoTrialsDuelResultForwardV197(ticket.duelCheckpointV197, result)
     || !['player', 'opponent', 'draw'].includes(result.winner)
     || !['playerId', 'opponentId', 'factionId', 'stageId', 'difficulty', 'seed'].every(k => result[k] === ticket.config[k])

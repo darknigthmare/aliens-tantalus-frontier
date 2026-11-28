@@ -4,7 +4,9 @@ import { XENO_TRIALS_EVENTS_V179, getXenoTrialsEventWaveV179 } from './xeno-tria
 import { getXenoTrialsHordeProtocolV180 } from './xeno-trials-horde-v180.js';
 import { getXenoTrialsOperationV188 } from './xeno-trials-operations-v188.js';
 import { XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231, normalizeXenoTrialsCharacterRouteClearsV231,
-  resolveXenoTrialsCharacterRouteChapterV231 } from './xeno-trials-character-routes-v231.js';
+  XENO_TRIALS_BIG_CHAP_ROUTE_V231 } from './xeno-trials-character-routes-v231.js';
+import { normalizeXenoTrialsCharacterRouteClearsV232,
+  resolveXenoTrialsCharacterRouteChapterV232 } from './xeno-trials-character-routes-v232.js';
 
 // Authored simulation curriculum: these incidents belong to Tantalus, not film canon.
 export const XENO_TRIALS_BRANCHES_V119 = Object.freeze([
@@ -68,6 +70,8 @@ export function normalizeXenoTrialsModesProgressV119(value) {
   base.campaignCleared = ids('campaignCleared').filter(id => XENO_TRIALS_CAMPAIGN_V119.some(m => m.id === id));
   const routeClears = normalizeXenoTrialsCharacterRouteClearsV231(value.characterRoutesClearedV231);
   if (routeClears.length) base.characterRoutesClearedV231 = routeClears;
+  const routeClearsV232 = normalizeXenoTrialsCharacterRouteClearsV232(value.characterRoutesClearedV232);
+  if (Object.keys(routeClearsV232).length) base.characterRoutesClearedV232 = routeClearsV232;
   base.challengesCleared = ids('challengesCleared').filter(id => XENO_TRIALS_CHALLENGES_V119.some(c => c.id === id));
   base.hordeCleared = ids('hordeCleared').filter(id => getXenoTrialsHordeProtocolV180(id));
   base.operationsCleared = ids('operationsCleared').filter(id => getXenoTrialsOperationV188(id));
@@ -141,7 +145,7 @@ export function resolveXenoTrialsActivityV119(activity, modesValue) {
     return entry && isXenoTrialsMissionOpenV119(entry.id, modes) ? { ...entry, branch: 'campaign' } : null;
   }
   if (activity.branch === XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231)
-    return resolveXenoTrialsCharacterRouteChapterV231(activity.id, modes);
+    return resolveXenoTrialsCharacterRouteChapterV232(activity.id, modes);
   if (activity.branch === 'contracts') {
     const parsed = /^xtc119-(\d+)-[0-4]$/.exec(activity.id || '');
     if (!parsed) return null;
@@ -193,7 +197,10 @@ export function settleXenoTrialsActivityV119(modesValue, config, result) {
   if (activity.branch === 'campaign' && !modes.campaignCleared.includes(activity.id)) {
     modes.campaignCleared.push(activity.id); receipt.bonus = activity.reward + (receipt.secondary ? 50 : 0); receipt.unlockId = activity.unlockId;
   } else if (activity.branch === XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231 && !activity.cleared) {
-    modes.characterRoutesClearedV231 = [...(modes.characterRoutesClearedV231 || []), activity.id];
+    if (activity.routeId === XENO_TRIALS_BIG_CHAP_ROUTE_V231.id)
+      modes.characterRoutesClearedV231 = [...(modes.characterRoutesClearedV231 || []), activity.id];
+    else modes.characterRoutesClearedV232 = { ...modes.characterRoutesClearedV232,
+      [activity.routeId]: [...(modes.characterRoutesClearedV232?.[activity.routeId] || []), activity.id] };
     receipt.bonus = activity.reward;
     receipt.unlockId = activity.unlockId ?? null;
   } else if (activity.branch === 'contracts' && !modes.claimedContracts.includes(activity.id)) {

@@ -7,7 +7,10 @@ import { XENO_PRODUCTION_ASSETS_NEW_INPUTS_V206 } from './audit-xeno-production-
 import { getXenoTrialsPoseAssetsV209 } from '../src/xeno-trials-poses-v209.js';
 
 const rootDirectory = 'assets/openai/xeno-trials-v209';
-export const PUBLIC_XENO_POSE_DIRECTORIES_V209 = Object.freeze([rootDirectory, rootDirectory + '/characters']);
+const rootDirectoryV232 = 'assets/openai/xeno-trials-v232';
+export const PUBLIC_XENO_POSE_DIRECTORIES_V209 = Object.freeze([
+  rootDirectory, rootDirectory + '/characters', rootDirectoryV232, rootDirectoryV232 + '/characters'
+]);
 const approvedV205 = ['grid-heavy-impact.png', 'arachnoid-light-windup.png', 'arachnoid-light-impact.png', 'arachnoid-light-recovery.png',
   'arachnoid-special-windup.png', 'arachnoid-special-recovery.png'];
 const approvedV206 = [
@@ -90,6 +93,12 @@ const generatedV229 = [
   ['combat-synth-light-atlas-v229.png', 'bfc304d6139ff8633f05ac339243f206fc6749a7e2ac51209aeb90bd5567ca97'],
   ['combat-synth-heavy-atlas-v229.png', '126d382bd6a8283660300dbcfe963f526c7f6643702f8dff5d39f54f4cb4b159']
 ];
+const generatedV232 = [
+  ['big-chap-light-atlas-v232.png', '5ea2e20218f27e65bba22de276df9405b74814af05952b30857baab30452112c'],
+  ['big-chap-heavy-atlas-v232.png', 'cf5125360b9bff4f9f1a22ee07acc5515a369d88323943aa0cc0c7dc221f54cc'],
+  ['deacon-light-atlas-v232.png', '7747c023bb2884cf0c614c6807c8eda19268fdb65a663f355512ac7fbc502d8c'],
+  ['deacon-heavy-atlas-v232.png', 'c72d5c5150b5807cee358ac69f19f4f81ef0d690330afd8f54a4107c4979c049']
+];
 const approved = new Map([
   ...[
     [205, approvedV205, XENO_VISUAL_ASSETS_NEW_INPUTS_V205], [206, approvedV206, XENO_PRODUCTION_ASSETS_NEW_INPUTS_V206]
@@ -102,10 +111,11 @@ const approved = new Map([
   ...generatedV227,
   ...generatedV228,
   ...generatedV229
-].map(([name, sha256]) => [`${rootDirectory}/characters/${name}`, sha256]));
+].map(([name, sha256]) => [`${rootDirectory}/characters/${name}`, sha256]).concat(
+  generatedV232.map(([name, sha256]) => [`${rootDirectoryV232}/characters/${name}`, sha256])));
 
 export function publicXenoPosePathAdmissionV209(path, { directory = false } = {}) {
-  if (path !== rootDirectory && !path.startsWith(rootDirectory + '/')) return null;
+  if (![rootDirectory, rootDirectoryV232].some(root => path === root || path.startsWith(root + '/'))) return null;
   return directory ? PUBLIC_XENO_POSE_DIRECTORIES_V209.includes(path) : approved.has(path);
 }
 
