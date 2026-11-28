@@ -49,7 +49,7 @@ test('the 24 new pairs reference exact bible rows, including all starters, witho
   assert.equal(new Set(moves.map(move => move.id)).size, 48);
   assert.equal(new Set(moves.map(move => JSON.stringify(move.spec))).size, 48);
   const addedLater = new Set(XENO_TRIALS_SUPER_KITS_V211.map(kit => kit.first.fighterId));
-  const roster = XENO_TRIALS_FIGHTERS_V96.filter(fighter => !addedLater.has(fighter.id));
+  const roster = XENO_TRIALS_FIGHTERS_V96.filter(fighter => identities.has(fighter.id + '::super1') && !addedLater.has(fighter.id));
   assert.equal(roster.filter(getXenoTrialsSuperV148).length, 45);
   assert.equal(roster.filter(fighter => fighter.id !== 'import-game-afe2-exploder' && getXenoTrialsRiposteV208(fighter)).length, 44);
   for (const id of ['warrior', 'runner', 'arachnoid']) assert.ok(getXenoTrialsRiposteV208(getXenoTrialsFighterV96(id)));

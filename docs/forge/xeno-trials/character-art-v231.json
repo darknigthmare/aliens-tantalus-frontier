@@ -1,0 +1,107 @@
+[
+  {
+    "fighterId": "mire-v210-predalien-avpr",
+    "profileId": "design-v210-predalien-avpr",
+    "kind": "neutral",
+    "path": "assets/openai/xeno-trials-v231/predalien-avpr-neutral.png",
+    "sha256": "dc9dec47f5dccd1c1a42f4390b9cf050ee8b80043f43bed89d77c43f28bab792",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "alphaBounds": [
+      29,
+      14,
+      1470,
+      1011
+    ],
+    "rootX": 1067,
+    "rootY": 1010,
+    "statureHeight": 997,
+    "sourceFacing": 1,
+    "canonExact": false,
+    "visualStatus": "provisional-film-adaptation"
+  },
+  {
+    "fighterId": "mire-v210-predalien-avpr",
+    "profileId": "design-v210-predalien-avpr",
+    "kind": "select",
+    "path": "assets/openai/xeno-trials-v231/predalien-avpr-select.png",
+    "sha256": "8a317bc91b466e5ea0f24da4f1d5deb229ee9ec703e84b0ec2a9151b8ce4db17",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "alphaBounds": [
+      120,
+      16,
+      1442,
+      994
+    ],
+    "rootX": 970,
+    "rootY": 993,
+    "statureHeight": 997,
+    "sourceFacing": 1,
+    "canonExact": false,
+    "visualStatus": "provisional-film-adaptation"
+  },
+  {
+    "fighterId": "mire-v210-predalien-avpr",
+    "profileId": "design-v210-predalien-avpr",
+    "kind": "intro",
+    "path": "assets/openai/xeno-trials-v231/predalien-avpr-intro.png",
+    "sha256": "8b118b863dbe80c3dbcb76b34b9424c1a1d7456646eb3cbcde73d3f90f88f348",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "alphaBounds": [
+      42,
+      138,
+      1527,
+      937
+    ],
+    "rootX": 920,
+    "rootY": 936,
+    "statureHeight": 997,
+    "sourceFacing": 1,
+    "canonExact": false,
+    "visualStatus": "provisional-film-adaptation"
+  },
+  {
+    "fighterId": "mire-v210-predalien-avpr",
+    "profileId": "design-v210-predalien-avpr",
+    "kind": "victory",
+    "path": "assets/openai/xeno-trials-v231/predalien-avpr-victory.png",
+    "sha256": "7a804377b94601d8530fcbd4f83bae31c02a159363d00b74d68bfd863bcdc04a",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "alphaBounds": [
+      159,
+      10,
+      1461,
+      1007
+    ],
+    "rootX": 990,
+    "rootY": 1005,
+    "statureHeight": 997,
+    "sourceFacing": 1,
+    "canonExact": false,
+    "visualStatus": "provisional-film-adaptation"
+  },
+  {
+    "fighterId": "mire-v210-striker",
+    "profileId": "design-v210-striker",
+    "kind": "neutral",
+    "path": "assets/openai/xeno-trials-v231/striker-neutral.png",
+    "sha256": "b44db527d7d533434ecf492a7d2e971a335913ba103fc9a03a85d10fa3cfed90",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "alphaBounds": [
+      192,
+      65,
+      1319,
+      962
+    ],
+    "rootX": 718,
+    "rootY": 960,
+    "statureHeight": 896,
+    "sourceFacing": 1,
+    "canonExact": false,
+    "visualStatus": "original-mire-role-adaptation"
+  }
+]

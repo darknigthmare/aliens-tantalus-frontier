@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { XENO_TRIALS_RESEARCH_V210, XENO_TRIALS_RESEARCH_FIGHTERS_V210, XENO_TRIALS_RESEARCH_SIGNATURES_V210,
-  getXenoTrialsResearchEvaluationV210, getXenoTrialsResearchPoseV210 } from '../src/xeno-trials-research-v210.js';
+  getXenoTrialsHistoricalResearchArtV210, getXenoTrialsResearchEvaluationV210,
+  getXenoTrialsResearchPoseV210 } from '../src/xeno-trials-research-v210.js';
 import { XENO_TRIALS_RESEARCH_MEDIA_V210 } from '../src/xeno-trials-research-media-v210.js';
 import { XENO_TRIALS_STAGES_V96, getXenoTrialsFighterV96, getXenoTrialsArtV96 } from '../src/xeno-trials-data-v96.js';
 import { getXenoTrialsAlternateSignatureV208 } from '../src/xeno-trials-signature-kit-v208.js';
@@ -31,7 +32,7 @@ test('seven original study models have unique identities, legal opponents, and s
     assert.equal(config.playerId, dossier.fighterId);
     assert.ok(getXenoTrialsFighterV96(config.opponentId), dossier.id);
     assert.ok(XENO_TRIALS_STAGES_V96.some(stage => stage.id === config.stageId), dossier.id);
-    const art = getXenoTrialsArtV96(config.playerId), [x, y, w, h] = art.sourceRectV209;
+    const art = getXenoTrialsHistoricalResearchArtV210(config.playerId), [x, y, w, h] = art.sourceRectV209;
     const [sheetWidth, sheetHeight] = dims.get(art.path);
     assert.ok(x > 0 && y > 0 && x + w <= sheetWidth && y + h <= sheetHeight);
     assert.ok(w >= 300 && h >= 300 && art.pivot.y === 1 && art.pivot.x > 0 && art.pivot.x < 1);

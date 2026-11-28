@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-xeno-trials-roster-presentations-v230';
+const CACHE = 'atf-v143-xeno-trials-character-kits-v231';
 const SHELL = Object.freeze([
   '/src/xeno-trials-power-v227.js',
   '/src/xeno-trials-deflector-calibration-v226.js',
@@ -757,6 +757,10 @@ const SHELL = Object.freeze([
   '/src/xeno-trials-castes-v151.js',
   '/src/xeno-trials-stage-motion-v147.js',
   '/src/xeno-trials-ui-v96.js',
+  '/src/xeno-trials-recruit-kits-v231.js',
+  '/src/xeno-trials-research-art-v231.js',
+  '/src/xeno-trials-character-routes-v231.js',
+  '/src/xeno-trials-character-route-ui-v231.js',
   '/src/xeno-trials-recruits-v230.js',
   '/src/xeno-trials-presentation-art-v230.js',
   '/src/xeno-trials-selection-motion-v230.js',

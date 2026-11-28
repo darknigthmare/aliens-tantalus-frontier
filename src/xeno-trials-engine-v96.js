@@ -18,6 +18,7 @@ import { XENO_TRIALS_ARENA_V105, getXenoTrialsBodyBoundsV105, getXenoTrialsBodyG
 import { createXenoTrialsBrainV119, stepXenoTrialsBrainV119 } from './xeno-trials-ai-v119.js';
 import { chooseXenoTrialsHardTacticsV209 } from './xeno-trials-ai-v209.js';
 import { normalizeXenoTrialsRulesV119 } from './xeno-trials-modes-v119.js';
+import { XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231 } from './xeno-trials-character-routes-v231.js';
 import { XENO_TRIALS_HORDE_LIMITS_V180 as HORDE_LIMITS, getXenoTrialsHordeProtocolV180,
   createXenoTrialsHordeStateV180, advanceXenoTrialsHordeDirectorV180 } from './xeno-trials-horde-v180.js';
 import { getXenoTrialsHordeSlotV186, getXenoTrialsHordeBossViewV186 } from './xeno-trials-horde-bosses-v186.js';
@@ -91,7 +92,7 @@ export function createXenoTrialsMatchV96(config = {}) {
     rulesV119,
     ...(hordeProtocol ? { hordeV180: { protocolId: hordeProtocol.id } } : {}),
     ...(operation ? { operationV188: { id: operation.id } } : {}),
-    ...(config.activityV119 && ['campaign', 'contracts', 'challenges', 'on-demand', 'horde', 'operations'].includes(config.activityV119.branch)
+    ...(config.activityV119 && ['campaign', 'contracts', 'challenges', 'on-demand', 'horde', 'operations', XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231].includes(config.activityV119.branch)
       && typeof config.activityV119.id === 'string' ? { activityV119: { branch: config.activityV119.branch,
         id: config.activityV119.id.slice(0, 64), ...(config.activityV119.branch === 'on-demand' ? { rules: rulesV119 } : {}) } } : {}),
     introSeconds: clamp(finite(config.introSeconds, .8), 0, 5),

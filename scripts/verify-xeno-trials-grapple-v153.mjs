@@ -7,7 +7,7 @@ import { createXenoTrialsMatchV96 as create, stepXenoTrialsMatchV96 as step, nex
   setXenoTrialsPausedV96 as pause, XENO_TRIALS_ATTACKS_V96 as base } from '../src/xeno-trials-engine-v96.js';
 import { getXenoTrialsSignatureV147 as signature, getXenoTrialsAttackV147 as spec } from '../src/xeno-trials-signatures-v147.js';
 import { getXenoTrialsSuperV148 as superProfile } from '../src/xeno-trials-supers-v148.js';
-import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210, XENO_TRIALS_SUPER_KITS_V211, getXenoTrialsPhysicalSuper } from '../src/xeno-trials-super-kits-v209.js';
+import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210, XENO_TRIALS_SUPER_KITS_V211, XENO_TRIALS_SUPER_KITS_V231, getXenoTrialsPhysicalSuper } from '../src/xeno-trials-super-kits-v209.js';
 import { getXenoTrialsBodyBoundsV105 as bounds, resolveXenoTrialsBodiesV105 as resolve } from '../src/xeno-trials-geometry-v105.js';
 import { stepXenoTrialsBrainV119 as brain } from '../src/xeno-trials-ai-v119.js';
 import { readFileSync } from 'node:fs';
@@ -39,7 +39,7 @@ test('exact identity and three explicitly reviewed targets; no family/name inher
   assert.equal(has(loader), false);
   assert.equal(target(loader), false);
   assert.equal(roster.filter(f=>superProfile(f)).length,
-    5 + XENO_TRIALS_SUPER_KITS_V209.length + XENO_TRIALS_SUPER_KITS_V210.length + XENO_TRIALS_SUPER_KITS_V211.length);
+    5 + XENO_TRIALS_SUPER_KITS_V209.length + XENO_TRIALS_SUPER_KITS_V210.length + XENO_TRIALS_SUPER_KITS_V211.length + XENO_TRIALS_SUPER_KITS_V231.length);
 });
 for(const t of config.targets)for(const side of [0,1])test(`${t.id} side ${side}: physical latch without relocation, extra cost or changed body scale`,()=>{
   const opts=side?{playerId:t.id,opponentId:'prowler'}:{opponentId:t.id};

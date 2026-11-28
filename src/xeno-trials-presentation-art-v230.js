@@ -1,3 +1,4 @@
+import { getXenoTrialsReferencedPresentationPlateV231 } from './xeno-trials-research-art-v231.js';
 // Painted presentation plates stay separate from procedural choreography and
 // ordinary attacks. Exact identity/variant lookup never borrows another body.
 export const XENO_TRIALS_PRESENTATION_PLATES_V230 = Object.freeze([
@@ -46,7 +47,7 @@ export const XENO_TRIALS_PRESENTATION_PLATES_V230 = Object.freeze([
 ].map(plate => Object.freeze({ ...plate, alphaBounds: Object.freeze(plate.alphaBounds) })));
 
 export function getXenoTrialsPresentationPlateV230(kind, id, variant = null) {
-  return XENO_TRIALS_PRESENTATION_PLATES_V230.find(plate => plate.kind === kind
+  return getXenoTrialsReferencedPresentationPlateV231(kind, id, variant) || XENO_TRIALS_PRESENTATION_PLATES_V230.find(plate => plate.kind === kind
     && plate.fighterId === id && plate.variant === variant) || null;
 }
 

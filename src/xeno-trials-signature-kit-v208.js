@@ -2,6 +2,7 @@ import { XENO_TRIALS_SIGNATURES_V209 } from './xeno-trials-signature-kit-v209.js
 import { XENO_TRIALS_SIGNATURES_V210 } from './xeno-trials-signature-kit-v210.js';
 import { XENO_TRIALS_SIGNATURES_V211 } from './xeno-trials-signature-kit-v211.js';
 import { XENO_TRIALS_RESEARCH_SIGNATURES_V210 } from './xeno-trials-research-v210.js';
+import { XENO_TRIALS_RECRUIT_SIGNATURES_V231 } from './xeno-trials-recruit-kits-v231.js';
 
 export const XENO_TRIALS_SIGNATURE_KINDS_V208 = Object.freeze(['signature-2', 'signature-3']);
 
@@ -249,6 +250,7 @@ const byId = new Map([
   ...XENO_TRIALS_SIGNATURES_V208, ...XENO_TRIALS_SIGNATURES_V209, ...XENO_TRIALS_SIGNATURES_V210,
   ...XENO_TRIALS_SIGNATURES_V211,
   ...XENO_TRIALS_RESEARCH_SIGNATURES_V210,
+  ...XENO_TRIALS_RECRUIT_SIGNATURES_V231,
 ].map(move => [move.id, move]));
 
 export function getXenoTrialsAlternateSignatureV208(definition, kind) {

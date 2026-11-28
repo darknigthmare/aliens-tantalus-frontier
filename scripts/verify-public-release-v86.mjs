@@ -1,3 +1,4 @@
+import { publicXenoReferencedArtAdmissionV231, verifyXenoReferencedArtAdmissionsV231 } from './public-xeno-referenced-art-admissions-v231.mjs';
 import { publicXenoPresentationAdmissionV230, verifyXenoPresentationAdmissionsV230 } from './public-xeno-presentation-admissions-v230.mjs';
 import { publicXenoResearchPathAdmissionV210, verifyXenoResearchAdmissionsV210 } from './public-xeno-research-admissions-v210.mjs';
 import { publicXenoPosePathAdmissionV209, verifyXenoPoseAdmissionsV209 } from './public-xeno-pose-admissions-v209.mjs';
@@ -946,7 +947,21 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
   'scripts/verify-xeno-original-arenas-v193.mjs'
 ]);
 
-export const XENO_AUDIT_TERMINAL_PATH = 'scripts/audit-xeno-trials-v230.mjs';
+export const XENO_AUDIT_TERMINAL_PATH = 'scripts/audit-xeno-trials-v231.mjs';
+const XENO_CHARACTERS_SOURCE_ONLY_V231 = new Set([
+  "scripts/audit-xeno-trials-v230.mjs",
+  "scripts/public-xeno-referenced-art-admissions-v231.mjs",
+  "scripts/verify-xeno-trials-recruit-kits-v231.mjs",
+  "scripts/verify-xeno-trials-recruit-compatibility-v231.mjs",
+  "scripts/verify-xeno-trials-character-routes-v231.mjs",
+  "scripts/verify-xeno-trials-character-route-ui-v231.mjs",
+  "scripts/verify-xeno-trials-research-art-v231.mjs",
+  "docs/forge/xeno-trials/V231-CHARACTER-KITS-AND-ROUTES.md",
+  "docs/forge/xeno-trials/character-art-v231.json",
+  "docs/forge/xeno-trials/combat-guide-coverage-v231.json",
+  "docs/forge/xeno-trials/recruit-checkpoints-v230.json",
+  "docs/forge/xeno-trials/striker-active-checkpoints-v230.json"
+]);
 const XENO_PRESENTATIONS_SOURCE_ONLY_V230 = new Set([
   'scripts/audit-xeno-trials-v229.mjs',
   'scripts/public-xeno-presentation-admissions-v230.mjs',
@@ -1043,6 +1058,7 @@ const XENO_GAMEPLAY_SOURCE_ONLY_V219 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_CHARACTERS_SOURCE_ONLY_V231.has(path)) return !built && !directory;
   if (XENO_PRESENTATIONS_SOURCE_ONLY_V230.has(path)) return !built && !directory;
   if (path === XENO_AUDIT_TERMINAL_PATH) return !built && !directory;
   if (XENO_SPRITES_SOURCE_ONLY_V229.has(path)) return !built && !directory;
@@ -1078,6 +1094,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   const researchAdmissionV210 = publicXenoResearchPathAdmissionV210(path, { directory });
   if (researchAdmissionV210 !== null) return researchAdmissionV210;
   if (XENO_GAMEPLAY_SOURCE_ONLY_V209.has(path)) return !built && !directory;
+  const referencedAdmissionV231 = publicXenoReferencedArtAdmissionV231(path, { directory });
+  if (referencedAdmissionV231 !== null) return referencedAdmissionV231;
   const presentationAdmissionV230 = publicXenoPresentationAdmissionV230(path, { directory });
   if (presentationAdmissionV230 !== null) return presentationAdmissionV230;
   const poseAdmissionV209 = publicXenoPosePathAdmissionV209(path, { directory });
@@ -1247,6 +1265,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyXenoVisualAdmissionsV205(root);
   await verifyXenoPoseAdmissionsV209(root);
   await verifyXenoPresentationAdmissionsV230(root);
+  await verifyXenoReferencedArtAdmissionsV231(root);
   await verifyXenoResearchAdmissionsV210(root);
   if (!built) await verifyXenoProductionAdmissionsV206(root);
   await verifyXenoFranchiseStageAdmissionsV192(root);

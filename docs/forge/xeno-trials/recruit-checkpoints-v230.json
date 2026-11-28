@@ -1,0 +1,3106 @@
+[
+  {
+    "ticket": {
+      "playerId": "mire-v209-bigchap",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v209-bigchap",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v209-bigchap",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 232,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 688.75,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": true,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [],
+        "serial": 0,
+        "ai": {
+          "schema": 119,
+          "state": "APPROACH",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": true,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": false,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 118.37938559866393,
+            "direction": -1,
+            "overlap": true,
+            "lane": true,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 0,
+            "heightRatio": 0.6788332938976024,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 232,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "APPROACH": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "mire-v210-scorched",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v210-scorched",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v210-scorched",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 192,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 688.75,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": true,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [],
+        "serial": 0,
+        "ai": {
+          "schema": 119,
+          "state": "APPROACH",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": true,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": false,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 147.6889838129497,
+            "direction": -1,
+            "overlap": true,
+            "lane": true,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 0,
+            "heightRatio": 0.6462864921353886,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 192,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "APPROACH": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "mire-v209-deacon",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v209-deacon",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v209-deacon",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 194,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 688.75,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": true,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [],
+        "serial": 0,
+        "ai": {
+          "schema": 119,
+          "state": "APPROACH",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": true,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": false,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 153.15273381294963,
+            "direction": -1,
+            "overlap": true,
+            "lane": false,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 17.40529020392708,
+            "heightRatio": 0.4370570522354426,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 194,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "APPROACH": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "mire-v209-neomorph",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v209-neomorph",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v209-neomorph",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 171,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 688.75,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": true,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [],
+        "serial": 0,
+        "ai": {
+          "schema": 119,
+          "state": "APPROACH",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": true,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": false,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 122.56840345580684,
+            "direction": -1,
+            "overlap": true,
+            "lane": false,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 19.976718775355664,
+            "heightRatio": 0.4277579660176672,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 171,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "APPROACH": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "mire-v210-predalien-avpr",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v210-predalien-avpr",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v210-predalien-avpr",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 279,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 690,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 75,
+            "guard": false,
+            "stun": 0,
+            "attack": {
+              "kind": "heavy",
+              "age": 0.008333333333333333,
+              "hit": false,
+              "emitted": false,
+              "facing": -1,
+              "id": 1
+            },
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": true,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [
+          {
+            "id": 2,
+            "tick": 1,
+            "type": "attack",
+            "side": "opponent",
+            "kind": "heavy"
+          }
+        ],
+        "serial": 2,
+        "ai": {
+          "schema": 119,
+          "state": "COMMIT_ATTACK",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": false,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": true,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 78.1635678857092,
+            "direction": -1,
+            "overlap": true,
+            "lane": true,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 0,
+            "heightRatio": 0.7532259836398051,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 279,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "PROBE": 1,
+            "COMMIT_ATTACK": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "mire-v209-praetorian",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v209-praetorian",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v209-praetorian",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 274,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 690,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 75,
+            "guard": false,
+            "stun": 0,
+            "attack": {
+              "kind": "heavy",
+              "age": 0.008333333333333333,
+              "hit": false,
+              "emitted": false,
+              "facing": -1,
+              "id": 1
+            },
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": true,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [
+          {
+            "id": 2,
+            "tick": 1,
+            "type": "attack",
+            "side": "opponent",
+            "kind": "heavy"
+          }
+        ],
+        "serial": 2,
+        "ai": {
+          "schema": 119,
+          "state": "COMMIT_ATTACK",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": false,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": true,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 83.57469809866393,
+            "direction": -1,
+            "overlap": true,
+            "lane": true,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 0,
+            "heightRatio": 0.7625250698575807,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 274,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "PROBE": 1,
+            "COMMIT_ATTACK": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "mire-v210-praetorian-avp",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v210-praetorian-avp",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v210-praetorian-avp",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 272,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 688.75,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": true,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [],
+        "serial": 0,
+        "ai": {
+          "schema": 119,
+          "state": "APPROACH",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": true,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": false,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 136.40352272552963,
+            "direction": -1,
+            "overlap": true,
+            "lane": true,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 0,
+            "heightRatio": 0.7532259836398054,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 272,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "APPROACH": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "mire-v210-praetorian-afe",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v210-praetorian-afe",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v210-praetorian-afe",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 254,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 688.75,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": true,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [],
+        "serial": 0,
+        "ai": {
+          "schema": 119,
+          "state": "APPROACH",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": true,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": false,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 107.64896757918342,
+            "direction": -1,
+            "overlap": true,
+            "lane": true,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 0,
+            "heightRatio": 0.68348283700649,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 254,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "APPROACH": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "mire-v210-praetorian-afe2",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v210-praetorian-afe2",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v210-praetorian-afe2",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 241,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 688.75,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": true,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [],
+        "serial": 0,
+        "ai": {
+          "schema": 119,
+          "state": "APPROACH",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": true,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": false,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 139.87675210992364,
+            "direction": -1,
+            "overlap": true,
+            "lane": true,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 0,
+            "heightRatio": 0.7671746129664683,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 241,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "APPROACH": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "mire-v209-six",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v209-six",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v209-six",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 205,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 690,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 75,
+            "guard": false,
+            "stun": 0,
+            "attack": {
+              "kind": "heavy",
+              "age": 0.008333333333333333,
+              "hit": false,
+              "emitted": false,
+              "facing": -1,
+              "id": 1
+            },
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": true,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [
+          {
+            "id": 2,
+            "tick": 1,
+            "type": "attack",
+            "side": "opponent",
+            "kind": "heavy"
+          }
+        ],
+        "serial": 2,
+        "ai": {
+          "schema": 119,
+          "state": "COMMIT_ATTACK",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": false,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": true,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 94.22201952723537,
+            "direction": -1,
+            "overlap": true,
+            "lane": true,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 0,
+            "heightRatio": 0.6416369490265008,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 205,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "PROBE": 1,
+            "COMMIT_ATTACK": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "mire-v210-siren",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v210-siren",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v210-siren",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 175,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 688.75,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": true,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [],
+        "serial": 0,
+        "ai": {
+          "schema": 119,
+          "state": "APPROACH",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": true,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": false,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 113.7068276295808,
+            "direction": -1,
+            "overlap": true,
+            "lane": true,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 0,
+            "heightRatio": 0.6137396903731747,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 175,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "APPROACH": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "mire-v210-striker",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v210-striker",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v210-striker",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 185,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 690,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 75,
+            "guard": false,
+            "stun": 0,
+            "attack": {
+              "kind": "heavy",
+              "age": 0.008333333333333333,
+              "hit": false,
+              "emitted": false,
+              "facing": -1,
+              "id": 1
+            },
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": true,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [
+          {
+            "id": 2,
+            "tick": 1,
+            "type": "attack",
+            "side": "opponent",
+            "kind": "heavy"
+          }
+        ],
+        "serial": 2,
+        "ai": {
+          "schema": 119,
+          "state": "COMMIT_ATTACK",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": false,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": true,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 79.76619245956624,
+            "direction": -1,
+            "overlap": true,
+            "lane": false,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 49.54814734678423,
+            "heightRatio": 0.3208184745132504,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 185,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "PROBE": 1,
+            "COMMIT_ATTACK": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "mire-v209-blight",
+      "opponentId": "queen",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "mire-v209-blight",
+          "opponentId": "queen",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "mire-v209-blight",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 184,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "queen",
+            "variant": null,
+            "x": 688.75,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 310,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": true,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [],
+        "serial": 0,
+        "ai": {
+          "schema": 119,
+          "state": "APPROACH",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": true,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": false,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 109.5726397154304,
+            "direction": -1,
+            "overlap": true,
+            "lane": false,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 178.90298047276463,
+            "detonationVerticalGap": 78.51257938496349,
+            "heightRatio": 0.21607407143527985,
+            "selfHeight": 276.5248661221399,
+            "roomBehind": 1110,
+            "own": {
+              "id": "queen",
+              "profileId": "castes-film_queen_aliens_1986",
+              "label": "Reine mobile",
+              "role": "tank",
+              "hp": 310,
+              "speed": 150,
+              "power": 1.15,
+              "reach": 1.25,
+              "special": "tail",
+              "stamina": 100,
+              "jump": 550,
+              "width": 88,
+              "height": 118,
+              "artStatus": "dedicated-static-pose",
+              "canonExact": false,
+              "family": "xenomorph",
+              "variants": []
+            },
+            "targetHp": 184,
+            "ownHp": 310,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "APPROACH": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "ticket": {
+      "playerId": "queen",
+      "opponentId": "mire-v210-striker",
+      "playerVariant": "grey",
+      "opponentVariant": "grey",
+      "factionId": "containment",
+      "stageId": "containment-deck",
+      "difficulty": "normal",
+      "roundsToWin": 2,
+      "roundSeconds": 99,
+      "matchId": "xt96-1",
+      "seed": 96001
+    },
+    "checkpoint": {
+      "schema": 197,
+      "matchId": "xt96-1",
+      "seed": 96001,
+      "tick": 1,
+      "snapshot": {
+        "version": 96,
+        "config": {
+          "playerId": "queen",
+          "opponentId": "mire-v210-striker",
+          "playerVariant": null,
+          "opponentVariant": null,
+          "factionId": "containment",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "roundsToWin": 2,
+          "roundSeconds": 99,
+          "seed": 96001,
+          "rulesV119": {
+            "noSpecial": false,
+            "specialLockSeconds": 0,
+            "initialHp": null,
+            "goal": "eliminate",
+            "timeLimitSeconds": null
+          },
+          "introSeconds": 0,
+          "holdRoundTransition": true,
+          "matchId": "xt96-1"
+        },
+        "rng": 3143858640,
+        "accumulator": 0,
+        "tick": 1,
+        "round": 1,
+        "opponentInputSourceV163": "cpu",
+        "phase": "active",
+        "phaseTime": 0,
+        "paused": true,
+        "timeRemaining": 98.99166666666666,
+        "wins": {
+          "player": 0,
+          "opponent": 0
+        },
+        "roundWinner": null,
+        "roundReason": null,
+        "result": null,
+        "fighters": [
+          {
+            "side": "player",
+            "id": "queen",
+            "variant": null,
+            "x": 310,
+            "y": 0,
+            "vy": 0,
+            "facing": 1,
+            "hp": 310,
+            "stamina": 100,
+            "guard": false,
+            "stun": 0,
+            "attack": null,
+            "specialCooldown": 0,
+            "superMeterV148": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          },
+          {
+            "side": "opponent",
+            "id": "mire-v210-striker",
+            "variant": null,
+            "x": 690,
+            "y": 0,
+            "vy": 0,
+            "facing": -1,
+            "hp": 185,
+            "stamina": 75,
+            "guard": false,
+            "stun": 0,
+            "attack": {
+              "kind": "heavy",
+              "age": 0.008333333333333333,
+              "hit": false,
+              "emitted": false,
+              "facing": -1,
+              "id": 1
+            },
+            "specialCooldown": 0,
+            "hitFlash": 0,
+            "previousInput": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": true,
+              "special": false,
+              "super": false
+            },
+            "rearmControls": {
+              "left": false,
+              "right": false,
+              "jump": false,
+              "guard": false,
+              "light": false,
+              "heavy": false,
+              "special": false,
+              "super": false
+            },
+            "stats": {
+              "hits": 0,
+              "damage": 0,
+              "blocks": 0,
+              "specials": 0
+            },
+            "guardBrokenV147": false
+          }
+        ],
+        "projectiles": [],
+        "events": [
+          {
+            "id": 2,
+            "tick": 1,
+            "type": "attack",
+            "side": "opponent",
+            "kind": "heavy"
+          }
+        ],
+        "serial": 2,
+        "ai": {
+          "schema": 119,
+          "state": "COMMIT_ATTACK",
+          "stateTime": 0,
+          "decisionIn": 0.26,
+          "input": {
+            "left": false,
+            "right": false,
+            "jump": false,
+            "guard": false,
+            "light": false,
+            "heavy": true,
+            "special": false,
+            "super": false
+          },
+          "observation": {
+            "gap": 79.76619245956624,
+            "direction": -1,
+            "overlap": true,
+            "lane": true,
+            "attack": null,
+            "projectileThreat": false,
+            "targetAirborne": false,
+            "frontOffset": 121.33082706766913,
+            "detonationVerticalGap": 0,
+            "heightRatio": 3.117027476417036,
+            "selfHeight": 88.71428571428571,
+            "roomBehind": 1110,
+            "own": {
+              "id": "mire-v210-striker",
+              "profileId": "design-v210-striker",
+              "label": "Striker",
+              "role": "agile",
+              "hp": 185,
+              "speed": 314,
+              "stamina": 100,
+              "jump": 570,
+              "width": 77,
+              "height": 69,
+              "power": 1,
+              "reach": 1,
+              "special": "pounce",
+              "family": "xenomorph",
+              "variants": [],
+              "artStatus": "original-mire-model",
+              "canonExact": false
+            },
+            "targetHp": 310,
+            "ownHp": 185,
+            "ownStamina": 100,
+            "grounded": true,
+            "targetRecovering": false,
+            "tick": 1
+          },
+          "guardRemaining": 0,
+          "lastAttackId": null,
+          "decisions": 1,
+          "stateVisits": {
+            "OBSERVE": 1,
+            "PROBE": 1,
+            "COMMIT_ATTACK": 1
+          }
+        }
+      }
+    }
+  }
+]

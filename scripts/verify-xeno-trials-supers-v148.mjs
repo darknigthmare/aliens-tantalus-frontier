@@ -17,7 +17,8 @@ import { createXenoTrialsPracticeV207, getXenoTrialsPracticeConfigV207 } from '.
 import { getXenoTrialsRiposteReadinessV208 } from '../src/xeno-trials-ripostes-v208.js';
 import { XenoTrialsUiV96 } from '../src/xeno-trials-ui-v96.js';
 import { createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
-import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210, XENO_TRIALS_SUPER_KITS_V211 } from '../src/xeno-trials-super-kits-v209.js';
+import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210, XENO_TRIALS_SUPER_KITS_V211,
+  XENO_TRIALS_SUPER_KITS_V231 } from '../src/xeno-trials-super-kits-v209.js';
 
 // Pure-engine boundary fixtures can set position, HP or meter to isolate a
 // contract. They are not represented as ordinary browser-playthrough evidence.
@@ -55,8 +56,10 @@ test('five immutable supers are original simulation extensions on exact fighter/
 });
 test('all explicit super admissions preserve the original attack contracts and start with an empty gauge', () => {
   const physical = [...XENO_TRIALS_SUPER_KITS_V209, ...XENO_TRIALS_SUPER_KITS_V210, ...XENO_TRIALS_SUPER_KITS_V211];
-  const admitted = new Map([...supers, ...physical.map(kit => kit.first)].map(move => [move.fighterId, move]));
-  assert.equal(admitted.size, 189);
+  const published = [...supers, ...physical.map(kit => kit.first)];
+  assert.equal(new Set(published.map(move => move.fighterId)).size, 189);
+  const admitted = new Map([...published, ...XENO_TRIALS_SUPER_KITS_V231.map(kit => kit.first)].map(move => [move.fighterId, move]));
+  assert.equal(admitted.size, 202);
   for(const f of fighters) {
     assert.equal(profile(f),admitted.get(f.id) ?? null);
     for(const kind of ['light','heavy','special']) {

@@ -15,6 +15,7 @@ import { XENO_TRIALS_GROUND_BREAK_V213 as GROUND_BREAK, XENO_TRIALS_GROUND_BREAK
   XENO_TRIALS_GROUND_BREAK_FAIL_V213 as BREAK_FAIL } from './xeno-trials-grapple-v213.js';
 import { getXenoTrialsCasteV151 } from './xeno-trials-castes-v151.js';
 import { normalizeXenoTrialsRulesV119 } from './xeno-trials-modes-v119.js';
+import { XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231 } from './xeno-trials-character-routes-v231.js';
 import { XENO_TRIALS_MOVE_ATTACKS_V207, validXenoTrialsEvadeEventV213, validXenoTrialsMovesetV207, xenoTrialsMovePoseV207 } from './xeno-trials-moveset-v207.js';
 import { getXenoTrialsAlternateProjectileV211, validXenoTrialsAlternateProjectileV211, XENO_TRIALS_SIGNATURE_KINDS_V208, validXenoTrialsSignatureActionV208,
   validXenoTrialsSignatureEventV208 } from './xeno-trials-signature-kit-v208.js';
@@ -36,7 +37,7 @@ const eventTypes = ['attack', 'hit', 'block', 'guard-break', 'round-start', 'rou
 const coreKeys = ['version', 'config', 'rng', 'accumulator', 'tick', 'round', 'opponentInputSourceV163', 'phase', 'phaseTime',
   'paused', 'timeRemaining', 'wins', 'roundWinner', 'roundReason', 'result', 'fighters', 'projectiles', 'events', 'serial', 'ai',
   'synthEffectsV110', 'acidDropsV152', 'acidPoolsV152', 'acidNextHitV152', 'grappleV153'];
-const persistedBranches = ['on-demand', 'campaign', 'contracts', 'challenges'];
+const persistedBranches = ['on-demand', 'campaign', 'contracts', 'challenges', XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231];
 const defaultRules = Object.freeze(normalizeXenoTrialsRulesV119());
 const maxTicks = 0x7fffffff;
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);

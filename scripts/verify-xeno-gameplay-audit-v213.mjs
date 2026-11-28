@@ -1,3 +1,5 @@
+import { XENO_TRIALS_BASELINE_V231, XENO_TRIALS_DECLARATIONS_V231, XENO_TRIALS_SUCCESSORS_V231, XENO_TRIALS_NEW_INPUTS_V231,
+  reviewedXenoTrialsDigestV231, xenoTrialsRuntimeSourcesV231, verifyXenoTrialsV231 } from './audit-xeno-trials-v231.mjs';
 import { XENO_TRIALS_BASELINE_V230, XENO_TRIALS_DECLARATIONS_V230, XENO_TRIALS_SUCCESSORS_V230, XENO_TRIALS_NEW_INPUTS_V230,
   reviewedXenoTrialsDigestV230, xenoTrialsRuntimeSourcesV230, verifyXenoTrialsV230 } from './audit-xeno-trials-v230.mjs';
 import test from 'node:test';
@@ -833,9 +835,10 @@ test('V230 advances exact V229 bytes without transferring its historical results
   assert.equal(runtime.historical, 'untouched');
   for (const [path, receipt] of Object.entries(XENO_TRIALS_SUCCESSORS_V230)) {
     assert.equal(sha(git('show', `${XENO_TRIALS_BASELINE_V230}:${path}`)), receipt.previousSha256, path);
+    assert.equal(sha(git('show', `${XENO_TRIALS_BASELINE_V231}:${path}`)), receipt.sha256, path);
     assert.equal(reviewedXenoTrialsDigestV230(path, receipt.previousSha256), sha(read(path)), path);
     assert.throws(() => reviewedXenoTrialsDigestV230(path, receipt.sha256), /Incorrect V229 endpoint for V230/);
-    if (receipt.kind === 'runtime') assert.equal(runtime[path], receipt.sha256, path);
+    if (receipt.kind === 'runtime') assert.equal(runtime[path], reviewedXenoTrialsDigestV231(path, receipt.sha256), path);
   }
   assert.deepEqual(xenoTrialsRuntimeSourcesV230(runtime), runtime);
   assert.equal(verifyXenoTrialsV230().historicalResultsTransferred, false);
@@ -846,9 +849,8 @@ test('V230 advances exact V229 bytes without transferring its historical results
 });
 
 test('V230 admits only its exact new inputs and excludes tooling from both builds', () => {
-  const terminal = XENO_AUDIT_TERMINAL_PATH;
-  assert.equal(terminal, 'scripts/audit-xeno-trials-v230.mjs');
-  assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  const terminal = 'scripts/audit-xeno-trials-v230.mjs';
+  assert.ok(read(terminal).toString().includes("from './audit-xeno-trials-v231.mjs'"));
   assert.ok(!Object.hasOwn(XENO_TRIALS_SUCCESSORS_V230, terminal));
   assert.ok(!Object.hasOwn(XENO_TRIALS_NEW_INPUTS_V230, terminal));
   assert.equal(isPublicDistributionPathV86(terminal), true);
@@ -864,9 +866,54 @@ test('V230 admits only its exact new inputs and excludes tooling from both build
     assert.equal(baseline.has(path), false, path);
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), ['runtime', 'asset'].includes(receipt.kind), path);
-    if (receipt.kind === 'runtime') assert.equal(runtime[path], receipt.sha256, path);
+    if (receipt.kind === 'runtime') assert.equal(runtime[path], reviewedXenoTrialsDigestV231(path, receipt.sha256), path);
     if (path.startsWith('scripts/verify-')) assert.equal(tests.filter(testPath => testPath === path).length, 1, path);
     assert.throws(() => verifyXenoTrialsV229(candidate => candidate === path ? Buffer.from('unreviewed V230 input') : read(candidate)),
       error => error.message.split('\n', 1)[0] === 'Unreviewed V230 source bytes: ' + path);
+  }
+});
+
+test('V231 advances exact V230 bytes without transferring its historical results', () => {
+  assert.equal(XENO_TRIALS_BASELINE_V231, '012fc8237fef4dbc81c9649719db1fe2fdc3e08e');
+  verifyHistoricalDeclarations(XENO_TRIALS_DECLARATIONS_V231, XENO_TRIALS_BASELINE_V231);
+  const runtime = xenoGameplayRuntimeSourcesV213({ historical: 'untouched' });
+  assert.equal(runtime.historical, 'untouched');
+  for (const [path, receipt] of Object.entries(XENO_TRIALS_SUCCESSORS_V231)) {
+    assert.equal(sha(git('show', `${XENO_TRIALS_BASELINE_V231}:${path}`)), receipt.previousSha256, path);
+    assert.equal(reviewedXenoTrialsDigestV231(path, receipt.previousSha256), sha(read(path)), path);
+    assert.throws(() => reviewedXenoTrialsDigestV231(path, receipt.sha256), /Incorrect V230 endpoint for V231/);
+    if (receipt.kind === 'runtime') assert.equal(runtime[path], receipt.sha256, path);
+  }
+  assert.deepEqual(xenoTrialsRuntimeSourcesV231(runtime), runtime);
+  assert.equal(verifyXenoTrialsV231().historicalResultsTransferred, false);
+  const poses = 'src/xeno-trials-ui-v96.js';
+  assert.equal(XENO_TRIALS_SUCCESSORS_V231[poses]?.kind, 'runtime');
+  assert.throws(() => verifyXenoTrialsV230(path => path === poses ? Buffer.from('unreviewed painted phases') : read(path)),
+    error => error.message.includes(poses) && error.message.includes('Unreviewed'));
+});
+
+test('V231 admits only its exact new inputs and excludes tooling from both builds', () => {
+  const terminal = XENO_AUDIT_TERMINAL_PATH;
+  assert.equal(terminal, 'scripts/audit-xeno-trials-v231.mjs');
+  assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.ok(!Object.hasOwn(XENO_TRIALS_SUCCESSORS_V231, terminal));
+  assert.ok(!Object.hasOwn(XENO_TRIALS_NEW_INPUTS_V231, terminal));
+  assert.equal(isPublicDistributionPathV86(terminal), true);
+  assert.equal(isPublicDistributionPathV86(terminal, { built: true }), false);
+  assert.equal(isPublicDistributionPathV86('scripts/audit-xeno-unreviewed-v231.mjs'), false);
+  assert.equal(isPublicDistributionPathV86('docs/forge/xeno-trials/V231-DRAFT.md'), false);
+  assert.equal(XENO_TRIALS_NEW_INPUTS_V231['docs/forge/xeno-trials/V231-CHARACTER-KITS-AND-ROUTES.md']?.kind, 'documentation');
+  assert.equal(XENO_TRIALS_NEW_INPUTS_V231['docs/forge/xeno-trials/combat-guide-coverage-v231.json']?.kind, 'documentation');
+  const baseline = new Set(git('ls-tree', '-r', '--name-only', XENO_TRIALS_BASELINE_V231).toString().split('\n'));
+  const runtime = xenoGameplayRuntimeSourcesV213({});
+  const tests = collectReleaseTestsV143(JSON.parse(read('package.json')).scripts);
+  for (const [path, receipt] of Object.entries(XENO_TRIALS_NEW_INPUTS_V231)) {
+    assert.equal(baseline.has(path), false, path);
+    assert.equal(isPublicDistributionPathV86(path), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), ['runtime', 'asset'].includes(receipt.kind), path);
+    if (receipt.kind === 'runtime') assert.equal(runtime[path], receipt.sha256, path);
+    if (path.startsWith('scripts/verify-')) assert.equal(tests.filter(testPath => testPath === path).length, 1, path);
+    assert.throws(() => verifyXenoTrialsV230(candidate => candidate === path ? Buffer.from('unreviewed V231 input') : read(candidate)),
+      error => error.message.split('\n', 1)[0] === 'Unreviewed V231 source bytes: ' + path);
   }
 });

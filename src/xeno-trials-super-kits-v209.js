@@ -1,17 +1,18 @@
 import { XENO_TRIALS_SUPER_RECIPES_V210 } from './xeno-trials-super-kits-v210.js';
 import { XENO_TRIALS_SUPER_RECIPES_V211 } from './xeno-trials-super-kits-v211.js';
+import { XENO_TRIALS_RECRUIT_SUPER_RECIPES_V231, XENO_TRIALS_MIRE_MOVE_EVIDENCE_V231 } from './xeno-trials-recruit-kits-v231.js';
 
-function move(fighterId, profileId, slot, label, labelEn, description, descriptionEn, spec) {
+function move(fighterId, profileId, slot, evidence, label, labelEn, description, descriptionEn, spec) {
   return Object.freeze({
     id: `${fighterId}::super${slot}`, fighterId, profileId, label, labelEn, description, descriptionEn,
-    ...(slot === 1 ? { styleV209: 'physical' } : {}), evidence: 'original-trials-gameplay',
+    ...(slot === 1 ? { styleV209: 'physical' } : {}), evidence,
     canonExact: false, animation: 'existing-silhouette', meterCost: 100,
     spec: Object.freeze({ ...spec, groundedOnly: true, cooldown: 3, superV148: true }),
   });
 }
 
-const pair = (fighterId, profileId, first, counter) => Object.freeze({
-  first: move(fighterId, profileId, 1, ...first), counter: move(fighterId, profileId, 2, ...counter),
+const pair = (fighterId, profileId, first, counter, evidence = 'original-trials-gameplay') => Object.freeze({
+  first: move(fighterId, profileId, 1, evidence, ...first), counter: move(fighterId, profileId, 2, evidence, ...counter),
 });
 
 // These original Trials actions use the admitted limbs, stance or equipment
@@ -115,7 +116,9 @@ export const XENO_TRIALS_SUPER_KITS_V209 = Object.freeze([
 
 export const XENO_TRIALS_SUPER_KITS_V210 = Object.freeze(XENO_TRIALS_SUPER_RECIPES_V210.map(args => pair(...args)));
 export const XENO_TRIALS_SUPER_KITS_V211 = Object.freeze(XENO_TRIALS_SUPER_RECIPES_V211.map(args => pair(...args)));
-const byFighter = new Map([...XENO_TRIALS_SUPER_KITS_V209, ...XENO_TRIALS_SUPER_KITS_V210, ...XENO_TRIALS_SUPER_KITS_V211]
+export const XENO_TRIALS_SUPER_KITS_V231 = Object.freeze(XENO_TRIALS_RECRUIT_SUPER_RECIPES_V231
+  .map(args => pair(...args, XENO_TRIALS_MIRE_MOVE_EVIDENCE_V231)));
+const byFighter = new Map([...XENO_TRIALS_SUPER_KITS_V209, ...XENO_TRIALS_SUPER_KITS_V210, ...XENO_TRIALS_SUPER_KITS_V211, ...XENO_TRIALS_SUPER_KITS_V231]
   .map(kit => [kit.first.fighterId, kit]));
 function getKit(definition) {
   const kit = byFighter.get(definition?.id);

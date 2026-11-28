@@ -1,3 +1,4 @@
+import { getXenoTrialsReferencedResearchArtV231, getXenoTrialsReferencedAssetsV231 } from './xeno-trials-research-art-v231.js';
 import { XENO_TRIALS_RESEARCH_V209, getXenoTrialsResearchEvaluationV209, getXenoTrialsResearchFighterV209,
   getXenoTrialsResearchArtV209, getXenoTrialsResearchAssetsV209 } from './xeno-trials-research-v209.js';
 import { XENO_TRIALS_RESEARCH_MEDIA_V210 } from './xeno-trials-research-media-v210.js';
@@ -21,7 +22,7 @@ const definitions = [
     hp: 192, speed: 264, special: 'tail', role: 'agile', stage: 'xt192-renaissance-cryo-chamber', opponent: 'warrior',
     attacks: [
       move('Retour de cendre', 'Ash Reversal', 'Un retrait bref suit le balayage bas.', [26, 25, 82, .25, .11, .45, .24, 26], { ...low, retreatV208: 92 }),
-      move('Accroc de crête', 'Crest Snag', 'Une pointe haute intercepte le saut devant le spécimen.', [25, 27, 55, .16, .09, .43, .29, 24], high),
+      move('Accroc crânien', 'Dome Snag', 'Un revers haut intercepte le saut devant le spécimen.', [25, 27, 55, .16, .09, .43, .29, 24], high),
     ],
   },
   {
@@ -40,22 +41,22 @@ const definitions = [
     texture: specimenSheet, bounds: [151, 523, 591, 992], root: 384, body: [46, 132], stature: 154,
     hp: 175, speed: 238, special: 'slash', role: 'balanced', stage: 'xt190-specimen-transfer', opponent: 'runner',
     attacks: [
-      move('Résonance courte', 'Short Resonance', 'Un mouvement haut du thorax frappe dans un arc rapproché.', [31, 29, 83, .31, .16, .59, .40, 40], high),
-      move('Contretemps', 'Counterbeat', 'Une frappe basse se termine par un retrait bref.', [23, 21, 72, .19, .10, .35, .20, 29], { ...low, retreatV208: 107 }),
+      move('Coup de pied haut', 'High Kick', 'Un coup de pied couvre l’arc haut devant le spécimen.', [31, 29, 83, .31, .16, .59, .40, 40], high),
+      move('Revers de jambe', 'Leg Reversal', 'Un coup de pied bas accompagne un bref retrait.', [23, 21, 72, .19, .10, .35, .20, 29], { ...low, retreatV208: 107 }),
     ],
   },
   {
     key: 'STRIKER', slug: 'striker', label: 'Striker', source: 'AFE2',
-    briefing: 'Accélérer au contact et récupérer derrière un balayage rasant.',
-    texture: specimenSheet, bounds: [782, 654, 1506, 996], root: 1180, body: [77, 69], stature: 99,
-    hp: 185, speed: 314, special: 'pounce', role: 'agile', stage: 'xt179-workshop', opponent: 'runner',
+    briefing: 'Engager le poids du corps puis couvrir le sol par un large balayage de bras.',
+    texture: specimenSheet, bounds: [782, 654, 1506, 996], root: 1180, body: [80, 166], stature: 180,
+    hp: 185, speed: 180, special: 'ram', role: 'tank', family: 'pathogen', stage: 'xt179-workshop', opponent: 'runner',
     attacks: [
-      move('Pointe de foulée', 'Leading Stride', 'Une foulée engagée parcourt le sol pendant la fenêtre de contact.', [28, 29, 63, .22, .16, .49, .25, 32], { approachV208: 340 }),
-      move('Fauche du coureur', 'Runner Sweep', 'Les appuis bas balayent la cible au sol. La fin de mouvement reste exposée.', [32, 33, 94, .28, .10, .58, .26, 26], { ...low, groundedTargetV208: true }),
+      move('Percussion en avancée', 'Advancing Bash', 'Une avancée lourde engage le bras pendant la fenêtre de contact.', [28, 29, 63, .22, .16, .49, .25, 32], { approachV208: 340 }),
+      move('Balayage de bras', 'Broad Arm Sweep', 'Le bras couvre largement le sol après une préparation exposée.', [32, 33, 94, .28, .10, .58, .26, 26], { ...low, groundedTargetV208: true }),
     ],
   },
   {
-    key: 'PRAETORIAN-AVP', slug: 'praetorian-avp', label: 'Praetorian · AVP', source: 'AVP',
+    key: 'PRAETORIAN-AVP', slug: 'praetorian-avp', label: 'Praetorian · AVP', source: 'Aliens versus Predator: Classic 2000 (Rebellion)',
     briefing: 'Faire reculer l’adversaire avec l’épaule, puis couvrir le sol avec la queue.',
     texture: guardSheet, bounds: [34, 23, 496, 559], root: 341, body: [71, 162], stature: 174,
     hp: 272, speed: 172, special: 'ram', role: 'tank', stage: 'xt179-ship-docking', opponent: 'royal-guard',
@@ -128,9 +129,10 @@ export const XENO_TRIALS_RESEARCH_V210 = Object.freeze(XENO_TRIALS_RESEARCH_V209
 }));
 
 export const getXenoTrialsResearchFighterV210 = id => fighters.get(id) ?? getXenoTrialsResearchFighterV209(id);
-export const getXenoTrialsResearchArtV210 = id => artById.get(id) ?? getXenoTrialsResearchArtV209(id);
+export const getXenoTrialsHistoricalResearchArtV210 = id => artById.get(id) ?? getXenoTrialsResearchArtV209(id);
+export const getXenoTrialsResearchArtV210 = id => getXenoTrialsReferencedResearchArtV231(id) ?? getXenoTrialsHistoricalResearchArtV210(id);
 export const getXenoTrialsResearchAssetsV210 = () => [
-  ...getXenoTrialsResearchAssetsV209(), ...XENO_TRIALS_RESEARCH_MEDIA_V210.map(asset => asset.path),
+  ...getXenoTrialsResearchAssetsV209(), ...XENO_TRIALS_RESEARCH_MEDIA_V210.map(asset => asset.path), ...getXenoTrialsReferencedAssetsV231(),
 ];
 
 export function getXenoTrialsResearchEvaluationV210(id) {
@@ -143,7 +145,7 @@ export function getXenoTrialsResearchEvaluationV210(id) {
 /** The image plate stays rooted at its sole. Read the simulation clock for
  * each small deformation and let collision continue to use its native body. */
 export function getXenoTrialsResearchPoseV210(fighter, art, { spec, moving, tick, reducedMotion }) {
-  if (!fighter || artById.get(fighter.id) !== art || reducedMotion || !Number.isFinite(tick)) return null;
+  if (!fighter || (artById.get(fighter.id) !== art && getXenoTrialsReferencedResearchArtV231(fighter.id) !== art) || reducedMotion || !Number.isFinite(tick)) return null;
   if (fighter.hp <= 0) return { lean: -.23, height: .68 };
   if (fighter.stun > 0) return { lean: .11, height: .95 };
   if (fighter.guard || fighter.movesetV207?.low) return { lean: .06, height: .93 };

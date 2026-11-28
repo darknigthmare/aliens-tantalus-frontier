@@ -1,3 +1,5 @@
+import { XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231 as CHARACTER_ROUTES, getXenoTrialsCharacterRouteViewV231 } from './xeno-trials-character-routes-v231.js';
+import { canUseXenoTrialsCharacterRouteFighterV231 as canUseRouteFighter, renderXenoTrialsCharacterRouteStoryV231, routeTextV231, displayXenoTrialsRouteEntryV231, routeRuleTextV231 } from './xeno-trials-character-route-ui-v231.js';
 import { getXenoTrialsRecruitV230 } from './xeno-trials-recruits-v230.js';
 import { XENO_TRIALS_RESEARCH_LABS_V209 } from './xeno-trials-research-lab-v209.js';
 import { createXenoTrialsResearchLabRuntimeV209 } from './xeno-trials-research-lab-ui-v209.js';
@@ -223,7 +225,7 @@ export class XenoTrialsUiV96 {
           ${specimen.fighterId ? `<button type="button" class="button primary" data-xt-research-bout="${specimen.id}">${specimen.kind === 'asymmetric' ? 'LANCER L’ÉPREUVE ASYMÉTRIQUE' : 'ESSAYER LE SPÉCIMEN'}</button>`
           : specimen.kind === 'event' ? `<button type="button" class="button" data-xt-research-lab="${specimen.id}">OBJECTIF DE LABORATOIRE</button>`
             : '<small>MODÈLE À VALIDER</small>'}</article>`).join('')}</div>
-      </details><div data-xt="activity-board" class="xt-activity-board-v119"></div></section>
+      </details><section data-xt="character-route-story" class="xt-briefing-v119" hidden aria-label="Parcours du spécimen"></section><div data-xt="activity-board" class="xt-activity-board-v119"></div></section>
       <section data-xt="practice-lab-panel" hidden></section>
       <section data-xt="briefing" class="xt-briefing-v119" hidden></section>
       <div class="xt-layout" data-xt="layout">
@@ -705,7 +707,7 @@ export class XenoTrialsUiV96 {
     const lockedArchiveLabel = this.standaloneV207
       ? (currentLanguageV185() === 'en' ? 'SEALED · COMPLETE THE MIRE CAMPAIGN' : 'SCELLÉS · TERMINER LA CAMPAGNE MIRE')
       : 'SCELLÉS · TERMINER L’ENQUÊTE ARBITER';
-    this.el('branches').innerHTML = TERMINAL_BRANCHES_V191.map((branch, index) => `<button type="button" data-xt-branch="${branch.id}" class="xt-branch-v119${branch.id === 'horde' ? ' xt-branch-horde' : ''}"><span class="xt-branch-code">MIRE / ${String(index + 1).padStart(2, '0')}<i aria-hidden="true">${branch.id === 'horde' ? 'CONFINEMENT' : 'ÉVALUATION'}</i></span><strong>${escapeHtml(branch.label)}</strong><p>${escapeHtml(branch.description)}</p>${branch.id === ARCHIVE_BRANCH_V191 ? `<p>${escapeHtml(archiveAccess.notice)}</p>` : ''}<span class="xt-branch-open">OUVRIR LE PROGRAMME <b aria-hidden="true">↗</b></span></button>`).join('');
+    this.el('branches').innerHTML = TERMINAL_BRANCHES_V191.map((branch, index) => `<button type="button" data-xt-branch="${branch.id}" class="xt-branch-v119${branch.id === 'horde' ? ' xt-branch-horde' : ''}"><span class="xt-branch-code">MIRE / ${String(index + 1).padStart(2, '0')}<i aria-hidden="true">${branch.id === 'horde' ? 'CONFINEMENT' : 'ÉVALUATION'}</i></span><strong>${escapeHtml(branch.id === CHARACTER_ROUTES && currentLanguageV185() === 'en' ? 'CHARACTER ROUTES' : branch.label)}</strong><p>${escapeHtml(branch.id === CHARACTER_ROUTES && currentLanguageV185() === 'en' ? 'Follow a specimen through a series of MIRE duels and readings.' : branch.description)}</p>${branch.id === ARCHIVE_BRANCH_V191 ? `<p>${escapeHtml(archiveAccess.notice)}</p>` : ''}<span class="xt-branch-open">OUVRIR LE PROGRAMME <b aria-hidden="true">↗</b></span></button>`).join('');
     this.el('branch-title').textContent = TERMINAL_BRANCHES_V191.find(branch => branch.id === this.branchV119)?.label || '';
     this.el('renew-contracts').hidden = this.branchV119 !== 'contracts';
     this.el('program-tools').hidden = this.branchV119 === 'practice';
@@ -713,6 +715,12 @@ export class XenoTrialsUiV96 {
     this.el('practice-sandbox').hidden = this.branchV119 !== 'practice';
     this.el('practice-labs').hidden = this.branchV119 !== 'practice';
     this.el('research-dossiers').hidden = this.branchV119 !== 'practice';
+    const route = this.branchV119 === CHARACTER_ROUTES && getXenoTrialsCharacterRouteViewV231('big-chap', state.modesV119);
+    if (route && currentLanguageV185() === 'en') this.el('branch-title').textContent = 'CHARACTER ROUTES';
+    const story = this.el('character-route-story');
+    story.hidden = !route;
+    const routeStage = route && STAGES.find(stage => stage.id === route.chapters[Math.min(route.clearedCount, route.chapters.length - 1)].stageId);
+    story.innerHTML = route ? renderXenoTrialsCharacterRouteStoryV231(route, currentLanguageV185(), routeStage ? stagePreviewImageV192(routeStage, routeStage.label, this.usesLocalMenuMediaV222()) : '') : '';
     if (this.branchV119 === 'practice') {
       const cleared = state.practiceClearedV207 || [];
       if (sandboxForm.elements) for (const [name, value] of Object.entries(normalizeXenoTrialsSandboxV208(state.practiceSandboxV208))) {
@@ -732,7 +740,7 @@ export class XenoTrialsUiV96 {
         <p>${escapeHtml(entry.briefing)}</p><button type="button" class="button primary" data-xt-practice="${entry.id}">${cleared.includes(entry.id) ? 'VALIDÉ · REJOUER' : 'LANCER L’ATELIER'}</button></article>`).join('');
       return;
     }
-    const entries = this.branchV119 === ARCHIVE_BRANCH_V191 ? ARBITER_PROGRAMS_V191 : this.branchV119 === 'operations' ? OPERATIONS : this.branchV119 === 'horde' ? HORDE_PROTOCOLS : this.branchV119 === 'campaign' ? CAMPAIGN : this.branchV119 === 'contracts' ? getXenoTrialsContractsV119(state.modesV119.contractCycle) : ['challenges', 'events'].includes(this.branchV119) ? CHALLENGES.filter(entry => Boolean(entry.eventV179) === (this.branchV119 === 'events')) : [];
+    const entries = route ? route.chapters.map(chapter => displayXenoTrialsRouteEntryV231(chapter, currentLanguageV185())) : this.branchV119 === ARCHIVE_BRANCH_V191 ? ARBITER_PROGRAMS_V191 : this.branchV119 === 'operations' ? OPERATIONS : this.branchV119 === 'horde' ? HORDE_PROTOCOLS : this.branchV119 === 'campaign' ? CAMPAIGN : this.branchV119 === 'contracts' ? getXenoTrialsContractsV119(state.modesV119.contractCycle) : ['challenges', 'events'].includes(this.branchV119) ? CHALLENGES.filter(entry => Boolean(entry.eventV179) === (this.branchV119 === 'events')) : [];
     this.el('activity-count').textContent = this.branchV119 === ARCHIVE_BRANCH_V191 ? `40 DOSSIERS / 20 HORDES / 20 OPÉRATIONS · ${archiveAccess.notice}` : this.branchV119 === 'operations' ? `${entries.length} OPÉRATIONS / OBJECTIFS PHYSIQUES / DANGERS DE TERRAIN` : this.branchV119 === 'horde' ? `${entries.length} PROTOCOLES / CONTACTS SIMULTANÉS / SURVIE CONTINUE` : `${entries.length} DOSSIERS / ${this.branchV119 === 'events' ? 'DUELS SUCCESSIFS' : 'ÉVALUATION COMPARATIVE'}`;
     const page = getXenoTrialsProgramPageV186(entries, { page: this.programPageV186, kind: this.branchV119 === 'horde' ? this.el('program-filter').value : 'all' });
     this.programPageV186 = page.page;
@@ -743,24 +751,27 @@ export class XenoTrialsUiV96 {
     this.el('activity-board').innerHTML = page.entries.map((entry, index) => {
       const entryBranch = activityBranchV191(this.branchV119, entry.id);
       const archiveLocked = Boolean(getArbiterProgramV191(entry.id)) && !archiveAccess.available;
-      const activity = resolveXenoTrialsActivityV119({ branch: entryBranch, id: entry.id }, state.modesV119);
+      const resolved = resolveXenoTrialsActivityV119({ branch: entryBranch, id: entry.id }, state.modesV119);
+      const activity = route ? displayXenoTrialsRouteEntryV231(resolved, currentLanguageV185()) : resolved;
       const horde = combatBriefingV188(activity);
-      const cleared = entryBranch === 'operations' ? state.modesV119.operationsCleared?.includes(entry.id) : entryBranch === 'horde' ? state.modesV119.hordeCleared?.includes(entry.id) : this.branchV119 === 'campaign' ? state.modesV119.campaignCleared.includes(entry.id) : this.branchV119 === 'contracts' ? state.modesV119.claimedContracts.includes(entry.id) : state.modesV119.challengesCleared.includes(entry.id);
+      const cleared = route ? entry.cleared : entryBranch === 'operations' ? state.modesV119.operationsCleared?.includes(entry.id) : entryBranch === 'horde' ? state.modesV119.hordeCleared?.includes(entry.id) : this.branchV119 === 'campaign' ? state.modesV119.campaignCleared.includes(entry.id) : this.branchV119 === 'contracts' ? state.modesV119.claimedContracts.includes(entry.id) : state.modesV119.challengesCleared.includes(entry.id);
       const opponentId = activity?.opponentId || entry.opponentId || entry.opponentIds?.[0], fighter = FIGHTERS.find(fighter => fighter.id === opponentId);
-      const locked = archiveLocked || this.branchV119 === 'campaign' && !isXenoTrialsMissionOpenV119(entry.id, state.modesV119) || this.branchV119 === 'contracts' && cleared
+      const locked = Boolean(route && !entry.open) || archiveLocked || this.branchV119 === 'campaign' && !isXenoTrialsMissionOpenV119(entry.id, state.modesV119) || this.branchV119 === 'contracts' && cleared
         || ['challenges', 'events'].includes(this.branchV119) && state.modesV119.challengeRun && state.modesV119.challengeRun.id !== entry.id;
       const passage = !horde && entry.opponentIds?.length > 1 ? ` · Passage ${(activity?.bout || 0) + 1}/${entry.opponentIds.length}` : '';
       const stage = STAGES.find(stage => stage.id === activity?.stageId);
-      return `<article class="xt-activity-v119 ${cleared ? 'validated' : ''}${horde ? ' xt-horde-protocol' : ''}"${entry.operationV188 || entryBranch === 'operations' ? ' data-xt-operation="true"' : ''}${entry.eventV179 ? ' data-xt-event="true"' : ''}${horde ? ' data-xt-horde="true"' : ''}>${horde && stage?.backdrop ? `<div class="xt-activity-image${stage.stageRevision === 190 ? ' xt-atlas-preview-v190' : ''}">${this.usesLocalMenuMediaV222() ? menuTileV222('stage', stage.id) : `<img src="${stage.backdrop}" alt="" loading="lazy">`}<span>PROTOCOLE ${String(entries.indexOf(entry) + 1).padStart(2, '0')} / ${escapeHtml(stage.label)}</span></div>` : ''}<p class="eyebrow">${escapeHtml(horde?.operation ? 'MIRE / OPÉRATION DE TERRAIN' : horde ? 'ALERTE MIRE / HORDE SIMULTANÉE' : entry.act || (entry.eventV179 ? 'ALERTE MIRE / DUELS SUCCESSIFS' : this.branchV119 === 'contracts' ? 'CIBLE ASSIGNÉE' : 'ÉPREUVE FIXE'))}</p><h3>${escapeHtml(entry.title || entry.label)}</h3><strong>${escapeHtml(horde ? horde.pressureLabel : fighter?.label || 'Cible à définir')}${passage}</strong><p>${escapeHtml(entry.briefing || entry.description)}</p>${entry.bossFinaleV186 ? `<p class="xt-boss-order-v186">FINALE · ${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.bossFinaleV186.fighterId)?.label || 'Contact majeur')} · ${entry.bossFinaleV186.hp} PV</p>` : ''}${hordeStatsV180(horde)}${!horde && activity?.waveLabel ? `<p>${escapeHtml(activity.waveLabel)}</p>` : ''}${!horde ? `<p>${escapeHtml(getXenoTrialsRuleTextV119(activity?.rules || entry.rules))}</p>` : ''}${stage && !horde ? `<p>${escapeHtml(stage.label)}</p>` : ''}<span class="xt-activity-reward">${cleared ? 'VALIDÉ · Récompense déjà accordée' : `PRIME DE VALIDATION · ${activity?.reward ?? entry.reward ?? 0} crédits Trials`}</span><button type="button" class="button ${locked ? '' : 'primary'}" data-xt-activity="${entry.id}" ${locked ? 'disabled' : ''}>${locked ? archiveLocked ? lockedArchiveLabel : cleared ? 'CONTRAT TERMINÉ' : state.modesV119.challengeRun ? 'SÉRIE EN COURS' : 'ACCRÉDITATION REQUISE' : cleared ? 'REJOUER' : activity?.bout > 0 ? 'POURSUIVRE LA SÉRIE' : horde ? 'OUVRIR LE PROTOCOLE →' : 'BRIEFING · CHOISIR MON SPÉCIMEN'}</button></article>`;
+      return `<article class="xt-activity-v119 ${cleared ? 'validated' : ''}${horde ? ' xt-horde-protocol' : ''}"${entry.operationV188 || entryBranch === 'operations' ? ' data-xt-operation="true"' : ''}${entry.eventV179 ? ' data-xt-event="true"' : ''}${horde ? ' data-xt-horde="true"' : ''}>${horde && stage?.backdrop ? `<div class="xt-activity-image${stage.stageRevision === 190 ? ' xt-atlas-preview-v190' : ''}">${this.usesLocalMenuMediaV222() ? menuTileV222('stage', stage.id) : `<img src="${stage.backdrop}" alt="" loading="lazy">`}<span>PROTOCOLE ${String(entries.indexOf(entry) + 1).padStart(2, '0')} / ${escapeHtml(stage.label)}</span></div>` : ''}<p class="eyebrow">${escapeHtml(horde?.operation ? 'MIRE / OPÉRATION DE TERRAIN' : horde ? 'ALERTE MIRE / HORDE SIMULTANÉE' : entry.act || (entry.eventV179 ? 'ALERTE MIRE / DUELS SUCCESSIFS' : this.branchV119 === 'contracts' ? 'CIBLE ASSIGNÉE' : 'ÉPREUVE FIXE'))}</p><h3>${escapeHtml(route ? routeTextV231(entry, 'title', currentLanguageV185()) : entry.title || entry.label)}</h3><strong>${escapeHtml(route && !entry.open ? (currentLanguageV185() === 'en' ? 'HIDDEN CONTACT' : 'CONTACT MASQUÉ') : horde ? horde.pressureLabel : fighter?.label || 'Cible à définir')}${passage}</strong><p>${escapeHtml(route ? routeTextV231(entry, 'briefing', currentLanguageV185()) : entry.briefing || entry.description)}</p>${entry.bossFinaleV186 ? `<p class="xt-boss-order-v186">FINALE · ${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.bossFinaleV186.fighterId)?.label || 'Contact majeur')} · ${entry.bossFinaleV186.hp} PV</p>` : ''}${hordeStatsV180(horde)}${!horde && activity?.waveLabel ? `<p>${escapeHtml(activity.waveLabel)}</p>` : ''}${!horde ? `<p>${escapeHtml(route ? routeRuleTextV231(getXenoTrialsRuleTextV119(activity?.rules || entry.rules), currentLanguageV185()) : getXenoTrialsRuleTextV119(activity?.rules || entry.rules))}</p>` : ''}${stage && !horde ? `<p>${escapeHtml(stage.label)}</p>` : ''}<span class="xt-activity-reward">${cleared ? 'VALIDÉ · Récompense déjà accordée' : `PRIME DE VALIDATION · ${activity?.reward ?? entry.reward ?? 0} crédits Trials`}</span><button type="button" class="button ${locked ? '' : 'primary'}" data-xt-activity="${entry.id}" ${locked ? 'disabled' : ''}>${locked ? archiveLocked ? lockedArchiveLabel : cleared ? 'CONTRAT TERMINÉ' : state.modesV119.challengeRun ? 'SÉRIE EN COURS' : route ? (currentLanguageV185() === 'en' ? 'PREVIOUS CHAPTER REQUIRED' : 'CHAPITRE PRÉCÉDENT REQUIS') : 'ACCRÉDITATION REQUISE' : cleared ? 'REJOUER' : activity?.bout > 0 ? 'POURSUIVRE LA SÉRIE' : horde ? 'OUVRIR LE PROTOCOLE →' : route ? (currentLanguageV185() === 'en' ? 'OPEN BRIEFING' : 'OUVRIR LE BRIEFING') : 'BRIEFING · CHOISIR MON SPÉCIMEN'}</button></article>`;
     }).join('');
-    const activity = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, state.modesV119);
+    const resolved = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, state.modesV119);
+    const activity = route ? displayXenoTrialsRouteEntryV231(resolved, currentLanguageV185()) : resolved;
     const horde = combatBriefingV188(activity);
-    this.el('briefing').innerHTML = activity ? `<div class="xt-briefing-identity"><p class="eyebrow">${escapeHtml(activity.supervisor || 'MIRE / ORDRES D’ÉVALUATION')}</p><h2>${escapeHtml(activity.title)}</h2><span>${horde?.operation ? 'OPÉRATION / OBJECTIF DE TERRAIN' : horde ? 'HORDE / CONFINEMENT CONTINU' : 'DOSSIER / ÉVALUATION COMPARATIVE'}</span></div><div class="xt-briefing-orders">${!horde && activity.waveLabel ? `<h3>PASSAGE ${activity.bout + 1}/${activity.opponentIds.length} · ${escapeHtml(activity.waveLabel)}</h3>` : ''}<p>${escapeHtml(activity.briefing || activity.description || 'Cible demandée par l’opérateur.')}</p>${horde ? `${hordeStatsV180(horde)}<p class="xt-horde-orders">${escapeHtml(horde.orders)}</p>` : `<strong>${escapeHtml(getXenoTrialsRuleTextV119(activity.rules))}</strong>`}${activity.secondary ? `<p>OBJECTIF SECONDAIRE · ${escapeHtml(activity.secondary.label)} · +50 crédits à la première validation.</p>` : ''}${activity.event ? `<p>${escapeHtml(activity.event)}</p>` : ''}</div>` : '';
+    this.el('briefing').innerHTML = activity ? `<div class="xt-briefing-identity"><p class="eyebrow">${escapeHtml(activity.supervisor || 'MIRE / ORDRES D’ÉVALUATION')}</p><h2>${escapeHtml(activity.title)}</h2><span>${horde?.operation ? 'OPÉRATION / OBJECTIF DE TERRAIN' : horde ? 'HORDE / CONFINEMENT CONTINU' : 'DOSSIER / ÉVALUATION COMPARATIVE'}</span></div><div class="xt-briefing-orders">${!horde && activity.waveLabel ? `<h3>PASSAGE ${activity.bout + 1}/${activity.opponentIds.length} · ${escapeHtml(activity.waveLabel)}</h3>` : ''}<p>${escapeHtml(activity.briefing || activity.description || 'Cible demandée par l’opérateur.')}</p>${horde ? `${hordeStatsV180(horde)}<p class="xt-horde-orders">${escapeHtml(horde.orders)}</p>` : `<strong>${escapeHtml(route ? routeRuleTextV231(getXenoTrialsRuleTextV119(activity.rules), currentLanguageV185()) : getXenoTrialsRuleTextV119(activity.rules))}</strong>`}${activity.secondary ? `<p>OBJECTIF SECONDAIRE · ${escapeHtml(activity.secondary.label)} · +50 crédits à la première validation.</p>` : ''}${activity.event && (activity.branch !== CHARACTER_ROUTES || activity.cleared) ? `<p>${escapeHtml(routeTextV231(activity, 'event', currentLanguageV185()))}</p>` : ''}</div>` : '';
   }
 
   confirmFighters() {
-    if (!this.active || this.isRunning() || this.state().pending || this.unsavedResult || !this.state().unlocked.includes(this.selected)) return false;
+    if (!this.active || this.isRunning() || this.state().pending || this.unsavedResult) return false;
     const activity = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, this.state().modesV119);
+    if (!canUseRouteFighter(this.state(), this.selected, activity)) return false;
     if (activity?.forcedPlayerId && activity.forcedPlayerId !== this.selected
       || activity?.requiredFamily && FIGHTERS.find(f => f.id === this.selected)?.family !== activity.requiredFamily) return false;
     this.selectionStep = 'arena'; this.render(); this.form.elements.stageId.focus(); return true;
@@ -847,14 +858,15 @@ export class XenoTrialsUiV96 {
       const rig=getXenoTrialsRigV154(f,art);
       const coverage = getXenoTrialsRuntimeAnimationCoverage(f.id);
       const admittedActions = getXenoTrialsRuntimeActionAtlases(f, art).map(atlas => drawnActionLabels[atlas.kind]);
-      const motionLabel = coverage?.playerLabel || (rig ? (rig.id.startsWith('rig-v154-') ? 'Présentations, défi et réactions disponibles.' : 'Présentations et réactions disponibles.') : attack ? `Marche : 4 poses adaptées · ${attack.label}` : walk?.label);
+      const paintedPresentation = ['select', 'intro', 'victory'].some(kind => getXenoTrialsPresentationPlateV230(kind, id, f.variants.includes(variant) ? variant : null));
+      const motionLabel = (paintedPresentation ? currentLanguageV185() === 'en' ? 'Painted selection and presentation poses available.' : 'Poses dessinées de sélection et de présentation disponibles.' : coverage?.playerLabel) || (rig ? (rig.id.startsWith('rig-v154-') ? 'Présentations, défi et réactions disponibles.' : 'Présentations et réactions disponibles.') : attack ? `Marche : 4 poses adaptées · ${attack.label}` : walk?.label);
       const gestures = (admittedActions.length ? admittedActions : [motionLabel]).filter(Boolean)
         .map(label => `<small>${escapeHtml(label)}</small>`).join('');
       const desiredFacing = i ? -1 : 1;
       const sourceFacing = art?.sourceFacing === 1 ? 1 : -1;
       const family = FAMILIES.find(entry => entry.id === getXenoTrialsSelectionFamilyV119(f))?.label || 'À DÉFINIR';
       const profile = getXenoTrialsRosterProfileV179(f);
-      const playerLocked = !i && !state.unlocked.includes(id);
+      const playerLocked = !i && !canUseRouteFighter(state, id, activity);
       const health = rules?.initialHp === 1 ? 1 : f.hp;
       const dossier = `${i}-${id}`;
       return `<figure class="xt-selection-preview" data-slot="${i ? 'target' : 'player'}">
@@ -1626,7 +1638,7 @@ export class XenoTrialsUiV96 {
     this.el('mode-help').textContent = this.branchV119 === 'practice' ? 'Suivez l’objectif de l’atelier. La pause suspend la simulation.' : horde ? horde.orders : 'Deux manches gagnantes. Surveillez votre endurance et punissez les attaques manquées.';
     const wrongCombatant = Boolean(activity?.forcedPlayerId && this.selected !== activity.forcedPlayerId
       || activity?.requiredFamily && FIGHTERS.find(f => f.id === this.selected)?.family !== activity.requiredFamily);
-    const unavailable = !this.active || running || Boolean(state.pending) || Boolean(this.unsavedResult) || !state.unlocked.includes(this.selected) || wrongCombatant;
+    const unavailable = !this.active || running || Boolean(state.pending) || Boolean(this.unsavedResult) || !canUseRouteFighter(state, this.selected, activity) || wrongCombatant;
     this.el('start').disabled = unavailable || this.selectionStep !== 'arena';
     this.el('confirm-fighters').disabled = unavailable;
     this.el('fighter-config-title').textContent = this.selectionStep === 'target' ? 'Désignation de la cible' : 'Autorisation d’essai';
@@ -1635,6 +1647,7 @@ export class XenoTrialsUiV96 {
     selectionRules.textContent = selectionRules.hidden ? '' : getXenoTrialsRuleTextV119(activity?.rules);
     const selectionHold = this.el('selection-hold');
     selectionHold.textContent = wrongCombatant ? 'Ce spécimen ne répond pas aux critères de l’évaluation.'
+      : !state.unlocked.includes(this.selected) && canUseRouteFighter(state, this.selected, activity) ? (currentLanguageV185() === 'en' ? 'MIRE LOAN · Authorization limited to this route.' : 'PRÊT MIRE · Autorisation limitée à ce parcours.')
       : !state.unlocked.includes(this.selected) ? 'Débloquez le spécimen dans le registre pour l’affecter.' : '';
     selectionHold.hidden = this.selectionStep !== 'fighters' || !selectionHold.textContent;
     this.el('back-fighters').disabled = running || Boolean(state.pending);

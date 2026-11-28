@@ -3,6 +3,8 @@ import { XENO_TRIALS_CHALLENGE_CURRICULUM_V179 } from './xeno-trials-challenge-c
 import { XENO_TRIALS_EVENTS_V179, getXenoTrialsEventWaveV179 } from './xeno-trials-events-v179.js';
 import { getXenoTrialsHordeProtocolV180 } from './xeno-trials-horde-v180.js';
 import { getXenoTrialsOperationV188 } from './xeno-trials-operations-v188.js';
+import { XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231, normalizeXenoTrialsCharacterRouteClearsV231,
+  resolveXenoTrialsCharacterRouteChapterV231 } from './xeno-trials-character-routes-v231.js';
 
 // Authored simulation curriculum: these incidents belong to Tantalus, not film canon.
 export const XENO_TRIALS_BRANCHES_V119 = Object.freeze([
@@ -12,7 +14,8 @@ export const XENO_TRIALS_BRANCHES_V119 = Object.freeze([
   { id: 'challenges', label: 'DÉFIS', description: 'Épreuves fixes, contraintes physiques et séries de combats.' },
   { id: 'events', label: 'ÉVÉNEMENTS', description: 'Alertes, survie et protocoles MIRE : vagues de duels successifs.' },
   { id: 'horde', label: 'HORDE', description: 'Contacts simultanés à faibles PV. Repousser toutes les vagues sans récupération entre les contacts.' },
-  { id: 'operations', label: 'OPÉRATIONS', description: 'Escorter, rétablir les relais, purger, synchroniser et extraire sous pression.' }
+  { id: 'operations', label: 'OPÉRATIONS', description: 'Escorter, rétablir les relais, purger, synchroniser et extraire sous pression.' },
+  { id: XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231, label: 'PARCOURS INDIVIDUELS', description: 'Suivez un spécimen dans une série de duels et de relevés MIRE.' }
 ]);
 const known = new Set(FIGHTERS.map(f => f.id));
 const stages = ['containment-deck', 'reactor-ring', 'planet-surface', 'tantalus-cargo', 'hive-vault', 'tantalus-bridge'];
@@ -63,6 +66,8 @@ export function normalizeXenoTrialsModesProgressV119(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return base;
   const ids = key => Array.isArray(value[key]) ? [...new Set(value[key].filter(x => typeof x === 'string'))] : [];
   base.campaignCleared = ids('campaignCleared').filter(id => XENO_TRIALS_CAMPAIGN_V119.some(m => m.id === id));
+  const routeClears = normalizeXenoTrialsCharacterRouteClearsV231(value.characterRoutesClearedV231);
+  if (routeClears.length) base.characterRoutesClearedV231 = routeClears;
   base.challengesCleared = ids('challengesCleared').filter(id => XENO_TRIALS_CHALLENGES_V119.some(c => c.id === id));
   base.hordeCleared = ids('hordeCleared').filter(id => getXenoTrialsHordeProtocolV180(id));
   base.operationsCleared = ids('operationsCleared').filter(id => getXenoTrialsOperationV188(id));
@@ -135,6 +140,8 @@ export function resolveXenoTrialsActivityV119(activity, modesValue) {
     const entry = XENO_TRIALS_CAMPAIGN_V119.find(m => m.id === activity.id);
     return entry && isXenoTrialsMissionOpenV119(entry.id, modes) ? { ...entry, branch: 'campaign' } : null;
   }
+  if (activity.branch === XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231)
+    return resolveXenoTrialsCharacterRouteChapterV231(activity.id, modes);
   if (activity.branch === 'contracts') {
     const parsed = /^xtc119-(\d+)-[0-4]$/.exec(activity.id || '');
     if (!parsed) return null;
@@ -185,6 +192,10 @@ export function settleXenoTrialsActivityV119(modesValue, config, result) {
   receipt.secondary = getXenoTrialsSecondaryCompleteV119(activity.secondary, result);
   if (activity.branch === 'campaign' && !modes.campaignCleared.includes(activity.id)) {
     modes.campaignCleared.push(activity.id); receipt.bonus = activity.reward + (receipt.secondary ? 50 : 0); receipt.unlockId = activity.unlockId;
+  } else if (activity.branch === XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231 && !activity.cleared) {
+    modes.characterRoutesClearedV231 = [...(modes.characterRoutesClearedV231 || []), activity.id];
+    receipt.bonus = activity.reward;
+    receipt.unlockId = activity.unlockId ?? null;
   } else if (activity.branch === 'contracts' && !modes.claimedContracts.includes(activity.id)) {
     modes.claimedContracts = [...modes.claimedContracts, activity.id].slice(-128); receipt.bonus = activity.reward;
   } else if (activity.branch === 'challenges') {

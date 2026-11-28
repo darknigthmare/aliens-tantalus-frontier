@@ -2,17 +2,17 @@ import { XENO_TRIALS_RESEARCH_V210, getXenoTrialsResearchArtV210, getXenoTrialsR
 
 const approved = [
   ['BIGCHAP', 'mire-v209-bigchap', 'dedicated-pose', 'hive'],
-  ['SCORCHED', 'mire-v210-scorched', 'original-mire-model', 'pursuit'],
+  ['SCORCHED', 'mire-v210-scorched', 'original-mire-model', 'pursuit', 'Scorched · étude MIRE', 'Scorched · MIRE study'],
   ['DEACON', 'mire-v209-deacon', 'reference-adaptation', 'pursuit'],
   ['NEOMORPH', 'mire-v209-neomorph', 'reference-adaptation', 'pursuit'],
   ['PREDALIEN-AVPR', 'mire-v210-predalien-avpr', 'original-mire-model', 'hive'],
   ['PRAETORIAN', 'mire-v209-praetorian', 'comparison-model', 'containment', 'Praetorian · comparaison MIRE', 'Praetorian · MIRE comparison'],
-  ['PRAETORIAN-AVP', 'mire-v210-praetorian-avp', 'original-mire-model', 'containment'],
+  ['PRAETORIAN-AVP', 'mire-v210-praetorian-avp', 'original-mire-model', 'containment', 'Praetorian · AvP Classic 2000', 'Praetorian · AvP Classic 2000'],
   ['PRAETORIAN-AFE', 'mire-v210-praetorian-afe', 'original-mire-model', 'containment'],
   ['PRAETORIAN-AFE2', 'mire-v210-praetorian-afe2', 'original-mire-model', 'containment'],
   ['SIX', 'mire-v209-six', 'lineage-model', 'pursuit', 'Lignée Specimen Six · modèle MIRE', 'Specimen Six lineage · MIRE model'],
   ['SIREN', 'mire-v210-siren', 'original-mire-model', 'hive'],
-  ['STRIKER', 'mire-v210-striker', 'original-mire-model', 'pursuit'],
+  ['STRIKER', 'mire-v210-striker', 'original-mire-model', 'containment', 'Striker · modèle MIRE', 'Striker · MIRE model'],
   ['BLIGHT', 'mire-v209-blight', 'reference-adaptation', 'rival-lab']
 ];
 const dossiers = new Map(XENO_TRIALS_RESEARCH_V210

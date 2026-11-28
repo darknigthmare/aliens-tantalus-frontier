@@ -5,6 +5,7 @@ import { getXenoTrialsPracticeV207, normalizeXenoTrialsPracticeV207 } from './xe
 import { XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
 import { createXenoTrialsModesProgressV119, normalizeXenoTrialsModesProgressV119, normalizeXenoTrialsRulesV119,
   resolveXenoTrialsActivityV119, settleXenoTrialsActivityV119 } from './xeno-trials-modes-v119.js';
+import { XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231 } from './xeno-trials-character-routes-v231.js';
 import { getXenoTrialsHordeProtocolV180 } from './xeno-trials-horde-v180.js';
 import { createXenoTrialsHordeCheckpointV186, normalizeXenoTrialsHordeCheckpointV186,
   isXenoTrialsCheckpointForwardV186 } from './xeno-trials-horde-checkpoint-v186.js';
@@ -22,6 +23,10 @@ const stageIds = new Set(XENO_TRIALS_STAGES_V96.map(f => f.id));
 export const XENO_TRIALS_STARTERS_V96 = Object.freeze(['warrior', 'runner', 'arachnoid']);
 const integer = (value, max = 1000000) => Number.isFinite(value) ? Math.max(0, Math.min(max, Math.floor(value))) : 0;
 const record = value => value && typeof value === 'object' && !Array.isArray(value);
+// A route issues a temporary evaluation specimen. Ordinary roster ownership
+// continues to come from the saved unlock list.
+const routeLoanV231 = (activity, id) => activity?.branch === XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231
+  && activity.forcedPlayerId === id;
 
 /** This is an isolated simulation economy, never campaign money or canonical lore. */
 export function createXenoTrialsProgressV96() {
@@ -44,7 +49,7 @@ export function normalizeXenoTrialsConfigV96(value = {}) {
     ...(horde ? { hordeV180: { protocolId: horde.id } } : {}),
     ...(operation ? { operationV188: { id: operation.id } } : {}),
     ...(record(value.activityV119) ? { activityV119: {
-      branch: ['campaign', 'contracts', 'challenges', 'on-demand', 'horde', 'operations'].includes(value.activityV119.branch) ? value.activityV119.branch : 'on-demand',
+      branch: ['campaign', 'contracts', 'challenges', 'on-demand', 'horde', 'operations', XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231].includes(value.activityV119.branch) ? value.activityV119.branch : 'on-demand',
       id: typeof value.activityV119.id === 'string' ? value.activityV119.id.slice(0, 64) : 'on-demand',
       ...(value.activityV119.branch === 'on-demand' ? { rules: normalizeXenoTrialsRulesV119(value.activityV119.rules) } : {})
     }, rulesV119: normalizeXenoTrialsRulesV119(value.rulesV119) } : {})
@@ -83,12 +88,13 @@ export function normalizeXenoTrialsProgressV96(value) {
         unlockId: fighterIds.has(e.modeReward.unlockId) ? e.modeReward.unlockId : null, continuing: e.modeReward.continuing === true } } : {}) }));
   const ticket = value.pending;
   if (record(ticket) && ticket.matchId === `xt96-${base.serial}` && base.serial > 0
-    && record(ticket.config) && base.unlocked.includes(ticket.config.playerId)
+    && record(ticket.config)
     && Number.isInteger(ticket.config.seed) && ticket.config.seed > 0 && ticket.config.seed <= 0x7fffffff
     && !base.ledger.some(e => e.matchId === ticket.matchId)) {
+    const activity = ticket.config.activityV119 && resolveXenoTrialsActivityV119(ticket.config.activityV119, base.modesV119);
+    if (!base.unlocked.includes(ticket.config.playerId) && !routeLoanV231(activity, ticket.config.playerId)) return base;
     base.pending = { matchId: ticket.matchId, config: { ...normalizeXenoTrialsConfigV96(ticket.config),
       seed: ticket.config.seed, matchId: ticket.matchId } };
-    const activity = ticket.config.activityV119 && resolveXenoTrialsActivityV119(ticket.config.activityV119, base.modesV119);
     const run = base.modesV119.challengeRun;
     const runMismatch = run && (!activity || activity.branch !== 'challenges' || activity.id !== run.id || ticket.config.playerId !== run.playerId);
     // A resumed series belongs to its current authored wave. A stale ticket
@@ -195,6 +201,8 @@ export function getXenoTrialsUnlockCostV96(id) {
   const fighter = XENO_TRIALS_FIGHTERS_V96.find(f => f.id === id);
   if (!fighter) return null;
   if (XENO_TRIALS_STARTERS_V96.includes(id)) return 0;
+  // Preserve the already published study authorization price after posture correction.
+  if (id === 'mire-v210-striker') return 300;
   // Simulation prices reflect threat, never insertion order or canonical value.
   const identity = `${fighter.id} ${fighter.profileId} ${fighter.label}`.toLowerCase();
   if (/queen|reine/.test(identity)) return 1400;
@@ -223,10 +231,11 @@ export function beginXenoTrialsV96(value, configuration, { arbiterProgressV190, 
     return { applied: false, state, reason: 'activity-unavailable' };
   if (archive && !getXenoTrialsArchiveAccessV207({ arbiterProgressV190, standaloneV207, trialsProgress: state }).available)
     return { applied: false, state, reason: 'arbiter-archives-locked' };
-  if (!state.unlocked.includes(config.playerId)) return { applied: false, state, reason: 'fighter-locked' };
+  const activity = config.activityV119 && resolveXenoTrialsActivityV119(config.activityV119, state.modesV119);
+  if (!state.unlocked.includes(config.playerId) && !routeLoanV231(activity, config.playerId))
+    return { applied: false, state, reason: 'fighter-locked' };
   if (state.modesV119.challengeRun && !config.activityV119) return { applied: false, state, reason: 'activity-unavailable' };
   if (config.activityV119) {
-    const activity = resolveXenoTrialsActivityV119(config.activityV119, state.modesV119);
     if (!activity || (activity.branch === 'contracts' && activity.cycle !== state.modesV119.contractCycle)
       || (state.modesV119.challengeRun && (activity.branch !== 'challenges' || activity.id !== state.modesV119.challengeRun.id))
       || (activity.forcedPlayerId && activity.forcedPlayerId !== config.playerId)
@@ -353,7 +362,10 @@ export function settleXenoTrialsV96(value, result) {
   const extension = settleXenoTrialsActivityV119(state.modesV119, ticket.config, result);
   state.modesV119 = extension.modes;
   const credits = (won ? 80 + bonus : draw ? 25 : 15) + extension.receipt.bonus, xp = won ? 60 + bonus : draw ? 20 : 10;
-  if (extension.receipt.unlockId && fighterIds.has(extension.receipt.unlockId) && !state.unlocked.includes(extension.receipt.unlockId)) state.unlocked.push(extension.receipt.unlockId);
+  if (extension.receipt.unlockId && fighterIds.has(extension.receipt.unlockId)) {
+    if (!state.unlocked.includes(extension.receipt.unlockId)) state.unlocked.push(extension.receipt.unlockId);
+    else if (ticket.config.activityV119?.branch === XENO_TRIALS_CHARACTER_ROUTES_BRANCH_V231) extension.receipt.unlockId = null;
+  }
   state.credits = integer(state.credits + credits); state.xp = integer(state.xp + xp);
   state[won ? 'wins' : draw ? 'draws' : 'losses'] += 1;
   if (won) state.factionWins[ticket.config.factionId] = integer(state.factionWins[ticket.config.factionId]) + 1;

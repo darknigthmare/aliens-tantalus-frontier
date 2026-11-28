@@ -46,7 +46,7 @@ test('the sixteen pairs bind both original supers to exact roster profiles and B
   const known = new Map(bible.tables['07_Supers'].rows.map(row => [row[0], row[1]]));
   assert.equal(XENO_TRIALS_SUPER_KITS_V209.length, 16);
   const addedLater = new Set([...XENO_TRIALS_SUPER_KITS_V210, ...XENO_TRIALS_SUPER_KITS_V211].map(kit => kit.first.fighterId));
-  const original = XENO_TRIALS_FIGHTERS_V96.filter(fighter => !addedLater.has(fighter.id));
+  const original = XENO_TRIALS_FIGHTERS_V96.filter(fighter => known.has(fighter.id + '::super1') && !addedLater.has(fighter.id));
   assert.equal(original.filter(getXenoTrialsSuperV148).length, 21);
   assert.equal(original.filter(fighter => fighter.id !== 'import-game-afe2-exploder' && getXenoTrialsRiposteV208(fighter)).length, 20);
   const records = XENO_TRIALS_SUPER_KITS_V209.flatMap(kit => [kit.first, kit.counter]);

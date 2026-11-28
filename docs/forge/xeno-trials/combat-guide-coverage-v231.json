@@ -1,0 +1,260 @@
+{
+  "baseline": "012fc8237fef4dbc81c9649719db1fe2fdc3e08e",
+  "sourceDocuments": [
+    {
+      "file": "Combat_Games_Extension_01_Tag_Taunts_Bonus_v1.0.txt",
+      "sha256": "fc0b6b418218a757bf4980cc02111529445b1d683b151618970020e8d6433c83"
+    },
+    {
+      "file": "Combat_Games_Extension_02_Slots_Verrouilles_Deblocages_Abonnes_v1.0.txt",
+      "sha256": "b55e17f4abe75920d8d1c9e2e17057ce9831cf60c470ae537c584b3b9cd188f0"
+    },
+    {
+      "file": "Combat_Games_Guide_General_v1.0.txt",
+      "sha256": "11d47b890fb1dbcc5cb194349f375786a823a98b8544db76d7d23c9c7e11deea"
+    }
+  ],
+  "globalCompletionClaim": false,
+  "canonExactApproval": false,
+  "roster": {
+    "previous": 189,
+    "current": 202,
+    "researchModels": 15,
+    "researchOverlap": 13,
+    "uniqueIdentities": 204,
+    "uniqueAppearances": 205,
+    "newCharacterDrawings": 2,
+    "newPresentationDrawings": 3,
+    "previousNewPresentationDrawings": 2
+  },
+  "rows": [
+    {
+      "source": "general",
+      "sections": "01-03,17",
+      "id": "identity",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-data-v96.js",
+        "src/xeno-trials-recruits-v230.js"
+      ],
+      "assessment": "202 roster models/204 unique identities. Striker posture, movement role and family corrected; AvP edition disambiguated. No global canonical fidelity approval."
+    },
+    {
+      "source": "general",
+      "sections": "04-05",
+      "id": "combat",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-engine-v96.js",
+        "src/xeno-trials-moveset-v207.js",
+        "src/xeno-trials-recruit-kits-v231.js"
+      ],
+      "assessment": "202 selectable identities each resolve H/O and Super I/II; 38 new commands. Ordinary moves, contact choreography and animation are still partial."
+    },
+    {
+      "source": "general",
+      "sections": "06",
+      "id": "supers-finishers",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-supers-v148.js",
+        "src/xeno-trials-finishers-v207.js"
+      ],
+      "assessment": "Signed outcomes and restricted supported contacts; not a complete painted finisher for every target."
+    },
+    {
+      "source": "general",
+      "sections": "07,18",
+      "id": "presentation",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-selection-motion-v230.js",
+        "src/xeno-trials-presentation-v230.js",
+        "src/xeno-trials-research-art-v231.js"
+      ],
+      "assessment": "Five new original PNGs: Predalien AVPR neutral/select/intro/victory and Striker neutral; drawing/edition fidelity remains provisional and separate from native choreography."
+    },
+    {
+      "source": "general",
+      "sections": "08",
+      "id": "individual-stories",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-modes-v119.js",
+        "src/xeno-trials-character-routes-v231.js",
+        "src/xeno-trials-character-route-ui-v231.js"
+      ],
+      "assessment": "One complete four-chapter Big Chap MIRE pilot with prologue, sealed future chapters, log, epilogue, persistent loan and final permanent unlock. Other identities remain open."
+    },
+    {
+      "source": "general",
+      "sections": "09-10",
+      "id": "campaign",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-arbiter-campaign-v190.js",
+        "src/xeno-trials-modes-v119.js"
+      ],
+      "assessment": "Integrated AB-40 investigation and standalone MIRE campaign exist; chapter art and narrative scenes remain partial."
+    },
+    {
+      "source": "general",
+      "sections": "11-12",
+      "id": "bosses-modes",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-horde-v180.js",
+        "src/xeno-trials-operations-v188.js"
+      ],
+      "assessment": "Duel, Boss Rush, hordes and operations; local Versus product flow, co-op and tournament remain deferred."
+    },
+    {
+      "source": "general",
+      "sections": "13-16",
+      "id": "arenas",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-stage-hazards-v188.js",
+        "src/xeno-trials-stage-events-v211.js"
+      ],
+      "assessment": "131 arenas; contextual hazards do not provide all possible physical linked-arena transitions."
+    },
+    {
+      "source": "general",
+      "sections": "19-22",
+      "id": "interface-training-accessibility",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-ui-v96.js",
+        "src/xeno-trials-practice-v207.js"
+      ],
+      "assessment": "Native UI, training and comfort controls; simultaneous full keyboard/gamepad/screen-reader certification is not asserted."
+    },
+    {
+      "source": "general",
+      "sections": "23",
+      "id": "network-replays",
+      "status": "deferred",
+      "evidence": [
+        "src/xeno-trials-runtime-v96.js"
+      ],
+      "assessment": "No online/rollback/full-match replay product; training recordings are a separate restricted tool."
+    },
+    {
+      "source": "general",
+      "sections": "24-29",
+      "id": "progression-validation",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-progress-v96.js",
+        "scripts/test-release-v143.mjs"
+      ],
+      "assessment": "Persistent local authorization and signed receipts; production completeness is distinct from playable mechanics."
+    },
+    {
+      "source": "extension01",
+      "sections": "30-31,35-40",
+      "id": "teams-tag-assists",
+      "status": "deferred",
+      "evidence": [
+        "src/xeno-trials-engine-v96.js"
+      ],
+      "assessment": "No active/bench team lifecycle, tag resource, assist authority or team ending."
+    },
+    {
+      "source": "extension01",
+      "sections": "32-34",
+      "id": "taunts-selection",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-presentation-v211.js",
+        "src/xeno-trials-selection-motion-v230.js"
+      ],
+      "assessment": "Existing presentation taunts plus V230 selection/deselection; not a new action advantage."
+    },
+    {
+      "source": "extension01",
+      "sections": "41-43",
+      "id": "clash",
+      "status": "deferred",
+      "evidence": [
+        "src/xeno-trials-engine-v96.js"
+      ],
+      "assessment": "Double KO and projectile collision do not constitute a Clash QTE."
+    },
+    {
+      "source": "extension01",
+      "sections": "44-49",
+      "id": "bonus-stages",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-horde-v180.js",
+        "src/xeno-trials-research-lab-v209.js"
+      ],
+      "assessment": "Horde defense, extraction, physical operations and laboratory trials; team-only coordination is not applicable to current solo mode."
+    },
+    {
+      "source": "extension02",
+      "sections": "50-53,63",
+      "id": "slots-discovery",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-ui-v96.js",
+        "src/xeno-trials-progress-v96.js"
+      ],
+      "assessment": "Visible locked dossiers and permanent CR purchases; no fully hidden secret identity state."
+    },
+    {
+      "source": "extension02",
+      "sections": "54-56",
+      "id": "costumes-stages-routes",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-archive-access-v207.js"
+      ],
+      "assessment": "Two Arachnoid palettes and archive gates; costume-specific acquisitions and arena rights remain partial."
+    },
+    {
+      "source": "extension02",
+      "sections": "57-58,64-65",
+      "id": "local-acquisition",
+      "status": "adapted",
+      "evidence": [
+        "src/xeno-trials-progress-v96.js"
+      ],
+      "assessment": "Existing permanent credit purchases plus one chapter-final permanent Big Chap authorization, with alternate prior purchase, unique reward and genuine saved-ticket replay."
+    },
+    {
+      "source": "extension02",
+      "sections": "59-62,66-67",
+      "id": "subscriber-access",
+      "status": "deferred",
+      "evidence": [
+        "src/xeno-trials-offline-v223.js"
+      ],
+      "assessment": "No verified external membership service; offline media availability is distinct from entitlement. Expiry in online/tag modes is not applicable while those modes are absent."
+    }
+  ],
+  "v231": {
+    "selectableCharacters": 202,
+    "specializedCommands": 808,
+    "newCommands": 38,
+    "newSignatureCommands": 12,
+    "newSupers": 26,
+    "individualRoutes": 1,
+    "routeChapters": 4,
+    "finaleUnlock": "mire-v209-bigchap",
+    "sourceCheckpointFixtures": 20,
+    "newPngFiles": 5,
+    "newNeutralBodies": 2,
+    "newPresentedStates": 3,
+    "scorchedNewDrawing": "blocked-by-generation-tool",
+    "canonExact": false,
+    "strikerOriginalMireRoleAdaptation": true,
+    "predalienFilmReferenceVisualReview": "provisional-text-reference-only",
+    "coldOfflineProductChanges": 0,
+    "coldOfflineCause": "test-closed-browser-before-worker-install-completed",
+    "v230ColdOfflineBaselinePassed": 19,
+    "v231ColdOfflineProof": "separate-exact-artifact-check-required"
+  }
+}
