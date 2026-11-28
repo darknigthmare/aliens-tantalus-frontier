@@ -5467,6 +5467,12 @@ function setupRuntimeControls() {
     keyLabel: () => String(normalizeKeyBindingsV188(saveSystem.data?.settings?.keyBindingsV188).pump || '').replace(/^(Key|Digit)/, '') || '—'
   };
   if (byId('mission-pump-v188')) byId('mission-pump-v188').onclick = () => engine.requestPumpV188?.(engine.player);
+  // V188 lot C: secondary fire — key label for the HUD counter; the touch button exists only while the held weapon has a secondary.
+  engine.secondaryInputV188 = {
+    language: () => document.documentElement.lang,
+    keyLabel: () => String(normalizeKeyBindingsV188(saveSystem.data?.settings?.keyBindingsV188).secondaryFire || '').replace(/^(Key|Digit)/, '') || '—',
+    onAvailability: (available) => { const button = byId('mission-secondary-v188'); if (button) button.hidden = !available; }
+  };
   syncPumpTouchButtonV188();
   // Experimental physical feed only: Shift+R performs an honest speed reload.
   // Capture before the ordinary canvas R handler so one edge cannot start two reloads.

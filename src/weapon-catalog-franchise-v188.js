@@ -17,6 +17,7 @@
  * Heavy Pulse Rifle plate by modulo, which would lend that art to another weapon.
  */
 import { PROVISIONAL_PLAQUE_ADMISSION_V188 } from './weapon-provisional-plaque-v188.js';
+import { FRANCHISE_LOT_C_ROWS_V188, FRANCHISE_LOT_C_RESEARCH_V188 } from './weapon-catalog-franchise-c-v188.js';
 const freeze = value => {
   if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
   for (const child of Object.values(value)) freeze(child);
@@ -51,6 +52,8 @@ export const WEAPON_RESEARCH_SUPPLEMENT_V188 = freeze([
   ['proposed-v188-alien-earth-kel-tec-ksg', 'Kel-Tec KSG (Morrow)', 'Alien: Earth (2025)', URL.earth],
   ['proposed-v188-alien-earth-steyr-aug', 'Steyr AUG', 'Alien: Earth (2025)', URL.earthHook],
   ['proposed-v188-alien-earth-kriss-vector', 'KRISS Vector', 'Alien: Earth (2025)', URL.earthHook]
+  // Lot C (src/weapon-catalog-franchise-c-v188.js): rows found while reading the lists of the remaining works.
+  , ...FRANCHISE_LOT_C_RESEARCH_V188
 ].map(([id, name, work, sourceUrl]) => ({ id, name, work, sourceUrl, priority: 'P1', admission: 'RESEARCH_ONLY', canonExact: false,
   evidence: 'recorded-with-source-v188' })));
 
@@ -111,10 +114,10 @@ const ROWS = [
     refs: ['https://propstore.com/product/alien-resurrection-1997/14-ellen-ripleys-sigourney-weaver-and-gary-christies-gary-dourdan-screen-and-photo-matched-light-up-draco-double-burner'],
     evidence: FILM, verified: false, mech: 'fuel-canister-flame-jet', feed: ['tank', 70, null, 'feed not documented'],
     ammo: 'fuel [À DÉFINIR]', stats: [30, 9, 2.6, 0],
-    fr: 'Arme lourde de l’équipage du Betty dans Alien Resurrection (1997), vue en lance-flammes, lance-grenades et fusil selon l’IMFDB. Seul le lance-flammes est jouable ici. Plaque provisoire dessinée.',
-    en: 'Heavy weapon of the Betty crew in Alien Resurrection (1997), seen as a flamethrower, grenade launcher and rifle according to IMFDB. Only the flamethrower is playable here. Provisional drawn plaque.',
+    fr: 'Arme lourde de l’équipage du Betty dans Alien Resurrection (1997), vue en lance-flammes, lance-grenades et fusil selon l’IMFDB. Le lance-flammes est le tir principal, le lance-grenades le tir secondaire ; le mode fusil n’est pas jouable. Plaque provisoire dessinée.',
+    en: 'Heavy weapon of the Betty crew in Alien Resurrection (1997), seen as a flamethrower, grenade launcher and rifle according to IMFDB. The flamethrower is the primary fire, the grenade launcher the secondary fire; the rifle mode is not playable. Provisional drawn plaque.',
     documented: ['modes fusil, lance-grenades et lance-flammes (IMFDB)', 'conçu par Nigel Phelps, construit de toutes pièces (Prop Store)'],
-    toDefine: ['modes fusil et lance-grenades non implémentés', 'contenance', 'plaque native'] },
+    toDefine: ['mode fusil non implémenté (lance-grenades : tir secondaire, lot C)', 'contenance', 'plaque native'] },
   { n: 203, slug: 'usm-standard-sidearm', name: 'USM Standard Sidearm', canonical: 'USM standard sidearm [À VÉRIFIER]',
     family: 'ballistic', tags: ['sidearm', 'portable'], cat: 'pistol', source: 'USM', work: 'Alien Resurrection (1997)',
     research: 'proposed-usm-standard-sidearm', url: URL.resurrection, refs: [], evidence: NAME, verified: false, mech: 'semi-automatic-pistol',
@@ -186,9 +189,9 @@ const ROWS = [
     family: 'ballistic', tags: ['rifle', 'portable'], cat: 'rifle', source: 'Covenant', work: 'Alien: Covenant (2017)',
     research: 'proposed-v188-covenant-thales-f90-sl40', url: URL.covenant, refs: [], evidence: FILM, verified: false, mech: 'automatic-rifle',
     feed: ['box', 30, null, 'capacity of the real rifle not consulted [À VÉRIFIER]'], ammo: '5,56 mm (arme réelle) [À VÉRIFIER]', stats: [25, 8, 2.2, 30],
-    fr: 'Fusil du soldat Cole dans Alien: Covenant (2017), identifié comme un Thales F90 équipé d’un lance-grenades SL40 par l’IMFDB. Le lance-grenades n’est pas jouable ici. Plaque provisoire dessinée.',
-    en: 'Private Cole’s rifle in Alien: Covenant (2017), identified as a Thales F90 fitted with an SL40 grenade launcher by IMFDB. The grenade launcher is not playable here. Provisional drawn plaque.',
-    documented: ['Thales F90 avec Thales SL40 porté par Cole (IMFDB)'], toDefine: ['lance-grenades SL40 non implémenté', 'capacité', 'plaque native'] },
+    fr: 'Fusil du soldat Cole dans Alien: Covenant (2017), identifié comme un Thales F90 équipé d’un lance-grenades SL40 par l’IMFDB. Le lance-grenades est le tir secondaire. Plaque provisoire dessinée.',
+    en: 'Private Cole’s rifle in Alien: Covenant (2017), identified as a Thales F90 fitted with an SL40 grenade launcher by IMFDB. The grenade launcher is the secondary fire. Provisional drawn plaque.',
+    documented: ['Thales F90 avec Thales SL40 porté par Cole (IMFDB)'], toDefine: ['calibre et capacité du SL40 (tir secondaire à un coup proposé, lot C)', 'capacité', 'plaque native'] },
   { n: 213, slug: 'covenant-beretta-92fs', name: 'Beretta 92FS Brigadier', canonical: 'Beretta 92FS Brigadier (Alien: Covenant)',
     family: 'ballistic', tags: ['sidearm', 'portable'], cat: 'pistol', source: 'Covenant', work: 'Alien: Covenant (2017)',
     research: 'proposed-beretta-92fs', url: URL.covenant, refs: [], evidence: FILM, verified: false, mech: 'semi-automatic-pistol',
@@ -273,23 +276,23 @@ const ROWS = [
     family: 'ballistic', tags: ['sidearm', 'burst', 'portable'], cat: 'pistol', source: 'USCM', work: 'Aliens vs Predator (2010)',
     research: 'proposed-vp78-pistol', url: URL.avp2010, refs: [], evidence: GAME, verified: false, mech: 'repeating-three-round-burst',
     feed: ['box', 18, null, 'the source game gives unlimited ammunition'], ammo: '9 mm « squash-head » (liste du jeu)', stats: [16, 2.6, 1.6, 20],
-    fr: 'Arme de poing de dernier recours d’Aliens vs Predator (2010), tirant au coup par coup ou par rafales de trois. Le jeu d’origine lui donne des munitions illimitées ; la capacité est ici un réglage. Plaque provisoire dessinée.',
-    en: 'Last-resort sidearm from Aliens vs Predator (2010), firing single shots or three-round bursts. The source game gives it unlimited ammunition; the capacity here is tuning. Provisional drawn plaque.',
-    documented: ['coup par coup ou rafale de trois, 9 mm « squash-head », munitions illimitées (liste AvPGalaxy)'], toDefine: ['coup par coup non sélectionnable ici', 'plaque native'] },
+    fr: 'Arme de poing de dernier recours d’Aliens vs Predator (2010), tirant au coup par coup ou par rafales de trois : la rafale est le tir principal, le coup par coup le tir secondaire. Le jeu d’origine lui donne des munitions illimitées ; la capacité est ici un réglage. Plaque provisoire dessinée.',
+    en: 'Last-resort sidearm from Aliens vs Predator (2010), firing single shots or three-round bursts: the burst is the primary fire, the single shot the secondary fire. The source game gives it unlimited ammunition; the capacity here is tuning. Provisional drawn plaque.',
+    documented: ['coup par coup ou rafale de trois, 9 mm « squash-head », munitions illimitées (liste AvPGalaxy)'], toDefine: ['sélecteur de tir du jeu d’origine (ici : rafale au tir principal, coup par coup au tir secondaire, lot C)', 'plaque native'] },
   { n: 226, slug: 'zx-76-shotgun', name: 'ZX-76 Shotgun', canonical: 'ZX-76 Shotgun',
     family: 'ballistic', tags: ['shotgun', 'portable'], cat: 'shotgun', source: 'USCM', work: 'Aliens vs Predator (2010)',
     research: 'proposed-zx-76-shotgun', url: URL.avp2010, refs: [], evidence: GAME, verified: false, mech: 'twin-barrel-shotgun',
     feed: ['box', 6, null, 'the list only says it holds few rounds'], ammo: 'shotshell [À DÉFINIR]', stats: [46, 1.3, 3.2, 14],
-    fr: 'Fusil à canons jumelés d’Aliens vs Predator (2010), redoutable de près et long à recharger. Le tir secondaire des deux canons n’est pas jouable ici. Plaque provisoire dessinée.',
-    en: 'Twin-barrel shotgun from Aliens vs Predator (2010), deadly up close and slow to reload. The both-barrels secondary fire is not playable here. Provisional drawn plaque.',
+    fr: 'Fusil à canons jumelés d’Aliens vs Predator (2010), redoutable de près et long à recharger. Le tir secondaire décharge les deux canons. Plaque provisoire dessinée.',
+    en: 'Twin-barrel shotgun from Aliens vs Predator (2010), deadly up close and slow to reload. The secondary fire discharges both barrels. Provisional drawn plaque.',
     documented: ['tir secondaire des deux canons, peu de cartouches, rechargement long (liste AvPGalaxy)'], toDefine: ['capacité', 'mécanisme d’alimentation', 'plaque native'] },
   { n: 227, slug: 'm41a-2-pulse-rifle', name: 'M41A/2 Pulse Rifle', canonical: 'M41A/2 Pulse Rifle',
     family: 'ballistic', tags: ['rifle', 'portable'], cat: 'rifle', source: 'USCM', work: 'Aliens vs Predator (2010)',
     research: 'proposed-m41a-2-pulse-rifle-avp2010', url: URL.avp2010, refs: [], evidence: GAME, verified: false, mech: 'automatic-rifle',
     feed: ['box', 99, null, 'capacity not stated by the list'], ammo: '[À DÉFINIR]', stats: [22, 9, 1.8, 30],
-    fr: 'Fusil à impulsions de départ d’Aliens vs Predator (2010), avec un lance-grenades en tir secondaire dans le jeu d’origine. Le lance-grenades n’est pas jouable sur ce modèle. Plaque provisoire dessinée.',
-    en: 'Starting pulse rifle from Aliens vs Predator (2010), with a grenade launcher as secondary fire in the source game. The grenade launcher is not playable on this model. Provisional drawn plaque.',
-    documented: ['tir automatique en rafales courtes, lance-grenades secondaire (liste AvPGalaxy)'], toDefine: ['capacité', 'lance-grenades non implémenté sur ce modèle', 'plaque native'] },
+    fr: 'Fusil à impulsions de départ d’Aliens vs Predator (2010), avec un lance-grenades en tir secondaire, comme dans le jeu d’origine. Plaque provisoire dessinée.',
+    en: 'Starting pulse rifle from Aliens vs Predator (2010), with a grenade launcher as secondary fire, as in the source game. Provisional drawn plaque.',
+    documented: ['tir automatique en rafales courtes, lance-grenades secondaire (liste AvPGalaxy)'], toDefine: ['capacité', 'capacité du lance-grenades (quatre grenades proposées, lot C)', 'plaque native'] },
   { n: 228, slug: 'm59-b-smartgun', name: 'M59/B Smartgun', canonical: 'M59/B Smartgun',
     family: 'ballistic', tags: ['smart', 'heavy'], cat: 'heavy', source: 'USCM', work: 'Aliens vs Predator (2010)',
     research: 'proposed-m59-b-smartgun', url: URL.avp2010, refs: [], evidence: GAME, verified: false, mech: 'auto-tracking-machine-gun',
@@ -355,7 +358,7 @@ const common = {
   visualStatus: 'canvas-placeholder-native-plaque-required', referenceStatus: 'SOURCE_IDENTITY_NO_PLAQUE',
   plaqueStatus: 'provisional-drawn', admissionV188: PROVISIONAL_PLAQUE_ADMISSION_V188
 };
-export const WEAPON_CATALOG_FRANCHISE_V188 = freeze(ROWS.map(row => ({
+const toWeapon = (row, lot) => ({
   ...common,
   id: 'weapon-' + row.n + '-' + row.slug, name: row.name, canonicalName: row.canonical,
   family: row.family, source: row.source, damage: row.stats[0], fireRate: row.stats[1], magazine: row.feed[1],
@@ -363,19 +366,29 @@ export const WEAPON_CATALOG_FRANCHISE_V188 = freeze(ROWS.map(row => ({
   sourceWork: row.work, appearances: [row.work], researchId: row.research, sourceUrl: row.url, sourceRefs: row.refs,
   identityEvidence: row.evidence, identityVerified: row.verified, sourceMechanism: row.mech, ammunitionV188: row.ammo,
   feedV188: { kind: row.feed[0], capacity: row.feed[1], capacitySource: row.feed[2], capacityDocumented: Boolean(row.feed[2]), note: row.feed[3] },
+  lotV188: lot,
+  // Lot C: a thrown device (grenade, incendiary, mine) is carried by the V130 thrown action — radius, fuse and status are [PROPOSÉ].
+  ...(row.device ? { thrownDeviceV188: { radius: row.device.radius, fuse: row.device.fuse, status: row.device.status } } : {}),
   description: row.fr
-})));
+});
+/** Lot B (ids 197–235): unchanged. */
+export const WEAPON_CATALOG_FRANCHISE_V188 = freeze(ROWS.map(row => toWeapon(row, 'B')));
 export const WEAPON_FRANCHISE_IDS_V188 = Object.freeze(WEAPON_CATALOG_FRANCHISE_V188.map(weapon => weapon.id));
+/** Lot C (ids 236–301, 256 and 296 skipped): the remaining works, appended after lot B. */
+export const WEAPON_CATALOG_FRANCHISE_LOT_C_V188 = freeze(FRANCHISE_LOT_C_ROWS_V188.map(row => toWeapon(row, 'C')));
+export const WEAPON_FRANCHISE_LOT_C_IDS_V188 = Object.freeze(WEAPON_CATALOG_FRANCHISE_LOT_C_V188.map(weapon => weapon.id));
 
-/** Fidelity ledger of the lot: one row per added weapon, three separated statuses. */
-export const WEAPON_FRANCHISE_LEDGER_V188 = freeze(ROWS.map(row => ({
-  weaponId: 'weapon-' + row.n + '-' + row.slug, name: row.name, work: row.work, researchId: row.research,
+/** Fidelity ledger of lots B and C: one row per added weapon, three separated statuses (`lot` tells them apart). */
+const toLedger = (row, lot) => ({
+  weaponId: 'weapon-' + row.n + '-' + row.slug, name: row.name, work: row.work, researchId: row.research, lot,
   sourceUrl: row.url, sourceRefs: row.refs, evidence: row.evidence,
   documented: [...row.documented, ...(row.feed[2] ? ['capacité ' + row.feed[1] + ' (' + row.feed[2] + ')'] : [])],
   adapted: ['dégâts ' + row.stats[0], 'cadence ' + row.stats[1] + '/s', 'rechargement ' + row.stats[2] + ' s',
-    ...(row.feed[2] ? [] : ['capacité ' + row.feed[1]]), 'alimentation de jeu « ' + row.feed[0] + ' »'].map(text => text + ' ' + P),
+    ...(row.feed[2] ? [] : ['capacité ' + row.feed[1]]), 'alimentation de jeu « ' + row.feed[0] + ' »',
+    ...(row.device ? ['rayon ' + row.device.radius + ' px', 'délai ' + row.device.fuse + ' s', 'effet « ' + (row.device.status || 'souffle') + ' »'] : [])].map(text => text + ' ' + P),
   toDefine: row.toDefine, feedNote: row.feed[3],
   canonExact: false, visualFidelity1to1: false, isPurchasable: true, plaque: 'provisional-drawn'
-})));
+});
+export const WEAPON_FRANCHISE_LEDGER_V188 = freeze([...ROWS.map(row => toLedger(row, 'B')), ...FRANCHISE_LOT_C_ROWS_V188.map(row => toLedger(row, 'C'))]);
 /** English descriptions reviewed with the French ones (catalogue key = French text). */
-export const WEAPON_FRANCHISE_DESCRIPTIONS_EN_V188 = freeze(Object.fromEntries(ROWS.map(row => [row.fr, row.en])));
+export const WEAPON_FRANCHISE_DESCRIPTIONS_EN_V188 = freeze(Object.fromEntries([...ROWS, ...FRANCHISE_LOT_C_ROWS_V188].map(row => [row.fr, row.en])));

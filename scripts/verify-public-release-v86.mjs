@@ -619,6 +619,8 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/qa-arsenal-v188.mjs',
   'scripts/verify-weapon-franchise-v188.mjs',
   'scripts/qa-arsenal-franchise-v188.mjs',
+  'scripts/verify-weapon-franchise-lot-c-v188.mjs',
+  'scripts/qa-arsenal-lot-c-v188.mjs',
   'docs/development/ARSENAL_COMPLETION_V188.md',
   'specs/014-arsenal',
   'specs/014-arsenal/spec.md',

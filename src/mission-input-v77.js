@@ -4,7 +4,8 @@ const combatPointerBindingsV83 = new WeakMap();
 const down = (pad, index) => Boolean(pad.buttons?.[index]?.pressed || Number(pad.buttons?.[index]?.value) > 0.55);
 const axis = (pad, index) => Number.isFinite(pad.axes?.[index]) ? pad.axes[index] : 0;
 const controls = [
-  { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', fire: 'KeyF', interact: 'KeyE', jump: 'Space' },
+  // V188: `secondary` is the secondary-fire action (left-stick press; see weapon-secondary-fire-v188.js).
+  { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', fire: 'KeyF', interact: 'KeyE', jump: 'Space', secondary: 'KeyN' },
   { left: 'KeyJ', right: 'KeyL', up: 'KeyI', down: 'KeyK', fire: 'KeyO', jump: 'KeyU' }
 ];
 
@@ -65,7 +66,9 @@ export class MissionGamepadInputV77 {
         actor.gamepadAimHeldV124 = buttons[6];
         actor.gamepadCrouchV124 = buttons[1];
         actor.gamepadMoveV124 = { x: buttons[14] || buttons[15] ? Number(buttons[15]) - Number(buttons[14]) : axis(pad, 0), y: axis(pad, 1) };
-        const held = { left: axis(pad, 0) < -0.25 || buttons[14], right: axis(pad, 0) > 0.25 || buttons[15], up: axis(pad, 1) < -0.25 || buttons[12], down: axis(pad, 1) > 0.25 || buttons[13], fire: buttons[7], interact: buttons[3], jump: buttons[0] };
+        const held = { left: axis(pad, 0) < -0.25 || buttons[14], right: axis(pad, 0) > 0.25 || buttons[15], up: axis(pad, 1) < -0.25 || buttons[12], down: axis(pad, 1) > 0.25 || buttons[13], fire: buttons[7], interact: buttons[3], jump: buttons[0],
+          // The left-stick press stays the speed-reload modifier while the physical magazines pilot is on.
+          secondary: buttons[10] && !this.engine.experimentalPhysicalMagazinesV167 };
         for (const [action, code] of Object.entries(controls[index])) this.engine.setHeldGameplayKeyV77(code, held[action], 'gamepad-' + index);
         for (const [button, method] of [[2, 'reload'], [3, 'interact'], [4, 'activateTracker'], [5, 'toggleVehicle'], [8, 'useMedkit']]) {
           if (this.engine.forgeNarrativeOpenV156) break;

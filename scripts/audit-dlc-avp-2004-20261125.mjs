@@ -636,6 +636,94 @@ export const COVENANT_V017_BIBLE_SUCCESSORS_20261126 = Object.freeze(Object.from
 ));
 // END COVENANT V017 BIBLE HOST RECEIPTS 20261126
 
+// BEGIN TANTALUS PASSE 12 HOST RECEIPTS 20261128
+// Arsenal lot C and the Saison des Reines levels join the exact published head.
+// Every receipt block above remains byte-identical; this final stage maps each
+// pinned source changed by that integration from its exact ba7d8a4d bytes to the
+// merged bytes. It transfers no earlier CI, browser, gameplay or art result.
+export const TANTALUS_PASSE12_BASELINE_20261128 = 'ba7d8a4dc347547d56063f398ac2b7e938570edb';
+export const TANTALUS_PASSE12_SUCCESSORS_20261128 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "docs/arsenal/README.md": {
+    "previousSha256": "e6741d011b30550344130a7decde8d3bf59591840ce696bf5b17ca5e0b25aa32",
+    "currentSha256": "bcacd24908cfb37da1ba31528edef3e475217280bbca81770ad4d358bfc1ddf9"
+  },
+  "docs/development/AUDIT_CONTENU_V188.md": {
+    "previousSha256": "1c8da889e918d3aa28a00a1646093841b51c510cc36a865746d1ae52df4c4ad0",
+    "currentSha256": "26b4e95c0b122dcf321150eb8a8669c6d57ab19e41c139e9fbfdfc088d668981"
+  },
+  "docs/development/QUESTIONS_PROPRIETAIRE_V188.md": {
+    "previousSha256": "da9a09b8eb8c2a02c885b71339a7d1d366dd88bf7ed6271525e52d89b8cf9867",
+    "currentSha256": "d78a8c2ec8f5cf21842fba21717d025bc5beceb3a833dc5e024df2f65eecdede"
+  },
+  "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+    "previousSha256": "e74a6c39b2e4e85f658680578b4e0d03963bc8a42d642638dae4551c302b837c",
+    "currentSha256": "dbc9134bee2c975561abc1a404a13dc78d7744af67cb666ede5810fe9559724e"
+  },
+  "index.html": {
+    "previousSha256": "dd4f1fb7e5f749a566c816f50074aeb39c73b5dc10813da3276dacb40e0d61f7",
+    "currentSha256": "1683db60e074305ac788b7bc1cb552536a41eea3d8f7f8f9f1d1f5385a94c908"
+  },
+  "package.json": {
+    "previousSha256": "ee46a793dcfed996d8177bf2141bf33e145fbfc22855d6776cf99e3c561439dc",
+    "currentSha256": "c67ee706eeb35151428524783f3fa0674cbc875e0d5ee6ec1a4cb2e0fe19502b"
+  },
+  "scripts/i18n-tantalus-xeno-merge-v188.mjs": {
+    "previousSha256": "0847730b37a1c658d686deee4d678e995577db8a547d3782a0a6024c0e4cc78b",
+    "currentSha256": "3d0420bf0b683ba52262a8258944bbcdd6576a99444746a0f60cbbaa5911afc4"
+  },
+  "scripts/verify-accessibility-v188.mjs": {
+    "previousSha256": "148afed871df18be26732f0c0f6043f62f1a0a3fb6dacc2392ea4f5fa3cef7f5",
+    "currentSha256": "cf8eb8f59512e1a4aa9cf5786cee004624c8ca1eac3b71b69f8b5518e5c564b3"
+  },
+  "scripts/verify-audit-v143.mjs": {
+    "previousSha256": "2ceca7377c3b9bf11caf572369efa4b6ec4f8ec7a51a4358fe907e12c8d77882",
+    "currentSha256": "405f72219c09b1d3ce72004457b5d2a2f1eed67262ab3ac5ad3952824f01dad0"
+  },
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "a1539aeab9240e04cae927d11a50a6c1dccfe36157ab487fb715539458f5158c",
+    "currentSha256": "046725da8f29c782ba75655e8b309476ea17ce4fb27f17e5608c8cd9796334cd"
+  },
+  "src/accessibility-v188.js": {
+    "previousSha256": "13fda44f9d159d26c66371fe98bb9eb49a7a714a4b13cadfaa211842d7b4529c",
+    "currentSha256": "80a4df33396396659a5cd3bfc9e2eb35e5f0d1f33487fd098fe733dca0338b1a"
+  },
+  "src/app.js": {
+    "previousSha256": "e3b968211e54bd08eed24b828780a7da0342bc3900541869d7ffb1face1af789",
+    "currentSha256": "ecc4d307466a0eed89231e582b6b101caec9138c6263ef009996d0f662a329e8"
+  },
+  "src/game-production-runtime.js": {
+    "previousSha256": "d8e3ac6670b951450ee375cf982bef5d43493a43e89d604666af41914dd64766",
+    "currentSha256": "21d0d905d4e651cbb4ab9e1dd76af7bac24dfff2b588059939ee2b25b3f7398f"
+  },
+  "src/i18n-en-catalog-v185.js": {
+    "previousSha256": "dc88d2ff0d09e81aebf9a8c90674aa37139a08ba45aa2abc75360ca369108096",
+    "currentSha256": "6ad9f2b4282561aa059b7ba4333c7fba2ab120b94aa979a8087911fb07f08948"
+  },
+  "src/mission-input-v77.js": {
+    "previousSha256": "c564966b27980c6733b7024fa832e6b8dd64e4441b08104a50f4c43e459d49b4",
+    "currentSha256": "0d6252eb313f953b3d032b2fdc81b92ca038b3d38f262dc37db3e24469d90a71"
+  },
+  "src/weapon-actions-v130.js": {
+    "previousSha256": "c8e9035706ab41edcbafe5a40dbd7755d997f09228a6ad3c64151065564e7b25",
+    "currentSha256": "ac1ff6340ad6b1401d4ad750abb0384d0c0ebc6c72b92df7bbc876560ece3c1d"
+  },
+  "sw.js": {
+    "previousSha256": "03d20c98eeadc1ff223ca2a43efec81c9e38ad0bb85aef18c9412917783f1145",
+    "currentSha256": "152c60ab650e9911dcf50bb5615f8e492ef0cc69489cd95c789ddc9db4aa2bf4"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END TANTALUS PASSE 12 HOST RECEIPTS 20261128
+
+// Final link of every chain that resolves through this terminal, whichever
+// branch published the endpoint: an unlisted path keeps its endpoint, a listed
+// path must arrive with its exact ba7d8a4d bytes.
+export function reviewedTantalusPasse12Digest20261128(path, endpoint) {
+  return advanceReceipt(path, endpoint, TANTALUS_PASSE12_SUCCESSORS_20261128,
+    'Broken published-head-to-Tantalus-passe-12 source chain: ');
+}
+
 export function reviewedCovenantV017BibleDigest20261126(path, endpoint) {
   return advanceReceipt(path, endpoint, COVENANT_V017_BIBLE_SUCCESSORS_20261126,
     'Broken merged-bible-to-Covenant-V017 source chain: ');
@@ -654,8 +742,9 @@ export function reviewedCovenantV012HostDigest20261126(path, endpoint) {
     'Broken Covenant-V011-to-V012 host source chain: ');
   return Object.hasOwn(AVP_COVENANT_SUCCESSORS_20261126, path)
     || Object.hasOwn(AVP_COVENANT_V012_SUCCESSORS_20261126, path)
-    ? reviewedCovenantV017BibleDigest20261126(path,
-      reviewedCovenantDlcBibleMergeDigest20261126(path, published)) : published;
+    ? reviewedTantalusPasse12Digest20261128(path, reviewedCovenantV017BibleDigest20261126(path,
+      reviewedCovenantDlcBibleMergeDigest20261126(path, published)))
+    : reviewedTantalusPasse12Digest20261128(path, published);
 }
 
 export function reviewedCovenantHostDigest20261126(path, endpoint) {
@@ -715,8 +804,9 @@ export function reviewedAvpProductionBibleHostDigest20261126(path, endpoint) {
   return Object.hasOwn(AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126, path)
     || Object.hasOwn(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126, path)
     || Object.hasOwn(AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126, path)
-    ? reviewedCovenantV017BibleDigest20261126(path,
-      reviewedCovenantDlcBibleMergeDigest20261126(path, published)) : published;
+    ? reviewedTantalusPasse12Digest20261128(path, reviewedCovenantV017BibleDigest20261126(path,
+      reviewedCovenantDlcBibleMergeDigest20261126(path, published)))
+    : reviewedTantalusPasse12Digest20261128(path, published);
 }
 
 export function reviewedAvpHostDigest20261125(path, endpoint) {
@@ -726,7 +816,8 @@ export function reviewedAvpHostDigest20261125(path, endpoint) {
 }
 
 export function reviewedAliensIncomingDigest20261125(path, endpoint) {
-  if (!Object.hasOwn(AVP_ALIENS_INCOMING_SOURCES_20261125, path)) return endpoint;
+  if (!Object.hasOwn(AVP_ALIENS_INCOMING_SOURCES_20261125, path))
+    return reviewedTantalusPasse12Digest20261128(path, endpoint);
   assert.equal(endpoint, AVP_ALIENS_INCOMING_SOURCES_20261125[path], 'Broken published-Aliens incoming source chain: ' + path);
   const merged = advanceReceipt(path, endpoint, ALIENS_AVP_JOIN_SUCCESSORS_20261125,
     'Broken published-Aliens-to-AVP-merge source chain: ');
@@ -777,12 +868,22 @@ export function avpHostRuntimeSources20261125(view) {
         'Broken merged-bible-to-Covenant-V017 source chain: ' + path);
       endpoints.add(continuation.previousSha256); endpoints.add(continuation.currentSha256);
     }
+    const passe12 = TANTALUS_PASSE12_SUCCESSORS_20261128[path];
+    if (passe12 && result[path] === passe12.currentSha256) continue;
     assert.ok(endpoints.has(result[path]), 'Incorrect AVP host runtime view predecessor: ' + path);
     const mergedEndpoint = merge ? merge.currentSha256
       : (Object.hasOwn(AVP_COVENANT_SUCCESSORS_20261126, path)
         || Object.hasOwn(AVP_COVENANT_V012_SUCCESSORS_20261126, path))
         ? covenant.at(-1).currentSha256 : documents.at(-1).currentSha256;
-    result[path] = reviewedCovenantV017BibleDigest20261126(path, mergedEndpoint);
+    result[path] = reviewedTantalusPasse12Digest20261128(path,
+      reviewedCovenantV017BibleDigest20261126(path, mergedEndpoint));
+  }
+  // A view of a pinned source without an older host receipt holds either its
+  // exact ba7d8a4d bytes or the reviewed merged bytes, never a third digest.
+  const hosts = new Set(hostPaths());
+  for (const [path, receipt] of Object.entries(TANTALUS_PASSE12_SUCCESSORS_20261128)) {
+    if (hosts.has(path) || !Object.hasOwn(result, path) || result[path] === receipt.currentSha256) continue;
+    result[path] = reviewedTantalusPasse12Digest20261128(path, result[path]);
   }
   return Object.freeze(result);
 }
@@ -805,6 +906,8 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     'AVP production documents require the exact corrected bible continuation base');
   assert.equal(COVENANT_V017_BIBLE_BASELINE_20261126, '6c2d610b7faf9ed88fc6c6977a98411ad1880940',
     'Covenant V017 documentation requires the exact published merged campaign base');
+  assert.equal(TANTALUS_PASSE12_BASELINE_20261128, 'ba7d8a4dc347547d56063f398ac2b7e938570edb',
+    'Tantalus passe 12 requires the exact published Aliens 1986 V115 merge head');
   assert.equal(AVP_FIORINA_JOIN_BASELINES_20261125.commonCommit, AVP_HOST_BASELINE_20261125);
   for (const commit of Object.values(AVP_FIORINA_JOIN_BASELINES_20261125)) assert.match(commit, /^[a-f0-9]{40}$/);
   assert.match(AVP_FIORINA_QA_BASELINE_20261125, /^[a-f0-9]{40}$/, 'Fiorina QA requires its exact combined baseline');
@@ -818,7 +921,7 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_COVENANT_SUCCESSORS_20261126,
     AVP_COVENANT_V012_SUCCESSORS_20261126, AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126,
     AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126,
-    COVENANT_V017_BIBLE_SUCCESSORS_20261126]) {
+    COVENANT_V017_BIBLE_SUCCESSORS_20261126, TANTALUS_PASSE12_SUCCESSORS_20261128]) {
     assert.equal(Object.hasOwn(receipts, ownPath), false, 'The AVP terminal cannot admit its own bytes');
     for (const [path, receipt] of Object.entries(receipts)) {
       assert.ok(/^[a-zA-Z0-9._/-]+$/.test(path) && !path.split('/').some(segment => !segment || segment === '.' || segment === '..'), 'Invalid AVP host source path: ' + path);
@@ -956,6 +1059,12 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
       || AVP_FIORINA_QA_SUCCESSORS_20261125[path] || AVP_ALIENS_JOIN_SUCCESSORS_20261125[path]
       || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path] || AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126[path]).previousSha256;
     assert.equal(sha(readSource(path)), reviewedAvpHostDigest20261125(path, seed), 'Unreviewed AVP host source bytes: ' + path);
+  }
+  assert.ok(Object.isFrozen(TANTALUS_PASSE12_SUCCESSORS_20261128));
+  for (const [path, receipt] of Object.entries(TANTALUS_PASSE12_SUCCESSORS_20261128)) {
+    assert.ok(Object.isFrozen(receipt));
+    assert.equal(reviewedTantalusPasse12Digest20261128(path, receipt.previousSha256), receipt.currentSha256);
+    assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed Tantalus passe 12 source bytes: ' + path);
   }
   return Object.freeze({ baselineCommit: AVP_HOST_BASELINE_20261125, successors: paths.length,
     joinedSuccessors: Object.keys(AVP_FIORINA_JOIN_SUCCESSORS_20261125).length,

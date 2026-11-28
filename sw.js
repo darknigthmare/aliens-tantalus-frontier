@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-tantalus-decisions-arsenal-franchise-collier-s1-debat-bioforge-reines-arcs-fiorina-sprites-v116-20261125';
+const CACHE = 'atf-v143-tantalus-arsenal-lot-c-tir-secondaire-fiorina-sprites-v116-20261128';
 const SHELL = Object.freeze([
   '/src/dlc-menu.js',
   '/src/xeno-trials-visual-assets-v205.js',
@@ -91,6 +91,8 @@ const SHELL = Object.freeze([
   '/src/weapon-arsenal-v188.js',
   '/src/weapon-arsenal-runtime-v188.js',
   '/src/weapon-catalog-franchise-v188.js',
+  '/src/weapon-catalog-franchise-c-v188.js',
+  '/src/weapon-secondary-fire-v188.js',
   '/src/weapon-provisional-plaque-v188.js',
   '/src/weapon-underbarrel-v174.js',
   '/src/npc-dialogue-portraits-v168.js',

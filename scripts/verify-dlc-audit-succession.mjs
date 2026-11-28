@@ -20,38 +20,108 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_FIORINA_V116_SUCCESSORS_20261125 as spriteV116Successors,
   AVP_DLC_BIBLE_DOCUMENTS_BASELINE_20261126 as bibleDocumentsBaseline,
   AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126 as bibleDocumentsSuccessors,
-  reviewedDlcBibleDocumentsHostDigest20261126 as advanceBibleDocuments,
+  reviewedDlcBibleDocumentsHostDigest20261126 as advanceBibleDocumentsPasse12,
   AVP_DLC_BIBLE_BRIDGE_BASELINE_20261126 as bibleBridgeBaseline,
   AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126 as bibleBridgeSuccessors,
-  reviewedDlcBibleBridgeHostDigest20261126 as advanceBibleBridge,
+  reviewedDlcBibleBridgeHostDigest20261126 as advanceBibleBridgePasse12,
   AVP_PRODUCTION_BIBLE_BASELINE_20261126 as productionBibleBaseline,
   AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126 as productionBibleSuccessors,
-  reviewedAvpProductionBibleHostDigest20261126 as advanceProductionBible,
+  reviewedAvpProductionBibleHostDigest20261126 as advanceProductionBiblePasse12,
   COVENANT_DLC_BIBLE_MERGE_BASELINES_20261126 as covenantBibleMergeBaselines,
   COVENANT_DLC_BIBLE_MERGE_SOURCES_20261126 as covenantBibleMergeSources,
   reviewedCovenantDlcBibleMergeDigest20261126 as advanceCovenantBibleMerge,
   COVENANT_V017_BIBLE_BASELINE_20261126 as covenantV017BibleBaseline,
   COVENANT_V017_BIBLE_SUCCESSORS_20261126 as covenantV017BibleSuccessors,
   reviewedCovenantV017BibleDigest20261126 as advanceCovenantV017Bible,
-  reviewedFiorinaV116HostDigest20261125 as advanceV116,
+  reviewedFiorinaV116HostDigest20261125 as advanceV116Passe12,
   AVP_COVENANT_BASELINE_20261126 as covenantBaseline,
   AVP_COVENANT_SUCCESSORS_20261126 as covenantSuccessors,
-  reviewedCovenantHostDigest20261126 as advanceCovenant,
+  reviewedCovenantHostDigest20261126 as advanceCovenantPasse12,
   AVP_COVENANT_V012_BASELINE_20261126 as covenantV012Baseline,
   AVP_COVENANT_V012_SUCCESSORS_20261126 as covenantV012Successors,
-  reviewedCovenantV012HostDigest20261126 as advanceCovenantV012,
-  reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
-  reviewedAliensIncomingDigest20261125 as advanceAliens,
-  reviewedAvpHostDigest20261125 as advance, avpHostRuntimeSources20261125 as runtimeView,
-  verifyAvpHostSources20261125 as verify } from './audit-dlc-avp-2004-20261125.mjs';
+  reviewedCovenantV012HostDigest20261126 as advanceCovenantV012Passe12,
+  reviewedFiorinaSpriteHostDigest20261125 as advanceSpritesPasse12,
+  reviewedAliensIncomingDigest20261125 as advanceAliensPasse12,
+  reviewedAvpHostDigest20261125 as advancePasse12, avpHostRuntimeSources20261125 as runtimeViewPasse12,
+  verifyAvpHostSources20261125 as verifyPasse12,
+  TANTALUS_PASSE12_BASELINE_20261128 as passe12Baseline,
+  TANTALUS_PASSE12_SUCCESSORS_20261128 as passe12Successors,
+  reviewedTantalusPasse12Digest20261128 as advanceOnlyPasse12 } from './audit-dlc-avp-2004-20261125.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { createBuildAssetFilter, EXCLUDED_BUILD_ASSET_PATHS } from './build-asset-filter.mjs';
-import { reviewedAfterNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mjs';
+import { reviewedAfterNativeQaResourcesV187 as reviewedAfterNativeQaResourcesPasse12 } from './audit-native-qa-resources-v187.mjs';
 import { XENO_TRIALS_TANTALUS_JOIN_V206 as xenoJoin,
-  reviewedXenoTrialsTantalusJoinV206, verifyXenoTrialsTantalusJoinV206 } from './audit-xeno-production-assets-v206.mjs';
+  reviewedXenoTrialsTantalusJoinV206 as reviewedXenoTrialsTantalusJoinPasse12,
+  verifyXenoTrialsTantalusJoinV206 as verifyXenoTrialsTantalusJoinPasse12 } from './audit-xeno-production-assets-v206.mjs';
 
-const read = path => readFileSync(new URL('../' + path, import.meta.url));
+const readCurrent = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+
+// Tantalus passe 12 follows the published ba7d8a4d head. Every historical test
+// below keeps its original assertions and literals: it reads the exact ba7d8a4d
+// bytes, rebuilt from the current files by the recorded inverse edits and checked
+// against the receipt, and it sees each chain one link before the new terminal.
+// The passe 12 tests at the end of this file cover that last link on real bytes.
+// BEGIN TANTALUS PASSE 12 PUBLISHED RECOVERY 20261128
+const passe12PublishedRecovery = {
+  "docs/arsenal/README.md": [[0, 43767]],
+  "docs/development/AUDIT_CONTENU_V188.md": [[0, 123331], [125436, 135576]],
+  "docs/development/QUESTIONS_PROPRIETAIRE_V188.md": [[0, 89671]],
+  "docs/narrative/CAMPAGNE_PRINCIPALE.md": [[0, 408530], [409912, 593154]],
+  "index.html": [[0, 39268], "          <div class=\"mission-touch-controls runtime-touch\" role=\"group\" aria-label=\"Contrôles tactiles de mission\"><button data-mission-key=\"KeyA\" aria-label=\"Aller à gauche\">←</button><button data-mission-key=\"KeyD\" aria-label=\"Aller à droite\">→</button><button data-mission-key=\"KeyW\" aria-label=\"Monter une échelle\">↑</button><button data-mission-key=\"KeyS\" aria-label=\"Descendre une échelle\">↓</button><button data-mission-key=\"Space\" aria-label=\"Sauter\">SAUT</button><button data-mission-key=\"KeyZ\" aria-label=\"Rester accroupi ou à couvert\">COUVERT</button><button data-mission-key=\"ShiftLeft\" aria-label=\"Viser sur place\">VISER</button><button data-mission-key=\"KeyF\" aria-label=\"Tirer\">F</button><button id=\"mission-melee-v124\" aria-label=\"Attaquer au corps à corps\">CQC</button><button id=\"mission-interact\">E</button><button id=\"mission-tracker\" aria-label=\"Activer le détecteur de mouvement\">Q</button><button id=\"mission-vehicle\">V</button><button id=\"mission-reload\">R</button><button id=\"mission-pump-v188\" aria-label=\"Pomper le fusil à pompe\" hidden>POMPE</button><button id=\"mission-medkit\">H</button><button id=\"mission-neuro-counter\" title=\"Contre-impulsion Neuro\">X</button></div>\n", [40594, 44030]],
+  "package.json": [[0, 1150], "    \"test:weapons\": \"node --test scripts/verify-weapon-presentation-profiles-v124.mjs scripts/verify-weapon-effects-v124.mjs scripts/verify-weapon-runtime-v124.mjs scripts/verify-held-weapon-v125.mjs scripts/verify-weapon-image-cache-v125.mjs scripts/verify-weapon-arsenal-v167.mjs scripts/verify-weapon-magazine-world-v168.mjs scripts/verify-weapon-attachments-v168.mjs scripts/verify-weapon-fidelity-v170.mjs scripts/verify-weapon-research-v171.mjs scripts/verify-weapon-special-feeds-v171.mjs scripts/verify-weapon-underbarrel-v174.mjs scripts/verify-armory-art-installer-v171.mjs scripts/verify-armory-resupply-v174.mjs scripts/verify-weapon-conservation-v177.mjs scripts/verify-weapon-feed-admission-v193.mjs scripts/verify-weapon-arsenal-v188.mjs scripts/verify-weapon-franchise-v188.mjs\",\n", [1993, 24436]],
+  "scripts/i18n-tantalus-xeno-merge-v188.mjs": [[0, 64379], "      \"65 MONDES // COLONIES SIMULÉES\"\n", [80009, 88037]],
+  "scripts/verify-accessibility-v188.mjs": [[0, 1694], "  assert.equal(KEY_ACTIONS_V188.length, 15); // 14 + the manual pump (owner decision 2026-11-23)\n", [1813, 6849]],
+  "scripts/verify-audit-v143.mjs": [[0, 19874], "  assert.equal(h.api.CACHE, 'atf-v143-tantalus-decisions-arsenal-franchise-collier-s1-debat-bioforge-reines-arcs-fiorina-sprites-v116-20261125');\n", [19983, 46485]],
+  "scripts/verify-public-release-v86.mjs": [[0, 34582], [34673, 81847]],
+  "src/accessibility-v188.js": [[0, 5017], "  { id: 'pump', code: 'KeyB', fr: 'Pomper (pompe manuelle)', en: 'Pump (manual pump)' }\n", [5320, 11100]],
+  "src/app.js": [[0, 361519], [362023, 395893]],
+  "src/game-production-runtime.js": [[0, 4446], [4519, 10055], "export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withColonyMissionLevelsV188(withMissionObjectivePanelV188(withStationMissionLevelsV188(withTensionDirectorV188(withArbiterCampaignRuntimeV190(withMagazineRecoveryWorldV168(withArsenalFeedsV188(withMotionTrackerV160(withArchiveRelayPresentationV160(withAlien3ProductionV115(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine)))))))))))))))))))))))))) {\n", [10823, 21724]],
+  "src/i18n-en-catalog-v185.js": [[0, 844352], "\"65 MONDES // COLONIES SIMULÉES\": \"65 WORLDS // SIMULATED COLONIES\"\n", [874085, 940703]],
+  "src/mission-input-v77.js": [[0, 382], "  { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', fire: 'KeyF', interact: 'KeyE', jump: 'Space' },\n", [616, 4295], "        const held = { left: axis(pad, 0) < -0.25 || buttons[14], right: axis(pad, 0) > 0.25 || buttons[15], up: axis(pad, 1) < -0.25 || buttons[12], down: axis(pad, 1) > 0.25 || buttons[13], fire: buttons[7], interact: buttons[3], jump: buttons[0] };\n", [4739, 14882]],
+  "src/weapon-actions-v130.js": [[0, 1903], [2389, 30930]],
+  "sw.js": [[0, 91], "const CACHE = 'atf-v143-tantalus-decisions-arsenal-franchise-collier-s1-debat-bioforge-reines-arcs-fiorina-sprites-v116-20261125';\n", [185, 3906], [3991, 50801]]
+};
+// END TANTALUS PASSE 12 PUBLISHED RECOVERY 20261128
+function publishedBeforePasse12(path, current) {
+  const receipt = passe12Successors[path], edits = passe12PublishedRecovery[path];
+  assert.ok(Array.isArray(edits), 'Missing passe 12 inverse edits: ' + path);
+  assert.equal(sha(current), receipt.currentSha256, 'Unreviewed Tantalus passe 12 source bytes: ' + path);
+  const published = Buffer.concat(edits.map(edit => {
+    if (typeof edit === 'string') return Buffer.from(edit);
+    assert.ok(Array.isArray(edit) && edit.length === 2 && Number.isSafeInteger(edit[0]) && Number.isSafeInteger(edit[1])
+      && edit[0] >= 0 && edit[0] < edit[1] && edit[1] <= current.length, 'Invalid passe 12 inverse edit: ' + path);
+    return current.subarray(edit[0], edit[1]);
+  }));
+  assert.equal(sha(published), receipt.previousSha256, 'Passe 12 inverse edits must recover the exact ba7d8a4d bytes: ' + path);
+  return published;
+}
+const read = path => Object.hasOwn(passe12Successors, path) ? publishedBeforePasse12(path, readCurrent(path)) : readCurrent(path);
+const beforePasse12 = (path, digest) => Object.hasOwn(passe12Successors, path)
+  && digest === passe12Successors[path].currentSha256 ? passe12Successors[path].previousSha256 : digest;
+const publishedDigest = advanceCurrent => (path, endpoint) => beforePasse12(path, advanceCurrent(path, endpoint));
+// Exact ba7d8a4d bytes stand for the reviewed current bytes; any other bytes
+// reach the real verifier unchanged and must be refused by it.
+const currentReader = reader => path => {
+  const bytes = reader(path);
+  return Object.hasOwn(passe12Successors, path) && sha(bytes) === passe12Successors[path].previousSha256
+    ? readCurrent(path) : bytes;
+};
+const advanceBibleDocuments = publishedDigest(advanceBibleDocumentsPasse12);
+const advanceBibleBridge = publishedDigest(advanceBibleBridgePasse12);
+const advanceProductionBible = publishedDigest(advanceProductionBiblePasse12);
+const advanceV116 = publishedDigest(advanceV116Passe12);
+const advanceCovenant = publishedDigest(advanceCovenantPasse12);
+const advanceCovenantV012 = publishedDigest(advanceCovenantV012Passe12);
+const advanceSprites = publishedDigest(advanceSpritesPasse12);
+const advanceAliens = publishedDigest(advanceAliensPasse12);
+const advance = publishedDigest(advancePasse12);
+const reviewedAfterNativeQaResourcesV187 = publishedDigest(reviewedAfterNativeQaResourcesPasse12);
+const reviewedXenoTrialsTantalusJoinV206 = publishedDigest(reviewedXenoTrialsTantalusJoinPasse12);
+const runtimeView = view => Object.freeze(Object.fromEntries(Object.entries(runtimeViewPasse12(view))
+  .map(([path, digest]) => [path, beforePasse12(path, digest)])));
+const verify = (reader = read) => verifyPasse12(currentReader(reader));
+const verifyXenoTrialsTantalusJoinV206 = (reader = read) => verifyXenoTrialsTantalusJoinPasse12(currentReader(reader));
 const audit = 'scripts/audit-dlc-avp-2004-20261125.mjs';
 const expectedPaths = [
   "index.html",
@@ -1007,5 +1077,75 @@ test('the V017 campaign successor remains source-only and changes no general adm
   for (const guard of ['scripts/verify-public-release-v86.mjs', 'scripts/build-asset-filter.mjs']) {
     assert.equal(sha(read(guard)), covenantBibleMergeSources[guard].currentSha256, guard);
     assert.equal(Object.hasOwn(covenantV017BibleSuccessors, guard), false, guard);
+  }
+});
+
+test('Tantalus passe 12 advances only pinned sources from their exact ba7d8a4d bytes to the merged bytes', () => {
+  assert.equal(passe12Baseline, 'ba7d8a4dc347547d56063f398ac2b7e938570edb');
+  assert.ok(Object.isFrozen(passe12Successors));
+  assert.ok(Object.keys(passe12Successors).length > 0);
+  assert.deepEqual(Object.keys(passe12PublishedRecovery).sort(), Object.keys(passe12Successors).sort());
+  for (const [path, receipt] of Object.entries(passe12Successors)) {
+    assert.ok(Object.isFrozen(receipt), path);
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256'], path);
+    assert.match(receipt.previousSha256, /^[a-f0-9]{64}$/, path);
+    assert.match(receipt.currentSha256, /^[a-f0-9]{64}$/, path);
+    assert.notEqual(receipt.previousSha256, receipt.currentSha256, path);
+    assert.equal(sha(readCurrent(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), receipt.previousSha256, path);
+    assert.equal(advanceOnlyPasse12(path, receipt.previousSha256), receipt.currentSha256, path);
+    for (const endpoint of [receipt.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceOnlyPasse12(path, endpoint),
+        /Broken published-head-to-Tantalus-passe-12 source chain/, path);
+  }
+  for (const candidate of ['src/unreviewed.js', '__proto__', 'constructor', audit,
+    'scripts/audit-tantalus-priorities-v188.mjs', 'scripts/audit-xeno-production-assets-v206.mjs']) {
+    assert.equal(Object.hasOwn(passe12Successors, candidate), false, candidate);
+    assert.equal(advanceOnlyPasse12(candidate, 'unreviewed'), 'unreviewed', candidate);
+  }
+  const terminal = readCurrent(audit).toString();
+  const marker = '// BEGIN TANTALUS PASSE 12 HOST RECEIPTS 20261128';
+  assert.equal(terminal.split(marker).length, 2);
+  assert.equal(sha(terminal.slice(0, terminal.indexOf(marker))),
+    '33008a761010d84284ef98fa49a378e7292408f74116b3b45818bf7b4c57c1f4',
+    'All receipt declarations through Covenant V017 remain exact');
+});
+
+test('every published chain reaches the passe 12 bytes through its own historical endpoint', () => {
+  for (const path of verifiedPaths) {
+    const receipt = passe12Successors[path];
+    // finalEndpoint is the published ba7d8a4d endpoint computed from the older receipts alone.
+    const expected = receipt ? receipt.currentSha256 : finalEndpoint(path);
+    if (receipt) assert.equal(receipt.previousSha256, finalEndpoint(path), path);
+    assert.equal(advancePasse12(path, firstEndpoint(path)), expected, path);
+    assert.equal(sha(readCurrent(path)), expected, path);
+    assert.throws(() => advancePasse12(path, expected), brokenChain, path);
+    assert.deepEqual(runtimeViewPasse12({ [path]: firstEndpoint(path) }), { [path]: expected });
+    assert.deepEqual(runtimeViewPasse12({ [path]: finalEndpoint(path) }), { [path]: expected });
+    assert.deepEqual(runtimeViewPasse12({ [path]: expected }), { [path]: expected });
+  }
+  for (const [path, receipt] of Object.entries(passe12Successors)) {
+    assert.deepEqual(runtimeViewPasse12({ [path]: receipt.previousSha256 }), { [path]: receipt.currentSha256 });
+    assert.deepEqual(runtimeViewPasse12({ [path]: receipt.currentSha256 }), { [path]: receipt.currentSha256 });
+    assert.throws(() => runtimeViewPasse12({ [path]: 'f'.repeat(64) }),
+      /Incorrect AVP host runtime view predecessor|Broken published-head-to-Tantalus-passe-12 source chain/, path);
+    assert.equal(advancePasse12('src/unreviewed.js', 'untouched'), 'untouched');
+  }
+  for (const [path, digest] of Object.entries(aliensIncoming)) {
+    const receipt = passe12Successors[path];
+    assert.equal(advanceAliensPasse12(path, digest), receipt ? receipt.currentSha256 : advanceAliens(path, digest), path);
+  }
+});
+
+test('the real verifier accepts the passe 12 bytes and refuses the published or any altered bytes', () => {
+  assert.equal(verifyPasse12().successors, verifiedPaths.length);
+  for (const path of Object.keys(passe12Successors)) {
+    const published = read(path);
+    assert.throws(() => verifyPasse12(candidate => candidate === path ? published : readCurrent(candidate)),
+      /Unreviewed (?:AVP host|Tantalus passe 12) source bytes/, path);
+    const altered = Buffer.concat([readCurrent(path), Buffer.from('\n// unreviewed byte\n')]);
+    assert.throws(() => verifyPasse12(candidate => candidate === path ? altered : readCurrent(candidate)),
+      /Unreviewed (?:AVP host|Tantalus passe 12) source bytes/, path);
+    assert.throws(() => publishedBeforePasse12(path, altered), /Unreviewed Tantalus passe 12 source bytes/, path);
   }
 });

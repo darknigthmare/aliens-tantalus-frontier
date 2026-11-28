@@ -122,6 +122,25 @@ if (!only || only.includes('range-arsenal')) {
       { fired: m.fireRate.shots, arsenal: m.arsenal && { feed: m.arsenal.feed, bridge: m.arsenal.nativeBridge, capacity: m.arsenal.capacity }, slot: entry.slot });
     if (index === 0) { await page.locator('[data-range-tab="measures"]').click(); await page.waitForTimeout(400); await shot('range-arsenal-franchise'); }
   }
+  // Lot C (spec 014): every lot-C weapon is listed; the secondary fire is driven from the range (panel button, then the API)
+  // and read back in the measures — M41A 30 mm launcher (own counter, explosion) and the M240 flames of Ripley's combination.
+  const lotC = await page.evaluate(async () => (await import('/src/weapon-arsenal-v188.js')).listArsenalProfilesV188({ lotC: true }).map(p => p.weaponId));
+  check('range-arsenal: every lot-C weapon is listed', lotC.length === 64 && lotC.every(id => listed.includes(id)), { missing: lotC.filter(id => !listed.includes(id)) });
+  await page.evaluate(() => { const r = globalThis.__ATF_DEV_V188__.range; r.autoFire(0); r.setWeapon('weapon-001-m41a-pulse-rifle'); });
+  await page.waitForTimeout(600);
+  await page.locator('[data-range-tab="weapons"]').click(); await page.locator('[data-range-secondary="0.1"]').click(); await page.waitForTimeout(3600);
+  const launcher = (await page.evaluate(() => globalThis.__ATF_DEV_V188__.range.measures())).secondary;
+  check('range-arsenal secondary: the panel button fires one 30 mm grenade from the M41A launcher counter, and it explodes',
+    launcher?.mode === 'm41a-u1-30mm-pump' && launcher.loaded === 3 && launcher.stats.grenades === 1 && launcher.stats.explosions === 1 && launcher.sources.length >= 2, launcher);
+  await page.locator('[data-range-tab="measures"]').click(); await page.waitForTimeout(300); await shot('range-arsenal-secondary');
+  await page.evaluate(() => { const r = globalThis.__ATF_DEV_V188__.range; r.setWeapon('weapon-266-ripley-m41a-m240-combination'); });
+  await page.waitForTimeout(600);
+  await page.evaluate(() => { globalThis.__ATF_DEV_V188__.range.secondaryFire(1); }); await page.waitForTimeout(1700);
+  const flames = (await page.evaluate(() => globalThis.__ATF_DEV_V188__.range.measures())).secondary;
+  check('range-arsenal secondary: the API holds the M240 flames of Ripley\u2019s combination from their own tank',
+    flames?.mode === 'ripley-m240-flame' && flames.stats.streams >= 4 && flames.loaded === 40 - flames.stats.streams, flames);
+  const none = await page.evaluate(() => { const r = globalThis.__ATF_DEV_V188__.range; r.setWeapon('weapon-252-m4ra-battle-rifle'); return r.measures().secondary; });
+  check('range-arsenal secondary: a weapon without a secondary reports none', none === null, none);
   await page.locator('[data-dev-exit]').click().catch(() => {});
 }
 // —— Shooting range: 3 weapons, an equipment item, a squad order, caste targets, measures, tuning export ——

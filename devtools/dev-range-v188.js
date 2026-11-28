@@ -139,7 +139,9 @@ export async function startDevRangeV188({ engine, api, session, log }) {
     const last = range.reloads.at(-1);
     if (last && last.end === null && !player()?.reloading) last.end = t;
     if (range.autoFireUntil > t) engine.fire(player());
-    for (const list of [engine.bullets, engine.weaponProjectilesV130, engine.weaponProjectilesV131]) for (const projectile of list || []) {
+    // Spec 014 lot C: the secondary fire is held through the game's own action code, like the key, the touch button and the pad.
+    if (range.secondaryUntil > t) engine.keys?.add('KeyN'); else if (range.secondaryUntil) { engine.keys?.delete('KeyN'); range.secondaryUntil = 0; }
+    for (const list of [engine.bullets, engine.weaponProjectilesV130, engine.weaponProjectilesV131, engine.secondaryProjectilesV188]) for (const projectile of list || []) {
       if (!Number.isFinite(projectile?.x)) continue;
       const trail = range.trails.get(projectile) || []; trail.push([projectile.x + (projectile.w || 0) / 2, projectile.y + (projectile.h || 0) / 2]);
       if (trail.length > 40) trail.shift(); range.trails.set(projectile, trail);
@@ -184,6 +186,9 @@ export async function startDevRangeV188({ engine, api, session, log }) {
           tracer: profile?.vfx.tracer || null, shotCue: profile?.audio.shot || null, heldArt: profile?.held.art || null, fidelity: profile?.fidelity.status || null,
           live: { bridged: state.bridged, loaded: state.loaded, reserve: state.reserve, needsCycle: state.needsCycle, spentCases: state.spentCases, pending: Boolean(state.pending) },
           stats: state.stats } : null; })(),
+      // Spec 014 lot C: secondary fire (mode, own feed, counters) of the equipped weapon, null when it has none.
+      secondary: (() => { const state = engine.getSecondaryFireStateV188?.(); return state?.available ? { mode: state.mode.id, kind: state.kind, ownFeed: state.ownFeed, loaded: state.loaded,
+        reserve: state.reserve, capacity: state.capacity, needsPump: state.needsPump, reloading: state.reloading, hud: state.hud, sources: state.mode.sources, stats: state.stats } : null; })(),
       projectiles: { bullets: engine.bullets?.length || 0, v130: engine.weaponProjectilesV130?.length || 0, v131: engine.weaponProjectilesV131?.length || 0, beams: engine.weaponBeamsV131?.length || 0 },
       effects: engine.weaponEffectsSnapshotV124?.()?.stats || null,
       rig: { weaponMode: actor.weaponMode, grounded: actor.grounded, crouching: actor.crouching, climbing: actor.climbing, aiming: actor.aimingV124, fireClock: round(actor.fireClock, 3),
@@ -217,6 +222,8 @@ export async function startDevRangeV188({ engine, api, session, log }) {
     setEquipment(ids, { physicalMagazines = range.physicalMagazines } = {}) { range.equipmentIds = ids.filter(id => EQUIPMENT.some(entry => entry.id === id)); range.physicalMagazines = Boolean(physicalMagazines); restart(); },
     useEquipment(id) { const used = engine.useEquipment?.(id); log('equipment-use', { id, used: Boolean(used) }); return used; },
     autoFire(seconds = 2) { range.autoFireUntil = now() + Math.max(0, Number(seconds) || 0); },
+    /** Hold the secondary-fire action for `seconds` (0.1 = one press). */
+    secondaryFire(seconds = 0.1) { range.secondaryUntil = now() + Math.max(0, Number(seconds) || 0); return engine.getSecondaryFireStateV188?.() || null; },
     reload() { return engine.reload(player()); },
     clearTargets() { engine.enemies = engine.enemies.filter(enemy => !enemy.devRangeV188); range.targets.length = 0; },
     resetMeasures() { for (const key of ['records', 'shots', 'damage', 'reloads', 'spread', 'events', 'cues']) range[key].length = 0; range.trails.clear(); },
@@ -239,7 +246,7 @@ function mountPanel(range) {
   const placeables = [...PLACEABLE_CATALOG_V86, ...PLACEABLE_EXTENSION_CATALOG_V132].map(entry => escapeHtml(entry.catalogId || entry.id || entry.name)).join(', ');
   panel.innerHTML = `<nav role="tablist">${tabs.map(([id, label], index) => `<button type="button" role="tab" data-range-tab="${id}" aria-selected="${index === 0}">${label}</button>`).join('')}<button type="button" data-range-collapse aria-expanded="true" aria-label="Replier ou déplier le stand">▾</button></nav>
     <section data-range-panel="weapons"><label>Arme <select data-range-weapon>${weaponOptions}</select></label> <button type="button" data-range-equip-weapon>Équiper (relance du niveau)</button>
-      <div class="atf-dev-row"><button type="button" data-range-fire="0.5">Tir 0,5 s</button><button type="button" data-range-fire="3">Tir 3 s</button><button type="button" data-range-reload>Recharger</button><button type="button" data-range-reset>Remettre les mesures à zéro</button></div>
+      <div class="atf-dev-row"><button type="button" data-range-fire="0.5">Tir 0,5 s</button><button type="button" data-range-fire="3">Tir 3 s</button><button type="button" data-range-secondary="0.1">Tir secondaire</button><button type="button" data-range-secondary="2">Tir sec. 2 s</button><button type="button" data-range-reload>Recharger</button><button type="button" data-range-reset>Remettre les mesures à zéro</button></div>
       <p class="atf-dev-note">Tir clavier/souris normal aussi. Arme sous le canon, alimentations spéciales et accessoires : ceux de l’entrée choisie (étiquettes du catalogue, profil d’action et état d’alimentation affichés dans Mesures).</p></section>
     <section data-range-panel="equipment" hidden><label>Équipement <select data-range-equipment>${equipmentOptions}</select></label>
       <label><input type="checkbox" data-range-physical> Chargeurs physiques (pilote V167)</label> <button type="button" data-range-equip>Équiper (relance)</button> <button type="button" data-range-use>Utiliser</button>
@@ -277,6 +284,7 @@ function mountPanel(range) {
       }
       if (button.matches('[data-range-equip-weapon]')) range.setWeapon($('[data-range-weapon]').value);
       if (button.dataset.rangeFire) range.autoFire(Number(button.dataset.rangeFire));
+      if (button.dataset.rangeSecondary) range.secondaryFire(Number(button.dataset.rangeSecondary));
       if (button.matches('[data-range-reload]')) range.reload();
       if (button.matches('[data-range-reset]')) range.resetMeasures();
       if (button.matches('[data-range-equip]')) range.setEquipment([$('[data-range-equipment]').value], { physicalMagazines: $('[data-range-physical]').checked });

@@ -60,6 +60,12 @@ export const ARSENAL_PLACEHOLDER_SLOTS_V188 = Object.freeze({
     ctx.fillStyle = '#4fb6c9'; ctx.fillRect(length * 0.05, 3, length * 0.2, 5);   // cell
     ctx.fillRect(length * 0.62, -1, length * 0.08, 2);                            // emitter
   },
+  // Lot C: a thrown device (grenade, incendiary, mine) held in the hand.
+  'held-weapon-placeholder-device'(ctx, length) {
+    ctx.fillStyle = '#4a4f45'; ctx.fillRect(length * 0.62, -5, length * 0.2, 10);   // body
+    ctx.fillStyle = DARK; ctx.fillRect(length * 0.66, -8, length * 0.12, 3);        // cap
+    ctx.fillStyle = '#c9a23f'; ctx.fillRect(length * 0.62, -1, length * 0.2, 2);    // band
+  },
   'held-weapon-placeholder-prod'(ctx, length) {
     ctx.fillStyle = DARK; ctx.fillRect(-length * 0.1, -2, length * 0.95, 3);      // pole
     ctx.fillStyle = '#9ad7ff'; ctx.fillRect(length * 0.82, -4, 3, 2); ctx.fillRect(length * 0.82, 1, 3, 2); // electrodes
@@ -72,7 +78,8 @@ export const ARSENAL_PLACEHOLDER_CATEGORIES_V188 = Object.freeze(Object.fromEntr
   rifle: ['held-weapon-placeholder-rifle', 'rifle', 'Rifle'], smg: ['held-weapon-placeholder-smg', 'rifle', 'SMG'],
   sniper: ['held-weapon-placeholder-sniper', 'rifle', 'Sniper'], heavy: ['held-weapon-placeholder-heavy', 'heavy', 'Heavy'],
   launcher: ['held-weapon-placeholder-launcher', 'heavy', 'Launcher'], energy: ['held-weapon-placeholder-energy', 'rifle', 'Energy'],
-  melee: ['held-weapon-placeholder-prod', 'melee', 'Melee'], prod: ['held-weapon-placeholder-prod', 'melee', 'Melee']
+  melee: ['held-weapon-placeholder-prod', 'melee', 'Melee'], prod: ['held-weapon-placeholder-prod', 'melee', 'Melee'],
+  device: ['held-weapon-placeholder-device', 'thrown', 'Thrown device']
 }).map(([key, value]) => [key, Object.freeze(value)])));
 
 export const hasProvisionalPlaqueV188 = weapon => Boolean(weapon && typeof weapon === 'object'

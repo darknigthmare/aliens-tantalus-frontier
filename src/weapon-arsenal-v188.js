@@ -116,7 +116,9 @@ const MARINE_BASES = Object.freeze(Array.from({ length: 17 }, (_, index) => WEAP
 export const ARSENAL_LOT_A_BASE_IDS_V188 = Object.freeze([...MARINE_BASES, 'weapon-021-357-magnum-revolver',
   ...WEAPON_CATALOG_ADDITIONS_V188.filter(weapon => !weapon.feedV188).map(weapon => weapon.id)]);
 /** Lot B (franchise arsenal): the provisional-plaque rows 197+, each verified in a mission by its own suite. */
-export const ARSENAL_LOT_B_IDS_V188 = Object.freeze(WEAPON_CATALOG_ADDITIONS_V188.filter(weapon => weapon.feedV188).map(weapon => weapon.id));
+export const ARSENAL_LOT_B_IDS_V188 = Object.freeze(WEAPON_CATALOG_ADDITIONS_V188.filter(weapon => weapon.feedV188 && weapon.lotV188 !== 'C').map(weapon => weapon.id));
+/** Lot C (remaining works): rows 236+, same admission; verified by scripts/verify-weapon-franchise-lot-c-v188.mjs. */
+export const ARSENAL_LOT_C_IDS_V188 = Object.freeze(WEAPON_CATALOG_ADDITIONS_V188.filter(weapon => weapon.lotV188 === 'C').map(weapon => weapon.id));
 
 /** Native specialized-feed bridge. Each kind reuses one V171 mechanism state
  * machine; the template id names that state machine, never the weapon source. */
@@ -139,7 +141,7 @@ const BRIDGED_BASES = freeze({
   'weapon-040-pathogen-containment-projector': 'tank', 'weapon-147-ocap-91-volcan': 'tank', 'weapon-152-type-99-incinerator': 'tank',
   'weapon-150-l59-minigun': 'belt', 'weapon-161-thunderbolt-mk2': 'belt', 'weapon-170-frontier-revolver': 'cylinder',
   // Lot B additions: the feed kind each row records (documented or [PROPOSÉ] in the row itself).
-  ...Object.fromEntries(WEAPON_CATALOG_ADDITIONS_V188.filter(weapon => ['tube', 'cylinder', 'belt', 'tank', 'cell'].includes(weapon.feedV188?.kind))
+  ...Object.fromEntries(WEAPON_CATALOG_ADDITIONS_V188.filter(weapon => ['tube', 'cylinder', 'belt', 'tank', 'cell', 'single'].includes(weapon.feedV188?.kind))
     .map(weapon => [weapon.id, weapon.feedV188.kind]))
 });
 /** Recorded, deliberately NOT bridged (see ARSENAL_COMPLETION_V188.md): the stun baton spends no charge
@@ -152,6 +154,12 @@ export const ARSENAL_UNBRIDGED_SPECIAL_FEEDS_V188 = freeze({
   'weapon-034-sonic-harpoon': 'single-capacity-would-change-balance-owner-decision'
 });
 export { ARSENAL_PLACEHOLDER_CATEGORIES_V188 };
+/** Lot C: a status applied by a thrown device or a secondary flame jet needs a V131 profile to tick; the M240
+ * incinerator carries that bookkeeping (status only — the blast damage keeps the device's own id). */
+export const ARSENAL_STATUS_CARRIER_V188 = 'weapon-006-m240-incinerator-unit';
+/** Thrown devices (lot C): catalogue id → { radius, fuse, status }, all [PROPOSÉ]. */
+export const ARSENAL_THROWN_DEVICES_V188 = freeze(Object.fromEntries(WEAPON_CATALOG_ADDITIONS_V188
+  .filter(weapon => weapon.thrownDeviceV188).map(weapon => [weapon.id, { ...weapon.thrownDeviceV188 }])));
 /** Capacities that the feed mechanism (or the CSV) settles; others keep the catalogue value. */
 const CAPACITY_RULES = freeze({
   single: { capacity: 1, source: 'mechanism: one projectile per tube (CSV Alimentation=single)' },
@@ -192,6 +200,7 @@ const RELOAD_BEATS = freeze({
   tank: [['isolate-old-tank', 0.45], ['replenish-tank', 0.88], ['ready', 1]],
   cell: [['eject-cell', 0.35], ['seat-cell', 0.75], ['charged', 0.92]],
   single: [['open-tube', 0], ['chamber-projectile', 0.9], ['ready', 1]],
+  carried: [], // lot C thrown devices: a carried count, nothing to reload
   none: []
 });
 const tracerFor = (action, presentation, baseId) => baseId === 'weapon-005-m56-smartgun' ? 'smartgun-tracer'
@@ -256,7 +265,8 @@ function buildProfile(weapon) {
   const modes = [action?.kind === 'burst' ? 'burst-3' : action?.kind === 'scatter' ? (feed.nativeBridge === 'tube' ? 'pump-single' : 'semi-scatter')
     : action?.kind === 'stream' ? 'continuous-stream' : ['rocket', 'launcher'].includes(action?.kind) ? 'single-projectile'
       : ['melee', 'stun', 'torch', 'disc', 'grenade'].includes(action?.kind) ? action.kind : 'automatic'];
-  if (baseId === M41A_UNDERBARREL_HOST_V174) modes.push('underbarrel-30mm-v174-contract-not-native');
+  // Lot C (T106): the 30 mm launcher is native — fired by the secondary-fire action (weapon-secondary-fire-v188.js) on the V174 contract.
+  if (baseId === M41A_UNDERBARREL_HOST_V174) modes.push('underbarrel-30mm-native-secondary-fire-v188');
   const slots = ['muzzle', 'optic', 'side_rail', 'cosmetic',
     { box: 'magwell', drum: 'magwell', belt: 'belt_harness', tank: 'tank_mount', cell: 'cell_port',
       tube: 'chamber', cylinder: 'chamber', single: 'projectile_head' }[feed.kind]].filter(Boolean);
@@ -267,6 +277,7 @@ function buildProfile(weapon) {
   return {
     schema: 188, weaponId: weapon.id, baseId, name: weapon.name, family: weapon.family, source: weapon.source,
     mark: weapon.mark, lotA: ARSENAL_LOT_A_BASE_IDS_V188.includes(baseId), lotB: ARSENAL_LOT_B_IDS_V188.includes(weapon.id),
+    lotC: ARSENAL_LOT_C_IDS_V188.includes(weapon.id),
     role: row?.role || (placeholder ? placeholder[2] : weapon.family),
     feed,
     fire: { actionKind: action?.kind || 'legacy-single-bullet', modes,
@@ -311,7 +322,7 @@ export function getArsenalProfileV188(weaponOrId) {
     : weaponOrId && typeof weaponOrId === 'object' ? weaponOrId.id || weaponOrId.weaponId || weaponOrId.catalogId : null;
   return typeof id === 'string' ? byId.get(id) || null : null;
 }
-export function listArsenalProfilesV188({ lotA = null, lotB = null, bridged = null } = {}) {
-  return profiles.filter(p => (lotA === null || p.lotA === lotA) && (lotB === null || p.lotB === lotB)
+export function listArsenalProfilesV188({ lotA = null, lotB = null, lotC = null, bridged = null } = {}) {
+  return profiles.filter(p => (lotA === null || p.lotA === lotA) && (lotB === null || p.lotB === lotB) && (lotC === null || p.lotC === lotC)
     && (bridged === null || Boolean(p.feed.nativeBridge) === bridged));
 }

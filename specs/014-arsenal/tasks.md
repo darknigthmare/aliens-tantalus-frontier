@@ -23,19 +23,31 @@
 - [x] T206 Décisions A6 (chargeur physique du VP70) et A9 (cadence citée du M41A)
 - [x] T207 Suite `scripts/verify-weapon-franchise-v188.mjs` ; QA Chromium `scripts/qa-arsenal-franchise-v188.mjs` ; stand de tir (`range-arsenal`)
 - [x] T208 Bible, audit, questions du propriétaire, README de l’arsenal
-- [ ] T209 Familles reportées : *Fireteam Elite*, *Colonial Marines*, *Fireteam Elite 2*, *Alien RPG*, engins d’*Isolation*, comics, romans, *Technical Manual*
-- [ ] T210 Modes secondaires documentés des armes du lot B (colonne « à définir » du registre)
+- [x] T209 Familles reportées : fait au lot C (voir plus bas) sauf le *Technical Manual*, non consulté
+- [x] T210 Modes secondaires documentés des armes du lot B qui relèvent du tir secondaire (F90 + SL40, M41A/2, Draco, ZX-76, VP78) — lot C ; les autres modes : T404
+
+## Lot C — reste de la franchise et tir secondaire (23 novembre 2026)
+
+- [x] T401 Recherche et sources du lot C, accès consignés (`docs/development/ARSENAL_COMPLETION_V188.md`, section « Lot C »)
+- [x] T402 64 entrées de catalogue 236–301 (`src/weapon-catalog-franchise-c-v188.js`), registre à trois statuts, 17 « nom seul », fiches de recherche complémentaires
+- [x] T403 Engins lancés portés par l’action V130 (huit fiches, effet dans le rayon), emplacement Canvas `held-weapon-placeholder-device`
+- [x] T405 Tir secondaire : action réaffectable (N), bouton tactile, manette, sept modes, second compteur, reprise additive, stand de tir (`src/weapon-secondary-fire-v188.js`)
+- [x] T406 Suite `scripts/verify-weapon-franchise-lot-c-v188.mjs` ; QA Chromium `scripts/qa-arsenal-lot-c-v188.mjs`
+- [x] T407 Bible, audit, questions du propriétaire (C-1 à C-8), README de l’arsenal, i18n, cache, admissions
+- [ ] T404 Modes documentés d’un autre mécanisme : visée automatique, types de grenades, balles perforantes, projection de carburant, rotation à vide, surcharges, tir chargé, armes sous canon du M4RA / NSG 23 (sources contradictoires)
+- [ ] T408 Sourcer les 17 entrées « nom seul » et les capacités ; *Colonial Marines Technical Manual* ; armes notées hors suivi
+- [ ] T409 Pose des mines (M20, GEM-80, IEM) ; tir secondaire du second joueur et de l’escouade ; pompe manuelle et recharge partielle du lance-grenades
 
 ## Reste (non livré, à ne pas déclarer terminé)
 
-- [ ] T101 Plaques natives des armes 194–235 puis admission V121/V122 (achat ouvert avec plaque provisoire dessinée : lot B, décision du 23 novembre)
+- [ ] T101 Plaques natives des armes 194–301 puis admission V121/V122 (achat ouvert avec plaque provisoire dessinée : lot B, décision du 23 novembre)
 - [ ] T102 Animations natives : pompe, barillet, bande, réservoir, chambrage de roquette
 - [ ] T103 Chargeurs physiques des armes « box » hors M41A, seulement avec preuve propre au modèle (CSV + V193) — **VP70 fait** (lot B, décision A6) ; M4A3 et F44AA sans preuve, autres inchangés
 - [x] T104 Pont natif hors lot A : cellules (ES-4, plasma, Neuro-Link, N79, P.649, EVI-87, EDS-93), réservoirs Tantalus, bandes L59/Thunderbolt, barillet Frontier, réservoirs Volcan/Type 99 (lot B)
 - [ ] T104b Reste de T104 : cutter et bâton (actions V130), arc et fusil-harpon (réserve récupérable V131), Bolt Gun et harpon sonique (capacité 1 = décision d’équilibrage)
 - [ ] T105 Sons propres par arme, sprites dédiés d’impact et de douilles
-- [ ] T106 M41A sous-canon 30 mm natif (contrat V174) — non fait au lot B : tir secondaire à concevoir avec les réglages des commandes ; sources réunies (Royal Armouries ; U1 à pompe, 4 coups selon la liste *Dark Descent*)
-- [ ] T107 Combinaison M41A + M240 de Ripley (dépend du tir secondaire de T106) — **Nostromo fait** au lot B : lance-flammes, aiguillon électrique et pistolet laser inscrits avec source puis ajoutés (197–199)
+- [x] T106 M41A sous-canon 30 mm natif (contrat V174) — fait au lot C : tir secondaire `m41a-u1-30mm-pump` (Royal Armouries ; U1 à pompe, 4 coups selon la liste *Dark Descent*)
+- [x] T107 Combinaison M41A + M240 de Ripley — fait au lot C (`weapon-266`, flammes du M240 en tir secondaire) ; **Nostromo fait** au lot B (197–199)
 - [ ] T108 Coop : le pont suit le second joueur, non couvert par le parcours Chromium
 
 ## Décisions du propriétaire du 2026-11-23

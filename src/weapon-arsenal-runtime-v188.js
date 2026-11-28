@@ -18,7 +18,7 @@
  * accepted events only. Pending-plaque additions draw a named Canvas
  * placeholder silhouette (no image). Audio reuses existing original cues.
  */
-import { getArsenalProfileV188 } from './weapon-arsenal-v188.js';
+import { getArsenalProfileV188, ARSENAL_THROWN_DEVICES_V188, ARSENAL_STATUS_CARRIER_V188 } from './weapon-arsenal-v188.js';
 import { ARSENAL_PLACEHOLDER_SLOTS_V188 } from './weapon-provisional-plaque-v188.js';
 import { resolveWeaponActionProfileV131 } from './weapon-actions-v131.js';
 import { createSpecialFeedV171, fireSpecialFeedV171, cycleSpecialFeedV171, beginSpecialReloadV171,
@@ -310,6 +310,17 @@ export function withArsenalFeedsV188(Base) {
       if (!was && projectile?.resolved && this.vfxV188Enabled && !projectile.vfxExplodedV188 && typeof this.vfxExplosionV188 === 'function') {
         projectile.vfxExplodedV188 = true; this.arsenalStatsV188.explosions++;
         this.vfxExplosionV188(finite(projectile.x) + finite(projectile.w) / 2, finite(projectile.y) + finite(projectile.h) / 2);
+      }
+      // Lot C thrown devices: the status the row declares (burn, stun, ionized, disoriented) reaches the hostiles in the radius.
+      const device = !was && projectile?.resolved ? ARSENAL_THROWN_DEVICES_V188[profile?.weaponId] : null;
+      if (device?.status && typeof this.applyWeaponStatusV131 === 'function') {
+        const cx = finite(projectile.x) + finite(projectile.w) / 2, cy = finite(projectile.y) + finite(projectile.h) / 2;
+        for (const enemy of this.enemies || []) {
+          if (!enemy?.alive) continue;
+          const dx = Math.max(enemy.x - cx, 0, cx - (enemy.x + enemy.w)), dy = Math.max(enemy.y - cy, 0, cy - (enemy.y + enemy.h));
+          if (Math.hypot(dx, dy) < device.radius) this.applyWeaponStatusV131(enemy, { status: device.status, weaponId: ARSENAL_STATUS_CARRIER_V188 }, projectile.owner);
+        }
+        this.arsenalStatsV188.deviceStatuses = finite(this.arsenalStatsV188.deviceStatuses) + 1;
       }
       return result;
     }

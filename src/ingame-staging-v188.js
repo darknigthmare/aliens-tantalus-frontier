@@ -45,7 +45,7 @@ export function stagedBeatDurationV188(id) {
   return (STAGED_BEATS_V188[id]?.lines || []).reduce((sum, entry) => sum + entry.seconds, 0);
 }
 
-const HOLD_KEYS = new Set(['KeyA', 'KeyD', 'KeyW', 'KeyS', 'KeyQ', 'KeyF', 'KeyR', 'KeyC', 'KeyZ', 'KeyX', 'KeyV', 'KeyH', 'KeyP', 'KeyM',
+const HOLD_KEYS = new Set(['KeyA', 'KeyD', 'KeyW', 'KeyS', 'KeyQ', 'KeyF', 'KeyN', 'KeyR', 'KeyC', 'KeyZ', 'KeyX', 'KeyV', 'KeyH', 'KeyP', 'KeyM',
   'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'ShiftLeft', 'ShiftRight', 'Tab']);
 const ADVANCE_KEYS = new Set(['Enter', 'NumpadEnter', 'Space', 'KeyE']);
 
