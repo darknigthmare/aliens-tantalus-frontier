@@ -17,13 +17,24 @@ const approvedV206 = [
   'panther-light-windup.png', 'panther-light-recovery.png', 'grid-special-windup.png', 'grid-special-recovery.png',
   'gorilla-heavy-windup-four-spines.png'
 ];
+const generatedV226 = [
+  ['gorilla-heavy-impact-four-spines.png', 'a0f9fda83b209e792008e4c07857b436a8219336f376a32aa1af573c74d7581c'],
+  ['gorilla-heavy-recovery-four-spines.png', 'a3e1185cc5b1232b752d462f51a72e81b71680eaba65f987c5716b6625bb88b7'],
+  ['gorilla-special-active-four-spines.png', 'c41f8334e3155ad4a89806430463797c14bec69248dbce322f7e660a0bf35c43'],
+  ['grid-heavy-windup-v226.png', '1a070e2b051846445d85379835ed7dca714192a796ac4504d750b6a16c07707f'],
+  ['grid-special-contact.png', 'b59d9e5b7aee600e668dfe3a0a86cfa6250a277cf9ec0293f4dfff0f0dd60084'],
+  ['panther-light-contact.png', '9013b24f3964d50b68a166b73175d573470a0b24963bea3b1c505d47c12f31bf']
+];
 const approved = new Map([
-  [205, approvedV205, XENO_VISUAL_ASSETS_NEW_INPUTS_V205], [206, approvedV206, XENO_PRODUCTION_ASSETS_NEW_INPUTS_V206]
-].flatMap(([version, names, receipts]) => names.map(name => {
-  const origin = receipts[`assets/openai/xeno-trials-v${version}/characters/${name}`];
-  assert.equal(origin?.kind, 'production-asset', 'V209 pose must have a production receipt: ' + name);
-  return [`${rootDirectory}/characters/${name}`, origin.sha256];
-})));
+  ...[
+    [205, approvedV205, XENO_VISUAL_ASSETS_NEW_INPUTS_V205], [206, approvedV206, XENO_PRODUCTION_ASSETS_NEW_INPUTS_V206]
+  ].flatMap(([version, names, receipts]) => names.map(name => {
+    const origin = receipts[`assets/openai/xeno-trials-v${version}/characters/${name}`];
+    assert.equal(origin?.kind, 'production-asset', 'V209 pose must have a production receipt: ' + name);
+    return [name, origin.sha256];
+  })),
+  ...generatedV226
+].map(([name, sha256]) => [`${rootDirectory}/characters/${name}`, sha256]));
 
 export function publicXenoPosePathAdmissionV209(path, { directory = false } = {}) {
   if (path !== rootDirectory && !path.startsWith(rootDirectory + '/')) return null;

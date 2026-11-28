@@ -3,6 +3,7 @@ import { getXenoTrialsReinforcementV201 } from './xeno-trials-reinforcements-v20
 import { getXenoTrialsBossStageV179 } from './xeno-trials-boss-stages-v179.js';
 import { getXenoTrialsCollectorViewV224, getXenoTrialsGantryConvoyV222, getXenoTrialsGroundingDoorV223, getXenoTrialsHangarBypassV221 } from './xeno-trials-operations-v188.js';
 import { getXenoTrialsArchiveTransferV225 } from './xeno-trials-archive-transfer-v225.js';
+import { getXenoTrialsDeflectorCalibrationV226 } from './xeno-trials-deflector-calibration-v226.js';
 
 // The V146 proposed rows map to the stage that now represents each room.
 // These are scene fixtures drawn behind the fight, not colliders or hazards.
@@ -143,6 +144,7 @@ export function createXenoTrialsStageEventsV211(stageId, match, arena) {
     const grounding = getXenoTrialsGroundingDoorV223(match);
     const collector = getXenoTrialsCollectorViewV224(match);
     const archive = getXenoTrialsArchiveTransferV225(match);
+    const deflectors = getXenoTrialsDeflectorCalibrationV226(match);
     if (gates) opening = Math.max(gates.left.opening, gates.right.opening);
     if (reducedMotion && phase === 'introduction') opening = 0;
     return {
@@ -153,6 +155,7 @@ export function createXenoTrialsStageEventsV211(stageId, match, arena) {
       ...(grounding ? { reactorGroundingV223: grounding } : {}),
       ...(collector ? { collectorV224: collector } : {}),
       ...(archive ? { archiveTransferV225: archive } : {}),
+      ...(deflectors ? { deflectorCalibrationV226: deflectors } : {}),
       reducedMotion, affectsCombat: false,
       time: moving ? observedTick / 120 + (match.config.seed % 41) * .07 : 0,
       degraded: [...degraded]
@@ -398,6 +401,38 @@ function drawArchiveUplink(ctx, archive, reducedMotion, x, y) {
   ctx.fillRect(left + 12, top + 75, 88 * archive.transmission, 6);
 }
 
+function drawDeflector(ctx, x, y, aligned, fraction) {
+  const frame = x - 55;
+  const top = y - 104;
+  const travel = 65 * fraction;
+  ctx.globalAlpha = .72;
+  ctx.fillStyle = '#12242c';
+  ctx.fillRect(frame, top, 110, 104);
+  ctx.strokeStyle = '#536d75';
+  ctx.strokeRect(frame, top, 110, 104);
+  ctx.fillStyle = '#283e47';
+  ctx.fillRect(frame + 14, top + 11, 8, 86);
+  ctx.fillRect(frame + 88, top + 11, 8, 86);
+  ctx.fillStyle = '#4d6870';
+  ctx.fillRect(frame + 18, top + 12 + travel, 74, 30);
+  ctx.fillStyle = aligned ? '#9bd9bd' : '#bc9974';
+  ctx.fillRect(frame + 26, top + 17 + travel, 58, 4);
+}
+
+function drawDeflectorRelay(ctx, x, y, view) {
+  ctx.globalAlpha = .65;
+  ctx.fillStyle = '#172a32';
+  ctx.fillRect(x - 47, y - 55, 94, 55);
+  ctx.strokeStyle = '#4d6870';
+  ctx.strokeRect(x - 47, y - 55, 94, 55);
+  view.aligned.forEach((aligned, index) => {
+    ctx.fillStyle = aligned ? '#9bd9bd' : '#a88169';
+    ctx.fillRect(x - 28 + index * 34, y - 37, 23, 6);
+  });
+  ctx.fillStyle = view.phase === 'ready' ? '#9bd9bd' : '#273b44';
+  ctx.fillRect(x - 24, y - 20, 48, 5);
+}
+
 export function drawXenoTrialsStageEventsV211(ctx, stage, camera, view) {
   if (!view || view.stageId !== stage.id) return;
   const floor = clamp(camera.floor, 180, 530);
@@ -425,6 +460,16 @@ export function drawXenoTrialsStageEventsV211(ctx, stage, camera, view) {
     drawArchiveUplink(ctx, archive, view.reducedMotion, 500 - shift * .14, floor - 79);
     archive.phases.forEach((phase, index) => drawArchiveRack(ctx, 234 + index * 532 - shift * .3,
       floor - 47, phase, archive.progress[index], view.reducedMotion));
+  }
+  if (view.deflectorCalibrationV226) {
+    const shift = camera.center - 500;
+    const deflectors = view.deflectorCalibrationV226;
+    drawDeflectorRelay(ctx, 500 - shift * .17, floor - 97, deflectors);
+    deflectors.aligned.forEach((aligned, index) => {
+      const fraction = deflectors.deployment[index];
+      drawDeflector(ctx, 330 + index * 340 - shift * .31, floor - 55,
+        aligned, view.reducedMotion && fraction < 1 ? 0 : fraction);
+    });
   }
   drawFixture(ctx, view, stage, 105 - offset, floor - 30, 'left');
   drawFixture(ctx, view, stage, 895 - offset, floor - 30, 'right');

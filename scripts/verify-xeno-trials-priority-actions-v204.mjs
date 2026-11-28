@@ -87,8 +87,11 @@ test('V204 adds specific attacks while retaining Smasher ground animation and Ki
   assert.equal(previouslyDrawn.length, 37);
   for (const [fighterId, action, id, revision, frameIds] of [
     ['panther', 'special', 'panther-pounce', 221, ['windup', 'contact', 'recovery']],
-    ['grid', 'heavy', 'grid-heavy', 222, ['contact', 'recovery']],
-    ['gorilla', 'special', 'gorilla-ram', 222, ['windup', 'recovery']]
+    ['panther', 'light', 'panther-light', 226, ['windup', 'contact', 'recovery']],
+    ['grid', 'heavy', 'grid-heavy', 226, ['windup', 'contact', 'recovery']],
+    ['grid', 'special', 'grid-tail', 226, ['windup', 'contact', 'recovery']],
+    ['gorilla', 'special', 'gorilla-ram', 226, ['windup', 'contact', 'recovery']],
+    ['gorilla', 'heavy', 'gorilla-heavy', 226, ['windup', 'contact', 'recovery']]
   ]) {
     const entry = getXenoTrialsRuntimeAnimationCoverage(fighterId);
     const source = entry.states[action].sources.find(candidate => candidate.id === id);

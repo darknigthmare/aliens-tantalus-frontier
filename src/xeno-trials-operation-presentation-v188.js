@@ -10,6 +10,7 @@ const bypassPhases = Object.freeze({ locked: 'POSTE VERROUILLÉ', ready: 'DÉRIV
 const groundingPhases = Object.freeze({ waiting: 'ATTENTE DE DÉCHARGE', manual: 'RÉARMEMENT MANUEL',
   opening: 'SAS EN OUVERTURE', open: 'SAS ALIMENTÉ' });
 const collectorPhases = Object.freeze({ pressurized: 'CONDUITS SOUS PRESSION', opening: 'SAS EN DÉCOMPRESSION', open: 'SAS OUVERT' });
+const deflectorPhases = Object.freeze({ guard: 'BLOCAGES DANS LES ZONES', deploying: 'DÉFLECTEURS EN DÉPLOIEMENT', ready: 'DÉFLECTEURS ALIGNÉS' });
 
 export function getXenoTrialsOperationHudV188(match) {
   const view = getXenoTrialsOperationViewV188(match);
@@ -48,6 +49,8 @@ export function getXenoTrialsOperationHudV188(match) {
       : `CACHE TEMPORAIRE · ${(tenths / 10).toFixed(1).replace('.', ',')} s`;
   }
   if (archive?.remainingTicks === 0 && view.status === 'failed') phase = 'CACHE EXPIRÉ';
+  const deflectors = view.status === 'active' ? view.deflectorCalibrationV226 : null;
+  if (deflectors) phase = deflectorPhases[deflectors.phase];
   const player = match.fighters?.[0], target = view.status === 'active' ? view.target : null;
   const body = player ? getXenoTrialsBodyBoundsV105(player) : null;
   let instruction = view.status === 'completed' ? 'Objectifs validés.' : view.status === 'failed' ? 'Évaluation interrompue.' : view.instruction;
@@ -55,7 +58,8 @@ export function getXenoTrialsOperationHudV188(match) {
   let extractionWorkV203 = null;
   const purgeV204 = getXenoTrialsPurgeTelemetryV204(match, view, XENO_TRIALS_ARENA_V105);
   if (target && body) {
-    const contact = player.y === 0 && body.left <= target.x + target.radius && body.right >= target.x - target.radius;
+    const contact = player.y === 0 && (target.guardZone ? Math.abs(player.x - target.x) <= target.radius
+      : body.left <= target.x + target.radius && body.right >= target.x - target.radius);
     const label = contact ? target.label : target.x < body.center ? `← ${target.label}` : `${target.label} →`;
     if (view.kind === 'beacon') {
       const open = target.windowOpen;
@@ -87,6 +91,11 @@ export function getXenoTrialsOperationHudV188(match) {
       }
       if (archive) {
         if (target.locked) instruction = `${label} · NEUTRALISEZ LA PREMIÈRE VAGUE`;
+        else if (contact) instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
+      }
+      if (deflectors) {
+        if (deflectors.phase === 'guard') instruction = contact ? `${label} · GARDE FACE AU CONTACT` : label;
+        else if (deflectors.phase === 'deploying') instruction = `${label} · ${phase} · ${Math.floor(Math.min(...deflectors.deployment) * 100)} %`;
         else if (contact) instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
       }
       if (collector?.phase === 'opening') {
@@ -129,6 +138,7 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
   const grounding = view.status === 'active' ? view.groundingV223 : null;
   const collector = view.decompressionV224;
   const archive = view.archiveTransferV225;
+  const deflectors = view.deflectorCalibrationV226;
   const extraction = view.kind === 'extraction';
   if (extraction && plane === 'rear') {
     return { id: view.id, plane, entities: view.entities.length,
@@ -140,10 +150,12 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
   ctx.save();
   for (const entity of view.entities) {
     if (purge && entity.kind === 'vent') continue;
+    if (entity.guardZone && plane === 'rear') continue;
     if (!Number.isFinite(entity.x) || !Number.isFinite(entity.radius)) continue;
     if (entity.kind === 'supply' && (entity.carried || entity.delivered)) continue;
     const access = collector && entity.kind === 'terminal' && !entity.completed ? collector.phase === 'open'
-      : archive && !entity.completed ? !entity.locked : !entity.active ? null : relief ? relief.open : bypass ? bypass.phase === 'ready' || bypass.phase === 'open'
+      : archive && !entity.completed ? !entity.locked : deflectors && !entity.guardZone && !entity.completed ? deflectors.phase === 'ready'
+      : !entity.active ? null : relief ? relief.open : bypass ? bypass.phase === 'ready' || bypass.phase === 'open'
       : grounding ? grounding.phase === 'manual' || grounding.phase === 'open' : null;
     const color = entity.contested ? '#ed997c' : entity.kind === 'beacon' ? beaconColor(entity)
       : entity.completed || access ? '#91bd8c' : entity.active ? '#ecd08c' : '#8a9d98';

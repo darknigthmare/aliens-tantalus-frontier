@@ -25,7 +25,7 @@ const entryModule = 'src/xeno-trials-standalone.js';
 const launchPage = 'xeno-trials.html';
 const digest = value => createHash('sha256').update(value).digest('hex');
 
-export const XENO_TRIALS_BUILD_REVISION = 225;
+export const XENO_TRIALS_BUILD_REVISION = 226;
 export const xenoTrialsCacheName = fingerprint => `atf-trials-v${XENO_TRIALS_BUILD_REVISION}-${fingerprint.slice(0, 24)}`;
 
 const icons = [192, 512].flatMap(size => ['any', 'maskable'].map(purpose => ({

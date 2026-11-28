@@ -111,6 +111,17 @@ const layouts = [
       ['split', 'ENCERCLEMENT DES RAYONS', ['runner', 'prowler', 'panther'], 6, 4, 17, .16],
       ['left', 'DERNIÈRE RAFLE', ['runner', 'prowler', 'synth-guard'], 7, 4, 20, .18]
     ]
+  },
+  {
+    id: 'xth226-proving-assault', title: 'ASSAUT DU CHAMP D’ESSAI', stageId: 'xt179-proving-ground',
+    description: 'Dix-huit contacts fragiles traversent le champ d’évaluation en trois vagues.',
+    orders: 'La première vague vient de l’ouest. Laissez-vous une issue quand les deux sas s’ouvrent, puis préparez le repli vers l’est.',
+    roundSeconds: 150, reward: 440,
+    waves: [
+      ['left', 'SONDE DU CHAMP', ['runner', 'prowler'], 5, 3, 15, .15],
+      ['split', 'PRISE EN TENAILLE', ['runner', 'panther', 'prowler'], 6, 4, 17, .17],
+      ['right', 'RÉSERVE EST', ['runner', 'armored-runner', 'warrior'], 7, 4, 20, .19]
+    ]
   }
 ];
 

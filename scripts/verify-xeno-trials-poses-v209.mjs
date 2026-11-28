@@ -170,16 +170,19 @@ test('Panther pounce plays all three grounded phases at one scale through a real
 
 const addedActions = [
   { id: 'grid', action: 'heavy', dimensions: [1774, 887], reachCases: [[70, true], [90, false]],
-    frames: [null, ['grid-heavy-impact.png', 205, [17, 51, 1748, 809]], ['grid-heavy-recovery.png', 206, [157, 39, 1305, 808]]],
+    frames: [['grid-heavy-windup-v226.png', null, [25, 54, 1602, 797]],
+      ['grid-heavy-impact.png', 205, [17, 51, 1748, 809]], ['grid-heavy-recovery.png', 206, [157, 39, 1305, 808]]],
     forbidden: 'grid-heavy-windup.png', animation: 'painted-grid-heavy-poses' },
   { id: 'gorilla', action: 'special', style: 'ram', travels: true, dimensions: [1254, 1254], reachCases: [[155, true], [195, false]],
-    frames: [['gorilla-special-windup.png', 206, [69, 166, 1119, 923]], null, ['gorilla-special-recovery.png', 206, [44, 116, 1150, 917]]],
+    frames: [['gorilla-special-windup.png', 206, [69, 166, 1119, 923]],
+      ['gorilla-special-active-four-spines.png', null, [27, 220, 1217, 837]], ['gorilla-special-recovery.png', 206, [44, 116, 1150, 917]]],
     forbidden: 'gorilla-heavy-impact.png', animation: 'painted-gorilla-ram-poses' },
   { id: 'arachnoid', variant: 'grey', action: 'light', dimensions: [1536, 1024], reachCases: [[55, true], [65, false]],
     frames: [['arachnoid-light-windup.png', 205, [148, 25, 1220, 981]], ['arachnoid-light-impact.png', 205, [83, 119, 1617, 710], [1774, 887]],
       ['arachnoid-light-recovery.png', 205, [219, 19, 1083, 990]]], forbidden: 'arachnoid-special-active.png', animation: 'painted-arachnoid-light-poses' },
   { id: 'panther', action: 'light', dimensions: [1536, 1024], density: .80, reachCases: [[45, true], [62, false]],
-    frames: [['panther-light-windup.png', 206, [109, 45, 1232, 887]], null, ['panther-light-recovery.png', 206, [168, 32, 1260, 950]]],
+    frames: [['panther-light-windup.png', 206, [109, 45, 1232, 887]],
+      ['panther-light-contact.png', null, [53, 22, 1437, 906]], ['panther-light-recovery.png', 206, [168, 32, 1260, 950]]],
     forbidden: 'panther-light-impact.png', animation: 'painted-panther-light-poses' },
   { id: 'arachnoid', variant: 'grey', action: 'special', style: 'pounce', travels: true, dimensions: [1536, 1024],
     reachCases: [[150, true], [190, false]], frames: [['arachnoid-special-windup.png', 205, [129, 65, 1190, 916]],
@@ -187,11 +190,14 @@ const addedActions = [
       ['arachnoid-special-recovery.png', 205, [172, 45, 1175, 935]]],
     forbidden: 'arachnoid-special-active.png', animation: 'painted-grounded-pounce' },
   { id: 'grid', action: 'special', style: 'tail', dimensions: [1774, 887], reachCases: [[112, true], [125, false]],
-    frames: [['grid-special-windup.png', 206, [231, 21, 1426, 801]], null, ['grid-special-recovery.png', 206, [307, 48, 1188, 775]]],
+    frames: [['grid-special-windup.png', 206, [231, 21, 1426, 801]],
+      ['grid-special-contact.png', null, [115, 57, 1569, 787]], ['grid-special-recovery.png', 206, [307, 48, 1188, 775]]],
     forbidden: 'grid-special-active.png', animation: 'painted-grid-tail-poses' },
   { id: 'gorilla', action: 'heavy', dimensions: [1254, 1254], reachCases: [[80, true], [94, false]],
-    frames: [['gorilla-heavy-windup-four-spines.png', 206, [147, 16, 836, 1213]], null, null],
-    forbidden: 'gorilla-heavy-windup.png', animation: 'painted-gorilla-heavy-windup' }
+    frames: [['gorilla-heavy-windup-four-spines.png', 206, [147, 16, 836, 1213]],
+      ['gorilla-heavy-impact-four-spines.png', null, [12, 106, 1231, 1032]],
+      ['gorilla-heavy-recovery-four-spines.png', null, [16, 188, 1134, 936]]],
+    forbidden: 'gorilla-heavy-windup.png', animation: 'painted-gorilla-heavy-poses' }
 ];
 const phases = ['windup', 'contact', 'recovery'];
 const publicDirectory = '/assets/openai/xeno-trials-v209/characters/';
@@ -229,7 +235,8 @@ for (const { id, variant = null, action, style, travels = false, dimensions, den
     for (const [name, source, , frameDimensions = dimensions] of frames.filter(Boolean)) {
       const path = publicDirectory + name;
       const bytes = readFileSync(new URL('..' + path, import.meta.url));
-      assert.deepEqual(bytes, readFileSync(new URL('..' + path.replace('v209', `v${source}`), import.meta.url)));
+      if (source) assert.deepEqual(bytes, readFileSync(new URL('..' + path.replace('v209', `v${source}`), import.meta.url)));
+      assert.equal(publicXenoPosePathAdmissionV209(path.slice(1)), true);
       const [naturalWidth, naturalHeight] = [bytes.readUInt32BE(16), bytes.readUInt32BE(20)];
       assert.deepEqual([naturalWidth, naturalHeight, bytes[25]], [...frameDimensions, 6]);
       images.set(path, { naturalWidth, naturalHeight, complete: true });

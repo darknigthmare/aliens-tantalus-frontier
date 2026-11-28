@@ -21,28 +21,29 @@ const pantherFrames = Object.freeze([
   ['contact', '/assets/openai/xeno-trials-v209/characters/panther-special-active.png', [50, 56, 1504, 956], 780],
   ['recovery', '/assets/openai/xeno-trials-v209/characters/panther-special-recovery.png', [89, 51, 1445, 980], 780]
 ].map(poseFrame));
-const gridFrames = Object.freeze([null,
+const gridFrames = Object.freeze([
+  poseFrame(['windup', '/assets/openai/xeno-trials-v209/characters/grid-heavy-windup-v226.png', [25, 54, 1627, 851], 1259]),
   // Keep the rightmost claw with its existing 9-pixel source margin.
   poseFrame(['contact', '/assets/openai/xeno-trials-v209/characters/grid-heavy-impact.png', [17, 51, 1765, 860], 1176]),
   poseFrame(['recovery', '/assets/openai/xeno-trials-v209/characters/grid-heavy-recovery.png', [157, 39, 1462, 847], 1175])
 ]);
 const gridTailFrames = Object.freeze([
-  // The painted shoulder centers (x = 1161 and x = 1104) retain the neutral 63-pixel offset.
+  // Keep the pivot about 60 pixels ahead of the painted shoulder in each phase.
   poseFrame(['windup', '/assets/openai/xeno-trials-v209/characters/grid-special-windup.png', [231, 21, 1657, 822], 1224]),
-  null,
+  poseFrame(['contact', '/assets/openai/xeno-trials-v209/characters/grid-special-contact.png', [115, 57, 1684, 844], 985]),
   poseFrame(['recovery', '/assets/openai/xeno-trials-v209/characters/grid-special-recovery.png', [307, 48, 1495, 823], 1167])
 ]);
 const gorillaFrames = Object.freeze([
   // Match the chest axis of the neutral plate, using the same crest length to retain scale.
   poseFrame(['windup', '/assets/openai/xeno-trials-v209/characters/gorilla-special-windup.png', [69, 166, 1188, 1089], 804]),
-  null,
+  poseFrame(['contact', '/assets/openai/xeno-trials-v209/characters/gorilla-special-active-four-spines.png', [27, 220, 1244, 1057], 762]),
   poseFrame(['recovery', '/assets/openai/xeno-trials-v209/characters/gorilla-special-recovery.png', [44, 116, 1194, 1033], 794])
 ]);
 const gorillaHeavyFrames = Object.freeze([
-  // The painted chest axis is at x = 715. Retain the neutral 35-pixel offset.
+  // Retain the neutral 35-pixel offset ahead of the painted chest axis.
   poseFrame(['windup', '/assets/openai/xeno-trials-v209/characters/gorilla-heavy-windup-four-spines.png', [147, 16, 983, 1229], 750]),
-  null,
-  null
+  poseFrame(['contact', '/assets/openai/xeno-trials-v209/characters/gorilla-heavy-impact-four-spines.png', [12, 106, 1243, 1138], 670]),
+  poseFrame(['recovery', '/assets/openai/xeno-trials-v209/characters/gorilla-heavy-recovery-four-spines.png', [16, 188, 1150, 1124], 751])
 ]);
 const arachnoidLightFrames = Object.freeze([
   ['windup', '/assets/openai/xeno-trials-v209/characters/arachnoid-light-windup.png', [148, 25, 1368, 1006], 865],
@@ -51,7 +52,7 @@ const arachnoidLightFrames = Object.freeze([
 ].map(poseFrame));
 const pantherLightFrames = Object.freeze([
   poseFrame(['windup', '/assets/openai/xeno-trials-v209/characters/panther-light-windup.png', [109, 45, 1341, 932], 716]),
-  null,
+  poseFrame(['contact', '/assets/openai/xeno-trials-v209/characters/panther-light-contact.png', [53, 22, 1490, 928], 731]),
   poseFrame(['recovery', '/assets/openai/xeno-trials-v209/characters/panther-light-recovery.png', [168, 32, 1428, 982], 801])
 ]);
 const pantherSource = ['pose-v94-kenner-panther', '/assets/openai/sprites/static-enemy-v94/kenner-panther-neca.png',
@@ -71,14 +72,14 @@ const groundedActions = Object.freeze([
     textureWidth: 1536, textureHeight: 1024, density: .77, frames: pantherFrames, limitations: ['three-painted-poses']
   }],
   ['grid', {
-    id: 'grid-heavy', action: 'heavy', revision: 222, animation: 'painted-grid-heavy-poses',
+    id: 'grid-heavy', action: 'heavy', revision: 226, animation: 'painted-grid-heavy-poses',
     source: gridSource,
-    textureWidth: 1774, textureHeight: 887, density: 1, frames: gridFrames, limitations: ['contact-and-recovery-only']
+    textureWidth: 1774, textureHeight: 887, density: 1, frames: gridFrames, limitations: ['three-painted-poses']
   }],
   ['gorilla', {
-    id: 'gorilla-ram', action: 'special', revision: 222, animation: 'painted-gorilla-ram-poses',
+    id: 'gorilla-ram', action: 'special', revision: 226, animation: 'painted-gorilla-ram-poses',
     source: gorillaSource,
-    textureWidth: 1254, textureHeight: 1254, density: 1, frames: gorillaFrames, limitations: ['windup-and-recovery-only']
+    textureWidth: 1254, textureHeight: 1254, density: 1, frames: gorillaFrames, limitations: ['three-painted-poses']
   }],
   ['arachnoid', {
     id: 'arachnoid-light', action: 'light', revision: 223, animation: 'painted-arachnoid-light-poses', variant: 'grey',
@@ -87,9 +88,9 @@ const groundedActions = Object.freeze([
     textureWidth: 1536, textureHeight: 1024, density: 1, frames: arachnoidLightFrames, limitations: ['grey-only', 'three-painted-poses']
   }],
   ['panther', {
-    id: 'panther-light', action: 'light', revision: 223, animation: 'painted-panther-light-poses', source: pantherSource,
+    id: 'panther-light', action: 'light', revision: 226, animation: 'painted-panther-light-poses', source: pantherSource,
     // The neutral shoulder-to-skull span is about 80% of the span in these light keys.
-    textureWidth: 1536, textureHeight: 1024, density: .80, frames: pantherLightFrames, limitations: ['windup-and-recovery-only']
+    textureWidth: 1536, textureHeight: 1024, density: .80, frames: pantherLightFrames, limitations: ['three-painted-poses']
   }],
   ['arachnoid', {
     id: 'arachnoid-pounce', action: 'special', revision: 224, animation: 'painted-grounded-pounce', variant: 'grey',
@@ -97,14 +98,14 @@ const groundedActions = Object.freeze([
     frames: arachnoidPounceFrames, limitations: ['grey-only', 'three-painted-poses']
   }],
   ['grid', {
-    id: 'grid-tail', action: 'special', revision: 224, animation: 'painted-grid-tail-poses',
+    id: 'grid-tail', action: 'special', revision: 226, animation: 'painted-grid-tail-poses',
     source: gridSource, textureWidth: 1774, textureHeight: 887, density: 1,
-    frames: gridTailFrames, limitations: ['windup-and-recovery-only']
+    frames: gridTailFrames, limitations: ['three-painted-poses']
   }],
   ['gorilla', {
-    id: 'gorilla-heavy', action: 'heavy', revision: 225, animation: 'painted-gorilla-heavy-windup',
+    id: 'gorilla-heavy', action: 'heavy', revision: 226, animation: 'painted-gorilla-heavy-poses',
     source: gorillaSource, textureWidth: 1254, textureHeight: 1254, density: 1,
-    frames: gorillaHeavyFrames, limitations: ['windup-only']
+    frames: gorillaHeavyFrames, limitations: ['three-painted-poses']
   }]
 ].map(([fighterId, entry]) => Object.freeze({ ...entry, fighterId, source: Object.freeze(entry.source), limitations: Object.freeze(entry.limitations),
   paths: Object.freeze(entry.frames.filter(Boolean).map(frame => frame.path)) })));

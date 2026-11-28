@@ -6,7 +6,7 @@ import { getXenoTrialsProjectileThreatV149 } from './xeno-trials-ai-v119.js';
 import { getXenoTrialsAcidEscapeV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsParryViewV208, isXenoTrialsParryingV208 } from './xeno-trials-defense-v208.js';
 import { getXenoTrialsRiposteReadinessV208, getXenoTrialsRiposteV208 } from './xeno-trials-ripostes-v208.js';
-import { getXenoTrialsAttackStyleV147, getXenoTrialsAttackV147 } from './xeno-trials-signatures-v147.js';
+import { getXenoTrialsAttackStyleV147, getXenoTrialsAttackV147, getXenoTrialsSignatureV147 } from './xeno-trials-signatures-v147.js';
 import { getXenoTrialsAlternateSignatureV208, XENO_TRIALS_SIGNATURE_KINDS_V208 } from './xeno-trials-signature-kit-v208.js';
 import { getXenoTrialsPhysicalSuper } from './xeno-trials-super-kits-v209.js';
 import { getXenoTrialsActiveStrikeV210 } from './xeno-trials-super-kits-v210.js';
@@ -107,22 +107,24 @@ function floorWaveJumpInput(match, cpu, definition, brain, dt) {
   return incomingWave ? { jump: true } : null;
 }
 
-function heavyRetreatInput(match, cpu, target, definition, controls, brain, specs, dt) {
+function retreatInput(match, cpu, target, definition, controls, brain, specs, dt) {
   const sliding = definition.id === 'spitter' && hasXenoTrialsDefensiveTravelV213(definition);
   const guarded = definition.id === 'synth-guard' && hasXenoTrialsGuardedWalkV218(definition) && controls.guard;
   if (match.hordeV180 || (!sliding && !guarded) || cpu.movementV210?.kind === 'ground-turn'
     || isXenoTrialsParryingV208(match, cpu)) return null;
 
   const strike = target.attack, sampled = brain.observation?.attack;
-  if (strike?.kind !== 'heavy' || strike.hit || target.y !== 0 || sampled?.id !== strike.id || sampled.age < .075
+  if (!strike || strike.hit || target.y !== 0 || sampled?.id !== strike.id || sampled.age < .075
     || match.tick - brain.observation.tick < 2 || cpu.facing !== -strike.facing || brain.observation.projectileThreat) return null;
   const attacker = getXenoTrialsFighterV96(target.id);
-  const heavy = getXenoTrialsAttackV147(attacker, 'heavy', specs.heavy);
-  if (!heavy || heavy.approachV208 || heavy.retreatV208 || heavy.liftV208 || heavy.unblockableV151
-    || heavy.contactBandV207 === 'low' || heavy.detonationV210 || heavy.projectileStyleV211) return null;
-  const remaining = heavy.startup - strike.age;
-  const reach = heavy.reach * attacker.reach;
-  if (remaining < dt || !inRange(target, cpu, heavy, reach, strike.facing)) return null;
+  const clamp = guarded && strike.kind === 'special' && getXenoTrialsSignatureV147(attacker)?.id === 'automated-powerloader-clamp-v221';
+  if (strike.kind !== 'heavy' && !clamp) return null;
+  const spec = getXenoTrialsAttackV147(attacker, strike.kind, specs[strike.kind]);
+  if (!spec || spec.approachV208 || spec.retreatV208 || spec.liftV208 || spec.unblockableV151
+    || spec.contactBandV207 === 'low' || spec.detonationV210 || spec.projectileStyleV211) return null;
+  const remaining = spec.startup - strike.age;
+  const reach = spec.reach * attacker.reach;
+  if (remaining < dt || !inRange(target, cpu, spec, reach, strike.facing)) return null;
 
   const advanceTicks = Math.floor(remaining / dt);
   // The engine's low retreat speed is at least 170. Count only whole steps
@@ -340,7 +342,7 @@ export function chooseXenoTrialsHardTacticsV209(match, cpu, target, brain, specs
   if (duck) return duck;
   const jump = floorWaveJumpInput(match, cpu, definition, brain, dt);
   if (jump) return jump;
-  const retreat = heavyRetreatInput(match, cpu, target, definition, controls, brain, specs, dt);
+  const retreat = retreatInput(match, cpu, target, definition, controls, brain, specs, dt);
   if (retreat) return retreat;
   if (!cpu.parryV208?.openingId && !decided) return controls;
   return riposteInput(match, cpu, target, definition)

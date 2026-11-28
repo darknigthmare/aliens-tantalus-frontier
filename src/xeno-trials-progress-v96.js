@@ -303,7 +303,7 @@ function validOperationResultV188(config, result) {
     || !Number.isInteger(horde.wavesCleared) || horde.wavesCleared < 0 || horde.wavesCleared > protocol.waves.length
     || horde.kills < protocol.waves.slice(0, horde.wavesCleared).reduce((sum, wave) => sum + wave.total, 0)
     || !validateXenoTrialsOperationSnapshotV188(receipt.state, config, {
-      tick: result.durationTicks, hordeV180: horde, stageHazardsV188: result.stageHazardsV188 })
+      tick: result.durationTicks, hordeV180: horde, stageHazardsV188: result.stageHazardsV188, playerStats: result.playerStats })
     || !validateXenoTrialsStageHazardsV188(result.stageHazardsV188, { stageId: config.stageId, seed: config.seed,
       tick: result.durationTicks, operationId: operation.id, operationState: receipt.state })) return false;
   const { state, ...summary } = receipt;

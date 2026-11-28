@@ -621,6 +621,69 @@ test('hard Synth Guard takes only the guarded steps required to escape a heavy a
   assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
 });
 
+function clampRetreatFixture(margin, mirrored = false) {
+  const loader = getXenoTrialsFighterV96('synth-automated-powerloader');
+  const clamp = getXenoTrialsAttackV147(loader, 'special', XENO_TRIALS_ATTACKS_V96.special);
+  const reach = clamp.reach * loader.reach;
+  const trial = fixture({ playerId: loader.id, opponentId: 'synth-guard', gap: reach - margin, meter: 0, seed: 2 });
+  if (mirrored) for (const fighter of trial.match.fighters) {
+    fighter.x = XENO_TRIALS_ARENA_V105.left + XENO_TRIALS_ARENA_V105.right - fighter.x;
+    fighter.facing *= -1;
+  }
+  return { ...trial, reach };
+}
+
+test('hard Synth Guard retreats outside the Power Loader clamp after observing its windup', () => {
+  for (const mirrored of [false, true]) {
+    const { match, player, cpu, config, reach } = clampRetreatFixture(1, mirrored);
+    const x = cpu.x, hp = cpu.hp, facing = cpu.facing;
+    advance(match, 1, { special: true });
+    assert.equal(match.events.at(-1).signatureIdV147, 'automated-powerloader-clamp-v221');
+    advance(match, 22);
+    assert.equal(cpu.x, x);
+    assert.equal(cpu.guard, true);
+    assert.equal(match.ai.observation.attack.id, player.attack.id);
+    assert.equal(match.tick - match.ai.observation.tick, 1);
+    const saved = createXenoTrialsDuelCheckpointV197(getXenoTrialsSnapshotV96(match), config);
+    assert.ok(saved);
+    const resumed = structuredClone(saved.snapshot);
+    setXenoTrialsPausedV96(resumed, false);
+    const step = getXenoTrialsFighterV96(cpu.id).speed * XENO_TRIALS_GUARD_RETREAT_V213.speedRatio * dt;
+    for (const state of [match, resumed]) {
+      const [loader, guard] = state.fighters;
+      const stamina = guard.stamina;
+      advance(state, 1);
+      assert.ok(Math.abs(guard.x - x + facing * step) < 1e-8);
+      assert.equal(guard.facing, facing);
+      assert.ok(Math.abs(guard.stamina - stamina + (5 + XENO_TRIALS_GUARD_RETREAT_V213.additionalDrain) * dt) < 1e-8);
+      advance(state, 16);
+      assert.ok(Math.abs(guard.x - x + facing * step * 2) < 1e-8);
+      assert.ok(gapTo(loader, guard) > reach);
+      assert.equal(guard.guard, true);
+      assert.equal(guard.hp, hp);
+      assert.equal(loader.attack.hit, false);
+    }
+    assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
+  }
+});
+
+test('hard Synth Guard keeps its ordinary block if the Power Loader clamp cannot be escaped', () => {
+  for (const [margin, againstWall] of [[1, true], [12, false]]) {
+    const { match, cpu } = clampRetreatFixture(margin);
+    if (againstWall) {
+      const offset = XENO_TRIALS_ARENA_V105.right - cpu.x;
+      for (const fighter of match.fighters) fighter.x += offset;
+    }
+    const x = cpu.x;
+    advance(match, 1, { special: true });
+    advance(match, 33);
+    assert.equal(cpu.x, x);
+    assert.equal(cpu.guard, true);
+    advance(match, 1);
+    assert.equal(match.events.at(-1).type, 'block');
+  }
+});
+
 test('the retreats respect walls, cost and a heavy too close to escape', () => {
   const pinned = heavyRetreatFixture('spitter', 2);
   const offset = XENO_TRIALS_ARENA_V105.right - pinned.cpu.x;

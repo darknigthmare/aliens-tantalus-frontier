@@ -1,3 +1,4 @@
+import { createXenoTrialsPracticeGoalsV226, XENO_TRIALS_NEW_DRILLS_V226 } from './xeno-trials-practice-v226.js';
 import { createXenoTrialsPracticeGoalsV225, XENO_TRIALS_NEW_DRILLS_V225 } from './xeno-trials-practice-v225.js';
 import { createXenoTrialsPracticeGoalsV224, XENO_TRIALS_NEW_DRILLS_V224 } from './xeno-trials-practice-v224.js';
 import { createXenoTrialsPracticeGoalsV223, XENO_TRIALS_NEW_DRILLS_V223 } from './xeno-trials-practice-v223.js';
@@ -76,9 +77,11 @@ export const XENO_TRIALS_PRACTICE_DRILLS_V224 = Object.freeze([...XENO_TRIALS_PR
   ...XENO_TRIALS_NEW_DRILLS_V224.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
 export const XENO_TRIALS_PRACTICE_DRILLS_V225 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V224,
   ...XENO_TRIALS_NEW_DRILLS_V225.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
-const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V225.map(entry => [entry.id, entry]));
+export const XENO_TRIALS_PRACTICE_DRILLS_V226 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V225,
+  ...XENO_TRIALS_NEW_DRILLS_V226.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
+const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V226.map(entry => [entry.id, entry]));
 export const getXenoTrialsPracticeV207 = id => LESSONS.get(id) || null;
-export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V225
+export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V226
   .filter(entry => Array.isArray(value) && value.includes(entry.id)).map(entry => entry.id);
 
 export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
@@ -125,6 +128,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
     retryCue = cue;
   }
   const progress = { index: () => index, advance, retry };
+  const goalsV226 = createXenoTrialsPracticeGoalsV226(id, match, progress);
   const goalsV225 = createXenoTrialsPracticeGoalsV225(id, match, progress);
   const goalsV224 = createXenoTrialsPracticeGoalsV224(id, match, progress);
   const goalsV223 = createXenoTrialsPracticeGoalsV223(id, match, progress);
@@ -135,7 +139,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   const goalsV218 = createXenoTrialsPracticeGoalsV218(id, match, progress);
   const goalsV217 = createXenoTrialsPracticeGoalsV217(id, match, progress);
   const goalsV213 = createXenoTrialsPracticeGoalsV213(id, match, progress);
-  const liveGoals = goalsV225 || goalsV224 || goalsV223 || goalsV222 || goalsV221 || goalsV220 || goalsV219 || goalsV218 || goalsV217 || goalsV213;
+  const liveGoals = goalsV226 || goalsV225 || goalsV224 || goalsV223 || goalsV222 || goalsV221 || goalsV220 || goalsV219 || goalsV218 || goalsV217 || goalsV213;
   const goals = liveGoals || createXenoTrialsPracticeGoalsV212(id, match, progress) || createXenoTrialsPracticeGoalsV211(id, match, progress);
   let cueV213 = '';
 
