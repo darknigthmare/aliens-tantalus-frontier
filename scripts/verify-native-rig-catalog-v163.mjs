@@ -139,14 +139,15 @@ for(const r of rigs) {
 // Actual controller rendering with a recording Canvas. This catches both the
 // missing hybrid label and the old screen-space banner over tall native heads;
 // no gameplay state or presentation clock is assigned by this fixture.
-test('all189 identities render defined intro labels and an on-screen placard clear of both native silhouettes',async t=>{
+test('the 189 published identities render defined intro labels and an on-screen placard clear of both native silhouettes',async t=>{
  const families={synthetic:'SYNTHÉTIQUE',pathogen:'PATHOGÈNE',xenomorph:'XÉNOMORPHE',engineer:'INGÉNIEUR',human:'HUMAIN',hybrid:'HYBRIDE'};
  const roles={balanced:'POLYVALENT',agile:'MOBILE',tank:'DÉFENSIF',ranged:'DISTANCE'};
  const metadata=new Map(),familyCounts={},matrixProduct=(a,b)=>[a[0]*b[0]+a[2]*b[1],a[1]*b[0]+a[3]*b[1],a[0]*b[2]+a[2]*b[3],a[1]*b[2]+a[3]*b[3],a[0]*b[4]+a[2]*b[5]+a[4],a[1]*b[4]+a[3]*b[5]+a[5]];
  const transform=(m,[x,y])=>[m[0]*x+m[2]*y+m[4],m[1]*x+m[3]*y+m[5]];
  const eventTarget=properties=>Object.assign({addEventListener(){},removeEventListener(){}},properties);
+ const published=roster.slice(0,189);
  let observed=0;
- for(const definition of roster){
+ for(const definition of published){
   const cards=[],texts=[],stack=[];let matrix=[1,0,0,1,0,0];
   const properties={font:'16px monospace',fillStyle:'#000',textAlign:'left',globalAlpha:1,
    save(){stack.push({matrix:[...matrix],font:this.font,fillStyle:this.fillStyle,textAlign:this.textAlign,globalAlpha:this.globalAlpha});},
@@ -199,6 +200,6 @@ test('all189 identities render defined intro labels and an on-screen placard cle
   }finally{controller.stop();}
   familyCounts[definition.family]=(familyCounts[definition.family]||0)+1;
  }
- assert.equal(observed,roster.length*2);assert.equal(roster.length,189);assert.deepEqual(Object.keys(familyCounts).sort(),Object.keys(families).sort());
- t.diagnostic(JSON.stringify({identities:roster.length,introRenders:observed,familyCounts,scope:'Recorded native controller/Canvas operations and measured native alpha envelopes; not browser raster evidence.'}));
+ assert.equal(observed,published.length*2);assert.equal(new Set(published.map(fighter=>fighter.id)).size,189);assert.deepEqual(Object.keys(familyCounts).sort(),Object.keys(families).sort());
+ t.diagnostic(JSON.stringify({identities:published.length,introRenders:observed,familyCounts,scope:'Recorded native controller/Canvas operations and measured native alpha envelopes; not browser raster evidence.'}));
 });

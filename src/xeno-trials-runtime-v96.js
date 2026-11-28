@@ -10,6 +10,9 @@ import { getXenoTrialsRigV154, getXenoTrialsRuntimeArticulatedRig, getXenoTrials
   getXenoTrialsRigCueV154, sampleXenoTrialsRigV154, drawXenoTrialsRigV154, sampleXenoTrialsExitPoseV157 } from './xeno-trials-rig-v154.js';
 import { createXenoTrialsPilotOutroV197, createXenoTrialsPilotReturnV212, getXenoTrialsPilotSequenceV197 } from './xeno-trials-pilot-sequences-v197.js';
 import { canDrawXenoTrialsPresentationV211, getXenoTrialsPresentationPoseV211, getXenoTrialsPresentationRigV211 } from './xeno-trials-presentation-v211.js';
+import { getXenoTrialsPresentationPlateV230 } from './xeno-trials-presentation-art-v230.js';
+import { createXenoTrialsVictoryClockV230, drawXenoTrialsPresentationMarksV230, drawXenoTrialsPresentationPlateV230,
+  getXenoTrialsPresentationPlateLayoutV230, getXenoTrialsPresentationViewV230, XENO_TRIALS_PAINTED_INTRO_V230 } from './xeno-trials-presentation-v230.js';
 import { getXenoTrialsGrappleViewV153, drawXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsGroundBreakViewV213 } from './xeno-trials-grapple-v213.js';
 import { getXenoTrialsGroundGripPoseV213 } from './xeno-trials-grapple-art-v213.js';
@@ -146,6 +149,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   let finisherV207 = null, finisherViewV207 = null;
   let finisherFixturesV208 = [], neutralFinisherV211 = null;
   const displayScale = getXenoTrialsDisplayScaleV110(match.fighters);
+  const introPlateV230 = fighter => !restored && !practiceV207 && !hordeProtocol && !match.operationV188
+    ? getXenoTrialsPresentationPlateV230('intro', fighter.id, fighter.variant) : null;
   const camera = createXenoTrialsCameraV119(match.fighters, { width: 1000, height: 560 }, {
     envelope: fighter => {
       const floorLock = finisherViewV207?.lock;
@@ -159,7 +164,11 @@ export function createXenoTrialsRuntimeV96(options = {}) {
         || getXenoTrialsSpriteEnvelopeV188(fighter, art, metrics);
       const kind = fighter.attack?.kind;
       const spec = kind && getXenoTrialsAttackV147(getXenoTrialsFighterV96(fighter.id), kind, XENO_TRIALS_ATTACKS_V96[kind]);
-      return getXenoTrialsActionEnvelope(fighter, art, metrics, spec, previous);
+      const entry = match.tick === 0 && getXenoTrialsPresentationPlateLayoutV230(introPlateV230(fighter), fighter, metrics, 'intro');
+      const envelope = getXenoTrialsActionEnvelope(fighter, art, metrics, spec, previous);
+      return entry ? { left: Math.min(fighter.x + entry.left, envelope?.left ?? Infinity),
+        right: Math.max(fighter.x + entry.right, envelope?.right ?? -Infinity),
+        top: Math.max(entry.top + fighter.y, envelope?.top ?? 0) } : envelope;
     } });
   let cameraView = camera.getState(), frameDelta = 0;
   let presentation = (restored || practiceV207 && !practiceV207.showIntroV210) ? { phase: 'active', elapsedMs: 0, round: match.round } : createXenoPresentationV97(), outroV155 = null, terminalV156 = null, tauntV156 = null, exitV157 = null, landingV157 = null;
@@ -412,7 +421,16 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const exitView=getXenoTrialsExitViewV157(match,fighter,exitV157,reduceMotion());
     const landingView=getXenoTrialsLandingViewV157(match,fighter,landingV157,reduceMotion());
     const presentationState = presentationView();
-    const arrivalView = !practiceV207 && getXenoTrialsArrivalViewV221(match, fighter, presentationState, images, reduceMotion());
+    const reducedMotion = reduceMotion();
+    const authoredPresentation = !practiceV207 && !exitView && !landingView
+      && getXenoTrialsPresentationViewV230(match, fighter, { presentation: presentationState, outro: outroV155 }, reducedMotion);
+    const entry = authoredPresentation?.kind === 'intro' ? introPlateV230(fighter) : null;
+    const entryImage = entry && images.get(entry.path);
+    const canShowEntry = entryImage && entryImage.complete !== false && entryImage.naturalWidth === entry.sourceWidth
+      && entryImage.naturalHeight === entry.sourceHeight;
+    const arrivalClock = canShowEntry ? { ...presentationState,
+      durationMs: presentationState.durationMs * XENO_TRIALS_PAINTED_INTRO_V230.walkDuration } : presentationState;
+    const arrivalView = !practiceV207 && getXenoTrialsArrivalViewV221(match, fighter, arrivalClock, images, reducedMotion);
     if(exitView&&!exitView.visible)return;
     const drawX=exitView?.x??arrivalView?.x??fighter.x,drawFacing=exitView?.direction??fighter.facing;
     const definition = getXenoTrialsFighterV96(fighter.id), art = getXenoTrialsArtV96(fighter.id, fighter.variant);
@@ -444,10 +462,24 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     }
     const metrics = getXenoTrialsRenderMetricsV110(fighter.id, fighter.variant, displayScale);
     const { width, height, pivotX, bottom, sourceFacing } = metrics;
+    const drawKey = fighter.instanceIdV180 || fighter.side;
+    function recordPresentation(mode, platePath = null) {
+      if (authoredPresentation) rigDrawsV154.set(drawKey, { ...rigDrawsV154.get(drawKey),
+        presentationV230: { ...authoredPresentation, mode, ...(platePath ? { platePath } : {}) } });
+    }
+    drawXenoTrialsPresentationMarksV230(context, authoredPresentation, drawX, ground, body.width, drawFacing);
+    if (canShowEntry && authoredPresentation.progress >= XENO_TRIALS_PAINTED_INTRO_V230.stanceStarts
+      && drawXenoTrialsPresentationPlateV230(context, entryImage,
+        getXenoTrialsPresentationPlateLayoutV230(entry, fighter, metrics, 'intro'), fighter.x, ground)) {
+      if (arrivalView) rigDrawsV154.set(drawKey, { arrivalV221: arrivalView });
+      recordPresentation('painted-intro', entry.path);
+      return;
+    }
     if (arrivalView && !arrivalView.waiting) {
       const drawn = drawXenoTrialsArrivalV221(context, fighter, art, images, arrivalView, metrics);
       if (drawn) {
-        rigDrawsV154.set(fighter.side, drawn);
+        rigDrawsV154.set(drawKey, drawn);
+        recordPresentation('native-arrival');
         return;
       }
     }
@@ -489,7 +521,6 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const moving = displaced && !moveset?.evade && (Boolean(fighter.previousInput?.left) !== Boolean(fighter.previousInput?.right))
       && fighter.hp > 0 && !fighter.attack && !fighter.guard && fighter.stun <= 0
       && fighter.hitFlash <= 0 && fighter.y === 0 && match.phase === 'active';
-    const reducedMotion = reduceMotion();
     // The engine owns the attack clock and locked facing. Art cannot restart an
     // attack, extend its active window or change collision/damage/save data.
     const canShowAttack = fighter.hp > 0 && fighter.y === 0 && fighter.stun <= 0
@@ -594,7 +625,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       height, x: fighter.x, y: ground, facing: fighter.attack?.facing,
       maxHorizontalExtent: null
     });
-    const animated = rigDrawn || attackDrawn || drawEnemyImportAnimationV107(context, art, images, {
+    const animated = rigDrawn || attackDrawn || !authoredPresentation && drawEnemyImportAnimationV107(context, art, images, {
       action: moving ? 'move' : 'idle', timeSeconds, height, x: drawX, y: ground, facing: drawFacing,
       maxHorizontalExtent: null,
       reducedMotion
@@ -604,13 +635,15 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       context.save(); context.translate(drawX, ground); context.scale(flip, 1);
       if(exitView&&exitView.fromFacing!==drawFacing&&exitView.turn<1)context.globalAlpha=exitView.turn;
       if (fighter.hitFlash > 0) context.globalAlpha = .65;
-      const modelMotion = getXenoTrialsResearchPoseV210(fighter, art, { spec, moving, tick: match.tick, reducedMotion });
-      if (modelMotion) context.transform(1, 0, modelMotion.lean, modelMotion.height, 0, 0);
+      const modelMotion = !authoredPresentation && getXenoTrialsResearchPoseV210(fighter, art, { spec, moving, tick: match.tick, reducedMotion });
+      if (authoredPresentation?.stanceLean) context.transform(1, 0, authoredPresentation.stanceLean * drawFacing * flip, 1, 0, 0);
+      else if (modelMotion) context.transform(1, 0, modelMotion.lean, modelMotion.height, 0, 0);
       const destination = [-width * pivotX, -height * bottom, width, height];
       if (art.sourceRectV209) context.drawImage(image, ...art.sourceRectV209, ...destination);
       else context.drawImage(image, ...destination);
       context.restore();
     }
+    recordPresentation(animated ? 'native-animation' : 'native-plate');
     if (lowPose) context.restore();
     if(exitView)return;
     if (evade && !reducedMotion && evade.ticks <= evadeSpec.travelTicks) {
@@ -1144,6 +1177,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
         if (!practiceV207) exitV157 = createXenoTrialsSurvivalExitV225(match, cameraView, reducedMotion, images);
         if (!exitV157) {
           outroV155 = createXenoTrialsPilotOutroV197(match, createXenoTrialsOutroV155(match, reducedMotion, images), reducedMotion);
+          if (!practiceV207) outroV155 = createXenoTrialsVictoryClockV230(match, outroV155, images, reducedMotion);
           terminalV156 = createXenoTrialsTerminalV156(match, 'draw', reducedMotion, null, images);
           landingV157 = createXenoTrialsLandingV157(match, reducedMotion, images, !practiceV207);
           if (!practiceV207 || practiceV207.allowsFinisherV221())
@@ -1196,6 +1230,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       const paths = [...new Set(preloadFighters.map(f => getXenoTrialsArtV96(f.id, f.variant).path))];
       const allPaths = [...new Set([...paths,...(stage.backdrop?[stage.backdrop]:[]),...getXenoTrialsStageAssetsV180(stage.id),...getXenoTrialsStageAssetsV190(stage.id),
         ...getXenoTrialsFranchiseStageAssetsV192(stage.id),
+        ...preloadFighters.map(fighter => introPlateV230(fighter)?.path).filter(Boolean),
         ...preloadFighters.flatMap(fighter => getXenoTrialsPoseAssetsV209(fighter, getXenoTrialsArtV96(fighter.id, fighter.variant))),
         ...(hordeProtocol ? [] : getXenoTrialsCaptureAssetsV163(match.fighters))])];
       const results = await Promise.allSettled(allPaths.map(async path => {

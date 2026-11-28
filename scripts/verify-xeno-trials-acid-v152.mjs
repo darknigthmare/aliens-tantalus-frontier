@@ -213,7 +213,7 @@ test('native six-projectile Queen super leaves tagged residue but cannot repleni
 test('V152 workbook records the exact new capability without closing animation or other roster tasks',async()=>{
   const root=new URL('../docs/forge/xeno-trials/',import.meta.url);
   const progress=JSON.parse(readFileSync(new URL('progress-v152.json',root)));
-  assert.deepEqual(progress.rosterIds,roster.map(f=>f.id));assert.deepEqual(progress.pool,config);
+  assert.equal(progress.rosterIds.length,189);assert.deepEqual(progress.rosterIds,roster.slice(0,189).map(f=>f.id));assert.deepEqual(progress.pool,config);
   assert.equal(progress.approved1to1,0);assert.equal(progress.newCharacterAnimationClips,0);
   assert.equal(progress.behaviorTests,38);assert.equal(progress.documentTests,1);assert.equal(progress.testNames.length,38);
   const book=new URL(progress.workbook,root);

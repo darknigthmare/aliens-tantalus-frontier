@@ -1,3 +1,4 @@
+import { getXenoTrialsRecruitV230 } from './xeno-trials-recruits-v230.js';
 import { XENO_TRIALS_RESEARCH_LABS_V209 } from './xeno-trials-research-lab-v209.js';
 import { createXenoTrialsResearchLabRuntimeV209 } from './xeno-trials-research-lab-ui-v209.js';
 import { normalizeXenoTrialsSandboxV208, XENO_TRIALS_SANDBOX_BEHAVIORS_V208, XENO_TRIALS_SANDBOX_ID_V208 } from './xeno-trials-practice-v208.js';
@@ -6,7 +7,9 @@ import { usesXenoTrialsIndependentProps } from './xeno-trials-franchise-stage-sc
 import { renderArbiterTerminalDossierV190 } from './xeno-arbiter-ui-v190.js';
 import { ARBITER_PROGRAMS_V191, ARBITER_HORDE_PROTOCOLS_V191, getArbiterProgramV191 } from './xeno-arbiter-protocols-v191.js';
 import { getXenoTrialsArchiveAccessV207 } from './xeno-trials-archive-access-v207.js';
-import { XENO_TRIALS_RESEARCH_V210, getXenoTrialsResearchEvaluationV210 } from './xeno-trials-research-v210.js';
+import { XENO_TRIALS_RESEARCH_V210, XENO_TRIALS_RESEARCH_FIGHTERS_V210, getXenoTrialsResearchEvaluationV210 } from './xeno-trials-research-v210.js';
+import { createXenoTrialsSelectionMotionV230, getXenoTrialsSelectionVisualV230 } from './xeno-trials-selection-motion-v230.js';
+import { getXenoTrialsPresentationPlateV230 } from './xeno-trials-presentation-art-v230.js';
 import { currentLanguageV185 } from './i18n-v185.js';
 import { getXenoTrialsRigV154 } from './xeno-trials-rig-v154.js';
 import { getXenoTrialsSequenceV155 } from './xeno-trials-sequences-v155.js';
@@ -47,7 +50,20 @@ import { getXenoTrialsOperationBriefingV188, getXenoTrialsOperationHudV188 } fro
 import { getXenoTrialsProgramPageV186 } from './xeno-trials-programs-v186.js';
 import { getXenoTrialsHordeBriefingV180, getXenoTrialsHordeViewV180, isXenoTrialsHordeActivityV180 } from './xeno-trials-horde-ui-v180.js';
 
-const options = entries => entries.map(e => `<option value="${e.id}">${e.label}</option>`).join('');
+const fighterLabelV230 = fighter => {
+  const recruit = getXenoTrialsRecruitV230(fighter?.id);
+  return recruit ? currentLanguageV185() === 'en' ? recruit.labelEn : recruit.label : fighter?.label || '';
+};
+const options = entries => entries.map(e => `<option value="${e.id}">${fighterLabelV230(e)}</option>`).join('');
+
+// Native rectangular viewport over the admitted whole image. Atlas crops do
+// not edit pixels and the offline menu never substitutes a different identity.
+export function getXenoTrialsRecruitPreviewV230(id) {
+  const recruit = getXenoTrialsRecruitV230(id);
+  if (!recruit) return null;
+  const { path, width, height, rect } = recruit.preview;
+  return `<svg xmlns="http://www.w3.org/2000/svg" data-xt-recruit-preview="${id}" aria-hidden="true" viewBox="${rect.join(' ')}" preserveAspectRatio="xMidYMid meet" style="display:block;width:100%;height:100%;overflow:hidden;pointer-events:none"><image href="${path}" width="${width}" height="${height}"/></svg>`;
+}
 const requestedRulesV119 = value => ({ 'no-special': { noSpecial: true }, 'one-hp': { initialHp: 1 },
   'thirty-seconds': { timeLimitSeconds: 30 } }[value] || {});
 const roleLabel = { balanced: 'Polyvalent', agile: 'Mobile', tank: 'Défensif', ranged: 'Distance' };
@@ -150,6 +166,8 @@ export class XenoTrialsUiV96 {
     onOpenArbiterDossier = null, standaloneV207 = false, offlineDuels = null, getReducedMotion = () => false }) {
     Object.assign(this, { root, getProgress, onCommit, canCommit, onReturn, audioDirector, getCampaignProgress, onOpenArbiterDossier,
       standaloneV207, offlineDuels, getReducedMotion });
+    this.selectionMotionV230 = createXenoTrialsSelectionMotionV230({ document: root.ownerDocument, getReducedMotion,
+      getPlate: getXenoTrialsPresentationPlateV230 });
     this.offlineSelectionV223 = null;
     this.offlinePreparationsV224 = new Map();
     this.offlineLibraryMutationV224 = null;
@@ -190,6 +208,12 @@ export class XenoTrialsUiV96 {
       </form></details><details data-xt="practice-labs" class="xt-practice-sandbox-v208" hidden><summary>LABORATOIRES MIRE</summary>
         <div data-xt="practice-lab-list" class="xt-activity-board-v119"></div></details><details data-xt="research-dossiers" class="xt-practice-sandbox-v208" hidden>
         <summary>DOSSIERS EXPÉRIMENTAUX MIRE</summary>
+        <label>${currentLanguageV185() === 'en' ? 'Model preview' : 'Aperçu du modèle'}
+          <select data-xt="research-preview-select">${options(XENO_TRIALS_RESEARCH_FIGHTERS_V210)}</select>
+        </label>
+        <div data-xt="research-preview" class="xt-specimen-window" style="position:relative;max-width:280px">
+          <div data-xt="research-preview-static" class="xt-facing-preview" aria-hidden="true"></div>
+        </div>
         <div class="xt-activity-board-v119">${XENO_TRIALS_RESEARCH_V210.map(specimen => `<article class="xt-activity-v119">
           <h3>${escapeHtml(specimen.label)}</h3><strong>${escapeHtml(specimen.source)}</strong><p>${escapeHtml(specimen.briefing)}</p>
           ${specimen.originalModel ? '<small>MODÈLE ORIGINAL MIRE</small>' : ''}
@@ -359,6 +383,8 @@ export class XenoTrialsUiV96 {
     this.form.elements.opponentFamily.addEventListener('change', () => this.updateOpponents());
     this.form.elements.opponentId.addEventListener('change', () => { this.updateVariants(); this.renderPreviews(); });
     this.form.elements.opponentVariant.addEventListener('change', () => this.renderPreviews());
+    this.el('research-preview-select')?.addEventListener('change', () => this.syncSelectionMotionV230());
+    this.el('research-dossiers')?.addEventListener('toggle', () => this.syncSelectionMotionV230());
     this.form.elements.stageId.addEventListener('change', () => {
       this.el('stage-media').value = 'all'; this.stageSelectionV192 = null; this.renderPreviews();
     });
@@ -761,6 +787,38 @@ export class XenoTrialsUiV96 {
     this.form.elements.stageId.value = id; this.renderPreviews();
     this.root.querySelector(`[data-xt-arena="${id}"]`)?.focus(); return true;
   }
+  syncSelectionMotionV230() {
+    const motion = this.selectionMotionV230;
+    if (!motion) return;
+    if (!this.active) { motion.stop(); return; }
+    const requests = [];
+    if (['fighters', 'target'].includes(this.selectionStep)) {
+      for (const slot of ['player', 'target']) {
+        const host = this.el('portraits').querySelector?.(`[data-xt-selection-view="${slot}"]`);
+        if (!host) continue;
+        const target = slot === 'target';
+        requests.push({ slot, host, fallback: host.querySelector('.xt-facing-preview'),
+          id: target ? this.form.elements.opponentId.value : this.selected,
+          variant: this.form.elements[target ? 'opponentVariant' : 'playerVariant'].value, facing: target ? -1 : 1 });
+      }
+    } else if (this.selectionStep === 'activities' && this.branchV119 === 'practice' && this.el('research-dossiers').open) {
+      const id = this.el('research-preview-select').value;
+      const host = this.el('research-preview'), fallback = this.el('research-preview-static');
+      const visual = XENO_TRIALS_RESEARCH_FIGHTERS_V210.some(model => model.id === id) && getXenoTrialsSelectionVisualV230(id);
+      if (visual && host && fallback) {
+        if (this.lastResearchPreviewV230 !== id) {
+          const [x, y] = visual.source;
+          const [left, top, right, bottom] = visual.bounds;
+          fallback.innerHTML = `<svg aria-hidden="true" viewBox="${x + left} ${y + top} ${right - left} ${bottom - top}">
+            <image href="${escapeHtml(visual.path)}" width="${visual.textureWidth}" height="${visual.textureHeight}"/></svg>`;
+          this.lastResearchPreviewV230 = id;
+        }
+        requests.push({ slot: 'research', host, fallback, id, facing: 1 });
+      }
+    }
+    if (this.usesLocalMenuMediaV222()) motion.stop();
+    else motion.sync(requests);
+  }
   renderPreviews() {
     const state = this.state();
     const activity = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, state.modesV119);
@@ -776,8 +834,8 @@ export class XenoTrialsUiV96 {
       const f = FIGHTERS.find(entry => entry.id === id); if (!f) return '';
       const art = getXenoTrialsArtV96(id, this.form.elements[i ? 'opponentVariant' : 'playerVariant'].value);
       const variant = this.form.elements[i ? 'opponentVariant' : 'playerVariant'].value;
-      const portrait = this.usesLocalMenuMediaV222() ? menuTileV222('fighter', f.id, f.variants.includes(variant) ? variant : null)
-        : art ? renderEnemyImportPreviewV103(art) || `<img src="${escapeHtml(art.path)}" alt="">` : '<p>VISUEL À DÉFINIR</p>';
+      const portrait = (this.usesLocalMenuMediaV222() && menuTileV222('fighter', f.id, f.variants.includes(variant) ? variant : null))
+        || getXenoTrialsRecruitPreviewV230(f.id) || (art ? renderEnemyImportPreviewV103(art) || `<img src="${escapeHtml(art.path)}" alt="">` : '<p>VISUEL À DÉFINIR</p>');
       const walk = getEnemyImportAnimationV107(art);
       const attack = getEnemyImportAttackV109(art);
       const signature = getXenoTrialsSignatureV147(f);
@@ -800,10 +858,10 @@ export class XenoTrialsUiV96 {
       const health = rules?.initialHp === 1 ? 1 : f.hp;
       const dossier = `${i}-${id}`;
       return `<figure class="xt-selection-preview" data-slot="${i ? 'target' : 'player'}">
-        <div class="xt-specimen-window"><div class="xt-facing-preview" data-facing="${desiredFacing}" style="transform:scaleX(${desiredFacing * sourceFacing})">${portrait}</div></div>
+        <div class="xt-specimen-window" data-xt-selection-view="${i ? 'target' : 'player'}" style="position:relative"><div class="xt-facing-preview" data-facing="${desiredFacing}" style="transform:scaleX(${desiredFacing * sourceFacing})">${portrait}</div></div>
         <figcaption class="xt-specimen-identity">
           <span class="xt-specimen-slot">${i ? horde ? 'CONTACT TYPE' : 'CIBLE D’ESSAI' : 'SPÉCIMEN AFFECTÉ'}</span>
-          <strong>${escapeHtml(f.label)}</strong>
+          <strong>${escapeHtml(fighterLabelV230(f))}</strong>
           <span class="xt-specimen-family">${family} · ${roleLabel[f.role]}</span>
           <dl class="xt-specimen-stats"><div><dt>${horde && i ? 'Contact' : 'Santé'}</dt><dd>${escapeHtml(horde && i ? horde.healthLabel : `${health} ${healthUnit}`)}</dd></div><div><dt>Mobilité</dt><dd>${f.speed}</dd></div></dl>
           ${playerLocked ? '<span class="xt-specimen-hold">AFFECTATION VERROUILLÉE</span>' : ''}
@@ -818,6 +876,7 @@ export class XenoTrialsUiV96 {
         </details>
       </figure>`;
     }).join(`<span class="xt-versus" aria-hidden="true">${horde ? '×' : 'VS'}</span>`);
+    this.syncSelectionMotionV230();
     const stage = STAGES.find(s => s.id === this.form.elements.stageId.value) || STAGES[0];
     const matchup = ids.map(id => FIGHTERS.find(f => f.id === id)?.label || '').join(' contre ');
     this.el('arena-matchup').textContent = horde ? `${FIGHTERS.find(f => f.id === this.selected)?.label} · ${horde.waveLabel} · ${horde.populationLabel} · ${horde.healthLabel}` : `${matchup} · Deux manches gagnantes`;
@@ -962,6 +1021,7 @@ export class XenoTrialsUiV96 {
     this.resultRetryTimer = null;
   }
   closeRuntime() {
+    this.selectionMotionV230?.stop();
     this.labRuntimeV209?.stop(); this.labRuntimeV209 = null;
     this.el('practice-hud').hidden = this.el('practice-restart').hidden = true;
     this.practiceAnnouncementV207 = this.practiceContactV209 = this.practiceRecordingStatusV209 = null;
@@ -1304,8 +1364,8 @@ export class XenoTrialsUiV96 {
     // They only reflect the runtime snapshot; no combat values are written here.
     for (const [i, fighter] of hudFighters.entries()) {
       const side = i === 0 ? 'player' : 'opponent', definition = getXenoTrialsFighterV96(fighter.id);
-      this.el(`${side}-name`).textContent = definition.label;
-      this.el(`${side}-name`).setAttribute('title', definition.label);
+      this.el(`${side}-name`).textContent = fighterLabelV230(definition);
+      this.el(`${side}-name`).setAttribute('title', fighterLabelV230(definition));
       for (const key of ['hp', 'stamina']) {
         const maximum=key==='hp' && snapshot.config?.rulesV119?.initialHp===1 ? 1 : definition[key];
         const current = Math.max(0, Math.min(maximum, fighter[key]));
@@ -1502,12 +1562,12 @@ export class XenoTrialsUiV96 {
     const cards = page.fighters.map(f => {
       const variant = f.id === 'arachnoid' ? this.form.elements.playerVariant.value : null;
       const unlocked = state.unlocked.includes(f.id), art = getXenoTrialsArtV96(f.id, variant), cost = getXenoTrialsUnlockCostV96(f.id);
-      const portrait = this.usesLocalMenuMediaV222() ? menuTileV222('fighter', f.id, f.variants.includes(variant) ? variant : null)
-        : renderEnemyImportPreviewV103(art) || (art ? `<img src="${escapeHtml(art.path)}" alt="" loading="lazy">` : '');
+      const portrait = (this.usesLocalMenuMediaV222() && menuTileV222('fighter', f.id, f.variants.includes(variant) ? variant : null))
+        || getXenoTrialsRecruitPreviewV230(f.id) || renderEnemyImportPreviewV103(art) || (art ? `<img src="${escapeHtml(art.path)}" alt="" loading="lazy">` : '');
       const power = getXenoTrialsSimulationPowerV227(f.id);
       return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}" data-owned="${unlocked}">
         <button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${locked ? 'disabled' : ''}>
-          <span class="xt-fighter-thumbnail">${portrait}</span><strong>${escapeHtml(f.label)}</strong>
+          <span class="xt-fighter-thumbnail">${portrait}</span><strong>${escapeHtml(fighterLabelV230(f))}</strong>
           ${power === null ? '' : `<small class="xt-fighter-power" data-xt-power="${power}"><span>Puissance MIRE</span> <b>${formatPower.format(power)}</b></small>`}
           <small class="xt-motion-status-v189 xt-sr-only">${escapeHtml(getXenoTrialsRuntimeAnimationCoverage(f.id)?.playerLabel || '')}</small>
         </button>

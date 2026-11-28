@@ -386,10 +386,10 @@ test('offline shell admits the new exact module once and reduced-motion QA targe
  const qa=readFileSync(new URL('./qa-xeno-trials-signatures-v147.py',import.meta.url),'utf8');assert.ok(qa.includes("page.emulate_media(reduced_motion='reduce')"));assert.ok(!qa.includes('context.emulate_media'));
 });
 
-test('V148 workbook and progress cover the live roster without certifying missing artwork',async()=>{
+test('V148 workbook and progress cover the published roster without certifying missing artwork',async()=>{
  const {createHash}=await import('node:crypto'),{spawnSync}=await import('node:child_process');
  const root=new URL('../docs/forge/xeno-trials/',import.meta.url),progress=JSON.parse(readFileSync(new URL('progress-v148.json',root)));
- assert.deepEqual(progress.rosterIds,fighters.map(f=>f.id));assert.equal(progress.approved1to1,0);assert.equal(progress.newCharacterAnimationClips,0);
+ assert.deepEqual(progress.rosterIds,fighters.slice(0,189).map(f=>f.id));assert.equal(progress.approved1to1,0);assert.equal(progress.newCharacterAnimationClips,0);
  assert.equal(progress.behaviorTests,58);assert.equal(progress.documentTests,1);
  assert.deepEqual(progress.supers.map(({status,productionLotsV146,remaining,...s})=>s),supers);
  const book=new URL(progress.workbook,root);

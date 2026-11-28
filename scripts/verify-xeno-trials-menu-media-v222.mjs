@@ -7,8 +7,8 @@ import { XENO_TRIALS_MENU_ATLASES_V222 } from '../src/xeno-trials-menu-atlases-v
 import { getXenoTrialsMenuTileV222 } from '../src/xeno-trials-menu-media-v222.js';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 
-test('V222 reserves a distinct offline tile for each roster variant and each illustrated stage', () => {
-  const fighter = XENO_TRIALS_FIGHTERS_V96.flatMap(definition => [definition.id,
+test('V222 reserves a distinct offline tile for each published roster variant and each illustrated stage', () => {
+  const fighter = XENO_TRIALS_FIGHTERS_V96.slice(0, 189).flatMap(definition => [definition.id,
     ...definition.variants.map(variant => `${definition.id}:${variant}`)]);
   const stage = XENO_TRIALS_STAGES_V96.filter(definition => definition.backdrop).map(definition => definition.id);
   for (const [kind, ids] of Object.entries({ fighter, stage })) {

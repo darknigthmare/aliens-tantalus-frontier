@@ -11,7 +11,7 @@ import { getXenoTrialsBodyBoundsV105 as bounds } from '../src/xeno-trials-geomet
 test('the fifteen Bible proposals have explicit, separate dossiers and only reviewed comparison models start a fight', () => {
   const bible = JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/xeno-trials-plan-v146.json', import.meta.url)));
   assert.deepEqual(XENO_TRIALS_RESEARCH_V209.map(specimen => specimen.id).sort(), bible.tables['16_HorsRoster'].rows.map(row => row[0]).sort());
-  assert.equal(XENO_TRIALS_FIGHTERS_V96.length, 189);
+  assert.deepEqual(XENO_TRIALS_FIGHTERS_V96.slice(0, 189).map(fighter => fighter.id), bible.currentFighterIds);
   assert.equal(XENO_TRIALS_RESEARCH_V209.filter(specimen => specimen.fighterId).length, 8);
   assert.equal(XENO_TRIALS_RESEARCH_V209.filter(specimen => specimen.kind === 'event').length, 3);
   assert.equal(getXenoTrialsResearchEvaluationV209('SIREN'), null);

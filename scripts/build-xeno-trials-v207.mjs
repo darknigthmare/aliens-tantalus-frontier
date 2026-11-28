@@ -25,7 +25,7 @@ const entryModule = 'src/xeno-trials-standalone.js';
 const launchPage = 'xeno-trials.html';
 const digest = value => createHash('sha256').update(value).digest('hex');
 
-export const XENO_TRIALS_BUILD_REVISION = 229;
+export const XENO_TRIALS_BUILD_REVISION = 230;
 export const xenoTrialsCacheName = fingerprint => `atf-trials-v${XENO_TRIALS_BUILD_REVISION}-${fingerprint.slice(0, 24)}`;
 
 const icons = [192, 512].flatMap(size => ['any', 'maskable'].map(purpose => ({
@@ -68,6 +68,8 @@ export async function planXenoTrialsBuildV207(base, info) {
   const poseAssets = getXenoTrialsPoseAssetsV209().map(path => required(path.slice(1)));
   const researchMedia = XENO_TRIALS_RESEARCH_MEDIA_V210.map(row => required(row.path.slice(1)));
   const researchAssets = [...getXenoTrialsResearchAssetsV210(), ...getXenoTrialsResearchLabAssetsV209()]
+    .map(path => required(path.slice(1)));
+  const researchMenuMedia = getXenoTrialsResearchAssetsV210()
     .map(path => required(path.slice(1)));
   const menuMedia = XENO_TRIALS_MENU_ASSETS_V222.map(path => required(path.slice(1)));
   const assets = new Set([...bootstrapArt, ...audioAssets, ...poseAssets, ...researchAssets, ...researchMedia, ...menuMedia]);
@@ -112,7 +114,7 @@ export async function planXenoTrialsBuildV207(base, info) {
     ...[...entranceStages].flatMap(stageAssets)
   ].map(path => required(path.slice(1)));
   const copyPaths = [...new Set([...modules, ...css, ...assets, required('LICENSE_NOTICE.md')])].sort();
-  const shellPaths = [manifestPath, audioManifest, ...modules, ...css, ...bootstrapArt, ...starterArt, ...poseAssets, ...researchMedia, ...menuMedia]
+  const shellPaths = [manifestPath, audioManifest, ...modules, ...css, ...bootstrapArt, ...starterArt, ...poseAssets, ...researchMedia, ...researchMenuMedia, ...menuMedia]
     .map(path => '/' + path);
   // AudioAssetBankV77 uses the stamped sound hash in the request URL.
   const audioUrls = audioSources.map(({ path, sha256 }) => `${path}?v=${sha256.slice(0, 16)}`);

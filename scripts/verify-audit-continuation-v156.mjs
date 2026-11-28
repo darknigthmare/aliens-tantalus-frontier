@@ -45,7 +45,7 @@ test('V156 keeps the exact inherited 40 presentation, 28 ART153 and 189 roster I
   assert.equal(current.approved1to1, 0);
   assert.equal(current.fullArtTasksClosed, 0);
   assert.equal(current.newOriginalSpriteFiles, 0);
-  assert.deepEqual(current.rosterIds, roster.map(f => f.id));
+  assert.deepEqual(current.rosterIds, roster.slice(0, 189).map(f => f.id));
   assert.deepEqual(current.rosterIds, previous.rosterIds);
   assert.equal(new Set(current.rosterIds).size, 189);
   const presentations = current.tables['01_Presentations'];
@@ -96,7 +96,7 @@ test('the tracker counts the real exported 40 sequences, 20 new mappings and 200
   }
   const active = new Set(rigs.map(r => r.fighterId));
   assert.deepEqual(current.tables['08_Roster'].rows,
-    roster.map(f => [f.id, f.label, f.family, Number(active.has(f.id)), sequences.filter(s => s.fighterId === f.id).length, 0]));
+    roster.slice(0, 189).map(f => [f.id, f.label, f.family, Number(active.has(f.id)), sequences.filter(s => s.fighterId === f.id).length, 0]));
 });
 
 test('all ten historical XLSX files and four admitted source plates remain byte-identical', () => {

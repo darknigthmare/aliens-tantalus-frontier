@@ -25,7 +25,21 @@ test('the new ledger is source-bound, reproducible and keeps its V189 predecesso
   assert.equal(report.schema, 191); assert.equal(report.baseCommit, '07f9525c18c9b55cf21ae93fe758209f64ed8ff4');
   assert.equal(publicationBaseline, '0e9843808823a9ce9da73e5b2effeefa1ee51f26');
   assert.equal(sha(reportBytes), sha(readPublicationBaseline(reportPath)), 'The published V191 ledger remains historical exact bytes.');
-  assert.deepEqual(report.summary, summary()); assert.deepEqual(report.entries, list());
+  const live = list(), published = live.slice(0, 189), recruits = live.slice(189);
+  assert.equal(report.entries.length, 189);
+  assert.deepEqual(report.entries, published);
+  const expanded = structuredClone(report.summary);
+  expanded.roster += recruits.length;
+  for (const entry of recruits) {
+    assert.ok(!entry.drawnStates.length && !entry.fullProne);
+    if (entry.meshStates.length) expanded.articulatedProfiles++;
+    if (entry.meshStates.some(action => action !== 'presentation')) expanded.activeArticulatedProfiles++;
+    for (const [action, state] of Object.entries(entry.states)) {
+      expanded.byAction[action][state.renderKind]++;
+      if (state.supported) expanded.byAction[action].supported++;
+    }
+  }
+  assert.deepEqual(summary(), expanded);
   const reviewedPaths = [];
   for (const [path, expected] of Object.entries(report.sourceSha256)) {
     const current = sha(readFileSync(new URL('../' + path, import.meta.url)));
@@ -44,9 +58,9 @@ test('the new ledger is source-bound, reproducible and keeps its V189 predecesso
   assert.equal(historical.trialsDrawnFrames, 120); assert.equal(historical.byAction.special.drawn, 0);
 });
 
-test('all189 exact identities retain the same ten action capabilities while only their newly drawn states gain V191 sources', () => {
-  assert.equal(list().length, 189); assert.deepEqual(list().map(entry => entry.id), fighters.map(fighter => fighter.id));
-  assert.equal(new Set(list().map(entry => entry.profileId)).size, 189);
+test('all 202 selectable identities retain the ten action capabilities alongside the V191 sources', () => {
+  assert.equal(list().length, 202); assert.deepEqual(list().map(entry => entry.id), fighters.map(fighter => fighter.id));
+  assert.equal(new Set(list().map(entry => entry.profileId)).size, 202);
   assert.deepEqual(actions, ['idle', 'walk', 'air', 'light', 'heavy', 'guard', 'hurt', 'ko', 'special', 'presentation']);
   assert.equal(coverage('unknown'), null); assert.equal(coverage({ id: 'warrior', profileId: 'another-caste' }), null);
 });
@@ -71,14 +85,14 @@ for (const fighter of fighters) test(`${fighter.id}: exact admitted sources dist
 
 test('counts include eighty new drawings once, twenty-one gesturing profiles, twelve full prone sets and four partial specials', () => {
   const result = summary();
-  assert.equal(result.schema, 191); assert.equal(result.roster, 189); assert.equal(result.drawnProfiles, 21);
+  assert.equal(result.schema, 191); assert.equal(result.roster, fighters.length); assert.equal(result.drawnProfiles, 21);
   assert.equal(result.fullProneProfiles, 12); assert.equal(result.uniqueAdmittedDrawnFrames, 240);
   assert.equal(result.trialsDrawnFrames, 200); assert.equal(result.newDrawnFrames, 80);
   assert.equal(result.byAction.special.drawn, 4); assert.equal(result.byAction.air.drawn, 4);
   assert.equal(result.canonExact, 0); assert.equal(result.fullyAnimated, 0);
   assert.equal(atlases.length, 8); assert.equal(atlases.flatMap(atlas => atlas.frames).length, 80);
   for (const action of actions) {
-    const row = result.byAction[action]; assert.equal(row.drawn + row.mesh + row.static, 189);
+    const row = result.byAction[action]; assert.equal(row.drawn + row.mesh + row.static, result.roster);
   }
 });
 

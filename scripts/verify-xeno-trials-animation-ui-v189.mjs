@@ -60,7 +60,7 @@ test('the animation filter uses admitted gestures, clamps an old page and preser
   assert.equal(JSON.stringify(h.progress), before);
 });
 
-test('all 189 specimens remain reachable in category batches of at most forty after returning to the complete catalog', () => {
+test('all 202 admitted specimens remain reachable in category batches of at most forty after returning to the complete catalog', () => {
   const h = terminal(), before = JSON.stringify(h.progress), seen = [];
   h.el('animation').value = 'all';
   h.el('sort').value = 'catalog';
@@ -73,7 +73,7 @@ test('all 189 specimens remain reachable in category batches of at most forty af
     }
   }
   assert.deepEqual(seen, groupXenoTrialsRosterV227(fighters).flatMap(group => group.fighters.map(fighter => fighter.id)));
-  assert.equal(new Set(seen).size, 189);
+  assert.equal(new Set(seen).size, 202);
   assert.equal(JSON.stringify(h.progress), before);
 });
 

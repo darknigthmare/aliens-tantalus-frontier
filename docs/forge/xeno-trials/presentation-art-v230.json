@@ -1,0 +1,238 @@
+[
+  {
+    "fighterId": "warrior",
+    "variant": null,
+    "action": "select",
+    "poseId": "warrior-select",
+    "path": "assets/openai/xeno-trials-v230/warrior-select.png",
+    "publicPath": "/assets/openai/xeno-trials-v230/warrior-select.png",
+    "name": "warrior-select.png",
+    "sha256": "469b8c02f9b21df04aca935f65852f365b0ea51abcbe94735ac2965ffe116471",
+    "bytes": 1806652,
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "width": 1536,
+    "height": 1024,
+    "bounds": [
+      91,
+      22,
+      1371,
+      995
+    ],
+    "alphaBounds": [
+      91,
+      22,
+      1371,
+      995
+    ],
+    "crop": [
+      91,
+      22,
+      1371,
+      995
+    ],
+    "rect": [
+      91,
+      22,
+      1280,
+      973
+    ],
+    "rootX": 1083,
+    "rootY": 994,
+    "sourceFacing": 1,
+    "actionFacing": 1,
+    "density": 0.96,
+    "referenceArtwork": [
+      {
+        "path": "assets/user/castes-v87/film_warrior_aliens_1986.png",
+        "id": "castes-film_warrior_aliens_1986",
+        "sha256": "c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f",
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "facing": 1
+      }
+    ],
+    "rootMeasurement": {
+      "method": "Repère horizontal à 70 % bassin et 30 % épaule, calé sur le pivot neutre.",
+      "nativePivotX": 1090.56,
+      "nativeHip": [
+        1048,
+        522
+      ],
+      "nativeShoulder": [
+        1059,
+        267
+      ],
+      "paintedHip": [
+        1040,
+        518
+      ],
+      "paintedShoulder": [
+        1046,
+        255
+      ]
+    },
+    "scaleMeasurement": {
+      "nativeCrownDistancePx": 432.0,
+      "paintedCrownDistancePx": 448.8,
+      "paintedCrownRatio": 0.997,
+      "nativeThoraxDistancePx": 255.2,
+      "paintedThoraxDistancePx": 263.1,
+      "paintedThoraxRatio": 0.989,
+      "paintedAlphaHeightPx": 973
+    },
+    "supportMeasurement": {
+      "supportTipsAlphaGt128": [
+        [
+          984,
+          994
+        ],
+        [
+          1206,
+          992
+        ]
+      ],
+      "supportLineY": 994,
+      "supportDifferencePx": 2,
+      "cropMarginBelowFeetPx": 0,
+      "marginToTextureEdgesPx": [
+        91,
+        22,
+        165,
+        29
+      ],
+      "tailAndClawsAboveFeet": true
+    },
+    "alphaMeasurement": {
+      "edgeMaxAlpha": 1,
+      "clearFieldMaxAlpha": 2,
+      "clearFieldMeanAlpha": 0.001,
+      "dominantComponentAlphaGt16": 0.99999708
+    },
+    "generator": "OpenAI ImageGen",
+    "generationSteps": 1,
+    "visualReview": "Posture d’inspection verticale. La main proche revient sous les côtes et l’autre pend près du genou. Le Warrior conserve son crâne côtelé, sa cage thoracique graphite, ses trois tubes dorsaux et sa queue segmentée entière. Deux appuis visibles."
+  },
+  {
+    "fighterId": "warrior",
+    "variant": null,
+    "action": "intro",
+    "poseId": "warrior-intro",
+    "path": "assets/openai/xeno-trials-v230/warrior-intro.png",
+    "publicPath": "/assets/openai/xeno-trials-v230/warrior-intro.png",
+    "name": "warrior-intro.png",
+    "sha256": "9efcd828be3067c83a73f4b3214ddeaf7bea057bbfec0f85d26b276342647d7e",
+    "bytes": 1845535,
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "width": 1536,
+    "height": 1024,
+    "bounds": [
+      59,
+      80,
+      1484,
+      954
+    ],
+    "alphaBounds": [
+      59,
+      80,
+      1484,
+      954
+    ],
+    "crop": [
+      59,
+      80,
+      1484,
+      954
+    ],
+    "rect": [
+      59,
+      80,
+      1425,
+      874
+    ],
+    "rootX": 1023,
+    "rootY": 953,
+    "sourceFacing": 1,
+    "actionFacing": 1,
+    "density": 0.96,
+    "referenceArtwork": [
+      {
+        "path": "assets/user/castes-v87/film_warrior_aliens_1986.png",
+        "id": "castes-film_warrior_aliens_1986",
+        "sha256": "c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f",
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "facing": 1
+      }
+    ],
+    "rootMeasurement": {
+      "method": "Repère horizontal à 70 % bassin et 30 % épaule, calé sur le pivot neutre.",
+      "nativePivotX": 1090.56,
+      "nativeHip": [
+        1048,
+        522
+      ],
+      "nativeShoulder": [
+        1059,
+        267
+      ],
+      "paintedHip": [
+        945,
+        537
+      ],
+      "paintedShoulder": [
+        1069,
+        297
+      ]
+    },
+    "scaleMeasurement": {
+      "nativeCrownDistancePx": 432.0,
+      "paintedCrownDistancePx": 491.5,
+      "paintedCrownRatio": 1.092,
+      "nativeThoraxDistancePx": 255.2,
+      "paintedThoraxDistancePx": 270.1,
+      "paintedThoraxRatio": 1.016,
+      "paintedAlphaHeightPx": 874
+    },
+    "supportMeasurement": {
+      "supportTipsAlphaGt128": [
+        [
+          803,
+          953
+        ],
+        [
+          1265,
+          952
+        ]
+      ],
+      "supportLineY": 953,
+      "supportDifferencePx": 1,
+      "cropMarginBelowFeetPx": 0,
+      "marginToTextureEdgesPx": [
+        59,
+        80,
+        52,
+        70
+      ],
+      "tailAndClawsAboveFeet": true
+    },
+    "alphaMeasurement": {
+      "edgeMaxAlpha": 0,
+      "clearFieldMaxAlpha": 1,
+      "clearFieldMeanAlpha": 0.001,
+      "dominantComponentAlphaGt16": 0.99999731
+    },
+    "generator": "OpenAI ImageGen",
+    "generationSteps": 1,
+    "visualReview": "Entrée vigilante en vue latérale. Le corps s’abaisse dans une garde en fente et la griffe avancée explore l’espace à mi-hauteur. Crâne côtelé, trois tubes dorsaux, queue segmentée entière, silhouette projet et deux pieds plantés."
+  }
+]

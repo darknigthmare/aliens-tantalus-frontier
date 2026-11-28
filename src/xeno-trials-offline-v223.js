@@ -1,3 +1,4 @@
+import { XENO_TRIALS_PRESENTATION_PLATES_V230 } from './xeno-trials-presentation-art-v230.js';
 import { getXenoTrialsArtV96, getXenoTrialsFighterV96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
 import { normalizeXenoTrialsConfigV96 } from './xeno-trials-progress-v96.js';
 import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
@@ -26,7 +27,8 @@ export function getXenoTrialsFighterAssetsV223(id, requestedVariant) {
     getXenoTrialsSpriteAtlasV188(fighter, art)?.texture.path, getXenoTrialsSpriteAtlasV189(fighter, art)?.texture.path,
     getXenoTrialsRuntimeSpriteAtlas(fighter, art)?.texture.path,
     ...getXenoTrialsRuntimeActionAtlases(fighter, art).map(atlas => atlas.texture.path),
-    ...getXenoTrialsPoseAssetsV209(fighter, art), ...getXenoTrialsCaptureAssetsV163([fighter])].filter(Boolean);
+    ...getXenoTrialsPoseAssetsV209(fighter, art),
+    ...XENO_TRIALS_PRESENTATION_PLATES_V230.filter(plate => plate.fighterId === id && plate.variant === variant).map(plate => plate.path), ...getXenoTrialsCaptureAssetsV163([fighter])].filter(Boolean);
 }
 
 export function getXenoTrialsArenaAssetsV223(stage) {

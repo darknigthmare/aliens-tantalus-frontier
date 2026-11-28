@@ -29,11 +29,11 @@ const cards = html => [...html.matchAll(/data-xt-fighter="([^"]+)"/g)].map(match
 const powers = html => [...html.matchAll(/data-xt-power="([\d.]+)"/g)].map(match => Number(match[1]));
 const openDrawer = html => /data-xt-roster-drawer="([^"]+)" open/.exec(html)?.[1];
 
-test('classification partitions the 189 live IDs and the family filter uses the same single category', () => {
+test('classification partitions the 202 live IDs and the family filter uses the same single category', () => {
   const groups = groupXenoTrialsRosterV227(fighters);
   assert.deepEqual(groups.map(group => group.id), categories);
   const all = groups.flatMap(group => group.fighters.map(fighter => fighter.id));
-  assert.equal(new Set(all).size, 189);
+  assert.equal(new Set(all).size, 202);
   assert.equal(all.length, fighters.length);
   for (const { id, fighters: group } of groups) {
     assert.ok(group.every(fighter => getXenoTrialsSelectionFamilyV119(fighter) === id));
@@ -73,7 +73,7 @@ test('collapse does not render any portraits and finding a filtered cross-family
   ui.resetRosterPagesV227(true);
   ui.renderRosterV227(progress, false);
   assert.equal(openDrawer(el('roster').innerHTML), 'hybrid');
-  assert.deepEqual(cards(el('roster').innerHTML), ['predalien']);
+  assert.deepEqual(cards(el('roster').innerHTML), ['mire-v210-predalien-avpr', 'predalien']);
   assert.equal(ui.selected, 'warrior');
   el('search').value = 'no enemy matches this exact query';
   ui.resetRosterPagesV227(true);

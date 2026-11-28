@@ -40,7 +40,7 @@ test('V158 preserves the 68 inherited task IDs and 189 roster IDs without artist
   assert.equal(current.newPresentationMappings, 0);
   assert.equal(current.newOriginalSpriteFiles, 0);
   assert.deepEqual(current.rosterIds, previous.rosterIds);
-  assert.deepEqual(current.rosterIds, roster.map(row => row.id));
+  assert.deepEqual(current.rosterIds, roster.slice(0, 189).map(row => row.id));
   assert.equal(current.rosterIds.length, 189);
   assert.deepEqual(current.inheritedPresentationIds, previous.inheritedPresentationIds);
   assert.deepEqual(current.inheritedArt153Ids, previous.inheritedArt153Ids);

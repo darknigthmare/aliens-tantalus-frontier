@@ -18,7 +18,7 @@ function live(){const m=create({playerId:HUMAN,opponentId:'prowler',introSeconds
  for(let i=0;i<5400&&!m.grappleV153;i++)step(m,DT,{});assert.ok(m.grappleV153,'CPU must actually obtain contact');return m;}
 test('four historical rigs and twenty-five historical poses remain intact beside the measured presentation catalogs',()=>{
  assert.equal(rigs.length,4);assert.equal(rigs.reduce((n,r)=>n+Object.keys(r.poses).length,0),25);assert.ok(Object.isFrozen(rigs));
- assert.equal(roster.length,189);for(const f of roster)assert.equal(Boolean(rigFor(f,art(f.id))),[...rigs,...XENO_TRIALS_RIG_DATA_V163,...XENO_TRIALS_RIG_DATA_V165].some(r=>r.fighterId===f.id),f.id);
+ assert.equal(roster.length,202);for(const f of roster)assert.equal(Boolean(rigFor(f,art(f.id))),[...rigs,...XENO_TRIALS_RIG_DATA_V163,...XENO_TRIALS_RIG_DATA_V165].some(r=>r.fighterId===f.id),f.id);
  for(const r of rigs){assert.equal(r.canonExact,false);assert.equal(r.animation,'authored-keyframes-native-mesh');assert.ok(Object.isFrozen(r.bones));}
 });
 for(const r of rigs){
@@ -130,7 +130,7 @@ test('Excel, inherited task IDs and exact source-only documents agree with the i
  const {isPublicDistributionPathV86}=await import('./verify-public-release-v86.mjs');
  const prefix='docs/forge/xeno-trials/',read=path=>readFileSync(new URL('../'+prefix+path,import.meta.url));
  const data=JSON.parse(read('progress-v154.json'));
- assert.deepEqual(data.rosterIds,[...roster.map(f=>f.id)]);
+ assert.deepEqual(data.rosterIds,roster.slice(0,189).map(f=>f.id));
  assert.equal(data.bones,rigs.reduce((n,r)=>n+r.bones.length,0));assert.equal(data.keyPoses,25);
  assert.equal(data.completedTechnicalTasks,8);assert.equal(data.partialTasks,9);assert.equal(data.openTasks,11);assert.equal(data.approved1to1,0);
  const old=JSON.parse(read('progress-v153.json'));

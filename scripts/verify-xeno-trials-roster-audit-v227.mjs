@@ -61,14 +61,15 @@ function checkIncarnation(fighter, variant) {
   }
 }
 
-test('every selectable pose and every separate MIRE research model has native stats, an unstretched image and a mirrored ground body', () => {
+test('every selectable pose and both asymmetric MIRE research models has native stats, an unstretched image and a mirrored ground body', () => {
   const roster = XENO_TRIALS_FIGHTERS_V96;
   const research = XENO_TRIALS_RESEARCH_FIGHTERS_V210;
-  assert.equal(roster.length, 189);
+  assert.equal(roster.length, 202);
   assert.equal(research.length, 15);
-  assert.equal(new Set([...roster, ...research].map(entry => entry.id)).size, 204);
-  assert.equal(roster.reduce((total, entry) => total + Math.max(1, entry.variants.length), 0), 190);
-  for (const fighter of [...roster, ...research]) {
+  const models = new Map([...roster, ...research].map(entry => [entry.id, entry]));
+  assert.equal(models.size, 204);
+  assert.equal(roster.reduce((total, entry) => total + Math.max(1, entry.variants.length), 0), 203);
+  for (const fighter of models.values()) {
     assert.equal(getXenoTrialsFighterV96(fighter.id), fighter);
     const numbers = [fighter.hp, fighter.stamina, fighter.speed, fighter.jump, fighter.power, fighter.reach];
     assert.ok(numbers.every(value => Number.isFinite(value) && value > 0), fighter.id);

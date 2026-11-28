@@ -13,14 +13,14 @@ import { drawXenoTrialsSpriteAtlasV191, getXenoTrialsSpriteAtlasV191, getXenoTri
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { verifyXenoSpriteAdmissionsV197 } from './public-xeno-sprite-admissions-v197.mjs';
 
-test('all six V146 P0 identities have admitted drawn gestures and all 189 stay selectable', async () => {
+test('all six V146 P0 identities have admitted drawn gestures and all 189 published IDs stay selectable', async () => {
   const plan = JSON.parse(await readFile(new URL('../docs/forge/xeno-trials/xeno-trials-plan-v146.json', import.meta.url)));
   const rows = plan.tables['02_Roster'].rows, priority = new Map(rows.map(row => [row[0], row[9]]));
   const p0 = rows.filter(row => row[9] === 'P0').map(row => row[0]);
   assert.equal(p0.length, 6);
   assert.ok(p0.every(id => coverage(id)?.hasDrawnGestures));
-  const admissions = fighters.map(({ id }) => coverage(id));
-  assert.equal(admissions.length, 189);
+  const admissions = fighters.slice(0, 189).map(({ id }) => coverage(id));
+  assert.deepEqual(admissions.map(entry => entry.id), plan.currentFighterIds);
   assert.equal(admissions.filter(entry => entry.hasDrawnGestures).length, 24);
   assert.ok(admissions.every(entry => entry.canonExact === false && entry.fullAnimation === false));
   const authoredRigs = admissions.filter(entry => entry.states.presentation.sources.some(source => source.revision === 197));

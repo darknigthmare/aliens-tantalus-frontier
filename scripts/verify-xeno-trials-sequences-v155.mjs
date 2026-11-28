@@ -40,7 +40,7 @@ function host(extra={}) {
 }
 const physical = s => copy({tick:s.tick,time:s.timeRemaining,result:s.result,fighters:s.fighters,events:s.events,wins:s.wins,rng:s.rng,projectiles:s.projectiles});
 test('twenty exact-identity sequences map four native rigs and never grant new fighter powers',()=>{
- assert.equal(sequences.length,20);assert.equal(new Set(sequences.map(s=>s.id)).size,20);assert.equal(roster.length,189);
+ assert.equal(sequences.length,20);assert.equal(new Set(sequences.map(s=>s.id)).size,20);assert.equal(new Set(roster.slice(0,189).map(f=>f.id)).size,189);
  assert.ok(Object.isFrozen(sequences));for(const r of rigs){assert.equal(sequences.filter(s=>s.rigId===r.id).length,5);assert.equal(entry({...r},'intro'),null);}
  for(const s of sequences){assert.equal(s.canonExact,false);assert.equal(s.evidence,'original-versus-presentation');assert.ok(Object.isFrozen(s.keys));assert.equal(s.keys.length,5);}
 });
@@ -164,7 +164,7 @@ test('published tracker keeps the original presentation/task IDs, source cells a
  const {isPublicDistributionPathV86}=await import('./verify-public-release-v86.mjs');
  const prefix='docs/forge/xeno-trials/',read=n=>readFileSync(new URL('../'+prefix+n,import.meta.url));
  const d=JSON.parse(read('progress-v155.json')),p=JSON.parse(read('xeno-trials-plan-v146.json')),old=JSON.parse(read('progress-v154.json'));
- assert.deepEqual(d.rosterIds,roster.map(f=>f.id));assert.deepEqual(d.sequenceIds,sequences.map(s=>s.id));assert.equal(d.keyframes,100);assert.equal(d.approved1to1,0);
+ assert.deepEqual(d.rosterIds,roster.slice(0,189).map(f=>f.id));assert.deepEqual(d.sequenceIds,sequences.map(s=>s.id));assert.equal(d.keyframes,100);assert.equal(d.approved1to1,0);
  assert.deepEqual(d.tables['03_ART153'],old.tables['03_Production']);assert.equal(d.tables['02_Production'].rows.length,40);
  const ids=new Set(p.tables['09_Presentations'].rows.map(r=>r[0]));for(const r of d.tables['02_Production'].rows)assert.ok(ids.has(r[0]));
  assert.equal(d.tables['02_Production'].rows.filter(r=>r[4]).length,20);assert.equal(d.tables['02_Production'].rows.reduce((n,r)=>n+r[6]+r[7],0),0);

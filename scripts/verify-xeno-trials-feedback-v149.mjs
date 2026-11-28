@@ -158,7 +158,7 @@ test('V149 workbook tracks exact current IDs, open art and source-only distribut
  const dir=new URL('../docs/forge/xeno-trials/',import.meta.url),data=JSON.parse(readFileSync(new URL('progress-v149.json',dir)));
  const hash=b=>createHash('sha256').update(b).digest('hex');
  assert.equal(data.schema,149);assert.equal(data.approved1to1,0);assert.equal(data.newCharacterAnimationClips,0);assert.equal(data.newSupers,0);
- assert.deepEqual(data.fighters.map(f=>f.id),roster.map(f=>f.id));assert.equal(data.retainedPilotSupers,5);
+ assert.equal(data.fighters.length,189);assert.deepEqual(data.fighters.map(f=>f.id),roster.slice(0,189).map(f=>f.id));assert.equal(data.retainedPilotSupers,5);
  // The V149 workbook records its six historical scenes; V179 additions are
  // tested against the live runtime separately and do not rewrite that snapshot.
  assert.deepEqual(data.stages.map(s=>s.id),stages.filter(s=>!s.stageRevision||s.stageRevision<=149).map(s=>s.id));

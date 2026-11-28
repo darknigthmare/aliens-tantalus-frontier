@@ -129,7 +129,8 @@
     "qa:dlc:river": "python3 scripts/qa-river-of-pain.py",
     "test:dlc:aliens1986": "npm --prefix modules/aliens-1986/v114 run check && node --test scripts/verify-aliens1986-dlc-integration.mjs scripts/verify-aliens1986-main-succession-v116.mjs scripts/verify-aliens1986-raster-presentation-v116.mjs",
     "check:dlc:aliens1986": "node scripts/public-aliens1986-dlc-admissions.mjs",
-    "qa:dlc:aliens1986": "python3 -B scripts/qa-aliens1986-integration.py"
+    "qa:dlc:aliens1986": "python3 -B scripts/qa-aliens1986-integration.py",
+    "test:trials:v230": "node --test scripts/verify-xeno-trials-presentation-v230.mjs scripts/verify-xeno-trials-presentation-art-v230.mjs scripts/verify-xeno-trials-selection-motion-v230.mjs scripts/verify-xeno-trials-recruits-v230.mjs"
   },
   "engines": {
     "node": ">=22"

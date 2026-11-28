@@ -171,7 +171,7 @@ test('terminal Burster damage settles once through the existing saved match tick
 test('V151 workbook and progress retain exact roster, open art work and source-only distribution', async()=>{
   const {readFileSync}=await import('node:fs'),{createHash}=await import('node:crypto'),{spawnSync}=await import('node:child_process');
   const root=new URL('../docs/forge/xeno-trials/',import.meta.url),p=JSON.parse(readFileSync(new URL('progress-v151.json',root)));
-  assert.deepEqual(p.rosterIds,fighters.map(f=>f.id));assert.deepEqual(p.castes,castes);assert.deepEqual(p.sources,sources);
+  assert.equal(p.rosterIds.length,189);assert.deepEqual(p.rosterIds,fighters.slice(0,189).map(f=>f.id));assert.deepEqual(p.castes,castes);assert.deepEqual(p.sources,sources);
   assert.equal(p.behaviorTests,44);assert.equal(p.documentTests,1);assert.equal(p.testNames.length,44);
   assert.equal(p.approved1to1,0);assert.equal(p.newCharacterAnimationClips,0);assert.equal(p.newSupers,0);
   assert.equal(p.cumulativeSignatureCount,9);assert.equal(p.unchangedAttackContracts,180);

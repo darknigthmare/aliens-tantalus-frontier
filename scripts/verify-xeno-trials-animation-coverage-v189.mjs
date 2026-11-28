@@ -11,8 +11,8 @@ import {getEnemyImportAnimationV107} from '../src/enemy-import-animation-v107.js
 import {getEnemyImportAttackV109} from '../src/enemy-import-attacks-v109.js';
 import {getXenoTrialsRigV154} from '../src/xeno-trials-rig-v154.js';
 
-test('the coverage view resolves all 189 canonical identities once without changing the admitted roster or media',()=>{
- const before=JSON.stringify(FIGHTERS),rows=list();assert.equal(rows.length,189);assert.equal(new Set(rows.map(row=>row.id)).size,189);
+test('the coverage view resolves all 202 selectable identities once without changing the admitted roster or media',()=>{
+ const before=JSON.stringify(FIGHTERS),rows=list();assert.equal(rows.length,202);assert.equal(new Set(rows.map(row=>row.id)).size,202);
  assert.deepEqual(rows.map(row=>row.id),FIGHTERS.map(f=>f.id));assert.equal(JSON.stringify(FIGHTERS),before);
  assert.equal(get('not-a-fighter'),null);assert.equal(get({id:'warrior',profileId:'another-identity'}),null);
  assert.equal(Object.isFrozen(rows),true);assert.equal(Object.isFrozen(rows[0].states),true);
@@ -94,19 +94,31 @@ test('legacy imported walks and the one light attack are admitted only to the ac
 });
 
 test('ten action totals each cover the whole roster and reused light/heavy keyframes are counted only once',()=>{
- const counts=summary();assert.equal(counts.roster,189);assert.equal(counts.canonExact,0);assert.equal(counts.fullyAnimated,0);
- for(const action of ACTIONS)assert.equal(counts.byAction[action].drawn+counts.byAction[action].mesh+counts.byAction[action].static,189);
+ const counts=summary();assert.equal(counts.roster,FIGHTERS.length);assert.equal(counts.canonExact,0);assert.equal(counts.fullyAnimated,0);
+ for(const action of ACTIONS)assert.equal(counts.byAction[action].drawn+counts.byAction[action].mesh+counts.byAction[action].static,counts.roster);
  const keys=new Set(),trials=new Set();for(const row of list())for(const state of Object.values(row.states))for(const media of state.sources)
   if(media.renderKind==='drawn')for(const frame of media.frameIds){const key=media.path+'#'+frame;keys.add(key);if(/\/xeno-trials-v18[89]\//.test(media.path))trials.add(key);}
  assert.equal(counts.uniqueAdmittedDrawnFrames,keys.size);assert.equal(counts.trialsDrawnFrames,trials.size);assert.ok(counts.trialsDrawnFrames>=40);
 });
 
-test('the source-only coverage report is the current read-only successor, not a rewrite of the historical V146 plan',()=>{
+test('the source-only coverage report retains its published 189 identities and V146 source evidence',()=>{
  const path=new URL('../docs/forge/xeno-trials/animation-coverage-v189.json',import.meta.url),report=JSON.parse(readFileSync(path,'utf8'));
  assert.equal(report.schema,189);assert.equal(report.claims.canonExact,0);assert.equal(report.claims.fullyAnimated,0);
- assert.equal(report.claims.artisticClosure,false);assert.deepEqual(report.summary,summary());
- assert.equal(report.entries.length,189);assert.deepEqual(report.entries.map(row=>row.id),FIGHTERS.map(f=>f.id));
- const drawn=new Map();for(const row of list())for(const state of Object.values(row.states))for(const media of state.sources)if(media.renderKind==='drawn'){
+ assert.equal(report.claims.artisticClosure,false);
+ const live=list(),published=live.slice(0,189),recruits=live.slice(189),expanded=structuredClone(report.summary);
+ expanded.roster+=recruits.length;
+ for(const entry of recruits){
+  assert.ok(!entry.drawnStates.length&&!entry.fullProne);
+  if(entry.meshStates.length)expanded.articulatedProfiles++;
+  if(entry.meshStates.some(action=>action!=='presentation'))expanded.activeArticulatedProfiles++;
+  for(const [action,state] of Object.entries(entry.states)){
+   expanded.byAction[action][state.renderKind]++;
+   if(state.supported)expanded.byAction[action].supported++;
+  }
+ }
+ assert.deepEqual(expanded,summary());
+ assert.equal(report.entries.length,189);assert.deepEqual(report.entries.map(row=>row.id),published.map(row=>row.id));
+ const drawn=new Map();for(const row of published)for(const state of Object.values(row.states))for(const media of state.sources)if(media.renderKind==='drawn'){
   let frames=drawn.get(media.path);if(!frames){frames=new Set();drawn.set(media.path,frames);}for(const frame of media.frameIds)frames.add(frame);
  }
  assert.equal(report.drawnMedia.length,drawn.size);for(const media of report.drawnMedia){

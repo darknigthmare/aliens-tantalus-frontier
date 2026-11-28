@@ -39,9 +39,9 @@ test('every reviewed V189 translation comes from its published product strings a
  for(const entry of review.exact)assert.equal(translate(entry.fr),entry.fr);
 });
 
-test('all 189 current fighter dossiers translate their visible motion label without modifying source identity or admission',()=>{
+test('all 202 current fighter dossiers translate their visible motion label without modifying source identity or admission',()=>{
  const rows=list(),before=JSON.stringify(rows),expected={'Gestes dessinés':'Drawn motions','Gestes articulés':'Articulated motions','Posture de référence':'Reference pose'};
- assert.equal(rows.length,189);
+ assert.equal(rows.length,202);
  english(()=>{for(const row of rows){assert.equal(translate(row.playerLabel),expected[row.playerLabel]);assert.ok(!/atlas|mesh|static|supported|1:1|canon|fully/i.test(translate(row.playerLabel)));}});
  assert.equal(JSON.stringify(rows),before);for(const row of rows)assert.equal(translate(row.playerLabel),row.playerLabel);
 });

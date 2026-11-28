@@ -187,7 +187,7 @@ test('modified Enter on a combat button is not consumed or converted into an att
 });
 test('all roster identities retain legal fresh light input after a held intermission is released', async () => {
   const { XENO_TRIALS_FIGHTERS_V96: roster } = await import('../src/xeno-trials-data-v96.js');
-  assert.equal(roster.length, 189);
+  assert.equal(roster.length, 202);
   for (const fighter of roster) {
     const m = create({ playerId: fighter.id, introSeconds: 0, holdRoundTransition: true });
     m.timeRemaining = DT; step(m, DT, { light: true }, {}); next(m);
@@ -197,7 +197,7 @@ test('all roster identities retain legal fresh light input after a held intermis
   }
 });
 
-test('V150 tracker matches the unchanged roster and preserves the upstream feedback and declares review scope', async () => {
+test('V150 tracker matches its published roster and preserves the upstream feedback and declares review scope', async () => {
   const { readFileSync } = await import('node:fs'); const { createHash } = await import('node:crypto');
   const { spawnSync } = await import('node:child_process');
   const { XENO_TRIALS_FIGHTERS_V96: roster } = await import('../src/xeno-trials-data-v96.js');
@@ -205,7 +205,7 @@ test('V150 tracker matches the unchanged roster and preserves the upstream feedb
   const p = JSON.parse(readFileSync(new URL('progress-v150.json', root)));
   assert.equal(p.phase, 'engine-tested-review'); assert.equal(p.behaviorTests, 44); assert.equal(p.documentTests, 1);
   assert.equal(p.testNames.length, 44); assert.equal(p.changes.length, 8);
-  assert.deepEqual(p.rosterIds, roster.map(f => f.id)); assert.equal(p.newSupers, 0); assert.equal(p.newCharacterAnimationClips, 0); assert.equal(p.approved1to1, 0);
+  assert.deepEqual(p.rosterIds, roster.slice(0, 189).map(f => f.id)); assert.equal(p.newSupers, 0); assert.equal(p.newCharacterAnimationClips, 0); assert.equal(p.approved1to1, 0);
   assert.equal(createHash('sha256').update(readFileSync(new URL('XENO_TRIALS_SUIVI_V149.xlsx', root))).digest('hex'), p.preservedPublishedV149.workbookSha256);
   const file = new URL(p.workbook, root);
   assert.equal(createHash('sha256').update(readFileSync(file)).digest('hex'), p.workbookSha256);

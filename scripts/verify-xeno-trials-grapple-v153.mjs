@@ -255,7 +255,7 @@ test('existing historical attack numerics and super admission are not rewritten 
 test('V153 workbook preserves all IDs, exact target selection, open art and source-only documents',async()=>{
   const root=new URL('../docs/forge/xeno-trials/',import.meta.url),p=JSON.parse(readFileSync(new URL('progress-v153.json',root)));
   assert.equal(p.behaviorTests,32);assert.equal(p.documentTests,1);assert.equal(p.testNames.length,32);
-  assert.deepEqual(p.rosterIds,roster.map(f=>f.id));assert.deepEqual(p.mechanic,config);
+  assert.equal(p.rosterIds.length,189);assert.deepEqual(p.rosterIds,roster.slice(0,189).map(f=>f.id));assert.deepEqual(p.mechanic,config);
   assert.equal(p.approved1to1,0);assert.equal(p.newCharacterAnimationClips,0);assert.equal(p.newSupers,0);
   assert.equal(p.openArtTasks.length,28);
   const book=new URL(p.workbook,root);assert.equal(createHash('sha256').update(readFileSync(book)).digest('hex'),p.workbookSha256);

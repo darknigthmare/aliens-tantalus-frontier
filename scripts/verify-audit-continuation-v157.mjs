@@ -43,7 +43,7 @@ test('V157 preserves all 40 presentation, 28 ART153 and 189 roster identities wi
   assert.deepEqual(current.inheritedPresentationIds, previous.inheritedPresentationIds);
   assert.deepEqual(current.inheritedArt153Ids, previous.inheritedArt153Ids);
   assert.deepEqual(current.rosterIds, previous.rosterIds);
-  assert.deepEqual(current.rosterIds, roster.map(row => row.id));
+  assert.deepEqual(current.rosterIds, roster.slice(0, 189).map(row => row.id));
   assert.deepEqual(ids(current.tables['01_Presentations']), previous.inheritedPresentationIds);
   assert.deepEqual(ids(current.tables['02_ART153']), previous.inheritedArt153Ids);
   assert.equal(current.rosterIds.length, 189);

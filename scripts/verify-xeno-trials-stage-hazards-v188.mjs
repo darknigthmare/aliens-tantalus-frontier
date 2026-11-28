@@ -76,8 +76,8 @@ for (const entry of definitions) test(`${entry.stageId}: warning, native geometr
   }
 });
 
-test('all 189 admitted body widths and native speeds can clear every warned strip with a 0.6 second reaction allowance', () => {
-  assert.equal(fighters.length, 189);
+test('all 202 admitted body widths and native speeds can clear every warned strip with a 0.6 second reaction allowance', () => {
+  assert.equal(fighters.length, 202);
   for (const entry of definitions) for (const fighter of fighters) {
     const shape = geometry(fighter.id), distance = (shape.width + entry.width) / 2 + 2;
     assert.ok(fighter.speed * (entry.warningTicks / 120 - .6) > distance,

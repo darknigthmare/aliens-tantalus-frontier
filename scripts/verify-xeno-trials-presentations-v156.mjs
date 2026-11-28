@@ -75,12 +75,12 @@ const finishDraw=()=>{
 const finishRuntime=h=>{for(let i=0;i<3000&&(h.r.getState().phase!=='match-over'||h.queue.size);i++)h.frames();assert.equal(h.r.getState().phase,'match-over');};
 test('forty exact presentations cover the forty source IDs while the twenty V155 entries stay historical',()=>{
  assert.equal(historical.length,20);assert.equal(added.length,20);assert.equal(sequences.length,40);assert.equal(new Set(sequences.map(s=>s.id)).size,40);
- assert.equal(sequences.reduce((n,s)=>n+s.keys.length,0),200);assert.equal(roster.length,189);
+ const published=roster.slice(0,189);assert.equal(sequences.reduce((n,s)=>n+s.keys.length,0),200);assert.equal(new Set(published.map(f=>f.id)).size,189);
  const p=JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/progress-v155.json',import.meta.url)));
  const alias={'win-r1':'round-win','lose-r1':'round-loss','win-final':'outro-win','lose-final':'outro-loss'};
  for(const [id] of p.tables['02_Production'].rows){const [fighter,kind]=id.split('::');assert.ok(sequences.some(s=>s.id===fighter+'::'+(alias[kind]||kind)),id);}
  for(const r of rigs){assert.equal(added.filter(s=>s.rigId===r.id).length,5);assert.equal(entry({...r},'taunt'),null);}
- assert.equal(roster.filter(f=>!rigs.some(r=>r.fighterId===f.id)).length,185);
+ assert.equal(published.filter(f=>!rigs.some(r=>r.fighterId===f.id)).length,185);
  for(const s of added){assert.equal(s.canonExact,false);assert.equal(s.evidence,'original-versus-presentation');assert.ok(Object.isFrozen(s.keys));}
 });
 for(const r of rigs)test(r.fighterId+': new multi-beat sequences remain grounded, mirror and reduce exactly to source art',()=>{

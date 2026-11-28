@@ -216,8 +216,8 @@ for (const hazard of hazards) test(`${hazard.stageId}: actual warning, collision
   }
 });
 
-test('all 189 native statures can leave each new warned strip after a 0.6-second reaction allowance', () => {
-  assert.equal(fighters.length, 189);
+test('all 202 selectable native statures can leave each new warned strip after a 0.6-second reaction allowance', () => {
+  assert.equal(fighters.length, 202);
   for (const hazard of hazards) for (const fighter of fighters) {
     const shape = geometry(fighter.id), distance = (shape.width + hazard.width) / 2 + 2;
     assert.ok(fighter.speed * (hazard.warningTicks / 120 - .6) > distance, `${hazard.stageId}/${fighter.id}`);

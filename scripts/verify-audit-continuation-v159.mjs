@@ -40,7 +40,7 @@ test('V159 preserves the exact 68 inherited tasks and 189 identities without art
   assert.equal(current.saveSchema, previous.saveSchema);
   for (const key of ['approved1to1', 'fullArtTasksClosed', 'newPresentationMappings', 'newOriginalSpriteFiles']) assert.equal(current[key], 0);
   assert.deepEqual(current.rosterIds, previous.rosterIds);
-  assert.deepEqual(current.rosterIds, roster.map(row => row.id));
+  assert.deepEqual(current.rosterIds, roster.slice(0, 189).map(row => row.id));
   assert.equal(current.rosterIds.length, 189);
   assert.deepEqual(current.inheritedPresentationIds, previous.inheritedPresentationIds);
   assert.deepEqual(current.inheritedArt153Ids, previous.inheritedArt153Ids);
