@@ -22,6 +22,10 @@ const arenaLabels = new Map([
   [label.toUpperCase(), labelEn.toUpperCase()]
 ]));
 const trialLabels = new Map([
+  ['Puissance MIRE', 'MIRE Power'],
+  ['Nom du spécimen', 'Specimen name'],
+  ['Puissance croissante', 'Power low to high'],
+  ['Puissance décroissante', 'Power high to low'],
   ['CALIBRAGE DES DÉFLECTEURS', 'DEFLECTOR CALIBRATION'],
   ['ASSAUT DU CHAMP D’ESSAI', 'PROVING GROUND ASSAULT'],
   ['Dix-huit contacts fragiles traversent le champ d’évaluation en trois vagues.', 'Eighteen low-health contacts cross the proving ground in three waves.'],

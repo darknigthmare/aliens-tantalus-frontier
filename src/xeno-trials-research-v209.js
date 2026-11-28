@@ -1,8 +1,11 @@
 import { getEnemyStaticPoseV95 } from './enemy-static-poses-v95.js';
+import { ENEMY_DISPLAY_ALPHA_V110 } from './enemy-display-alpha-v110.js';
 
+const bigChapSheet = '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-004-drone-big-chap.webp';
+const bigChapBounds = ENEMY_DISPLAY_ALPHA_V110[bigChapSheet].bounds;
 const dossiers = [
   ['BIGCHAP', 'Big Chap', 'Alien (1979)', 'Pression à moyenne portée, queue et garde rapprochée.',
-    { profile: 'v209-big-chap', sheet: '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-004-drone-big-chap.webp', bounds: [41, 107, 181, 240], pivot: [126, 240], body: [54, 146], height: 305, special: 'tail', hp: 232, speed: 228 }],
+    { profile: 'v209-big-chap', sheet: bigChapSheet, bounds: bigChapBounds, pivot: [126, bigChapBounds[3]], body: [54, 146], height: 305, special: 'tail', hp: 232, speed: 228 }],
   ['SCORCHED', 'Scorched', 'Alien: Romulus', 'Travail de distance et d’anticipation en espace exigu. Silhouette adulte à valider.'],
   ['DEACON', 'Deacon', 'Prometheus', 'Entrée brève au contact et recul sur récupération.',
     { profile: 'castes-film_deacon_2012', special: 'slash', hp: 194, speed: 253 }],

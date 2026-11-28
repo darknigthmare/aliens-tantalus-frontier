@@ -197,11 +197,41 @@ const addedActions = [
     frames: [['gorilla-heavy-windup-four-spines.png', 206, [147, 16, 836, 1213]],
       ['gorilla-heavy-impact-four-spines.png', null, [12, 106, 1231, 1032]],
       ['gorilla-heavy-recovery-four-spines.png', null, [16, 188, 1134, 936]]],
-    forbidden: 'gorilla-heavy-windup.png', animation: 'painted-gorilla-heavy-poses' }
+    forbidden: 'gorilla-heavy-windup.png', animation: 'painted-gorilla-heavy-poses' },
+  { id: 'gorilla', action: 'light', dimensions: [1254, 1254], reachCases: [[58, true], [63, false]],
+    frames: [['gorilla-light-windup.png', null, [26, 50, 1165, 1144]],
+      ['gorilla-light-contact.png', null, [15, 185, 1229, 940]],
+      ['gorilla-light-recovery.png', null, [20, 153, 1213, 991]]],
+    animation: 'painted-gorilla-light-poses' },
+  { id: 'grid', action: 'light', dimensions: [1774, 887], reachCases: [[49, true], [61, false]],
+    frames: [['grid-light-windup.png', null, [164, 18, 1381, 856]],
+      ['grid-light-contact.png', null, [110, 11, 1650, 862]],
+      null],
+    forbidden: 'grid-light-recovery.png', animation: 'painted-grid-light-poses' },
+  { id: 'panther', action: 'heavy', density: .77, dimensions: [1536, 1024], reachCases: [[70, true], [80, false]],
+    frames: [['panther-heavy-windup.png', null, [110, 12, 1215, 978]],
+      ['panther-heavy-contact.png', null, [76, 39, 1392, 912]],
+      ['panther-heavy-recovery.png', null, [94, 42, 1384, 922]]],
+    animation: 'painted-panther-heavy-poses' },
+  { id: 'warrior', action: 'heavy', density: .98, dimensions: [1536, 1024], reachCases: [[80, true], [90, false]], historicalKind: 'drawn',
+    frames: [['warrior-heavy-windup-v227.png', null, [40, 76, 1416, 886]],
+      ['warrior-heavy-contact-v227.png', null, [40, 29, 1459, 961]],
+      ['warrior-heavy-recovery-v227.png', null, [64, 22, 1402, 970]]],
+    animation: 'painted-warrior-heavy-poses' },
+  { id: 'runner', action: 'heavy', dimensions: [1536, 1024], reachCases: [[70, true], [83, false]], historicalKind: 'drawn',
+    frames: [['runner-heavy-windup-v227.png', null, [42, 287, 1459, 528]],
+      ['runner-heavy-contact-v227.png', null, [34, 284, 1472, 466]],
+      ['runner-heavy-recovery-v227.png', null, [52, 224, 1422, 595]]],
+    animation: 'painted-runner-heavy-poses' },
+  { id: 'queen', action: 'light', dimensions: [1536, 1024], reachCases: [[70, true], [79, false]], historicalKind: 'drawn',
+    frames: [['queen-light-windup-v227.png', null, [21, 27, 1498, 970]],
+      ['queen-light-contact-v227.png', null, [21, 19, 1502, 975]],
+      ['queen-light-recovery-v227.png', null, [20, 23, 1502, 969]]],
+    animation: 'painted-queen-light-poses' }
 ];
 const phases = ['windup', 'contact', 'recovery'];
 const publicDirectory = '/assets/openai/xeno-trials-v209/characters/';
-for (const { id, variant = null, action, style, travels = false, dimensions, density = 1, reachCases, frames, forbidden, animation } of addedActions) {
+for (const { id, variant = null, action, style, travels = false, dimensions, density = 1, reachCases, frames, forbidden, animation, historicalKind = 'static' } of addedActions) {
   test(`${id} ${action} advertises its exact painted phases and plays them through native hit and miss`, () => {
     const definition = getXenoTrialsFighterV96(id), art = getXenoTrialsArtV96(id, variant);
     const actorId = { id, variant };
@@ -221,9 +251,9 @@ for (const { id, variant = null, action, style, travels = false, dimensions, den
         assert.equal(publicXenoPosePathAdmissionV209(`${publicDirectory.slice(1)}gorilla-heavy-${phase}.png`), false);
       }
     }
-    assert.equal(publicXenoPosePathAdmissionV209((publicDirectory + forbidden).slice(1)), false);
+    if (forbidden) assert.equal(publicXenoPosePathAdmissionV209((publicDirectory + forbidden).slice(1)), false);
     const historical = getXenoTrialsAnimationCoverageV199(id), live = getXenoTrialsRuntimeAnimationCoverage(id);
-    assert.equal(historical.states[action].renderKind, 'static');
+    assert.equal(historical.states[action].renderKind, historicalKind);
     assert.equal(live.states[action].renderKind, 'drawn');
     assert.deepEqual(live.states[action].frameIds, phasesDrawn);
     assert.deepEqual(live.states[action].sources[0].paths, paths);
@@ -245,6 +275,9 @@ for (const { id, variant = null, action, style, travels = false, dimensions, den
     if (style) assert.equal(getXenoTrialsSpecialStyleV147(definition), style);
     const context = { save() {}, translate() {}, scale() {},
       drawImage(_image, _sx, _sy, w, h, _x, y, dw, dh) { assert.deepEqual([y + dh, dw, dh], [0, w * density, h * density]); }, restore() {} };
+    const airborne = { ...actorId, y: 1, stun: 0, attack: { id: 1, kind: action, age: spec.startup, facing: -1 } };
+    assert.equal(drawXenoTrialsPoseV209(context, airborne, art, images,
+      { spec, groundedHeight: art.sourceHeight, ground: 450, x: 430 }), null);
     for (const [gap, shouldHit] of reachCases) {
       const match = createXenoTrialsMatchV96({ playerId: id, playerVariant: variant, opponentId: 'warrior', introSeconds: 0 });
       const [actor, rival] = match.fighters;

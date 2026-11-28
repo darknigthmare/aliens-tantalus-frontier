@@ -4,7 +4,7 @@ import { XenoTrialsUiV96 } from '../src/xeno-trials-ui-v96.js';
 import { XENO_TRIALS_FIGHTERS_V96 as fighters, getXenoTrialsArtV96 } from '../src/xeno-trials-data-v96.js';
 import { createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
 import { getXenoTrialsRuntimeAnimationCoverage } from '../src/xeno-trials-animation-coverage-v199.js';
-import { XENO_TRIALS_ROSTER_PAGE_SIZE_V179 } from '../src/xeno-trials-roster-v179.js';
+import { groupXenoTrialsRosterV227, XENO_TRIALS_ROSTER_PAGE_SIZE_V179 } from '../src/xeno-trials-roster-v179.js';
 import { publicXenoSpritePathAdmissionV189, verifyXenoSpriteAdmissionsV189 } from './public-xeno-sprite-admissions-v189.mjs';
 import { getXenoTrialsSpriteAtlasV189 } from '../src/xeno-trials-sprite-atlas-v189.js';
 import { createXenoTrialsReactionObserverV186, getXenoTrialsReactionProfileV186 } from '../src/xeno-trials-reactions-v186.js';
@@ -23,6 +23,7 @@ function terminal() {
   Object.assign(ui, { root: { ownerDocument: { hasFocus: () => true }, setAttribute: (k, v) => attrs.set(k, v), querySelector: () => el('control') },
     form: { elements: selects }, el, runtime: null, active: true, selected: 'warrior', selectionStep: 'fighters',
     branchV119: 'horde', activityV119: null, rosterPageV179: 0, rosterSelectionV179: 'warrior', audioEnabledV189: true,
+    rosterDrawerV227: 'xenomorph', rosterDrawerPagesV227: new Map(),
     getProgress: () => progress, renderActivitiesV119() {}, renderPreviews() {} });
   return { ui, el, progress };
 }
@@ -31,9 +32,11 @@ test('the animation filter uses admitted gestures, clamps an old page and preser
   const h = terminal(), before = JSON.stringify(h.progress);
   const selected = fighters.find(fighter => !getXenoTrialsRuntimeAnimationCoverage(fighter.id).hasDrawnGestures).id;
   h.ui.selected = h.ui.rosterSelectionV179 = selected; h.ui.rosterPageV179 = 4;
-  h.el('animation').value = 'drawn'; h.ui.render();
+  h.el('animation').value = 'drawn'; h.el('sort').value = 'catalog'; h.ui.render();
   const shownIds = () => [...h.el('roster').innerHTML.matchAll(/data-xt-fighter="([^"]+)"/g)].map(match => match[1]);
-  const admitted = fighters.filter(fighter => getXenoTrialsRuntimeAnimationCoverage(fighter.id).hasDrawnGestures).map(fighter => fighter.id);
+  const visible = fighters.filter(fighter => getXenoTrialsRuntimeAnimationCoverage(fighter.id).hasDrawnGestures);
+  const groups = groupXenoTrialsRosterV227(visible).filter(group => group.fighters.length);
+  const admitted = groups[0].fighters.map(fighter => fighter.id);
   const size = XENO_TRIALS_ROSTER_PAGE_SIZE_V179, lastPage = Math.max(0, Math.ceil(admitted.length / size) - 1);
   assert.equal(h.ui.rosterPageV179, Math.min(4, lastPage));
   assert.deepEqual(shownIds(), admitted.slice(h.ui.rosterPageV179 * size, (h.ui.rosterPageV179 + 1) * size));
@@ -44,19 +47,33 @@ test('the animation filter uses admitted gestures, clamps an old page and preser
     seen.push(...shownIds());
   }
   assert.deepEqual(seen, admitted);
+  for (const group of groups.slice(1)) {
+    h.ui.rosterDrawerV227 = group.id;
+    for (let page = 0; page * size < group.fighters.length; page++) {
+      h.ui.rosterPageV179 = page;
+      h.ui.render();
+      seen.push(...shownIds());
+    }
+  }
+  assert.deepEqual(seen, groups.flatMap(group => group.fighters.map(fighter => fighter.id)));
   assert.equal(h.ui.selected, selected); assert.ok(!seen.includes(selected));
   assert.equal(JSON.stringify(h.progress), before);
 });
 
-test('all 189 specimens remain reachable in five forty-entry pages after returning to the complete catalog', () => {
+test('all 189 specimens remain reachable in category batches of at most forty after returning to the complete catalog', () => {
   const h = terminal(), before = JSON.stringify(h.progress), seen = [];
   h.el('animation').value = 'all';
-  for (let page = 0; page < 5; page++) {
-    h.ui.rosterPageV179 = page; h.ui.render();
-    const ids = [...h.el('roster').innerHTML.matchAll(/data-xt-fighter="([^"]+)"/g)].map(match => match[1]);
-    assert.ok(ids.length <= 40); seen.push(...ids);
+  h.el('sort').value = 'catalog';
+  for (const group of groupXenoTrialsRosterV227(fighters)) {
+    h.ui.rosterDrawerV227 = group.id;
+    for (let page = 0; page * XENO_TRIALS_ROSTER_PAGE_SIZE_V179 < group.fighters.length; page++) {
+      h.ui.rosterPageV179 = page; h.ui.render();
+      const ids = [...h.el('roster').innerHTML.matchAll(/data-xt-fighter="([^"]+)"/g)].map(match => match[1]);
+      assert.ok(ids.length <= 40); seen.push(...ids);
+    }
   }
-  assert.deepEqual(seen, fighters.map(fighter => fighter.id)); assert.equal(new Set(seen).size, 189);
+  assert.deepEqual(seen, groupXenoTrialsRosterV227(fighters).flatMap(group => group.fighters.map(fighter => fighter.id)));
+  assert.equal(new Set(seen).size, 189);
   assert.equal(JSON.stringify(h.progress), before);
 });
 

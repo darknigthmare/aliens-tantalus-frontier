@@ -26,7 +26,7 @@ import { getXenoTrialsOperationV188, createXenoTrialsOperationStateV188,
   stepXenoTrialsOperationV188, getXenoTrialsOperationReceiptV188 } from './xeno-trials-operations-v188.js';
 import { createXenoTrialsStageHazardsV188, stepXenoTrialsStageHazardsV188 } from './xeno-trials-stage-hazards-v188.js';
 import { createXenoTrialsHordeCheckpointV186 } from './xeno-trials-horde-checkpoint-v186.js';
-import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
+import { XENO_TRIALS_ATTACKS_V96, XENO_TRIALS_SPECIAL_COOLDOWN_V96 } from './xeno-trials-combat-contract-v186.js';
 import { XENO_TRIALS_MOVE_CONTROLS_V207, XENO_TRIALS_EVADE_V207, readXenoTrialsMovesetV207, gateXenoTrialsMovesetV207,
   releaseXenoTrialsMovesetV207, clearXenoTrialsMovePoseV207, getXenoTrialsHurtBoundsV207, getXenoTrialsStrikeBandV207,
   validXenoTrialsMovesetV207, hasXenoTrialsGroundTraversalV208, XENO_TRIALS_LOW_RETREAT_V213, XENO_TRIALS_GUARD_RETREAT_V213,
@@ -396,7 +396,7 @@ function fighterStep(match, fighter, enemy, controls, dt) {
         if (getXenoTrialsAttackStyleV147(definition, action) !== 'physical')
           fighter.attack.targetBodyV148 = { ...getXenoTrialsBodyBoundsV105(enemy) };
       }
-      if (action === 'special' || signature) { fighter.specialCooldown = spec.cooldown || 1.6; fighter.stats.specials++; }
+      if (action === 'special' || signature) { fighter.specialCooldown = spec.cooldown || XENO_TRIALS_SPECIAL_COOLDOWN_V96; fighter.stats.specials++; }
       event(match, 'attack', { side: fighter.side, kind: action,
         ...(match.hordeV180 ? { attackerInstanceV180: fighter.instanceIdV180 || 'player' } : {}),
         ...(signature ? { signatureIdV208: signature.id } : {}),

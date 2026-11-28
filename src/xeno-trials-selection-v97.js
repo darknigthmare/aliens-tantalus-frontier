@@ -1,4 +1,5 @@
 import { getXenoTrialsUnlockCostV96 } from './xeno-trials-progress-v96.js';
+import { compareXenoTrialsSimulationPowerV227 } from './xeno-trials-power-v227.js';
 
 // Search tolerates French accents and typographic dashes without rewriting displayed names.
 const searchText = value => String(value).normalize('NFD').replace(/\p{M}/gu, '')
@@ -8,19 +9,21 @@ export function filterXenoTrialsRosterV97(fighters, { family = 'all', role = 'al
   const text = searchText(query);
   const owned = new Set(unlocked);
   const faction = Array.isArray(factionRoster) ? new Set(factionRoster) : null;
-  const result = fighters.filter(f => (family === 'all' || (family === 'hybrid' || family === 'unknown' || family === 'fauna' ? getXenoTrialsSelectionFamilyV119(f) : f.family) === family) && (role === 'all' || f.role === role)
+  const result = fighters.filter(f => (family === 'all' || getXenoTrialsSelectionFamilyV119(f) === family) && (role === 'all' || f.role === role)
     && (!faction || faction.has(f.id))
     && (ownership === 'all' || (ownership === 'owned') === owned.has(f.id)) && (!text || searchText(f.label).includes(text)));
   if (sort === 'name') result.sort((a, b) => a.label.localeCompare(b.label, 'fr'));
   if (sort === 'health') result.sort((a, b) => b.hp - a.hp || a.label.localeCompare(b.label, 'fr'));
   if (sort === 'speed') result.sort((a, b) => b.speed - a.speed || a.label.localeCompare(b.label, 'fr'));
   if (sort === 'cost') result.sort((a, b) => getXenoTrialsUnlockCostV96(a.id) - getXenoTrialsUnlockCostV96(b.id) || a.label.localeCompare(b.label, 'fr'));
+  if (sort === 'power') result.sort(compareXenoTrialsSimulationPowerV227);
+  if (sort === 'power-desc') result.sort((a, b) => -compareXenoTrialsSimulationPowerV227(a, b));
   return result;
 }
 
 export const XENO_TRIALS_SELECTION_FAMILIES_V119 = Object.freeze([
-  ['all', 'TOUS'], ['xenomorph', 'XÉNOMORPHES'], ['pathogen', 'PATHOGÈNES'], ['hybrid', 'HYBRIDES'],
-  ['synthetic', 'SYNTHÉTIQUES / MACHINES'], ['human', 'HUMAINS'], ['engineer', 'ENGINEERS'], ['fauna', 'FAUNE'], ['unknown', 'À DÉFINIR']
+  ['all', 'TOUS'], ['xenomorph', 'XÉNOMORPHES'], ['synthetic', 'SYNTHÉTIQUES / MACHINES'], ['pathogen', 'PATHOGÈNES'],
+  ['hybrid', 'HYBRIDES'], ['human', 'HUMAINS'], ['engineer', 'ENGINEERS'], ['fauna', 'FAUNE'], ['unknown', 'À DÉFINIR']
 ].map(([id, label]) => Object.freeze({ id, label })));
 export function getXenoTrialsSelectionFamilyV119(fighter) {
   if (!fighter) return 'unknown';

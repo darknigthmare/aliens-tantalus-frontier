@@ -2,6 +2,7 @@ import { XENO_TRIALS_FIGHTERS_V96, getXenoTrialsFighterV96, getXenoTrialsArtV96 
 import { getXenoTrialsSignatureV147 } from './xeno-trials-signatures-v147.js';
 import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsRigV154 } from './xeno-trials-rig-v154.js';
+import { getXenoTrialsSelectionFamilyV119, XENO_TRIALS_SELECTION_FAMILIES_V119 } from './xeno-trials-selection-v97.js';
 import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 
@@ -25,6 +26,14 @@ export function getXenoTrialsRosterPageV179(fighters = XENO_TRIALS_FIGHTERS_V96,
   return Object.freeze({ fighters: visible, page: current, pageCount, total: entries.length,
     start: visible.length ? offset + 1 : 0, end: offset + visible.length, size,
     hasPrevious: current > 0, hasNext: current + 1 < pageCount });
+}
+
+/** Organize an already filtered and sorted roster without changing either order. */
+export function groupXenoTrialsRosterV227(fighters) {
+  const groups = XENO_TRIALS_SELECTION_FAMILIES_V119.slice(1).map(family => ({ ...family, fighters: [] }));
+  const byFamily = new Map(groups.map(group => [group.id, group.fighters]));
+  for (const fighter of fighters) byFamily.get(getXenoTrialsSelectionFamilyV119(fighter)).push(fighter);
+  return groups;
 }
 
 const roles = Object.freeze({

@@ -440,7 +440,7 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active:is([data-xt-step="fighters"],[da
   padding: 12px;
 }
 
-#xeno-trials-v96 .xt-roster > :is(.xt-roster-heading, nav, .xt-fighters),
+#xeno-trials-v96 .xt-roster > :is(.xt-roster-heading, nav, .xt-roster-drawers),
 #xeno-trials-v96 .xt-roster-filters[open],
 #xeno-trials-v96 .xt-roster:has(.xt-roster-filters[open]) .xt-roster-search {
   grid-column: 1 / -1;
@@ -473,17 +473,6 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active:is([data-xt-step="fighters"],[da
 #xeno-trials-v96 .xt-roster-heading p {
   font-family: monospace;
   color: #c1c7c3;
-}
-
-#xeno-trials-v96[data-xt-step="fighters"] .xt-family-tabs-v119 {
-  margin: 0;
-  padding-bottom: 3px;
-}
-
-#xeno-trials-v96[data-xt-step="fighters"] .xt-family-tabs-v119 button[aria-pressed="true"] {
-  color: #17120b;
-  background: var(--xt-amber);
-  border-color: var(--xt-amber);
 }
 
 #xeno-trials-v96 .xt-roster-search {
@@ -530,6 +519,77 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active:is([data-xt-step="fighters"],[da
   margin-inline-start: auto;
 }
 
+#xeno-trials-v96 .xt-roster-drawers {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+#xeno-trials-v96 .xt-roster-drawer {
+  min-width: 0;
+  border: 1px solid var(--xt-line);
+  background: #111719;
+}
+
+#xeno-trials-v96 .xt-roster-drawer[open] {
+  border-color: #9c855c;
+}
+
+#xeno-trials-v96 .xt-roster-drawer > summary {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 8px 12px;
+  list-style: none;
+  cursor: pointer;
+  color: var(--xt-crt);
+  background: #1b2528;
+  font: 700 12px/1.35 monospace;
+}
+
+#xeno-trials-v96 .xt-roster-drawer > summary::-webkit-details-marker {
+  display: none;
+}
+
+#xeno-trials-v96 .xt-roster-drawer > summary::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  transform: rotate(-45deg);
+  justify-self: start;
+}
+
+#xeno-trials-v96 .xt-roster-drawer[open] > summary {
+  color: var(--xt-amber);
+  background: #2a2317;
+}
+
+#xeno-trials-v96 .xt-roster-drawer[open] > summary::before {
+  transform: rotate(45deg);
+}
+
+#xeno-trials-v96 .xt-roster-drawer > summary[aria-disabled="true"] {
+  color: #a1aca9;
+  background: #151b1d;
+  cursor: default;
+}
+
+#xeno-trials-v96 .xt-roster-drawer > summary:focus-visible {
+  outline: 2px solid var(--xt-amber);
+  outline-offset: -3px;
+}
+
+#xeno-trials-v96 .xt-roster-drawer-count {
+  min-width: 2ch;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
 #xeno-trials-v96[data-xt-step="fighters"] .xt-fighters {
   grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
   gap: 6px;
@@ -539,8 +599,9 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active:is([data-xt-step="fighters"],[da
   scrollbar-gutter: stable;
 }
 
-#xeno-trials-v96 .xt-fighters > p {
-  grid-column: 1 / -1;
+#xeno-trials-v96 .xt-roster-drawers > p {
+  margin: 0;
+  padding: 6px 2px;
 }
 
 #xeno-trials-v96[data-xt-step="fighters"] .xt-fighter {
@@ -566,6 +627,22 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active:is([data-xt-step="fighters"],[da
 #xeno-trials-v96 .xt-fighter > [data-xt-fighter]:focus-visible {
   z-index: 1;
   outline-offset: -3px;
+}
+
+#xeno-trials-v96 .xt-fighter .xt-fighter-power {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 1px 5px;
+  padding: 0 4px 5px;
+  color: #b5c4c0;
+  font: 600 10px/1.25 monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+#xeno-trials-v96 .xt-fighter-power b {
+  color: var(--xt-crt);
 }
 
 #xeno-trials-v96 .xt-fighter-thumbnail {

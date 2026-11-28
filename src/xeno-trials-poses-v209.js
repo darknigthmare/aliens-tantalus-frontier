@@ -55,6 +55,36 @@ const pantherLightFrames = Object.freeze([
   poseFrame(['contact', '/assets/openai/xeno-trials-v209/characters/panther-light-contact.png', [53, 22, 1490, 928], 731]),
   poseFrame(['recovery', '/assets/openai/xeno-trials-v209/characters/panther-light-recovery.png', [168, 32, 1428, 982], 801])
 ]);
+const gorillaLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/gorilla-light-windup.png', [26, 50, 1191, 1194], 674],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/gorilla-light-contact.png', [15, 185, 1244, 1125], 609],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/gorilla-light-recovery.png', [20, 153, 1233, 1144], 687]
+].map(poseFrame));
+const gridLightFrames = Object.freeze([
+  poseFrame(['windup', '/assets/openai/xeno-trials-v209/characters/grid-light-windup.png', [164, 18, 1545, 874], 1124]),
+  poseFrame(['contact', '/assets/openai/xeno-trials-v209/characters/grid-light-contact.png', [110, 11, 1760, 873], 1136]),
+  null
+]);
+const pantherHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/panther-heavy-windup.png', [110, 12, 1325, 990], 715],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/panther-heavy-contact.png', [76, 39, 1468, 951], 691],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/panther-heavy-recovery.png', [94, 42, 1478, 964], 702]
+].map(poseFrame));
+const warriorHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/warrior-heavy-windup-v227.png', [40, 76, 1456, 962], 1113],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/warrior-heavy-contact-v227.png', [40, 29, 1499, 990], 997],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/warrior-heavy-recovery-v227.png', [64, 22, 1466, 992], 1092]
+].map(poseFrame));
+const runnerHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/runner-heavy-windup-v227.png', [42, 287, 1501, 815], 1097],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/runner-heavy-contact-v227.png', [34, 284, 1506, 750], 1034],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/runner-heavy-recovery-v227.png', [52, 224, 1474, 819], 1098]
+].map(poseFrame));
+const queenLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/queen-light-windup-v227.png', [21, 27, 1519, 997], 1083],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/queen-light-contact-v227.png', [21, 19, 1523, 994], 1082],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/queen-light-recovery-v227.png', [20, 23, 1522, 992], 1081]
+].map(poseFrame));
 const pantherSource = ['pose-v94-kenner-panther', '/assets/openai/sprites/static-enemy-v94/kenner-panther-neca.png',
   '575f23d532b10eb34f2dd0df9e8a860e1511cdecf4e7ab20eb5fa7742acc549c', 1310, 1201];
 const arachnoidSource = ['castes-game_avp_capcom_arachnoid', artPath,
@@ -63,6 +93,12 @@ const gridSource = ['castes-film_grid_avp_2004', '/assets/user/castes-v87/film_g
   '49d756a01928adb1c3fa787d47efbb158da988699fd9d0008bf9a723a7002a74', 1536, 1024];
 const gorillaSource = ['pose-v94-kenner-gorilla', '/assets/openai/sprites/static-enemy-v94/kenner-gorilla-neca.png',
   'c91b539cebeb76fd69ac39ef5c9966166584a45f8a51a064c09a7306d54f4685', 1254, 1254];
+const warriorSource = ['castes-film_warrior_aliens_1986', '/assets/user/castes-v87/film_warrior_aliens_1986.png',
+  'c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f', 1536, 1024];
+const runnerSource = ['castes-film_runner_alien3_1992', '/assets/user/castes-v87/film_runner_alien3_1992.png',
+  'f117c7ad0e6da9a02d3a4ce315066d75acfd67a909620f560ff6cd8c3d7b64b3', 1536, 1024];
+const queenSource = ['castes-film_queen_aliens_1986', '/assets/user/castes-v87/film_queen_aliens_1986.png',
+  '985abf27db63400d8a6a68101bfaa7dde3335da0e8986ea85c409ab30da5e991', 1536, 1024];
 
 const groundedActions = Object.freeze([
   ['panther', {
@@ -106,6 +142,36 @@ const groundedActions = Object.freeze([
     id: 'gorilla-heavy', action: 'heavy', revision: 226, animation: 'painted-gorilla-heavy-poses',
     source: gorillaSource, textureWidth: 1254, textureHeight: 1254, density: 1,
     frames: gorillaHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['gorilla', {
+    id: 'gorilla-light', action: 'light', revision: 227, animation: 'painted-gorilla-light-poses',
+    source: gorillaSource, textureWidth: 1254, textureHeight: 1254, density: 1,
+    frames: gorillaLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['grid', {
+    id: 'grid-light', action: 'light', revision: 227, animation: 'painted-grid-light-poses',
+    source: gridSource, textureWidth: 1774, textureHeight: 887, density: 1,
+    frames: gridLightFrames, limitations: ['windup-and-contact-only']
+  }],
+  ['panther', {
+    id: 'panther-heavy', action: 'heavy', revision: 227, animation: 'painted-panther-heavy-poses',
+    source: pantherSource, textureWidth: 1536, textureHeight: 1024, density: .77,
+    frames: pantherHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['warrior', {
+    id: 'warrior-heavy', action: 'heavy', revision: 227, animation: 'painted-warrior-heavy-poses',
+    source: warriorSource, textureWidth: 1536, textureHeight: 1024, density: .98,
+    frames: warriorHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['runner', {
+    id: 'runner-heavy', action: 'heavy', revision: 227, animation: 'painted-runner-heavy-poses',
+    source: runnerSource, textureWidth: 1536, textureHeight: 1024, density: 1,
+    frames: runnerHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['queen', {
+    id: 'queen-light', action: 'light', revision: 227, animation: 'painted-queen-light-poses',
+    source: queenSource, textureWidth: 1536, textureHeight: 1024, density: 1,
+    frames: queenLightFrames, limitations: ['three-painted-poses']
   }]
 ].map(([fighterId, entry]) => Object.freeze({ ...entry, fighterId, source: Object.freeze(entry.source), limitations: Object.freeze(entry.limitations),
   paths: Object.freeze(entry.frames.filter(Boolean).map(frame => frame.path)) })));

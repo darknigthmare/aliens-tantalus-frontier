@@ -15,7 +15,10 @@ export function getXenoTrialsPhysicalScaleV119(id, variant = null) {
   if (!definition || !visual) return null;
   const inheritedReference = definition.importRevision === 123
     ? referenceIds[definition.tuningCounterpartFighterId] : null;
-  const referenceId = referenceIds[id] || inheritedReference || art.legacyCounterpartId || art.alteredOf || definition.profileId;
+  // The reconstructed Titan rests on an abdominal base and foreclaws. Its
+  // authored opaque height is the staging reference for that posture.
+  const referenceId = art.reconstruction === 'unseen-legless-abdominal-base-and-tail' ? definition.profileId
+    : referenceIds[id] || inheritedReference || art.legacyCounterpartId || art.alteredOf || definition.profileId;
   const candidate = getEnemyPhysicalSizeV100(referenceId);
   const candidateHeight = candidate?.axis?.startsWith('vertical') && candidate.targetMeters > 0 ? candidate.targetMeters : null;
   const heightMeters = candidateHeight || visual.visibleHeight / 70;

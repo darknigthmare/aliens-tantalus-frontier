@@ -121,6 +121,7 @@
     "test:trials:v224": "node --test scripts/verify-xeno-trials-ai-v213.mjs scripts/verify-xeno-trials-decompression-v224.mjs scripts/verify-xeno-trials-horde-minigames-v213.mjs scripts/verify-xeno-trials-offline-v223.mjs scripts/verify-xeno-trials-poses-v209.mjs scripts/verify-xeno-trials-practice-v224.mjs scripts/verify-xeno-trials-spatial-outro-v224.mjs",
     "test:trials:v225": "node --test scripts/verify-xeno-trials-ai-v213.mjs scripts/verify-xeno-trials-archive-transfer-v225.mjs scripts/verify-xeno-trials-horde-minigames-v213.mjs scripts/verify-xeno-trials-offline-v223.mjs scripts/verify-xeno-trials-poses-v209.mjs scripts/verify-xeno-trials-practice-v225.mjs scripts/verify-xeno-trials-survival-outro-v225.mjs",
     "test:trials:v226": "node --test scripts/verify-xeno-trials-ai-v213.mjs scripts/verify-xeno-trials-deflector-calibration-v226.mjs scripts/verify-xeno-trials-horde-minigames-v213.mjs scripts/verify-xeno-trials-poses-v209.mjs scripts/verify-xeno-trials-practice-v226.mjs",
+    "test:trials:v227": "node --test scripts/verify-xeno-trials-roster-ui-v227.mjs scripts/verify-xeno-trials-roster-audit-v227.mjs scripts/verify-xeno-trials-poses-v209.mjs scripts/verify-xeno-trials-animation-ui-v189.mjs scripts/verify-xeno-trials-roster-v179.mjs",
     "test:dlc:river": "node --test scripts/verify-river-of-pain-launcher.mjs scripts/verify-river-of-pain-integration.mjs",
     "test:dlc:river:source": "node scripts/test-river-of-pain-source.mjs",
     "qa:dlc:river": "python3 scripts/qa-river-of-pain.py",
