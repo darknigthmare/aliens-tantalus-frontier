@@ -68,6 +68,28 @@ const generatedV228 = [
   ['synth-heavy-light-recovery-v228.png', '4480d0fceca32f7c4ca873ec3f42004113259691df5e571c99d24d2dd1c2d07c'],
   ['synth-heavy-heavy-atlas-v228.png', 'db3cd02b113daa667c852e43497046ad52046b7ea48271acce0adf09ed49635f']
 ];
+const generatedV229 = [
+  ['predalien-light-windup-v229.png', 'e143cbaa3fc5b2a896a97baf072e41157ce4412e76047b49addfa177f332234c'],
+  ['predalien-light-contact-v229.png', '6594f8e1d0f60c55236fcb85328aae3b68781c107b4962db1608ef995fa11064'],
+  ['predalien-light-recovery-v229.png', 'aa2b6066cb36bdd8ad454daa75b40cb287e1754b5efe2159dd28c4b971cb264d'],
+  ['predalien-heavy-windup-v229.png', '81a5e06c8737f656f8e2a960682f898693fbe14cad9fbfd194e37e4c6f1432ec'],
+  ['predalien-heavy-contact-v229.png', '58d673302cfdeb7f215ab7dcb7a773af15d4279dc92fa8aebe5b11ff76c16df8'],
+  ['predalien-heavy-recovery-v229.png', '4c2876a80882bb6d30c68faa40a8289942d19c6149d07d15b9640bdb7f81d176'],
+  ['boiler-light-windup-v229.png', 'd9df03486712634df0fe7fa45b2b9c86cb87c947135131f16f759df5c198349f'],
+  ['boiler-light-contact-v229.png', '7f3ae95c95d3993c62669559f6bb138b3a605cafa197ee8b6f4de314c447260a'],
+  ['boiler-light-recovery-v229.png', '9d5bd5483743e6e216c479485a82be6250adab5e61f7c0e70e1e008729356d8c'],
+  ['boiler-heavy-windup-v229.png', '9134a7f64e5658c6dc6616e603ce0800ab96e36b070d39fda54c8a58896faa53'],
+  ['boiler-heavy-contact-v229.png', '7c1bc2dbc566edc336b13c89a1d9fbf7c48426653609f4c47cefecc1006e7b08'],
+  ['boiler-heavy-recovery-v229.png', 'a5f509bad6f8bc1c1aba5fbebb28e35885584e448c8628d7032be35b1685587d'],
+  ['royal-guard-light-atlas-v229.png', '0a12cb0cb25a215631c5a52f6046c1fd36447d521d78181f19ec31fe3ec1d317'],
+  ['royal-guard-heavy-atlas-v229.png', 'b4c8b74c61df65a29a8f826a07e7abf595bf1935a3ac4fd62c00eb1ba17e8bee'],
+  ['razor-claws-light-atlas-v229.png', '6fd947e7c7309e45561e95f7bbc241572333ec612d1001397371851a39d19777'],
+  ['razor-claws-heavy-atlas-v229.png', '26af781bcba0de3fda6afef18ff9c9c0b2898065eba6ec7def6362c79b483290'],
+  ['xenoborg-light-atlas-v229.png', '1acdf9209a4ce9f351d8a16c4c07cc81267d45c4ae1d256faf148dc3644964a3'],
+  ['xenoborg-heavy-atlas-v229.png', 'd11ca6d80817e204ea584468fefa950ba987771851685d014e0315bf41f1fbb3'],
+  ['combat-synth-light-atlas-v229.png', 'bfc304d6139ff8633f05ac339243f206fc6749a7e2ac51209aeb90bd5567ca97'],
+  ['combat-synth-heavy-atlas-v229.png', '126d382bd6a8283660300dbcfe963f526c7f6643702f8dff5d39f54f4cb4b159']
+];
 const approved = new Map([
   ...[
     [205, approvedV205, XENO_VISUAL_ASSETS_NEW_INPUTS_V205], [206, approvedV206, XENO_PRODUCTION_ASSETS_NEW_INPUTS_V206]
@@ -78,7 +100,8 @@ const approved = new Map([
   })),
   ...generatedV226,
   ...generatedV227,
-  ...generatedV228
+  ...generatedV228,
+  ...generatedV229
 ].map(([name, sha256]) => [`${rootDirectory}/characters/${name}`, sha256]));
 
 export function publicXenoPosePathAdmissionV209(path, { directory = false } = {}) {

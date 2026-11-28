@@ -277,7 +277,67 @@ const addedActions = [
     frames: [['synth-heavy-heavy-atlas-v228.png', null, [158, 8, 364, 502]],
       ['synth-heavy-heavy-atlas-v228.png', null, [819, 74, 595, 431]],
       ['synth-heavy-heavy-atlas-v228.png', null, [149, 568, 451, 448]]],
-    animation: 'painted-synth-heavy-heavy-poses' }
+    animation: 'painted-synth-heavy-heavy-poses' },
+  { id: 'predalien', action: 'light', dimensions: [1536, 1024], density: .93, reachCases: [[64, true], [73, false]],
+    frames: [['predalien-light-windup-v229.png', null, [81, 82, 1386, 885]],
+      ['predalien-light-contact-v229.png', null, [103, 109, 1368, 840]],
+      ['predalien-light-recovery-v229.png', null, [147, 42, 1193, 938]]],
+    animation: 'painted-predalien-light-poses' },
+  { id: 'predalien', action: 'heavy', dimensions: [1536, 1024], density: .93, reachCases: [[93, true], [102, false]],
+    frames: [['predalien-heavy-windup-v229.png', null, [154, 19, 1156, 966]],
+      ['predalien-heavy-contact-v229.png', null, [58, 73, 1461, 895]],
+      ['predalien-heavy-recovery-v229.png', null, [142, 62, 1183, 898]]],
+    animation: 'painted-predalien-heavy-poses' },
+  { id: 'boiler', action: 'light', dimensions: [1536, 1024], density: .98, reachCases: [[49, true], [58, false]],
+    frames: [['boiler-light-windup-v229.png', null, [41, 26, 1459, 968]],
+      ['boiler-light-contact-v229.png', null, [61, 26, 1425, 969]],
+      ['boiler-light-recovery-v229.png', null, [49, 12, 1454, 997]]],
+    animation: 'painted-boiler-light-poses' },
+  { id: 'boiler', action: 'heavy', dimensions: [1536, 1024], density: .98, reachCases: [[72, true], [81, false]],
+    frames: [['boiler-heavy-windup-v229.png', null, [47, 36, 1463, 965]],
+      ['boiler-heavy-contact-v229.png', null, [44, 25, 1460, 973]],
+      ['boiler-heavy-recovery-v229.png', null, [64, 27, 1421, 976]]],
+    animation: 'painted-boiler-heavy-poses' },
+  { id: 'royal-guard', action: 'light', dimensions: [1536, 1024], density: 1.91, reachCases: [[67, true], [76, false]],
+    frames: [['royal-guard-light-atlas-v229.png', null, [37, 11, 590, 475]],
+      ['royal-guard-light-atlas-v229.png', null, [837, 11, 622, 475]],
+      ['royal-guard-light-atlas-v229.png', null, [49, 526, 578, 484]]],
+    animation: 'painted-royal-guard-light-poses' },
+  { id: 'royal-guard', action: 'heavy', dimensions: [1536, 1024], density: 1.91, reachCases: [[97, true], [107, false]],
+    frames: [['royal-guard-heavy-atlas-v229.png', null, [47, 11, 583, 466]],
+      ['royal-guard-heavy-atlas-v229.png', null, [829, 26, 651, 448]],
+      ['royal-guard-heavy-atlas-v229.png', null, [58, 532, 565, 474]]],
+    animation: 'painted-royal-guard-heavy-poses' },
+  { id: 'razor-claws', action: 'light', dimensions: [1536, 1024], density: 2.04, reachCases: [[58, true], [67, false]],
+    frames: [['razor-claws-light-atlas-v229.png', null, [51, 10, 597, 446]],
+      ['razor-claws-light-atlas-v229.png', null, [802, 10, 722, 446]],
+      ['razor-claws-light-atlas-v229.png', null, [64, 519, 618, 467]]],
+    animation: 'painted-razor-claws-light-poses' },
+  { id: 'razor-claws', action: 'heavy', dimensions: [1536, 1024], density: 2.04, reachCases: [[85, true], [94, false]],
+    frames: [['razor-claws-heavy-atlas-v229.png', null, [90, 13, 545, 473]],
+      ['razor-claws-heavy-atlas-v229.png', null, [830, 18, 656, 468]],
+      ['razor-claws-heavy-atlas-v229.png', null, [62, 521, 642, 477]]],
+    animation: 'painted-razor-claws-heavy-poses' },
+  { id: 'xenoborg', action: 'light', dimensions: [1024, 1536], density: 1.692, reachCases: [[55, true], [64, false]],
+    frames: [['xenoborg-light-atlas-v229.png', null, [62, 15, 811, 482]],
+      ['xenoborg-light-atlas-v229.png', null, [39, 542, 950, 451]],
+      ['xenoborg-light-atlas-v229.png', null, [46, 1033, 835, 487]]],
+    animation: 'painted-xenoborg-light-poses' },
+  { id: 'xenoborg', action: 'heavy', dimensions: [1024, 1536], density: 1.758, reachCases: [[81, true], [90, false]],
+    frames: [['xenoborg-heavy-atlas-v229.png', null, [33, 14, 854, 486]],
+      ['xenoborg-heavy-atlas-v229.png', null, [23, 594, 969, 395]],
+      ['xenoborg-heavy-atlas-v229.png', null, [44, 1049, 863, 463]]],
+    animation: 'painted-xenoborg-heavy-poses' },
+  { id: 'combat-synth', action: 'light', dimensions: [1536, 1024], density: 1.525, reachCases: [[55, true], [64, false]], historicalKind: 'mesh',
+    frames: [['combat-synth-light-atlas-v229.png', null, [56, 120, 419, 753]],
+      ['combat-synth-light-atlas-v229.png', null, [536, 121, 479, 751]],
+      ['combat-synth-light-atlas-v229.png', null, [1062, 121, 423, 752]]],
+    animation: 'painted-combat-synth-light-poses' },
+  { id: 'combat-synth', action: 'heavy', dimensions: [1536, 1024], density: 1.651, reachCases: [[81, true], [90, false]], historicalKind: 'mesh',
+    frames: [['combat-synth-heavy-atlas-v229.png', null, [66, 157, 362, 714]],
+      ['combat-synth-heavy-atlas-v229.png', null, [486, 238, 545, 633]],
+      ['combat-synth-heavy-atlas-v229.png', null, [1064, 255, 427, 616]]],
+    animation: 'painted-combat-synth-heavy-poses' }
 ];
 const phases = ['windup', 'contact', 'recovery'];
 const publicDirectory = '/assets/openai/xeno-trials-v209/characters/';
@@ -293,6 +353,16 @@ for (const { id, variant = null, action, style, travels = false, dimensions, den
     assert.ok(getXenoTrialsPoseAssetsV209({ id, variant: 'altered' }, art).every(path => !paths.includes(path)));
     if (variant === 'grey') {
       assert.deepEqual(getXenoTrialsPoseAssetsV209({ id, variant: 'purple' }, getXenoTrialsArtV96(id, 'purple')), []);
+    }
+    const otherProfiles = {
+      predalien: ['mire-v210-predalien-avpr'],
+      boiler: ['acid-boiler', 'cryo-boiler', 'drive-v123-acm-boiler'],
+      'combat-synth': ['synth-trooper', 'albino-combat-synth', 'acid-combat-synth', 'cryo-combat-synth', 'drive-v123-game-combat-synthetic-avp2'],
+    };
+    for (const related of otherProfiles[id] ?? []) {
+      const alternative = getXenoTrialsArtV96(related);
+      assert.ok(getXenoTrialsPoseAssetsV209({ id: related }, alternative).every(path => !paths.includes(path)));
+      assert.ok(getXenoTrialsPoseAssetsV209(actorId, alternative).every(path => !paths.includes(path)));
     }
     if (id === 'rhino') {
       assert.equal(art.sourceFacing, -1);
@@ -316,6 +386,10 @@ for (const { id, variant = null, action, style, travels = false, dimensions, den
     assert.equal(live.states[action].renderKind, 'drawn');
     assert.deepEqual(live.states[action].frameIds, phasesDrawn);
     assert.deepEqual(live.states[action].sources[0].paths, paths);
+    if (id === 'razor-claws') {
+      const air = live.states[action].sources.find(source => source.revision === 203 && source.renderKind === 'drawn');
+      assert.deepEqual(air?.frameIds, [`air-${action}-windup`, `air-${action}-impact`, `air-${action}-recovery`]);
+    }
     assert.ok(live.drawnStates.includes(action));
     assert.equal(live.canonExact, false);
     assert.equal(live.fullAnimation, false);

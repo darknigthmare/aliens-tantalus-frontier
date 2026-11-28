@@ -135,6 +135,66 @@ const synthHeavyHeavyFrames = Object.freeze([
   ['contact', '/assets/openai/xeno-trials-v209/characters/synth-heavy-heavy-atlas-v228.png', [819, 74, 1414, 505], 1102],
   ['recovery', '/assets/openai/xeno-trials-v209/characters/synth-heavy-heavy-atlas-v228.png', [149, 568, 600, 1016], 362]
 ].map(poseFrame));
+const predalienLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/predalien-light-windup-v229.png', [81, 82, 1467, 967], 982],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/predalien-light-contact-v229.png', [103, 109, 1471, 949], 865],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/predalien-light-recovery-v229.png', [147, 42, 1340, 980], 1037]
+].map(poseFrame));
+const predalienHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/predalien-heavy-windup-v229.png', [154, 19, 1310, 985], 899],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/predalien-heavy-contact-v229.png', [58, 73, 1519, 968], 888],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/predalien-heavy-recovery-v229.png', [142, 62, 1325, 960], 1035]
+].map(poseFrame));
+const boilerLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/boiler-light-windup-v229.png', [41, 26, 1500, 994], 1016],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/boiler-light-contact-v229.png', [61, 26, 1486, 995], 941],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/boiler-light-recovery-v229.png', [49, 12, 1503, 1009], 1065]
+].map(poseFrame));
+const boilerHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/boiler-heavy-windup-v229.png', [47, 36, 1510, 1001], 1028],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/boiler-heavy-contact-v229.png', [44, 25, 1504, 998], 977],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/boiler-heavy-recovery-v229.png', [64, 27, 1485, 1003], 1081]
+].map(poseFrame));
+const royalGuardLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/royal-guard-light-atlas-v229.png', [37, 11, 627, 486], 400],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/royal-guard-light-atlas-v229.png', [837, 11, 1459, 486], 1147],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/royal-guard-light-atlas-v229.png', [49, 526, 627, 1010], 401]
+].map(poseFrame));
+const royalGuardHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/royal-guard-heavy-atlas-v229.png', [47, 11, 630, 477], 407],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/royal-guard-heavy-atlas-v229.png', [829, 26, 1480, 474], 1122],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/royal-guard-heavy-atlas-v229.png', [58, 532, 623, 1006], 399]
+].map(poseFrame));
+const razorClawsLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/razor-claws-light-atlas-v229.png', [51, 10, 648, 456], 352],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/razor-claws-light-atlas-v229.png', [802, 10, 1524, 456], 1109],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/razor-claws-light-atlas-v229.png', [64, 519, 682, 986], 373]
+].map(poseFrame));
+const razorClawsHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/razor-claws-heavy-atlas-v229.png', [90, 13, 635, 486], 376],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/razor-claws-heavy-atlas-v229.png', [830, 18, 1486, 486], 1130],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/razor-claws-heavy-atlas-v229.png', [62, 521, 704, 998], 387]
+].map(poseFrame));
+const xenoborgLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/xenoborg-light-atlas-v229.png', [62, 15, 873, 497], 628],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/xenoborg-light-atlas-v229.png', [39, 542, 989, 993], 603],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/xenoborg-light-atlas-v229.png', [46, 1033, 881, 1520], 618]
+].map(poseFrame));
+const xenoborgHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/xenoborg-heavy-atlas-v229.png', [33, 14, 887, 500], 616],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/xenoborg-heavy-atlas-v229.png', [23, 594, 992, 989], 606],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/xenoborg-heavy-atlas-v229.png', [44, 1049, 907, 1512], 598]
+].map(poseFrame));
+const combatSynthLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/combat-synth-light-atlas-v229.png', [56, 120, 475, 873], 243],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/combat-synth-light-atlas-v229.png', [536, 121, 1015, 872], 725],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/combat-synth-light-atlas-v229.png', [1062, 121, 1485, 873], 1246]
+].map(poseFrame));
+const combatSynthHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/combat-synth-heavy-atlas-v229.png', [66, 157, 428, 871], 273],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/combat-synth-heavy-atlas-v229.png', [486, 238, 1031, 871], 770],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/combat-synth-heavy-atlas-v229.png', [1064, 255, 1491, 871], 1256]
+].map(poseFrame));
 const pantherSource = ['pose-v94-kenner-panther', '/assets/openai/sprites/static-enemy-v94/kenner-panther-neca.png',
   '575f23d532b10eb34f2dd0df9e8a860e1511cdecf4e7ab20eb5fa7742acc549c', 1310, 1201];
 const arachnoidSource = ['castes-game_avp_capcom_arachnoid', artPath,
@@ -159,6 +219,18 @@ const synthSniperSource = ['pose-v94-afe-synth-sniper', '/assets/openai/sprites/
   '6541a21be18321c71b2e8e2a8b76f5ac7e58581babe5e190a3dcde6247f5977b', 1024, 1536];
 const synthHeavySource = ['pose-v94-afe-synth-heavy', '/assets/openai/sprites/static-enemy-v94/game-afe-synth-heavy.png',
   '71a4ad45aafe454e33eb7a90a9f4574b59c731fe9406f19a5382987a6a9d5a4d', 1024, 1536];
+const predalienSource = ['castes-game_predalien_avp2_primal_hunt', '/assets/user/castes-v87/game_predalien_avp2_primal_hunt.png',
+  '3c39acccb5bcfd571026d2511553946078be96b4f2c0e2c2470b39197f770bb5', 1536, 1024];
+const boilerSource = ['castes-game_acm_boiler', '/assets/user/castes-v87/game_acm_boiler.png',
+  'c1385916ec2e5bb3f1d6ff421f2a58850cb907697bdbcc7845d3b1f729f00ac1', 1536, 1024];
+const royalGuardSource = ['castes-game_avp_capcom_royal_guard', '/assets/user/castes-v87/game_avp_capcom_royal_guard.png',
+  'f8678cd4d343ec643c79791258fc4d25540aba43de40fc4b20ae720818b04cd3', 1536, 1024];
+const razorClawsSource = ['castes-game_avp_capcom_razor_claws', '/assets/user/castes-v87/game_avp_capcom_razor_claws.png',
+  'a1d024f5a20e4a7210b7f77f011ed2f81e6a177ba787afd07a430b5cd71d1987', 1536, 1024];
+const xenoborgSource = ['castes-game_xenoborg_avp1999', '/assets/user/castes-v87/game_xenoborg_avp1999.png',
+  'd6532326d96fbdd14e7feb8d19946b92edac55a0f8ae88ccc916cc692b192a09', 1536, 1024];
+const combatSynthSource = ['enemy-146-armored-combat-synthetic', '/assets/openai/sprites/static-enemy-v96/armored-combat-synthetic.png',
+  'fb161cf728b2f8f4fa5f7ef7b894a7aed7a2f5cae79e122cbabc96ad2d4afd39', 1205, 1306];
 
 const groundedActions = Object.freeze([
   ['panther', {
@@ -282,6 +354,66 @@ const groundedActions = Object.freeze([
     id: 'synth-heavy-heavy', action: 'heavy', revision: 228, animation: 'painted-synth-heavy-heavy-poses',
     source: synthHeavySource, textureWidth: 1536, textureHeight: 1024, density: 2.18,
     frames: synthHeavyHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['predalien', {
+    id: 'predalien-light', action: 'light', revision: 229, animation: 'painted-predalien-light-poses',
+    source: predalienSource, textureWidth: 1536, textureHeight: 1024, density: .93,
+    frames: predalienLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['predalien', {
+    id: 'predalien-heavy', action: 'heavy', revision: 229, animation: 'painted-predalien-heavy-poses',
+    source: predalienSource, textureWidth: 1536, textureHeight: 1024, density: .93,
+    frames: predalienHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['boiler', {
+    id: 'boiler-light', action: 'light', revision: 229, animation: 'painted-boiler-light-poses',
+    source: boilerSource, textureWidth: 1536, textureHeight: 1024, density: .98,
+    frames: boilerLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['boiler', {
+    id: 'boiler-heavy', action: 'heavy', revision: 229, animation: 'painted-boiler-heavy-poses',
+    source: boilerSource, textureWidth: 1536, textureHeight: 1024, density: .98,
+    frames: boilerHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['royal-guard', {
+    id: 'royal-guard-light', action: 'light', revision: 229, animation: 'painted-royal-guard-light-poses',
+    source: royalGuardSource, textureWidth: 1536, textureHeight: 1024, density: 1.91,
+    frames: royalGuardLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['royal-guard', {
+    id: 'royal-guard-heavy', action: 'heavy', revision: 229, animation: 'painted-royal-guard-heavy-poses',
+    source: royalGuardSource, textureWidth: 1536, textureHeight: 1024, density: 1.91,
+    frames: royalGuardHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['razor-claws', {
+    id: 'razor-claws-light', action: 'light', revision: 229, animation: 'painted-razor-claws-light-poses',
+    source: razorClawsSource, textureWidth: 1536, textureHeight: 1024, density: 2.04,
+    frames: razorClawsLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['razor-claws', {
+    id: 'razor-claws-heavy', action: 'heavy', revision: 229, animation: 'painted-razor-claws-heavy-poses',
+    source: razorClawsSource, textureWidth: 1536, textureHeight: 1024, density: 2.04,
+    frames: razorClawsHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['xenoborg', {
+    id: 'xenoborg-light', action: 'light', revision: 229, animation: 'painted-xenoborg-light-poses',
+    source: xenoborgSource, textureWidth: 1024, textureHeight: 1536, density: 1.692,
+    frames: xenoborgLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['xenoborg', {
+    id: 'xenoborg-heavy', action: 'heavy', revision: 229, animation: 'painted-xenoborg-heavy-poses',
+    source: xenoborgSource, textureWidth: 1024, textureHeight: 1536, density: 1.758,
+    frames: xenoborgHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['combat-synth', {
+    id: 'combat-synth-light', action: 'light', revision: 229, animation: 'painted-combat-synth-light-poses',
+    source: combatSynthSource, textureWidth: 1536, textureHeight: 1024, density: 1.525,
+    frames: combatSynthLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['combat-synth', {
+    id: 'combat-synth-heavy', action: 'heavy', revision: 229, animation: 'painted-combat-synth-heavy-poses',
+    source: combatSynthSource, textureWidth: 1536, textureHeight: 1024, density: 1.651,
+    frames: combatSynthHeavyFrames, limitations: ['three-painted-poses']
   }]
 ].map(([fighterId, entry]) => Object.freeze({ ...entry, fighterId, source: Object.freeze(entry.source), limitations: Object.freeze(entry.limitations),
   paths: Object.freeze([...new Set(entry.frames.filter(Boolean).map(frame => frame.path))]) })));
