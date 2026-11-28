@@ -227,7 +227,57 @@ const addedActions = [
     frames: [['queen-light-windup-v227.png', null, [21, 27, 1498, 970]],
       ['queen-light-contact-v227.png', null, [21, 19, 1502, 975]],
       ['queen-light-recovery-v227.png', null, [20, 23, 1502, 969]]],
-    animation: 'painted-queen-light-poses' }
+    animation: 'painted-queen-light-poses' },
+  { id: 'rhino', action: 'light', dimensions: [1536, 1024], reachCases: [[55, true], [64, false]],
+    frames: [['rhino-light-windup-v228.png', null, [35, 89, 1467, 835]],
+      ['rhino-light-contact-v228.png', null, [9, 24, 1516, 909]],
+      ['rhino-light-recovery-v228.png', null, [37, 82, 1464, 849]]],
+    animation: 'painted-rhino-light-poses' },
+  { id: 'rhino', action: 'heavy', dimensions: [1536, 1024], reachCases: [[81, true], [90, false]],
+    frames: [['rhino-heavy-windup-v228.png', null, [35, 79, 1467, 844]],
+      ['rhino-heavy-contact-v228.png', null, [37, 92, 1464, 815]],
+      ['rhino-heavy-recovery-v228.png', null, [28, 36, 1467, 903]]],
+    animation: 'painted-rhino-heavy-poses' },
+  { id: 'mantis', action: 'light', dimensions: [1254, 1254], reachCases: [[64, true], [73, false]],
+    frames: [['mantis-light-windup-v228.png', null, [34, 108, 1174, 1065]],
+      ['mantis-light-contact-v228.png', null, [34, 8, 1159, 1232], [1219, 1290]],
+      ['mantis-light-recovery-v228.png', null, [26, 81, 1200, 1069]]],
+    animation: 'painted-mantis-light-poses' },
+  { id: 'mantis', action: 'heavy', dimensions: [1536, 1024], density: 1.94, reachCases: [[93, true], [102, false]],
+    frames: [['mantis-heavy-atlas-v228.png', null, [157, 19, 431, 446]],
+      ['mantis-heavy-atlas-v228.png', null, [842, 35, 581, 430]],
+      ['mantis-heavy-atlas-v228.png', null, [163, 529, 432, 470]]],
+    animation: 'painted-mantis-heavy-poses' },
+  { id: 'armored-joe', action: 'light', dimensions: [1536, 1024], density: 2.46, reachCases: [[49, true], [58, false]],
+    frames: [['armored-joe-light-atlas-v228.png', null, [248, 18, 274, 459]],
+      ['armored-joe-light-atlas-v228.png', null, [943, 18, 355, 459]],
+      ['armored-joe-light-atlas-v228.png', null, [247, 533, 278, 460]]],
+    animation: 'painted-armored-joe-light-poses' },
+  { id: 'armored-joe', action: 'heavy', dimensions: [1536, 1024], density: 1.45, reachCases: [[72, true], [81, false]],
+    frames: [['armored-joe-heavy-atlas-v228.png', null, [32, 113, 444, 807]],
+      ['armored-joe-heavy-atlas-v228.png', null, [535, 173, 471, 746]],
+      ['armored-joe-heavy-atlas-v228.png', null, [1073, 173, 441, 746]]],
+    animation: 'painted-armored-joe-heavy-poses' },
+  { id: 'synth-sniper', action: 'light', dimensions: [1536, 1024], density: 1.38, reachCases: [[48, true], [57, false]],
+    frames: [['synth-sniper-light-windup-v228.png', null, [459, 57, 623, 930]],
+      ['synth-sniper-light-contact-v228.png', null, [455, 56, 751, 928]],
+      ['synth-sniper-light-recovery-v228.png', null, [507, 64, 528, 921]]],
+    animation: 'painted-synth-sniper-light-poses' },
+  { id: 'synth-sniper', action: 'heavy', dimensions: [1536, 1024], density: 1.28, reachCases: [[72, true], [81, false]],
+    frames: [['synth-sniper-heavy-windup-v228.png', null, [400, 14, 711, 996]],
+      ['synth-sniper-heavy-contact-v228.png', null, [230, 71, 985, 914]],
+      ['synth-sniper-heavy-recovery-v228.png', null, [448, 78, 688, 916]]],
+    animation: 'painted-synth-sniper-heavy-poses' },
+  { id: 'synth-heavy', action: 'light', dimensions: [1536, 1024], density: 1.4, reachCases: [[55, true], [64, false]],
+    frames: [['synth-heavy-light-windup-v228.png', null, [447, 47, 718, 948]],
+      ['synth-heavy-light-contact-v228.png', null, [336, 130, 908, 822]],
+      ['synth-heavy-light-recovery-v228.png', null, [493, 45, 703, 945]]],
+    animation: 'painted-synth-heavy-light-poses' },
+  { id: 'synth-heavy', action: 'heavy', dimensions: [1536, 1024], density: 2.18, reachCases: [[81, true], [90, false]],
+    frames: [['synth-heavy-heavy-atlas-v228.png', null, [158, 8, 364, 502]],
+      ['synth-heavy-heavy-atlas-v228.png', null, [819, 74, 595, 431]],
+      ['synth-heavy-heavy-atlas-v228.png', null, [149, 568, 451, 448]]],
+    animation: 'painted-synth-heavy-heavy-poses' }
 ];
 const phases = ['windup', 'contact', 'recovery'];
 const publicDirectory = '/assets/openai/xeno-trials-v209/characters/';
@@ -237,11 +287,18 @@ for (const { id, variant = null, action, style, travels = false, dimensions, den
     const actorId = { id, variant };
     const paths = getXenoTrialsPoseAssetsV209(actorId, art).filter(path => path.includes(`/${id}-${action}-`));
     const phasesDrawn = phases.filter((_, index) => frames[index]);
-    assert.deepEqual(paths, frames.filter(Boolean).map(([name]) => publicDirectory + name));
+    assert.deepEqual(paths, [...new Set(frames.filter(Boolean).map(([name]) => publicDirectory + name))]);
+    assert.deepEqual(getXenoTrialsPoseAssetsV209(actorId, { ...art, sourceFacing: -art.sourceFacing }), []);
     assert.ok(getXenoTrialsPoseAssetsV209(actorId, { ...art, sha256: 'other' }).every(path => !paths.includes(path)));
     assert.ok(getXenoTrialsPoseAssetsV209({ id, variant: 'altered' }, art).every(path => !paths.includes(path)));
     if (variant === 'grey') {
       assert.deepEqual(getXenoTrialsPoseAssetsV209({ id, variant: 'purple' }, getXenoTrialsArtV96(id, 'purple')), []);
+    }
+    if (id === 'rhino') {
+      assert.equal(art.sourceFacing, -1);
+      for (const related of ['user-rhino', 'drive-v123-neca-rhino-kenner-orange-v14', 'drive-v123-neca-rhino-kenner-version2-blue-v14']) {
+        assert.deepEqual(getXenoTrialsPoseAssetsV209({ id: related }, getXenoTrialsArtV96(related)), []);
+      }
     }
     if (id === 'gorilla' && action === 'heavy') {
       for (const related of ['drive-v123-kenner-gorilla', 'import-xeno-gorillaxeno']) {
@@ -251,7 +308,9 @@ for (const { id, variant = null, action, style, travels = false, dimensions, den
         assert.equal(publicXenoPosePathAdmissionV209(`${publicDirectory.slice(1)}gorilla-heavy-${phase}.png`), false);
       }
     }
-    if (forbidden) assert.equal(publicXenoPosePathAdmissionV209((publicDirectory + forbidden).slice(1)), false);
+    for (const name of [forbidden].flat().filter(Boolean)) {
+      assert.equal(publicXenoPosePathAdmissionV209((publicDirectory + name).slice(1)), false);
+    }
     const historical = getXenoTrialsAnimationCoverageV199(id), live = getXenoTrialsRuntimeAnimationCoverage(id);
     assert.equal(historical.states[action].renderKind, historicalKind);
     assert.equal(live.states[action].renderKind, 'drawn');
@@ -275,6 +334,19 @@ for (const { id, variant = null, action, style, travels = false, dimensions, den
     if (style) assert.equal(getXenoTrialsSpecialStyleV147(definition), style);
     const context = { save() {}, translate() {}, scale() {},
       drawImage(_image, _sx, _sy, w, h, _x, y, dw, dh) { assert.deepEqual([y + dh, dw, dh], [0, w * density, h * density]); }, restore() {} };
+    if (id === 'rhino') {
+      const index = frames.findIndex(Boolean);
+      const ages = [spec.startup / 2, spec.startup + spec.active / 2, spec.startup + spec.active + spec.recovery / 2];
+      const mirrors = [];
+      const facingContext = { ...context, scale(...args) { mirrors.push(args); } };
+      const options = { spec, groundedHeight: art.sourceHeight, ground: 450, x: 430 };
+      for (const facing of [1, -1]) {
+        const attack = { id: 2, kind: action, age: ages[index], facing };
+        const pose = drawXenoTrialsPoseV209(facingContext, { ...actorId, y: 0, stun: 0, attack }, art, images, options);
+        assert.equal(pose?.poseV209.path, publicDirectory + frames[index][0]);
+      }
+      assert.deepEqual(mirrors, [[1, 1], [-1, 1]]);
+    }
     const airborne = { ...actorId, y: 1, stun: 0, attack: { id: 1, kind: action, age: spec.startup, facing: -1 } };
     assert.equal(drawXenoTrialsPoseV209(context, airborne, art, images,
       { spec, groundedHeight: art.sourceHeight, ground: 450, x: 430 }), null);

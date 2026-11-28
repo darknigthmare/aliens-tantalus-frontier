@@ -85,6 +85,56 @@ const queenLightFrames = Object.freeze([
   ['contact', '/assets/openai/xeno-trials-v209/characters/queen-light-contact-v227.png', [21, 19, 1523, 994], 1082],
   ['recovery', '/assets/openai/xeno-trials-v209/characters/queen-light-recovery-v227.png', [20, 23, 1522, 992], 1081]
 ].map(poseFrame));
+const rhinoLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/rhino-light-windup-v228.png', [35, 89, 1502, 924], 723],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/rhino-light-contact-v228.png', [9, 24, 1525, 933], 642],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/rhino-light-recovery-v228.png', [37, 82, 1501, 931], 741]
+].map(poseFrame));
+const rhinoHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/rhino-heavy-windup-v228.png', [35, 79, 1502, 923], 691],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/rhino-heavy-contact-v228.png', [37, 92, 1501, 907], 584],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/rhino-heavy-recovery-v228.png', [28, 36, 1495, 939], 590]
+].map(poseFrame));
+const mantisLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/mantis-light-windup-v228.png', [34, 108, 1208, 1173], 657],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/mantis-light-contact-v228.png', [34, 8, 1193, 1240], 621, 1219, 1290],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/mantis-light-recovery-v228.png', [26, 81, 1226, 1150], 691]
+].map(poseFrame));
+const mantisHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/mantis-heavy-atlas-v228.png', [157, 19, 588, 465], 374],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/mantis-heavy-atlas-v228.png', [842, 35, 1423, 465], 1112],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/mantis-heavy-atlas-v228.png', [163, 529, 595, 999], 411]
+].map(poseFrame));
+const armoredJoeLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/armored-joe-light-atlas-v228.png', [248, 18, 522, 477], 364],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/armored-joe-light-atlas-v228.png', [943, 18, 1298, 477], 1062],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/armored-joe-light-atlas-v228.png', [247, 533, 525, 993], 355]
+].map(poseFrame));
+const armoredJoeHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/armored-joe-heavy-atlas-v228.png', [32, 113, 476, 920], 238],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/armored-joe-heavy-atlas-v228.png', [535, 173, 1006, 919], 681],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/armored-joe-heavy-atlas-v228.png', [1073, 173, 1514, 919], 1232]
+].map(poseFrame));
+const synthSniperLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/synth-sniper-light-windup-v228.png', [459, 57, 1082, 987], 751],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/synth-sniper-light-contact-v228.png', [455, 56, 1206, 984], 729],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/synth-sniper-light-recovery-v228.png', [507, 64, 1035, 985], 730]
+].map(poseFrame));
+const synthSniperHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/synth-sniper-heavy-windup-v228.png', [400, 14, 1111, 1010], 724],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/synth-sniper-heavy-contact-v228.png', [230, 71, 1215, 985], 704],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/synth-sniper-heavy-recovery-v228.png', [448, 78, 1136, 994], 793]
+].map(poseFrame));
+const synthHeavyLightFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/synth-heavy-light-windup-v228.png', [447, 47, 1165, 995], 752],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/synth-heavy-light-contact-v228.png', [336, 130, 1244, 952], 700],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/synth-heavy-light-recovery-v228.png', [493, 45, 1196, 990], 755]
+].map(poseFrame));
+const synthHeavyHeavyFrames = Object.freeze([
+  ['windup', '/assets/openai/xeno-trials-v209/characters/synth-heavy-heavy-atlas-v228.png', [158, 8, 522, 510], 360],
+  ['contact', '/assets/openai/xeno-trials-v209/characters/synth-heavy-heavy-atlas-v228.png', [819, 74, 1414, 505], 1102],
+  ['recovery', '/assets/openai/xeno-trials-v209/characters/synth-heavy-heavy-atlas-v228.png', [149, 568, 600, 1016], 362]
+].map(poseFrame));
 const pantherSource = ['pose-v94-kenner-panther', '/assets/openai/sprites/static-enemy-v94/kenner-panther-neca.png',
   '575f23d532b10eb34f2dd0df9e8a860e1511cdecf4e7ab20eb5fa7742acc549c', 1310, 1201];
 const arachnoidSource = ['castes-game_avp_capcom_arachnoid', artPath,
@@ -99,6 +149,16 @@ const runnerSource = ['castes-film_runner_alien3_1992', '/assets/user/castes-v87
   'f117c7ad0e6da9a02d3a4ce315066d75acfd67a909620f560ff6cd8c3d7b64b3', 1536, 1024];
 const queenSource = ['castes-film_queen_aliens_1986', '/assets/user/castes-v87/film_queen_aliens_1986.png',
   '985abf27db63400d8a6a68101bfaa7dde3335da0e8986ea85c409ab30da5e991', 1536, 1024];
+const rhinoSource = ['pose-v94-kenner-rhino', '/assets/openai/sprites/static-enemy-v94/kenner-rhino-neca.png',
+  '056cff7c33e15760ea867185dba4228542eabc291328034d40246589180e7ce8', 1310, 1201, -1];
+const mantisSource = ['pose-v96-kenner-mantis', '/assets/openai/sprites/static-enemy-v96/mantis-alien-neca.png',
+  'd84bcb3069b7eb0119fb627a6f5aef5eb60da3478b3e18a9d254a4302a564ef7', 1226, 1283];
+const armoredJoeSource = ['enemy-145-armored-working-joe', '/assets/openai/sprites/static-enemy-v96/armored-working-joe.png',
+  'e361bb35804e23c66a2b981375d3eff3b99361f684ba394ce93f6bf9c7d28210', 1024, 1536];
+const synthSniperSource = ['pose-v94-afe-synth-sniper', '/assets/openai/sprites/static-enemy-v94/game-afe-synth-sniper.png',
+  '6541a21be18321c71b2e8e2a8b76f5ac7e58581babe5e190a3dcde6247f5977b', 1024, 1536];
+const synthHeavySource = ['pose-v94-afe-synth-heavy', '/assets/openai/sprites/static-enemy-v94/game-afe-synth-heavy.png',
+  '71a4ad45aafe454e33eb7a90a9f4574b59c731fe9406f19a5382987a6a9d5a4d', 1024, 1536];
 
 const groundedActions = Object.freeze([
   ['panther', {
@@ -172,9 +232,59 @@ const groundedActions = Object.freeze([
     id: 'queen-light', action: 'light', revision: 227, animation: 'painted-queen-light-poses',
     source: queenSource, textureWidth: 1536, textureHeight: 1024, density: 1,
     frames: queenLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['rhino', {
+    id: 'rhino-light', action: 'light', revision: 228, animation: 'painted-rhino-light-poses',
+    source: rhinoSource, textureWidth: 1536, textureHeight: 1024, density: 1,
+    frames: rhinoLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['rhino', {
+    id: 'rhino-heavy', action: 'heavy', revision: 228, animation: 'painted-rhino-heavy-poses',
+    source: rhinoSource, textureWidth: 1536, textureHeight: 1024, density: 1,
+    frames: rhinoHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['mantis', {
+    id: 'mantis-light', action: 'light', revision: 228, animation: 'painted-mantis-light-poses',
+    source: mantisSource, textureWidth: 1254, textureHeight: 1254, density: 1,
+    frames: mantisLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['mantis', {
+    id: 'mantis-heavy', action: 'heavy', revision: 228, animation: 'painted-mantis-heavy-poses',
+    source: mantisSource, textureWidth: 1536, textureHeight: 1024, density: 1.94,
+    frames: mantisHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['armored-joe', {
+    id: 'armored-joe-light', action: 'light', revision: 228, animation: 'painted-armored-joe-light-poses',
+    source: armoredJoeSource, textureWidth: 1536, textureHeight: 1024, density: 2.46,
+    frames: armoredJoeLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['armored-joe', {
+    id: 'armored-joe-heavy', action: 'heavy', revision: 228, animation: 'painted-armored-joe-heavy-poses',
+    source: armoredJoeSource, textureWidth: 1536, textureHeight: 1024, density: 1.45,
+    frames: armoredJoeHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['synth-sniper', {
+    id: 'synth-sniper-light', action: 'light', revision: 228, animation: 'painted-synth-sniper-light-poses',
+    source: synthSniperSource, textureWidth: 1536, textureHeight: 1024, density: 1.38,
+    frames: synthSniperLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['synth-sniper', {
+    id: 'synth-sniper-heavy', action: 'heavy', revision: 228, animation: 'painted-synth-sniper-heavy-poses',
+    source: synthSniperSource, textureWidth: 1536, textureHeight: 1024, density: 1.28,
+    frames: synthSniperHeavyFrames, limitations: ['three-painted-poses']
+  }],
+  ['synth-heavy', {
+    id: 'synth-heavy-light', action: 'light', revision: 228, animation: 'painted-synth-heavy-light-poses',
+    source: synthHeavySource, textureWidth: 1536, textureHeight: 1024, density: 1.4,
+    frames: synthHeavyLightFrames, limitations: ['three-painted-poses']
+  }],
+  ['synth-heavy', {
+    id: 'synth-heavy-heavy', action: 'heavy', revision: 228, animation: 'painted-synth-heavy-heavy-poses',
+    source: synthHeavySource, textureWidth: 1536, textureHeight: 1024, density: 2.18,
+    frames: synthHeavyHeavyFrames, limitations: ['three-painted-poses']
   }]
 ].map(([fighterId, entry]) => Object.freeze({ ...entry, fighterId, source: Object.freeze(entry.source), limitations: Object.freeze(entry.limitations),
-  paths: Object.freeze(entry.frames.filter(Boolean).map(frame => frame.path)) })));
+  paths: Object.freeze([...new Set(entry.frames.filter(Boolean).map(frame => frame.path))]) })));
 const heavyPaths = Object.freeze(heavyFrames.map(frame => frame.path));
 const allPaths = Object.freeze([...heavyPaths, ...groundedActions.flatMap(entry => entry.paths)]);
 const supported = (fighter, art) => fighter?.id === 'arachnoid' && fighter.variant !== 'purple'
@@ -186,8 +296,8 @@ export function getXenoTrialsGroundedPaintedActionsV223(fighter, art) {
   return groundedActions.filter(entry => {
     if (entry.fighterId !== fighter.id || (entry.variant ?? null) !== (fighter.variant ?? null)
       || entry.variant && entry.variant !== art.visualStateV95) return false;
-    const [profileId, path, sha256, width, height] = entry.source;
-    return art.profileId === profileId && art.path === path && sourceHash === sha256 && art.sourceFacing === 1
+    const [profileId, path, sha256, width, height, sourceFacing = 1] = entry.source;
+    return art.profileId === profileId && art.path === path && sourceHash === sha256 && art.sourceFacing === sourceFacing
       && art.sourceWidth === width && art.sourceHeight === height;
   });
 }

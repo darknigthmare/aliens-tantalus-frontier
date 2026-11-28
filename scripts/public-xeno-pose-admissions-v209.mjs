@@ -44,6 +44,30 @@ const generatedV227 = [
   ['panther-heavy-contact.png', '45d1d78cefa1224841db0f473baecd8e35f6a918de6c555251869ff4c0aad01f'],
   ['panther-heavy-recovery.png', 'b94eff0dc4ac3e761fa132fd8a1b50d93ffa92790444269d521304ebbe87e8ec']
 ];
+const generatedV228 = [
+  ['rhino-light-windup-v228.png', 'a52bb0cc13c01299b9633551f3e79f921a4e4f4640a98ce34b6dd89c4c22407b'],
+  ['rhino-light-contact-v228.png', '1dcc92f85ca5d53b40b3494f72b65d186d001932947194ba821c550939305238'],
+  ['rhino-light-recovery-v228.png', 'b8f31103ed7aa78a9167180085b5d513d3771eb75a492af075a381a62e6b929a'],
+  ['rhino-heavy-windup-v228.png', 'b38f380734d9e46517555e37e336de89c8259b47a8e9f8945835967a1b9c6e92'],
+  ['rhino-heavy-contact-v228.png', '5039673693fb8f14bd23ac936ae6873a811d3ff9c22597a62e16dad7f79f39eb'],
+  ['rhino-heavy-recovery-v228.png', '307daa03fcc4afbf712a8a01c7b9de721a49bdd343614e8289f880f0da0028ac'],
+  ['mantis-light-windup-v228.png', '62cb0145db0fc5f3c83eb8de0907638940e4b9883fff79a3389fe4bae1f14580'],
+  ['mantis-light-contact-v228.png', 'd49208d597cbad86c624df2ed025a86fd39da84a6d63d86b93ab3e6ee750eb53'],
+  ['mantis-light-recovery-v228.png', 'b11c4bb117c36db75bfbb757d9d8bc11a442ffbea0011dff400a749ac7ac19a4'],
+  ['mantis-heavy-atlas-v228.png', '3c4bdbd63cbe054f1f969f2e0eca7378d43a9de8ef2c25dd9630d3d6a9bf2f11'],
+  ['armored-joe-light-atlas-v228.png', 'b64a0b074ac4d229dea3e16298caee795713eb458edf8a01411c25080f6eb92c'],
+  ['armored-joe-heavy-atlas-v228.png', '3781789d46dab6149390e57d24c8cc145889fdf535cd4d30592591e2f4901aab'],
+  ['synth-sniper-light-windup-v228.png', 'cbde1074f428f1720e500710f51b42bda1c58e4fce8672dea8db35957d457aaa'],
+  ['synth-sniper-light-contact-v228.png', 'b97c4b05f1119c76535e4ddcd2db58ccfa8b4e24dac0045f4e90a715d302804a'],
+  ['synth-sniper-light-recovery-v228.png', '4e44d75e394428b7abcbba481e125dc0b63231438281c91626a52f0d27c89d96'],
+  ['synth-sniper-heavy-windup-v228.png', 'daee6fb1ee65e417322c660cf94cf2571db24b080bc2b26f9272800b5526be74'],
+  ['synth-sniper-heavy-contact-v228.png', 'e888e73e30ccd3261d17ae5de1a0726f5ef80ed7d07ad2a31e45dcc3c8ae1aa9'],
+  ['synth-sniper-heavy-recovery-v228.png', '466ce98bdd389b427f9fa3ab4983a8b06ed5b96830cf53bb51e995ab865d4073'],
+  ['synth-heavy-light-windup-v228.png', 'e86c40d98c01b9c4b97a975dd676d3478d7cd7446e956d524d932c4b8dd83d13'],
+  ['synth-heavy-light-contact-v228.png', 'ca0a7193d360a69bb559531b1732845a179bb82a4039d2ee69897bb91179ab3f'],
+  ['synth-heavy-light-recovery-v228.png', '4480d0fceca32f7c4ca873ec3f42004113259691df5e571c99d24d2dd1c2d07c'],
+  ['synth-heavy-heavy-atlas-v228.png', 'db3cd02b113daa667c852e43497046ad52046b7ea48271acce0adf09ed49635f']
+];
 const approved = new Map([
   ...[
     [205, approvedV205, XENO_VISUAL_ASSETS_NEW_INPUTS_V205], [206, approvedV206, XENO_PRODUCTION_ASSETS_NEW_INPUTS_V206]
@@ -53,7 +77,8 @@ const approved = new Map([
     return [name, origin.sha256];
   })),
   ...generatedV226,
-  ...generatedV227
+  ...generatedV227,
+  ...generatedV228
 ].map(([name, sha256]) => [`${rootDirectory}/characters/${name}`, sha256]));
 
 export function publicXenoPosePathAdmissionV209(path, { directory = false } = {}) {
